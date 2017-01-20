@@ -1,18 +1,17 @@
-// test_FixedChannelGroupService.cxx
+// test_Dune35tChannelGroupService.cxx
 
 // David Adams
 // October 2016
 //
-// Test FixedChannelGroupService.
+// Test Dune35tChannelGroupService.
 
-#include "../FixedChannelGroupService.h"
+#include "../Dune35tChannelGroupService.h"
 #include <string>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <iomanip>
 #include "dune/ArtSupport/ArtServiceHelper.h"
-#include "dune/DuneServiceAccess/DuneServiceAccess.h"
 
 using std::string;
 using std::cout;
@@ -27,8 +26,8 @@ using art::ServiceHandle;
 #undef NDEBUG
 #include <cassert>
 
-int test_FixedChannelGroupService(string sgeo) {
-  const string myname = "test_FixedChannelGroupService: ";
+int test_Dune35tChannelGroupService() {
+  const string myname = "test_Dune35tChannelGroupService: ";
 #ifdef NDEBUG
   cout << myname << "NDEBUG must be off." << endl;
   abort();
@@ -37,14 +36,18 @@ int test_FixedChannelGroupService(string sgeo) {
 
   cout << myname << line << endl;
   cout << myname << "Create fcl file." << endl;
-  string fname = "test_FixedChannelGroupService.fcl";
+  string fname = "test_Dune35tChannelGroupService.fcl";
   ofstream fout(fname.c_str());
-  fout << "#include \"services_dune.fcl\"" << endl;
-  fout << "services: @local::" << sgeo << endl;
+  fout << "services.ChannelMapService: {" << endl;
+  fout << "  service_provider: \"ChannelMapService\"" << endl;
+  fout << "  FileName: \"35tTPCChannelMap_v6.txt\"" << endl;
+  fout << "  LogLevel: 1" << endl;
+  fout << "}" << endl;
   fout << "services.ChannelGroupService: {" << endl;
-  fout << "  service_provider: \"FixedChannelGroupService\"" << endl;
-  fout << "  group1: [1, 2, 3, 4]" << endl;
-  fout << "  group2: [11, 12, 13]" << endl;
+  fout << "  service_provider: \"Dune35tChannelGroupService\"" << endl;
+  fout << "  UseOffline: true" << endl;
+  fout << "  Grouping: Regulator" << endl;
+  fout << "  SplitByPlane: false" << endl;
   fout << "}" << endl;
 
   cout << myname << line << endl;
@@ -66,34 +69,22 @@ int test_FixedChannelGroupService(string sgeo) {
   hcgs->print(cout, myname);
 
   cout << myname << line << endl;
-  cout << myname << "Geo fcl: " << sgeo << endl;
-
-  cout << myname << line << endl;
   unsigned int ngrp = hcgs->size();
   cout << myname << "Check group count: " << ngrp << endl;
-  if ( sgeo == "dunefd_services" ) {
-    assert( ngrp == 150 );
-  } else {
-    assert( ngrp == 2 );
-  }
+  assert( ngrp == 32 );
 
   cout << myname << line << endl;
   cout << myname << "Group names and channels:" << endl;
   for ( unsigned int igrp=0; igrp<ngrp; ++igrp ) {
     string name = hcgs->name(igrp);
     const vector<ChannelGroupService::Index> chans = hcgs->channels(igrp);
-    cout << myname << "  " << setw(10) << name << ":";
-    for ( ChannelGroupService::Index chan : chans ) cout << setw(6) << chan;
-    cout << endl;
+    cout << myname << "  " << setw(10) << name << ": ["
+         << setw(6) << chans.front() << ", "
+         << setw(6) << chans.back() << "]" << endl;
     assert( name.size() );
     assert( name != "NoSuchGroup" );
     assert( chans.size() );
   }
-
-  cout << myname << line << endl;
-  cout << myname << "Fetch ChannelGroupService by pointer." << endl;
-  ChannelGroupService* pcgs = ArtServicePointer<ChannelGroupService>();
-  pcgs->print(cout, myname);
 
   cout << myname << line << endl;
   cout << myname << "Done." << endl;
@@ -101,17 +92,7 @@ int test_FixedChannelGroupService(string sgeo) {
 }
 
 int main(int argc, char* argv[]) {
-  string sgeo = "dune35t_basic_services";
-  if ( argc > 1 ) {
-    sgeo = argv[1];
-    if ( sgeo == "-h" ) {
-      cout << "Usage: " << argv[0] << endl;
-      cout << "       " << argv[0] << " dune35t_basic_services" << endl;
-      cout << "       " << argv[0] << " dunefd_services" << endl;
-      return 0;
-    }
-  }
-  return test_FixedChannelGroupService(sgeo);
+  return test_Dune35tChannelGroupService();
   ArtServiceHelper::close();
   return 0;
 }
