@@ -212,11 +212,13 @@ if($protoDune==1){
 #Distance to floor  3760.2 mm
 #Distance to ceiling  4139.8 mm
 #Floor to ceiling  7900
+
 }
 
  #InnerDrift is the max distance form the edge of the CPA to the edge of the first wire plane
 #$InnerDrift              = 359.4;
 $InnerDrift              = 357.135;
+
 $APAFrame_x              = 3*$inch; # ~2in -- this does not include the wire spacing
 
 $TPCWireThickness        = 0.015;
@@ -274,9 +276,9 @@ $APA_UtoU_x   = $APAFrame_x + 6*$APAWirePlaneSpacing + (6-1)*$TPCWirePlaneThickn
                                                                                # outer wire planes (center to center)
 #$TPCInner_x   = $InnerDrift + $APAWirePlaneSpacing;# + $TPCWirePlaneThickness;
 $TPCInner_x   = $InnerDrift + 4*$APAWirePlaneSpacing + 4*$TPCWirePlaneThickness;
-#$TPCOuter_x   = $OuterDrift + $APAWirePlaneSpacing;# + $TPCWirePlaneThickness; Making it smaller than the distance to the wall.
+#$TPCOuter_x   = $OuterDrift + $APAWirePlaneSpacing;# + $TPCWirePlaneThickness; Making it smaller than the distance to the wall. 
 $TPCOuter_x   = 4*$APAWirePlaneSpacing + 4*$TPCWirePlaneThickness + 8;
-
+ 
 print "TPCInner_x=".$TPCInner_x."\n";
 print "TPCOuter_x=".$TPCOuter_x."\n";
 print "APA_UtoU_x=".$APA_UtoU_x."\n";
@@ -297,6 +299,7 @@ $Cathode_x                 =    0.13*$inch;
 #$Cathode_z                 =    $APAphys_z - $CPATube_OD;   
 #$Cathode_y                 =    610.4;
 $Cathode_z                 =    715.5;
+
 
 $APAToAPA =   $APAFrame_x 
             + 2*$TPCInner_x
@@ -656,7 +659,7 @@ $ModuleLongCorr      = 5.6;  # allign the the modules at the frame's edge
 
 # Beam Spot on the inside of the cryostat
 
-$BeamSpotDSS_x          = -20.58;
+$BeamSpotDSS_x          = -20.58; 
 $BeamSpotDSS_y          = -425.41;
 $BeamSpotDSS_z          = -82.96;
 
@@ -667,7 +670,6 @@ $BeamSpot_z = $posCryoInDetEnc_z + $CRTSurveyOrigin_z + $BeamSpotDSS_z +  $Origi
 print "BeamSpot_x =".$BeamSpot_x.", BeamSpot_y =".$BeamSpot_y.", BeamSpot_z =".$BeamSpot_z."\n";
 
 ####################### End of Survey data ##########
-
 
 my @posCRTDS_x = ();
 my @posCRTDS_y = ();
@@ -760,7 +762,6 @@ my @posCRTUS_y = ();
 my @posCRTUS_z = ();
 my @posCRTUS_rot = ();
 
-
 $posCRTUS_x[0] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopLeft_x - $ModuleSMDist;
 $posCRTUS_y[0] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopLeft_y - $ModuleLongCorr;
 $posCRTUS_z[0] = $CRTSurveyOrigin_z + $CRT_USTopLeftBa_z + $ModuleOff_z;
@@ -850,10 +851,11 @@ $LightPaddle_x            =    0.476;
 $LightPaddle_y            =    4*$inch;
 $LightPaddle_z            =    $APAFrame_z - 2*$APAFrameYSide_z;
 $nLightPaddlesPerAPA      =    10;   # 10, or 20 for double coverage (for now)
-$PaddleYInterval          =    (2*$APAphys_y+$APAGap_y-$LightPaddle_y-2*$APAFrameZSide_y)
-                              /(2*$nLightPaddlesPerAPA-1);
-$FrameToPaddleSpace       =    ($PaddleYInterval-$APAGap_y)/2;
-
+#$PaddleYInterval          =    (2*$APAphys_y+$APAGap_y-$LightPaddle_y-2*$APAFrameZSide_y)
+#                              /(2*$nLightPaddlesPerAPA-1);
+$PaddleYInterval          =    59.2;
+#$FrameToPaddleSpace       =    ($PaddleYInterval-$APAGap_y)/2;
+$FrameToPaddleSpace       =    30.412;
 $SiPM_z                   =    0;
 
 # $PaddleYInterval is defined so that the center-to-center distance in the 
@@ -861,6 +863,38 @@ $SiPM_z                   =    0;
 # $FrameToPaddleSpace is from the BOTTOM of the APA frame (4" in y direction)
 # to the CENTER of a paddle, including the 4" part of the frame. This variable's
 # primary purpose is to position the lowest paddle in each APA.
+
+
+####################################################################
+######################## ARAPUCA Dimensions ########################
+
+$ArapucaOut_x = 16.0;
+$ArapucaOut_y = 96.0;
+$ArapucaOut_z = 10.0*$LightPaddle_z; 
+$ArapucaIn_x = 15.0;
+$ArapucaIn_y = 80.0;
+$ArapucaIn_z = 100.0;
+$ArapucaAcceptanceWindow_x =1.0;
+$ArapucaAcceptanceWindow_y =80.0;
+$ArapucaAcceptanceWindow_z =100.0;
+$pos_subtraction_arapuca_x = 2.0;
+$gapCenterLeft_arapuca_z = 50.0;#if not simmetrical, positioning of windows for odd APAs needs to change
+$gapCenterRight_arapuca_z = 100.0-$gapCenterLeft_arapuca_z;
+$nAraAPA1 = 0;
+$nAraAPA2 = 3;
+$nSlotAra1 = 6;
+$nSlotAra2 = 4;
+
+$list_pos[0]=-$gapCenterLeft_arapuca_z-0.5*$ArapucaIn_z;
+for($list=1; $list<8; $list++){
+$list_pos[$list]=$list_pos[$i-1]-1.0*$ArapucaIn_z-2.0;
+}
+$list_pos[8]=$gapCenterRight_arapuca_z+0.5*$ArapucaIn_z;
+for($list=9; $list<16; $list++){
+$list_pos[$list]=$list_pos[$i-1]+$ArapucaIn_z+2.0;
+}
+
+#nAraAPAi is the number of the APA that the ith arapuca bar goes into and nSlotArai, its slot in that APA. These numbers are valid for the protodune-sp geometry.
 
 
 
@@ -929,6 +963,23 @@ print DEF <<EOF;
    <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/>
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
    <rotation name="rBeamWRev3"          unit="deg" x="-11.342" y="11.6190450403" z="-44.8829268772"/>
+   <position name="posArapucaSub0"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[0]]}"/>
+   <position name="posArapucaSub1"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[1]]}"/>
+   <position name="posArapucaSub2"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[2]]}"/>
+   <position name="posArapucaSub3"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[3]]}"/>
+   <position name="posArapucaSub4"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[4]]}"/>
+   <position name="posArapucaSub5"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[5]]}"/>
+   <position name="posArapucaSub6"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[6]]}"/>
+   <position name="posArapucaSub7"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[7]]}"/>
+   <position name="posArapucaSub8"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[8]]}"/>
+   <position name="posArapucaSub9"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[9]]}"/>
+   <position name="posArapucaSub10"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[10]]}"/>
+   <position name="posArapucaSub11"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[11]]}"/>
+   <position name="posArapucaSub12"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[12]]}"/>
+   <position name="posArapucaSub13"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[13]]}"/>
+   <position name="posArapucaSub14"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[14]]}"/>
+   <position name="posArapucaSub15"    unit="mm" x="@{[$pos_subtraction_arapuca_x]}" y="0" z="@{[$list_pos[15]]}"/>
+
 </define>
 </gdml>
 EOF
@@ -1698,7 +1749,6 @@ EOF
 
     my $BottomOfAPA = - $TPC_y/2 + $APAGap_y/2;
 
-
     $posZplane[0]   = -$_[0]/2 + $APAWirePlaneSpacing + $TPCWirePlaneThickness/2;
     $posZplane[1]   = $BottomOfAPA + $WrapCover + 4*$G10thickness + $Zactive_y/2;
     $posZplane[2]   = 0;
@@ -1714,6 +1764,7 @@ EOF
     $posTPCActive[0] = $posUplane[0] + $TPCWirePlaneThickness/2 + $TPCActive_x/2;
     $posTPCActive[1] = -$_[1]/2 + $TPCActive_y/2;
     $posTPCActive[2] = 0;
+
 
 #wrap up the TPC file
 print TPC <<EOF;
@@ -1851,7 +1902,7 @@ print CRYO <<EOF;
 
     <tube   name="TubeBePlFlangeOut" rmin="0" rmax="15" z="3.6" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
     <tube   name="TubeBePlFlangeIn" rmin="0" rmax="8.25" z="3.2" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
-    <tube   name="TubeBePlFlangeCut" rmin="12.5" rmax="15.01" z="2.302" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
+    <tube   name="TubeBePlFlangeCut" rmin="12.5" rmax="15.01" z="2.3" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
     <tube   name="TubeBePlFlangeTPCRem" rmin="0." rmax="12.5" z="0.91" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
 
     <subtraction name="BPRing">
@@ -2005,8 +2056,6 @@ EOF
 #      <second ref="Cath-12"/>
 #      <position name="posCPAInnerRem" x="179.23175" y="-3.805" z="0." unit="cm"/>
 #    </subtraction>
-#
-#################################
 print CRYO <<EOF;
     <box name="boxFCEWmod" x="354.3" y="151.2" z="12.8" lunit="cm"/>
     <box name="boxFCEWHorSuppOut" x="354.3" y="15.2" z="10.2" lunit="cm"/>
@@ -2025,28 +2074,28 @@ print CRYO <<EOF;
       <position name="posFCEWHorSuppBar" x="0" y="0" z="2." unit="cm"/>
     </subtraction>
 
-    <box name="boxFCEW-BP-Subtract" x="50.8" y="151.2" z="1.301" lunit="cm"/>
-    <tube name="tubBePlHolemod" rmin="0" rmax="15.25" z="12.801" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
-    <tube name="tubBePlHoleFiSh" rmin="0" rmax="15.25" z="1.301" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
+    <box name="boxFCEW-BP-Subtract" x="51" y="151.3" z="1.301" lunit="cm"/>
+    <box name="boxBePlHolemod" x="31.2" y="31.2" z="12.801" lunit="cm"/>
+    <box name="boxBePlHoleFiSh" x="31.2" y="31.2" z="1.301" lunit="cm"/>
     <box name="boxFCEW-BPFla-VerSupp" x="50.8" y="151.2" z="1.3" lunit="cm"/>
     <box name="boxFCEW-BPFla-Subtr" x="25.4" y="64" z="1.301" lunit="cm"/>
-    <tube name="tubFCEW-BPFla-Subtr" rmin="0" rmax="14.0" z="1.301" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
-    <tube name="tubFCEW-BPVer-Subtr" rmin="0" rmax="12.5" z="1.301" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="tubFCEW-BPFla-Subtr" rmin="0" rmax="13.6" z="1.301" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="tubFCEW-BPVer-Subtr" rmin="0" rmax="12.0" z="1.31" deltaphi="360." startphi="0" aunit="deg" lunit="cm"/>
 
     <subtraction name="boxFCEW-BP-NoHole">
       <first ref="boxFCEWmod"/>
       <second ref="boxFCEW-BP-Subtract"/>
-      <position name="posFCEW-BP-NoHole" x="147.8" y="0" z="5.7505" unit="cm"/>
+      <position name="posFCEW-BP-NoHole" x="147.8" y="0" z="5.75" unit="cm"/>
     </subtraction>
     <subtraction name="boxFCEW-BP-mod">
       <first ref="boxFCEW-BP-NoHole"/>
-      <second ref="tubBePlHolemod"/>
-      <position name="posboxFCEW-BP-mod" x="146" y="41.6" z="0" unit="cm"/>
+      <second ref="boxBePlHolemod"/>
+      <position name="posboxFCEW-BP-mod" x="149." y="43" z="0" unit="cm"/>
     </subtraction>
     <subtraction name="FCEW-BP-FieldShaping">
       <first ref="boxFCEWFieldShaping"/>
-      <second ref="tubBePlHoleFiSh"/>
-      <position name="posFCEW-BP-FieldShapingSol" x="146" y="41.6" z="0" unit="cm"/>
+      <second ref="boxBePlHoleFiSh"/>
+      <position name="posFCEW-BP-FieldShapingSol" x="149." y="43" z="0" unit="cm"/>
     </subtraction>
 
     <subtraction name="FCEW-BPFla-Ver">
@@ -2114,6 +2163,104 @@ print CRYO <<EOF;
       x="$LightPaddle_x"
       y="$LightPaddle_y"
       z="$LigthPaddleSiPM_z"/>
+
+    <box name="ArapucaOut" lunit="mm"
+      x="@{[$ArapucaOut_x]}"
+      y="@{[$ArapucaOut_y]}"
+      z="@{[$ArapucaOut_z]}"/>
+
+    <box name="ArapucaIn" lunit="mm"
+      x="@{[$ArapucaIn_x]}"
+      y="@{[$ArapucaIn_y]}"
+      z="@{[$ArapucaIn_z]}"/>
+
+     <subtraction name="ArapucaWalls0">
+      <first  ref="ArapucaOut"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub0"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls1">
+      <first  ref="ArapucaWalls0"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub1"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls2">
+      <first  ref="ArapucaWalls1"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub2"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls3">
+      <first  ref="ArapucaWalls2"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub3"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls4">
+      <first  ref="ArapucaWalls3"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub4"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls5">
+      <first  ref="ArapucaWalls4"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub5"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls6">
+      <first  ref="ArapucaWalls5"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub6"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls7">
+      <first  ref="ArapucaWalls6"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub7"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls8">
+      <first  ref="ArapucaWalls7"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub8"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls9">
+      <first  ref="ArapucaWalls8"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub9"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls10">
+      <first  ref="ArapucaWalls9"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub10"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls11">
+      <first  ref="ArapucaWalls10"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub11"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls12">
+      <first  ref="ArapucaWalls11"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub12"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls13">
+      <first  ref="ArapucaWalls12"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub13"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls14">
+      <first  ref="ArapucaWalls13"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub14"/>
+      </subtraction>
+     <subtraction name="ArapucaWalls">
+      <first  ref="ArapucaWalls14"/>
+      <second ref="ArapucaIn"/>
+      <positionref ref="posArapucaSub15"/>
+      </subtraction>
+
+
+    <box name="ArapucaAcceptanceWindow" lunit="mm"
+      x="@{[$ArapucaAcceptanceWindow_x]}"
+      y="@{[$ArapucaAcceptanceWindow_y]}"
+      z="@{[$ArapucaAcceptanceWindow_z]}"/>
+
 
      <box name="APAFrameYSideHollow" lunit="cm"
       x="$APAFrameYSideHollow_x"
@@ -2241,6 +2388,25 @@ EOF
 }
 }
 
+for($i=0 ; $i<$nAPAs ; $i++){
+if($i==$nAraAPA1 || $i==$nAraAPA2){
+print CRYO <<EOF;
+    <volume name="volArapuca_$i">
+      <materialref ref="G10" />
+      <solidref ref="ArapucaWalls" />
+    </volume>
+EOF
+for($p=0 ; $p<16 ; $p++){
+print CRYO <<EOF;
+    <volume name="volOpDetSensitive_Arapuca_$i\-$p">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaAcceptanceWindow"/>
+    </volume>
+EOF
+}
+}
+}
+
 #### End wall field cage module
 print CRYO <<EOF;
     <volume name="volFCEWHorSuppBar">
@@ -2348,11 +2514,11 @@ print CRYO <<EOF;
       </physvol>
       <physvol name="volFCEW-BP-VerSuppBar-5">
         <volumeref ref="volFCEWVerSuppBar"/>
-        <position name="posFCEW-BP-VerSuppBar-5" x="122.5" y="0" z="-5.75" unit="cm"/>
+        <position name="posFCEW-BP-VerSuppBar-5" x="123.8" y="0" z="-5.75" unit="cm"/>
       </physvol>
       <physvol>
         <volumeref ref="volFCEW-BPVer"/>
-        <position name="posFCEW-BPVer" x="169.4" y="0" z="-5.75" unit="cm"/>
+        <position name="posFCEW-BPVer" x="168.9" y="0" z="-5.75" unit="cm"/>
       </physvol>
     </volume>
 
@@ -2566,8 +2732,7 @@ if($cpa_i == 0) {
   $FCEWmodUS_z = $APACenter_z - 231.5/2 - $CPAmodbarGap - 2; #CPAmodCenter_z to FCEWmod 
   for($fcewy_i = 0; $fcewy_i < 4; $fcewy_i++){
 
-    $FCEWmod_y[$fcewy_i] = $APACenter_y + (-3 + 2*$fcewy_i)*77; #distance between FCEW module is 2.8 cm (originally 0.8 cm)
- 
+    $FCEWmod_y[$fcewy_i] = $APACenter_y + (-3 + 2*$fcewy_i)*76; 
   }
 }
 if($cpa_i == 2) {
@@ -2741,13 +2906,9 @@ print CRYO <<EOF;
 EOF
 }
 
-$FCEWBPmod_x = $FCEWmodLeft_x + 2.8;
-$FCEWBPmod_y = $FCEWmod_y[2]  + 0.9;
-$FCEWBPmod_z = $FCEWmodUS_z;
-
-$FCEWBPFla_x = $FCEWBPmod_x + 147.8;
-$FCEWBPFla_y = $FCEWBPmod_y  + 0;
-$FCEWBPFla_z = $FCEWBPmod_z   + 5.75;
+$FCEWBPFla_x = $FCEWmodLeft_x + 147.8;
+$FCEWBPFla_y = $FCEWmod_y[2]  + 0;
+$FCEWBPFla_z = $FCEWmodUS_z   + 5.75;
 
 print "volFCEW-BPFla pos x=".$FCEWBPFla_x." y=".$FCEWBPFla_y." z=".$FCEWBPFla_z."\n";
 
@@ -2755,9 +2916,9 @@ print CRYO <<EOF;
       <physvol>
         <volumeref ref="volFCEW-BP-mod"/>
         <position name="posFCEW-BP-mod" unit="cm"
-         x="$FCEWBPmod_x"
-         y="$FCEWBPmod_y"
-         z="$FCEWBPmod_z"/>
+         x="$FCEWmodLeft_x"
+         y="$FCEWmod_y[2]"
+         z="$FCEWmodUS_z"/>
       </physvol>
 
       <physvol>
@@ -2792,6 +2953,8 @@ sub place_OpDets()
     $APACenter_z = $_[2];
     $apa_i = $_[3];
 
+    $test = 0;
+
 for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
 {
 
@@ -2804,10 +2967,20 @@ for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
 
              $Paddle_Y   =    $APACenter_y 
                             - $APAphys_y/2 
-                            + $j*$FrameToPaddleSpace 
-                            + (1-$j)*($LightPaddle_y/2 + $APAFrameZSide_y) 
-                            + $PaddleYInterval*$paddle; 
+                            + $FrameToPaddleSpace 
+                            + (1-$j)*($LightPaddle_y/2) 
+                            + $PaddleYInterval*$paddle;
+#                            + 30.412; 
 
+
+     if($apa_i==$nAraAPA1){
+	if($paddle==$nSlotAra1) {$test=1;}
+    } #where the arapuca bar goes for pDUNE
+    if($apa_i==$nAraAPA2){
+	if($paddle==$nSlotAra2) {$test=1;}
+    }
+
+    if(($test!=1)){
              # Alternate the paddle orientations
              if ( $paddle % 2 == 0 ) { $rot = "rIdentity"; }
              else                    { $rot = "rPlus180AboutY"; }
@@ -2824,6 +2997,39 @@ for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
      </physvol>
 EOF
 
+$test = 0;
+    }else{
+	if ( $apa_i % 2 == 0 ) { 
+	    $rot = "rIdentity"; 
+	    $posArax = ($APACenter_x+0.05*$ArapucaOut_x-0.05*$ArapucaAcceptanceWindow_x-0.01);
+	}else{ 
+	    $rot = "rPlus180AboutY"; 
+	    $posArax = ($APACenter_x-0.05*$ArapucaOut_x+0.05*$ArapucaAcceptanceWindow_x+0.01);
+	}
+	
+	print CRYO <<EOF;
+     <physvol>
+       <volumeref ref="volArapuca_$apa_i"/>
+       <position name="posArapuca$apa_i-TPC\-$i\-$j\-$k" unit="cm" 
+         x="@{[$APACenter_x]}"
+	 y="@{[$Paddle_Y]}" 
+	 z="@{[$APACenter_z]}"/>
+       <rotationref ref="$rot"/>
+     </physvol>
+EOF
+	for ($ara = 0; $ara<16; $ara++){
+	    print CRYO <<EOF;
+     <physvol>
+       <volumeref ref="volOpDetSensitive_Arapuca_$apa_i\-$ara"/>
+       <position name="posOpArapuca$apa_i\-$ara\-TPC\-$i\-$j\-$k" unit="cm" 
+         x="@{[$posArax]}"
+	 y="@{[$Paddle_Y]}" 
+	 z="@{[(0.1*$list_pos[$ara]+$APACenter_z)]}"/>
+     </physvol>
+EOF
+}
+$test = 0;
+}
 }#end Paddle for-loop
 
 }
