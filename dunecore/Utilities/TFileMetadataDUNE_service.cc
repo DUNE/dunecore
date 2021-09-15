@@ -120,26 +120,34 @@ void util::TFileMetadataDUNE::postBeginJob()
   art::FileCatalogMetadata::collection_type artmd;
   artmds->getMetadata(artmd);
   
-  for(auto const & d : artmd)
+  for(auto const & d : artmd) {
     mdmap[d.first] = d.second;
+    std::cout << d.first << " " << d.second << std::endl;
+  }
     
   std::map<std::string,std::string>::iterator it;
   
   // if a certain paramter/key is not found, assign an empty string value to it
   
-  if ((it=mdmap.find("applicationFamily"))!=mdmap.end()) std::get<0>(md.fapplication) = it->second;
-  else std::get<0>(md.fapplication) = "\" \"";   
-
-  if ((it=mdmap.find("application.family"))!=mdmap.end()) std::get<0>(md.fapplication) = it->second;
-  else std::get<0>(md.fapplication) = "\" \"";   
+  if ((it=mdmap.find("application.family"))!=mdmap.end()) {
+    std::cout << "Setting applicationFamily: " << it->second << std::endl;
+    std::get<0>(md.fapplication) = it->second;
+  }
+  else {
+    std::cout << "Setting applicationFamily: empty" << std::endl;
+    std::get<0>(md.fapplication) = "\" \"";   
+  }
    
-  if ((it=mdmap.find("process_name"))!=mdmap.end()) std::get<1>(md.fapplication) = it->second;
-  else std::get<1>(md.fapplication) = "\" \"";  
-
-  if ((it=mdmap.find("art.process_name"))!=mdmap.end()) std::get<1>(md.fapplication) = it->second;
-  else std::get<1>(md.fapplication) = "\" \"";  
+  if ((it=mdmap.find("art.process_name"))!=mdmap.end()) {
+    std::cout << "Setting process_name: " << it->second << std::endl;
+    std::get<1>(md.fapplication) = it->second;
+  }
+  else {
+    std::cout << "Setting process_name: empty" << std::endl;
+    std::get<1>(md.fapplication) = "\" \"";  
+  }
   
-  if ((it=mdmap.find("applicationVersion"))!=mdmap.end()) std::get<2>(md.fapplication) = it->second;
+  if ((it=mdmap.find("application.version"))!=mdmap.end()) std::get<2>(md.fapplication) = it->second;
   else  std::get<2>(md.fapplication) = "\" \"";   
 
   if ((it=mdmap.find("application.version"))!=mdmap.end()) std::get<2>(md.fapplication) = it->second;
@@ -257,7 +265,7 @@ void util::TFileMetadataDUNE::postEndJob()
   // samweb json format. This json file holds the below information temporarily. 
   // If you submitted a grid job invoking this service, the information from 
   // this file is appended to a final json file and this file will be removed
-  
+
   std::ofstream jsonfile;
   jsonfile.open(fJSONFileName);
   jsonfile<<"{\n  \"application\": {\n    \"family\": "<<std::get<0>(md.fapplication)<<",\n    \"name\": ";
