@@ -50,7 +50,8 @@
 #include "art/Framework/Principal/SubRun.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "art/Framework/Services/System/FileCatalogMetadata.h"
-#include "art/Utilities/OutputFileInfo.h"
+//#include "art/Utilities/OutputFileInfo.h"
+#include "canvas/Persistency/Common/TriggerResults.h"
 #include "art_root_io/RootDB/SQLite3Wrapper.h"
 #include "art_root_io/RootDB/SQLErrMsg.h"
 #include "cetlib_except/exception.h"
@@ -80,6 +81,7 @@ util::TFileMetadataDUNE::TFileMetadataDUNE(fhicl::ParameterSet const& pset,
   reg.sPostOpenFile.watch(this, &TFileMetadataDUNE::postOpenFile);
   reg.sPostEndJob.watch(this, &TFileMetadataDUNE::postEndJob);
   reg.sPostProcessEvent.watch(this, &TFileMetadataDUNE::postEvent);
+  reg.sPostCloseOutputFile.watch(this, &TFileMetadataDUNE::postCloseOutput);
   reg.sPostBeginSubRun.watch(this, &TFileMetadataDUNE::postBeginSubRun);
 }
 
@@ -122,7 +124,7 @@ void util::TFileMetadataDUNE::postBeginJob()
   
   for(auto const & d : artmd) {
     mdmap[d.first] = d.second;
-    std::cout << d.first << " " << d.second << std::endl;
+    //std::cout << d.first << " " << d.second << std::endl;
   }
     
   std::map<std::string,std::string>::iterator it;
@@ -162,8 +164,13 @@ void util::TFileMetadataDUNE::postBeginJob()
   if ((it=mdmap.find("run_type"))!=mdmap.end()) frunType = it->second;
   else frunType = "\" \"";         	     	
 
+  //std::cout << "Run type: " << frunType << std::endl;
+
+  //Remove this
   if ((it=mdmap.find("art.run_type"))!=mdmap.end()) frunType = it->second;
   else frunType = "\" \"";         	     	
+  //std::cout << "Run type: " << frunType << std::endl;
+
 }
 
 
@@ -201,8 +208,31 @@ void util::TFileMetadataDUNE::postEvent(art::Event const& evt, art::ScheduleCont
   md.flast_event = event;
   // event counter
   ++md.fevent_count;
+
+  art::Handle<art::TriggerResults> h;
+  if (evt.getByLabel("TriggerResults", h) and h->accept()) {
+    // Event passed at least one of the paths
+    ++md.fnew_event_count;
+  }
     
 }
+
+//--------------------------------------------------------------------  	
+// PostEvent callback.
+void util::TFileMetadataDUNE::postCloseOutput(art::OutputFileInfo const& output_file)
+{
+ 
+  if(!fGenerateTFileMetadata) return;	
+  
+  
+  // save the first event
+  //if (md.fevent_count == 0) md.ffirst_event = event;
+  //md.flast_event = event;
+  // event counter
+  md.fFileName = output_file.fileName();
+    
+}
+
 
 //--------------------------------------------------------------------  	
 // PostSubRun callback.
@@ -271,7 +301,7 @@ void util::TFileMetadataDUNE::postEndJob()
   jsonfile<<"{\n  \"application\": {\n    \"family\": "<<std::get<0>(md.fapplication)<<",\n    \"name\": ";
   jsonfile<<std::get<1>(md.fapplication)<<",\n    \"version\": "<<std::get<2>(md.fapplication)<<"\n  },\n  ";
   jsonfile<<"\"data_tier\": \""<<md.fdata_tier<<"\",\n  ";
-  jsonfile<<"\"event_count\": "<<md.fevent_count<<",\n  ";
+  jsonfile<<"\"event_count\": "<<md.fnew_event_count<<",\n  ";
   //jsonfile<<"\"fcl.name\": \""<<md.ffcl_name<<"\",\n  ";
   //jsonfile<<"\"fcl.version\":  \""<<md.ffcl_version<<"\",\n  ";
   jsonfile<<"\"file_format\": \""<<md.ffile_format<<"\",\n  ";
