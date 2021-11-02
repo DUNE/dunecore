@@ -70,7 +70,7 @@ namespace geo { namespace dune{ namespace vd {
     {
       auto const dend = fROPfirstChannel.end();
       auto const iNextData = fROPfirstChannel.upper_bound( channel );
-      assert(iNextData != fROPfirstChannel.end());
+      assert(iNextData != fROPfirstChannel.begin());
       return ((iNextData == dend) && (channel >= endChannel()))
 	? nullptr: &(std::prev(iNextData)->second);
     }
