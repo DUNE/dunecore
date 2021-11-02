@@ -433,7 +433,7 @@ void geo::ColdBoxChannelMapAlg::fillChannelToWireMap
           << " (plane type: " << PlaneTypeName(planeType) << ")";
 
         PlaneColl_t const& plane_ids = ROPplanes(rid);
-	assert(!plane_idss.empty());
+	assert(!plane_ids.empty());
         log << " (" << plane_ids.size() << " planes):";
 	
 	std::vector<geo::PlaneGeo const*> planes;
