@@ -18,6 +18,7 @@
 #include "art/Framework/Principal/RunPrincipal.h"
 #include "art/Framework/Principal/SubRunPrincipal.h"
 #include "art/Framework/Principal/Event.h"
+#include "art/Utilities/OutputFileInfo.h"
 #include "art/Persistency/Provenance/ScheduleContext.h"
 #include <iostream>
 #include <fstream>
@@ -41,6 +42,7 @@ namespace util{
       std::string fdata_tier;
       time_t fend_time;
       unsigned int fevent_count=0;
+      unsigned int fnew_event_count = 0;
       std::string ffile_format;
       std::string ffile_type;
       art::EventNumber_t ffirst_event=0;
@@ -65,6 +67,7 @@ namespace util{
       std::string fDataDetectorType;		
       std::string fDataName;			
       std::string fStageName;           
+      std::string fFileName;
     };
     
     metadata md;
@@ -77,6 +80,7 @@ namespace util{
     void postBeginJob();
     void postOpenFile(std::string const& fn);
     void postEvent(art::Event const& ev, art::ScheduleContext);
+    void postCloseOutput(art::OutputFileInfo const&);
     void postBeginSubRun(art::SubRun const& subrun);
     void postEndJob();
 
