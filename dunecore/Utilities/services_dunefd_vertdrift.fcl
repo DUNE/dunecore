@@ -24,6 +24,8 @@ dunefdvd_simulation_services: {
 
 dunefdvd_reco_services: {
     @table::dunefd_reco_services
+    DetectorPropertiesService: @local::dunefdvd_detproperties
+    DetectorClocksService:     @local::dunefdvd_detectorclocks
     Geometry:                  @local::dunevd10kt_geo
 }
 
