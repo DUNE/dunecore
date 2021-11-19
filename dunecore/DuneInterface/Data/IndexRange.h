@@ -46,6 +46,43 @@ public:
     if ( lab2.size() ) setLabel(2, lab2);
     if ( lab3.size() ) setLabel(3, lab3);
   }
+  // Ctor from string: name:ich1:ich2, name:ich1:ich2:lab1, ...
+  explicit IndexRange(Name sran) {
+    // name
+    std::string srem = sran;
+    std::string::size_type ipos = srem.find(":");
+    if ( ipos ==0 || ipos == std::string::npos ) return;
+    std::string nameTmp = srem.substr(0, ipos);
+    // begin
+    srem = srem.substr(ipos+1);
+    if ( srem.size() == 0 ) return;
+    ipos = srem.find(":");
+    if ( ipos ==0 || ipos == std::string::npos ) return;
+    std::string swrd = srem.substr(0, ipos);
+    if ( swrd.find_first_not_of("0123456789") != std::string::npos ) return;
+    Index beginTmp = std::stoi(swrd);
+    // end
+    srem = srem.substr(ipos+1);
+    if ( srem.size() == 0 ) return;
+    ipos = srem.find(":");
+    if ( ipos ==0 ) return;
+    swrd = srem.substr(0, ipos);
+    if ( swrd.find_first_not_of( "0123456789" ) != std::string::npos ) return;
+    Index endTmp = std::stoi(swrd);
+    if ( endTmp <= beginTmp ) return;
+    // We now have a valid range.
+    name = nameTmp;
+    begin = beginTmp;
+    end = endTmp;
+    // Add any labels.
+    Index ilab = 0;
+    while ( ipos != std::string::npos ) {
+      srem = srem.substr(ipos+1);
+      swrd = srem.substr(0, ipos);
+      ipos = srem.find(":");
+      setLabel(ilab++, swrd);
+    }
+  }
 
   // Length of the range.
   Index size() const { return end>begin ? end - begin : 0; }
