@@ -19,11 +19,9 @@
 #include "HDF5Utils.h"
 
 
-
 //Is raw a good namespace?
 namespace dune {
 //Forward declare the class
-//The Class name is too long
 class HDF5RawInputDetail;
 }
 

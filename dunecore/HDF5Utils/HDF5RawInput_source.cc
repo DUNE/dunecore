@@ -55,9 +55,9 @@ bool dune::HDF5RawInputDetail::readNext(art::RunPrincipal const* const inR,
 
   //Accessing run number
   hid_t the_group = getGroupFromPath (hdf_file_->filePtr, nextEventGroupName);
-  //std::vector<std::string> detector_types = getMidLevelGroupNames(the_group);
   HeaderInfo header_info;
   std::string det_type = "TriggerRecordHeader";
+
   getHeaderInfo(the_group, det_type, header_info);
   if (fLogLevel > 0) {
     std::cout << "   Magic word: 0x" << std::hex << header_info.magicWord <<
@@ -83,16 +83,14 @@ bool dune::HDF5RawInputDetail::readNext(art::RunPrincipal const* const inR,
    uint64_t trigTimeStamp = header_info.trigTimestamp;
     
    uint64_t getTrigTime = formatTrigTimeStamp (trigTimeStamp);
-   std::cout << "getTrigTime :" << getTrigTime << std::endl;
+   // std::cout << "getTrigTime :" << getTrigTime << std::endl;
   
    art::Timestamp artTrigStamp (getTrigTime);
-   std::cout << "artTrigStamp :" << artTrigStamp.value() << std::endl;
+   // std::cout << "artTrigStamp :" << artTrigStamp.value() << std::endl;
 
   run_id = header_info.runNum;
   std::unique_ptr<raw::RDTimeStamp> rd_timestamp(
     new raw::RDTimeStamp(header_info.trigTimestamp));
-
- 
 
   // make new run if inR is 0 or if the run has changed
   if (inR == 0 || inR->run() != run_id) {

@@ -55,10 +55,10 @@ void getHeaderInfo(hid_t the_group, const std::string & det_type,
                    HeaderInfo & info);
 
 typedef std::vector<Fragment> Fragments;
-typedef std::map<std::string, std::unique_ptr<Fragments>> FragmentListsByType;
-//void getFragmentsForEvent(hid_t the_group, RawDigits& raw_digits, RDTimeStamps &timestamps, int apano, int maxchan);
-void getMedianSigma(const raw::RawDigit::ADCvector_t &v_adc, float &median,
-                    float &sigma);
+//typedef std::map<std::string, std::unique_ptr<Fragments>> FragmentListsByType;
+
+
 }
 }
+
 #endif
