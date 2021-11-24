@@ -99,11 +99,14 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& lhs, const IndexRangeGroup& ir) {
-  lhs << ir.name << ": ";
   if ( ir.size() == 0 ) {
-    lhs << "<empty>";
+    lhs << ir.name << ": <empty>";
+  // If the group holds one range and the range and group names are the same,
+  // then print the range.
+  } else if ( ir.size() == 1 && ir.range(0).name == ir.name ) {
+    lhs << ir.range(0);
   } else {
-    lhs << "[";
+    lhs << ir.name << ": [";
     bool first = true;
     for ( const IndexRange& ran : ir.ranges ) {
       if ( first ) first = false;
