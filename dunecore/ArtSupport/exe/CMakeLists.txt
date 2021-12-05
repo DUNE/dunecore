@@ -13,7 +13,7 @@ cet_make_exec(fcldump
 )
 
 cet_make_exec(liblist
-  SOURCE liblist
+  SOURCE liblist.cxx
   LIBRARIES
     cetlib cetlib_except
 )
