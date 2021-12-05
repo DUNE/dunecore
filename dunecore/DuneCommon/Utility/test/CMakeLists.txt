@@ -12,7 +12,7 @@ cet_test(test_LineColors SOURCES test_LineColors.cxx
 
 #cet_test(test_DuneTimeConverter SOURCES test_DuneTimeConverter.cxx
 #  LIBRARIES
-#    art_Persistency_Provenance canvas
+#    art::Persistency_Provenance canvas
 #)
 
 cet_test(test_StringManipulator SOURCES test_StringManipulator.cxx

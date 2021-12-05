@@ -13,12 +13,12 @@ art_make_library(
   SOURCE ${src_files}
   LIBRARIES
     SignalShapingServiceDUNE_service
-    art_Framework_Services_Registry
+    art::Framework_Services_Registry
     art_Framework_Core
-    art_Framework_Principal
-    art_Utilities
-    canvas
-    cetlib cetlib_except
+    art::Framework_Principal
+    art::Utilities
+    canvas::canvas
+    cetlib::cetlib cetlib_except
 )
 
 install_headers()

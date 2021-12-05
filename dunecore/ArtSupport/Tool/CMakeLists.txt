@@ -6,7 +6,7 @@
 # Add plugin for each tool.
 
 cet_build_plugin(TestTool   art::tool
-                art_Utilities canvas
-                cetlib cetlib_except
+                art::Utilities canvas
+                cetlib::cetlib cetlib_except
                 ROOT_BASIC_LIB_LIST
              )

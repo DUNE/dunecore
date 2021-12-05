@@ -8,16 +8,16 @@ set( dune_util_lib_list lardata_Utilities_LArFFT_service
   			ART_FRAMEWORK_CORE
 			ART_FRAMEWORK_PRINCIPAL
 			ART_FRAMEWORK_SERVICES_REGISTRY
-			art_Persistency_Common canvas
-			art_Persistency_Provenance canvas
+			art::Persistency_Common canvas
+			art::Persistency_Provenance canvas
 			ART_ROOT_IO_TFILE_SUPPORT
 			ROOT::Core
 			ART_ROOT_IO_TFILESERVICE_SERVICE
 			ART_FRAMEWORK_SERVICES_SYSTEM_FILECATALOGMETADATA_SERVICE
-			art_Utilities canvas
+			art::Utilities canvas
 			messagefacility::MF_MessageLogger
 			
-			cetlib cetlib_except
+			cetlib::cetlib cetlib_except
 			ROOT_BASIC_LIB_LIST
                         ROOT_GEOM
     )
@@ -63,8 +63,8 @@ cet_build_plugin(CrpGainService   art::service
                 dune_ArtSupport
                 larcorealg_Geometry
 		lardataobj_Simulation
-		art_Utilities canvas
-                cetlib cetlib_except
+		art::Utilities canvas
+                cetlib::cetlib cetlib_except
                 ROOT_BASIC_LIB_LIST
 		BASENAME_ONLY
              )
