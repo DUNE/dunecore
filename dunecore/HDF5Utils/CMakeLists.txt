@@ -5,13 +5,9 @@ art_make_library(LIBRARY_NAME HDF5Utils
          #artdaq-core_Utilities
          #${ARTDAQ_DAQDATA}
          cetlib_except::cetlib_except
-         
-         ${fhiclcpp::fhiclcpp}
+         fhiclcpp::fhiclcpp
          messagefacility::MF_MessageLogger
-         ${MF_MESSAGEUTILITIES}
          #${RCEDAMLIB}
-         ${GALLERY_LIB}
-         ${ART_LIB}
          lardataobj_RawData
          art::Framework_Principal
          #dune_VDColdbox_ChannelMap_VDColdboxChannelMapService_service 
