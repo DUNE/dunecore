@@ -5,16 +5,16 @@ art_make(
   MODULE_LIBRARIES
   #dune_DuneObjDumpers
     dune_DuneObj
-    nusimdata_SimulationBase
+    nusimdata::SimulationBase
     ART_FRAMEWORK_CORE
     ART_FRAMEWORK_PRINCIPAL
-    art_Persistency_Common
-    art_Persistency_Provenance
-    art_Utilities
-    canvas
+    art::Persistency_Common
+    art::Persistency_Provenance
+    art::Utilities
+    canvas::canvas
     messagefacility::MF_MessageLogger
 
-  cetlib cetlib_except
+  cetlib::cetlib cetlib_except
     ROOT_EG
     ROOT_BASIC_LIB_LIST
   )
