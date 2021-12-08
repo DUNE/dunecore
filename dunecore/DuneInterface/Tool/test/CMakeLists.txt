@@ -10,24 +10,24 @@ include(CetTest)
 cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
   LIBRARIES
     dune_ArtSupport
-    art_Utilities
-    canvas
+    art::Utilities
+    canvas::canvas
     fhiclcpp
-    cetlib cetlib_except
-    cetlib_except
+    cetlib::cetlib cetlib_except
+    cetlib_except::cetlib_except
     SQLITE3
-    ${Boost_FILESYSTEM_LIBRARY}
+    Boost::filesystem
 )
 
 cet_test(test_TpcDataTool SOURCES test_TpcDataTool.cxx
   LIBRARIES
     dune_DuneInterface_Data
     dune_ArtSupport
-    art_Utilities
-    canvas
+    art::Utilities
+    canvas::canvas
     fhiclcpp
-    cetlib cetlib_except
-    cetlib_except
+    cetlib::cetlib cetlib_except
+    cetlib_except::cetlib_except
     SQLITE3
-    ${Boost_FILESYSTEM_LIBRARY}
+    Boost::filesystem
 )

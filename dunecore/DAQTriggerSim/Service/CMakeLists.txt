@@ -9,12 +9,12 @@ cet_build_plugin(TemplateTriggerService   art::service
                 ART_ROOT_IO_TFILE_SUPPORT
                 ROOT::Core
                 ART_FRAMEWORK_SERVICES_OPTIONAL_RANDOMNUMBERGENERATOR_SERVICE
-                nurandom_RandomUtils_NuRandomService_service
+                nurandom::RandomUtils_NuRandomService_service
                 ART_FRAMEWORK_CORE
                 ART_FRAMEWORK_PRINCIPAL
-                art_Utilities canvas
+                art::Utilities canvas
                 messagefacility::MF_MessageLogger
-                cetlib cetlib_except
+                cetlib::cetlib cetlib_except
                 ROOT_BASIC_LIB_LIST
              )
 
@@ -29,7 +29,7 @@ cet_build_plugin(HardwareMapperService   art::service
                 ART_PERSISTENCY_PROVENANCE
                 messagefacility::MF_MessageLogger
                 ROOT_BASIC_LIB_LIST
-                art_Utilities canvas
+                art::Utilities canvas
              )
 
 install_fhicl()

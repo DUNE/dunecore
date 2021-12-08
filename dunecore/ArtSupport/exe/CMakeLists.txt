@@ -6,16 +6,18 @@
 # Instructions to build and install fcldump.
 
 cet_make_exec(fcldump
-  SOURCE fcldump.cxx
+  SOURCE
+    fcldump.cxx
   LIBRARIES
     fhiclcpp
-    cetlib cetlib_except
+    cetlib::cetlib cetlib_except
 )
 
 cet_make_exec(liblist
-  SOURCE liblist
+  SOURCE
+    liblist.cxx
   LIBRARIES
-    cetlib cetlib_except
+    cetlib::cetlib cetlib_except
 )
 
 install_source()

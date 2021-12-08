@@ -14,8 +14,8 @@ add_subdirectory(test)
 cet_find_library(FFTW NAMES fftw3 PATHS ENV FFTW_LIBRARY)
 art_make(BASENAME_ONLY
          LIB_LIBRARIES
-         art_Persistency_Provenance
-         canvas
+         art::Persistency_Provenance
+         canvas::canvas
          ROOT::HistPainter
          ROOT_BASIC_LIB_LIST
          FFTW
