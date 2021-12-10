@@ -12,6 +12,8 @@ FILS='
  iceberg5_decode_reco.fcl
  standard_reco_dune10kt_nu_1x2x6.fcl
  vdcoldbox_raw_dataprep.fcl
+ vdcoldbox_raw_tdedataprep.fcl
+ hdcoldbox_raw_dataprep.fcl
 '
 
 NERR=0
