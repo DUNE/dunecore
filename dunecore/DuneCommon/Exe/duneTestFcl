@@ -14,6 +14,11 @@ FILS='
  vdcoldbox_raw_dataprep.fcl
  vdcoldbox_raw_tdedataprep.fcl
  hdcoldbox_raw_dataprep.fcl
+ protodune_dqm.fcl
+ protodune_dqm2.fcl
+ iceberg3_dqm1.fcl
+ iceberg4_dqm1.fcl
+ iceberg5cond_dqm1.fcl
 '
 
 NERR=0
