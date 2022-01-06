@@ -18,8 +18,8 @@
 #include "lardataobj/Simulation/SimChannel.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/FloatArrayTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/FloatArrayTool.h"
 
 #include <TFile.h>
 #include <TH2F.h>

@@ -10,8 +10,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/FloatArrayTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/FloatArrayTool.h"
 #include "TH1F.h"
 
 #undef NDEBUG

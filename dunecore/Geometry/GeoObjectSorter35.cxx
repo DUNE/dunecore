@@ -6,7 +6,7 @@
 /// \author  brebel@fnal.gov
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/GeoObjectSorter35.h"
+#include "dunecore/Geometry/GeoObjectSorter35.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"
 #include "larcorealg/Geometry/AuxDetSensitiveGeo.h"
 #include "larcorealg/Geometry/CryostatGeo.h"

@@ -10,8 +10,8 @@
 #include <vector>
 #include <sstream>
 #include <memory>
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/RunDataTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/RunDataTool.h"
 
 using std::string;
 using std::cout;

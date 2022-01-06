@@ -15,7 +15,7 @@
 #ifndef FftwReal2dDftData_H
 #define FftwReal2dDftData_H
 
-#include "dune/DuneInterface/Data/Real2dDftData.h"
+#include "dunecore/DuneInterface/Data/Real2dDftData.h"
 #include "fftw3.h"
 
 //**********************************************************************

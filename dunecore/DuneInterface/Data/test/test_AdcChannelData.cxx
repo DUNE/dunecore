@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "dune/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
 
 #undef NDEBUG
 #include <cassert>

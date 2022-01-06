@@ -18,7 +18,7 @@
 
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/DuneInterface/Tool/IndexVectorMapTool.h"
+#include "dunecore/DuneInterface/Tool/IndexVectorMapTool.h"
 #include <map>
 
 class FclIndexVectorMapTool : public IndexVectorMapTool {

@@ -8,7 +8,7 @@
 cet_make_exec(duneRunData
   SOURCE duneRunData.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     fhiclcpp
     cetlib::cetlib cetlib_except
 )

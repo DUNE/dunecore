@@ -9,8 +9,8 @@
 #ifndef AdcChannelStringTool_H
 #define AdcChannelStringTool_H
 
-#include "dune/DuneInterface/Data/AdcChannelData.h"
-#include "dune/DuneInterface/Data/DataMap.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/DataMap.h"
 
 class AdcChannelStringTool {
 

@@ -7,7 +7,7 @@
 //
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
 
 // Framework includes
 

@@ -11,7 +11,7 @@
 /// This is done in DUNEGeometryHelper using the fcl parameter DetectorVersion
 /// in the SortingParameters pset.
 ///
-#include "dune/Geometry/ChannelMap35Alg.h"
+#include "dunecore/Geometry/ChannelMap35Alg.h"
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"
 #include "larcorealg/Geometry/CryostatGeo.h"

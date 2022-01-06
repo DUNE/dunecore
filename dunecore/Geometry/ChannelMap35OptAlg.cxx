@@ -19,7 +19,7 @@
 /// in the SortingParameters pset.
 ///
 ///
-#include "dune/Geometry/ChannelMap35OptAlg.h"
+#include "dunecore/Geometry/ChannelMap35OptAlg.h"
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/CryostatGeo.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"

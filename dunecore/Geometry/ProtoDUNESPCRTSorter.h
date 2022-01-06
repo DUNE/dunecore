@@ -8,7 +8,7 @@
 #define CRT_CRTSORTER_H
 
 #include <vector>
-#include "dune/Geometry/GeoObjectSorterAPA.h"
+#include "dunecore/Geometry/GeoObjectSorterAPA.h"
 
 namespace CRTSorter{
 

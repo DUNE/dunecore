@@ -30,7 +30,7 @@ cet_build_plugin(FixedTimeOffsetTool  art::tool
              )
 
 cet_build_plugin(TimingRawDecoderOffsetTool  art::tool
-                dune_ArtSupport
+                dunecore_ArtSupport
                 dune_raw_data::dune-raw-data_Services_ChannelMap_PdspChannelMapService_service
                 art::Utilities canvas
                 cetlib::cetlib cetlib_except

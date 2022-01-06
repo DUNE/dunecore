@@ -8,7 +8,7 @@
 // ////////////////////////////////////////////
 
 
-#include "dune/DuneObj/ProtoDUNEBeamSpill.h"
+#include "dunecore/DuneObj/ProtoDUNEBeamSpill.h"
 #include <algorithm>
 #include <iterator>
 

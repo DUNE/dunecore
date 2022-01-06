@@ -1,6 +1,6 @@
 // test_make_tool.cxx
 
-#include "dune/ArtSupport/Tool/TestTool.h"
+#include "dunecore/ArtSupport/Tool/TestTool.h"
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
 #include "fhiclcpp/intermediate_table.h"

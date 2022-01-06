@@ -2,7 +2,7 @@
 
 art_make( BASENAME_ONLY
 	  EXCLUDE CheckGeometry_module.cc CheckDPhaseGeometry_module.cc issue19191_module.cc
-	  LIBRARY_NAME dune_Geometry
+	  LIBRARY_NAME dunecore_Geometry
 	  LIB_LIBRARIES larcorealg_Geometry
                         messagefacility::MF_MessageLogger
                         cetlib::cetlib cetlib_except
@@ -15,7 +15,7 @@ art_make( BASENAME_ONLY
                         ROOT_GEOM
                         
           SERVICE_LIBRARIES larcorealg_Geometry
-                        dune_Geometry
+                        dunecore_Geometry
 
                         fhiclcpp::fhiclcpp
                         cetlib::cetlib cetlib_except

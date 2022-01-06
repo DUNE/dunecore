@@ -7,8 +7,8 @@
 /// \author vgalymov@ipnl.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/GeoObjectSorterCRU.h"
-#include "dune/Geometry/OpDetSorter.h"
+#include "dunecore/Geometry/GeoObjectSorterCRU.h"
+#include "dunecore/Geometry/OpDetSorter.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"
 #include "larcorealg/Geometry/AuxDetSensitiveGeo.h"
 #include "larcorealg/Geometry/CryostatGeo.h"

@@ -7,7 +7,7 @@
 #include "canvas/Utilities/InputTag.h"
 #include "lardataobj/RawData/RawDigit.h"
 #include "lardataobj/RawData/RDTimeStamp.h"
-#include "dune/DuneObj/RDStatus.h"
+#include "dunecore/DuneObj/RDStatus.h"
 
  class PDSPTPCDataInterfaceParent {
   public:

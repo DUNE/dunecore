@@ -13,7 +13,7 @@
 //   root> gSystem->SetBuildDir(".aclic");
 //   root> gSystem->AddLinkedLibs(gSystem->ExpandPathName("$DUNETPC_LIB/libdune_ArtSupport.so"));
 //   root> gSystem->AddLinkedLibs(gSystem->ExpandPathName("$DUNETPC_LIB/libdune_LarsoftServiceAccess.so"));
-//   root> .L $DUNETPC_INC/dune/ArtSupport/ArtServiceHelper.h+
+//   root> .L $DUNETPC_INC/dunecore/ArtSupport/ArtServiceHelper.h+
 //   root> .L $DUNETPC_INC/dune/LarsoftServiceAccess/LarsoftServiceAccess.h+
 //   root> ArtServiceHelper& ash = ArtServiceHelper::load("standard_reco_dune35tdata.fcl");
 //   root> ChannelGroupService* pcgs = ArtServicePointer<ChannelGroupService>();

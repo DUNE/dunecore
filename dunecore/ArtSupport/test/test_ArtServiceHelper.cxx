@@ -1,7 +1,7 @@
 // test_ArtServiceHelper.cxx
 
 //#include "AXService/ArtServiceHelper.h"
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 
 #include <string>
 #include <iostream>

@@ -8,7 +8,7 @@
 #ifndef GeoRopChannelGroupService_H
 #define GeoRopChannelGroupService_H
 
-#include "dune/DuneInterface/Service/ChannelGroupService.h"
+#include "dunecore/DuneInterface/Service/ChannelGroupService.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "larcore/Geometry/Geometry.h"
 

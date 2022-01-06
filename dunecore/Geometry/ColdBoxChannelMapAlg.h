@@ -26,7 +26,7 @@
 #include "fhiclcpp/ParameterSet.h"
 
 // dune specific
-#include "dune/Geometry/GeoObjectSorterCRU.h"
+#include "dunecore/Geometry/GeoObjectSorterCRU.h"
 
 // C/C++ standard libraries
 #include <vector>

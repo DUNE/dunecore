@@ -5,7 +5,7 @@
 //
 // Test CompactRealDftData.
 
-#include "dune/DuneCommon/Utility/CompactRealDftData.h"
+#include "dunecore/DuneCommon/Utility/CompactRealDftData.h"
 #include <string>
 #include <iostream>
 #include <fstream>

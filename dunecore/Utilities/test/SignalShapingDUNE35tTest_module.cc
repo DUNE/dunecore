@@ -13,7 +13,7 @@
 #include "art/Framework/Core/EDAnalyzer.h"
 #include "art_root_io/TFileService.h"
 
-#include "dune/Utilities/SignalShapingServiceDUNE35t.h"
+#include "dunecore/Utilities/SignalShapingServiceDUNE35t.h"
 #include "lardata/Utilities/LArFFT.h"
 
 #include "TComplex.h"

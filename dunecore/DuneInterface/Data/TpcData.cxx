@@ -1,6 +1,6 @@
 // TpcData.cxx
 
-#include "dune/DuneInterface/Data/TpcData.h"
+#include "dunecore/DuneInterface/Data/TpcData.h"
 
 using std::cout;
 using std::endl;

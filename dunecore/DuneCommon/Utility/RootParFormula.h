@@ -8,7 +8,7 @@
 #ifndef RootParFormula_H
 #define RootParFormula_H
 
-#include "dune/DuneInterface/Utility/ParFormula.h"
+#include "dunecore/DuneInterface/Utility/ParFormula.h"
 #include "TFormula.h"
 
 class RootParFormula : public ParFormula {

@@ -1,8 +1,8 @@
 // test_DuneToolManager.cxx
 
 //#include "AXService/DuneToolManager.h"
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/ArtSupport/Tool/TestTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/ArtSupport/Tool/TestTool.h"
 
 #include <string>
 #include <iostream>

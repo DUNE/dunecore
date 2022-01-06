@@ -14,7 +14,7 @@
 #include "lardataobj/RawData/OpDetWaveform.h"
 
 //jpd -- needed to allow for triggering on triggers
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
 //#ifndef __CLING__
 #include "art/Framework/Principal/Event.h"
 //#endif

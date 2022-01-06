@@ -11,8 +11,8 @@
 #ifndef Tpc2dRoi_H
 #define Tpc2dRoi_H
 
-#include "dune/DuneInterface/Data/Real2dData.h"
-#include "dune/DuneInterface/Data/FftwReal2dDftData.h"
+#include "dunecore/DuneInterface/Data/Real2dData.h"
+#include "dunecore/DuneInterface/Data/FftwReal2dDftData.h"
 #include <memory>
 
 class Tpc2dRoi {

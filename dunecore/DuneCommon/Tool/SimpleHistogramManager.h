@@ -10,7 +10,7 @@
 
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/DuneInterface/Tool/HistogramManager.h"
+#include "dunecore/DuneInterface/Tool/HistogramManager.h"
 #include <map>
 
 class SimpleHistogramManager : public HistogramManager {

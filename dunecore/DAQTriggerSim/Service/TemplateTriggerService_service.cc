@@ -7,7 +7,7 @@
 //
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/Service/TemplateTriggerService.h"
+#include "dunecore/DAQTriggerSim/Service/TemplateTriggerService.h"
 
 // Framework includes
 #include "fhiclcpp/ParameterSet.h"

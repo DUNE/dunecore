@@ -20,8 +20,8 @@
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 //We need a hardware mapper service, so we should include the header
-#include "dune/DAQTriggerSim/Service/HardwareMapperService.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
+#include "dunecore/DAQTriggerSim/Service/HardwareMapperService.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
 
 class TestHardwareMapper;
 

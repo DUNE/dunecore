@@ -7,7 +7,7 @@
 
 #undef NDEBUG
 
-#include "dune/DuneCommon/Utility/offsetLine.h"
+#include "dunecore/DuneCommon/Utility/offsetLine.h"
 #include <string>
 #include <iostream>
 #include <iomanip>

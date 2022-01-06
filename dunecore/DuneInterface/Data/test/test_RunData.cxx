@@ -8,7 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "dune/DuneInterface/Data/RunData.h"
+#include "dunecore/DuneInterface/Data/RunData.h"
 
 #undef NDEBUG
 #include <cassert>

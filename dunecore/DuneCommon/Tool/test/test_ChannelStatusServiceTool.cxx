@@ -5,10 +5,10 @@
 //
 // Test ChannelStatusServiceTool.
 
-#include "dune/DuneInterface/Data/AdcTypes.h"
-#include "dune/ArtSupport/ArtServiceHelper.h"
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/IndexMapTool.h"
+#include "dunecore/DuneInterface/Data/AdcTypes.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/IndexMapTool.h"
 #include "TH1F.h"
 #include <string>
 #include <iostream>

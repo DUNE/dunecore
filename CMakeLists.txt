@@ -17,13 +17,13 @@
 
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
-project(dunetpc VERSION 09.41.00.02 LANGUAGES CXX)
-
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
 
-# Make target names shorter (dune::X vs dunetpc::dune_X).
-set(dunetpc_NAMESPACE dune)
+project(dunecore VERSION 09.41.00.02 LANGUAGES CXX)
+
+## Make target names shorter (dunecore::X vs dunecore::dune_X).
+# set(dunecore_NAMESPACE dune)
 
 # Project variable defaults (_INIT) and overrides.
 set(${PROJECT_NAME}_SCRIPTS_DIR_INIT scripts)
@@ -61,9 +61,6 @@ find_ups_product( cetlib_except )
 find_ups_product( cetlib )
 find_ups_product( clhep v2_1_3_0 )
 find_ups_product( dune_raw_data )
-find_ups_product( dunepdsprce v0_0_3 )
-find_ups_product( dunedetdataformats )
-find_ups_product( dunedaqdataformats )
 find_ups_product( fhiclcpp )
 find_ups_product( genie )
 find_ups_product( hdf5 v1_12_0b )
@@ -87,30 +84,13 @@ find_ups_product( nug4 )
 find_ups_product( nugen )
 find_ups_product( nurandom )
 find_ups_product( nusimdata )
-find_ups_product( nusystematics  )
 find_ups_product( nutools )
 find_ups_product( pandora )
+find_ups_product( dunedaqdataformats )
+find_ups_product( dunedetdataformats )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( systematicstools  )
 find_ups_product( fftw )
-if(DEFINED ENV{CAFFE_LIB} )
-  find_ups_product(caffe)
-endif()
-if(DEFINED ENV{LAPACK_LIB} )
-  find_ups_product( lapack )
-endif()
-
-if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRITON_DIR} ))
-  # find tensorflow library
-  find_ups_product( protobuf )
-  find_ups_product( tensorflow )
-  find_ups_product( triton )
-  find_ups_product( larrecodnn )
-  cet_find_library(TENSORFLOW_CC NAMES tensorflow_cc PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
-  cet_find_library(TENSORFLOW_FRAMEWORK NAMES tensorflow_framework PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
-  set(TENSORFLOW TENSORFLOW_CC TENSORFLOW_FRAMEWORK)
-  cet_find_library(PROTOBUF NAMES protobuf PATHS ENV PROTOBUF_LIB NO_DEFAULT_PATH )
-endif()
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 
@@ -133,17 +113,15 @@ include(ArtMake)
 include(BuildPlugins)
 
 # ADD SOURCE CODE SUBDIRECTORIES HERE
-add_subdirectory(dune)
-# release database
-add_subdirectory(releaseDB)
+add_subdirectory(dunecore)
+## release database
+# add_subdirectory(releaseDB)
 # subdirectory for test code
-add_subdirectory(test)
+# add_subdirectory(test)
 # CMake Modules
 add_subdirectory(Modules)
 # ups - table and config files
 add_subdirectory(ups)
-# subdirectory for fcl files
-add_subdirectory(fcl)
 
 # packaging utility
 include(UseCPack)

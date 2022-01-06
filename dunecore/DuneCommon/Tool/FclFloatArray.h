@@ -20,7 +20,7 @@
 
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/DuneInterface/Tool/FloatArrayTool.h"
+#include "dunecore/DuneInterface/Tool/FloatArrayTool.h"
 #include <vector>
 
 class FclFloatArray : public FloatArrayTool {

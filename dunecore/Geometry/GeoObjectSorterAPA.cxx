@@ -6,8 +6,8 @@
 /// \author  brebel@fnal.gov
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/GeoObjectSorterAPA.h"
-#include "dune/Geometry/OpDetSorter.h"
+#include "dunecore/Geometry/GeoObjectSorterAPA.h"
+#include "dunecore/Geometry/OpDetSorter.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"
 #include "larcorealg/Geometry/CryostatGeo.h"
 #include "larcorealg/Geometry/TPCGeo.h"

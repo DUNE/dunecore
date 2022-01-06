@@ -1,8 +1,8 @@
 // LarsoftServiceAccess.cxx
 
 #include "LarsoftServiceAccess.h"
-#include "dune/ArtSupport/ArtServicePointer.h"
-#include "dune/ArtSupport/ArtServiceProvider.h"
+#include "dunecore/ArtSupport/ArtServicePointer.h"
+#include "dunecore/ArtSupport/ArtServiceProvider.h"
 
 #include "larcore/Geometry/Geometry.h"
 #include "larevt/CalibrationDBI/Interface/ChannelStatusService.h"

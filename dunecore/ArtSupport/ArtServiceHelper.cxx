@@ -2,7 +2,7 @@
 #include "fhiclcpp/make_ParameterSet.h"
 #include "fhiclcpp/intermediate_table.h"
 
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 
 ArtServiceHelper::ArtServiceHelper(fhicl::ParameterSet&& pset) :
   activityRegistry_{},

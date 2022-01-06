@@ -8,7 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "dune/DuneInterface/Data/DataMap.h"
+#include "dunecore/DuneInterface/Data/DataMap.h"
 
 #undef NDEBUG
 #include <cassert>

@@ -21,7 +21,7 @@
 #include "larcoreobj/SimpleTypesAndConstants/RawTypes.h"
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/TriggerAlgorithms/TemplateTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerAlgorithms/TemplateTrigger.h"
 
 // C++ includes
 #include <iomanip>

@@ -38,7 +38,7 @@
 
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/DuneInterface/Tool/TimeOffsetTool.h"
+#include "dunecore/DuneInterface/Tool/TimeOffsetTool.h"
 #include <vector>
 #include <map>
 

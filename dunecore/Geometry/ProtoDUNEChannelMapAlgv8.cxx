@@ -6,10 +6,10 @@
 /// \author  Laura Paulucci
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/ProtoDUNEChannelMapAlgv8.h"
-#include "dune/Geometry/DuneApaChannelMapAlg.h"
+#include "dunecore/Geometry/ProtoDUNEChannelMapAlgv8.h"
+#include "dunecore/Geometry/DuneApaChannelMapAlg.h"
 #include "larcorealg/Geometry/GeoObjectSorter.h"
-#include "dune/Geometry/GeoObjectSorterAPA.h"
+#include "dunecore/Geometry/GeoObjectSorterAPA.h"
 
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"

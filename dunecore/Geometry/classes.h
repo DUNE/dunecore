@@ -1,3 +1,3 @@
-#include "dune/Geometry/ChannelGeo.h"
-#include "dune/Geometry/IcebergChannelGeo.h"
+#include "dunecore/Geometry/ChannelGeo.h"
+#include "dunecore/Geometry/IcebergChannelGeo.h"
 

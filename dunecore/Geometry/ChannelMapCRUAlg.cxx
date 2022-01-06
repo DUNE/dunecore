@@ -6,7 +6,7 @@
 /// \author  vgalymov@ipnl.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/ChannelMapCRUAlg.h"
+#include "dunecore/Geometry/ChannelMapCRUAlg.h"
 #include "larcorealg/Geometry/Exceptions.h"
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"

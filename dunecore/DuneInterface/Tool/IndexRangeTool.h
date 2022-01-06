@@ -8,7 +8,7 @@
 #ifndef IndexRangeTool_H
 #define IndexRangeTool_H
 
-#include "dune/DuneInterface/Data/IndexRange.h"
+#include "dunecore/DuneInterface/Data/IndexRange.h"
 
 class IndexRangeTool {
 

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "dune/DuneInterface/Data/TpcData.h"
+#include "dunecore/DuneInterface/Data/TpcData.h"
 
 #undef NDEBUG
 #include <cassert>

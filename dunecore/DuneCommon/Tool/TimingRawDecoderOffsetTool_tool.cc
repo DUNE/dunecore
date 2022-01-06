@@ -1,8 +1,8 @@
 // TimingRawDecoderOffsetTool_tool.cc
 
 #include "TimingRawDecoderOffsetTool.h"
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/RunDataTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/RunDataTool.h"
 #include "dune-raw-data/Services/ChannelMap/PdspChannelMapService.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include <iostream>

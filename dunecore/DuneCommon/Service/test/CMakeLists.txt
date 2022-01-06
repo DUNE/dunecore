@@ -15,7 +15,7 @@ cet_test(test_GeoRopChannelGroupService
   LIBRARIES
     larcorealg_Geometry
     lardataalg_DetectorInfo
-    dune_ArtSupport
+    dunecore_ArtSupport
 )
 
 cet_test(test_GeoApaChannelGroupService
@@ -23,14 +23,14 @@ cet_test(test_GeoApaChannelGroupService
     test_GeoApaChannelGroupService.cxx
   LIBRARIES
     larcorealg_Geometry
-    dune_ArtSupport
+    dunecore_ArtSupport
 )
 
 cet_test(test_FixedChannelGroupService
   SOURCES
     test_FixedChannelGroupService.cxx
   LIBRARIES
-    dune_ArtSupport
-    dune_DuneServiceAccess
+    dunecore_ArtSupport
+    dunecore_DuneServiceAccess
 )
 

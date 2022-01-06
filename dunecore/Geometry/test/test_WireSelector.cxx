@@ -25,14 +25,14 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "../WireSelector.h"
 
 #include "TGraph.h"
 #include "TH2F.h"
-#include "dune/DuneCommon/Utility/TPadManipulator.h"
-#include "dune/DuneCommon/Utility/LineColors.h"
+#include "dunecore/DuneCommon/Utility/TPadManipulator.h"
+#include "dunecore/DuneCommon/Utility/LineColors.h"
 
 using std::string;
 using std::cout;

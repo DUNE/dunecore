@@ -3,7 +3,7 @@
 /// \author vgalymov@ipnl.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Utilities/SignalShapingServiceDUNEDPhase.h"
+#include "dunecore/Utilities/SignalShapingServiceDUNEDPhase.h"
 
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"

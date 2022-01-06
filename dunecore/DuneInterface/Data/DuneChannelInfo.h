@@ -8,7 +8,7 @@
 #ifndef DuneChannelInfo_H
 #define DuneChannelInfo_H
 
-#include "dune/DuneInterface/Data/AdcTypes.h"
+#include "dunecore/DuneInterface/Data/AdcTypes.h"
 #include <sstream>
 #include <memory>
 

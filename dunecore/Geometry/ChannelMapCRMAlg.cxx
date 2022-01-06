@@ -6,7 +6,7 @@
 /// \author  brebel@fnal.gov vgalymov@ipnl.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/ChannelMapCRMAlg.h"
+#include "dunecore/Geometry/ChannelMapCRMAlg.h"
 #include "larcorealg/Geometry/Exceptions.h"
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"

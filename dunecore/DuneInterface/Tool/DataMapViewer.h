@@ -9,7 +9,7 @@
 #ifndef DataMapViewer_H
 #define DataMapViewer_H
 
-#include "dune/DuneInterface/Data/DataMap.h"
+#include "dunecore/DuneInterface/Data/DataMap.h"
 
 class DataMapViewer {
 

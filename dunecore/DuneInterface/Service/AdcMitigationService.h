@@ -9,7 +9,7 @@
 // Interface for a service that modifies the signals for an ADC channel.
 
 #include <iostream>
-#include "dune/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
 
 class AdcMitigationService {
 

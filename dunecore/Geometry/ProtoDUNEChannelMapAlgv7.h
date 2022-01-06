@@ -22,7 +22,7 @@
 #include "larcorealg/Geometry/ChannelMapAlg.h"
 #include "larcorealg/Geometry/GeoObjectSorter.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/Geometry/DuneApaChannelMapAlg.h"
+#include "dunecore/Geometry/DuneApaChannelMapAlg.h"
 
 
 namespace geo{

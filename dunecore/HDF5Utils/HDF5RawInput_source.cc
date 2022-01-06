@@ -1,8 +1,8 @@
 #include "art/Framework/Core/InputSourceMacros.h"
 #include "art/Framework/IO/Sources/Source.h"
 #include "art/Framework/IO/Sources/SourceTraits.h"
-#include "dune/HDF5Utils/HDF5RawInput.h"
-#include "dune/DuneObj/DUNEHDF5FileInfo.h"
+#include "dunecore/HDF5Utils/HDF5RawInput.h"
+#include "dunecore/DuneObj/DUNEHDF5FileInfo.h"
 #include "lardataobj/RawData/RDTimeStamp.h"
 
 dune::HDF5RawInputDetail::HDF5RawInputDetail(

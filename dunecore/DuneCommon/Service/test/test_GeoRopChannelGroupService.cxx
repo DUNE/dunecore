@@ -11,7 +11,7 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 
 using std::string;
 using std::cout;

@@ -5,7 +5,7 @@
 
 // Interface for a tool providing access to run conditions data.
 
-#include "dune/DuneInterface/Data/RunData.h"
+#include "dunecore/DuneInterface/Data/RunData.h"
 
 class RunDataTool {
 

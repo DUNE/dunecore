@@ -28,8 +28,8 @@
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
 
 namespace triggersim {
 

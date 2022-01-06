@@ -1,6 +1,6 @@
 art_make( BASENAME_ONLY
           MODULE_LIBRARIES
-          dune_DAQTriggerSim_Service_HardwareMapperService_service
+          dunecore_DAQTriggerSim_Service_HardwareMapperService_service
           larcore_Geometry_Geometry_service
           larcorealg_Geometry
           lardataobj_RawData

@@ -9,8 +9,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/TimeOffsetTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/TimeOffsetTool.h"
 #include "TH1F.h"
 
 #undef NDEBUG

@@ -3,8 +3,8 @@ art_make(
     ROOT_EG
     ROOT::Core
   MODULE_LIBRARIES
-  #dune_DuneObjDumpers
-    dune_DuneObj
+  #dunecore_DuneObjDumpers
+    dunecore_DuneObj
     nusimdata::SimulationBase
     ART_FRAMEWORK_CORE
     ART_FRAMEWORK_PRINCIPAL

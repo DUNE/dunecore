@@ -8,8 +8,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "dune/DuneInterface/Tool/HistogramManager.h"
-#include "dune/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/HistogramManager.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
 #include "TH1F.h"
 
 #undef NDEBUG

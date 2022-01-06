@@ -10,7 +10,7 @@
 #include "messagefacility/MessageLogger/MessageLogger.h"
 //#include "larcoreobj/SimpleTypesAndConstants/geo_vectors_utils.h" 
 
-#include "dune/Geometry/ProtoDUNESPCRTSorter.h"
+#include "dunecore/Geometry/ProtoDUNESPCRTSorter.h"
                         
 
 //c++ includes                                                                                                                 

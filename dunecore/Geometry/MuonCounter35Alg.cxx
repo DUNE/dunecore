@@ -6,7 +6,7 @@
 /// \author  Matthew Worcester (mworcester@bnl.gov)
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/MuonCounter35Alg.h"
+#include "dunecore/Geometry/MuonCounter35Alg.h"
 
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "messagefacility/MessageLogger/MessageLogger.h" 

@@ -9,10 +9,10 @@
 FILE( GLOB src_files *.cxx )
 
 art_make_library(
-  LIBRARY_NAME dune_DuneServiceAccess
+  LIBRARY_NAME dunecore_DuneServiceAccess
   SOURCE ${src_files}
   LIBRARIES
-    SignalShapingServiceDUNE_service
+    dunecore::SignalShapingServiceDUNE_service
     art::Framework_Services_Registry
     art_Framework_Core
     art::Framework_Principal

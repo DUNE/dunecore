@@ -15,8 +15,8 @@
 #include "lardataobj/RawData/RawDigit.h"
 
 // Framework includes for the triggering framework.
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
 
 // C++ includes
 #include <vector>
@@ -64,7 +64,7 @@ class triggersim::TemplateTrigger{
 
   // An example function for how to trigger using the output of other triggers.
   //    Using this trigger means that you only have access to what is stored in the triggersim::BasicTrigger data product.
-  //      The methods to access stuff from these can be found in: dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h
+  //      The methods to access stuff from these can be found in: dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h
   bool TriggerOnTriggers( std::vector<triggersim::BasicTrigger> triggerVec);
 
  private:

@@ -1,5 +1,5 @@
 #include "larcore/Geometry/Geometry.h"
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
 #include <iostream>

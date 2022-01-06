@@ -13,7 +13,7 @@
 #ifndef Real2dDftData_H
 #define Real2dDftData_H
 
-#include "dune/DuneInterface/Data/RealDftNormalization.h"
+#include "dunecore/DuneInterface/Data/RealDftNormalization.h"
 #include <complex>
 #include <array>
 

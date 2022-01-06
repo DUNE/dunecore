@@ -1,6 +1,6 @@
 // RootParFormula.h
 
-#include "dune/DuneCommon/Utility/RootParFormula.h"
+#include "dunecore/DuneCommon/Utility/RootParFormula.h"
 
 using Names = ParFormula::Names;
 

@@ -12,7 +12,7 @@
 //
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Utilities/FileCatalogMetadataDUNE.h"
+#include "dunecore/Utilities/FileCatalogMetadataDUNE.h"
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 
   //--------------------------------------------------------------------

@@ -46,9 +46,9 @@
 #ifndef AdcChannelTool_H
 #define AdcChannelTool_H
 
-#include "dune/DuneInterface/Data/AdcChannelData.h"
-#include "dune/DuneInterface/Data/DataMap.h"
-#include "dune/DuneInterface/Data/DuneEventInfo.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/DataMap.h"
+#include "dunecore/DuneInterface/Data/DuneEventInfo.h"
 #include <set>
 
 class AdcChannelTool {

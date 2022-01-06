@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // class header
-#include "dune/Geometry/DUNEGeometryHelper.h"
+#include "dunecore/Geometry/DUNEGeometryHelper.h"
 
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 
@@ -13,19 +13,19 @@
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/ChannelMapAlg.h"
 #include "larcorealg/Geometry/ChannelMapStandardAlg.h"
-#include "dune/Geometry/DuneApaChannelMapAlg.h"
-#include "dune/Geometry/ChannelMap35Alg.h"
-#include "dune/Geometry/ChannelMap35OptAlg.h"
-#include "dune/Geometry/ChannelMapAPAAlg.h"
-#include "dune/Geometry/ChannelMapCRMAlg.h"
-#include "dune/Geometry/ChannelMapCRUAlg.h"
-#include "dune/Geometry/ColdBoxChannelMapAlg.h"
-#include "dune/Geometry/ProtoDUNEChannelMapAlg.h"
-#include "dune/Geometry/ProtoDUNEChannelMapAlgv7.h"
-#include "dune/Geometry/ProtoDUNEChannelMapAlgv8.h"
+#include "dunecore/Geometry/DuneApaChannelMapAlg.h"
+#include "dunecore/Geometry/ChannelMap35Alg.h"
+#include "dunecore/Geometry/ChannelMap35OptAlg.h"
+#include "dunecore/Geometry/ChannelMapAPAAlg.h"
+#include "dunecore/Geometry/ChannelMapCRMAlg.h"
+#include "dunecore/Geometry/ChannelMapCRUAlg.h"
+#include "dunecore/Geometry/ColdBoxChannelMapAlg.h"
+#include "dunecore/Geometry/ProtoDUNEChannelMapAlg.h"
+#include "dunecore/Geometry/ProtoDUNEChannelMapAlgv7.h"
+#include "dunecore/Geometry/ProtoDUNEChannelMapAlgv8.h"
 #include "larcorealg/Geometry/GeoObjectSorter.h"
-#include "dune/Geometry/GeoObjectSorterAPA.h"
-#include "dune/Geometry/GeoObjectSorter35.h"
+#include "dunecore/Geometry/GeoObjectSorterAPA.h"
+#include "dunecore/Geometry/GeoObjectSorter35.h"
 
 // C/C++ standard libraries
 #include <string>

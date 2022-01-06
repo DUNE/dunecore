@@ -1,4 +1,4 @@
-#include "dune/DuneObj/ProtoDUNETimeStamp.h"
+#include "dunecore/DuneObj/ProtoDUNETimeStamp.h"
 
 dune::ProtoDUNETimeStamp::ProtoDUNETimeStamp()
     :  m_cookie(0),

@@ -14,7 +14,7 @@
 // Template specializations may be used enable service without
 // direct use of ServiceHandle, i.e. inside root.
 
-#include "dune/ArtSupport/ArtServicePointer.h"
+#include "dunecore/ArtSupport/ArtServicePointer.h"
 
 // Access a provider via service and provider types.
 template<class S, class P>

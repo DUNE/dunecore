@@ -115,7 +115,7 @@ AdcWireBuildingService* ArtServicePointer<AdcWireBuildingService>() {
 
 //**********************************************************************
 
-#include "dune/Utilities/SignalShapingServiceDUNE.h"
+#include "dunecore/Utilities/SignalShapingServiceDUNE.h"
 
 template<>
 SignalShapingService* ArtServicePointer<SignalShapingService>() {

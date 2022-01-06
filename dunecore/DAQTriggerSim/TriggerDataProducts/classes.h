@@ -13,5 +13,5 @@
 #include "canvas/Persistency/Common/Assns.h"
 
 // DUNETPC includes:
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"

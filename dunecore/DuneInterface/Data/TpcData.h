@@ -16,8 +16,8 @@
 #ifndef TpcData_H
 #define TpcData_H
 
-#include "dune/DuneInterface/Data/AdcChannelData.h"
-#include "dune/DuneInterface/Data/Tpc2dRoi.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/Tpc2dRoi.h"
 #include <string>
 #include <map>
 #include <set>

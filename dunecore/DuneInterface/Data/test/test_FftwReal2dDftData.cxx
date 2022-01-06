@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
-#include "dune/DuneInterface/Data/FftwReal2dDftData.h"
+#include "dunecore/DuneInterface/Data/FftwReal2dDftData.h"
 
 #undef NDEBUG
 #include <cassert>

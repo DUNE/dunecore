@@ -9,8 +9,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/IndexRangeTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/IndexRangeTool.h"
 #include "TH1F.h"
 
 #undef NDEBUG

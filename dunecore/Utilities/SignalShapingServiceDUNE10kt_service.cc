@@ -3,7 +3,7 @@
 /// \author H. Greenlee 
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Utilities/SignalShapingServiceDUNE10kt.h"
+#include "dunecore/Utilities/SignalShapingServiceDUNE10kt.h"
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"

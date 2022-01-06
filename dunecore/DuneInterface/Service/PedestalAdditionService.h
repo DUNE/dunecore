@@ -12,7 +12,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "dune/DuneInterface/Data/AdcTypes.h"
+#include "dunecore/DuneInterface/Data/AdcTypes.h"
 
 namespace sim {
 class SimChannel;

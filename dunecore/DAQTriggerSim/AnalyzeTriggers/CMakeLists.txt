@@ -1,6 +1,6 @@
 art_make( BASENAME_ONLY
-          MODULE_LIBRARIES dune_DAQTriggerSim_Service_TemplateTriggerService_service
-	                   dune_DAQTriggerSim_TriggerDataProducts
+          MODULE_LIBRARIES dunecore_DAQTriggerSim_Service_TemplateTriggerService_service
+	                   dunecore_DAQTriggerSim_TriggerDataProducts
                            TriggerAlgorithms
                            larcore_Geometry_Geometry_service
                            larcorealg_Geometry

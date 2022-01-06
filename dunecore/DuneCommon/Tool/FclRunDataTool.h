@@ -21,7 +21,7 @@
 
 #include "art/Utilities/ToolMacros.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "dune/DuneInterface/Tool/RunDataTool.h"
+#include "dunecore/DuneInterface/Tool/RunDataTool.h"
 #include <vector>
 
 class FclRunDataTool : public RunDataTool {

@@ -11,7 +11,7 @@
 
 #include <vector>
 #include <iostream>
-#include "dune/DuneInterface/Data/AdcTypes.h"
+#include "dunecore/DuneInterface/Data/AdcTypes.h"
 
 namespace detinfo {
   class DetectorClocksData;

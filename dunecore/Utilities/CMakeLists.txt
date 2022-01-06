@@ -60,7 +60,7 @@ cet_build_plugin( TFileMetadataDUNE art::service
 	)
 
 cet_build_plugin(CrpGainService   art::service
-                dune_ArtSupport
+                dunecore_ArtSupport
                 larcorealg_Geometry
 		lardataobj_Simulation
 		art::Utilities canvas

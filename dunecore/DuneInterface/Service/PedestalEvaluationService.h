@@ -10,7 +10,7 @@
 // the pedestal for a channel.
 
 #include <iostream>
-#include "dune/DuneInterface/Data/AdcChannelData.h"
+#include "dunecore/DuneInterface/Data/AdcChannelData.h"
 
 class PedestalEvaluationService {
 

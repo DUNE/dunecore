@@ -36,11 +36,11 @@
 #include "nusimdata/SimulationBase/MCTruth.h"
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/BasicTrigger.h"
 
 // The trigger classes which you're including
-#include "dune/DAQTriggerSim/TriggerAlgorithms/TemplateTrigger.h"
+#include "dunecore/DAQTriggerSim/TriggerAlgorithms/TemplateTrigger.h"
 
 namespace triggersim { // Declare that we are working in the triggersim namespace
 

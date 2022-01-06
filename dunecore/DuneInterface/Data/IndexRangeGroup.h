@@ -15,7 +15,7 @@
 #ifndef IndexRangeGroup_H
 #define IndexRangeGroup_H
 
-#include "dune/DuneInterface/Data/IndexRange.h"
+#include "dunecore/DuneInterface/Data/IndexRange.h"
 
 class IndexRangeGroup {
 

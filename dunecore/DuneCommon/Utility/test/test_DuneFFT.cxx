@@ -5,7 +5,7 @@
 //
 // Test DuneFFT.
 
-#include "dune/DuneCommon/Utility/DuneFFT.h"
+#include "dunecore/DuneCommon/Utility/DuneFFT.h"
 #include <string>
 #include <iostream>
 #include <fstream>

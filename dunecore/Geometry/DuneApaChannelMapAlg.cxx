@@ -6,7 +6,7 @@
 /// \author  tylerdalion@gmail.com
 ////////////////////////////////////////////////////////////////////////
 
-#include "dune/Geometry/DuneApaChannelMapAlg.h"
+#include "dunecore/Geometry/DuneApaChannelMapAlg.h"
 #include "larcorealg/Geometry/GeometryCore.h"
 #include "larcorealg/Geometry/AuxDetGeo.h"
 #include "larcorealg/Geometry/CryostatGeo.h"

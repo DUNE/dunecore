@@ -16,7 +16,7 @@
 #include <vector>
 #include <iostream>
 #include <TFormula.h>
-#include "dune/DuneInterface/Utility/ParFormula.h"
+#include "dunecore/DuneInterface/Utility/ParFormula.h"
 
 class RunData {
 

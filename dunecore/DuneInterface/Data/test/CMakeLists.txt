@@ -34,7 +34,7 @@ cet_test(test_Tpc2dRoi SOURCES test_Tpc2dRoi.cxx
 
 cet_test(test_TpcData SOURCES test_TpcData.cxx
   LIBRARIES
-    dune_DuneInterface_Data
+    dunecore_DuneInterface_Data
     ROOT_BASIC_LIB_LIST
 )
 

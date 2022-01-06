@@ -1,6 +1,6 @@
 // StringManipulator.h
 
-#include "dune/DuneCommon/Utility/StringManipulator.h"
+#include "dunecore/DuneCommon/Utility/StringManipulator.h"
 #include <iostream>
 #include <sstream>
 #include <cctype>

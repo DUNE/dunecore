@@ -18,7 +18,7 @@
 #include "larcoreobj/SummaryData/RunData.h"
 
 //We define some useful data structures (classes) in here
-#include "dune/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
 
 #include <vector>
 #include <set>

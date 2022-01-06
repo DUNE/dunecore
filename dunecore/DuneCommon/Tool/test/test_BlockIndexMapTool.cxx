@@ -5,8 +5,8 @@
 //
 // Test BlockIndexMapTool.
 
-#include "dune/ArtSupport/DuneToolManager.h"
-#include "dune/DuneInterface/Tool/IndexMapTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
+#include "dunecore/DuneInterface/Tool/IndexMapTool.h"
 #include "TH1F.h"
 #include <string>
 #include <iostream>

@@ -20,7 +20,7 @@ cet_build_plugin(TemplateTriggerService   art::service
 
 cet_build_plugin(HardwareMapperService   art::service
                 larcorealg_Geometry
-                dune_Geometry
+                dunecore_Geometry
                 ART_FRAMEWORK_CORE
                 ART_FRAMEWORK_PRINCIPAL
                 ART_FRAMEWORK_SERVICES_REGISTRY

@@ -9,7 +9,7 @@ include(CetTest)
 
 cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     art::Utilities
     canvas::canvas
     fhiclcpp
@@ -21,8 +21,8 @@ cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
 
 cet_test(test_TpcDataTool SOURCES test_TpcDataTool.cxx
   LIBRARIES
-    dune_DuneInterface_Data
-    dune_ArtSupport
+    dunecore_DuneInterface_Data
+    dunecore_ArtSupport
     art::Utilities
     canvas::canvas
     fhiclcpp

@@ -1,3 +1,3 @@
-#include "dune/ArtSupport/ArtServiceHelper.h"
-#include "dune/ArtSupport/DuneToolManager.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
 

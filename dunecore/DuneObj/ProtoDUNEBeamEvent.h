@@ -6,7 +6,7 @@
 #include <iostream>
 #include <map>
 #include "lardataobj/RecoBase/Track.h"
-#include "dune/DuneObj/ProtoDUNEBeamSpill.h"
+#include "dunecore/DuneObj/ProtoDUNEBeamSpill.h"
 
 namespace beam
 {

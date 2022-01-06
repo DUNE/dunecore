@@ -1,6 +1,6 @@
 // shiftHistFit.cxx
 
-#include "dune/DuneCommon/Utility/shiftHistFit.h"
+#include "dunecore/DuneCommon/Utility/shiftHistFit.h"
 #include "quietHistFit.h"
 #include "TFitResult.h"
 

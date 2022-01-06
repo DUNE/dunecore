@@ -10,8 +10,8 @@
 //   root> gSystem->SetBuildDir(".aclic");
 //   root> gSystem->AddLinkedLibs(gSystem->ExpandPathName("$DUNETPC_LIB/libdune_ArtSupport.so"));
 //   root> gSystem->AddLinkedLibs(gSystem->ExpandPathName("$DUNETPC_LIB/libdune_DuneServiceAccess.so"));
-//   root> .L $DUNETPC_INC/dune/ArtSupport/ArtServiceHelper.h+
-//   root> .L $DUNETPC_INC/dune/DuneServiceAccess/DuneServiceAccess.h+
+//   root> .L $DUNETPC_INC/dunecore/ArtSupport/ArtServiceHelper.h+
+//   root> .L $DUNETPC_INC/dunecore/DuneServiceAccess/DuneServiceAccess.h+
 //   root> ArtServiceHelper& ash = ArtServiceHelper::load("standard_reco_dune35tdata.fcl");
 //   root> ChannelGroupService* pcgs = ArtServicePointer<ChannelGroupService>();
 //   root> pcgs->print();
@@ -19,33 +19,33 @@
 #ifndef DuneServiceAccess_H
 #define DuneServiceAccess_H
 
-#include "dune/ArtSupport/ArtServicePointer.h"
+#include "dunecore/ArtSupport/ArtServicePointer.h"
 
-#include "dune/DuneInterface/Service/ChannelGroupService.h"
-#include "dune/DuneInterface/Service/ChannelMappingService.h"
+#include "dunecore/DuneInterface/Service/ChannelGroupService.h"
+#include "dunecore/DuneInterface/Service/ChannelMappingService.h"
 
-#include "dune/DuneInterface/Service/SimChannelExtractService.h"
-#include "dune/DuneInterface/Service/PedestalAdditionService.h"
-#include "dune/DuneInterface/Service/AdcDistortionService.h"
-#include "dune/DuneInterface/Service/ChannelNoiseService.h"
-#include "dune/DuneInterface/Service/AdcSuppressService.h"
-#include "dune/DuneInterface/Service/MultiAdcSuppressService.h"
-#include "dune/DuneInterface/Service/AdcCompressService.h"
-#include "dune/DuneInterface/Service/BaseTriggerService.h"
+#include "dunecore/DuneInterface/Service/SimChannelExtractService.h"
+#include "dunecore/DuneInterface/Service/PedestalAdditionService.h"
+#include "dunecore/DuneInterface/Service/AdcDistortionService.h"
+#include "dunecore/DuneInterface/Service/ChannelNoiseService.h"
+#include "dunecore/DuneInterface/Service/AdcSuppressService.h"
+#include "dunecore/DuneInterface/Service/MultiAdcSuppressService.h"
+#include "dunecore/DuneInterface/Service/AdcCompressService.h"
+#include "dunecore/DuneInterface/Service/BaseTriggerService.h"
 
-#include "dune/DuneInterface/Service/RawDigitPrepService.h"
-#include "dune/DuneInterface/Service/RawDigitExtractService.h"
-#include "dune/DuneInterface/Service/AdcMitigationService.h"
-#include "dune/DuneInterface/Service/PedestalEvaluationService.h"
-#include "dune/DuneInterface/Service/AdcSignalFindingService.h"
-#include "dune/DuneInterface/Service/AdcNoiseRemovalService.h"
-#include "dune/DuneInterface/Service/AdcChannelNoiseRemovalService.h"
-#include "dune/DuneInterface/Service/AdcDeconvolutionService.h"
-#include "dune/DuneInterface/Service/AdcChannelDataCopyService.h"
-#include "dune/DuneInterface/Service/AdcRoiBuildingService.h"
-#include "dune/DuneInterface/Service/AdcWireBuildingService.h"
+#include "dunecore/DuneInterface/Service/RawDigitPrepService.h"
+#include "dunecore/DuneInterface/Service/RawDigitExtractService.h"
+#include "dunecore/DuneInterface/Service/AdcMitigationService.h"
+#include "dunecore/DuneInterface/Service/PedestalEvaluationService.h"
+#include "dunecore/DuneInterface/Service/AdcSignalFindingService.h"
+#include "dunecore/DuneInterface/Service/AdcNoiseRemovalService.h"
+#include "dunecore/DuneInterface/Service/AdcChannelNoiseRemovalService.h"
+#include "dunecore/DuneInterface/Service/AdcDeconvolutionService.h"
+#include "dunecore/DuneInterface/Service/AdcChannelDataCopyService.h"
+#include "dunecore/DuneInterface/Service/AdcRoiBuildingService.h"
+#include "dunecore/DuneInterface/Service/AdcWireBuildingService.h"
 
-#include "dune/DuneInterface/Service/SignalShapingService.h"
+#include "dunecore/DuneInterface/Service/SignalShapingService.h"
 
 template<class T> T* ArtServicePointer();
 

@@ -10,8 +10,8 @@
 #define BASICTRIGGER_H
 
 // DUNETPC specific includes
-#include "dune/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
-#include "dune/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/TriggerTypes.h"
+#include "dunecore/DAQTriggerSim/TriggerDataProducts/HardwareElements.h"
 
 // Framework includes
 

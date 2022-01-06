@@ -23,7 +23,7 @@ art_make( BASENAME_ONLY
   ROOT_BASIC_LIB_LIST
   messagefacility::MF_MessageLogger
   fhiclcpp::fhiclcpp
-  dune_DAQTriggerSim_TriggerDataProducts
+  dunecore_DAQTriggerSim_TriggerDataProducts
   #          DICT_LIBRARIES   lardataobj_RawData
   )
 

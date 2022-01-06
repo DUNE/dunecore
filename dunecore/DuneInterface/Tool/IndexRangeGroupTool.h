@@ -8,7 +8,7 @@
 #ifndef IndexRangeGroupTool_H
 #define IndexRangeGroupTool_H
 
-#include "dune/DuneInterface/Data/IndexRangeGroup.h"
+#include "dunecore/DuneInterface/Data/IndexRangeGroup.h"
 
 class IndexRangeGroupTool {
 
