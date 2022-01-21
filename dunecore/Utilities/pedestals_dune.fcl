@@ -29,7 +29,8 @@ dune_fixedpeds: {
 }
 
 dunedp_fixedpeds: {
-  service_provider: DPhaseFixedDetPedestalService
+#  service_provider: DPhaseFixedDetPedestalService
+  service_provider: FixedDetPedestalService # DPhaseFixedDetPedestalService was merged into FixedDetPedestalService for simplicity
   FixedDetPedestal: {
     PedMeanX: 10.0
     PedMeanY: 10.0
