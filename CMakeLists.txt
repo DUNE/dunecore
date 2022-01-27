@@ -91,6 +91,7 @@ find_ups_product( dunedetdataformats )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( systematicstools  )
 find_ups_product( fftw )
+find_ups_product( sqlite )
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 
