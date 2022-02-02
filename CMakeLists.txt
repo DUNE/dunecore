@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
 
-project(dunecore VERSION 09.42.00.01 LANGUAGES CXX)
+project(dunecore VERSION 09.42.02.00 LANGUAGES CXX)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -91,6 +91,7 @@ find_ups_product( dunedetdataformats )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( systematicstools  )
 find_ups_product( fftw )
+find_ups_product( sqlite )
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 

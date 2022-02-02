@@ -15,31 +15,48 @@ dune_fixedpeds: {
   FixedDetPedestal: {
     PedMeanU: 1800.0
     PedMeanV: 1800.0
+    PedMeanX: -999.0
+    PedMeanY: -999.0
     PedMeanZ:  500.0
     PedRmsU:     2.5
     PedRmsV:     2.5
+    PedRmsX:     0.0
+    PedRmsY:     0.0
     PedRmsZ:     2.5
     PedMeanErrU: 0.1
     PedMeanErrV: 0.1
+    PedMeanErrX: 0.0
+    PedMeanErrY: 0.0
     PedMeanErrZ: 0.1
     PedRmsErrU:  0.1
     PedRmsErrV:  0.1
+    PedRmsErrX:  0.0
+    PedRmsErrY:  0.0
     PedRmsErrZ:  0.1
   }
 }
 
 dunedp_fixedpeds: {
-  service_provider: DPhaseFixedDetPedestalService
+#  service_provider: DPhaseFixedDetPedestalService
+  service_provider: FixedDetPedestalService # DPhaseFixedDetPedestalService was merged into FixedDetPedestalService for simplicity
   FixedDetPedestal: {
+    PedMeanU: -999.0
+    PedMeanV: -999.0
     PedMeanX: 10.0
     PedMeanY: 10.0
     PedMeanZ: 10.0
+    PedRmsU:     0.0
+    PedRmsV:     0.0
     PedRmsX:     1.0
     PedRmsY:     1.0
     PedRmsZ:     1.0
+    PedMeanErrU: 0.0
+    PedMeanErrV: 0.0
     PedMeanErrX: 0.1
     PedMeanErrY: 0.1
     PedMeanErrZ: 0.1
+    PedRmsErrU:  0.0
+    PedRmsErrV:  0.0
     PedRmsErrX:  0.1
     PedRmsErrY:  0.1
     PedRmsErrZ:  0.1
