@@ -1,4 +1,4 @@
-# dunetpc/dune/DuneInterface/CMakeLists.txt
+# dunecore/dunecore/DuneInterface/CMakeLists.txt
 #
 # David Adams
 # December 2015

@@ -1,4 +1,4 @@
-# dunetpc/dune/DuneInterface/ToolCMakeLists.txt
+# dunecore/dunecore/DuneInterface/ToolCMakeLists.txt
 #
 # David Adams
 # August 2017

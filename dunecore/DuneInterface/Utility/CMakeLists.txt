@@ -1,4 +1,4 @@
-# dunetpc/dune/DuneInterface/Utility/CMakeLists.txt
+# dunecore/dunecore/DuneInterface/Utility/CMakeLists.txt
 #
 # David Adams
 # July 2021
