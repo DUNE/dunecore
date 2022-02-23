@@ -12,8 +12,8 @@ cet_test(test_FclRunDataTool SOURCES test_FclRunDataTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -25,8 +25,8 @@ cet_test(test_FclIndexRangeTool SOURCES test_FclIndexRangeTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -38,8 +38,8 @@ cet_test(test_FclIndexVectorMapTool SOURCES test_FclIndexVectorMapTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -51,8 +51,8 @@ cet_test(test_FixedTimeOffsetTool SOURCES test_FixedTimeOffsetTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -64,8 +64,8 @@ cet_test(test_TimingRawDecoderOffsetTool SOURCES test_TimingRawDecoderOffsetTool
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -77,8 +77,8 @@ cet_test(test_SimpleHistogramManager SOURCES test_SimpleHistogramManager.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -90,8 +90,8 @@ cet_test(test_FclFloatArray SOURCES test_FclFloatArray.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -102,8 +102,8 @@ cet_test(test_FclFileFloatArray SOURCES test_FclFileFloatArray.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -115,8 +115,8 @@ cet_test(test_ChannelStatusServiceTool SOURCES test_ChannelStatusServiceTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -128,8 +128,8 @@ cet_test(test_ChannelStatusConfigTool SOURCES test_ChannelStatusConfigTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
@@ -140,8 +140,8 @@ cet_test(test_BlockIndexMapTool SOURCES test_BlockIndexMapTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
-    cetlib::cetlib cetlib_except
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
     cetlib_except::cetlib_except
     ROOT_BASIC_LIB_LIST
     SQLITE3
