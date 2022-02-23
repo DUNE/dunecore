@@ -1,19 +1,14 @@
 art_make_library(LIBRARY_NAME HDF5Utils
          SOURCE HDF5Utils.cc
          LIBRARIES
-         #artdaq-core_Data
-         #artdaq-core_Utilities
-         #${ARTDAQ_DAQDATA}
          cetlib_except::cetlib_except
          fhiclcpp::fhiclcpp
          messagefacility::MF_MessageLogger
-         #${RCEDAMLIB}
-         lardataobj_RawData
+         lardataobj::RawData
          art::Framework_Principal
-         #dune_VDColdbox_ChannelMap_VDColdboxChannelMapService_service 
-         ART_FRAMEWORK_CORE
-         ART_FRAMEWORK_PRINCIPAL
-         ART_FRAMEWORK_SERVICES_REGISTRY
+         art::Framework_Core
+         art::Framework_Principal
+         art::Framework_Services_Registry
          LIBHDF5 
          pthread
          z
