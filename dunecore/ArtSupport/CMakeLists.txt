@@ -8,14 +8,13 @@
 
 art_make(
   LIB_LIBRARIES
-    art_Framework_EventProcessor
+    art::Framework_EventProcessor
     art::Framework_Services_Registry
     art::Utilities
     canvas::canvas
-    fhiclcpp
+    fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    
     ROOT::Core
 )
 
