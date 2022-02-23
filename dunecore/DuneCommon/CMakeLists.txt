@@ -6,4 +6,5 @@ add_subdirectory(Service)
 add_subdirectory(Exe)
 add_subdirectory(fcl)
 
-install(FILES valgrind_dune.sup DESTINATION ${dunecore_inc_dir})
+
+install(FILES valgrind_dune.sup DESTINATION ${dunecore_INCLUDE_DIR})

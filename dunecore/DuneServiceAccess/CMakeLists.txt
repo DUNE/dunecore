@@ -14,11 +14,12 @@ art_make_library(
   LIBRARIES
     dunecore::SignalShapingServiceDUNE_service
     art::Framework_Services_Registry
-    art_Framework_Core
+    art::Framework_Core
     art::Framework_Principal
     art::Utilities
     canvas::canvas
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib
+    cetlib_except::cetlib_except
 )
 
 install_headers()

@@ -2,29 +2,27 @@
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-art_make( BASENAME_ONLY
-  LIBRARY_NAME     TriggerAlgorithms
-  LIB_LIBRARIES    nusimdata::SimulationBase
-  larcorealg_Geometry
-  larcore_Geometry_Geometry_service
-  larsim_MCCheater_BackTrackerService_service
-  larsim_MCCheater_ParticleInventoryService_service
-  #lardataobj_RecoBase
-  #lardataobj_RawData
-  ART_FRAMEWORK_CORE
-  ART_FRAMEWORK_PRINCIPAL
-  ART_FRAMEWORK_SERVICES_REGISTRY
-  art::Persistency_Common canvas
-  art::Persistency_Provenance canvas
-  art::Utilities canvas
-  cetlib::cetlib cetlib_except
-  Boost::filesystem            
-  
+art_make(
+  LIB_LIBRARIES    
+  nusimdata::SimulationBase
+  larcorealg::Geometry
+  larcore::Geometry_Geometry_service
+  larsim::MCCheater_BackTrackerService_service
+  larsim::MCCheater_ParticleInventoryService_service
+  art::Framework_Core
+  art::Framework_Principal
+  art::Framework_Services_Registry
+  art::Persistency_Common
+  art::Persistency_Provenance
+  art::Utilities
+  canvas::canvas
+  cetlib::cetlib 
+  cetlib_except::cetlib_except
+  Boost::filesystem              
   ROOT_BASIC_LIB_LIST
   messagefacility::MF_MessageLogger
   fhiclcpp::fhiclcpp
-  dunecore_DAQTriggerSim_TriggerDataProducts
-  #          DICT_LIBRARIES   lardataobj_RawData
+  dunecore::DAQTriggerSim_TriggerDataProducts
   )
 
 

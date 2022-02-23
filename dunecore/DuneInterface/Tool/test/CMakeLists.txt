@@ -1,4 +1,4 @@
-# dunetpc/dune/DuneInterface/Tool/test/CMakeLists.txt
+# dunecore/dunecore/DuneInterface/Tool/test/CMakeLists.txt
 
 # David Adams
 # April 2018
@@ -12,7 +12,7 @@ cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
+    fhiclcpp::fhiclcpp
     cetlib::cetlib cetlib_except
     cetlib_except::cetlib_except
     SQLITE3
@@ -25,7 +25,7 @@ cet_test(test_TpcDataTool SOURCES test_TpcDataTool.cxx
     dunecore_ArtSupport
     art::Utilities
     canvas::canvas
-    fhiclcpp
+    fhiclcpp::fhiclcpp
     cetlib::cetlib cetlib_except
     cetlib_except::cetlib_except
     SQLITE3

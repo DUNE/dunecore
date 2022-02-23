@@ -1,4 +1,4 @@
-# dunetpc/dune/DuneInterface/Data/test/CMakeLists.txt
+# dunecore/dunecore/DuneInterface/Data/test/CMakeLists.txt
 
 # David Adams
 # May 2018
@@ -34,7 +34,7 @@ cet_test(test_Tpc2dRoi SOURCES test_Tpc2dRoi.cxx
 
 cet_test(test_TpcData SOURCES test_TpcData.cxx
   LIBRARIES
-    dunecore_DuneInterface_Data
+    dunecore::DuneInterface_Data
     ROOT_BASIC_LIB_LIST
 )
 
