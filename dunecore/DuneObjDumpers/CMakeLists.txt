@@ -3,18 +3,17 @@ art_make(
     ROOT_EG
     ROOT::Core
   MODULE_LIBRARIES
-  #dunecore_DuneObjDumpers
-    dunecore_DuneObj
+    dunecore::DuneObj
     nusimdata::SimulationBase
-    ART_FRAMEWORK_CORE
-    ART_FRAMEWORK_PRINCIPAL
+    art::Framework_Core
+    art::Framework_Principal
     art::Persistency_Common
     art::Persistency_Provenance
     art::Utilities
     canvas::canvas
     messagefacility::MF_MessageLogger
-
-  cetlib::cetlib cetlib_except
+    cetlib::cetlib
+    cetlib_except::cetlib_except
     ROOT_EG
     ROOT_BASIC_LIB_LIST
   )
