@@ -2,11 +2,12 @@
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 art_make( 
-          LIB_LIBRARIES lardataobj_RawData
-	  art::Persistency_Common canvas
-	  art::Persistency_Provenance canvas
+          LIB_LIBRARIES 
+	  lardataobj::RawData
+	  art::Persistency_Common
+	  art::Persistency_Provenance
+	  canvas::canvas
 	  messagefacility::MF_MessageLogger
-	  
 	  cetlib::cetlib cetlib_except
 	  ROOT_BASIC_LIB_LIST
 	)
