@@ -27,7 +27,7 @@ fwdir  product_dir config_data
 
 product             version
 dune_raw_data       v1_19_03
-duneutil            v09_42_04_00
+duneutil            v09_43_00_00
 dune_pardata        v01_77_00
 dunedetdataformats  v3_2_1
 dunedaqdataformats  v3_2_1
