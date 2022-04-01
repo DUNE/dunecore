@@ -27,14 +27,14 @@ fwdir  product_dir config_data
 
 product             version
 dune_raw_data       v1_19_03
-duneutil            v09_47_00_00
+duneutil            v09_47_00_01
 dune_pardata        v01_78_00
 dunedetdataformats  v3_2_2
 dunedaqdataformats  v3_3_1
 nusystematics       v01_00_11
 systematicstools    v01_00_03
 dune_oslibs         v1_0_0         -       optional
-larsoft             v09_46_00
+larsoft             v09_47_00
 cetbuildtools       v8_19_02    -       only_for_build
 end_product_list
 
