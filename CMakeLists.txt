@@ -20,7 +20,9 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
 
-project(dunecore VERSION 09.47.00.01 LANGUAGES CXX)
+#project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
+project(dunecore LANGUAGES CXX)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.48.00d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
