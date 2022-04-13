@@ -17,7 +17,8 @@
 #           VG: Added defs to enable use in the refactored sim framework
 #           VG: 23.02.21 Adjust plane dimensions to fit a given number of ch per side
 #           VG: 23.02.21 Group CRUs in CRPs
-#           Laura Paulucci: 17.03.22 Include Cathode and Cathode mesh
+#
+#     V2:   Laura Paulucci: 17.03.22 Include Cathode and Cathode mesh
 #                                    Included 4 Mini-Arapucas and 1 X-Arapuca over the cathode
 #				       TPC height = 23 cm (not 30 cm)
 #
@@ -258,12 +259,12 @@ $FieldCageSizeZ = $FieldShaperLength+2;
 
 ##################################################################
 ############## Cathode Parameters ###############
-$heightCathode=5.0; #cm
-$CathodeBorder=5.0; #cm
-$widthCathode=$widthTPCActive;
-$lengthCathode=$lengthTPCActive;
-$widthCathodeVoid=$widthCathode/4.0-1.0*$CathodeBorder;
-$lengthCathodeVoid=$lengthCathode/4.0-1.0*$CathodeBorder;
+$heightCathode=4.0; #cm
+$CathodeBorder=4.0; #cm
+$widthCathode=$widthTPCActive; #2*$widthCRM;
+$lengthCathode=$lengthTPCActive; #2*$lengthCRM;
+$widthCathodeVoid=76.35;
+$lengthCathodeVoid=67.0;
 
 #Cathode Mesh
 
@@ -287,15 +288,13 @@ $TileIn_z = 60.0;
 $TileAcceptanceWindow_x = 1.0;
 $TileAcceptanceWindow_y = 60.0;
 $TileAcceptanceWindow_z = 60.0;
-$BlockPD_x = 0.5*$widthCRM_active - 6.35; #Sub-division of Frame (4 n x, 4 in z)
-$BlockPD_z = 0.5*$lengthCRM_active - 6.25;
-$GapPD = 0.5; #Size of supporting bars in Frame
-$FrameToArapucaSpace       =    1.0; #At this moment, should cover the thickness of Frame + small gap to prevent overlap. VALUE NEEDS TO BE CHECKED!!!
+$TileposY = 37.2; #with respect to cathode center
+$TileposZ = 37.3; #with respect to cathode center
 $MiniArapucaOut_x = 2.5; 
-$MiniArapucaOut_y = 12.7;
-$MiniArapucaOut_z = 15.0; 
+$MiniArapucaOut_y = 10.5;
+$MiniArapucaOut_z = 14.0; 
 $MiniArapucaIn_x = 2.0;
-$MiniArapucaIn_y = 10.0;
+$MiniArapucaIn_y = 7.7;
 $MiniArapucaIn_z = 10.0;
 $MiniArapucaAcceptanceWindow_x = 1.0;
 $MiniArapucaAcceptanceWindow_y = 7.7;
@@ -1318,15 +1317,15 @@ sub place_OpDetsCathode()
        <volumeref ref="volTile"/>
        <position name="posTile" unit="cm" 
          x="@{[$FrameCenter_x]}"
-	 y="@{[$FrameCenter_y-0.5*$CathodeBorder-0.5*$TileOut_y]}" 
-	 z="@{[$FrameCenter_z+0.5*$CathodeBorder+0.5*$TileOut_z]}"/>
+	 y="@{[$FrameCenter_y+$TileposY]}" 
+	 z="@{[$FrameCenter_z+$TileposZ]}"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_Tile"/>
        <position name="posOpTile" unit="cm" 
          x="@{[$FrameCenter_x+0.5*$TileOut_x-0.5*$TileAcceptanceWindow_x-0.01]}"
-	 y="@{[$FrameCenter_y-0.5*$CathodeBorder-0.5*$TileOut_y]}" 
-	 z="@{[$FrameCenter_z+0.5*$CathodeBorder+0.5*$TileOut_z]}"/>
+	 y="@{[$FrameCenter_y+$TileposY]}" 
+	 z="@{[$FrameCenter_z+$TileposZ]}"/>
      </physvol>
 EOF
 #Placing the miniArapucas
@@ -1401,82 +1400,82 @@ print ENCL <<EOF;
     <subtraction name="Cathode1">
       <first ref="CathodeBlock"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub1" x="0" y="@{[-1.5*$widthCathode/4.]}" z="@{[-1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub1" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode2">
       <first ref="Cathode1"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub2" x="0" y="@{[-1.5*$widthCathode/4.]}" z="@{[-0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub2" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode3">
       <first ref="Cathode2"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub3" x="0" y="@{[-1.5*$widthCathode/4.]}" z="@{[0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub3" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode4">
       <first ref="Cathode3"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub4" x="0" y="@{[-1.5*$widthCathode/4.]}" z="@{[1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub4" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode5">
       <first ref="Cathode4"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub5" x="0" y="@{[-0.5*$widthCathode/4.]}" z="@{[-1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub5" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode6">
       <first ref="Cathode5"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub6" x="0" y="@{[-0.5*$widthCathode/4.]}" z="@{[-0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub6" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode7">
       <first ref="Cathode6"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub7" x="0" y="@{[-0.5*$widthCathode/4.]}" z="@{[0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub7" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode8">
       <first ref="Cathode7"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub8" x="0" y="@{[-0.5*$widthCathode/4.]}" z="@{[1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub8" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode9">
       <first ref="Cathode8"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub9" x="0" y="@{[0.5*$widthCathode/4.]}" z="@{[-1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub9" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode10">
       <first ref="Cathode9"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub10" x="0" y="@{[0.5*$widthCathode/4.]}" z="@{[-0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub10" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode11">
       <first ref="Cathode10"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub11" x="0" y="@{[0.5*$widthCathode/4.]}" z="@{[0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub11" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode12">
       <first ref="Cathode11"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub12" x="0" y="@{[0.5*$widthCathode/4.]}" z="@{[1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub12" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode13">
       <first ref="Cathode12"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub13" x="0" y="@{[1.5*$widthCathode/4.]}" z="@{[-1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub13" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode14">
       <first ref="Cathode13"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub14" x="0" y="@{[1.5*$widthCathode/4.]}" z="@{[-0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub14" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode15">
       <first ref="Cathode14"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub15" x="0" y="@{[1.5*$widthCathode/4.]}" z="@{[0.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub15" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="CathodeGrid">
       <first ref="Cathode15"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathode/4.]}" z="@{[1.5*$lengthCathode/4.]}" unit="cm"/>
+      <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
 
     <box name="FoamPadBlock" lunit="cm"

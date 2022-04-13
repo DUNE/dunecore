@@ -1730,12 +1730,12 @@
 
     <box name="MiniArapucaOut" lunit="cm"
       x="2.5"
-      y="12.7"
-      z="15"/>
+      y="10.5"
+      z="14"/>
 
     <box name="MiniArapucaIn" lunit="cm"
       x="2.5"
-      y="10"
+      y="7.7"
       z="10"/>
 
      <subtraction name="MiniArapucaWalls">
@@ -1773,94 +1773,94 @@
 
 
     <box name="CathodeBlock" lunit="cm"
-      x="5"
+      x="4"
       y="337"
       z="298.8018" />
 
     <box name="CathodeVoid" lunit="cm"
-      x="6"
-      y="79.25"
-      z="69.70045" />
+      x="5"
+      y="76.35"
+      z="67" />
 
     <subtraction name="Cathode1">
       <first ref="CathodeBlock"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub1" x="0" y="-126.375" z="-112.050675" unit="cm"/>
+      <position name="posCathodeSub1" x="0" y="-122.525" z="-108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode2">
       <first ref="Cathode1"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub2" x="0" y="-126.375" z="-37.350225" unit="cm"/>
+      <position name="posCathodeSub2" x="0" y="-122.525" z="-37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode3">
       <first ref="Cathode2"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub3" x="0" y="-126.375" z="37.350225" unit="cm"/>
+      <position name="posCathodeSub3" x="0" y="-122.525" z="37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode4">
       <first ref="Cathode3"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub4" x="0" y="-126.375" z="112.050675" unit="cm"/>
+      <position name="posCathodeSub4" x="0" y="-122.525" z="108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode5">
       <first ref="Cathode4"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub5" x="0" y="-42.125" z="-112.050675" unit="cm"/>
+      <position name="posCathodeSub5" x="0" y="-42.175" z="-108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode6">
       <first ref="Cathode5"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub6" x="0" y="-42.125" z="-37.350225" unit="cm"/>
+      <position name="posCathodeSub6" x="0" y="-42.175" z="-37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode7">
       <first ref="Cathode6"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub7" x="0" y="-42.125" z="37.350225" unit="cm"/>
+      <position name="posCathodeSub7" x="0" y="-42.175" z="37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode8">
       <first ref="Cathode7"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub8" x="0" y="-42.125" z="112.050675" unit="cm"/>
+      <position name="posCathodeSub8" x="0" y="-42.175" z="108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode9">
       <first ref="Cathode8"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub9" x="0" y="42.125" z="-112.050675" unit="cm"/>
+      <position name="posCathodeSub9" x="0" y="42.175" z="-108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode10">
       <first ref="Cathode9"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub10" x="0" y="42.125" z="-37.350225" unit="cm"/>
+      <position name="posCathodeSub10" x="0" y="42.175" z="-37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode11">
       <first ref="Cathode10"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub11" x="0" y="42.125" z="37.350225" unit="cm"/>
+      <position name="posCathodeSub11" x="0" y="42.175" z="37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode12">
       <first ref="Cathode11"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub12" x="0" y="42.125" z="112.050675" unit="cm"/>
+      <position name="posCathodeSub12" x="0" y="42.175" z="108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode13">
       <first ref="Cathode12"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub13" x="0" y="126.375" z="-112.050675" unit="cm"/>
+      <position name="posCathodeSub13" x="0" y="122.525" z="-108.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode14">
       <first ref="Cathode13"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub14" x="0" y="126.375" z="-37.350225" unit="cm"/>
+      <position name="posCathodeSub14" x="0" y="122.525" z="-37.5" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode15">
       <first ref="Cathode14"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub15" x="0" y="126.375" z="37.350225" unit="cm"/>
+      <position name="posCathodeSub15" x="0" y="122.525" z="37.5" unit="cm"/>
     </subtraction>
     <subtraction name="CathodeGrid">
       <first ref="Cathode15"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub16" x="0" y="126.375" z="112.050675" unit="cm"/>
+      <position name="posCathodeSub16" x="0" y="122.525" z="108.5" unit="cm"/>
     </subtraction>
 
     <box name="FoamPadBlock" lunit="cm"
@@ -7393,7 +7393,7 @@
       </physvol>
   <physvol>
    <volumeref ref="volGroundGrid"/>
-   <position name="posGroundGrid01" unit="cm" x="-38.207" y="0" z="0"/>
+   <position name="posGroundGrid01" unit="cm" x="-37.707" y="0" z="0"/>
   </physvol>
 
 <physvol>
@@ -9643,70 +9643,70 @@
      <physvol>
        <volumeref ref="volTile"/>
        <position name="posTile" unit="cm" 
-         x="-38.207"
-	 y="-35" 
-	 z="35"/>
+         x="-37.707"
+	 y="37.2" 
+	 z="37.3"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_Tile"/>
        <position name="posOpTile" unit="cm" 
-         x="-37.467"
-	 y="-35" 
-	 z="35"/>
+         x="-36.967"
+	 y="37.2" 
+	 z="37.3"/>
      </physvol>
      <physvol>
        <volumeref ref="volMiniArapuca-0"/>
        <position name="posMiniArapuca0" unit="cm" 
-         x="-38.207"
+         x="-37.707"
 	 y="-74.9" 
 	 z="118.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_MiniArapuca-0"/>
        <position name="posOpMiniArapuca0" unit="cm" 
-         x="-37.467"
+         x="-36.967"
 	 y="-74.9" 
 	 z="118.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volMiniArapuca-1"/>
        <position name="posMiniArapuca1" unit="cm" 
-         x="-38.207"
+         x="-37.707"
 	 y="-74.9" 
 	 z="88.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_MiniArapuca-1"/>
        <position name="posOpMiniArapuca1" unit="cm" 
-         x="-37.467"
+         x="-36.967"
 	 y="-74.9" 
 	 z="88.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volMiniArapuca-2"/>
        <position name="posMiniArapuca2" unit="cm" 
-         x="-38.207"
+         x="-37.707"
 	 y="74.9" 
 	 z="88.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_MiniArapuca-2"/>
        <position name="posOpMiniArapuca2" unit="cm" 
-         x="-37.467"
+         x="-36.967"
 	 y="74.9" 
 	 z="88.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volMiniArapuca-3"/>
        <position name="posMiniArapuca3" unit="cm" 
-         x="-38.207"
+         x="-37.707"
 	 y="74.9" 
 	 z="118.4"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_MiniArapuca-3"/>
        <position name="posOpMiniArapuca3" unit="cm" 
-         x="-37.467"
+         x="-36.967"
 	 y="74.9" 
 	 z="118.4"/>
      </physvol>
