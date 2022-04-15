@@ -20,6 +20,7 @@ dunefdvd_simulation_services: {
     Geometry:                  @local::dunevd10kt_geo
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
+    ParticleListAction:        @local::dunefdvd_particle_list_action
 }
 
 dunefdvd_reco_services: {
