@@ -31,10 +31,10 @@ duneutil            v09_48_01d00
 dune_pardata        v01_79_01
 dunedetdataformats  v3_2_2
 dunedaqdataformats  v3_3_1
-nusystematics       v01_00_11
+nusystematics       v01_00_12
 systematicstools    v01_00_03
 dune_oslibs         v1_0_0         -       optional
-larsoft             v09_48_01
+larsoft             v09_49_00
 cetbuildtools       v8_19_02    -       only_for_build
 end_product_list
 
