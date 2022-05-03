@@ -11,6 +11,14 @@ namespace HDF5Utils {
 
 HDFFileInfoPtr openFile(const std::string& fileName) {
   HDFFileInfoPtr hdfFileInfoPtr(new HDFFileInfo());
+
+  // a bit of a sledgehammer -- reset the HDF5 library before opening
+  // a new file -- clears out caches that interfer with xrootd
+
+  H5close();
+  H5open();
+
+  // open the actual file
   hdfFileInfoPtr->filePtr = H5Fopen(fileName.data(), H5F_ACC_RDONLY, H5P_DEFAULT);
   hdfFileInfoPtr->bytesWritten = 0;
   hdfFileInfoPtr->fileName = fileName;
