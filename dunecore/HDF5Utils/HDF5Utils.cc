@@ -13,7 +13,7 @@ HDFFileInfoPtr openFile(const std::string& fileName) {
   HDFFileInfoPtr hdfFileInfoPtr(new HDFFileInfo());
 
   // a bit of a sledgehammer -- reset the HDF5 library before opening
-  // a new file -- clears out caches that interfer with xrootd
+  // a new file -- clears out caches that interfere with xrootd
 
   H5close();
   H5open();
