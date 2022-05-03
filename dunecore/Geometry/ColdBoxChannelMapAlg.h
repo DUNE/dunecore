@@ -105,7 +105,7 @@ namespace geo { namespace dune{ namespace vd {
     void addROP( readout::ROPID const& rid,
 		 raw::ChannelID_t firstROPchannel, unsigned int nChannels )
     {
-      assert( fROPfirstChannel.find( firstROPchannel ) != fROPfirstChannel.end() );
+      assert( fROPfirstChannel.find( firstROPchannel ) == fROPfirstChannel.end() );
       fROPfirstChannel[ firstROPchannel ] = {firstROPchannel, nChannels, rid};
     }
 
