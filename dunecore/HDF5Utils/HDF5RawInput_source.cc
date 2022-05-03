@@ -14,15 +14,10 @@ dune::HDF5RawInputDetail::HDF5RawInputDetail(
     pmaker(sh) {
   rh.reconstitutes<raw::DUNEHDF5FileInfo, art::InEvent>(pretend_module_name); 
   rh.reconstitutes<raw::RDTimeStamp, art::InEvent>(pretend_module_name, "trigger");
-  hdf_file_ = NULL;
 }
 
 void dune::HDF5RawInputDetail::readFile(
     std::string const & filename, art::FileBlock*& fb) {
-  if (hdf_file_)
-    {
-      closeCurrentFile();
-    }
   hdf_file_ = dune::HDF5Utils::openFile(filename);
   unprocessedEventList_
       = dune::HDF5Utils::getTopLevelGroupNames(hdf_file_);
