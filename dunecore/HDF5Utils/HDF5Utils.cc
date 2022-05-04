@@ -12,14 +12,15 @@ namespace HDF5Utils {
 HDFFileInfoPtr openFile(const std::string& fileName) {
   HDFFileInfoPtr hdfFileInfoPtr(new HDFFileInfo());
 
-  // a bit of a sledgehammer -- reset the HDF5 library before opening
-  // a new file -- clears out caches that interfere with xrootd
+  // open the actual file, but set the close degree so that when we close the file, all
+  // open objects (attributes, groups, datasets) get closed automatically.  This is needed
+  // so that xrootd streaming picks up the new file instead of accessing the old one
 
-  H5close();
-  H5open();
+  hid_t fapl = H5Pcreate(H5P_FILE_ACCESS);
+  H5Pset_fclose_degree(fapl,H5F_CLOSE_STRONG);
+  hdfFileInfoPtr->filePtr = H5Fopen(fileName.data(), H5F_ACC_RDONLY, fapl);
+  H5Pclose(fapl);
 
-  // open the actual file
-  hdfFileInfoPtr->filePtr = H5Fopen(fileName.data(), H5F_ACC_RDONLY, H5P_DEFAULT);
   hdfFileInfoPtr->bytesWritten = 0;
   hdfFileInfoPtr->fileName = fileName;
   hdfFileInfoPtr->runNumber = 0;   // don't know it yet.  Fill it when we get fragments.
@@ -37,6 +38,14 @@ HDFFileInfoPtr openFile(const std::string& fileName) {
 }
 
 void closeFile(HDFFileInfoPtr hdfFileInfoPtr) {
+
+  //std::vector<char> outname;
+  //ssize_t cs = 0;
+  //cs = H5Fget_name(hdfFileInfoPtr->filePtr, NULL, 0 ) + 10;
+  //outname.resize(cs);  // and a little extra just in case
+  //cs = H5Fget_name(hdfFileInfoPtr->filePtr, outname.data(), cs );
+  //std::cout << "Calling H5Fclose on file: " << outname.data() << std::endl;
+
   H5Fclose(hdfFileInfoPtr->filePtr);
   hdfFileInfoPtr->filePtr = 0;
 }
@@ -93,6 +102,11 @@ std::deque<std::string> getMidLevelGroupNames(hid_t grp) {
   H5Eset_auto(H5E_DEFAULT,old_func, old_client_data);
   
   bool result = (retval >= 0);
+
+  if (result)
+    {
+      H5Aclose(retval);
+    }
   return result;
 }
 
