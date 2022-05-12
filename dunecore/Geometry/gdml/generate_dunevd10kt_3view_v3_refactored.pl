@@ -3,7 +3,7 @@
 #
 #
 #  First attempt to make a GDML fragment generator for the DUNE vertical drift 
-#  10kt detector geometry with 3 views: +/- Xdeg for induction and 90 deg collection
+#  10kt detector geometry with 3 views (2 orthogonal + induction at angle)
 #  The lower chamber is not added yet. 
 #  !!!NOTE!!!: the readout is on a positive Y plane (drift along horizontal X)
 #              due to current reco limitations)
@@ -17,24 +17,19 @@
 #           VG: Added defs to enable use in the refactored sim framework
 #           VG: 23.02.21 Adjust plane dimensions to fit a given number of ch per side
 #           VG: 23.02.21 Group CRUs in CRPs
-#           VG: 02.03.21 The length for the ROP is force to be the lenght
-#                        given by nch_collection x pitch_collection
-#    V2:    Laura Paulucci (lpaulucc@fnal.gov): Sept 2021 PDS added. 
+#    V2     Laura Paulucci (lpaulucc@fnal.gov): Sept 2021 PDS added. 
 #             Use option -pds=1 for backup design (membrane only coverage).
 #             Default (pds=0) is the reference design (~4-pi).
 #             This is linked with a larger geometry to account for photon propagation, generate it with -k=4.
 #             Field Cage is turned on with reference and backup designs to match PDS option.
 #	      For not including the pds, please use option -pds=-1
 #	      Mar 2022: Cathode included
-#    V3:      Apr 2022: Pitch and number of channels changed. 
-#                       Collection pitch = 5.1 mm (4.89 mm in v2)
-#                       Induction pitch = 7.65 mm (7.335 mm in v2) 
-#                       Reference for changes: https://indico.fnal.gov/event/53111/timetable/
-#             May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
-#             In order to achieve it without overlaps, the 3 wire planes x positions were shifted downwards by
-#             1*$padWidth = 0.02 cm. Currently the material of this plate is set to vm2000 so that no aditional
-#             geometry (ReflAnode) is needed to obtain optical fast simulation.
-#             TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
+#
+#    V3     May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
+#           In order to achieve it without overlaps, the 3 wire planes x positions were shifted downwards by
+#           1*$padWidth = 0.02 cm. Currently the material of this plate is set to vm2000 so that no aditional
+#           geometry (ReflAnode) is needed to obtain optical fast simulation.
+#           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #
 #################################################################################
 
@@ -57,8 +52,8 @@ Math::BigFloat->precision(-16);
 GetOptions( "help|h" => \$help,
 	    "suffix|s:s" => \$suffix,
 	    "output|o:s" => \$output,
-	    "wires|w:s" => \$wires,  
-            "workspace|k:s" => \$wkspc,
+	    "wires|w:s" => \$wires,
+	    "workspace|k:s" => \$wkspc,
             "pdsconfig|pds:s" => \$pdsconfig);
 
 my $FieldCage_switch="on";
@@ -124,28 +119,24 @@ $basename="_";
 #$lengthPCBActive  = 150.0; # cm
 
 # views and channel counts
-%nChans = ('Ind1', 286, 'Ind1Bot', 96, 'Ind2', 286, 'Col', 292);
+%nChans = ('Ind1', 256, 'Ind1Bot', 128, 'Ind2', 320, 'Col', 288);
 $nViews = keys %nChans;
 #print "$nViews %nChans\n";
 
 # first induction view
-$wirePitchU      = 0.765;  # cm
-$wireAngleU      = 150.0;   # deg
+$wirePitchU      = 0.8695;  # cm
+$wireAngleU      = 131.63;  #-48.37;  # deg
 
 # second induction view
-$wirePitchV      = 0.765;  # cm
-$wireAngleV      = 30.0;    # deg
-
+$wirePitchY      = 0.525;
+$widthPCBActive  = 168.00;   #$wirePitchY * $nChans{'Ind2'};
 
 # last collection view
-$wirePitchZ      = 0.51;   # cm
-
-# force length to be equal to collection nch x pitch
-$lengthPCBActive = $wirePitchZ * $nChans{'Col'};
-$widthPCBActive  = 167.7006;
+$wirePitchZ      = 0.517;
+$lengthPCBActive = 148.9009; #$wirePitchZ * $nChans{'Col'};
 
 #
-$borderCRM       = 0.0;     # border space aroud each CRM 
+$borderCRM       = 0.0;      # border space aroud each CRM 
 
 $widthCRM_active  = $widthPCBActive;  
 $lengthCRM_active = $lengthPCBActive; 
@@ -184,11 +175,12 @@ if( $workspace == 3 )
 if( $workspace == 4 )
 {
     $nCRM_x = 4 * 2;
+#   $nCRM_z = 3 * 2;
     $nCRM_z = 7 * 2;
 }
 
 
-# calculate tpc area based on number of CRMs and their dimensions
+# calculate tpc area based on number of CRMs and their dimensions 
 # each CRP should have a 2x2 CRMs
 $widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  # around 1200 for full module
 $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 for full module
@@ -427,7 +419,6 @@ print DEF <<EOF;
    <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/>
    <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
    <rotation name="rUWireAboutX"        unit="deg" x="$wireAngleU" y="0" z="0"/>
-   <rotation name="rVWireAboutX"        unit="deg" x="$wireAngleV" y="0" z="0"/>
    <rotation name="rPlus90AboutX"       unit="deg" x="90" y="0" z="0"/>
    <rotation name="rPlus90AboutY"       unit="deg" x="0" y="90" z="0"/>
    <rotation name="rPlus90AboutXPlus90AboutY" unit="deg" x="90" y="90" z="0"/>
@@ -576,12 +567,12 @@ sub gen_Wires
     if( $dirp[1] < 0 ){
 	$orig[1] = $width;
     }
-
+  
     #print "origin    : @orig\n";
     #print "pitch dir : @dirp\n";
     #print "wire dir  : @dirw\n";
     #print "$length x $width cm2\n";
-
+    
     # gen wires
     my @winfo  = ();
     my $offset = $pitch/2;
@@ -654,16 +645,11 @@ print TPC <<EOF;
 EOF
 
     # compute wires for 1st induction
-    my @winfoU = ();
-    my @winfoV = ();
+    my @winfo = ();
     if( $wires_on == 1 ){
-	@winfoU = gen_Wires( $TPCActive_z, 0, # force length
-			     $nChans{'Ind1'}, $nChans{'Ind1Bot'}, 
-			     $wirePitchU, $wireAngleU, $padWidth );
-	@winfoV = gen_Wires( $TPCActive_z, 0, # force length
-			     $nChans{'Ind2'}, $nChans{'Ind1Bot'}, 
-			     $wirePitchV, $wireAngleV, $padWidth );
-
+	@winfo = gen_Wires( 0, 0, # $TPCActive_y,
+			    $nChans{'Ind1'}, $nChans{'Ind1Bot'}, 
+			    $wirePitchU, $wireAngleU, $padWidth );
     }
 
     # All the TPC solids save the wires.
@@ -682,7 +668,7 @@ print TPC <<EOF;
       y="$TPCActive_y" 
       z="$TPCActive_z"
       lunit="cm"/>
-   <box name="CRMVPlane" 
+   <box name="CRMYPlane" 
       x="$padWidth" 
       y="$TPCActive_y" 
       z="$TPCActive_z"
@@ -702,7 +688,7 @@ EOF
 #++++++++++++++++++++++++++++ Wire Solids ++++++++++++++++++++++++++++++
 if($wires_on==1){
 	    
-    foreach my $wire (@winfoU) {
+    foreach my $wire (@winfo) {
 	my $wid = $wire->[0];
 	my $wln = $wire->[3];
 print TPC <<EOF;
@@ -713,21 +699,13 @@ print TPC <<EOF;
       aunit="deg" lunit="cm"/>
 EOF
     }
-
-    foreach my $wire (@winfoV) {
-	my $wid = $wire->[0];
-	my $wln = $wire->[3];
-print TPC <<EOF;
-   <tube name="CRMWireV$wid"
-      rmax="0.5*$padWidth"
-      z="$wln"               
-      deltaphi="360"
-      aunit="deg" lunit="cm"/>
-EOF
-    }
-
     
 print TPC <<EOF;
+   <tube name="CRMWireY"
+      rmax="0.5*$padWidth"
+      z="$TPCActive_z"               
+      deltaphi="360" 
+      aunit="deg" lunit="cm"/>
    <tube name="CRMWireZ"
       rmax="0.5*$padWidth"
       z="$TPCActive_y"               
@@ -755,7 +733,7 @@ EOF
 
 if($wires_on==1) 
 {
-    foreach my $wire (@winfoU) 
+    foreach my $wire (@winfo) 
     {
 	my $wid = $wire->[0];
 print TPC <<EOF;
@@ -766,18 +744,11 @@ print TPC <<EOF;
 EOF
     }
 
-    foreach my $wire (@winfoV) 
-    {
-	my $wid = $wire->[0];
 print TPC <<EOF;
-    <volume name="volTPCWireV$wid">
+    <volume name="volTPCWireY">
       <materialref ref="Copper_Beryllium_alloy25"/>
-      <solidref ref="CRMWireV$wid"/>
+      <solidref ref="CRMWireY"/>
     </volume>
-EOF
-    }
-
-print TPC <<EOF;
     <volume name="volTPCWireZ">
       <materialref ref="Copper_Beryllium_alloy25"/>
       <solidref ref="CRMWireZ"/>
@@ -797,7 +768,7 @@ if ($wires_on==1) # add wires to U plane
     my $offsetZ = 0; #-0.5 * $TPCActive_z;
     my $offsetY = 0; #-0.5 * $TPCActive_y;
 
-    foreach my $wire (@winfoU) {
+    foreach my $wire (@winfo) {
 	my $wid  = $wire->[0];
 	my $zpos = $wire->[1] + $offsetZ;
 	my $ypos = $wire->[2] + $offsetY;
@@ -816,30 +787,28 @@ EOF
 
 # 2nd induction plane
 print TPC <<EOF;
-  <volume name="volTPCPlaneV">
+  <volume name="volTPCPlaneY">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane"/>
+    <solidref ref="CRMYPlane"/>
 EOF
 
-if ($wires_on==1) # add wires to V plane (plane with wires reading y position)
-  {
-          # the coordinates were computed with a corner at (0,0)
-    # so we need to move to plane coordinates
-    my $offsetZ = 0; #-0.5 * $TPCActive_z;
-    my $offsetY = 0; #-0.5 * $TPCActive_y;
-
-    foreach my $wire (@winfoV) {
-	my $wid  = $wire->[0];
-	my $zpos = $wire->[1] + $offsetZ;
-	my $ypos = $wire->[2] + $offsetY;
+if ($wires_on==1) # add wires to Y plane (plane with wires reading y position)
+{
+    for(my $i=0;$i<$nChans{'Ind2'};++$i)
+    {
+	#my $ypos = -0.5 * $TPCActive_y + ($i+0.5)*$wirePitchY + 0.5*$padWidth;
+	my $ypos = ($i + 0.5 - $nChans{'Ind2'}/2)*$wirePitchY;
+	if( (0.5 * $TPCActive_y - abs($ypos)) < 0 ){
+	    die "Cannot place wire $i in view Y, as plane is too small\n";
+	}
 print TPC <<EOF;
-     <physvol>
-       <volumeref ref="volTPCWireV$wid"/> 
-       <position name="posWireV$wid" unit="cm" x="0" y="$ypos" z="$zpos"/>
-       <rotationref ref="rVWireAboutX"/> 
-     </physvol>
+      <physvol>
+        <volumeref ref="volTPCWireY"/> 
+        <position name="posWireY$i" unit="cm" x="0" y="$ypos" z="0"/>
+	<rotationref ref="rIdentity"/> 
+      </physvol>
 EOF
-    }
+   }
 }
 print TPC <<EOF;
   </volume>
@@ -853,9 +822,9 @@ print TPC <<EOF;
 EOF
 if ($wires_on==1) # add wires to Z plane (plane with wires reading z position)
    {
-       for($i=0;$i<$nChans{'Col'};++$i)
+       for(my $i=0;$i<$nChans{'Col'};++$i)
        {
-	  #my $zpos = -0.5 * $TPCActive_z + ($i+0.5)*$wirePitchZ + 0.5*$padWidth;
+	   #my $zpos = -0.5 * $TPCActive_z + ($i+0.5)*$wirePitchZ + 0.5*$padWidth;
 	   my $zpos = ($i + 0.5 - $nChans{'Col'}/2)*$wirePitchZ;
 	   if( (0.5 * $TPCActive_z - abs($zpos)) < 0 ){
 	       die "Cannot place wire $i in view Z, as plane is too small\n";
@@ -876,19 +845,20 @@ print TPC <<EOF;
      <materialref ref="vm2000"/>
      <solidref ref="CRMZPlane"/>
 EOF
+
 print TPC <<EOF;
   </volume>
 EOF
-
-#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;       
+       
+#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
 $posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth;
 $posUplane[1] = 0;
 $posUplane[2] = 0;
 
-#$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
-$posVplane[1] = 0;
-$posVplane[2] = 0;
+#$posYplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
+$posYplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
+$posYplane[1] = 0;
+$posYplane[2] = 0;
 
 #$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
 $posZplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
@@ -899,6 +869,7 @@ $posZplane[2] = 0;
 $posAnodePlate[0] = 0.5*$TPC_x - 0.5*$padWidth;
 $posAnodePlate[1] = 0; 
 $posAnodePlate[2] = 0;
+
 
 $posTPCActive[0] = -$ReadoutPlane/2;
 $posTPCActive[1] = 0;
@@ -917,9 +888,9 @@ print TPC <<EOF;
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCPlaneV"/>
+       <volumeref ref="volTPCPlaneY"/>
        <position name="posPlaneY" unit="cm" 
-         x="$posVplane[0]" y="$posVplane[1]" z="$posVplane[2]"/>
+         x="$posYplane[0]" y="$posYplane[1]" z="$posYplane[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -933,7 +904,7 @@ print TPC <<EOF;
        <position name="posAnodePlate" unit="cm" 
          x="$posAnodePlate[0]" y="$posAnodePlate[1]" z="$posAnodePlate[2]"/>
        <rotationref ref="rIdentity"/>
-     </physvol>
+     </physvol>    
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive" unit="cm" 
@@ -942,6 +913,7 @@ print TPC <<EOF;
      </physvol>
    </volume>
 EOF
+## x="@{[$posTPCActive[0]+$padWidth]}" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
 
 print TPC <<EOF;
  </structure>
@@ -1167,7 +1139,7 @@ print CRYO <<EOF;
 
 </solids>
 EOF
-
+    
 #PDS
 #Double sided detectors should only be included when both top and bottom volumes become available
 #Optical sensitive volumes cannot be rotated because Larsoft cannot pick up the rotation when obtinaing the lengths needed for the semi-analytic model --> two acceptance windows for single sided lateral and cathode
@@ -1228,7 +1200,7 @@ print CRYO <<EOF;
     <volume name="volGroundGrid">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="CathodeGrid" />
-    </volume>
+    </volume>    
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
@@ -1422,7 +1394,7 @@ EOF
        $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
   }
   }
-
+  
 if ($pdsconfig == 0) {  #4-pi PDS converage
 
 #for placing the Arapucas over the cathode
@@ -1464,7 +1436,7 @@ for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per fr
 }
 
 }
-  
+
  print CRYO <<EOF;
     </volume>
 </structure>
@@ -1963,7 +1935,7 @@ EOF
 print "Some of the principal parameters for this TPC geometry (unit cm unless noted otherwise)\n";
 print " CRM active area       : $widthCRM_active x $lengthCRM_active\n";
 print " CRM total area        : $widthCRM x $lengthCRM\n";
-print " Wire pitch in U, V, Z : $wirePitchU, $wirePitchV, $wirePitchZ\n";
+print " Wire pitch in U, Y, Z : $wirePitchU, $wirePitchY, $wirePitchZ\n";
 print " TPC active volume  : $driftTPCActive x $widthTPCActive x $lengthTPCActive\n";
 print " Argon volume       : ($Argon_x, $Argon_y, $Argon_z) \n"; 
 print " Argon buffer       : ($xLArBuffer, $yLArBuffer, $zLArBuffer) \n"; 
