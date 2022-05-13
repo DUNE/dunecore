@@ -30,11 +30,14 @@
 #                       Collection pitch = 5.1 mm (4.89 mm in v2)
 #                       Induction pitch = 7.65 mm (7.335 mm in v2) 
 #                       Reference for changes: https://indico.fnal.gov/event/53111/timetable/
-#             May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
-#             In order to achieve it without overlaps, the 3 wire planes x positions were shifted downwards by
-#             1*$padWidth = 0.02 cm. Currently the material of this plate is set to vm2000 so that no aditional
-#             geometry (ReflAnode) is needed to obtain optical fast simulation.
-#             TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
+#           May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
+#           In order to achieve it without overlaps, the TPC drift size was increased by 
+#           1*$padWidth = 0.02 cm. In this way, the relative distances of the 3 wire planes to the cathode plane
+#           remain the same. Other impacts are (all in drift direction): Argon volume from 850.08 to 850.1 cm,
+#           Detector enclosure from 1310.32 to 1310.34 cm, TPC origin from 50.04 to 50.05 cm, and TPC dimension
+#           from 650.08 to 650.1 cm. Currently the material of this plate is set to vm2000 so that no additional
+#           geometry (ReflAnode) is needed to obtain optical fast simulation.
+#           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #
 #################################################################################
 
@@ -198,7 +201,7 @@ $driftTPCActive  = 650.0;
 
 # model anode strips as wires of some diameter
 $padWidth          = 0.02;
-$ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space b/w)!
+$ReadoutPlane      = (1+$nViews) * $padWidth; # 3 readout planes (no space b/w) + space for anode plate!
 
 ##################################################################
 ############## Parameters for TPC and inner volume ###############
@@ -880,7 +883,7 @@ print TPC <<EOF;
   </volume>
 EOF
 
-#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;       
+#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth; #the original positions without the anode plate are commented
 $posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth;
 $posUplane[1] = 0;
 $posUplane[2] = 0;
@@ -903,7 +906,6 @@ $posAnodePlate[2] = 0;
 $posTPCActive[0] = -$ReadoutPlane/2;
 $posTPCActive[1] = 0;
 $posTPCActive[2] = 0;
-
 
 #wrap up the TPC file
 print TPC <<EOF;
@@ -1402,6 +1404,7 @@ EOF
 $CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation;
 $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
 $CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
+
 $idx = 0;
   if ( $Cathode_switch eq "on" )
   {
