@@ -31,11 +31,14 @@
 #                       Induction pitch = 7.65 mm (7.335 mm in v2) 
 #                       Reference for changes: https://indico.fnal.gov/event/53111/timetable/
 #           May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
-#           In order to achieve it without overlaps, the TPC drift size was increased by 
-#           1*$padWidth = 0.02 cm. In this way, the relative distances of the 3 wire planes to the cathode plane
-#           remain the same. Other impacts are (all in drift direction): Argon volume from 850.08 to 850.1 cm,
-#           Detector enclosure from 1310.32 to 1310.34 cm, TPC origin from 50.04 to 50.05 cm, and TPC dimension
-#           from 650.08 to 650.1 cm. Currently the material of this plate is set to vm2000 so that no additional
+#           In order to avoid overlaps, the TPC drift size was increased by 1*$padWidth = 0.02 cm. Also, 
+#           a small displacement downwards (upwards) in the TPC (cathode) was included to keep cathode and 
+#           wireplanes in their original positions (world origin remains vertically centered on active TPC). 
+#           This change uses parameters: $nplate=1 and $tpc_x_disp, that should both be set to zero (or 
+#           deleted) if the anode plate is no longer needed. Other impacts are (all in drift direction): 
+#           Argon volume from 850.08 to 850.1 cm, Detector enclosure from 1310.32 to 1310.34 cm, TPC 
+#           origin from 50.04 to 50.05 cm, and TPC dimension from 650.08 to 650.1 cm. Currently the 
+#           material of this plate is set to vm2000 so that no additional
 #           geometry (ReflAnode) is needed to obtain optical fast simulation.
 #           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #
@@ -200,8 +203,10 @@ $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 fo
 $driftTPCActive  = 650.0;
 
 # model anode strips as wires of some diameter
+$nplate            = 1; #use 0 if the anode plate is no longer needed
 $padWidth          = 0.02;
-$ReadoutPlane      = (1+$nViews) * $padWidth; # 3 readout planes (no space b/w) + space for anode plate!
+$tpc_x_disp        = $padWidth/2.; #displacement to maintain cathode and wire planes in their original positions when including the anode plate --> Change to 0 if no longer needed
+$ReadoutPlane      = ($nplate+$nViews) * $padWidth; # 3 readout planes (no space b/w) + space for anode plate!
 
 ##################################################################
 ############## Parameters for TPC and inner volume ###############
@@ -695,6 +700,11 @@ print TPC <<EOF;
       y="$TPCActive_y"
       z="$TPCActive_z"
       lunit="cm"/>
+   <box name="AnodePlate" 
+      x="$padWidth/2."
+      y="$TPCActive_y"
+      z="$TPCActive_z"
+      lunit="cm"/>
    <box name="CRMActive" 
       x="$TPCActive_x"
       y="$TPCActive_y"
@@ -877,31 +887,32 @@ print TPC <<EOF;
      
    <volume name="volAnodePlate">
      <materialref ref="vm2000"/>
-     <solidref ref="CRMZPlane"/>
+     <solidref ref="AnodePlate"/>
 EOF
 print TPC <<EOF;
   </volume>
 EOF
 
 #$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth; #the original positions without the anode plate are commented
-$posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth;
+$posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth + $tpc_x_disp;
 $posUplane[1] = 0;
 $posUplane[2] = 0;
 
 #$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
+$posVplane[0] = 0.5*$TPC_x - 2.5*$padWidth + $tpc_x_disp;
 $posVplane[1] = 0;
 $posVplane[2] = 0;
 
 #$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posZplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
+$posZplane[0] = 0.5*$TPC_x - 1.5*$padWidth + $tpc_x_disp;
 $posZplane[1] = 0; 
 $posZplane[2] = 0;
 
 #to simulate backgrounds from anode
-$posAnodePlate[0] = 0.5*$TPC_x - 0.5*$padWidth;
+$posAnodePlate[0] = 0.5*$TPC_x - 0.5*$padWidth + $tpc_x_disp/2.;
 $posAnodePlate[1] = 0; 
 $posAnodePlate[2] = 0;
+#print "anode= $posAnodePlate[0], Zplane= $posZplane[0], Vplane= $posVplane[0], Uplane=$posUplane[0]\n";
 
 $posTPCActive[0] = -$ReadoutPlane/2;
 $posTPCActive[1] = 0;
@@ -1401,7 +1412,7 @@ EOF
   }
 
 
-$CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation;
+$CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation + $tpc_x_disp;
 $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
 $CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
