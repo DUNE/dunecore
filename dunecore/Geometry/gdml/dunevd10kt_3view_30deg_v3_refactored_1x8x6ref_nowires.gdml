@@ -743,6 +743,10 @@
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
       <colorref ref="blue"/>
     </volume>
+   <volume name="volAnodePlate">
+     <materialref ref="vm2000"/>
+     <solidref ref="AnodePlate"/>
+   </volume>
    <volume name="volTPCPlaneU">
      <materialref ref="LAr"/>
      <solidref ref="CRMUPlane"/>
@@ -754,11 +758,6 @@
   <volume name="volTPCPlaneZ">
     <materialref ref="LAr"/>
     <solidref ref="CRMZPlane"/>
-  </volume>
-     
-   <volume name="volAnodePlate">
-     <materialref ref="vm2000"/>
-     <solidref ref="AnodePlate"/>
   </volume>
    <volume name="volTPC">
      <materialref ref="LAr"/>
