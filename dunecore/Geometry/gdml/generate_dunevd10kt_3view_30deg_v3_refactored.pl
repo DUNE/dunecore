@@ -31,15 +31,9 @@
 #                       Induction pitch = 7.65 mm (7.335 mm in v2) 
 #                       Reference for changes: https://indico.fnal.gov/event/53111/timetable/
 #           May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
-#           In order to avoid overlaps, the TPC drift size was increased by 1*$padWidth = 0.02 cm. Also, 
-#           a small displacement downwards (upwards) in the TPC (cathode) was included to keep cathode and 
-#           wireplanes in their original positions (world origin remains vertically centered on active TPC). 
-#           This change uses parameters: $nplate=1 and $tpc_x_disp, that should both be set to zero (or 
-#           deleted) if the anode plate is no longer needed. Other impacts are (all in drift direction): 
-#           Argon volume from 850.08 to 850.1 cm, Detector enclosure from 1310.32 to 1310.34 cm, TPC 
-#           origin from 50.04 to 50.05 cm, and TPC dimension from 650.08 to 650.1 cm. Currently the 
-#           material of this plate is set to vm2000 so that no additional
-#           geometry (ReflAnode) is needed to obtain optical fast simulation.
+#           This is included together with the cathode switch on. In order to avoid overlaps, the gaseous argon
+#           was decreased by $padWidth = 0.02 cm. Currently the material of this plate is set to 
+#           vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
 #           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #
 #################################################################################
@@ -203,10 +197,8 @@ $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 fo
 $driftTPCActive  = 650.0;
 
 # model anode strips as wires of some diameter
-$nplate            = 1; #use 0 if the anode plate is no longer needed
 $padWidth          = 0.02;
-$tpc_x_disp        = $padWidth/2.; #displacement to maintain cathode and wire planes in their original positions when including the anode plate --> Change to 0 if no longer needed
-$ReadoutPlane      = ($nplate+$nViews) * $padWidth; # 3 readout planes (no space b/w) + space for anode plate!
+$ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space b/w)!
 
 ##################################################################
 ############## Parameters for TPC and inner volume ###############
@@ -700,11 +692,6 @@ print TPC <<EOF;
       y="$TPCActive_y"
       z="$TPCActive_z"
       lunit="cm"/>
-   <box name="AnodePlate" 
-      x="$padWidth/2."
-      y="$TPCActive_y"
-      z="$TPCActive_z"
-      lunit="cm"/>
    <box name="CRMActive" 
       x="$TPCActive_x"
       y="$TPCActive_y"
@@ -884,35 +871,19 @@ EOF
 }
 print TPC <<EOF;
   </volume>
-     
-   <volume name="volAnodePlate">
-     <materialref ref="vm2000"/>
-     <solidref ref="AnodePlate"/>
-EOF
-print TPC <<EOF;
-  </volume>
 EOF
 
-#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth; #the original positions without the anode plate are commented
-$posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth + $tpc_x_disp;
+$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth; 
 $posUplane[1] = 0;
 $posUplane[2] = 0;
 
-#$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[0] = 0.5*$TPC_x - 2.5*$padWidth + $tpc_x_disp;
+$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
 $posVplane[1] = 0;
 $posVplane[2] = 0;
 
-#$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posZplane[0] = 0.5*$TPC_x - 1.5*$padWidth + $tpc_x_disp;
+$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
 $posZplane[1] = 0; 
 $posZplane[2] = 0;
-
-#to simulate backgrounds from anode
-$posAnodePlate[0] = 0.5*$TPC_x - 0.5*$padWidth + $tpc_x_disp/2.;
-$posAnodePlate[1] = 0; 
-$posAnodePlate[2] = 0;
-#print "anode= $posAnodePlate[0], Zplane= $posZplane[0], Vplane= $posVplane[0], Uplane=$posUplane[0]\n";
 
 $posTPCActive[0] = -$ReadoutPlane/2;
 $posTPCActive[1] = 0;
@@ -942,12 +913,6 @@ print TPC <<EOF;
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volAnodePlate"/>
-       <position name="posAnodePlate" unit="cm" 
-         x="$posAnodePlate[0]" y="$posAnodePlate[1]" z="$posAnodePlate[2]"/>
-       <rotationref ref="rIdentity"/>
-     </physvol>
-     <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive" unit="cm" 
         x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
@@ -955,7 +920,6 @@ print TPC <<EOF;
      </physvol>
    </volume>
 EOF
-
 print TPC <<EOF;
  </structure>
  </gdml>
@@ -1154,7 +1118,7 @@ print CRYO <<EOF;
       z="$Argon_z"/>
 
     <box name="GaseousArgon" lunit="cm" 
-      x="$HeightGaseousAr"
+      x="$HeightGaseousAr - $padWidth"
       y="$Argon_y"
       z="$Argon_z"/>
 
@@ -1241,6 +1205,10 @@ print CRYO <<EOF;
     <volume name="volGroundGrid">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="CathodeGrid" />
+    </volume>
+    <volume name="volAnodePlate">
+     <materialref ref="vm2000"/>
+     <solidref ref="AnodePlate"/>
     </volume>
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
@@ -1415,6 +1383,7 @@ EOF
 $CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation + $tpc_x_disp;
 $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
 $CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
+$posAnodePlate = 0.5*($driftTPCActive + $nViews*$padWidth) + $padWidth/4;#right above TPC vol
 
 $idx = 0;
   if ( $Cathode_switch eq "on" )
@@ -1428,6 +1397,11 @@ $idx = 0;
    <volumeref ref="volGroundGrid"/>
    <position name="posGroundGrid\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
       </physvol>
+      <physvol>
+       <volumeref ref="volAnodePlate"/>
+       <position name="posAnodePlate\-$idx" unit="cm" x="$posAnodePlate" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>    
 EOF
        $idx++;
        $CathodePosY += $widthCathode;
@@ -1763,6 +1737,12 @@ print ENCL <<EOF;
       <second ref="CathodeVoid"/>
       <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
+
+   <box name="AnodePlate" 
+      x="$padWidth/2."
+      y="$widthCathode"
+      z="$lengthCathode"
+      lunit="cm"/>
 
     <box name="FoamPadBlock" lunit="cm"
       x="@{[$Cryostat_x + 2*$FoamPadding]}"
