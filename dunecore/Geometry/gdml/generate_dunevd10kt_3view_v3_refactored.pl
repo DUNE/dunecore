@@ -768,15 +768,6 @@ print TPC <<EOF;
     </volume>
 EOF
 }
-    # Anode Plate for bkg generation
-print TPC <<EOF;
-   <volume name="volAnodePlate">
-     <materialref ref="vm2000"/>
-     <solidref ref="AnodePlate"/>
-EOF
-print TPC <<EOF;
-   </volume>
-EOF
     # 1st induction plane
 print TPC <<EOF;
    <volume name="volTPCPlaneU">
@@ -862,6 +853,14 @@ EOF
 }
 print TPC <<EOF;
   </volume>
+     
+   <volume name="volAnodePlate">
+     <materialref ref="vm2000"/>
+     <solidref ref="AnodePlate"/>
+EOF
+
+print TPC <<EOF;
+  </volume>
 EOF
        
 #$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth; #the original positions without the anode plate are commented
@@ -925,6 +924,8 @@ print TPC <<EOF;
      </physvol>
    </volume>
 EOF
+## x="@{[$posTPCActive[0]+$padWidth]}" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
+
 print TPC <<EOF;
  </structure>
  </gdml>

@@ -3064,10 +3064,6 @@
       <materialref ref="Copper_Beryllium_alloy25"/>
       <solidref ref="CRMWireZ"/>
     </volume>
-   <volume name="volAnodePlate">
-     <materialref ref="vm2000"/>
-     <solidref ref="AnodePlate"/>
-   </volume>
    <volume name="volTPCPlaneU">
      <materialref ref="LAr"/>
      <solidref ref="CRMUPlane"/>
@@ -7399,6 +7395,11 @@
          <position name="posWireZ287" unit="cm" x="0" y="0" z="74.1895"/>
          <rotationref ref="rPlus90AboutX"/>
        </physvol>
+  </volume>
+     
+   <volume name="volAnodePlate">
+     <materialref ref="vm2000"/>
+     <solidref ref="AnodePlate"/>
   </volume>
    <volume name="volTPC">
      <materialref ref="LAr"/>
