@@ -30,11 +30,7 @@
 #                       Collection pitch = 5.1 mm (4.89 mm in v2)
 #                       Induction pitch = 7.65 mm (7.335 mm in v2) 
 #                       Reference for changes: https://indico.fnal.gov/event/53111/timetable/
-#             May 2022: Inclusion of anode plate on top of the 3 wire planes as requested by the background TF.
-#             In order to achieve it without overlaps, the 3 wire planes x positions were shifted downwards by
-#             1*$padWidth = 0.02 cm. Currently the material of this plate is set to vm2000 so that no aditional
-#             geometry (ReflAnode) is needed to obtain optical fast simulation.
-#             TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
+#
 #
 #################################################################################
 
@@ -871,34 +867,20 @@ EOF
 }
 print TPC <<EOF;
   </volume>
-     
-   <volume name="volAnodePlate">
-     <materialref ref="vm2000"/>
-     <solidref ref="CRMZPlane"/>
-EOF
-print TPC <<EOF;
-  </volume>
 EOF
 
-#$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;       
-$posUplane[0] = 0.5*$TPC_x - 3.5*$padWidth;
+       
+$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
 $posUplane[1] = 0;
 $posUplane[2] = 0;
 
-#$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
+$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
 $posVplane[1] = 0;
 $posVplane[2] = 0;
 
-#$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posZplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
+$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
 $posZplane[1] = 0; 
 $posZplane[2] = 0;
-
-#to simulate backgrounds from anode
-$posAnodePlate[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posAnodePlate[1] = 0; 
-$posAnodePlate[2] = 0;
 
 $posTPCActive[0] = -$ReadoutPlane/2;
 $posTPCActive[1] = 0;
@@ -926,12 +908,6 @@ print TPC <<EOF;
        <volumeref ref="volTPCPlaneZ"/>
        <position name="posPlaneZ" unit="cm" 
          x="$posZplane[0]" y="$posZplane[1]" z="$posZplane[2]"/>
-       <rotationref ref="rIdentity"/>
-     </physvol>
-     <physvol>
-       <volumeref ref="volAnodePlate"/>
-       <position name="posAnodePlate" unit="cm" 
-         x="$posAnodePlate[0]" y="$posAnodePlate[1]" z="$posAnodePlate[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
