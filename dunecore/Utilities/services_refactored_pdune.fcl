@@ -29,8 +29,12 @@ protodune_larg4_services:
 ### ProtoDUNE-HD           ###
 ##############################
 
-protodunehd_refactored_simulation_services: @local::protodune_refactored_simulation_services
-
+protodunehd_refactored_simulation_services:
+{
+  @table::protodunehd_simulation_services
+  ParticleInventoryService:     @local::standard_particleinventoryservice
+  PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice
+}
 protodunehd_larg4_services: @local::protodune_larg4_services
 protodunehd_larg4_services.LArG4Detector: @local::protodunehd_larg4detector
 

@@ -347,7 +347,7 @@ protodunev8_refactored_geo.ROOT: "protodune_v8_refactored.gdml"
 # === Start ProtoDUNE-HD ===
 protodunehdv1_geo: @local::dune10kt_geo
 protodunehdv1_geo.Name: "protodunehdv1"
-protodunehdv1_geo.GDML: "protodunehd_v1_nowires.gdml"
+protodunehdv1_geo.GDML: "protodunehd_v1.gdml" #nowires.gdml
 protodunehdv1_geo.ROOT: "protodunehd_v1.gdml"
 # === End ProtoDUNE-HD ===
 
