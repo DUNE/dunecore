@@ -1,0 +1,65 @@
+#include "services_common_dune.fcl"
+#include "services_protodune_singlephase.fcl"
+
+BEGIN_PROLOG
+
+##############################
+### ProtoDUNE-HD           ###
+##############################
+
+protodunehd_services: @local::protodune_services 
+protodunehd_services.Geometry:  @local::protodunehdv1_geo
+
+protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
+protodunehd_rawdecoding_services.Geometry: @local::protodunehdv1_geo
+
+protodunehd_data_services: @local::protodune_data_services
+protodunehd_data_services.Geometry: @local::protodunehdv1_geo
+
+# Low memory configuration leaving out some heavy services
+protodunehd_minimal_simulation_services: @local::protodune_minimal_simulation_services
+protodunehd_minimal_simulation_services.Geometry: @local::protodunehdv1_geo
+
+# Full service configuration which includes memory-intensive services
+protodunehd_simulation_services: 
+{
+  @table::protodunehd_minimal_simulation_services
+  SignalShapingServiceDUNE:     @local::protodunesp_signalshapingservice
+  PhotonVisibilityService:      @local::protodune_photonvisibilityservice
+  OpDetResponseInterface:       @local::protodune_opdetresponse
+}
+
+# Reco services for ProtoDUNE simulation.
+protodunehd_reco_services:                            @local::protodunehd_services
+protodunehd_reco_services.RawDigitExtractService:     @local::rdx_std
+protodunehd_reco_services.RawDigitPrepService:        @local::adcprep_with_services_sim
+protodunehd_reco_services.AdcDeconvolutionService:    @local::adcdco_dunefd
+protodunehd_reco_services.AdcRoiBuildingService:      @local::adcroi_dunefd
+protodunehd_reco_services.AdcWireBuildingService:     @local::adcwire_std
+# Switch to tool-based dataprep for ProtoDUNE simulation.
+protodunehd_reco_services.RawDigitPrepService:        @local::adcprep_with_tools_sim
+protodunehd_reco_services.RawDigitPrepService.ToolNames: @local::protodune_dataprep_tools_sim
+# xyz calibration service
+protodunehd_reco_services.XYZCalibService:            @local::protodune_xyzcalib
+# lifetime calibration service
+protodunehd_reco_services.LifetimeCalibService:       @local::protodune_lifetimecalib
+# channel map service
+protodunehd_reco_services.PdspChannelMapService:      @local::pdspchannelmap
+# channel status service
+protodunehd_reco_services.ChannelStatusService:       @local::pdsp_channel_status
+
+# Reco services for ProtoDUNE data
+protodunehd_data_reco_services:                       @local::protodunehd_reco_services
+# Get rid of low frequency noise
+protodunehd_data_reco_services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
+protodunehd_data_reco_services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
+# Use channel service for data
+protodunehd_data_reco_services.ChannelStatusService: @local::pdsp_channel_status
+# Add the photon detector calibrator service
+protodunehd_data_reco_services.IPhotonCalibrator:    @local::protodunesp_photoncalibrator
+# ProtoDUNE detector properties service
+protodunehd_data_reco_services.DetectorPropertiesService: @local::protodunesp_detproperties
+# Dataprep service.
+protodunehd_data_reco_services.RawDigitPrepService.ToolNames: @local::protodune_dataprep_tools_wirecell
+
+END_PROLOG
