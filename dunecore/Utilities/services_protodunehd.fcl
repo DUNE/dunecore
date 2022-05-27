@@ -4,7 +4,7 @@
 BEGIN_PROLOG
 
 ##############################
-### ProtoDUNE Single Phase ###
+### ProtoDUNE-HD           ###
 ##############################
 
 protodunehd_services: @local::protodune_services 

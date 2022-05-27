@@ -21722,6 +21722,9 @@
     <volume name="volTPCActiveInner">
       <materialref ref="LAr"/>
       <solidref ref="InnerActive"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
     </volume>
 
     <volume name="volTPCWireVertInner">
@@ -42062,6 +42065,9 @@
     <volume name="volTPCActiveOuter">
       <materialref ref="LAr"/>
       <solidref ref="OuterActive"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
     </volume>
 
     <volume name="volTPCWireVertOuter">
