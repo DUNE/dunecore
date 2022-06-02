@@ -13,6 +13,7 @@ dunefdvd_services: {
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     ChannelGroupService:       @erase
+    PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
 }
 
 dunefdvd_simulation_services: {
@@ -21,6 +22,7 @@ dunefdvd_simulation_services: {
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     ParticleListAction:        @local::dunefdvd_particle_list_action
+    PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
 }
 
 dunefdvd_reco_services: {
@@ -28,6 +30,7 @@ dunefdvd_reco_services: {
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     Geometry:                  @local::dunevd10kt_geo
+    PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
 }
 
 END_PROLOG

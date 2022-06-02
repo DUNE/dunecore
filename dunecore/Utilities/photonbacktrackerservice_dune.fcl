@@ -1,0 +1,33 @@
+#include "photonbacktrackerservice.fcl"
+
+BEGIN_PROLOG
+
+dunefd_photonbacktrackerservice:
+{
+  PhotonBackTracker: 
+  {
+    G4ModuleLabel:  @erase         # Not longer in use
+    G4ModuleLabels: ["PDFastSim"]  # modules that produced the OpDetBTRs
+    MinimumHitEnergyFraction: 0.1  # minimum fraction of energy a G4 trackID contributes to a hit
+                                   # to be counted in hit based efficiency and purity calculations
+    Delay:                    260  # difference between when ligh arrives at the detector, and the
+                                   # time recorded in OpHits
+  }
+}
+
+dunefdvd_photonbacktrackerservice: @local::standard_photonbacktrackerservice
+dunefdvd_photonbacktrackerservice.PhotonBackTracker.G4ModuleLabels: ["PDFastSimAr", "PDFastSimXe", "PDFastSimArExternal", "PDFastSimXeExternal"]
+
+
+# Legacy definitions
+
+dunefd_photonbacktrackerservice_legacy:  @local::standard_photonbacktrackerservice
+dunefd_photonbacktrackerservice_legacy.PhotonBackTracker.G4ModuleLabel:            "largeant"
+dunefd_photonbacktrackerservice_legacy.PhotonBackTracker.G4ModuleLabels:           @erase
+dunefd_photonbacktrackerservice_legacy.PhotonBackTracker.MinimumHitEnergyFraction: 0.1
+dunefd_photonbacktrackerservice_legacy.PhotonBackTracker.Delay:                    260
+
+dune35t_photonbacktrackerservice: @local::dunefd_photonbacktrackerservice_legacy
+
+
+END_PROLOG
