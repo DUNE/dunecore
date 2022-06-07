@@ -46,7 +46,7 @@ protodunehd_reco_services.LifetimeCalibService:       @local::protodune_lifetime
 # channel map service
 protodunehd_reco_services.PdspChannelMapService:      @local::pdspchannelmap
 # channel status service
-protodunehd_reco_services.ChannelStatusService:       @local::pdsp_channel_status
+protodunehd_reco_services.ChannelStatusService:       @local::protodunehd_channel_status
 
 # Reco services for ProtoDUNE data
 protodunehd_data_reco_services:                       @local::protodunehd_reco_services
@@ -54,7 +54,7 @@ protodunehd_data_reco_services:                       @local::protodunehd_reco_s
 protodunehd_data_reco_services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
 protodunehd_data_reco_services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
 # Use channel service for data
-protodunehd_data_reco_services.ChannelStatusService: @local::pdsp_channel_status
+protodunehd_data_reco_services.ChannelStatusService: @local::protodunehd_channel_status
 # Add the photon detector calibrator service
 protodunehd_data_reco_services.IPhotonCalibrator:    @local::protodunesp_photoncalibrator
 # ProtoDUNE detector properties service
