@@ -17,14 +17,14 @@
 #           VG: Added defs to enable use in the refactored sim framework
 #           VG: 23.02.21 Adjust plane dimensions to fit a given number of ch per side
 #           VG: 23.02.21 Group CRUs in CRPs
-#           Laura Paulucci (lpaulucc@fnal.gov): Sept 2021 PDS added. 
+#    V2     Laura Paulucci (lpaulucc@fnal.gov): Sept 2021 PDS added. 
 #             Use option -pds=1 for backup design (membrane only coverage).
 #             Default (pds=0) is the reference design (~4-pi).
 #             This is linked with a larger geometry to account for photon propagation, generate it with -k=4.
 #             Field Cage is turned on with reference and backup designs to match PDS option.
 #	      For not including the pds, please use option -pds=-1
-#	      Mar 2022: Enabling light in 1x8x14 and charge in 1x8x6 geometry
-#                       Including cathode
+#
+#    V3     Mar 2022: Cathode included 
 #
 #################################################################################
 
@@ -162,7 +162,7 @@ if( $workspace == 2 )
 # create a smaller geometry
 if( $workspace == 3 )
 {
-    $nCRM_x = 3 * 2;
+    $nCRM_x = 4 * 2;
     $nCRM_z = 3 * 2;
 }
 
@@ -171,16 +171,13 @@ if( $workspace == 4 )
 {
     $nCRM_x = 4 * 2;
     $nCRM_z = 7 * 2;
-    $nCRM_tpc_z = 3 * 2;
-    
 }
 
 
 # calculate tpc area based on number of CRMs and their dimensions 
 # each CRP should have a 2x2 CRMs
 $widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  # around 1200 for full module
-$lengthTPCActive = $nCRM_tpc_z * $lengthCRM + $nCRM_tpc_z * $borderCRP; # around 6000 for full module
-$lengthTPCTotal  = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # differs from the above because we are not including the TPC in all the volume
+$lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 for full module
 
 # active volume dimensions 
 $driftTPCActive  = 650.0;
@@ -205,14 +202,14 @@ if( $workspace != 0 )
     #active tpc + 1.0 m buffer on each side
     $Argon_x = $driftTPCActive + $HeightGaseousAr + $ReadoutPlane + 100;
     $Argon_y = $widthTPCActive + 200;
-    $Argon_z = $lengthTPCTotal + 200;
+    $Argon_z = $lengthTPCActive + 200;
 }
 
 
 # size of liquid argon buffer
 $xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $ReadoutPlane;
 $yLArBuffer = 0.5 * ($Argon_y - $widthTPCActive);
-$zLArBuffer = 0.5 * ($Argon_z - $lengthTPCTotal);
+$zLArBuffer = 0.5 * ($Argon_z - $lengthTPCActive);
 
 # cryostat 
 $SteelThickness = 0.12; # membrane
@@ -283,7 +280,7 @@ $OriginZSet =   $DetEncZ/2.0
 
 ##################################################################
 ############## Field Cage Parameters ###############
-$FieldShaperLongTubeLength  =  $lengthTPCTotal;
+$FieldShaperLongTubeLength  =  $lengthTPCActive;
 $FieldShaperShortTubeLength =  $widthTPCActive;
 #$FieldShaperInnerRadius = 1.485;
 #$FieldShaperOuterRadius = 1.685;
@@ -342,7 +339,6 @@ $list_posx_bot[2]=-$list_posx_bot[1];
 $list_posz_bot[2]=-$list_posz_bot[1];
 $list_posx_bot[3]=-$list_posx_bot[0];
 $list_posz_bot[3]=-$list_posz_bot[0];
-
 
 
 #+++++++++++++++++++++++++ End defining variables ++++++++++++++++++++++++++
@@ -839,7 +835,6 @@ EOF
 print TPC <<EOF;
   </volume>
 EOF
-
        
 $posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
 $posUplane[1] = 0;
@@ -889,7 +884,6 @@ print TPC <<EOF;
      </physvol>
    </volume>
 EOF
-## x="@{[$posTPCActive[0]+$padWidth]}" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
 
 print TPC <<EOF;
  </structure>
@@ -1108,21 +1102,6 @@ print CRYO <<EOF;
       <second ref="ExternalAuxIn"/>
     </subtraction>
 
-    <box name="InternalAuxOut" lunit="cm" 
-      x="$driftTPCActive"
-      y="$widthTPCActive"
-      z="$lengthTPCTotal"/>
-
-    <box name="InternalAuxIn" lunit="cm" 
-      x="$driftTPCActive+10"
-      y="$widthTPCActive+10"
-      z="$lengthTPCActive"/>
-
-   <subtraction name="InternalActive">
-      <first ref="InternalAuxOut"/>
-      <second ref="InternalAuxIn"/>
-    </subtraction>
-
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
       <second ref="ArgonInterior"/>
@@ -1191,7 +1170,7 @@ print CRYO <<EOF;
     <volume name="volGroundGrid">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="CathodeGrid" />
-    </volume>
+    </volume>    
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
@@ -1202,14 +1181,6 @@ print CRYO <<EOF;
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
-      <colorref ref="green"/>
-    </volume>
-    <volume name="volInternalActive">
-      <materialref ref="LAr"/>
-      <solidref ref="InternalActive"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
       <colorref ref="green"/>
     </volume>
 EOF
@@ -1295,31 +1266,14 @@ EOF
         <volumeref ref="volExternalActive"/>
         <position name="posExternalActive" unit="cm" x="-$xLArBuffer/2" y="0" z="0"/>
       </physvol>
-      <physvol>
-        <volumeref ref="volInternalActive"/>
-        <position name="posInternalActive" unit="cm" x="0" y="0" z="0"/>
-      </physvol>
 EOF
 
-$CRM_z_min=($nCRM_z-$nCRM_tpc_z)/2;
-$CRM_z_max=$CRM_z_min+$nCRM_tpc_z;
-
-if ($tpc_on==1) # place TPC inside croysotat offsetting each pair of CRMs by borderCRP but start at CRM_z_min
+if ($tpc_on==1) # place TPC inside cryostat offsetting each pair of CRMs by borderCRP
 {
   $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane); 
   $idx = 0;
   my $posZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCRM;
-  for(my $ii=0;$ii<$CRM_z_min;$ii++)
-  {
-    if( $ii % 2 == 0 ){
-	$posZ += $borderCRP;
-	if( $ii>0 ){
-	    $posZ += $borderCRP;
-	}
-    }
-    $posZ += $lengthCRM;
-  }
-  for(my $ii=$CRM_z_min;$ii<$CRM_z_max;$ii++)
+  for(my $ii=0;$ii<$nCRM_z;$ii++)
   {
     if( $ii % 2 == 0 ){
 	$posZ += $borderCRP;
@@ -1350,8 +1304,6 @@ EOF
     $posZ += $lengthCRM;
   }
 }
-
-#Now fill the extra space inside the field cage that do not contain TPC active volume with some other active volume
 
 #The +50 in the x positions must depend on some other parameter
   if ( $FieldCage_switch eq "on" ) {
@@ -1493,7 +1445,7 @@ for ($ara = 0; $ara<4; $ara++)
              # X and Z coordinates are defined with respect to the center of the current Frame
 
  	     $Ara_Y = $FrameCenter_x+$list_posx_bot[$ara]; #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             $Ara_X = $FrameCenter_y;# + $FrameToArapucaSpace;
+             $Ara_X = $FrameCenter_y;
  	     $Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
 
 	print CRYO <<EOF;
@@ -1545,7 +1497,7 @@ for ($ara = 0; $ara<8; $ara++)
              else {$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
              $Ara_Z = $FrameCenter_z;
 
-  
+        
 	print CRYO <<EOF;
      <physvol>
        <volumeref ref="volArapucaLat_$Lat_z\-$ara"/>
@@ -1643,6 +1595,7 @@ sub gen_Enclosure()
 <?xml version='1.0'?>
 <gdml>
 EOF
+
 
 # All the detector enclosure solids.
 print ENCL <<EOF;
