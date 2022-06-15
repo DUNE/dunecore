@@ -15,7 +15,7 @@ art_make_library(LIBRARY_NAME HDF5Utils
 )
 
 simple_plugin(HDF5RawInput "source"
-  dune_raw_data::dune-raw-data_Overlays
+  dunepdlegacy_Overlays
   HDF5Utils
   art::Framework_Services_Registry
 )
