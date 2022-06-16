@@ -3,7 +3,7 @@
 #include "TimingRawDecoderOffsetTool.h"
 #include "dunecore/ArtSupport/DuneToolManager.h"
 #include "dunecore/DuneInterface/Tool/RunDataTool.h"
-#include "dune-raw-data/Services/ChannelMap/PdspChannelMapService.h"
+#include "dunepdlegacy/Services/ChannelMap/PdspChannelMapService.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include <iostream>
 #include <fstream>
