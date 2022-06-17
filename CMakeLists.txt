@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.53.01d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.53.02d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -62,7 +62,7 @@ find_ups_product( canvas_root_io )
 find_ups_product( cetlib_except )
 find_ups_product( cetlib )
 find_ups_product( clhep v2_1_3_0 )
-find_ups_product( dune_raw_data )
+find_ups_product( dunepdlegacy )
 find_ups_product( fhiclcpp )
 find_ups_product( genie )
 find_ups_product( hdf5 v1_12_0b )
