@@ -36,16 +36,17 @@ systematicstools    v01_00_03
 dune_oslibs         v1_0_0         -       optional
 larsoft             v09_53_02
 cetbuildtools       v8_20_00    -       only_for_build
+valgrind            v3_17_0
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier        dunepdlegacy         larsoft     duneutil  nusystematics  systematicstools    dunedetdataformats   dunedaqdataformats  dune_oslibs  dune_pardata    notes
-c7:debug         c7:debug             c7:debug    c7:debug  c7:debug       c7:debug               -nq-                -nq-                    -nq-       -nq-          
-c7:prof          c7:prof              c7:prof     c7:prof   c7:prof        c7:prof                -nq-                -nq-                    -nq-       -nq-          
-e20:debug        e20:debug            e20:debug   e20:debug e20:debug      e20:debug              -nq-                -nq-                    -nq-       -nq-          
-e20:prof         e20:prof             e20:prof    e20:prof  e20:prof       e20:prof               -nq-                -nq-                -nq-       -nq-          
+qualifier        dunepdlegacy         larsoft     duneutil  nusystematics  systematicstools    dunedetdataformats   dunedaqdataformats  dune_oslibs  dune_pardata valgrind notes
+c7:debug         c7:debug             c7:debug    c7:debug  c7:debug       c7:debug               -nq-                -nq-                    -nq-       -nq-       -nq-
+c7:prof          c7:prof              c7:prof     c7:prof   c7:prof        c7:prof                -nq-                -nq-                    -nq-       -nq-       -nq-
+e20:debug        e20:debug            e20:debug   e20:debug e20:debug      e20:debug              -nq-                -nq-                    -nq-       -nq-       -nq-
+e20:prof         e20:prof             e20:prof    e20:prof  e20:prof       e20:prof               -nq-                -nq-                    -nq-       -nq-       -nq-
 
 end_qualifier_list
 
