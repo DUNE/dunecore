@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.53.02d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.54.00d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -93,9 +93,8 @@ find_ups_product( dunedetdataformats )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( systematicstools  )
 find_ups_product( fftw )
+find_package(FFTW3 REQUIRED EXPORT)
 find_ups_product( sqlite )
-# artdaq_core Utility library
-cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 
 string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
 if( ${BTYPE_UC} MATCHES "DEBUG" )

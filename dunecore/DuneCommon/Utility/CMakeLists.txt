@@ -11,14 +11,14 @@ add_subdirectory(test)
 #foreach (_variableName ${_variableNames})
 #  message(STATUS "${_variableName}=${${_variableName}}")
 #endforeach()
-cet_find_library(FFTW NAMES fftw3 PATHS ENV FFTW_LIBRARY)
+
 art_make(BASENAME_ONLY
          LIB_LIBRARIES
          art::Persistency_Provenance
          canvas::canvas
          ROOT::HistPainter
          ROOT_BASIC_LIB_LIST
-         FFTW
+         FFTW3::FFTW3
          PUBLIC ROOT::Core
          NO_PLUGINS
         )
