@@ -24,6 +24,7 @@ dunefdvd_simulation_services: {
     ParticleListAction:        @local::dunefdvd_particle_list_action
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
 }
+dunefdvd_simulation_services.LArPropertiesService.ScintYieldRatio: 0.23   
 
 dunefdvd_reco_services: {
     @table::dunefd_reco_services
