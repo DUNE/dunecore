@@ -372,6 +372,7 @@ print DEF <<EOF;
    <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/>
    <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
    <rotation name="rUWireAboutX"        unit="deg" x="$wireAngleU" y="0" z="0"/>
+   <rotation name="rVWireAboutX"        unit="deg" x="$wireAngleV" y="0" z="0"/>
    <rotation name="rPlus90AboutX"       unit="deg" x="90" y="0" z="0"/>
    <rotation name="rPlus90AboutY"       unit="deg" x="0" y="90" z="0"/>
    <rotation name="rPlus90AboutXPlus90AboutY" unit="deg" x="90" y="90" z="0"/>
