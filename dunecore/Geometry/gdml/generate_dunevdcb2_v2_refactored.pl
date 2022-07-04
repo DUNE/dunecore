@@ -6,8 +6,6 @@
 #  !!!NOTE!!!: the readout is on a positive Y plane (drift along horizontal X)
 #              due to current reco limitations)
 #  Simplified treatment of inter-module dead spaces
-#     CRP border "dead" space is set to 6 mm
-#  No photon detectors declared
 #
 #  Created: Mon Jul  4 12:14:46 CEST 2022
 #           Vyacheslav Galymov <vgalymov@ipnl.in2p3.fr>
@@ -40,7 +38,7 @@ GetOptions( "help|h" => \$help,
             "workspace|k:s" => \$wkspc);
 
 my $FieldCage_switch="off";
-my $Cathode_switch="off";
+my $Cathode_switch="on";
 
 if ( defined $help )
 {
@@ -83,6 +81,7 @@ if (defined $wires)
 $tpc_on = 1;
 $basename="_";
 
+
 ##################################################################
 ############## Parameters for One Readout Panel ##################
 
@@ -92,11 +91,11 @@ $nViews = keys %nChans;
 #print "$nViews %nChans\n";
 
 # first induction view
-$wirePitchU      = 0.765;   # cm
+$wirePitchU      = 0.765;  # cm
 $wireAngleU      = 150.0;   # deg
 
 # second induction view
-$wirePitchV      = 0.765;   # cm
+$wirePitchV      = 0.765;  # cm
 $wireAngleV      = 30.0;    # deg
 
 
@@ -105,7 +104,7 @@ $wirePitchZ      = 0.51;   # cm
 
 # force length to be equal to collection nch x pitch
 $lengthPCBActive = $wirePitchZ * $nChans{'Col'};
-$widthPCBActive  = 167.7006; ##### !!!! fix this
+$widthPCBActive  = 167.7006;
 
 #
 $borderCRM       = 0.0;     # border space aroud each CRM 
@@ -135,7 +134,7 @@ $widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  # around 1200 fo
 $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 for full module
 
 # active volume dimensions 
-$driftTPCActive  = 30.0;
+$driftTPCActive  = 23.0;
 
 # model anode strips as wires of some diameter
 $padWidth          = 0.02;
@@ -247,6 +246,58 @@ $NFieldShapers = ($driftTPCActive/$FieldShaperSeparation) - 1;
 $FieldCageSizeX = $FieldShaperSeparation*$NFieldShapers+2;
 $FieldCageSizeY = $FieldShaperWidth+2;
 $FieldCageSizeZ = $FieldShaperLength+2;
+
+##################################################################
+############## Cathode Parameters ###############
+$heightCathode=4.0; #cm
+$CathodeBorder=4.0; #cm
+$widthCathode=$widthTPCActive; #2*$widthCRM;
+$lengthCathode=$lengthTPCActive; #2*$lengthCRM;
+$widthCathodeVoid=76.35;
+$lengthCathodeVoid=67.0;
+
+#Cathode Mesh
+
+$mesh_diameter = 0.063; #diameter of mesh profiles in cm
+$mesh_dist = 1.27; #center to center of mesh profiles in cm
+$buffer_mesh = 0.0005; #small gap to avoid overlap of mesh and cathode structure
+$NY_mesh = $widthCathode/1.27; #wire count along CB width
+$NZ_mesh = $lengthCathode/1.27; #wire count along CB length
+
+
+####################################################################
+######################## PDS ########################
+## in cm
+
+$TileOut_x = 2.5; #height
+$TileOut_y = 65.0;
+$TileOut_z = 65.0; 
+$TileIn_x = 2.0;
+$TileIn_y = 60.0;
+$TileIn_z = 60.0;
+$TileAcceptanceWindow_x = 1.0;
+$TileAcceptanceWindow_y = 60.0;
+$TileAcceptanceWindow_z = 60.0;
+$TileposY = 37.2; #with respect to cathode center
+$TileposZ = 37.3; #with respect to cathode center
+$MiniArapucaOut_x = 2.5; 
+$MiniArapucaOut_y = 10.5;
+$MiniArapucaOut_z = 14.0; 
+$MiniArapucaIn_x = 2.0;
+$MiniArapucaIn_y = 7.7;
+$MiniArapucaIn_z = 10.0;
+$MiniArapucaAcceptanceWindow_x = 1.0;
+$MiniArapucaAcceptanceWindow_y = 7.7;
+$MiniArapucaAcceptanceWindow_z = 10.0;
+#Positions of the 4 MiniArapucas with respect to Cathode center
+$list_posy[0]=-74.9;
+$list_posz[0]= 118.4;
+$list_posy[1]=$list_posy[0];
+$list_posz[1]= 88.4;
+$list_posy[2]=-$list_posy[1];
+$list_posz[2]=$list_posz[1];
+$list_posy[3]=-$list_posy[0];
+$list_posz[3]=$list_posz[0];
 
 
 #+++++++++++++++++++++++++ End defining variables ++++++++++++++++++++++++++
@@ -375,6 +426,7 @@ EOF
 
     close(MAT);
 }
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++ gen_TPC ++++++++++++++++++++++++++++++++++++++++
@@ -921,6 +973,59 @@ close(FieldCage);
 }
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++ gen_Cathode +++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub gen_Cathode {
+
+    $Cathode = $basename."_Catode" . $suffix . ".gdml";
+    push (@gdmlFiles, $Cathode);
+    $Cathode = ">" . $Cathode;
+    open(Cathode) or die("Could not open file $Cathode for writing");
+
+# The standard XML prefix and starting the gdml
+print Cathode <<EOF;
+   <?xml version='1.0'?>
+   <gdml>
+EOF
+# The printing solids used in the Field Cage
+#print "lengthTPCActive      : $lengthTPCActive \n";
+#print "widthTPCActive       : $widthTPCActive \n";
+
+
+print Cathode <<EOF;
+<solids>
+     <tube name="CatMeshZSolid" rmax="0.5*$mesh_diameter" z="$lengthCathode"      
+      deltaphi="360" aunit="deg" lunit="cm"/>
+    <tube name="CatMeshYSolid" rmax="0.5*$mesh_diameter" z="$widthCathode"      
+      deltaphi="360" aunit="deg" lunit="cm"/>
+</solids>
+
+EOF
+
+print Cathode <<EOF;
+
+<structure>
+<volume name="volCatMeshY">
+  <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+  <solidref ref="CatMeshYSolid"/>
+</volume>
+<volume name="volCatMeshZ">
+  <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+  <solidref ref="CatMeshZSolid"/>
+</volume> 
+</structure>
+
+EOF
+
+print Cathode <<EOF;
+
+</gdml>
+EOF
+close(Cathode);
+}
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++ gen_Cryostat +++++++++++++++++++++++++++++++++++++
@@ -970,6 +1075,55 @@ print CRYO <<EOF;
 </solids>
 EOF
 
+#PDS
+#1 large X-Arapuca = TILE and 4 mini-Arapucas
+print CRYO <<EOF;
+<solids>
+    <box name="TileOut" lunit="cm"
+      x="@{[$TileOut_x]}"
+      y="@{[$TileOut_y]}"
+      z="@{[$TileOut_z]}"/>
+
+    <box name="TileIn" lunit="cm"
+      x="@{[$TileOut_x]}"
+      y="@{[$TileIn_y]}"
+      z="@{[$TileIn_z]}"/>
+
+     <subtraction name="TileWalls">
+      <first  ref="TileOut"/>
+      <second ref="TileIn"/>
+      <position name="posTileSub" x="@{[$TileOut_x/2.0]}" y="0" z="0." unit="cm"/>
+      </subtraction>
+
+    <box name="TileAcceptanceWindow" lunit="cm"
+      x="@{[$TileAcceptanceWindow_x]}"
+      y="@{[$TileAcceptanceWindow_y]}"
+      z="@{[$TileAcceptanceWindow_z]}"/>
+
+    <box name="MiniArapucaOut" lunit="cm"
+      x="@{[$MiniArapucaOut_x]}"
+      y="@{[$MiniArapucaOut_y]}"
+      z="@{[$MiniArapucaOut_z]}"/>
+
+    <box name="MiniArapucaIn" lunit="cm"
+      x="@{[$MiniArapucaOut_x]}"
+      y="@{[$MiniArapucaIn_y]}"
+      z="@{[$MiniArapucaIn_z]}"/>
+
+     <subtraction name="MiniArapucaWalls">
+      <first  ref="MiniArapucaOut"/>
+      <second ref="MiniArapucaIn"/>
+      <position name="posMiniArapucaSub" x="@{[$MiniArapucaOut_x/2.0]}" y="0" z="0." unit="cm"/>
+      </subtraction>
+
+    <box name="MiniArapucaAcceptanceWindow" lunit="cm"
+      x="@{[$MiniArapucaAcceptanceWindow_x]}"
+      y="@{[$MiniArapucaAcceptanceWindow_y]}"
+      z="@{[$MiniArapucaAcceptanceWindow_z]}"/>
+
+</solids>
+EOF
+
 # Cryostat structure
 print CRYO <<EOF;
 <structure>
@@ -977,13 +1131,41 @@ print CRYO <<EOF;
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="SteelShell" />
     </volume>
+    <volume name="volGroundGrid">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
+      <solidref ref="CathodeGrid" />
+    </volume>
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
+    </volume>
 EOF
 
-      print CRYO <<EOF;
+  print CRYO <<EOF;
+    <volume name="volTile">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
     </volume>
+    <volume name="volOpDetSensitive_Tile">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+EOF
+
+for($p=0 ; $p<4 ; $p++){
+  print CRYO <<EOF;
+    <volume name="volMiniArapuca\-$p">
+      <materialref ref="G10" />
+      <solidref ref="MiniArapucaWalls" />
+    </volume>
+    <volume name="volOpDetSensitive_MiniArapuca\-$p">
+      <materialref ref="LAr"/>
+      <solidref ref="MiniArapucaAcceptanceWindow"/>
+    </volume>
+EOF
+}
+
+      print CRYO <<EOF;
 
     <volume name="volCryostat">
       <materialref ref="LAr" />
@@ -1040,7 +1222,7 @@ EOF
 
 #The +50 in the x positions must depend on some other parameter
   if ( $FieldCage_switch eq "on" ) {
-    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) { # pmts with coating
+    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
 $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane); 
 	print CRYO <<EOF;
   <physvol>
@@ -1053,7 +1235,7 @@ EOF
   }
 
 
-$CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation;
+$CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation - $heightCathode/2. - 2.*$mesh_diameter - 2.*$buffer_mesh;#new cathode position to accomodate the cathode mesh
 $CathodePosY = 0;
 $CathodePosZ = 0;
   if ( $Cathode_switch eq "on" )
@@ -1061,13 +1243,33 @@ $CathodePosZ = 0;
       print CRYO <<EOF;
   <physvol>
    <volumeref ref="volGroundGrid"/>
-   <position name="posGroundGrid01" unit="cm" x="$CathodePosX" y="@{[-$CathodePosY]}" z="@{[$CathodePosZ]}"/>
-   <rotation name="rotGG01" unit="deg" x="0" y="0" z="90" />
+   <position name="posGroundGrid01" unit="cm" x="@{[$CathodePosX]}" y="@{[-$CathodePosY]}" z="@{[$CathodePosZ]}"/>
   </physvol>
 
 EOF
   }
 
+for ( $i=0; $i<$NZ_mesh; $i=$i+1 ) { 
+$posZ = $CathodePosZ - $lengthCathode/2. + $i*$mesh_dist; 
+	print CRYO <<EOF;
+<physvol>
+<volumeref ref="volCatMeshY"/>
+<position name="posCatMeshY$i" unit="cm" x="@{[$CathodePosX + $heightCathode/2. + $mesh_diameter/2. + $buffer_mesh]}" y="@{[-$CathodePosY]}" z="@{[$posZ]}" />
+<rotationref ref="rPlus90AboutX"/>
+</physvol>
+EOF
+}
+for ( $i=0; $i<$NY_mesh; $i=$i+1 ) { 
+$posY = $CathodePosY - $widthCathode/2. + $i*$mesh_dist; 
+	print CRYO <<EOF;
+<physvol>
+<volumeref ref="volCatMeshZ"/>
+<position name="posCatMeshZ$i" unit="cm" x="@{[$CathodePosX + $heightCathode/2. + 3.*$mesh_diameter/2. + 2.*$buffer_mesh]}" y="@{[$posY]}" z="@{[$CathodePosZ]}" />
+</physvol>
+EOF
+}
+
+place_OpDetsCathode($CathodePosX,-$CathodePosY, $CathodePosZ);
   
  print CRYO <<EOF;
     </volume>
@@ -1076,6 +1278,96 @@ EOF
 EOF
 
 close(CRYO);
+}
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++ place_CathodeMesh +++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub place_CathodeMesh()
+{
+
+    $CathodePos_x = $_[0];
+    $CathodePos_y = $_[1];
+    $CathodePos_z = $_[2];
+
+for ( $i=0; $i<$NZ_mesh; $i=$i+1 ) { 
+$posZ = $CathodePos_z - $lengthCathode/2. + $i*$mesh_dist; 
+	print CRYO <<EOF;
+  <physvol>
+     <volumeref ref="volCatMeshY"/>
+     <position name="posCatMeshY$i" unit="cm"  x="@{[$CathodePos_x + $heightCathode/2. + $mesh_diameter/2. + $buffer_mesh]}" y="@{[$CathodePos_y]}" z="@{[$posZ]}" />
+     <rotationref ref="rPlus90AboutX"/>
+  </physvol>
+EOF
+}
+for ( $i=0; $i<$NY_mesh; $i=$i+1 ) { 
+$posY = $CathodePos_y - $widthCathode/2. + $i*$mesh_dist; 
+	print CRYO <<EOF;
+  <physvol>
+     <volumeref ref="volCatMeshZ"/>
+     <position name="posCatMeshZ$i" unit="cm"  x="@{[$CathodePos_x + $heightCathode/2. + 3.*$mesh_diameter/2. + 2.*$buffer_mesh]}" y="@{[$posY]}" z="@{[$CathodePos_z]}" />
+  </physvol>
+EOF
+}
+}
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++ place_OpDets +++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub place_OpDetsCathode()
+{
+
+    $FrameCenter_x = $_[0];
+    $FrameCenter_y = $_[1];
+    $FrameCenter_z = $_[2];
+
+#Placing Arapucas over the Cathode
+#Tile
+	print CRYO <<EOF;
+     <physvol>
+       <volumeref ref="volTile"/>
+       <position name="posTile" unit="cm" 
+         x="@{[$FrameCenter_x]}"
+	 y="@{[$FrameCenter_y+$TileposY]}" 
+	 z="@{[$FrameCenter_z+$TileposZ]}"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volOpDetSensitive_Tile"/>
+       <position name="posOpTile" unit="cm" 
+         x="@{[$FrameCenter_x+0.5*$TileOut_x-0.5*$TileAcceptanceWindow_x-0.01]}"
+	 y="@{[$FrameCenter_y+$TileposY]}" 
+	 z="@{[$FrameCenter_z+$TileposZ]}"/>
+     </physvol>
+EOF
+#Placing the miniArapucas
+for ($ara = 0; $ara<4; $ara++)
+{
+ 	     $Ara_X = $FrameCenter_x;
+             $Ara_Y = $FrameCenter_y +$list_posy[$ara];
+ 	     $Ara_Z = $FrameCenter_z+$list_posz[$ara];
+
+	print CRYO <<EOF;
+     <physvol>
+       <volumeref ref="volMiniArapuca\-$ara"/>
+       <position name="posMiniArapuca$ara" unit="cm" 
+         x="@{[$Ara_X]}"
+	 y="@{[$Ara_Y]}" 
+	 z="@{[$Ara_Z]}"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volOpDetSensitive_MiniArapuca-$ara"/>
+       <position name="posOpMiniArapuca$ara" unit="cm" 
+         x="@{[$Ara_X+0.5*$MiniArapucaOut_x-0.5*$MiniArapucaAcceptanceWindow_x-0.01]}"
+	 y="@{[$Ara_Y]}" 
+	 z="@{[$Ara_Z]}"/>
+     </physvol>
+EOF
+
+}#end Ara for-loop
+
+
+
 }
 
 
@@ -1106,6 +1398,97 @@ EOF
 # All the detector enclosure solids.
 print ENCL <<EOF;
 <solids>
+
+    <box name="CathodeBlock" lunit="cm"
+      x="@{[$heightCathode]}"
+      y="@{[$widthCathode]}"
+      z="@{[$lengthCathode]}" />
+
+    <box name="CathodeVoid" lunit="cm"
+      x="@{[$heightCathode+1.0]}"
+      y="@{[$widthCathodeVoid]}"
+      z="@{[$lengthCathodeVoid]}" />
+
+    <subtraction name="Cathode1">
+      <first ref="CathodeBlock"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub1" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode2">
+      <first ref="Cathode1"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub2" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode3">
+      <first ref="Cathode2"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub3" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode4">
+      <first ref="Cathode3"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub4" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode5">
+      <first ref="Cathode4"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub5" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode6">
+      <first ref="Cathode5"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub6" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode7">
+      <first ref="Cathode6"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub7" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode8">
+      <first ref="Cathode7"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub8" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode9">
+      <first ref="Cathode8"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub9" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode10">
+      <first ref="Cathode9"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub10" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode11">
+      <first ref="Cathode10"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub11" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode12">
+      <first ref="Cathode11"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub12" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode13">
+      <first ref="Cathode12"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub13" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode14">
+      <first ref="Cathode13"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub14" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode15">
+      <first ref="Cathode14"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub15" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
+    <subtraction name="CathodeGrid">
+      <first ref="Cathode15"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+    </subtraction>
 
     <box name="FoamPadBlock" lunit="cm"
       x="@{[$Cryostat_x + 2*$FoamPadding]}"
@@ -1320,7 +1703,7 @@ EOF
 print "Some of the principal parameters for this TPC geometry (unit cm unless noted otherwise)\n";
 print " CRM active area       : $widthCRM_active x $lengthCRM_active\n";
 print " CRM total area        : $widthCRM x $lengthCRM\n";
-print " Wire pitch in U, Y, Z : $wirePitchU, $wirePitchY, $wirePitchZ\n";
+print " Wire pitch in U, V, Z : $wirePitchU, $wirePitchV, $wirePitchZ\n";
 print " TPC active volume  : $driftTPCActive x $widthTPCActive x $lengthTPCActive\n";
 print " Argon volume       : ($Argon_x, $Argon_y, $Argon_z) \n"; 
 print " Argon buffer       : ($xLArBuffer, $yLArBuffer, $zLArBuffer) \n"; 
@@ -1333,7 +1716,7 @@ print " Wires              : $wires_on \n";
 
 # run the sub routines that generate the fragments
 if ( $FieldCage_switch eq "on" ) {  gen_FieldCage();	}
-#if ( $Cathode_switch eq "on" ) {  gen_Cathode();	} #Cathode for now has the same geometry as the Ground Grid
+if ( $Cathode_switch eq "on" ) {  gen_Cathode();	} #Cathode for now has the same geometry as the Ground Grid
 
 gen_Extend();    # generates the GDML color extension for the refactored geometry 
 gen_Define(); 	 # generates definitions at beginning of GDML
