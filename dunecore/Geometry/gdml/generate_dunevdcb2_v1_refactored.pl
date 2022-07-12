@@ -13,7 +13,11 @@
 #           Vyacheslav Galymov <vgalymov@ipnl.in2p3.fr>
 #
 #  Modified:
-#
+#           VG, Wed Jul  6 15:53:06 CEST 2022
+#           Reorganize the "wire" generator algorithm to allow 
+#           easily generating full length strips on the CRU plane
+#           These are then split through mid-CRU section to make
+#           wire objets for geo planes and geo vol TPCs
 #
 #################################################################################
 
@@ -36,8 +40,7 @@ Math::BigFloat->precision(-16);
 GetOptions( "help|h" => \$help,
 	    "suffix|s:s" => \$suffix,
 	    "output|o:s" => \$output,
-	    "wires|w:s" => \$wires,  
-            "workspace|k:s" => \$wkspc);
+	    "wires|w:s" => \$wires );
 
 my $FieldCage_switch="off";
 my $Cathode_switch="off";
@@ -62,17 +65,6 @@ else
     $suffix = "-" . $suffix;
 }
 
-
-$workspace = 0;
-if(defined $wkspc ) 
-{
-    $workspace = $wkspc;
-}
-elsif ( $workspace != 0 )
-{
-    print "\t\tCreating smaller workspace geometry.\n";
-}
-
 # set wires on to be the default, unless given an input by the user
 $wires_on = 1; # 1=on, 0=off
 if (defined $wires)
@@ -87,9 +79,8 @@ $basename="_";
 ############## Parameters for One Readout Panel ##################
 
 # views and channel counts
-%nChans = ('Ind1', 286, 'Ind1Bot', 96, 'Ind2', 286, 'Col', 292);
+%nChans = ('Ind1', 286, 'Ind2', 286, 'Col', 292);
 $nViews = keys %nChans;
-#print "$nViews %nChans\n";
 
 # first induction view
 $wirePitchU      = 0.765;   # cm
@@ -98,23 +89,25 @@ $wireAngleU      = 150.0;   # deg
 # second induction view
 $wirePitchV      = 0.765;   # cm
 $wireAngleV      = 30.0;    # deg
-
-
 # last collection view
 $wirePitchZ      = 0.51;   # cm
 
-# force length to be equal to collection nch x pitch
-$lengthPCBActive = $wirePitchZ * $nChans{'Col'};
-$widthPCBActive  = 167.7006; ##### !!!! fix this
+# offset of 1st u/v wire computed from gerber
+@offsetUVwire = (1.55, 0.89); # cm
 
-#
-$borderCRM       = 0.0;     # border space aroud each CRM 
+# Active CRU area
+$lengthPCBActive = 149.0;  #cm
+$widthPCBActive  = 335.8;  #cm
 
-$widthCRM_active  = $widthPCBActive;  
+# not done for the moment ...
+#$borderCRM       = 0.0;    # border space aroud each CRM 
+
+# each CRM module is half of CRU 
+$widthCRM_active  = $widthPCBActive/2;  
 $lengthCRM_active = $lengthPCBActive; 
 
-$widthCRM  = $widthPCBActive  + 2 * $borderCRM;
-$lengthCRM = $lengthPCBActive + 2 * $borderCRM;
+$widthCRM  = $widthCRM_active;  #+ 2 * $borderCRM;
+$lengthCRM = $lengthCRM_active; #+ 2 * $borderCRM;
 
 $borderCRP = 0.6; # cm
 
@@ -122,24 +115,17 @@ $borderCRP = 0.6; # cm
 $nCRM_x   = 2;
 $nCRM_z   = 2;
 
-# create a smaller geometry
-if( $workspace == 1 )
-{
-    $nCRM_x = 1 * 2;
-    $nCRM_z = 1 * 2;
-}
-
 # calculate tpc area based on number of CRMs and their dimensions 
 # each CRP should have a 2x2 CRMs
-$widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  # around 1200 for full module
-$lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 for full module
+$widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  
+$lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; 
 
 # active volume dimensions 
-$driftTPCActive  = 30.0;
+$driftTPCActive  = 22.0;
 
 # model anode strips as wires of some diameter
 $padWidth          = 0.02;
-$ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space b/w)!
+$ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space between)!
 
 ##################################################################
 ############## Parameters for TPC and inner volume ###############
@@ -546,7 +532,7 @@ print TPC <<EOF;
 	<gdml>
 EOF
 
-    # compute wires for 1st induction
+    # compute wires for 1st and 2nd induction
     my @winfoU = ();
     my @winfoV = ();
     if( $wires_on == 1 ){
