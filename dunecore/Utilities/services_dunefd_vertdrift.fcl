@@ -23,6 +23,7 @@ dunefdvd_simulation_services: {
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     ParticleListAction:        @local::dunefdvd_particle_list_action
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
+    PhotonVisibilityService: @local::dune10kt_vd_1x8x14_photonvisibilityservice_ArXe # The PhotonVisibilityService is used for the hybrid model for light simulation. 
 }
 
 dunefdvd_reco_services: {
