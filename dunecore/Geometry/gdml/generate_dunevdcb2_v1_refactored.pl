@@ -78,8 +78,8 @@ $basename="_";
 ##################################################################
 ############## Parameters for One Readout Panel ##################
 
-# views and channel counts
-%nChans = ('Ind1', 286, 'Ind2', 286, 'Col', 292);
+# views and channel counts per CRU (=1/2 of CRP)
+%nChans = ('Ind1', 476, 'Ind2', 476, 'Col', 2*292);
 $nViews = keys %nChans;
 
 # first induction view
@@ -89,36 +89,30 @@ $wireAngleU      = 150.0;   # deg
 # second induction view
 $wirePitchV      = 0.765;   # cm
 $wireAngleV      = 30.0;    # deg
+
 # last collection view
 $wirePitchZ      = 0.51;   # cm
 
-# offset of 1st u/v wire computed from gerber
+# offset of 1st u/v strip centre I measured directly from gerber
 @offsetUVwire = (1.55, 0.89); # cm
 
 # Active CRU area
 $lengthPCBActive = 149.0;  #cm
 $widthPCBActive  = 335.8;  #cm
 
-# not done for the moment ...
-#$borderCRM       = 0.0;    # border space aroud each CRM 
-
 # each CRM module is half of CRU 
 $widthCRM_active  = $widthPCBActive/2;  
 $lengthCRM_active = $lengthPCBActive; 
 
-$widthCRM  = $widthCRM_active;  #+ 2 * $borderCRM;
-$lengthCRM = $lengthCRM_active; #+ 2 * $borderCRM;
+# number of CRMs in y and z per CRP
+@nCRM = (2, 2);
 
-$borderCRP = 0.6; # cm
+# total area covered by CRP
+$widthCRP  = $widthPCBActive + 2 * $borderCRP;
+$lengthCRP = 2 * $lengthPCBAcitve + $gapCRU + 2 * $borderCRP;
 
-# number of CRMs in y and z
-$nCRM_x   = 2;
-$nCRM_z   = 2;
-
-# calculate tpc area based on number of CRMs and their dimensions 
-# each CRP should have a 2x2 CRMs
-$widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  
-$lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; 
+$widthCRM  = $widthCRP  / 2;
+$lengthCRM = $lengthCRP / 2;
 
 # active volume dimensions 
 $driftTPCActive  = 22.0;
@@ -425,10 +419,11 @@ sub gen_Wires
     my $length = $_[0];  # 
     my $width  = $_[1];  # 
     my $nch    = $_[2];  # 
-    my $nchb   = $_[3];  # nch per bottom side
-    my $pitch  = $_[4];  # 
-    my $theta  = $_[5];  # deg
-    my $dia    = $_[6];  #
+    my $pitch  = $_[3];  # 
+    my $theta  = $_[4];  # deg
+    my $dia    = $_[5];  #
+    my $w1offx = $_[6];  # offset for wire 1 1st coord
+    my $w1offy = $_[7];  # offset for wire 1 2nd coord
     
     $theta  = $theta * pi()/180.0;
     my @dirw   = (cos($theta), sin($theta));
@@ -441,19 +436,13 @@ sub gen_Wires
     }
     my $dX = $pitch / sin( $alpha );
     my $dY = $pitch / sin( pi()/2 - $alpha );
-    if( $length <= 0 ){
-        $length = $dX * $nchb;
-    }
-    if( $width <= 0 ){
-	$width = $dY * ($nch - $nchb);
-    }
 
-    my @orig   = (0, 0);
+    my @orig   = ($w1offx, $w1offy);
     if( $dirp[0] < 0 ){
-	$orig[0] = $length;
+	$orig[0] = $length - $w1offx;
     }
     if( $dirp[1] < 0 ){
-	$orig[1] = $width;
+	$orig[1] = $width - $w1offy;
     }
 
     #print "origin    : @orig\n";
@@ -463,7 +452,7 @@ sub gen_Wires
 
     # gen wires
     my @winfo  = ();
-    my $offset = $pitch/2;
+    my $offset = 0; # starting point is now given by w1offx and w1offy
     foreach my $ch (0..$nch-1){
 	#print "Processing $ch\n";
 
@@ -506,6 +495,139 @@ sub gen_Wires
     return @winfo;
 }
 
+sub split_wires
+{
+    # split wires at y = 0 line (widht / 2)
+    # assumes that the CRU wire plane has been
+    # centered already on 0,0
+    
+    # reference to array of wires
+    my $wires = $_[0];
+    my $width = $_[1];  # split
+    my $theta = $_[2];  # deg
+
+    ###
+    my $yref  = 0;
+    my $nx    = cos($theta * pi()/180.0);
+    my $ny    = sin($theta * pi()/180.0);
+    my $ich1  = 0;
+    my $ich2  = 0;
+    my @winfo1  = (); # lower half of CRU
+    my @winfo2  = (); # upper half of CRU
+
+    foreach my $wire (@$wires){
+	my $x0 = $wire->[1];
+	my $y0 = $wire->[2];
+	my @endpts = ($wire->[4], $wire->[5],
+		      $wire->[6], $wire->[7]);
+
+	# min of two y-values
+	my $y1 = ($endpts[1], $endpts[3])[$endpts[1] > $endpts[3]];
+	# max of two y-values
+	my $y2 = ($endpts[1], $endpts[3])[$endpts[1] < $endpts[3]];
+	if( $y2 < $yref )
+	{
+	    my @wire1 = ($ich1, $x0, $y0, $wire->[3]);
+	    push( @wire1, @endpts );
+	    push( @winfo1, \@wire1);
+	    $ich1++;
+	    next;
+	}
+	elsif( $y1 > $yref )
+	{
+	    my @wire2 = ($ich2, $x0, $y0, $wire->[3]);
+	    push( @wire2, @endpts );
+	    push( @winfo2, \@wire2);
+	    $ich2++;
+	    next;
+	}
+
+	# calculate an intercept point with yref
+	$y  = $yref;
+	$x  = $x0 + ($y - $y0) * $nx/$ny;
+	
+	# make new endpoints
+	my @endpts1 = @endpts;
+	my @endpts2 = @endpts;
+	if( $endpts[1] < $y )
+	{
+	    $endpts1[2] = $x;
+	    $endpts1[3] = $y;
+	    $endpts2[0] = $x;
+	    $endpts2[1] = $y;
+	}
+	else
+	{
+	    $endpts1[0] = $x;
+	    $endpts1[1] = $y;
+	    $endpts2[2] = $x;
+	    $endpts2[3] = $y;
+	}
+	
+	my @wcn1 = (0, 0);
+	$wcn1[0] = ($endpts1[0] + $endpts1[2])/2;
+	$wcn1[1] = ($endpts1[1] + $endpts1[3])/2;
+	my $dx    = $endpts1[0] - $endpts1[2];
+	my $dy    = $endpts1[1] - $endpts1[3];
+	my $wlen1 = sqrt($dx**2 + $dy**2);
+	my @wire1 = ($ich1, $wcn1[0], $wcn1[1], $wlen1);
+	push( @wire1, @endpts1 );
+	push( @winfo1, \@wire1 );
+	$ich1++;
+
+	my @wcn2 = (0, 0);
+	$wcn2[0] = ($endpts2[0] + $endpts2[2])/2;
+	$wcn2[1] = ($endpts2[1] + $endpts2[3])/2;
+	$dx      = $endpts2[0] - $endpts2[2];
+	$dy      = $endpts2[1] - $endpts2[3];
+	my $wlen2 = sqrt($dx**2 + $dy**2);
+	my @wire2 = ($ich2, $wcn2[0], $wcn2[1], $wlen2);
+	push( @wire2, @endpts2 );
+	push( @winfo2, \@wire2 );
+	$ich2++;
+    }
+
+    #return ( \@winfo1, \@winfo2 );
+    foreach my $w (@winfo1){
+	$w->[5] -= (-0.25 * $width);
+	$w->[7] -= (-0.25 * $width);
+	$w->[2]  = 0.5 * ($w->[5]+$w->[7]);
+    }
+
+    foreach my $w (@winfo2){
+	$w->[5] -= (0.25 * $width);
+	$w->[7] -= (0.25 * $width);
+	$w->[2]  = 0.5 * ($w->[5]+$w->[7]);
+    }
+
+    return ( \@winfo1, \@winfo2 );
+}
+
+sub flip_wires
+{
+    # flip generated wires for one CRU by 180 deg
+    # for the 2nd CRU
+
+    # input array
+    my $wires = $_[0];
+    # output array
+    my @winfo = ();
+    foreach my $wire (@$wires){
+	my $xn1 = -$wire->[4];
+	my $yn1 = -$wire->[5];
+	my $xn2 = -$wire->[6];
+	my $yn2 = -$wire->[7];
+	my $xc  = 0.5*($xn1 + $xn2);
+	my $yc  = 0.5*($yn1 + $yn2);
+	my $new_wire = ($wire->[0], $xc, $yc, $wire->[3],
+			$xn1, $yn1, $xn2, $yn2 );
+	push( @winfo, \@new_wire);
+    }
+    return @winfo;
+}
+
+
+
 #
 sub gen_TPC()
 {
@@ -519,7 +641,7 @@ sub gen_TPC()
     my $TPC_y = $widthCRM;
     my $TPC_z = $lengthCRM;
 
-    print " TPC dimensions     : $TPC_x x $TPC_y x $TPC_z\n";
+    print " volTPC dimensions     : $TPC_x x $TPC_y x $TPC_z\n";
     
     $TPC = $basename."_TPC" . $suffix . ".gdml";
     push (@gdmlFiles, $TPC);
@@ -536,13 +658,44 @@ EOF
     my @winfoU = ();
     my @winfoV = ();
     if( $wires_on == 1 ){
-	@winfoU = gen_Wires( $TPCActive_z, 0, # force length
-			     $nChans{'Ind1'}, $nChans{'Ind1Bot'}, 
-			     $wirePitchU, $wireAngleU, $padWidth );
-	@winfoV = gen_Wires( $TPCActive_z, 0, # force length
-			     $nChans{'Ind2'}, $nChans{'Ind1Bot'}, 
-			     $wirePitchV, $wireAngleV, $padWidth );
+	# first CRU
+	my @winfoU1 = gen_Wires( $lengthPCBActive, $widthPCBActive,
+				 $nChans{'Ind1'}, 
+				 $wirePitchU, $wireAngleU, $padWidth,
+				 $offsetUVwire[0], $offsetUVwire[1]);
+	my @winfoV1 = gen_Wires( $lengthPCBActive, $widthPCBActive,
+				 $nChans{'Ind2'}, 
+				 $wirePitchV, $wireAngleV, $padWidth,
+				 $offsetUVwire[0], $offsetUVwire[1]);
+	# second CRU
+	my @winfoU2 = flip_wires( \@winfoU1 );
+	my @winfoV2 = flip_wires( \@winfoV1 );
 
+	my ($winfoU1a, $winfoU1b) = split_wires( \@winfoU1, $widthPCBActive, $wireAngleU );
+	my ($winfoV1a, $winfoV1b) = split_wires( \@winfoV1, $widthPCBActive, $wireAngleU );
+	
+	my ($winfoU2a, $winfoU2b) = split_wires( \@winfoU2, $widthPCBActive, $wireAngleU );
+	my ($winfoV2a, $winfoV2b) = split_wires( \@winfoV2, $widthPCBActive, $wireAngleU );
+	
+	@winfoU = ($winfoU1a, $winfoU1b, $winfoU2a, $winfoU2b);
+	@winfoV = ($winfoV1a, $winfoV1b, $winfoV2a, $winfoV2b);
+	
+	# assign unique ID to each CRM wire
+	my $wcountU=0;
+	foreach my $crm_wires (@winfoU){
+	    foreach my $wire (@$crm_wires){
+		$wire->[0] = $wcountU;
+		$wcountU++;
+	    }
+	}
+	
+	my $wcountV=0;
+	foreach my $crm_wires (@winfoV){
+	    foreach my $wire (@$crm_wires){
+		$wire->[0] = $wcountV;
+		$wcountV++;
+	    }
+	}
     }
 
     # All the TPC solids save the wires.
