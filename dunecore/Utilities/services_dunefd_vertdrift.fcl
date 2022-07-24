@@ -23,6 +23,7 @@ dunefdvd_simulation_services: {
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     ParticleListAction:        @local::dunefdvd_particle_list_action
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
+    PhotonVisibilityService:   @local::dune10kt_vd_photonvisibilityservice_ArXe # The PhotonVisibilityService is used for the hybrid model for light simulation. 
 }
 dunefdvd_simulation_services.LArPropertiesService.ScintYieldRatio: 0.23   
 
