@@ -93,8 +93,9 @@ $wireAngleV      = 30.0;    # deg
 # last collection view
 $wirePitchZ      = 0.51;   # cm
 
-# offset of 1st u/v strip centre I measured directly from gerber
-@offsetUVwire = (1.55, 0.89); # cm
+# offset of 1st u/v strip centre I measured 
+# (not as precisely probably) directly from gerber
+@offsetUVwire = (1.50, 0.87); # cm
 
 # Active CRU area
 $lengthPCBActive = 149.0;    #cm
@@ -103,8 +104,8 @@ $gapCRU          = 0.1;      #cm
 $borderCRP       = 0.6;      #cm
 
 # total area covered by CRP
-$widthCRP  = $widthPCBActive + 2 * $borderCRP;
-$lengthCRP = 2 * $lengthPCBActive + $gapCRU + 2 * $borderCRP;
+$widthCRP  =     $widthPCBActive  + 2 * $borderCRP;
+$lengthCRP = 2 * $lengthPCBActive + 2 * $borderCRP + $gapCRU;
 
 # active volume dimensions 
 # only one crp so active area dimensions are given by CRP area
@@ -614,7 +615,7 @@ sub flip_wires
 	my $yn2 = -$wire->[7];
 	my $xc  = 0.5*($xn1 + $xn2);
 	my $yc  = 0.5*($yn1 + $yn2);
-	my $new_wire = ($wire->[0], $xc, $yc, $wire->[3],
+	my @new_wire = ($wire->[0], $xc, $yc, $wire->[3],
 			$xn1, $yn1, $xn2, $yn2 );
 	push( @winfo, \@new_wire);
     }
@@ -752,7 +753,7 @@ print TPC <<EOF;
 EOF
 if( $do_init == 0 ){ # do it only once
 print TPC <<EOF;
-    <volume name="volTPCActiveInner">
+    <volume name="volTPCActive">
       <materialref ref="LAr"/>
       <solidref ref="CRMActive"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
@@ -899,16 +900,16 @@ EOF
 my $pcbOffsetY = 999;
 my $pcbOffsetZ = 999;
 if( $quad == 0 ){
-    $pcbOffsetY = -$borderCRP/2;
+    $pcbOffsetY =  $borderCRP/2;
     $pcbOffsetZ = ($borderCRP/2 - $gapCRU/4);
 } elsif( $quad == 1 ){
-    $pcbOffsetY =  $borderCRP/2;
+    $pcbOffsetY =  -$borderCRP/2;
     $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 2 ){
-    $pcbOffsetY = -$borderCRP/2;
+    $pcbOffsetY =  $borderCRP/2;
     $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 3 ){
-    $pcbOffsetY = $borderCRP/2;
+    $pcbOffsetY = -$borderCRP/2;
     $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } else {
     die "Uknown $quad quadrant index\n";
@@ -959,7 +960,7 @@ print TPC <<EOF;
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActiveInner"/>
+       <volumeref ref="volTPCActive"/>
        <position name="posActive$quad" unit="cm" 
         x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
        <rotationref ref="rIdentity"/>
@@ -1001,6 +1002,12 @@ sub gen_TopCRP
 	# second CRU
 	my @winfoU2 = flip_wires( \@winfoU1 );
 	my @winfoV2 = flip_wires( \@winfoV1 );
+	#foreach my $wire (@winfoU2){
+	#printf ("U%d %.3f %.3f %.3f %.3f %.3f %.3f %.3f\n",
+	#$wire->[0], $wire->[1], $wire->[2],
+	#$wire->[3], $wire->[4], $wire->[5],
+	#$wire->[6], $wire->[7]);
+	#} 
 
 	my ($winfoU1a, $winfoU1b) = split_wires( \@winfoU1, $widthPCBActive, $wireAngleU );
 	my ($winfoV1a, $winfoV1b) = split_wires( \@winfoV1, $widthPCBActive, $wireAngleV );
@@ -1008,6 +1015,7 @@ sub gen_TopCRP
 	my ($winfoU2a, $winfoU2b) = split_wires( \@winfoU2, $widthPCBActive, $wireAngleU );
 	my ($winfoV2a, $winfoV2b) = split_wires( \@winfoV2, $widthPCBActive, $wireAngleV );
 	
+        # put them the same order as volTPCs for a given CRP
 	@winfoU = ($winfoU1a, $winfoU1b, $winfoU2a, $winfoU2b);
 	@winfoV = ($winfoV1a, $winfoV1b, $winfoV2a, $winfoV2b);
 	
@@ -1017,6 +1025,11 @@ sub gen_TopCRP
 	    foreach my $wire (@$crm_wires){
 		$wire->[0] = $wcountU;
 		$wcountU++;
+		#printf ("U%d %.3f %.3f %.3f %.3f %.3f %.3f %.3f\n",
+		#$wire->[0], $wire->[1], $wire->[2],
+		#$wire->[3], $wire->[4], $wire->[5],
+		#$wire->[6], $wire->[7]);
+
 	    }
 	}
 	
@@ -1039,62 +1052,6 @@ sub gen_TopCRP
 	    gen_crm( $quad, \@dummy, \@dummy );
 	}
     }
-
-    my @posTCP0 = (0,  $CRP_y/4, -$CRP_z/4 );
-    my @posTCP1 = (0, -$CRP_y/4, -$CRP_z/4 );
-    my @posTCP2 = (0,  $CRP_y/4,  $CRP_z/4 );
-    my @posTCP3 = (0, -$CRP_y/4,  $CRP_z/4 );
-    
-    $TPC = $basename."_TopCRP" . $suffix . ".gdml";
-    push (@gdmlFiles, $TPC);
-    $TPC = ">" . $TPC;
-    open(TPC) or die("Could not open file $TPC for writing");
-
-    # The standard XML prefix and starting the gdml
-print TPC <<EOF;
- <?xml version='1.0'?>
- <gdml>
-   <solids>
-    <box name="TopCRP"
-       x="$CRP_x" 
-       y="$CRP_y" 
-       z="$CRP_z"
-       lunit="cm"/>
-   </solids>
-   <structure>   
-    <volume name="volTopCRP">
-     <materialref ref="LAr"/>
-       <solidref ref="TopCRP"/>
-       <physvol>
-         <volumeref ref="volTPC0"/>
-         <position name="posTPC0" unit="cm" 
-         x="$posTCP0[0]" y="$posTCP0[1]" z="$posTCP0[2]"/>
-       <rotationref ref="rIdentity"/>
-      </physvol>
-       <physvol>
-         <volumeref ref="volTPC1"/>
-         <position name="posTPC1" unit="cm"
-         x="$posTCP1[0]" y="$posTCP1[1]" z="$posTCP1[2]"/>
-         <rotationref ref="rIdentity"/>
-      </physvol>
-       <physvol>
-         <volumeref ref="volTPC2"/>
-         <position name="posTPC2" unit="cm"
-         x="$posTCP2[0]" y="$posTCP2[1]" z="$posTCP2[2]"/>
-       <rotationref ref="rIdentity"/>
-      </physvol>
-       <physvol>
-         <volumeref ref="volTPC3"/>
-         <position name="posTPC3" unit="cm"
-         x="$posTCP3[0]" y="$posTCP3[1]" z="$posTCP3[2]"/>
-       <rotationref ref="rIdentity"/>
-      </physvol>
-    </volume>
-   </structure>
- </gdml>
-EOF
-
-    close(TPC);
 }
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1277,14 +1234,41 @@ EOF
 
 if ($tpc_on==1) # place CRP
 {
-  $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane) - $LArOverhead; #20 cm overhead lar 
+    my $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane) - $LArOverhead; #20 cm overhead lar 
+    my $CRP_y = $widthCRP;
+    my $CRP_z = $lengthCRP;
+    my @posTCP0 = ($posX,  -$CRP_y/4, -$CRP_z/4 );
+    my @posTCP1 = ($posX,   $CRP_y/4, -$CRP_z/4 );
+    my @posTCP2 = ($posX,  -$CRP_y/4,  $CRP_z/4 );
+    my @posTCP3 = ($posX,   $CRP_y/4,  $CRP_z/4 );
 
+    #place 4 CRP quadrants
 print CRYO <<EOF;
-      <physvol>
-        <volumeref ref="volTopCRP"/>
-	<position name="posCRP0" unit="cm"
-           x="$posX" y="0" z="0"/>
+       <physvol>
+         <volumeref ref="volTPC0"/>
+         <position name="posTPC0" unit="cm" 
+         x="$posTCP0[0]" y="$posTCP0[1]" z="$posTCP0[2]"/>
+        <rotationref ref="rIdentity"/>
+       </physvol>
+       <physvol>
+         <volumeref ref="volTPC1"/>
+         <position name="posTPC1" unit="cm"
+         x="$posTCP1[0]" y="$posTCP1[1]" z="$posTCP1[2]"/>
+         <rotationref ref="rIdentity"/>
+       </physvol>
+       <physvol>
+         <volumeref ref="volTPC2"/>
+         <position name="posTPC2" unit="cm"
+         x="$posTCP2[0]" y="$posTCP2[1]" z="$posTCP2[2]"/>
+         <rotationref ref="rIdentity"/>
       </physvol>
+      <physvol>
+         <volumeref ref="volTPC3"/>
+         <position name="posTPC3" unit="cm"
+         x="$posTCP3[0]" y="$posTCP3[1]" z="$posTCP3[2]"/>
+         <rotationref ref="rIdentity"/>
+      </physvol>
+
 EOF
 }
 
