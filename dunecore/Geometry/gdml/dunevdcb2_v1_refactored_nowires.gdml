@@ -389,109 +389,34 @@
 
 </materials>
 <solids>
-   <box name="CRM0"
+   <box name="CRM"
       x="23.06" 
       y="168.5" 
       z="149.65"
       lunit="cm"/>
-    <box name="CRMActive0" 
+   <box name="CRMActive" 
       x="23"
       y="168.5"
       z="149.65"
       lunit="cm"/>
-   <box name="CRMUPlane0" 
+   <box name="CRMUPlane" 
       x="0.02" 
       y="167.9" 
       z="149"
       lunit="cm"/>
-   <box name="CRMVPlane0" 
+   <box name="CRMVPlane" 
       x="0.02" 
       y="167.9" 
       z="149"
       lunit="cm"/>
-   <box name="CRMZPlane0" 
+   <box name="CRMZPlane" 
       x="0.02"
       y="167.9"
       z="149"
       lunit="cm"/>
 
-   <box name="CRM1"
-      x="23.06" 
-      y="168.5" 
-      z="149.65"
-      lunit="cm"/>
-    <box name="CRMActive1" 
-      x="23"
-      y="168.5"
-      z="149.65"
-      lunit="cm"/>
-   <box name="CRMUPlane1" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMVPlane1" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMZPlane1" 
-      x="0.02"
-      y="167.9"
-      z="149"
-      lunit="cm"/>
 
-   <box name="CRM2"
-      x="23.06" 
-      y="168.5" 
-      z="149.65"
-      lunit="cm"/>
-    <box name="CRMActive2" 
-      x="23"
-      y="168.5"
-      z="149.65"
-      lunit="cm"/>
-   <box name="CRMUPlane2" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMVPlane2" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMZPlane2" 
-      x="0.02"
-      y="167.9"
-      z="149"
-      lunit="cm"/>
 
-   <box name="CRM3"
-      x="23.06" 
-      y="168.5" 
-      z="149.65"
-      lunit="cm"/>
-    <box name="CRMActive3" 
-      x="23"
-      y="168.5"
-      z="149.65"
-      lunit="cm"/>
-   <box name="CRMUPlane3" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMVPlane3" 
-      x="0.02" 
-      y="167.9" 
-      z="149"
-      lunit="cm"/>
-   <box name="CRMZPlane3" 
-      x="0.02"
-      y="167.9"
-      z="149"
-      lunit="cm"/>
 
     <box name="TopCRP"
        x="23.06" 
@@ -501,18 +426,18 @@
    
     <box name="Cryostat" lunit="cm" 
       x="100.24" 
-      y="52.24" 
-      z="92.24"/>
+      y="389.24" 
+      z="391.54"/>
 
     <box name="ArgonInterior" lunit="cm" 
       x="100"
-      y="52"
-      z="92"/>
+      y="389"
+      z="391.3"/>
 
     <box name="GaseousArgon" lunit="cm" 
       x="40"
-      y="52"
-      z="92"/>
+      y="389"
+      z="391.3"/>
 
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
@@ -523,8 +448,8 @@
 
     <box name="FoamPadBlock" lunit="cm"
       x="200.24"
-      y="152.24"
-      z="192.24" />
+      y="489.24"
+      z="491.54" />
 
     <subtraction name="FoamPadding">
       <first ref="FoamPadBlock"/>
@@ -534,8 +459,8 @@
 
     <box name="SteelSupportBlock" lunit="cm"
       x="300.24"
-      y="252.24"
-      z="292.24" />
+      y="589.24"
+      z="591.54" />
 
     <subtraction name="SteelSupport">
       <first ref="SteelSupportBlock"/>
@@ -545,206 +470,182 @@
 
     <box name="DetEnclosure" lunit="cm" 
       x="400.24"
-      y="452.24"
-      z="492.24"/>
+      y="789.24"
+      z="791.54"/>
 
 
     <box name="World" lunit="cm" 
       x="8400.24" 
-      y="8452.24" 
-      z="8492.24"/>
+      y="8789.24" 
+      z="8791.54"/>
 </solids>
 <structure>
-    <volume name="volTPCActive0">
+    <volume name="volTPCActiveInner">
       <materialref ref="LAr"/>
-      <solidref ref="CRMActive0"/>
+      <solidref ref="CRMActive"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5*cm"/>
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
       <colorref ref="blue"/>
     </volume>
    <volume name="volTPCPlaneU0">
      <materialref ref="LAr"/>
-     <solidref ref="CRMUPlane0"/>
+     <solidref ref="CRMUPlane"/>
    </volume>
   <volume name="volTPCPlaneV0">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane0"/>
+    <solidref ref="CRMVPlane"/>
   </volume>
   <volume name="volTPCPlaneZ0">
     <materialref ref="LAr"/>
-    <solidref ref="CRMZPlane0"/>
+    <solidref ref="CRMZPlane"/>
   </volume>
    <volume name="volTPC0">
      <materialref ref="LAr"/>
-       <solidref ref="CRM0"/>
+       <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU0"/>
        <position name="posPlaneU0" unit="cm" 
-         x="11.48" y="-0.6" z="0.6"/>
+         x="11.48" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV0"/>
        <position name="posPlaneY0" unit="cm" 
-         x="11.5" y="-0.6" z="0.6"/>
+         x="11.5" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ0"/>
        <position name="posPlaneZ0" unit="cm" 
-         x="11.52" y="-0.6" z="0.6"/>
+         x="11.52" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActive0"/>
+       <volumeref ref="volTPCActiveInner"/>
        <position name="posActive0" unit="cm" 
         x="-0.03" y="" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
  
-    <volume name="volTPCActive1">
-      <materialref ref="LAr"/>
-      <solidref ref="CRMActive1"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
-      <colorref ref="blue"/>
-    </volume>
    <volume name="volTPCPlaneU1">
      <materialref ref="LAr"/>
-     <solidref ref="CRMUPlane1"/>
+     <solidref ref="CRMUPlane"/>
    </volume>
   <volume name="volTPCPlaneV1">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane1"/>
+    <solidref ref="CRMVPlane"/>
   </volume>
   <volume name="volTPCPlaneZ1">
     <materialref ref="LAr"/>
-    <solidref ref="CRMZPlane1"/>
+    <solidref ref="CRMZPlane"/>
   </volume>
    <volume name="volTPC1">
      <materialref ref="LAr"/>
-       <solidref ref="CRM1"/>
+       <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU1"/>
        <position name="posPlaneU1" unit="cm" 
-         x="11.48" y="0.6" z="0.6"/>
+         x="11.48" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV1"/>
        <position name="posPlaneY1" unit="cm" 
-         x="11.5" y="0.6" z="0.6"/>
+         x="11.5" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ1"/>
        <position name="posPlaneZ1" unit="cm" 
-         x="11.52" y="0.6" z="0.6"/>
+         x="11.52" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActive1"/>
+       <volumeref ref="volTPCActiveInner"/>
        <position name="posActive1" unit="cm" 
         x="-0.03" y="" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
  
-    <volume name="volTPCActive2">
-      <materialref ref="LAr"/>
-      <solidref ref="CRMActive2"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
-      <colorref ref="blue"/>
-    </volume>
    <volume name="volTPCPlaneU2">
      <materialref ref="LAr"/>
-     <solidref ref="CRMUPlane2"/>
+     <solidref ref="CRMUPlane"/>
    </volume>
   <volume name="volTPCPlaneV2">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane2"/>
+    <solidref ref="CRMVPlane"/>
   </volume>
   <volume name="volTPCPlaneZ2">
     <materialref ref="LAr"/>
-    <solidref ref="CRMZPlane2"/>
+    <solidref ref="CRMZPlane"/>
   </volume>
    <volume name="volTPC2">
      <materialref ref="LAr"/>
-       <solidref ref="CRM2"/>
+       <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU2"/>
        <position name="posPlaneU2" unit="cm" 
-         x="11.48" y="-0.6" z="-0.6"/>
+         x="11.48" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV2"/>
        <position name="posPlaneY2" unit="cm" 
-         x="11.5" y="-0.6" z="-0.6"/>
+         x="11.5" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ2"/>
        <position name="posPlaneZ2" unit="cm" 
-         x="11.52" y="-0.6" z="-0.6"/>
+         x="11.52" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActive2"/>
+       <volumeref ref="volTPCActiveInner"/>
        <position name="posActive2" unit="cm" 
         x="-0.03" y="" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
  
-    <volume name="volTPCActive3">
-      <materialref ref="LAr"/>
-      <solidref ref="CRMActive3"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
-      <colorref ref="blue"/>
-    </volume>
    <volume name="volTPCPlaneU3">
      <materialref ref="LAr"/>
-     <solidref ref="CRMUPlane3"/>
+     <solidref ref="CRMUPlane"/>
    </volume>
   <volume name="volTPCPlaneV3">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane3"/>
+    <solidref ref="CRMVPlane"/>
   </volume>
   <volume name="volTPCPlaneZ3">
     <materialref ref="LAr"/>
-    <solidref ref="CRMZPlane3"/>
+    <solidref ref="CRMZPlane"/>
   </volume>
    <volume name="volTPC3">
      <materialref ref="LAr"/>
-       <solidref ref="CRM3"/>
+       <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU3"/>
        <position name="posPlaneU3" unit="cm" 
-         x="11.48" y="0.6" z="-0.6"/>
+         x="11.48" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV3"/>
        <position name="posPlaneY3" unit="cm" 
-         x="11.5" y="0.6" z="-0.6"/>
+         x="11.5" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ3"/>
        <position name="posPlaneZ3" unit="cm" 
-         x="11.52" y="0.6" z="-0.6"/>
+         x="11.52" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActive3"/>
+       <volumeref ref="volTPCActiveInner"/>
        <position name="posActive3" unit="cm" 
         x="-0.03" y="" z="0"/>
        <rotationref ref="rIdentity"/>
@@ -792,6 +693,9 @@
     <volume name="volCryostat">
       <materialref ref="LAr" />
       <solidref ref="Cryostat" />
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="1*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
       <physvol>
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="30" y="0" z="0"/>
@@ -841,7 +745,7 @@
 
       <physvol>
         <volumeref ref="volDetEnclosure"/>
-	<position name="posDetEnclosure" unit="cm" x="71.56" y="3.5527136788005e-15" z="7.105427357601e-15"/>
+	<position name="posDetEnclosure" unit="cm" x="71.56" y="0" z="149.65"/>
       </physvol>
 
     </volume>

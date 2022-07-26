@@ -97,16 +97,19 @@ $wirePitchZ      = 0.51;   # cm
 @offsetUVwire = (1.55, 0.89); # cm
 
 # Active CRU area
-$lengthPCBActive = 149.0;  #cm
-$widthPCBActive  = 335.8;  #cm
-$gapCRU          = 0.1;    #cm
-$borderCRP       = 0.6;    #cm
+$lengthPCBActive = 149.0;    #cm
+$widthPCBActive  = 335.8;    #cm
+$gapCRU          = 0.1;      #cm
+$borderCRP       = 0.6;      #cm
 
 # total area covered by CRP
 $widthCRP  = $widthPCBActive + 2 * $borderCRP;
 $lengthCRP = 2 * $lengthPCBActive + $gapCRU + 2 * $borderCRP;
 
 # active volume dimensions 
+# only one crp so active area dimensions are given by CRP area
+$widthTPCActive  = $widthCRP;  
+$lengthTPCActive = $lengthCRP; 
 $driftTPCActive  = 23.0;
 
 # model anode strips as wires of some diameter
@@ -650,6 +653,7 @@ sub gen_crm
     my $ZPlaneWidth  = $widthPCBActive / 2;
 
     if( $do_init == 0 ){
+	#print " $UPlaneWidth x $UPlaneLenght\n";
 	print " TPC vol dimensions     : $TPC_x x $TPC_y x $TPC_z\n";
     }
     
@@ -669,35 +673,35 @@ print TPC <<EOF;
     <solids>
 EOF
 
-#if( $do_init == 0 ){
+if( $do_init == 0 ){ # do it only once
 print TPC <<EOF;
-   <box name="CRM$quad"
+   <box name="CRM"
       x="$TPC_x" 
       y="$TPC_y" 
       z="$TPC_z"
       lunit="cm"/>
-    <box name="CRMActive$quad" 
+   <box name="CRMActive" 
       x="$TPCActive_x"
       y="$TPCActive_y"
       z="$TPCActive_z"
       lunit="cm"/>
-   <box name="CRMUPlane$quad" 
+   <box name="CRMUPlane" 
       x="$padWidth" 
       y="$UPlaneWidth" 
       z="$UPlaneLength"
       lunit="cm"/>
-   <box name="CRMVPlane$quad" 
+   <box name="CRMVPlane" 
       x="$padWidth" 
       y="$VPlaneWidth" 
       z="$VPlaneLength"
       lunit="cm"/>
-   <box name="CRMZPlane$quad" 
+   <box name="CRMZPlane" 
       x="$padWidth"
       y="$ZPlaneWidth"
       z="$ZPlaneLength"
       lunit="cm"/>
 EOF
-#    }
+}
     
 #++++++++++++++++++++++++++++ Wire Solids ++++++++++++++++++++++++++++++
 if($wires_on == 1 ){
@@ -744,16 +748,21 @@ EOF
 # but do it only once for the volumes that are the same
 # for all CRP quadrants
 print TPC <<EOF;
-<structure>
-    <volume name="volTPCActive$quad">
+  <structure>
+EOF
+if( $do_init == 0 ){ # do it only once
+print TPC <<EOF;
+    <volume name="volTPCActiveInner">
       <materialref ref="LAr"/>
-      <solidref ref="CRMActive$quad"/>
+      <solidref ref="CRMActive"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5*cm"/>
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
       <colorref ref="blue"/>
     </volume>
 EOF
+}
+
 
 if($wires_on==1) 
 {
@@ -791,7 +800,7 @@ EOF
 print TPC <<EOF;
    <volume name="volTPCPlaneU$quad">
      <materialref ref="LAr"/>
-     <solidref ref="CRMUPlane$quad"/>
+     <solidref ref="CRMUPlane"/>
 EOF
 if ($wires_on==1) # add wires to U plane 
 {
@@ -822,7 +831,7 @@ EOF
 print TPC <<EOF;
   <volume name="volTPCPlaneV$quad">
     <materialref ref="LAr"/>
-    <solidref ref="CRMVPlane$quad"/>
+    <solidref ref="CRMVPlane"/>
 EOF
 
 if ($wires_on==1) # add wires to V plane 
@@ -853,7 +862,7 @@ EOF
 print TPC <<EOF;
   <volume name="volTPCPlaneZ$quad">
     <materialref ref="LAr"/>
-    <solidref ref="CRMZPlane$quad"/>
+    <solidref ref="CRMZPlane"/>
 EOF
 if ($wires_on==1) # add wires to Z plane (plane with wires reading z position)
   {
@@ -890,17 +899,17 @@ EOF
 my $pcbOffsetY = 999;
 my $pcbOffsetZ = 999;
 if( $quad == 0 ){
-    $pcbOffsetY = -$borderCRP;
-    $pcbOffsetZ =  $borderCRP;
+    $pcbOffsetY = -$borderCRP/2;
+    $pcbOffsetZ = ($borderCRP/2 - $gapCRU/4);
 } elsif( $quad == 1 ){
-    $pcbOffsetY =  $borderCRP;
-    $pcbOffsetZ =  $borderCRP;
+    $pcbOffsetY =  $borderCRP/2;
+    $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 2 ){
-    $pcbOffsetY = -$borderCRP;
-    $pcbOffsetZ = -$borderCRP;
+    $pcbOffsetY = -$borderCRP/2;
+    $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 3 ){
-    $pcbOffsetY =  $borderCRP;
-    $pcbOffsetZ = -$borderCRP;
+    $pcbOffsetY = $borderCRP/2;
+    $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } else {
     die "Uknown $quad quadrant index\n";
 }
@@ -930,7 +939,7 @@ $posTPCActive[2] = 0;
 print TPC <<EOF;
    <volume name="volTPC$quad">
      <materialref ref="LAr"/>
-       <solidref ref="CRM$quad"/>
+       <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU$quad"/>
        <position name="posPlaneU$quad" unit="cm" 
@@ -950,7 +959,7 @@ print TPC <<EOF;
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActive$quad"/>
+       <volumeref ref="volTPCActiveInner"/>
        <position name="posActive$quad" unit="cm" 
         x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
        <rotationref ref="rIdentity"/>
@@ -994,10 +1003,10 @@ sub gen_TopCRP
 	my @winfoV2 = flip_wires( \@winfoV1 );
 
 	my ($winfoU1a, $winfoU1b) = split_wires( \@winfoU1, $widthPCBActive, $wireAngleU );
-	my ($winfoV1a, $winfoV1b) = split_wires( \@winfoV1, $widthPCBActive, $wireAngleU );
+	my ($winfoV1a, $winfoV1b) = split_wires( \@winfoV1, $widthPCBActive, $wireAngleV );
 	
 	my ($winfoU2a, $winfoU2b) = split_wires( \@winfoU2, $widthPCBActive, $wireAngleU );
-	my ($winfoV2a, $winfoV2b) = split_wires( \@winfoV2, $widthPCBActive, $wireAngleU );
+	my ($winfoV2a, $winfoV2b) = split_wires( \@winfoV2, $widthPCBActive, $wireAngleV );
 	
 	@winfoU = ($winfoU1a, $winfoU1b, $winfoU2a, $winfoU2b);
 	@winfoV = ($winfoV1a, $winfoV1b, $winfoV2a, $winfoV2b);
@@ -1252,6 +1261,9 @@ EOF
     <volume name="volCryostat">
       <materialref ref="LAr" />
       <solidref ref="Cryostat" />
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="1*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
       <physvol>
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
