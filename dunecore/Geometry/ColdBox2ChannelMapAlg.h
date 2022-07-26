@@ -498,7 +498,7 @@ class geo::ColdBox2ChannelMapAlg: public geo::ChannelMapAlg {
   ReadoutMappingInfo_t fReadoutMapInfo;
   
   /// Mapping of channels and ROP's.
-  geo::dune::vd::ChannelToWireMap fChannelToWireMap;
+  geo::dune::vd::cb2::ChannelToWireMap fChannelToWireMap;
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
