@@ -50,15 +50,16 @@ private:
 
   // Declare member data here.
   //const double dpwpitch = 0.3125; //cm
-
+  bool m_dump_wires;
 };
 
 
 CheckDPhaseGeometry::CheckDPhaseGeometry(fhicl::ParameterSet const & p)
   :
-  EDAnalyzer(p)  // ,
+  EDAnalyzer(p), m_dump_wires(p.get< bool >("DumpWires", false))
  // More initializers here.
 {;}
+
 
 void CheckDPhaseGeometry::analyze(art::Event const & e)
 {
@@ -144,10 +145,11 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
 	  std::cout<<"  View type geo::kZ"<<std::endl;
 	else 
 	  std::cout<<"  View "<<view<<" uknown"<<std::endl;
-
-	if( geo->SignalType(planeID) == geo::kCollection )
+	
+	auto sigtype = geo->SignalType(planeID);
+	if(  sigtype == geo::kCollection )
 	  std::cout<<"  View is geo::kCollection"<<std::endl;
-	else if( geo->SignalType(planeID) == geo::kInduction )
+	else if( sigtype == geo::kInduction )
 	  std::cout<<"  View is geo::kInduction"<<std::endl;
 	else
 	  std::cout<<"  View signal type is unknown"<<std::endl;
@@ -193,7 +195,28 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
       }
     //break;
   }
-  /*
+
+  if( m_dump_wires ){
+    
+    double xyz[3];   
+    double abc[3];                                                                 
+    int chan;
+    int cryo = geo->Ncryostats();                                                             
+    for (int c=0; c<cryo;++c){                   
+      int tpc =geo->NTPC(c);                                               
+      for (int t=0; t<tpc; ++t){                                            
+	int Nplanes=geo->Nplanes(t,c);                                      
+	for (int p=0;p<Nplanes;++p) {                                        
+	  int Nwires = geo->Nwires(p,t,c);                                  
+	  for (int w=0;w<Nwires;++w){
+	    geo->WireEndPoints(c,t,p,w,xyz,abc);
+	    chan=geo->PlaneWireToChannel(p,w,t,c);  
+	    std::cout << "FLAG " << chan << " " << c << " " << t << " " << p << " " << w << " " << xyz[0] << " " << xyz[1] << " " << xyz[2] <<  " " << abc[0] << " " << abc[1] << " " << abc[2] << std::endl;                                         
+	  }      }}  }
+
+  }// dump wires
+
+    /*
   TCanvas *can = new TCanvas("c1","c1");
   can->cd();
   TH2F *frame = new TH2F("frame",";z (cm);y (cm)",3000,minz,maxz,3000,miny,maxy);
