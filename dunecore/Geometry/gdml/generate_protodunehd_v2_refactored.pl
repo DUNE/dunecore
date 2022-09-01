@@ -832,7 +832,7 @@ $posCRTUS_rot[15] = "rMinus90AboutYMinus90AboutX";
 $LightPaddle_x            =    0.476; #Historical reasons, should be substituted by some other name that makes more sense
 
 ####################################################################
-###################    Arapuca Dimensions    #######################
+###################  Arapuca Dimensions (cm)  #######################
 
 $ArapucaOut_x = 2.3;   
 $ArapucaOut_y = 12.0; 
@@ -960,25 +960,14 @@ print DEF <<EOF;
    <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/>
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
    <rotation name="rBeamWRev3"          unit="deg" x="-11.342" y="11.6190450403" z="-44.8829268772"/>
-   <position name="posArapucaSub0"    unit="cm" x="ArapucaOut_x/2" y="0" z="@{[$list_pos[0]]}"/>
-   <position name="posArapucaSub1"    unit="cm" x="ArapucaOut_x/2" y="0" z="@{[$list_pos[1]]}"/>
-   <position name="posArapucaSub2"    unit="cm" x="ArapucaOut_x/2" y="0" z="@{[$list_pos[2]]}"/>
-   <position name="posArapucaSub3"    unit="cm" x="ArapucaOut_x/2" y="0" z="@{[$list_pos[3]]}"/>
-   <position name="posArapucaDoubleSub0"    unit="cm" x="ArapucaOut_x" y="0" z="@{[$list_pos[0]]}"/>
-   <position name="posArapucaDoubleSub1"    unit="cm" x="ArapucaOut_x" y="0" z="@{[$list_pos[1]]}"/>
-   <position name="posArapucaDoubleSub2"    unit="cm" x="ArapucaOut_x" y="0" z="@{[$list_pos[2]]}"/>
-   <position name="posArapucaDoubleSub3"    unit="cm" x="ArapucaOut_x" y="0" z="@{[$list_pos[3]]}"/>
-   <position name="posPaddleSub0"    unit="mm" x="0" y="@{[$list_sub_paddle[0]]}" z="0"/>
-   <position name="posPaddleSub1"    unit="mm" x="0" y="@{[$list_sub_paddle[1]]}" z="0"/>
-   <position name="posPaddleSub2"    unit="mm" x="0" y="@{[$list_sub_paddle[2]]}" z="0"/>
-   <position name="posPaddleSub3"    unit="mm" x="0" y="@{[$list_sub_paddle[3]]}" z="0"/>
-   <position name="posPaddleSub4"    unit="mm" x="0" y="@{[$list_sub_paddle[4]]}" z="0"/>
-   <position name="posPaddleSub5"    unit="mm" x="0" y="@{[$list_sub_paddle[5]]}" z="0"/>
-   <position name="posPaddleSub6"    unit="mm" x="0" y="@{[$list_sub_paddle[6]]}" z="0"/>
-   <position name="posPaddleSub7"    unit="mm" x="0" y="@{[$list_sub_paddle[7]]}" z="0"/>
-   <position name="posPaddleSub8"    unit="mm" x="0" y="@{[$list_sub_paddle[8]]}" z="0"/>
-   <position name="posPaddleSub9"    unit="mm" x="0" y="@{[$list_sub_paddle[9]]}" z="0"/>
-
+   <position name="posArapucaSub0"    unit="cm" x="$ArapucaOut_x/2" y="0" z="@{[$list_pos[0]]}"/>
+   <position name="posArapucaSub1"    unit="cm" x="$ArapucaOut_x/2" y="0" z="@{[$list_pos[1]]}"/>
+   <position name="posArapucaSub2"    unit="cm" x="$ArapucaOut_x/2" y="0" z="@{[$list_pos[2]]}"/>
+   <position name="posArapucaSub3"    unit="cm" x="$ArapucaOut_x/2" y="0" z="@{[$list_pos[3]]}"/>
+   <position name="posArapucaDoubleSub0"    unit="cm" x="$ArapucaOut_x" y="0" z="@{[$list_pos[0]]}"/>
+   <position name="posArapucaDoubleSub1"    unit="cm" x="$ArapucaOut_x" y="0" z="@{[$list_pos[1]]}"/>
+   <position name="posArapucaDoubleSub2"    unit="cm" x="$ArapucaOut_x" y="0" z="@{[$list_pos[2]]}"/>
+   <position name="posArapucaDoubleSub3"    unit="cm" x="$ArapucaOut_x" y="0" z="@{[$list_pos[3]]}"/>
 </define>
 </gdml>
 EOF
@@ -2199,7 +2188,6 @@ print CRYO <<EOF;
       y="@{[$ArapucaAcceptanceWindow_y]}"
       z="@{[$ArapucaAcceptanceWindow_z]}"/>
 
-
      <box name="APAFrameYSideHollow" lunit="cm"
       x="$APAFrameYSideHollow_x"
       y="$APAFrameYSideHollow_y"
@@ -2216,21 +2204,21 @@ print CRYO <<EOF;
       <rotationref ref="rIdentity"/>
       </subtraction>
 
-<box name="APAFrameYCenterHollow" lunit="cm"
-      x="$APAFrameYCenterHollow_x"
-      y="$APAFrameYSideHollow_y"
-      z="$APAFrameYCenter_z"/>
-     <box name="APAFrameYCenterShell" lunit="cm"
-      x="$APAFrameYCenter_x"
-      y="$APAFrameYSide_y"
-      z="$APAFrameYCenter_z"/>
+      <box name="APAFrameYCenterHollow" lunit="cm"
+	x="$APAFrameYCenterHollow_x"
+	y="$APAFrameYSideHollow_y"
+	z="$APAFrameYCenter_z"/>
+      <box name="APAFrameYCenterShell" lunit="cm"
+	x="$APAFrameYCenter_x"
+	y="$APAFrameYSide_y"
+	z="$APAFrameYCenter_z"/>
 
-     <subtraction name="APAFrameYCenter">
-      <first  ref="APAFrameYCenterShell"/>
-      <second ref="APAFrameYCenterHollow"/>
-      <positionref ref="posCenter"/>
-      <rotationref ref="rIdentity"/>
-      </subtraction>
+      <subtraction name="APAFrameYCenter">
+	<first ref="APAFrameYCenterShell"/>
+	<second ref="APAFrameYCenterHollow"/>
+	<positionref ref="posCenter"/>
+	<rotationref ref="rIdentity"/>
+	</subtraction>
 
      <box name="APAFrameZSideHollow" lunit="cm"
       x="$APAFrameZSideHollow_x"
@@ -2601,10 +2589,10 @@ print CRYO <<EOF;
     </volume>
 
     <volume name="volAPAFrameYCenter">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="APAFrameYCenter"/>
-    </volume>
-    
+	<materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+	<solidref ref="APAFrameYCenter"/>
+    </volume>
+ 
     <volume name="volAPAFrameZSide">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
       <solidref ref="APAFrameZSide"/>
@@ -2978,10 +2966,10 @@ sub place_OpDets()
 
     # Alternate the paddle orientations
     if ( $apa_i % 2 == 0 ) {
-$rot = "rPlus180AboutY";
+$rot = "rIdentity";
 $posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
     }else{
-$rot = "rIdentity"; 
+$rot = "rPlus180AboutY";
 $posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);
     }
 
@@ -3002,13 +2990,6 @@ for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
                             + (1-$j)*($ArapucaOut_y/2 + $APAFrameZSide_y)
                             + $PaddleYInterval*$paddle;
 
-if($apa_i==3){
-if($paddle==$ndouble1||$paddle==$ndouble2||$paddle==$ndouble3||$paddle==$ndouble4){$posAra_x=$APACenter_x;}
-}
-if($apa_1==1){
-if($paddle!=$nsingle1&&$paddle!=$nsingle2&&$paddle!=$nsingle3&&$paddle!=$nsingle4){$posAra_x=$APACenter_x;}
-}
-
 print CRYO <<EOF;
 <physvol>
 <volumeref ref="volArapuca_$apa_i\-$paddle"/>
@@ -3020,6 +3001,12 @@ z="@{[$APACenter_z]}"/>
 </physvol>
 EOF
 
+if($apa_i==3){
+if($paddle==$ndouble1||$paddle==$ndouble2||$paddle==$ndouble3||$paddle==$ndouble4){$posAra_x=$APACenter_x;}else{$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);}
+}
+if($apa_i==1){
+if($paddle==$nsingle1||$paddle==$nsingle2||$paddle==$nsingle3||$paddle==$nsingle4){$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);}else{$posAra_x=$APACenter_x;}
+}
    
 for($nwindow=0 ; $nwindow<4; $nwindow++){
              print CRYO <<EOF;
@@ -3029,7 +3016,6 @@ for($nwindow=0 ; $nwindow<4; $nwindow++){
          x="@{[$posAra_x]}"
        y="@{[$Paddle_Y]}"
          z="@{[$list_pos[$nwindow]+$APACenter_z]}"/>
-       <rotationref ref="$rot"/>
      </physvol>
 EOF
 }#end nwindow for-loop
@@ -3175,12 +3161,12 @@ else{ print "APA not labeled as top or bottom"; }
         <rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
-       <volumeref ref="volAPAFrameYCenter"/>
-       <position name="posFrameYCenter\-$APA_i" unit="cm" 
-         x="$APAFrameCenter_x"
+      <volumeref ref="volAPAFrameYCenter"/>
+	 <position name="posFrameYCenter\-$APA_i" unit="cm" 
+	 x="$APAFrameCenter_x"
 	 y="$APAFrameCenter_y" 
 	 z="$APAFrameCenter_z"/>
-     </physvol>
+      </physvol>
       <physvol>
         <volumeref ref="volAPAFrameZSide"/>
         <position name="posAPAFrameZSidePos\-$APA_i" unit="cm" 
