@@ -1,0 +1,11 @@
+BEGIN_PROLOG
+
+FDHDdaqwriter:
+{
+  module_type:              "FDHDDAQWriter"
+  filename:                 "FDHDrawsim.hdf5"
+  rawdigitlabel:            "tpcrawdecoder:daq"
+  operational_environment:  "FDHD"
+}
+
+END_PROLOG
