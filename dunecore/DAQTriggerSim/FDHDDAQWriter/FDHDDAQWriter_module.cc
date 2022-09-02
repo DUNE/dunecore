@@ -225,7 +225,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 
 	      for (size_t wibframechan = 0; wibframechan < 256; ++wibframechan)
 		{
-		  uint32_t offlchan = 2560*curapa + upright ? cml_upright[ilink][wibframechan] : cml_inverted[ilink][wibframechan];
+		  uint32_t offlchan = 2560*curapa + (upright ? cml_upright[ilink][wibframechan] : cml_inverted[ilink][wibframechan]);
 	          auto cinfo2 = channelMap->GetChanInfoFromOfflChan(offlchan);
 		  uint32_t plane = cinfo2.plane;
 		  int pedestaloffset = (plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
