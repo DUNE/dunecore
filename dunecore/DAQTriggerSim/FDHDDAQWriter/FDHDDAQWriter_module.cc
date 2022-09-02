@@ -88,6 +88,8 @@ void FDHDDAQWriter::analyze(art::Event const& e)
   //auto subrun = e.subRun();
   auto evtno = e.event();
 
+  bool warnedNegative = false;  // warn just once per event
+
   hid_t gpl = H5Pcreate(H5P_LINK_CREATE);
   H5Pset_char_encoding(gpl,H5T_CSET_UTF8);
   std::string trgname = "/TriggerRecord";
@@ -204,7 +206,17 @@ void FDHDDAQWriter::analyze(art::Event const& e)
                       raw::Uncompress(RawDigits[rdmi->second]->ADCs(), uncompressed, pedestal, RawDigits[rdmi->second]->Compression());
 		      for (size_t isample=0; isample<nSamples; ++isample)
 			{
-			  frames.at(isample).set_adc(wibframechan,uncompressed.at(isample));
+			  auto adc = uncompressed.at(isample);
+			  if (adc < 0)
+			    {
+			      adc = 0;
+			      if (!warnedNegative)
+				{
+				  MF_LOG_WARNING("FDHDDAQWriter_module") << "Negative ADC value in raw::RawDigit.  Setting to zero to put in WIB frame\n";
+				  warnedNegative = true;
+				}
+			    }
+			  frames.at(isample).set_adc(wibframechan,adc);
 			}		      
 		    }
 		}
