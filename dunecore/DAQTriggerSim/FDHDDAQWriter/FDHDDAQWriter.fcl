@@ -2,10 +2,12 @@ BEGIN_PROLOG
 
 FDHDdaqwriter:
 {
-  module_type:              "FDHDDAQWriter"
-  filename:                 "FDHDrawsim.hdf5"
-  rawdigitlabel:            "tpcrawdecoder:daq"
-  operational_environment:  "FDHD"
+  module_type:                 "FDHDDAQWriter"
+  filename:                    "FDHDrawsim.hdf5"
+  rawdigitlabel:               "tpcrawdecoder:daq"
+  operational_environment:     "FDHD"
+  CollectionPedestalOffset:    900    # to be added to all collection-plane ADC values
+  InductionPedestalOffset:     2000   # to be added to all induction-plane ADC values
 }
 
 END_PROLOG

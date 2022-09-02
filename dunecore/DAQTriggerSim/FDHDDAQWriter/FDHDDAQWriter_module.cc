@@ -66,7 +66,8 @@ private:
   std::string fRawDigitLabel;
   std::string fOperationalEnvironment;
   size_t fBytesWritten;
-
+  int fCollectionPedestalOffset;
+  int fInductionPedestalOffset;
 };
 
 
@@ -77,6 +78,8 @@ FDHDDAQWriter::FDHDDAQWriter(fhicl::ParameterSet const& p)
   fOutfilename = p.get<std::string>("filename","hdcoldboxrawsim.hdf5");
   fRawDigitLabel = p.get<std::string>("rawdigitlabel","tpcrawdecoder:daq");
   fOperationalEnvironment = p.get<std::string>("operational_environment","np04_coldbox");
+  fCollectionPedestalOffset = p.get<int>("CollectionPedestalOffset",900);
+  fInductionPedestalOffset = p.get<int>("InductionPedestalOffset",2000);
   fFilePtr = H5I_INVALID_HID;
 }
 
@@ -192,12 +195,16 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 	      for (size_t wibframechan = 0; wibframechan < 256; ++wibframechan)
 		{
 		  uint32_t offlchan = 2560*curapa + cml[ilink][wibframechan];
+	          auto cinfo2 = channelMap->GetChanInfoFromOfflChan(offlchan);
+		  uint32_t plane = cinfo2.plane;
+		  int pedestaloffset = (plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
+
 		  auto rdmi = rdmap.find(offlchan);
 		  if (rdmi == rdmap.end())  // channel not list of raw::RawDigits.  Fill ADC values with zeros
 		    {
 		      for (size_t isample=0; isample<nSamples; ++isample)
 			{
-			  frames.at(isample).set_adc(wibframechan,0);
+			  frames.at(isample).set_adc(wibframechan,pedestaloffset);
 			}
 		    }
 		  else
@@ -206,7 +213,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
                       raw::Uncompress(RawDigits[rdmi->second]->ADCs(), uncompressed, pedestal, RawDigits[rdmi->second]->Compression());
 		      for (size_t isample=0; isample<nSamples; ++isample)
 			{
-			  auto adc = uncompressed.at(isample);
+			  auto adc = uncompressed.at(isample) + pedestaloffset;
 			  if (adc < 0)
 			    {
 			      adc = 0;
