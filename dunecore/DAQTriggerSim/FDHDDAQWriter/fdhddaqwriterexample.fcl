@@ -1,0 +1,10 @@
+#include "FDHDDAQWriter.fcl"
+#include "FDHDChannelMapService.fcl"
+#include "prodsingle_dunefd.fcl"
+
+services.FDHDChannelMapService: @local::fdhdchannelmap
+physics.analyzers.fdhdhdf5writer: @local::FDHDdaqwriter
+physics.stream1: [ "fdhdhdf5writer", "out1" ]
+physics.analyzers.fdhdhdf5writer.rawdigitlabel: "daq"
+
+
