@@ -132,20 +132,47 @@ void FDHDDAQWriter::analyze(art::Event const& e)
     }
   std::vector<short> uncompressed(nSamples);
 
-  // need a map of offline channels by link and wibframechan for each APA
+  // need maps of offline channels by link and wibframechan for each APA
   // use the first 2560 channels in the map as a template.
+  // separate ones for upright and inverted APAs.
 
   const uint32_t nLinks = 10;
-  uint32_t cml[nLinks][256];  // first index is link in HDF5 file, second is wibframechan
+  uint32_t cml_upright[nLinks][256];  // first index is link in HDF5 file, second is wibframechan.
+  uint32_t cml_inverted[nLinks][256];  // the same, but for an inverted APA
+
   // link goes from 0 to 9, like the dataset names in the HDF5 file
   // two links per WIB, two FEMBs per link
 
-  for (unsigned int ichan = 0; ichan < 2560; ++ichan)
+  bool have_upright_apa = false;
+  bool have_inverted_apa = false;
+
+  for (unsigned int iapa = 0; iapa < 150; iapa++)
     {
-      auto cinfo = channelMap->GetChanInfoFromOfflChan(ichan);
-      unsigned int link = (cinfo.wib-1)*2 + cinfo.link;
-      cml[link][cinfo.wibframechan] = ichan;
+      unsigned int ifc = iapa*2560;  // first channel in this apa
+      auto cinfo = channelMap->GetChanInfoFromOfflChan(ifc);
+      if (cinfo.upright != 0 && ! have_upright_apa)
+	{
+	  have_upright_apa = true;
+          for (unsigned int ichan = 0; ichan < 2560; ++ichan)
+            {
+              auto cinfo = channelMap->GetChanInfoFromOfflChan(ichan+ifc);
+              unsigned int link = (cinfo.wib-1)*2 + cinfo.link;
+              cml_upright[link][cinfo.wibframechan] = ichan;
+            }
+	}
+      if (cinfo.upright == 0 && ! have_inverted_apa)
+	{
+	  have_inverted_apa = true;
+          for (unsigned int ichan = 0; ichan < 2560; ++ichan)
+            {
+              auto cinfo = channelMap->GetChanInfoFromOfflChan(ichan+ifc);
+              unsigned int link = (cinfo.wib-1)*2 + cinfo.link;
+              cml_inverted[link][cinfo.wibframechan] = ichan;
+            }
+	}
+      if (have_upright_apa && have_inverted_apa) break;
     }
+
 
   int curapa = -1;
   hid_t agrp = H5I_INVALID_HID;
@@ -168,6 +195,10 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 	    }
           agrp = H5Gcreate(fFilePtr,agname.c_str(),gpl,H5P_DEFAULT,H5P_DEFAULT);
  
+	  uint32_t first_chan_on_apa = 2560*curapa;
+          auto cinfofca = channelMap->GetChanInfoFromOfflChan(first_chan_on_apa);
+	  uint32_t upright = cinfofca.upright;
+
           for (size_t ilink=0; ilink<nLinks; ++ilink)
             {
               std::string lgname = agname + "/Link";
@@ -175,7 +206,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
               ofm3 << std::internal << std::setfill('0') << std::setw(2) << ilink;
               lgname += ofm3.str();
 
-	      uint32_t first_chan_on_link = cml[ilink][0] + curapa*2560;
+	      uint32_t first_chan_on_link = curapa*2560 + (upright ? cml_upright[ilink][0] : cml_inverted[ilink][0]);
 	      auto cinfo = channelMap->GetChanInfoFromOfflChan(first_chan_on_link);
 	      uint32_t crate = cinfo.crate;
 	      uint32_t wib = cinfo.wib;
@@ -194,7 +225,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 
 	      for (size_t wibframechan = 0; wibframechan < 256; ++wibframechan)
 		{
-		  uint32_t offlchan = 2560*curapa + cml[ilink][wibframechan];
+		  uint32_t offlchan = 2560*curapa + upright ? cml_upright[ilink][wibframechan] : cml_inverted[ilink][wibframechan];
 	          auto cinfo2 = channelMap->GetChanInfoFromOfflChan(offlchan);
 		  uint32_t plane = cinfo2.plane;
 		  int pedestaloffset = (plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
