@@ -1,0 +1,19 @@
+#include "FDHDDAQWriter.fcl"
+#include "FDHDChannelMapService.fcl"
+#include "prodsingle_dunefd.fcl"
+
+services.FDHDChannelMapService: @local::fdhdchannelmap
+physics.analyzers.fdhdhdf5writer: @local::FDHDdaqwriter
+physics.stream1: [ "fdhdhdf5writer", "out1" ]
+physics.analyzers.fdhdhdf5writer.rawdigitlabel: "daq"
+physics.analyzers.fdhdhdf5writer.filename: "fdhd_nozs_test.hdf5"
+
+# save all the raw digits in memory
+
+physics.producers.daq.CompressionType: "none"
+physics.producers.daq.SaveEmptyChannel: true
+physics.producers.daq.ZeroThreshold: 1
+
+# but do not write them to disk
+
+outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
