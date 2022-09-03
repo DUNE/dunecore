@@ -180,6 +180,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 	      uint32_t crate = cinfofca.crate;
 	      uint32_t wib = ilink/2 + 1;  // runs from 1 to 5
 	      uint32_t slot = wib + 7;     // 7 = 8 - 1:  extra bit set to mimic WIB firmware (ProtoDUNE-HD)
+	      uint32_t sloc = slot & 0x7;  // but use this for channel map lookup
 	      uint32_t daqlink = ilink % 2;
 
               std::vector<dunedaq::detdataformats::wib2::WIB2Frame> frames(nSamples);
@@ -195,7 +196,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 
 	      for (size_t wibframechan = 0; wibframechan < 256; ++wibframechan)
 		{
-	          auto cinfo2 = channelMap->GetChanInfoFromWIBElements(crate,slot,daqlink,wibframechan);
+	          auto cinfo2 = channelMap->GetChanInfoFromWIBElements(crate,sloc,daqlink,wibframechan);
 		  uint32_t offlchan = cinfo2.offlchan;
 		  int pedestaloffset = (cinfo2.plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
 
