@@ -137,42 +137,10 @@ void FDHDDAQWriter::analyze(art::Event const& e)
   // separate ones for upright and inverted APAs.
 
   const uint32_t nLinks = 10;
-  uint32_t cml_upright[nLinks][256];  // first index is link in HDF5 file, second is wibframechan.
-  uint32_t cml_inverted[nLinks][256];  // the same, but for an inverted APA
 
-  // link goes from 0 to 9, like the dataset names in the HDF5 file
+  // DAQ consortium link goes from 0 to 9, and is used to name the datasets in the HDF5 file
   // two links per WIB, two FEMBs per link
-
-  bool have_upright_apa = false;
-  bool have_inverted_apa = false;
-
-  for (unsigned int iapa = 0; iapa < 150; iapa++)
-    {
-      unsigned int ifc = iapa*2560;  // first channel in this apa
-      auto cinfo = channelMap->GetChanInfoFromOfflChan(ifc);
-      if (cinfo.upright != 0 && ! have_upright_apa)
-	{
-	  have_upright_apa = true;
-          for (unsigned int ichan = 0; ichan < 2560; ++ichan)
-            {
-              auto cinfo = channelMap->GetChanInfoFromOfflChan(ichan+ifc);
-              unsigned int link = (cinfo.wib-1)*2 + cinfo.link;
-              cml_upright[link][cinfo.wibframechan] = ichan;
-            }
-	}
-      if (cinfo.upright == 0 && ! have_inverted_apa)
-	{
-	  have_inverted_apa = true;
-          for (unsigned int ichan = 0; ichan < 2560; ++ichan)
-            {
-              auto cinfo = channelMap->GetChanInfoFromOfflChan(ichan+ifc);
-              unsigned int link = (cinfo.wib-1)*2 + cinfo.link;
-              cml_inverted[link][cinfo.wibframechan] = ichan;
-            }
-	}
-      if (have_upright_apa && have_inverted_apa) break;
-    }
-
+  // electronics consortium link names in the WIB frame header are 0 or 1.
 
   int curapa = -1;
   hid_t agrp = H5I_INVALID_HID;
@@ -197,7 +165,10 @@ void FDHDDAQWriter::analyze(art::Event const& e)
  
 	  uint32_t first_chan_on_apa = 2560*curapa;
           auto cinfofca = channelMap->GetChanInfoFromOfflChan(first_chan_on_apa);
-	  uint32_t upright = cinfofca.upright;
+
+	  // loop over HDF5 groupname links (not the link in the WIB frame)
+	  // the HDF5 groupname links were defined by the DAQ consortium and the ones in the WIB
+	  // frame were defined by the electronics consortium.
 
           for (size_t ilink=0; ilink<nLinks; ++ilink)
             {
@@ -206,11 +177,10 @@ void FDHDDAQWriter::analyze(art::Event const& e)
               ofm3 << std::internal << std::setfill('0') << std::setw(2) << ilink;
               lgname += ofm3.str();
 
-	      uint32_t first_chan_on_link = curapa*2560 + (upright ? cml_upright[ilink][0] : cml_inverted[ilink][0]);
-	      auto cinfo = channelMap->GetChanInfoFromOfflChan(first_chan_on_link);
-	      uint32_t crate = cinfo.crate;
-	      uint32_t wib = cinfo.wib;
-	      uint32_t link = cinfo.link;
+	      uint32_t crate = cinfofca.crate;
+	      uint32_t wib = ilink/2 + 1;  // runs from 1 to 5
+	      uint32_t slot = wib + 7;     // 7 = 8 - 1:  extra bit set to mimic WIB firmware (ProtoDUNE-HD)
+	      uint32_t daqlink = ilink % 2;
 
               std::vector<dunedaq::detdataformats::wib2::WIB2Frame> frames(nSamples);
 	      for (size_t isample=0; isample<nSamples; ++isample)
@@ -219,19 +189,18 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 		  frames.at(isample).header.timestamp_1 = 0;  
 		  frames.at(isample).header.timestamp_2 = 25*isample;
 		  frames.at(isample).header.crate = crate;
-		  frames.at(isample).header.slot =  wib + 7;  // 8-1:  extra bit set to mimic WIB firmware
-		  frames.at(isample).header.link =  link;
+		  frames.at(isample).header.slot =  slot;  
+		  frames.at(isample).header.link =  daqlink;
 		}
 
 	      for (size_t wibframechan = 0; wibframechan < 256; ++wibframechan)
 		{
-		  uint32_t offlchan = 2560*curapa + (upright ? cml_upright[ilink][wibframechan] : cml_inverted[ilink][wibframechan]);
-	          auto cinfo2 = channelMap->GetChanInfoFromOfflChan(offlchan);
-		  uint32_t plane = cinfo2.plane;
-		  int pedestaloffset = (plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
+	          auto cinfo2 = channelMap->GetChanInfoFromWIBElements(crate,slot,daqlink,wibframechan);
+		  uint32_t offlchan = cinfo2.offlchan;
+		  int pedestaloffset = (cinfo2.plane == 2) ? fCollectionPedestalOffset : fInductionPedestalOffset;
 
 		  auto rdmi = rdmap.find(offlchan);
-		  if (rdmi == rdmap.end())  // channel not list of raw::RawDigits.  Fill ADC values with zeros
+		  if (rdmi == rdmap.end())  // channel not list of raw::RawDigits.  Fill ADC values with pedestal offset + 0
 		    {
 		      for (size_t isample=0; isample<nSamples; ++isample)
 			{
