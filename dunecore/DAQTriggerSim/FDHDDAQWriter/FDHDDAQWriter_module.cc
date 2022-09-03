@@ -132,10 +132,6 @@ void FDHDDAQWriter::analyze(art::Event const& e)
     }
   std::vector<short> uncompressed(nSamples);
 
-  // need maps of offline channels by link and wibframechan for each APA
-  // use the first 2560 channels in the map as a template.
-  // separate ones for upright and inverted APAs.
-
   const uint32_t nLinks = 10;
 
   // DAQ consortium link goes from 0 to 9, and is used to name the datasets in the HDF5 file
