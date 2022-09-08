@@ -38,6 +38,19 @@ protodunehd_refactored_simulation_services:
 protodunehd_larg4_services: @local::protodune_larg4_services
 protodunehd_larg4_services.LArG4Detector: @local::protodunehd_larg4detector
 
+##############################
+### ProtoDUNE-VD           ###
+##############################
+
+protodunevd_refactored_simulation_services:
+{
+  @table::protodunevd_simulation_services
+  ParticleInventoryService:     @local::standard_particleinventoryservice
+  PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice
+}
+protodunevd_larg4_services: @local::protodune_larg4_services
+protodunevd_larg4_services.LArG4Detector: @local::protodunevd_larg4detector
+
 ############################
 ### DUNE FD Single Phase ###
 ############################
