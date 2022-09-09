@@ -210,8 +210,9 @@ void util::TFileMetadataDUNE::postEvent(art::Event const& evt, art::ScheduleCont
   // event counter
   ++md.fevent_count;
 
-  art::Handle<art::TriggerResults> h;
-  if (evt.getByLabel("TriggerResults", h) and h->accept()) {
+  art::InputTag itag("TriggerResults");
+  auto h = evt.getHandle<art::TriggerResults>(itag);
+  if (h && h->accept()) {
     // Event passed at least one of the paths
     ++md.fnew_event_count;
   }
