@@ -1,0 +1,11 @@
+BEGIN_PROLOG
+
+# FD-HD online/offline channel mapping.
+# Two mapfiles are needed -- one for the channels in two APAs, and a second one for the crate mapping
+
+fdhdchannelmap: {
+  ChannelMapFile:         "FDHDChannelMap_v1_wireends.txt"  # wire maps for an upright and an inverted APA
+  CrateMapFile:           "FDHD_CrateMap_v1.txt"            # crate numbers and APA names
+}
+
+END_PROLOG

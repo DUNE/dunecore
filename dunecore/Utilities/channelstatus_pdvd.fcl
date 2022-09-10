@@ -1,0 +1,12 @@
+BEGIN_PROLOG
+protodunevd_channel_status: {
+  service_provider: SimpleChannelStatusService
+
+  # list of bad channels:
+  BadChannels:   []
+
+  # list of bad noisy channels:
+  NoisyChannels: []
+
+}
+END_PROLOG

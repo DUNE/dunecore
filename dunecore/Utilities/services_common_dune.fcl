@@ -19,6 +19,7 @@
 #include "channelstatus_dune.fcl"
 #include "channelstatus_pdsp.fcl"
 #include "channelstatus_pdhd.fcl"
+#include "channelstatus_pdvd.fcl"
 #include "pedestals_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "spacecharge_dune.fcl"

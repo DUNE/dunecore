@@ -86,9 +86,9 @@ $wirePitchZ      = 0.51;   # cm
 
 # force length to be equal to collection nch x pitch
 $lengthPCBActive = $wirePitchZ * $nChans{'Col'};
-$widthPCBActive  = 167.7006;
+$widthPCBActive  = 167.77;
 
-$borderCRM       = 0.0;     # border space aroud each CRM 
+$borderCRM       = 0.34;     # border space aroud each CRM 
 
 $widthCRM_active  = $widthPCBActive;  
 $lengthCRM_active = $lengthPCBActive; 
@@ -99,8 +99,8 @@ $lengthCRM = $lengthPCBActive + 2 * $borderCRM;
 $borderCRP = 0.5; # cm
 
 # number of CRMs in y and z
-$nCRM_x   = 1 * 2;
-$nCRM_z   = 2 * 2;
+$nCRM_x   = 2 * 2;
+$nCRM_z   = 1 * 2;
 
 # calculate tpc area based on number of CRMs and their dimensions
 # each CRP should have a 2x2 CRMs
@@ -1258,8 +1258,8 @@ print CRYO <<EOF;
 
     <box name="ArapucaAcceptanceWindow" lunit="cm"
       x="@{[$ArapucaAcceptanceWindow_x]}"
-      y="@{[$ArapucaAcceptanceWindow_z]}"
-      z="@{[$ArapucaAcceptanceWindow_y]}"/>
+      y="@{[$ArapucaAcceptanceWindow_y]}"
+      z="@{[$ArapucaAcceptanceWindow_z]}"/>
 
     <box name="ArapucaDoubleIn" lunit="cm"
       x="@{[$ArapucaIn_x]}"
@@ -1315,8 +1315,8 @@ EOF
 }
 
 #arapucas on the laterals
-for($j=0 ; $j<$nCRM_z/2 ; $j++){
-for($p=0 ; $p<4 ; $p++){
+for($j=0 ; $j<$nCRM_x/2 ; $j++){
+for($p=0 ; $p<8 ; $p++){
   print CRYO <<EOF;
     <volume name="volArapucaLat_$j\-$p">
       <materialref ref="G10" />
@@ -1444,14 +1444,14 @@ for($j=0;$j<$nCRM_z/2;$j++){
   place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
   $FrameCenter_z+=$lengthCathode;
 }
-  $FrameCenter_x+=$widthCathode;
+  $FrameCenter_y+=$widthCathode;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 }
 
 #for placing the Arapucas on laterals
   $FrameCenter_x=$CathodePosX +$driftTPCActive +$heightCathode/2;#$posZplane[0]; #anode position
-  $FrameCenter_y= 0;
-  $FrameCenter_z=-$lengthCathode - $FrameToArapucaSpaceLat;
+  $FrameCenter_y= -$widthCathode - $FrameToArapucaSpaceLat;
+  $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
 for($j=0;$j<1;$j++){#nCRM will give the collumn number (1 collumn per frame)
   place_OpDetsLateral($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $j);
@@ -1521,7 +1521,7 @@ sub place_OpDetsLateral()
     $Lat_z = $_[3];
 
 #Placing Arapucas on the laterals
-for ($ara = 0; $ara<4; $ara++)
+for ($ara = 0; $ara<8; $ara++)
 {
              # Arapucas on laterals
              # All Arapuca centers on a given collumn will have the same Z coordinate
@@ -1530,13 +1530,15 @@ for ($ara = 0; $ara<4; $ara++)
 
 $Ara_Y = $FrameCenter_y;
 $Ara_Z = $FrameCenter_z;
-             if ($ara<2) {$Ara_ZSens = ($Ara_Z+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
-                         $rot= "rMinus90AboutX"; }
-             else {      $Ara_Z = $Ara_Z+2*$lengthCathode + 2*$FrameToArapucaSpaceLat;
-                         $Ara_ZSens = ($Ara_Z-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
-                         $rot = "rPlus90AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             if ($ara==0||$ara==2) {$Ara_X = $FrameCenter_x-50.0;} #first tile's center 50 cm bellow anode
-             else {$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
+             if ($ara<4) {$Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
+                         $rot= "rIdentity"; }
+             else {      $Ara_Y = $Ara_Y+2*$widthCathode + 2*$FrameToArapucaSpaceLat;
+                         $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
+                         $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
+             if ($ara==0||$ara==4) {$Ara_X = $FrameCenter_x-50.0;} #first tile's center 50 cm bellow top anode
+             if ($ara==1||$ara==5) {$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
+             if ($ara==2||$ara==6) {$Ara_X = $FrameCenter_x - $heightCathode -2*$driftTPCActive+50.0;} #first tile's center 50 cm above bottom anode
+             if ($ara==3||$ara==7) {$Ara_X+=$VerticalPDdist;} #other tiles separated by VerticalPDdist
 
 	print CRYO <<EOF;
      <physvol>
@@ -1551,8 +1553,8 @@ $Ara_Z = $FrameCenter_z;
        <volumeref ref="volOpDetSensitive_ArapucaLat_$Lat_z\-$ara"/>
        <position name="posOpArapuca$ara-Lat\-$Lat_z" unit="cm" 
          x="@{[$Ara_X]}"
-	 y="@{[$Ara_Y]}" 
-	 z="@{[$Ara_ZSens]}"/>
+	 y="@{[$Ara_YSens]}" 
+	 z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
         
