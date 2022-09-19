@@ -413,7 +413,7 @@ dunecrpcb2_geo.GDML: "dunecrpcb2_v1_refactored.gdml"
 dunecrpcb2_geo.ROOT: "dunecrpcb2_v1_refactored.gdml"
 
 # VD CRP coldbox geo with 60D anode design currently same as CRP2 geo
-dunecrpcb_geo: @local::dunevdcb2_geo
+dunecrpcb_geo: @local::dunecrpcb2_geo
 dunecrpcb_geo.Name: "dunecrpcb"
 
 dune35t_geo:
