@@ -384,22 +384,26 @@ protodunehdv1_geo.GDML: "protodunehd_v1_refactored.gdml" #nowires.gdml
 protodunehdv1_geo.ROOT: "protodunehd_v1_refactored.gdml"
 # === End ProtoDUNE-HD ===
 
+# ProtoDUNE VD
+protodunevd_v1_geo: @local::dune10kt_geo
+protodunevd_v1_geo.Name: "protodunevd_v1"
+protodunevd_v1_geo.GDML: "protodunevd_v1_refactored.gdml" #nowires.gdml
+protodunevd_v1_geo.ROOT: "protodunevd_v1_refactored.gdml"
+
 iceberg_geo: @local::dune10kt_geo
 iceberg_geo.Name: "iceberg" # will be made lower case anyway
 iceberg_geo.GDML: "iceberg_v1.gdml"
 iceberg_geo.ROOT: "iceberg_v1.gdml"
 
-# === Vertical drift cold box geometries
 dunevdcb_geo: @local::dune10kt_geo
 dunevdcb_geo.Name: "dunevdcb1"
 dunevdcb_geo.GDML: "dunevdcb1_refactored.gdml"
 dunevdcb_geo.ROOT: "dunevdcb1_refactored.gdml"
 
-dunevdcb2_geo: @local::dunevdcb_geo
-dunevdcb2_geo.Name: "dunevdcb2"
-dunevdcb2_geo.GDML: "dunevdcb2_v1_refactored.gdml"
-dunevdcb2_geo.ROOT: "dunevdcb2_v1_refactored.gdml"
-# === 
+dunevdcb1_v2_geo: @local::dune10kt_geo
+dunevdcb1_v2_geo.Name: "dunevdcb1_v2"
+dunevdcb1_v2_geo.GDML: "dunevdcb1_v2_refactored.gdml"
+dunevdcb1_v2_geo.ROOT: "dunevdcb1_v2_refactored.gdml"
 
 dune35t_geo:
 {
