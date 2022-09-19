@@ -111,8 +111,8 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
       //channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
 
     // VD CRP2 cold box channel map 
-    } else if ( ( detectorName.find("dunevdcb2") != std::string::npos ) ) {
-      //channelMap = std::make_unique<geo::ColdBoxChannelMapAlg>(pset);
+    } else if ( ( detectorName.find("dunecrpcb") != std::string::npos ) ) {
+      //channelMap = std::make_unique<geo::CRPCBChannelMapAlg>(pset);
       channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
 
     // protoDUNE 6x6x6 dual phase

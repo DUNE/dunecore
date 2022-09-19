@@ -8,8 +8,8 @@
  *  vgalymov@ipnl.in2p3.fr
  */
 
-#ifndef DUNE_COLDBOX2CHANNELMAPALG_H
-#define DUNE_COLDBOX2CHANNELMAPALG_H
+#ifndef DUNE_CRPCBCHANNELMAPALG_H
+#define DUNE_CRPCBCHANNELMAPALG_H
 
 // LArSoft libraries
 #include "larcorealg/Geometry/ChannelMapAlg.h"
@@ -38,7 +38,7 @@
 // forward declarations
 namespace geo {
   
-  class ColdBox2ChannelMapAlg;
+  class CRPCBChannelMapAlg;
   
 } // namespace dune
 
@@ -118,7 +118,7 @@ namespace geo { namespace dune{ namespace vd { namespace cb2{
 
 // -----------------------------------------------------------------------------
 
-class geo::ColdBox2ChannelMapAlg: public geo::ChannelMapAlg {
+class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   
   // import definitions
   using TPCColl_t   = std::vector<geo::TPCID>;
@@ -126,7 +126,7 @@ class geo::ColdBox2ChannelMapAlg: public geo::ChannelMapAlg {
   
  public:
   
-  ColdBox2ChannelMapAlg(fhicl::ParameterSet const& p);
+  CRPCBChannelMapAlg(fhicl::ParameterSet const& p);
   
   /// Prepares the algorithm extracting information from the geometry.
   virtual void Initialize(geo::GeometryData_t const& geodata) override;
@@ -620,9 +620,9 @@ class geo::ColdBox2ChannelMapAlg: public geo::ChannelMapAlg {
   static std::string PlaneTypeName(PlaneType_t planeType);
   
   //
-  std::string fLogCategory = "ColdBox2ChannelMapAlg";
+  std::string fLogCategory = "CRPCBChannelMapAlg";
   
-}; // class geo::ColdBox2ChannelMapAlg
+}; // class geo::CRPCBChannelMapAlg
 
 
 #endif //
