@@ -37,7 +37,7 @@ if [ -n "$LOCA" ]; then
   exit 0
 fi
 
-echo "Welcome to dunetpc $DUNETPC_VERSION"
+echo "Welcome to dunesw $DUNESW_VERSION"
 echo "Some available commands:"
 echo "              duneHelp - Display information about the current setup of dunetpc."
 echo "                   lar - Run the art/larsoft event looop e.g. to process event data."
@@ -46,5 +46,6 @@ echo "               fcldump - Display the resolved configuration for a fcl file
 echo "               liblist - List available plugin libraries."
 echo "        pdChannelRange - Display protoDUNE channel grops and ranges."
 echo "           duneRunData - Display run data for a run."
+echo "          findRunFiles - List the files for a run or file and offset of a run-event."
 echo "           duneTestFcl - Test some high-level fcl configurations."
 echo "Use option \"-h\" with any of these for more information."
