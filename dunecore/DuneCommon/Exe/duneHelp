@@ -46,6 +46,6 @@ echo "               fcldump - Display the resolved configuration for a fcl file
 echo "               liblist - List available plugin libraries."
 echo "        pdChannelRange - Display protoDUNE channel grops and ranges."
 echo "           duneRunData - Display run data for a run."
-echo "          findRunFiles - List the files for a run or file and offset of a run-event."
+echo "          findRunFiles - Show files for a run or file and offset for an event in a run."
 echo "           duneTestFcl - Test some high-level fcl configurations."
 echo "Use option \"-h\" with any of these for more information."
