@@ -58,7 +58,7 @@ geo::CRPCBChannelMapAlg::CRPCBChannelMapAlg(Config const& config):
 */
 // -----------------------------------------------------------------------------
 geo::CRPCBChannelMapAlg::CRPCBChannelMapAlg(fhicl::ParameterSet const& p):
-  fSorter(geo::GeoObjectSorterCRU(p))
+  fSorter(geo::GeoObjectSorterCRU60D(p))
 {}
 
 
@@ -399,7 +399,7 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
   assert(fReadoutMapInfo);
   assert(!Cryostats.empty());
   
-  //mf::LogInfo("CRPCBChannelMapAlg")<<"fillChannelToWireMap\n";
+  mf::LogInfo("CRPCBChannelMapAlg")<<"fillChannelToWireMap\n";
   //
   // output setup
   //
@@ -483,9 +483,9 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
           // which has some wire number (`lastMatchedWireID.Wire`).
           //
           auto const nWires = plane.Nwires();
-          raw::ChannelID_t const firstChannel = 
-	    (r == 0)?((nextChannel - 1) - lastMatchedWireID.Wire):nextChannel;
-
+          raw::ChannelID_t const firstChannel =
+	    (r == 5)?((nextChannel - 1) - lastMatchedWireID.Wire):nextChannel;
+	  
           nextChannel = firstChannel + nWires;
           
           fPlaneInfo[plane.ID()] = { { firstChannel, nextChannel }, rid };

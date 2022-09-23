@@ -25,8 +25,8 @@
 #include "fhiclcpp/types/Table.h"
 #include "fhiclcpp/ParameterSet.h"
 
-// dune specific
-#include "dunecore/Geometry/GeoObjectSorterCRU.h"
+// CRP60D specific sorting algos for X drift
+#include "dunecore/Geometry/GeoObjectSorterCRU60D.h"
 
 // C/C++ standard libraries
 #include <vector>
@@ -503,7 +503,7 @@ class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
   
-   geo::GeoObjectSorterCRU  fSorter;              ///< class to sort geo objects
+  geo::GeoObjectSorterCRU60D fSorter;              ///< class to sort geo objects
   
   
   using PlaneType_t = std::size_t; ///< Type for plane type identifier.
