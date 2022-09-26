@@ -2,7 +2,6 @@
 /// \file  GeoObjectSorterCRU60Dx.cxx
 /// \brief Interface to algorithm class for sorting VD CRUs of geo::XXXGeo objects
 ///        this targets the final 60D anode geometry
-///        The direction of the drift is assumed to be the X axis for now
 ///
 /// \version $Id:  $
 /// \author vgalymov@ipnl.in2p3.fr
@@ -16,6 +15,7 @@
 #include "larcorealg/Geometry/TPCGeo.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
 #include "larcorealg/Geometry/WireGeo.h"
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
 #include <array>
 #include <string>
@@ -24,10 +24,35 @@
 using std::cout;
 using std::endl;
 
+
+namespace {
+  // Tolerance when comparing distances in geometry:
+  static constexpr double DistanceTol = 0.001; // cm
+} // local namespace
+
 // comparison functions for sorting various geo objects
 namespace geo { 
   
   namespace CRU60D {
+    short int TPCDriftAxis = 0;
+
+    short int getDriftCoord(){
+      if( TPCDriftAxis == 0 ){
+	MF_LOG_WARNING("geo::CRU60D::getDriftCoord") <<
+	  " Cannot retrieve drift coordinate. Defaulting to X axis";
+	return 0;
+      }
+      
+      short int axis = TPCDriftAxis - 1;
+      if( axis >= 2 ){
+	 throw cet::exception("geo::CRU60D::getDriftCoord") 
+	   << "Drift coordinate index '" << axis <<"' is bad \n";
+      }
+      
+      return axis;
+    }
+    
+
     //----------------------------------------------------------------------------
     // Define sort order for auxdet in VD configuration
     static bool sortAuxDet(const AuxDetGeo& ad1, const AuxDetGeo& ad2)
@@ -76,7 +101,7 @@ namespace geo {
 
 
     //----------------------------------------------------------------------------
-    // Define sort order for tpcs (CRU60Dxs) in VD configuration
+    // Define sort order for TPC volumes (CRU60D) in VD configuration
     static bool sortTPC(const TPCGeo& t1, const TPCGeo& t2)
     {
       double xyz1[3] = {0.};
@@ -84,14 +109,21 @@ namespace geo {
       double local[3] = {0.};
       t1.LocalToWorld(local, xyz1);
       t2.LocalToWorld(local, xyz2);
+      
+      // try to get drift coord index
+      short int dc = geo::CRU60D::getDriftCoord();
+      
+      // sort TPCs in drift volumes
+      if(std::abs(xyz1[dc]-xyz2[dc]) > DistanceTol)
+	return xyz1[dc] < xyz2[dc];
 
       // First sort all TPCs into same-z groups
-      if(xyz1[2]<xyz2[2]) return true;
-
-      // Within a same-z group, sort TPCs into same-y groups
-      if(xyz1[2] == xyz2[2] && xyz1[1] < xyz2[1]) return true;
-
-      return false;
+      if(std::abs(xyz1[2]-xyz2[2]) > DistanceTol)
+	return xyz1[2] < xyz2[2];
+      
+      // Within a same-z group, sort TPCs into same-y/x groups
+      int other = (dc == 0)?1:0;
+      return (xyz1[other] < xyz2[other]);
     }
 
 
@@ -105,21 +137,18 @@ namespace geo {
       p1.LocalToWorld(local, xyz1);
       p2.LocalToWorld(local, xyz2);
 
+      // try to get drift coord index
+      short int dc = geo::CRU60D::getDriftCoord();
+      
       // drift direction is negative, plane number increases in drift direction
-      return xyz1[0] > xyz2[0];
+      return xyz1[dc] > xyz2[dc];
     }
 
 
     //----------------------------------------------------------------------------
-    bool sortWire(WireGeo const& w1, WireGeo const& w2){
+    bool sortWireDX(WireGeo const& w1, WireGeo const& w2){ // X is drift coordinate
       // wire sorting algorithm
-      // z_low -> z_high
-      // for same-z group 
-      //  the sorting either from bottom (y) left (z) corner up for strip angles > pi/2
-      //  and horizontal wires
-      //  or from top corner to bottom otherwise
-      //  we assume all wires in the plane are parallel
-
+ 
       //  w1 geo info
       auto center1 = w1.GetCenter<geo::Point_t>();
       auto start1  = w1.GetStart<geo::Point_t>();
@@ -175,11 +204,74 @@ namespace geo {
       return ( center1.Z() > center2.Z() );
     }
 
+    //
+    bool sortWireDY(WireGeo const& w1, WireGeo const& w2){ // Y is drift coordinate
+      // wire sorting algorithm
+
+      //  w1 geo info
+      auto center1 = w1.GetCenter<geo::Point_t>();
+      auto start1  = w1.GetStart<geo::Point_t>();
+      auto end1    = w1.GetEnd<geo::Point_t>();
+      auto Delta   = end1-start1;
+      double dx1   = Delta.X();
+      double dz1   = Delta.Z();
+      double thtz  = w1.ThetaZ();
+      
+      // w2 geo info
+      auto center2 = w2.GetCenter<geo::Point_t>();
+      
+      auto CheckTol = [](double val, double tol = 1.E-4){ 
+	return (std::abs( val ) < tol); 
+      };
+      
+      if( CheckTol(dz1) ){ // wires perpendicular to z axis
+	return (center1.Z() < center2.Z());
+      }
+      
+      if( CheckTol(dx1) ){ // wires perpendicular to x axis
+	return (center1.X() < center2.X());
+      }
+      
+      //cout<<"w1 " << w1.WireInfo("  ", 3)
+      //<<" half length " << w1.HalfL()
+      //<<" thetaZ = "<<thtz<<endl;
+
+      // u-view
+      if( thtz > 1.57 ) { 
+
+	// wires at angle with same z center
+	if( CheckTol( center2.Z() - center1.Z() ) ){
+	  if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
+	  if( dx1 < 0 ){ return (center1.X() < center2.X()); }
+	  if( dx1 > 0 ){ return (center1.X() > center2.X()); }
+	}
+	
+	// otherwise sorted in z
+	return ( center1.Z() < center2.Z() );
+      } // u view
+      
+      // v view
+      // wires at angle with same z center
+      if( CheckTol( center2.Z() - center1.Z() ) ){
+	if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
+	if( dx1 < 0 ){ return (center1.X() > center2.X()); }
+	if( dx1 > 0 ){ return (center1.X() < center2.X()); }
+      }
+      
+      // otherwise sorted in -z
+      return ( center1.Z() > center2.Z() );
+    }
+
+    bool sortWire(WireGeo const& w1, WireGeo const& w2){
+      short int dc = geo::CRU60D::getDriftCoord();
+      if( dc == 1 ) return sortWireDY( w1, w2 );
+      return sortWireDX( w1, w2 );
+    }
+
   } // namespace geo::CRU60D
 
   //----------------------------------------------------------------------------
-  GeoObjectSorterCRU60D::GeoObjectSorterCRU60D(fhicl::ParameterSet const&)
-  {}
+  GeoObjectSorterCRU60D::GeoObjectSorterCRU60D(fhicl::ParameterSet const&){}
 
   //----------------------------------------------------------------------------
   void GeoObjectSorterCRU60D::SortAuxDets(std::vector<geo::AuxDetGeo> & adgeo) const
@@ -202,6 +294,12 @@ namespace geo {
   //----------------------------------------------------------------------------
   void GeoObjectSorterCRU60D::SortTPCs(std::vector<geo::TPCGeo>  & tgeo) const
   {
+    // attempt to get TPC drift direction: 1 - X, 2 - Y, 3 - Z
+    if( !geo::CRU60D::TPCDriftAxis ){ 
+      geo::CRU60D::TPCDriftAxis = std::abs((*tgeo.begin()).DetectDriftDirection());
+      MF_LOG_DEBUG("GeoObjectSorterCRU60D")
+	<<" Retrieved drift axis "<<geo::CRU60D::TPCDriftAxis;
+    }
     std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPC);
   }
 
