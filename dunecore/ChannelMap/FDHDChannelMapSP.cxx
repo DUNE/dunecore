@@ -8,7 +8,7 @@
 // the channel maps for two APAs (inverted and upright), and one containing the crate numbering
 // scheme.
 //
-// The SP in the class and file anme means "Service Provider"
+// The SP in the class and file name means "Service Provider"
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "FDHDChannelMapSP.h"
