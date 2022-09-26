@@ -1,6 +1,6 @@
 /*!
  * \file    CRPCBChannelMapAlg.cxx
- * \brief   Channel mapping algorithms for VD ColdBox CRP.
+ * \brief   Channel mapping algorithms for VD ColdBox CRP2+.
  * \details Adapted from ICARUSChannelMapAlg by G. Petrillo
  * \date    July 26, 2022
  * \warning Only one CRP is currently supported with 30 deg ind1/ind2
@@ -399,7 +399,8 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
   assert(fReadoutMapInfo);
   assert(!Cryostats.empty());
   
-  mf::LogInfo("CRPCBChannelMapAlg")<<"fillChannelToWireMap\n";
+  //mf::LogInfo("CRPCBChannelMapAlg")<<"fillChannelToWireMap\n";
+
   //
   // output setup
   //
@@ -425,6 +426,7 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
       for (readout::ROPID::ROPID_t r: util::counter(nROPs)) {
         
         mf::LogTrace log("CRPCBChannelMapAlg");
+	//mf::LogInfo log("CRPCBChannelMapAlg");
         
         readout::ROPID const rid { sid, r };
         auto const planeType = findPlaneType(rid);
@@ -442,62 +444,56 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
 	}
         
         raw::ChannelID_t const firstROPchannel = nextChannel;
-        
-        auto iPlane = util::begin(planes);
-        auto const pend = util::end(planes);
-        
-        // assign available channels to all wires of the first plane
-        nextChannel += (*iPlane)->Nwires();
-        fPlaneInfo[(*iPlane)->ID()] = {
-          ChannelRange_t{ firstROPchannel, nextChannel }, rid };
-        log << " [" << (*iPlane)->ID() << "] "
-          << fPlaneInfo[(*iPlane)->ID()].firstChannel()
-          << " -- " << fPlaneInfo[(*iPlane)->ID()].lastChannel() << ";";
-        
-        geo::Point_t lastWirePos = (*iPlane)->LastWire().GetCenter<geo::Point_t>();
 	
-        while (++iPlane != pend) {
-          
-          geo::PlaneGeo const& plane = **iPlane;
-          
-          // find out which wire matches the last wire from the previous plane;
-          // if there is no such wire, an exception will be thrown,
-          // which is ok to us since we believe it should not happen.
-          geo::WireID const lastMatchedWireID
-            = plane.NearestWireID(lastWirePos);
-          
-          /*
-          mf::LogTrace("CRPCBChannelMapAlg")
-            << (*std::prev(iPlane))->ID() << " W:" << ((*std::prev(iPlane))->Nwires() - 1)
-            << " ending at " << (*std::prev(iPlane))->LastWire().GetEnd<geo::Point_t>()
-            << " matched " << lastMatchedWireID
-            << " which starts at " << plane.Wire(lastMatchedWireID).GetStart<geo::Point_t>()
-            ;
-          */
-          
-          // For ROP = 0 (1st induction)
-          // the first channel in this plane (`iPlane`) is the one associated
-          // to the first wire in the plane, which has local wire number `0`;
-          // the last channel from the previous plane (`nextChannel - 1`)
-          // is associated to the matched wire (`lastMatchedWireID`),
-          // which has some wire number (`lastMatchedWireID.Wire`).
-          //
-          auto const nWires = plane.Nwires();
-          raw::ChannelID_t const firstChannel =
-	    (r == 5)?((nextChannel - 1) - lastMatchedWireID.Wire):nextChannel;
+	// iterate over all the geo planes assigend to this ROP
+	geo::Point_t lastWirePos = (*planes.begin())->LastWire().GetCenter<geo::Point_t>();
+	for( auto plane_it = planes.begin(); 
+	     plane_it != planes.end();
+	     plane_it++ ){
 	  
-          nextChannel = firstChannel + nWires;
-          
-          fPlaneInfo[plane.ID()] = { { firstChannel, nextChannel }, rid };
+	  //
+          geo::PlaneGeo const& plane = **plane_it;
+
+	  // first channel for a given plane
+	  raw::ChannelID_t firstChannel = nextChannel;
+
+	  if( r > 1 ){ // collection ROP
+	    // simply add offset
+	    nextChannel += plane.Nwires();
+	  }
+	  else { // induction ROPs
+
+	    // assumed the geoplane pairing in CRU: 0 with 1, 2 with 3
+	    auto plane_idx = std::distance(planes.begin(), plane_it);
+
+	    // assign all wires to channels from the first plane in the pair
+	    if( plane_idx % 2 == 0 ){ 
+	      //raw::ChannelID_t const firstChannel = nextChannel;
+	      nextChannel += plane.Nwires();
+	    }
+	    else {
+	      // find the wire which matches the last one 
+	      // from the previous plane of this CRU
+	      geo::WireID const lastMatchedWireID
+		= plane.NearestWireID(lastWirePos);
+	      
+	      // first channel for this plane
+	      firstChannel = (nextChannel - 1) - lastMatchedWireID.Wire;
+	      
+	      // add nwires
+	      nextChannel  = firstChannel + plane.Nwires();
+	    }
+	  }// else if induction ROPs
+	  
+	  fPlaneInfo[plane.ID()] = { { firstChannel, nextChannel }, rid };
           log << " [" << plane.ID() << "] "
-            << fPlaneInfo[plane.ID()].firstChannel() << " -- "
-            << fPlaneInfo[plane.ID()].lastChannel() << ";";
+	      << fPlaneInfo[plane.ID()].firstChannel() << " -- "
+	      << fPlaneInfo[plane.ID()].lastChannel() << ";";
           
           // update for the next iteration
           lastWirePos = plane.LastWire().GetCenter<geo::Point_t>();
-          
-        } // while
-        
+	} // for loop over geo planes belonging to a ROP
+	
 	unsigned int const nChannels = nextChannel - firstROPchannel;
         fChannelToWireMap.addROP(rid, firstROPchannel, nChannels);
         log
@@ -544,12 +540,16 @@ void geo::CRPCBChannelMapAlg::buildReadoutPlanes
   //unsigned int MaxTPCs = cryo.NTPC();
   //unsigned int MaxPlanes = 3;
   unsigned int MaxROPs    = 3;
-  unsigned int MaxTPCsets = MaxTPCs/2;
-  std::vector<unsigned int> TPCsetCount = {2};
-  std::vector<std::vector<const geo::TPCGeo*>> AllTPCsInTPCsets( MaxTPCsets );       // TPCs belonging to a set
-  // the standard CRU sorter is assumed (fixing this another "todo")
-  AllTPCsInTPCsets[0] = {cryo.TPCPtr(0), cryo.TPCPtr(1)};
-  AllTPCsInTPCsets[1] = {cryo.TPCPtr(2), cryo.TPCPtr(3)};
+  unsigned int MaxTPCsets = MaxTPCs/4; // 
+  std::vector<unsigned int> TPCsetCount = {1};
+  
+  // TPCs belonging to a set
+  std::vector<std::vector<const geo::TPCGeo*>> AllTPCsInTPCsets( MaxTPCsets );       
+  
+  // currently manually assign TPCs to TPC set
+  // relies on the standard sorter ...
+  AllTPCsInTPCsets[0] = {cryo.TPCPtr(0), cryo.TPCPtr(1), cryo.TPCPtr(2), cryo.TPCPtr(3)};
+
   readout::TPCsetDataContainer<TPCColl_t> TPCsetTPCs(NCryostats, MaxTPCsets);
   
   for( auto&& [s, TPClist ]: util::enumerate(AllTPCsInTPCsets) ){

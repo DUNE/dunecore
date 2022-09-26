@@ -1,6 +1,6 @@
 /*!
- * \file    ColdBox2ChannelMapAlg.h
- * \brief   Channel mapping algorithms for VD ColdBox CRP.
+ * \file    CRPCBChannelMapAlg.h
+ * \brief   Channel mapping algorithms for VD ColdBox CRP2+.
  * \details Adapted from ICARUSChannelMapAlg by G. Petrillo
  * \date    July 26, 2022
  * \warning Only one CRP is currently supported with 30 deg ind1/ind2
