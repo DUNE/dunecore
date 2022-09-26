@@ -183,8 +183,8 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 	      for (size_t isample=0; isample<nSamples; ++isample)
 		{
 		  frames.at(isample).header.version = 2;
-		  frames.at(isample).header.timestamp_1 = 0;  
-		  frames.at(isample).header.timestamp_2 = 25*isample;
+		  frames.at(isample).header.timestamp_2 = 0;  
+		  frames.at(isample).header.timestamp_1 = 25*isample;
 		  frames.at(isample).header.crate = crate;
 		  frames.at(isample).header.slot =  slot;  
 		  frames.at(isample).header.link =  daqlink;
