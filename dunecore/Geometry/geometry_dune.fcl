@@ -395,6 +395,7 @@ iceberg_geo.Name: "iceberg" # will be made lower case anyway
 iceberg_geo.GDML: "iceberg_v1.gdml"
 iceberg_geo.ROOT: "iceberg_v1.gdml"
 
+# first vertical drift CRP in coldbox 
 dunevdcb_geo: @local::dune10kt_geo
 dunevdcb_geo.Name: "dunevdcb1"
 dunevdcb_geo.GDML: "dunevdcb1_refactored.gdml"
@@ -404,6 +405,16 @@ dunevdcb1_v2_geo: @local::dune10kt_geo
 dunevdcb1_v2_geo.Name: "dunevdcb1_v2"
 dunevdcb1_v2_geo.GDML: "dunevdcb1_v2_refactored.gdml"
 dunevdcb1_v2_geo.ROOT: "dunevdcb1_v2_refactored.gdml"
+
+# VD CRP2 coldbox geo with 60D anode design
+dunecrpcb2_geo: @local::dunevdcb_geo
+dunecrpcb2_geo.Name: "dunecrpcb2"
+dunecrpcb2_geo.GDML: "dunecrpcb2_v1_refactored.gdml"
+dunecrpcb2_geo.ROOT: "dunecrpcb2_v1_refactored.gdml"
+
+# VD CRP coldbox geo with 60D anode design currently same as CRP2 geo
+dunecrpcb_geo: @local::dunecrpcb2_geo
+dunecrpcb_geo.Name: "dunecrpcb"
 
 dune35t_geo:
 {

@@ -20,6 +20,7 @@
 #include "dunecore/Geometry/ChannelMapCRMAlg.h"
 #include "dunecore/Geometry/ChannelMapCRUAlg.h"
 #include "dunecore/Geometry/ColdBoxChannelMapAlg.h"
+#include "dunecore/Geometry/CRPCBChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlgv7.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlgv8.h"
@@ -106,8 +107,13 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
       channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
 
     // VD CRP cold box channel map 
-    } else if ( ( detectorName.find("dunevdcb") != std::string::npos ) ) {
+    } else if ( ( detectorName.find("dunevdcb1") != std::string::npos ) ) {
       channelMap = std::make_unique<geo::ColdBoxChannelMapAlg>(pset);
+      //channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
+
+    // VD CRP2 cold box channel map 
+    } else if ( ( detectorName.find("dunecrpcb") != std::string::npos ) ) {
+      channelMap = std::make_unique<geo::CRPCBChannelMapAlg>(pset);
       //channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
 
     // protoDUNE 6x6x6 dual phase

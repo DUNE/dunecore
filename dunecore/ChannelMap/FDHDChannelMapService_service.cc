@@ -8,7 +8,7 @@
 // a channel-map file with two APAs worth of channel mapping information:  upright and inverted, and
 // a crate-map file.
 // This service calls methods in FDHDChannelMapSP.cxx, the service provider.  This service is meant to
-// satisfy the frameork interface, while the service provider 
+// satisfy the framework interface, while the service provider does the actual work. 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "FDHDChannelMapService.h"
