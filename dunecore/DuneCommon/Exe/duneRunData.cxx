@@ -21,6 +21,7 @@ using std::istringstream;
 int main(int argc, char** argv) {
   const string myname = "duneRunData: ";
   bool help = false;
+  bool longhelp = false;
   unsigned int irun = 0;
   bool verbose = false;
   string fname;
@@ -29,6 +30,10 @@ int main(int argc, char** argv) {
       string sarg = argv[iarg];
       if ( sarg == "-h" ) {
         help = true;
+        break;
+      } else if ( sarg == "-H" ) {
+        help = true;
+        longhelp = true;
         break;
       }
       if ( sarg == "-v" ) verbose = true;
@@ -48,9 +53,19 @@ int main(int argc, char** argv) {
   } 
   if ( help ) {
     cout << "Usage: duneRunData [-h] [-v] [-c FCLFILE] RUN" << endl;
-    cout << "  Displays the run info for a run." << endl;
-    cout << "  -h - Display this message." << endl;
+    cout << "  Displays the fcl-based run info for run RUN." << endl;
+    cout << "  -h - Display short help message." << endl;
+    cout << "  -H - Display long help message." << endl;
     cout << "  -v - Verbose display including info about fcl file and run data tool." << endl;
+    if ( longhelp ) {
+      cout << "This run info is kept in fcl files." << endl;
+      cout << "For ProtoDUNE-SP those are stored in" << endl;
+      cout << "  dunesw/fcl/protodune/fcldirs/rundata/protodune" << endl;
+      cout << "and installed in" << endl;
+      cout << "  fcl/rundata/protodune" << endl;
+      cout << "Schema are described at" << endl;
+      cout << "  https://wiki.dunescience.org/wiki/ProtoDUNE_run_configuration#Schema" << endl;
+    }
     return 0;
   }
   string tname = "protoduneRunDataTool";
