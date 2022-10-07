@@ -24,9 +24,10 @@ int main(int argc, char** argv) {
   bool longhelp = false;
   unsigned int irun = 0;
   bool verbose = false;
+  string detname = "protodune";
   string fname;
   if ( argc > 1 ) {
-    for ( int iarg=1; iarg< argc; ++iarg ) {
+    for ( int iarg=1; iarg<argc; ++iarg ) {
       string sarg = argv[iarg];
       if ( sarg == "-h" ) {
         help = true;
@@ -35,17 +36,17 @@ int main(int argc, char** argv) {
         help = true;
         longhelp = true;
         break;
-      }
-      if ( sarg == "-v" ) verbose = true;
-    }
-    if ( ! help ) {
-      string sarg = argv[argc-1];
-      istringstream ssarg(sarg);
-      ssarg >> irun;
-      if ( irun == 0 ) {
-        cout << myname << "ERROR: Last field does not appear to be a number: \""
-             << sarg << "\"" << endl;
-        return 1;
+      } else if ( sarg == "-d" ) {
+        detname = argv[++iarg];
+      } else if ( sarg == "-v" ) {
+        verbose = true;
+      } else {
+        istringstream ssarg(sarg);
+        ssarg >> irun;
+        if ( irun == 0 ) {
+          cout << myname << "ERROR: Invalid argument: " << sarg << endl;
+          return 1;
+        }
       }
     }
   } else {
@@ -56,6 +57,7 @@ int main(int argc, char** argv) {
     cout << "  Displays the fcl-based run info for run RUN." << endl;
     cout << "  -h - Display short help message." << endl;
     cout << "  -H - Display long help message." << endl;
+    cout << "  -d - Detector: protodune, hdcb, ..."  << endl;
     cout << "  -v - Verbose display including info about fcl file and run data tool." << endl;
     if ( longhelp ) {
       cout << "This run info is kept in fcl files." << endl;
@@ -68,13 +70,13 @@ int main(int argc, char** argv) {
     }
     return 0;
   }
-  string tname = "protoduneRunDataTool";
+  string tname = detname + "RunDataTool";
   if ( ! verbose ) cout.setstate(std::ios_base::failbit);   // Turn off cout
   cout << endl;
   cout << myname << "Fetching tool manager." << endl;
   DuneToolManager* ptm = DuneToolManager::instance();
   cout << endl;
-  cout << myname << "Fetching run data tool." << endl;
+  cout << myname << "Fetching run data tool " << tname << "." << endl;
   const RunDataTool* prdt = ptm->getShared<RunDataTool>(tname);
   cout << endl;
   if ( ! verbose ) cout.clear();  // Turn cout back on.
@@ -86,7 +88,7 @@ int main(int argc, char** argv) {
   if ( rdat.isValid() ) {
     cout << rdat << endl;
   } else {
-    cout << myname << "Unable to find run " << irun << endl;
+    cout << myname << "Unable to find " << detname << " run " << irun << endl;
     return 2;
   }
   return 0;
