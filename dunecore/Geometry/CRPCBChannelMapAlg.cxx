@@ -519,8 +519,8 @@ void geo::CRPCBChannelMapAlg::buildReadoutPlanes
   auto const [ NCryostats, MaxTPCs, MaxPlanes ]
     = geo::details::extractMaxGeometryElements<3U>(Cryostats);
   
-  //mf::LogInfo("CRPCBChannelMapAlg")
-  //<< "Build readout planes for "<<NCryostats<<" "<<MaxTPCs<<" "<<MaxPlanes<<"\n";
+  mf::LogInfo("CRPCBChannelMapAlg")
+  << "Build readout planes for "<<NCryostats<<" "<<MaxTPCs<<" "<<MaxPlanes<<"\n";
   
 
   if( Cryostats.size() > 1 ){
@@ -529,10 +529,10 @@ void geo::CRPCBChannelMapAlg::buildReadoutPlanes
       << ": more than one cryostat is currently not supported\n";
   }
   
-  if( Cryostats[0].NTPC() != 4 ){
+  if( Cryostats[0].NTPC() %4 != 0 ){
     throw cet::exception("Geometry")
       << "geo::CRPCBChannelMapAlg::buildReadoutPlanes " << Cryostats[0].NTPC()
-      << ": more than four TPCs is currently not supported\n";
+      << ": non-four-module TPCs is currently not supported\n";
   }
   
   // currently do it by hand for CB --> to be generalized for FD
@@ -541,14 +541,18 @@ void geo::CRPCBChannelMapAlg::buildReadoutPlanes
   //unsigned int MaxPlanes = 3;
   unsigned int MaxROPs    = 3;
   unsigned int MaxTPCsets = MaxTPCs/4; // 
-  std::vector<unsigned int> TPCsetCount = {1};
+  // std::vector<unsigned int> TPCsetCount = {1}; // CRP2 CB
+  std::vector<unsigned int> TPCsetCount = {MaxTPCsets};
   
   // TPCs belonging to a set
   std::vector<std::vector<const geo::TPCGeo*>> AllTPCsInTPCsets( MaxTPCsets );       
   
   // currently manually assign TPCs to TPC set
   // relies on the standard sorter ...
-  AllTPCsInTPCsets[0] = {cryo.TPCPtr(0), cryo.TPCPtr(1), cryo.TPCPtr(2), cryo.TPCPtr(3)};
+  // AllTPCsInTPCsets[0] = {cryo.TPCPtr(0), cryo.TPCPtr(1), cryo.TPCPtr(2), cryo.TPCPtr(3)}; // CRP2 CB
+  for (unsigned int iset=0; iset<MaxTPCsets; iset++) {
+    AllTPCsInTPCsets[iset] = {cryo.TPCPtr(iset*4+0), cryo.TPCPtr(iset*4+1), cryo.TPCPtr(iset*4+2), cryo.TPCPtr(iset*4+3)};
+  }
 
   readout::TPCsetDataContainer<TPCColl_t> TPCsetTPCs(NCryostats, MaxTPCsets);
   
