@@ -37,7 +37,7 @@
 
 #include "CRPCBChannelMapAlg.h"
 
-using geo::dune::vd::crp::ChannelToWireMap;
+using geo::dune::vd::crpcb::ChannelToWireMap;
 /*
 namespace {
   

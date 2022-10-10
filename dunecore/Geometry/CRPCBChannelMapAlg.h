@@ -43,7 +43,7 @@ namespace geo {
 } // namespace dune
 
 // -----------------------------------------------------------------------------
-namespace geo { namespace dune{ namespace vd { namespace crp{
+namespace geo { namespace dune{ namespace vd { namespace crpcb{
 
   class ChannelToWireMap
   {
@@ -498,7 +498,7 @@ class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   ReadoutMappingInfo_t fReadoutMapInfo;
   
   /// Mapping of channels and ROP's.
-  geo::dune::vd::crp::ChannelToWireMap fChannelToWireMap;
+  geo::dune::vd::crpcb::ChannelToWireMap fChannelToWireMap;
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
