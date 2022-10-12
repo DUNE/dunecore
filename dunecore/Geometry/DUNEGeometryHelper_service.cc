@@ -21,6 +21,7 @@
 #include "dunecore/Geometry/ChannelMapCRUAlg.h"
 #include "dunecore/Geometry/ColdBoxChannelMapAlg.h"
 #include "dunecore/Geometry/CRPCBChannelMapAlg.h"
+#include "dunecore/Geometry/CRPChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlgv7.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlgv8.h"
@@ -113,7 +114,7 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
 
     // VD CRP2 cold box channel map 
     } else if ( ( detectorName.find("dunecrpcb") != std::string::npos ) ) {
-      channelMap = std::make_unique<geo::CRPCBChannelMapAlg>(pset);
+      channelMap = std::make_unique<geo::CRPChannelMapAlg>(pset);
       //channelMap = std::make_unique<geo::ChannelMapCRUAlg>(pset);
 
     // protoDUNE 6x6x6 dual phase
@@ -136,7 +137,11 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
     // protoDUNE with arapucas and updated paddles
     } else if ( detectorName.find("protodunev8") != std::string::npos ) {
       channelMap = std::make_unique<geo::ProtoDUNEChannelMapAlgv8>(pset);
-
+      
+    // protoDUNE VD
+    } else if ( detectorName.find("protodunevd_v1") != std::string::npos ) {
+      channelMap = std::make_unique<geo::CRPChannelMapAlg>(pset);
+      
     // protoDUNE
     } else if ( ( detectorName.find("protodune") != std::string::npos )
              || ( detectorName.find("protolbne") != std::string::npos ) ) {
