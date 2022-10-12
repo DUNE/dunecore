@@ -20,7 +20,6 @@
 #include "dunecore/Geometry/ChannelMapCRMAlg.h"
 #include "dunecore/Geometry/ChannelMapCRUAlg.h"
 #include "dunecore/Geometry/ColdBoxChannelMapAlg.h"
-#include "dunecore/Geometry/CRPCBChannelMapAlg.h"
 #include "dunecore/Geometry/CRPChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlg.h"
 #include "dunecore/Geometry/ProtoDUNEChannelMapAlgv7.h"
