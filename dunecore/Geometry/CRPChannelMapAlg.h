@@ -1,15 +1,14 @@
 /*!
- * \file    CRPCBChannelMapAlg.h
- * \brief   Channel mapping algorithms for VD ColdBox CRP2+.
+ * \file    CRPChannelMapAlg.h
+ * \brief   Channel mapping algorithms for vertical drift CRPs.
  * \details Adapted from ICARUSChannelMapAlg by G. Petrillo
- * \date    July 26, 2022
- * \warning Only one CRP is currently supported with 30 deg ind1/ind2
+ * \date    Oct 10, 2022
  * 
  *  vgalymov@ipnl.in2p3.fr
  */
 
-#ifndef DUNE_CRPCBCHANNELMAPALG_H
-#define DUNE_CRPCBCHANNELMAPALG_H
+#ifndef DUNE_CRPCHANNELMAPALG_H
+#define DUNE_CRPCHANNELMAPALG_H
 
 // LArSoft libraries
 #include "larcorealg/Geometry/ChannelMapAlg.h"
@@ -25,7 +24,7 @@
 #include "fhiclcpp/types/Table.h"
 #include "fhiclcpp/ParameterSet.h"
 
-// CRP60D specific sorting algos for X drift
+// CRP60D specific sorting
 #include "dunecore/Geometry/GeoObjectSorterCRU60D.h"
 
 // C/C++ standard libraries
@@ -38,12 +37,12 @@
 // forward declarations
 namespace geo {
   
-  class CRPCBChannelMapAlg;
+  class CRPChannelMapAlg;
   
 } // namespace dune
 
 // -----------------------------------------------------------------------------
-namespace geo { namespace dune{ namespace vd { namespace crpcb{
+namespace geo { namespace dune{ namespace vd { namespace crp{
 
   class ChannelToWireMap
   {
@@ -118,7 +117,7 @@ namespace geo { namespace dune{ namespace vd { namespace crpcb{
 
 // -----------------------------------------------------------------------------
 
-class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
+class geo::CRPChannelMapAlg: public geo::ChannelMapAlg {
   
   // import definitions
   using TPCColl_t   = std::vector<geo::TPCID>;
@@ -126,7 +125,7 @@ class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   
  public:
   
-  CRPCBChannelMapAlg(fhicl::ParameterSet const& p);
+  CRPChannelMapAlg(fhicl::ParameterSet const& p);
   
   /// Prepares the algorithm extracting information from the geometry.
   virtual void Initialize(geo::GeometryData_t const& geodata) override;
@@ -498,7 +497,7 @@ class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   ReadoutMappingInfo_t fReadoutMapInfo;
   
   /// Mapping of channels and ROP's.
-  geo::dune::vd::crpcb::ChannelToWireMap fChannelToWireMap;
+  geo::dune::vd::crp::ChannelToWireMap fChannelToWireMap;
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
@@ -620,9 +619,9 @@ class geo::CRPCBChannelMapAlg: public geo::ChannelMapAlg {
   static std::string PlaneTypeName(PlaneType_t planeType);
   
   //
-  std::string fLogCategory = "CRPCBChannelMapAlg";
+  std::string fLogCategory = "CRPChannelMapAlg";
   
-}; // class geo::CRPCBChannelMapAlg
+}; // class geo::CRPChannelMapAlg
 
 
 #endif //
