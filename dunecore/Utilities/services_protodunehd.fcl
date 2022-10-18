@@ -8,24 +8,24 @@ BEGIN_PROLOG
 ##############################
 
 protodunehd_services: @local::protodune_services 
-protodunehd_services.Geometry:  @local::protodunehdv1_geo
+protodunehd_services.Geometry:  @local::protodunehdv2_geo
 
 protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
-protodunehd_rawdecoding_services.Geometry: @local::protodunehdv1_geo
+protodunehd_rawdecoding_services.Geometry: @local::protodunehdv2_geo
 
 protodunehd_data_services: @local::protodune_data_services
-protodunehd_data_services.Geometry: @local::protodunehdv1_geo
+protodunehd_data_services.Geometry: @local::protodunehdv2_geo
 
 # Low memory configuration leaving out some heavy services
 protodunehd_minimal_simulation_services: @local::protodune_minimal_simulation_services
-protodunehd_minimal_simulation_services.Geometry: @local::protodunehdv1_geo
+protodunehd_minimal_simulation_services.Geometry: @local::protodunehdv2_geo
 
 # Full service configuration which includes memory-intensive services
 protodunehd_simulation_services: 
 {
   @table::protodunehd_minimal_simulation_services
   SignalShapingServiceDUNE:     @local::protodunesp_signalshapingservice
-  PhotonVisibilityService:      @local::protodune_photonvisibilityservice
+  PhotonVisibilityService:      @local::protodune_hd_photonvisibilityservice
   OpDetResponseInterface:       @local::protodune_opdetresponse
 }
 
