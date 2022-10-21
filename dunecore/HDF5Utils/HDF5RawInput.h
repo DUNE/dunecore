@@ -49,6 +49,7 @@ class dune::HDF5RawInputDetail {
   std::deque<std::string> unprocessedEventList_;
   std::string pretend_module_name;
   int fLogLevel;
+  double fClockFreqMHz;            // clock frequency in MHz -- used to unpack trigger timestamps for the event
   art::SourceHelper const& pmaker;
  };
 #endif

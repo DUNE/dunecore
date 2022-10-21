@@ -1,9 +1,8 @@
 /*!
- * \file    CRPCBChannelMapAlg.cxx
- * \brief   Channel mapping algorithms for VD ColdBox CRP2+.
+ * \file    CRPChannelMapAlg.cxx
+ * \brief   Channel mapping algorithms for vertical drift CRPs
  * \details Adapted from ICARUSChannelMapAlg by G. Petrillo
- * \date    July 26, 2022
- * \warning Only one CRP is currently supported with 30 deg ind1/ind2
+ * \date    Oct 10, 2022
  * 
  *  vgalymov@ipnl.in2p3.fr
  */
@@ -35,7 +34,7 @@
 #include <functional> // std::mem_fn()
 #include <tuple>
 
-#include "CRPCBChannelMapAlg.h"
+#include "CRPChannelMapAlg.h"
 
 using geo::dune::vd::crp::ChannelToWireMap;
 /*
@@ -52,42 +51,159 @@ namespace {
 }
 
 // -----------------------------------------------------------------------------
-geo::CRPCBChannelMapAlg::CRPCBChannelMapAlg(Config const& config):
+geo::CRPChannelMapAlg::CRPChannelMapAlg(Config const& config):
   fSorter(geo::GeoObjectSorterCRU(getOptionalParameterSet(config.Sorter)))
 {}
 */
+
+
+namespace {
+  
+  typedef std::vector< const geo::TPCGeo* > TPCPtrVector_t;
+  
+  std::vector< TPCPtrVector_t > groupTPCsIntoSets( const geo::CryostatGeo &cryo ){
+    //
+    // The implementation of this function to group volTPC objects into sets 
+    // representing CRPs assumes the the following sorting scheme
+    // TPC volumes are sorted:
+    //   1) in drift coordinate
+    //   2) within a given drift volume in z coordinate
+    //   3) within a given z row in the other coordinate (x or y depending on the drift axis)
+    // The function attemtps to detect the number of drift volumes present in 
+    // the geometry by looking at a number of distinct values returned 
+    // by TPCGeo::DetectDriftDirection()
+    // Once the number of drift volumes or cells is found, it attemtps to to compute
+    // the number of TPC volumes on the same z row (nz). Then the number of TPC volumes 
+    // for the other coordinate is computed as no = ntpc / nz. With nz and no one then
+    // attempts to map the indecies of TPCs into tpcsets representing an entire CRP
+    //
+
+    const std::string LogCategory = "groupTPCsIntoSets in CRPChannelMapAlg";
+    
+    std::vector< TPCPtrVector_t > TPCsInSets;
+    TPCPtrVector_t tpcs;
+    unsigned int ntpc    = cryo.NTPC();
+    unsigned int ncells  = 1U;  // number of drift volumes
+    short int ldriftDir = -999;
+    for (geo::TPCGeo const& tpc: cryo.IterateTPCs()) {
+      tpcs.push_back( &tpc );
+      short int driftDir = tpc.DetectDriftDirection();
+      if( ldriftDir == -999 ){ 
+	ldriftDir = driftDir;
+	continue;
+      }
+      
+      if( ldriftDir != driftDir && ncells < 2U){
+	ncells++;
+      }
+      ldriftDir = driftDir;
+    }
+
+    mf::LogDebug log(LogCategory);
+    
+    log
+      << "Number of drift cells in this geometry: "<<ncells<<"\n";
+    
+    // if only 4 TPC volumes they must belong to the same CRP
+    // just return them (assumes they have been sorted correctly)
+    // if( ntpc == 4U ){ 
+    //   TPCsInSets.push_back( tpcs );
+    //   return TPCsInSets;
+    // }
+
+    unsigned int ntpc_cell = ntpc / ncells;
+    // now try to determine how many TPCs are on the same Z
+    // this again assumes the GeoObjectSorterCRU60D
+    // z is the second criteria for sorting
+    auto CheckTol = [](double val, double tol = 1.E-4){ 
+      return (std::abs( val ) < tol); 
+    };
+    unsigned int nz = 0U;
+    auto begin = tpcs.begin();
+    auto end   = begin + ntpc_cell;
+    auto c0 = (*begin)->GetCenter<geo::Point_t>();
+    for(;begin!=end;++begin){
+	auto c1 = (*begin)->GetCenter<geo::Point_t>();
+	if( CheckTol(c0.Z() - c1.Z()) ){
+	  nz++; // count also the first TPC
+	}
+	else {  
+	  break; 
+	}
+    }    
+    
+    // other CRP coordinate 
+    unsigned int no = ntpc / nz;
+    if( nz % 2 != 0  || no % 2 != 0 ){
+      throw cet::exception(LogCategory)
+	<< "could not interpret the CRP geometry correctly\n";
+    }
+    
+    log
+      << "Number of TPCs per Z row: "<<nz<<"\n";
+    
+    //
+    //    TPCsInSets
+    for( unsigned int irow = 0U; irow < no; irow += 2 ){
+      for( unsigned int icol = 0U; icol < nz; icol += 2 ){
+	unsigned int idx0 = icol + irow * nz;
+	unsigned int idx1 = idx0 + 1;
+	unsigned int idx2 = icol + (irow + 1) * nz;
+	unsigned int idx3 = idx2 + 1;
+	log
+	  <<"Set "<<TPCsInSets.size()<<" has TPCs at "<<idx0<<" "<<idx1<<" "<<idx2<<" "<<idx3<<"\n";
+	if( idx0>=ntpc || idx1>=ntpc || idx2 >= ntpc || idx3 >= ntpc ){
+	  throw cet::exception(LogCategory)
+	    << "bad tpc idx for set ("<<idx0<<", "<<idx1<<", "<<idx2<<", "<<idx3<<")\n";
+	}
+		
+	
+	TPCsInSets.push_back( { tpcs[ idx0 ], tpcs[ idx1 ], tpcs[ idx2 ], tpcs[ idx3 ] } );
+      }
+    }
+    
+    if( TPCsInSets.size() != ntpc/4 ){
+      throw cet::exception(LogCategory)
+	<< "bad number of tpcsets\n";
+    }
+    
+    return TPCsInSets;
+  }
+}
+
+
 // -----------------------------------------------------------------------------
-geo::CRPCBChannelMapAlg::CRPCBChannelMapAlg(fhicl::ParameterSet const& p):
+geo::CRPChannelMapAlg::CRPChannelMapAlg(fhicl::ParameterSet const& p):
   fSorter(geo::GeoObjectSorterCRU60D(p))
 {}
 
 
 // -----------------------------------------------------------------------------
-void geo::CRPCBChannelMapAlg::Initialize(geo::GeometryData_t const& geodata)
+void geo::CRPChannelMapAlg::Initialize(geo::GeometryData_t const& geodata)
 {
-  mf::LogInfo("CRPCBChannelMapAlg")
-    << "Initializing CRPCBChannelMapAlg channel mapping algorithm.";
+  mf::LogInfo(fLogCategory)
+    << "Initializing CRPChannelMapAlg channel mapping algorithm.";
   
   buildReadoutPlanes(geodata.cryostats);
   fillChannelToWireMap(geodata.cryostats);
   
-  MF_LOG_TRACE("CRPCBChannelMapAlg")
-    << "CRPCBChannelMapAlg::Initialize() completed.";
-} // geo::CRPCBChannelMapAlg::Initialize()
+  MF_LOG_TRACE(fLogCategory)
+    << "CRPChannelMapAlg::Initialize() completed.";
+} // geo::CRPChannelMapAlg::Initialize()
 
 
 // -----------------------------------------------------------------------------
-void geo::CRPCBChannelMapAlg::Uninitialize() {
+void geo::CRPChannelMapAlg::Uninitialize() {
   
   fReadoutMapInfo.clear();
   fChannelToWireMap.clear();
   fPlaneInfo.clear();
   
-} // geo::CRPCBChannelMapAlg::Uninitialize()
+} // geo::CRPChannelMapAlg::Uninitialize()
 
 
 //------------------------------------------------------------------------------
-std::vector<geo::WireID> geo::CRPCBChannelMapAlg::ChannelToWire
+std::vector<geo::WireID> geo::CRPChannelMapAlg::ChannelToWire
   (raw::ChannelID_t channel) const
 {
   //
@@ -106,8 +222,8 @@ std::vector<geo::WireID> geo::CRPCBChannelMapAlg::ChannelToWire
   ChannelToWireMap::ChannelsInROPStruct const* channelInfo
     = fChannelToWireMap.find(channel);
   if (!channelInfo) {
-    throw cet::exception("Geometry")
-      << "geo::CRPCBChannelMapAlg::ChannelToWire(" << channel
+    throw cet::exception(fLogCategory)
+      << "geo::CRPChannelMapAlg::ChannelToWire(" << channel
       << "): invalid channel requested (must be lower than "
       << Nchannels() << ")\n";
   }
@@ -134,81 +250,81 @@ std::vector<geo::WireID> geo::CRPCBChannelMapAlg::ChannelToWire
   
   return AllSegments;
   
-} // geo::CRPCBChannelMapAlg::ChannelToWire()
+} // geo::CRPChannelMapAlg::ChannelToWire()
 
 
 //------------------------------------------------------------------------------
-unsigned int geo::CRPCBChannelMapAlg::Nchannels() const {
+unsigned int geo::CRPChannelMapAlg::Nchannels() const {
   
   return fChannelToWireMap.nChannels();
-} // geo::CRPCBChannelMapAlg::Nchannels()
+} // geo::CRPChannelMapAlg::Nchannels()
 
 
 //------------------------------------------------------------------------------
-unsigned int geo::CRPCBChannelMapAlg::Nchannels
+unsigned int geo::CRPChannelMapAlg::Nchannels
   (readout::ROPID const& ropid) const 
 {
   ChannelToWireMap::ChannelsInROPStruct const* ROPinfo
     = fChannelToWireMap.find(ropid);
   return ROPinfo? ROPinfo->nChannels: 0U;
-} // geo::CRPCBChannelMapAlg::Nchannels(ROPID)
+} // geo::CRPChannelMapAlg::Nchannels(ROPID)
 
 
 //------------------------------------------------------------------------------
-double geo::CRPCBChannelMapAlg::WireCoordinate
+double geo::CRPChannelMapAlg::WireCoordinate
   (double YPos, double ZPos, geo::PlaneID const& planeID) const
 {
   /*
    * this should NOT be called... it shouldn't be here at all!
    */
   
-  cet::exception e("CRPCBChannelMapAlg");
-  e << "CRPCBChannelMapAlg does not support `WireCoordinate()` call."
+  cet::exception e(fLogCategory);
+  e << "CRPChannelMapAlg does not support `WireCoordinate()` call."
     "\nPlease update calling software to use geo::PlaneGeo::WireCoordinate()`:"
     "\n";
   
   //lar::debug::printBacktrace(e, 4U);
   
   throw e;
-} // geo::CRPCBChannelMapAlg::WireCoordinate()
+} // geo::CRPChannelMapAlg::WireCoordinate()
 
 
 //------------------------------------------------------------------------------
-geo::WireID geo::CRPCBChannelMapAlg::NearestWireID
+geo::WireID geo::CRPChannelMapAlg::NearestWireID
   (const TVector3& worldPos, geo::PlaneID const& planeID) const
 {
   /*
    * this should NOT be called... it shouldn't be here at all!
    */
   
-  cet::exception e("CRPCBChannelMapAlg");
-  e << "CRPCBChannelMapAlg does not support `NearestWireID()` call."
+  cet::exception e(fLogCategory);
+  e << "CRPChannelMapAlg does not support `NearestWireID()` call."
     "\nPlease update calling software to use geo::PlaneGeo::NearestWireID()`:"
     "\n";
   
   //lar::debug::printBacktrace(e, 3U);
   
   throw e;
-} // geo::CRPCBChannelMapAlg::NearestWireID()
+} // geo::CRPChannelMapAlg::NearestWireID()
 
 
 //------------------------------------------------------------------------------
-raw::ChannelID_t geo::CRPCBChannelMapAlg::PlaneWireToChannel
+raw::ChannelID_t geo::CRPChannelMapAlg::PlaneWireToChannel
   (geo::WireID const& wireID) const
 {
   return fPlaneInfo[wireID].firstChannel() + wireID.Wire;
-} // geo::CRPCBChannelMapAlg::PlaneWireToChannel()
+} // geo::CRPChannelMapAlg::PlaneWireToChannel()
 
 
 //------------------------------------------------------------------------------
-std::set<geo::PlaneID> const& geo::CRPCBChannelMapAlg::PlaneIDs() const {
+std::set<geo::PlaneID> const& geo::CRPChannelMapAlg::PlaneIDs() const {
   
   /*
    * this should NOT be called... it shouldn't be here at all!
    */
   
-  cet::exception e("CRPCBChannelMapAlg");
-  e << "CRPCBChannelMapAlg does not support `PlaneIDs()` call."
+  cet::exception e(fLogCategory);
+  e << "CRPChannelMapAlg does not support `PlaneIDs()` call."
     "\nPlease update calling software to use geo::GeometryCore::IteratePlanes()`"
     "\n";
   
@@ -216,57 +332,57 @@ std::set<geo::PlaneID> const& geo::CRPCBChannelMapAlg::PlaneIDs() const {
   
   throw e;
   
-} // geo::CRPCBChannelMapAlg::PlaneIDs()
+} // geo::CRPChannelMapAlg::PlaneIDs()
 
 
 //------------------------------------------------------------------------------
-unsigned int geo::CRPCBChannelMapAlg::NTPCsets
+unsigned int geo::CRPChannelMapAlg::NTPCsets
   (readout::CryostatID const& cryoid) const
 {
   return HasCryostat(cryoid)? TPCsetCount(cryoid): 0U;
-} // geo::CRPCBChannelMapAlg::NTPCsets()
+} // geo::CRPChannelMapAlg::NTPCsets()
 
 
 //------------------------------------------------------------------------------
 /// Returns the largest number of TPC sets any cryostat in the detector has
-unsigned int geo::CRPCBChannelMapAlg::MaxTPCsets() const {
+unsigned int geo::CRPChannelMapAlg::MaxTPCsets() const {
   assert(fReadoutMapInfo);
   return fReadoutMapInfo.MaxTPCsets();
-} // geo::CRPCBChannelMapAlg::MaxTPCsets()
+} // geo::CRPChannelMapAlg::MaxTPCsets()
 
 
 //------------------------------------------------------------------------------
 /// Returns whether we have the specified TPC set
 /// @return whether the TPC set is valid and exists
-bool geo::CRPCBChannelMapAlg::HasTPCset
+bool geo::CRPChannelMapAlg::HasTPCset
   (readout::TPCsetID const& tpcsetid) const
 {
   return
     HasCryostat(tpcsetid)? (tpcsetid.TPCset < TPCsetCount(tpcsetid)): false;
-} // geo::CRPCBChannelMapAlg::HasTPCset()
+} // geo::CRPChannelMapAlg::HasTPCset()
 
 
 //------------------------------------------------------------------------------
-readout::TPCsetID geo::CRPCBChannelMapAlg::TPCtoTPCset
+readout::TPCsetID geo::CRPChannelMapAlg::TPCtoTPCset
   (geo::TPCID const& tpcid) const
 {
   return tpcid? TPCtoTPCset()[tpcid]: readout::TPCsetID{};
-} // geo::CRPCBChannelMapAlg::TPCtoTPCset()
+} // geo::CRPChannelMapAlg::TPCtoTPCset()
 
 
 //------------------------------------------------------------------------------
-std::vector<geo::TPCID> geo::CRPCBChannelMapAlg::TPCsetToTPCs
+std::vector<geo::TPCID> geo::CRPChannelMapAlg::TPCsetToTPCs
   (readout::TPCsetID const& tpcsetid) const
 {
   std::vector<geo::TPCID> TPCs;
   if (!tpcsetid) return TPCs;
   
   return TPCsetTPCs(tpcsetid);
-} // geo::CRPCBChannelMapAlg::TPCsetToTPCs()
+} // geo::CRPChannelMapAlg::TPCsetToTPCs()
 
 
 //------------------------------------------------------------------------------
-geo::TPCID geo::CRPCBChannelMapAlg::FirstTPCinTPCset
+geo::TPCID geo::CRPChannelMapAlg::FirstTPCinTPCset
   (readout::TPCsetID const& tpcsetid) const
 {
   if (!tpcsetid) return {};
@@ -274,27 +390,27 @@ geo::TPCID geo::CRPCBChannelMapAlg::FirstTPCinTPCset
   auto const& TPClist = TPCsetTPCs(tpcsetid);
   return TPClist.empty()? geo::TPCID{}: TPClist.front();
   
-} // geo::CRPCBChannelMapAlg::FirstTPCinTPCset()
+} // geo::CRPChannelMapAlg::FirstTPCinTPCset()
 
 
 //------------------------------------------------------------------------------
-unsigned int geo::CRPCBChannelMapAlg::NROPs
+unsigned int geo::CRPChannelMapAlg::NROPs
   (readout::TPCsetID const& tpcsetid) const
 {
   return HasTPCset(tpcsetid)? ROPcount(tpcsetid): 0U;
-} // geo::CRPCBChannelMapAlg::NROPs()
+} // geo::CRPChannelMapAlg::NROPs()
 
 
 //------------------------------------------------------------------------------
-unsigned int geo::CRPCBChannelMapAlg::MaxROPs() const {
+unsigned int geo::CRPChannelMapAlg::MaxROPs() const {
   assert(fReadoutMapInfo);
   return fReadoutMapInfo.MaxROPs();
-} // geo::CRPCBChannelMapAlg::MaxROPs()
+} // geo::CRPChannelMapAlg::MaxROPs()
 
 //------------------------------------------------------------------------------
-bool geo::CRPCBChannelMapAlg::HasROP(readout::ROPID const& ropid) const {
+bool geo::CRPChannelMapAlg::HasROP(readout::ROPID const& ropid) const {
   return HasTPCset(ropid)? (ropid.ROP < ROPcount(ropid)): false;
-} // geo::CRPCBChannelMapAlg::HasROP()
+} // geo::CRPChannelMapAlg::HasROP()
 
 
 //------------------------------------------------------------------------------
@@ -310,26 +426,26 @@ bool geo::CRPCBChannelMapAlg::HasROP(readout::ROPID const& ropid) const {
    * does not necessarily imply that the plane specified by the ID actually
    * exists.
    */
-readout::ROPID geo::CRPCBChannelMapAlg::WirePlaneToROP
+readout::ROPID geo::CRPChannelMapAlg::WirePlaneToROP
   (geo::PlaneID const& planeid) const
 {
   return planeid? PlaneToROP(planeid): readout::ROPID{};
   //return planeid?fReadoutMapInfo.fPlaneToROP[planeid]:readout::ROPID{};
-} // geo::CRPCBChannelMapAlg::WirePlaneToROP()
+} // geo::CRPChannelMapAlg::WirePlaneToROP()
 
 
 //------------------------------------------------------------------------------
-std::vector<geo::PlaneID> geo::CRPCBChannelMapAlg::ROPtoWirePlanes
+std::vector<geo::PlaneID> geo::CRPChannelMapAlg::ROPtoWirePlanes
   (readout::ROPID const& ropid) const
 {
   std::vector<geo::PlaneID> Planes;
   if (!ropid) return Planes;
   return ROPplanes(ropid);
-} // geo::CRPCBChannelMapAlg::ROPtoWirePlanes()
+} // geo::CRPChannelMapAlg::ROPtoWirePlanes()
 
 
 //------------------------------------------------------------------------------
-std::vector<geo::TPCID> geo::CRPCBChannelMapAlg::ROPtoTPCs
+std::vector<geo::TPCID> geo::CRPChannelMapAlg::ROPtoTPCs
   (readout::ROPID const& ropid) const
 {
   std::vector<geo::TPCID> TPCs;
@@ -342,11 +458,11 @@ std::vector<geo::TPCID> geo::CRPCBChannelMapAlg::ROPtoTPCs
   }
 
   return TPCs;
-} // geo::CRPCBChannelMapAlg::ROPtoTPCs()
+} // geo::CRPChannelMapAlg::ROPtoTPCs()
 
 
 //------------------------------------------------------------------------------
-readout::ROPID geo::CRPCBChannelMapAlg::ChannelToROP
+readout::ROPID geo::CRPChannelMapAlg::ChannelToROP
   (raw::ChannelID_t channel) const
 {
   if (!raw::isValidChannelID(channel)) return {};
@@ -354,11 +470,11 @@ readout::ROPID geo::CRPCBChannelMapAlg::ChannelToROP
   ChannelToWireMap::ChannelsInROPStruct const* info
     = fChannelToWireMap.find(channel);
   return info? info->ropid: readout::ROPID{};
-} // geo::CRPCBChannelMapAlg::ChannelToROP()
+} // geo::CRPChannelMapAlg::ChannelToROP()
 
 
 //------------------------------------------------------------------------------
-raw::ChannelID_t geo::CRPCBChannelMapAlg::FirstChannelInROP
+raw::ChannelID_t geo::CRPChannelMapAlg::FirstChannelInROP
   (readout::ROPID const& ropid) const
 {
   if (!ropid) return raw::InvalidChannelID;
@@ -366,30 +482,30 @@ raw::ChannelID_t geo::CRPCBChannelMapAlg::FirstChannelInROP
   ChannelToWireMap::ChannelsInROPStruct const* info
     = fChannelToWireMap.find(ropid);
   return info? info->firstChannel: raw::InvalidChannelID;
-} // geo::CRPCBChannelMapAlg::FirstChannelInROP()
+} // geo::CRPChannelMapAlg::FirstChannelInROP()
 
 
 //------------------------------------------------------------------------------
-geo::PlaneID geo::CRPCBChannelMapAlg::FirstWirePlaneInROP
+geo::PlaneID geo::CRPChannelMapAlg::FirstWirePlaneInROP
   (readout::ROPID const& ropid) const
 {
   if (!ropid) return {};
   PlaneColl_t const& planes = ROPplanes(ropid);
   return planes.empty()? geo::PlaneID{}: planes.front();
-} // geo::CRPCBChannelMapAlg::FirstWirePlaneInROP()
+} // geo::CRPChannelMapAlg::FirstWirePlaneInROP()
 
 
 //------------------------------------------------------------------------------
-bool geo::CRPCBChannelMapAlg::HasCryostat
+bool geo::CRPChannelMapAlg::HasCryostat
   (readout::CryostatID const& cryoid) const
 {
   assert(fReadoutMapInfo);
   return cryoid.Cryostat < fReadoutMapInfo.NCryostats();
-} // geo::CRPCBChannelMapAlg::HasCryostat()
+} // geo::CRPChannelMapAlg::HasCryostat()
 
 
 //------------------------------------------------------------------------------
-void geo::CRPCBChannelMapAlg::fillChannelToWireMap
+void geo::CRPChannelMapAlg::fillChannelToWireMap
   (geo::GeometryData_t::CryostatList_t const& Cryostats)
 {
   
@@ -399,8 +515,6 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
   assert(fReadoutMapInfo);
   assert(!Cryostats.empty());
   
-  //mf::LogInfo("CRPCBChannelMapAlg")<<"fillChannelToWireMap\n";
-
   //
   // output setup
   //
@@ -425,8 +539,8 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
 
       for (readout::ROPID::ROPID_t r: util::counter(nROPs)) {
         
-        mf::LogTrace log("CRPCBChannelMapAlg");
-	//mf::LogInfo log("CRPCBChannelMapAlg");
+        mf::LogTrace log(fLogCategory);
+	//mf::LogInfo log(fLogCategory);
         
         readout::ROPID const rid { sid, r };
         auto const planeType = findPlaneType(rid);
@@ -506,60 +620,54 @@ void geo::CRPCBChannelMapAlg::fillChannelToWireMap
   } // for cryostat
   
   fChannelToWireMap.setEndChannel(nextChannel);
-  mf::LogInfo("CRPCBChannelMapAlg")
+  mf::LogInfo(fLogCategory)
     << "Counted " << fChannelToWireMap.nChannels() << " channels.";
   
-} // geo::CRPCBChannelMapAlg::fillChannelToWireMap()
+} // geo::CRPChannelMapAlg::fillChannelToWireMap()
 
 
 // -----------------------------------------------------------------------------
-void geo::CRPCBChannelMapAlg::buildReadoutPlanes
+void geo::CRPChannelMapAlg::buildReadoutPlanes
   (geo::GeometryData_t::CryostatList_t const& Cryostats)
 {
   auto const [ NCryostats, MaxTPCs, MaxPlanes ]
     = geo::details::extractMaxGeometryElements<3U>(Cryostats);
   
-  mf::LogInfo("CRPCBChannelMapAlg")
-  << "Build readout planes for "<<NCryostats<<" "<<MaxTPCs<<" "<<MaxPlanes<<"\n";
+  mf::LogInfo(fLogCategory)
+    << "Build readout planes for "<<NCryostats<<" "<<MaxTPCs<<" "<<MaxPlanes;
   
 
   if( Cryostats.size() > 1 ){
-    throw cet::exception("Geometry")
-      << "geo::CRPCBChannelMapAlg::buildReadoutPlanes " << Cryostats.size()
+    throw cet::exception(fLogCategory)
+      << "geo::CRPChannelMapAlg::buildReadoutPlanes " << Cryostats.size()
       << ": more than one cryostat is currently not supported\n";
   }
   
   if( Cryostats[0].NTPC() %4 != 0 ){
-    throw cet::exception("Geometry")
-      << "geo::CRPCBChannelMapAlg::buildReadoutPlanes " << Cryostats[0].NTPC()
-      << ": non-four-module TPCs is currently not supported\n";
+    throw cet::exception(fLogCategory)
+      << "geo::CRPChannelMapAlg::buildReadoutPlanes " << Cryostats[0].NTPC()
+      << ": non-four-module TPCs is not supported\n";
   }
   
-  // currently do it by hand for CB --> to be generalized for FD
+  //
   auto cryo = Cryostats[0];
-  //unsigned int MaxTPCs = cryo.NTPC();
-  //unsigned int MaxPlanes = 3;
   unsigned int MaxROPs    = 3;
   unsigned int MaxTPCsets = MaxTPCs/4; // 
-  // std::vector<unsigned int> TPCsetCount = {1}; // CRP2 CB
   std::vector<unsigned int> TPCsetCount = {MaxTPCsets};
   
   // TPCs belonging to a set
-  std::vector<std::vector<const geo::TPCGeo*>> AllTPCsInTPCsets( MaxTPCsets );       
-  
-  // currently manually assign TPCs to TPC set
-  // relies on the standard sorter ...
-  // AllTPCsInTPCsets[0] = {cryo.TPCPtr(0), cryo.TPCPtr(1), cryo.TPCPtr(2), cryo.TPCPtr(3)}; // CRP2 CB
-  for (unsigned int iset=0; iset<MaxTPCsets; iset++) {
-    AllTPCsInTPCsets[iset] = {cryo.TPCPtr(iset*4+0), cryo.TPCPtr(iset*4+1), cryo.TPCPtr(iset*4+2), cryo.TPCPtr(iset*4+3)};
-  }
+  std::vector<std::vector<const geo::TPCGeo*>> AllTPCsInTPCsets = groupTPCsIntoSets(cryo);
+  if( AllTPCsInTPCsets.size() != MaxTPCsets ){
+    throw cet::exception(fLogCategory)
+      << "geo::CRPChannelMapAlg::buildReadoutPlanes number of TPCsets in invalid\n";
+  }    
 
   readout::TPCsetDataContainer<TPCColl_t> TPCsetTPCs(NCryostats, MaxTPCsets);
   
   for( auto&& [s, TPClist ]: util::enumerate(AllTPCsInTPCsets) ){
     readout::TPCsetID const tpcsetid
     { cryo.ID(), static_cast<readout::TPCsetID::TPCsetID_t>(s) };
-    //mf::LogInfo("CRPCBChannelMapAlg")<< tpcsetid <<" "<<TPCPtrs.size()<<"\n";
+    //mf::LogInfo("CRPChannelMapAlg")<< tpcsetid <<" "<<TPCPtrs.size()<<"\n";
     std::vector<geo::TPCID> TPCs;
     TPCs.reserve(TPClist.size());
     std::transform(TPClist.begin(), TPClist.end(), std::back_inserter(TPCs),
@@ -663,11 +771,11 @@ void geo::CRPCBChannelMapAlg::buildReadoutPlanes
    		      std::move(ROPcount), std::move(ROPplanes),
    		      std::move(TPCtoTPCset), std::move(PlaneToROP)
    		      );
-} // geo::CRPCBChannelMapAlg::buildReadoutPlanes()
+} // geo::CRPChannelMapAlg::buildReadoutPlanes()
 
 
 // -----------------------------------------------------------------------------
-std::size_t geo::CRPCBChannelMapAlg::findPlaneType(readout::ROPID const& rid) const
+std::size_t geo::CRPChannelMapAlg::findPlaneType(readout::ROPID const& rid) const
 {
   /*
    * This implementation is very fragile, relying on the fact that the first
@@ -694,11 +802,11 @@ std::size_t geo::CRPCBChannelMapAlg::findPlaneType(readout::ROPID const& rid) co
     return PlaneTypes[planeNo];
   else return kUnknownType;
   
-} // geo::CRPCBChannelMapAlg::findPlaneType()
+} // geo::CRPChannelMapAlg::findPlaneType()
 
 
 // ----------------------------------------------------------------------------
-geo::SigType_t geo::CRPCBChannelMapAlg::SignalTypeForChannelImpl
+geo::SigType_t geo::CRPChannelMapAlg::SignalTypeForChannelImpl
   (raw::ChannelID_t const channel) const
 {
   ChannelToWireMap::ChannelsInROPStruct const* channelInfo
@@ -716,11 +824,11 @@ geo::SigType_t geo::CRPCBChannelMapAlg::SignalTypeForChannelImpl
   } // switch
   
   return geo::kMysteryType;
-} // geo::CRPCBChannelMapAlg::SignalTypeForChannelImpl()
+} // geo::CRPChannelMapAlg::SignalTypeForChannelImpl()
 
 
 // ----------------------------------------------------------------------------
-std::string geo::CRPCBChannelMapAlg::PlaneTypeName(PlaneType_t planeType) {
+std::string geo::CRPChannelMapAlg::PlaneTypeName(PlaneType_t planeType) {
   
   using namespace std::string_literals;
   switch (planeType) {
@@ -732,7 +840,7 @@ std::string geo::CRPCBChannelMapAlg::PlaneTypeName(PlaneType_t planeType) {
       return "unsupported ("s + std::to_string(planeType) + ")"s;
   } // switch
   
-} // geo::CRPCBChannelMapAlg::PlaneTypeName()
+} // geo::CRPChannelMapAlg::PlaneTypeName()
 
 
 // ----------------------------------------------------------------------------

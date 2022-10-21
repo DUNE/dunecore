@@ -11,6 +11,7 @@ dune::HDF5RawInputDetail::HDF5RawInputDetail(
     art::SourceHelper const & sh) 
   : pretend_module_name(ps.get<std::string>("raw_data_label", "daq")),
     fLogLevel(ps.get<int>("LogLevel", 0)),
+    fClockFreqMHz(ps.get<double>("ClockFrequencyMHz", 50.0)),
     pmaker(sh) {
   rh.reconstitutes<raw::DUNEHDF5FileInfo, art::InEvent>(pretend_module_name); 
   rh.reconstitutes<raw::RDTimeStamp, art::InEvent>(pretend_module_name, "trigger");
@@ -82,9 +83,10 @@ bool dune::HDF5RawInputDetail::readNext(art::RunPrincipal const* const inR,
    // trigTimeStamp is NOT time but Clock-tick since the epoch.
    uint64_t trigTimeStamp = header_info.trigTimestamp;
     
-   uint64_t getTrigTime = formatTrigTimeStamp (trigTimeStamp);
+   //std::cout << std::hex << "Trigger timestmap: " << trigTimeStamp << std::endl;
+   uint64_t getTrigTime = formatTrigTimeStampWithFrequency(trigTimeStamp, fClockFreqMHz);
    // std::cout << "getTrigTime :" << getTrigTime << std::endl;
-  
+
    art::Timestamp artTrigStamp (getTrigTime);
    // std::cout << "artTrigStamp :" << artTrigStamp.value() << std::endl;
 
