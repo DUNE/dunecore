@@ -16,7 +16,6 @@ art_make(MODULE_LIBRARIES
                         BASENAME_ONLY
 )
 
-
 install_headers()
 install_fhicl()
 install_source()
