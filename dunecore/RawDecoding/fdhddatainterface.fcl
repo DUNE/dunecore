@@ -1,0 +1,12 @@
+BEGIN_PROLOG
+
+fdhddatainterface_tool:
+{
+  tool_type: "FDHDDataInterface"
+  FileInfoLabel: "daq"      # module label for the source with file info
+  MaxChan:       1000000    # used to limit number of readin channels
+  DefaultCrate: 1           # crate number to use if crate is not recognized
+  DebugLevel: 0             # steers debug printout
+}
+
+END_PROLOG
