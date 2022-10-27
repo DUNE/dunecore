@@ -129,7 +129,7 @@ void setExpectedValuesSpacePoints(Geometry* pgeo) {
         fout << "  ev.posXyz.push_back(SpacePoint(" << x << ", " << y << ", " << z << "));" << endl;
         for ( unsigned int ipla=0; ipla<npla; ++ipla ) {
           PlaneID plaid(tpcid, ipla);
-          double xwire = pgeo->WireCoordinate(geo::Point_t{0, x, y}, plaid);
+          double xwire = pgeo->WireCoordinate(x, y, plaid);
           fout << "  ev.posTpc.push_back(" << itpc << ");" << endl;
           fout << "  ev.posPla.push_back(" << ipla << ");" << endl;
           fout << "  ev.posWco.push_back(" << xwire << ");" << endl;
@@ -140,3 +140,4 @@ void setExpectedValuesSpacePoints(Geometry* pgeo) {
 }
 
 //**********************************************************************
+

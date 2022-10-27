@@ -80,6 +80,9 @@ namespace geo{
 
           unsigned int t = 2*a;
           fWiresPerPlane[c][a][p] = cgeo[c].TPC(t).Plane(p).Nwires();
+          double xyz[3] = {0.};
+          double xyz_next[3] = {0.};
+
           fViews.emplace(cgeo[c].TPC(t).Plane(p).View());
 
           for(unsigned int w = 0; w != fWiresPerPlane[c][a][p]; ++w){
@@ -90,8 +93,8 @@ namespace geo{
               break;
             }
 
-            auto const xyz = cgeo[c].TPC(t).Plane(p).Wire(w).GetCenter();
-            auto const xyz_next = cgeo[c].TPC(t).Plane(p).Wire(w+1).GetCenter();
+            cgeo[c].TPC(t).Plane(p).Wire(w).GetCenter(xyz);
+            cgeo[c].TPC(t).Plane(p).Wire(w+1).GetCenter(xyz_next);
 
                 if(xyz[2]==xyz_next[2]){
               nAnchoredWires[c][a][p] = w-1; // this is a known bug, should be w
@@ -141,8 +144,9 @@ namespace geo{
         for (unsigned int plane=0; plane<fPlanesPerAPA; plane++){
           PlaneData_t& PlaneData = fPlaneData[cs][tpc][plane];
           fPlaneIDs.emplace(cs, tpc, plane);
+          double xyz[3]={0.0, 0.0, 0.0};
           const geo::PlaneGeo& thePlane = cgeo[cs].TPC(tpc).Plane(plane);
-          auto const xyz = thePlane.Wire(0).GetCenter();
+          thePlane.Wire(0).GetCenter(xyz);
           PlaneData.fFirstWireCenterY = xyz[1];
           PlaneData.fFirstWireCenterZ = xyz[2];
           // we are interested in the ordering of wire numbers: we find that a
@@ -153,19 +157,20 @@ namespace geo{
 
 	  // find boundaries of the APA frame for this plane by looking at endpoints of wires
 
-          auto endpoint = thePlane.Wire(0).GetStart();
+	  double endpoint[3];
+	  thePlane.Wire(0).GetStart(endpoint);
 	  PlaneData.fYmax = endpoint[1];
 	  PlaneData.fYmin = endpoint[1];
 	  PlaneData.fZmax = endpoint[2];
 	  PlaneData.fZmin = endpoint[2];
 	  unsigned int nwires = thePlane.Nwires(); 
 	  for (unsigned int iwire=0;iwire<nwires;iwire++){
-            endpoint = thePlane.Wire(iwire).GetStart();
+  	    thePlane.Wire(iwire).GetStart(endpoint);
 	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
 	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
 	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
 	    PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint[2]);
-            endpoint = thePlane.Wire(iwire).GetEnd();
+  	    thePlane.Wire(iwire).GetEnd(endpoint);
 	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
 	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
 	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
