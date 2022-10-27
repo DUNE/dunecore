@@ -129,8 +129,10 @@ namespace geo{
 
   //----------------------------------------------------------------------------
   bool sortWireAPA(WireGeo& w1, WireGeo& w2){
-    auto const xyz1 = w1.GetCenter();
-    auto const xyz2 = w2.GetCenter();
+    double xyz1[3] = {0.};
+    double xyz2[3] = {0.};
+
+    w1.GetCenter(xyz1); w2.GetCenter(xyz2);
 
     // we want the wires to be sorted such that the smallest corner wire
     // on the readout end of a plane is wire zero, with wire number
