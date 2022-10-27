@@ -463,10 +463,9 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     auto& auxdet = geo->AuxDet(i*2);
     for (size_t j = 0; j<auxdet.NSensitiveVolume(); ++j){
       auto& auxdetsen = auxdet.SensitiveVolume(j);
-      double xyz[3];
-      auxdetsen.GetCenter(xyz);
-      if (i==0) tt.DrawLatex(xyz[1]-0.5, xyz[2], Form("%d",int(j)));
-      else tt.DrawLatex(xyz[0]-0.5, xyz[2], Form("%d",int(j)));
+      auto const xyz = auxdetsen.GetCenter();
+      if (i==0) tt.DrawLatex(xyz.Y()-0.5, xyz.Z(), Form("%d",int(j)));
+      else tt.DrawLatex(xyz.X()-0.5, xyz.Z(), Form("%d",int(j)));
     }
     cstp[i]->Print(Form("cstp_%d.png",i));
   }

@@ -475,13 +475,13 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
         assert( ires < ev.posTpc.size() );
         PlaneID plaid(tpcid, ipla);
         WireID wirid;
-        try { wirid = pgeo->NearestWireID(xyz, plaid); }
+        try { wirid = pgeo->NearestWireID(geo::vect::toPoint(xyz), plaid); }
         catch (geo::InvalidWireError const& e) {
           if (!e.hasSuggestedWire()) throw;
           cerr << "ERROR (non-fatal):\n" << e;
           wirid = e.suggestedWireID();
         }
-        double xwire = pgeo->WireCoordinate(x, y, plaid);
+        double xwire = pgeo->WireCoordinate(geo::Point_t{0, x, y}, plaid);
         cout << "    TPC " << setw(2) << itpc << " plane " << ipla
              << " nearest wire is " << setw(3) << wirid.Wire
              << " and coordinate is " << xwire << endl;
