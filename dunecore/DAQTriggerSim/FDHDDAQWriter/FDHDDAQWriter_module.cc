@@ -36,9 +36,6 @@
 #include "dunecore/ChannelMap/FDHDChannelMapService.h"
 #include "dunecore/HDF5Utils/HDF5Utils.h"
 
-class FDHDDAQWriter;
-
-
 class FDHDDAQWriter : public art::EDAnalyzer {
 public:
   explicit FDHDDAQWriter(fhicl::ParameterSet const& p);

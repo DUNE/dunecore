@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.61.00d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.62.00d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -56,7 +56,8 @@ include_directories( $ENV{EIGEN_INC} )
 
 find_ups_product( art v3_09_00 )
 find_ups_product( art_root_io )
-find_ups_product( artdaq_core v01_03_6 )
+find_ups_product( artdaq_core )#v01_03_6 )
+find_ups_product( TRACE )
 find_ups_product( canvas )
 find_ups_product( canvas_root_io )
 find_ups_product( cetlib_except )
