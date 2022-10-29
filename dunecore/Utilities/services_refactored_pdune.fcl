@@ -19,7 +19,6 @@ protodune_refactored_simulation_services:
 protodune_larg4_services: 
 {
   @table::common_larg4_services
-
   ParticleListAction: @local::dune_particle_list_action
   PhysicsList:        @local::dune_physics_list_fastoptical
   LArG4Detector:      @local::protodune_larg4detector
@@ -29,14 +28,16 @@ protodune_larg4_services:
 ### ProtoDUNE-HD           ###
 ##############################
 
+protodunehd_larg4_services: @local::protodune_larg4_services
+protodunehd_larg4_services.LArG4Detector: @local::protodunehd_larg4detector
+
 protodunehd_refactored_simulation_services:
 {
+  @table::protodunehd_larg4_services
   @table::protodunehd_simulation_services
   ParticleInventoryService:     @local::standard_particleinventoryservice
   PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice
 }
-protodunehd_larg4_services: @local::protodune_larg4_services
-protodunehd_larg4_services.LArG4Detector: @local::protodunehd_larg4detector
 
 ##############################
 ### ProtoDUNE-VD           ###
