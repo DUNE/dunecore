@@ -106,8 +106,8 @@ namespace geo{
   //----------------------------------------------------------------------------
   bool sortWireCRM(WireGeo const& w1, WireGeo const& w2){
 
-    std::array<double, 3> xyz1, xyz2;
-    w1.GetCenter(xyz1.data()); w2.GetCenter(xyz2.data());
+    auto const xyz1 = w1.GetCenter();
+    auto const xyz2 = w2.GetCenter();
 
     // for dual-phase we have to planes with wires perpendicular to each other
     // sort wires in the increasing coordinate order
