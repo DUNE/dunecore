@@ -30,13 +30,13 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
 : m_size(0) {
   // Find the total # APAs and assign width for APA index.
   Index napatot = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->IterateCryostatIDs() ) {
+  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
     napatot += m_pgeo->NTPCsets(cryid);
   }
   unsigned int w = log10(napatot-1) + 1;
   // Loop over cryostats.
   Index krop = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->IterateCryostatIDs() ) {
+  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
     Index napa = m_pgeo->NTPCsets(cryid);
     // Loop over APAs.
     for ( Index iapa=0; iapa<napa; ++iapa ) {

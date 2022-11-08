@@ -60,7 +60,7 @@ namespace geo{
     
     //@{
     virtual WireID NearestWireID
-      (const TVector3& worldPos, geo::PlaneID const& planeID) const override;
+      (const geo::Point_t& worldPos, geo::PlaneID const& planeID) const override;
     //@}
     //@{
     virtual raw::ChannelID_t PlaneWireToChannel(geo::WireID const& wireID) const override;

@@ -29,7 +29,7 @@ IcebergChannelGeo::IcebergChannelGeo(Index icha, const geo::GeometryCore* pgeo)
   }
   double ylo = 173.819 - 95.23;
   for ( geo::WireID wid : pgeo->ChannelToWire(icha) ) {
-    EndPoints ends = pgeo->WireEndPoints<TVector3>(wid);
+    EndPoints ends = pgeo->WireEndPoints(wid);
     if ( ends.first.y() > ends.second.y() ) {
       Point firstPoint = ends.first;
       ends.first = ends.second;

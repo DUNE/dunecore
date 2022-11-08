@@ -69,7 +69,6 @@ dune::CheckGeometry::CheckGeometry(fhicl::ParameterSet const & p)
 
 void dune::CheckGeometry::analyze(art::Event const & evt)
 {
-
   art::ServiceHandle<geo::Geometry> geo;
 
   //std::cout<<"channel = "<<geo->PlaneWireToChannel(0,600,1)<<std::endl;
@@ -87,59 +86,54 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
   double maxz = -1e9;
   
   int nwires = 0;
-  std::vector<int> nwires_tpc(geo->NTPC());
-  for (size_t i = 0; i<geo->NTPC(); ++i) nwires_tpc[i] = 0;
-  for (size_t t = 0; t<geo->NTPC(); ++t){
+  std::vector<int> nwires_tpc(geo->NTPC(), 0);
+  for (geo::TPCGeo const& tpc : geo->Iterate<geo::TPCGeo>(geo::CryostatID{0})) {
+    auto const t = tpc.ID().TPC;
     //if (t%2==0) continue;
-    double local[3] = {0.,0.,0.};
-    double world[3] = {0.,0.,0.};
-    const geo::TPCGeo &tpc = geo->TPC(t);
-    tpc.LocalToWorld(local,world);
-    if (minx>world[0]-tpc.ActiveHalfWidth())
-      minx = world[0]-tpc.ActiveHalfWidth();
-    if (maxx<world[0]+tpc.ActiveHalfWidth())
-      maxx = world[0]+tpc.ActiveHalfWidth();
-    if (miny>world[1]-tpc.ActiveHalfHeight())
-      miny = world[1]-tpc.ActiveHalfHeight();
-    if (maxy<world[1]+tpc.ActiveHalfHeight())
-      maxy = world[1]+tpc.ActiveHalfHeight();
-    if (minz>world[2]-tpc.ActiveLength()/2.)
-      minz = world[2]-tpc.ActiveLength()/2.;
-    if (maxz<world[2]+tpc.ActiveLength()/2.)
-      maxz = world[2]+tpc.ActiveLength()/2.;
-//    std::cout<<t<<" "<<world[0]-tpc.ActiveHalfWidth()
-//	     <<" "<<world[0]+tpc.ActiveHalfWidth()
-//	     <<" "<<world[1]-tpc.ActiveHalfHeight()
-//	     <<" "<<world[1]+tpc.ActiveHalfHeight()
-//	     <<" "<<world[2]-tpc.ActiveLength()/2.
-//	     <<" "<<world[2]+tpc.ActiveLength()/2.<<std::endl;
+    auto const world = tpc.GetCenter();
+    if (minx>world.X()-tpc.ActiveHalfWidth())
+      minx = world.X()-tpc.ActiveHalfWidth();
+    if (maxx<world.X()+tpc.ActiveHalfWidth())
+      maxx = world.X()+tpc.ActiveHalfWidth();
+    if (miny>world.Y()-tpc.ActiveHalfHeight())
+      miny = world.Y()-tpc.ActiveHalfHeight();
+    if (maxy<world.Y()+tpc.ActiveHalfHeight())
+      maxy = world.Y()+tpc.ActiveHalfHeight();
+    if (minz>world.Z()-tpc.ActiveLength()/2.)
+      minz = world.Z()-tpc.ActiveLength()/2.;
+    if (maxz<world.Z()+tpc.ActiveLength()/2.)
+      maxz = world.Z()+tpc.ActiveLength()/2.;
+//    std::cout<<t<<" "<<world.X()-tpc.ActiveHalfWidth()
+//	     <<" "<<world.X()+tpc.ActiveHalfWidth()
+//	     <<" "<<world.Y()-tpc.ActiveHalfHeight()
+//	     <<" "<<world.Y()+tpc.ActiveHalfHeight()
+//	     <<" "<<world.Z()-tpc.ActiveLength()/2.
+//	     <<" "<<world.Z()+tpc.ActiveLength()/2.<<std::endl;
  
-    TPCBox.push_back(new TBox(world[2]-tpc.ActiveLength()/2.,
-			      world[1]-tpc.ActiveHalfHeight(),
-			      world[2]+tpc.ActiveLength()/2.,
-			      world[1]+tpc.ActiveHalfHeight()));
+    TPCBox.push_back(new TBox(world.Z()-tpc.ActiveLength()/2.,
+                              world.Y()-tpc.ActiveHalfHeight(),
+                              world.Z()+tpc.ActiveLength()/2.,
+                              world.Y()+tpc.ActiveHalfHeight()));
     TPCBox.back()->SetFillStyle(0);
     TPCBox.back()->SetLineStyle(2);
     TPCBox.back()->SetLineWidth(2);
     TPCBox.back()->SetLineColor(16);
     
-    for (size_t p = 0; p<geo->Nplanes(t);++p){
-      for (size_t w = 0; w<geo->Nwires(p,t); ++w){
+    for (auto const& wid : geo->Iterate<geo::WireID>(tpc.ID())) {
+      auto const [p, w] = std::make_pair(wid.Plane, wid.Wire);
 	++nwires;
 	++nwires_tpc[t];
-	double xyz0[3];
-	double xyz1[3];
-	unsigned int c = 0;
 //	if ((t==7&&p==0&&w==192)||
 //	    (t==7&&p==1&&w==112)||
 //	    (t==7&&p==2&&w==0)){
 //	if (true){
         if ((t==2||t==6||t==10)&&p==0&&w%10==0){
-	  geo->WireEndPoints(c,t,p,w,xyz0,xyz1);
+        double xyz0[3];
+        double xyz1[3];
+        geo->WireEndPoints(wid,xyz0,xyz1);
 	  Wires.push_back(new TLine(xyz0[2],xyz0[1],xyz1[2],xyz1[1]));
 	}
-	//std::cout<<t<<" "<<p<<" "<<w<<" "<<xyz0[0]<<" "<<xyz0[1]<<" "<<xyz0[2]<<std::endl;
-      }
+      //std::cout<<wid<<" "<<xyz0[0]<<" "<<xyz0[1]<<" "<<xyz0[2]<<std::endl;
     }
   }
 
@@ -170,21 +164,19 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
   std::vector<double> pixel_z(32);
   for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
     auto& auxdet = geo->AuxDet(i);
-    double xyz[3];
-    auxdet.GetCenter(xyz);
     //std::cout<<"Aux "<<i<<" "<<xyz[0]<<" "<<xyz[1]<<" "<<xyz[2]<<" "<<auxdet.HalfWidth1()<<" "<<auxdet.HalfHeight()<<" "<<auxdet.Length()/2<<std::endl;
-    double auxdet0[3] = {-auxdet.HalfWidth1(), auxdet.HalfHeight(), -auxdet.Length()/2};
-    double world0[3];
-    auxdet.LocalToWorld(auxdet0, world0);
-    double auxdet1[3] = {auxdet.HalfWidth1(), auxdet.HalfHeight(), auxdet.Length()/2};
-    double world1[3];
-    auxdet.LocalToWorld(auxdet1, world1);
-    module_x[i] = (world0[0]+world1[0])/2;
-    module_y[i] = (world0[1]+world1[1])/2;
-    module_z[i] = (world0[2]+world1[2])/2;
+    geo::AuxDetGeo::LocalPoint_t const auxdet0{-auxdet.HalfWidth1(), auxdet.HalfHeight(), -auxdet.Length()/2};
+    geo::AuxDetGeo::LocalPoint_t const auxdet1{auxdet.HalfWidth1(), auxdet.HalfHeight(), auxdet.Length()/2};
+    auto const world0 = auxdet.toWorldCoords(auxdet0);
+    auto const world1 = auxdet.toWorldCoords(auxdet1);
+    auto const midpoint = geo::vect::middlePoint({world0, world1});
+    module_x[i] = midpoint.X();
+    module_y[i] = midpoint.Y();
+    module_z[i] = midpoint.Z();
     std::cout<<"CRT module "<<i<<" x = "<<module_x[i]<<" y = "<<module_y[i]<<" z = "<<module_z[i]<<std::endl;
-    if (xyz[2] < 0){ //front
-      CRTBox0.push_back(new TBox(world0[0],world0[1],world1[0],world1[1]));
+    auto const xyz = auxdet.GetCenter();
+    if (xyz.Z() < 0){ //front
+      CRTBox0.push_back(new TBox(world0.X(),world0.Y(),world1.X(),world1.Y()));
       CRTBox0.back()->SetFillStyle(0);
       //CRTBox0.back()->SetLineStyle(i/8+1);
       CRTBox0.back()->SetLineColor(i%8+1);
@@ -193,7 +185,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
       }
       CRTBox0.back()->SetLineWidth(2);
       modules0.push_back(i);
-      text0.push_back(new TText((world0[0]+world1[0])/2,(world0[1]+world1[1])/2,Form("%d",i)));
+      text0.push_back(new TText(midpoint.X(),midpoint.Y(),Form("%d",i)));
       text0.back()->SetTextColor(i%8+1);
       if (i%8+1==5){
         text0.back()->SetTextColor(kOrange);
@@ -201,7 +193,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
 
     }
     else{
-      CRTBox1.push_back(new TBox(world0[0],world0[1],world1[0],world1[1]));
+      CRTBox1.push_back(new TBox(world0.X(),world0.Y(),world1.X(),world1.Y()));
       CRTBox1.back()->SetFillStyle(0);
       //CRTBox1.back()->SetLineStyle(i/8+1);
       CRTBox1.back()->SetLineColor(i%8+1);
@@ -210,7 +202,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
       }
       CRTBox1.back()->SetLineWidth(2);
       modules1.push_back(i);
-      text1.push_back(new TText((world0[0]+world1[0])/2,(world0[1]+world1[1])/2,Form("%d",i)));
+      text1.push_back(new TText(midpoint.X(),midpoint.Y(),Form("%d",i)));
       text1.back()->SetTextColor(i%8+1);
       if (i%8+1==5){
         text1.back()->SetTextColor(kOrange);
@@ -303,19 +295,16 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     module[1] = fChannelMap[vect[i].second];
     for (size_t j = 0; j<2; ++j){
       auto& auxdet = geo->AuxDet(module[j]);
-      double xyz[3];
-      auxdet.GetCenter(xyz);
-      x[j] = xyz[0];
-      y[j] = xyz[1];
-      z[j] = xyz[2];
-      double auxdet0[3] = {-auxdet.HalfWidth1(), auxdet.HalfHeight(), -auxdet.Length()/2};
-      double world0[3];
-      auxdet.LocalToWorld(auxdet0, world0);
-      double auxdet1[3] = {auxdet.HalfWidth1(), auxdet.HalfHeight(), auxdet.Length()/2};
-      double world1[3];
-      auxdet.LocalToWorld(auxdet1, world1);
-      x0[j] = world0[0];
-      x1[j] = world1[0];
+      auto const xyz = auxdet.GetCenter();
+      x[j] = xyz.X();
+      y[j] = xyz.Y();
+      z[j] = xyz.Z();
+      geo::AuxDetGeo::LocalPoint_t const auxdet0{-auxdet.HalfWidth1(), auxdet.HalfHeight(), -auxdet.Length()/2};
+      geo::AuxDetGeo::LocalPoint_t const auxdet1{auxdet.HalfWidth1(), auxdet.HalfHeight(), auxdet.Length()/2};
+      auto const world0 = auxdet.toWorldCoords(auxdet0);
+      auto const world1 = auxdet.toWorldCoords(auxdet1);
+      x0[j] = world0.X();
+      x1[j] = world1.X();
 //      y0[j] = world0[1];
 //      y1[j] = world1[1];
     }
@@ -352,23 +341,24 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
   for (int i = 0; i<16; ++i){
     //tex.DrawLatex(pixel_x[i], pixel_y[i], Form("CH %d",i));
   }
+
+  using LocalPoint_t = geo::AuxDetSensitiveGeo::LocalPoint_t;
+
   TLatex tt;
   tt.SetTextSize(0.02);
   for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
     auto& auxdet = geo->AuxDet(i);
-    double xyz[3];
-    auxdet.GetCenter(xyz);
-    if (xyz[2] < 0){ //front
+    auto const xyz = auxdet.GetCenter();
+    if (xyz.Z() < 0){ //front
       if (auxdet.HalfWidth1()>auxdet.HalfHeight()){//horizontal
         for (int j = 0; j<1; ++j){
           auto& auxdetsen = auxdet.SensitiveVolume(j);
           //std::cout<<i<<" "<<j<<" "<<auxdetsen.HalfWidth1()<<" "<<auxdetsen.HalfHeight()<<" "<<auxdetsen.Length()/2<<std::endl;
-          double auxdetsen0[3] = {0,0,auxdetsen.Length()/2-20};
-          double world0[3];
-          auxdetsen.LocalToWorld(auxdetsen0,world0);
+          LocalPoint_t const auxdetsen0{0,0,auxdetsen.Length()/2-20};
+          auto const world0 = auxdetsen.toWorldCoords(auxdetsen0);
           //std::cout<<i<<" "<<j<<" "<<world0[0]<<" "<<world0[1]<<std::endl;
           tt.SetTextColor(i%8+1);
-          tt.DrawLatex(world0[0], world0[1], Form("%d",j));
+          tt.DrawLatex(world0.X(), world0.Y(), Form("%d",j));
         }
       }
     }
@@ -390,18 +380,16 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
 
   for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
     auto& auxdet = geo->AuxDet(i);
-    double xyz[3];
-    auxdet.GetCenter(xyz);
-    if (xyz[2] > 0){ //front
+    auto const xyz = auxdet.GetCenter();
+    if (xyz.Z() > 0){ //front
       for (int j = 0; j<1; ++j){
         auto& auxdetsen = auxdet.SensitiveVolume(j);
         //std::cout<<i<<" "<<j<<" "<<auxdetsen.HalfWidth1()<<" "<<auxdetsen.HalfHeight()<<" "<<auxdetsen.Length()/2<<std::endl;
-        double auxdetsen0[3] = {0,0,auxdetsen.Length()/2-20};
-        double world0[3];
-        auxdetsen.LocalToWorld(auxdetsen0,world0);
+        LocalPoint_t const auxdetsen0{0,0,auxdetsen.Length()/2-20};
+        auto const world0 = auxdetsen.toWorldCoords(auxdetsen0);
         //std::cout<<i<<" "<<j<<" "<<world0[0]<<" "<<world0[1]<<std::endl;
         tt.SetTextColor(i%8+1);
-        tt.DrawLatex(world0[0], world0[1], Form("%d",j));
+        tt.DrawLatex(world0.X(), world0.Y(), Form("%d",j));
       }
     }
   }
@@ -411,23 +399,17 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     auto& auxdet = geo->AuxDet(i*2);
     for (size_t j = 0; j<auxdet.NSensitiveVolume(); ++j){
       auto& auxdetsen = auxdet.SensitiveVolume(j);
-      double world0[3] = {0};
-      double world1[3] = {0};
-      double auxdet0[3] = {-auxdetsen.HalfWidth1(),
-                           -auxdetsen.HalfHeight(),
-                           0};
-      double auxdet1[3] = {auxdetsen.HalfWidth1(),
-                           auxdetsen.HalfHeight(),
-                           0};
-      auxdetsen.LocalToWorld(auxdet0, world0);
-      auxdetsen.LocalToWorld(auxdet1, world1);
-//      std::cout<<world0[0]<<" "<<world0[1]<<" "<<world0[2]<<std::endl;
-//      std::cout<<world1[0]<<" "<<world1[1]<<" "<<world1[2]<<std::endl;
+      LocalPoint_t const auxdet0{-auxdetsen.HalfWidth1(), -auxdetsen.HalfHeight(), 0};
+      LocalPoint_t const auxdet1{auxdetsen.HalfWidth1(), auxdetsen.HalfHeight(), 0};
+      auto const world0 = auxdetsen.toWorldCoords(auxdet0);
+      auto const world1 = auxdetsen.toWorldCoords(auxdet1);
+//      std::cout<<world0.X()<<" "<<world0.Y()<<" "<<world0.Z()<<std::endl;
+//      std::cout<<world1.X()<<" "<<world1.Y()<<" "<<world1.Z()<<std::endl;
       if (i==0){
-        CRTStrips[i].push_back(new TBox(world0[1], world0[2], world1[1], world1[2]));
+        CRTStrips[i].push_back(new TBox(world0.Y(), world0.Z(), world1.Y(), world1.Z()));
       }
       else {
-        CRTStrips[i].push_back(new TBox(world0[0], world0[2], world1[0], world1[2]));
+        CRTStrips[i].push_back(new TBox(world0.X(), world0.Z(), world1.X(), world1.Z()));
       }
       CRTStrips[i].back()->SetFillStyle(0);
       CRTStrips[i].back()->SetLineWidth(2);

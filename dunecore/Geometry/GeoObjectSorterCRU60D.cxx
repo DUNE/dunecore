@@ -15,11 +15,14 @@
 #include "larcorealg/Geometry/TPCGeo.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
 #include "larcorealg/Geometry/WireGeo.h"
+
+#include "canvas/Utilities/Exception.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 #include <array>
 #include <string>
 #include <cmath> // std::abs()
+#include <utility>
 
 using std::cout;
 using std::endl;
@@ -28,30 +31,42 @@ using std::endl;
 namespace {
   // Tolerance when comparing distances in geometry:
   static constexpr double DistanceTol = 0.001; // cm
+
+  auto element(geo::Point_t const& point, short int i)
+  {
+    switch (std::abs(i)) {
+    case 0: return point.X();
+    case 1: return point.Y();
+    case 2: return point.Z();
+    }
+    throw art::Exception{art::errors::LogicError}
+      << "Unsupported index provided (" << i << ") for three-dimensional point.";
+  }
+
 } // local namespace
 
 // comparison functions for sorting various geo objects
-namespace geo { 
-  
+namespace geo {
+
   namespace CRU60D {
     short int TPCDriftAxis = 0;
 
     short int getDriftCoord(){
       if( TPCDriftAxis == 0 ){
-	MF_LOG_WARNING("geo::CRU60D::getDriftCoord") <<
-	  " Cannot retrieve drift coordinate. Defaulting to X axis";
-	return 0;
+        MF_LOG_WARNING("geo::CRU60D::getDriftCoord") <<
+          " Cannot retrieve drift coordinate. Defaulting to X axis";
+        return 0;
       }
-      
+
       short int axis = TPCDriftAxis - 1;
       if( axis >= 2 ){
-	 throw cet::exception("geo::CRU60D::getDriftCoord") 
-	   << "Drift coordinate index '" << axis <<"' is bad \n";
+         throw cet::exception("geo::CRU60D::getDriftCoord")
+           << "Drift coordinate index '" << axis <<"' is bad \n";
       }
-      
+
       return axis;
     }
-    
+
 
     //----------------------------------------------------------------------------
     // Define sort order for auxdet in VD configuration
@@ -91,12 +106,11 @@ namespace geo {
     // Define sort order for cryostats in VD configuration
     static bool sortCryo(const CryostatGeo& c1, const CryostatGeo& c2)
     {
-      double xyz1[3] = {0.}, xyz2[3] = {0.};
-      double local[3] = {0.};
-      c1.LocalToWorld(local, xyz1);
-      c2.LocalToWorld(local, xyz2);
+      geo::CryostatGeo::LocalPoint_t const local{};
+      auto const xyz1 = c1.toWorldCoords(local);
+      auto const xyz2 = c2.toWorldCoords(local);
 
-      return xyz1[0] < xyz2[0];
+      return xyz1.X() < xyz2.X();
     }
 
 
@@ -104,31 +118,27 @@ namespace geo {
     // Define sort order for TPC volumes (CRU60D) in VD configuration
     static bool sortTPC(const TPCGeo& t1, const TPCGeo& t2)
     {
-      double xyz1[3] = {0.};
-      double xyz2[3] = {0.};
-      double local[3] = {0.};
-      t1.LocalToWorld(local, xyz1);
-      t2.LocalToWorld(local, xyz2);
-      
+      auto const xyz1 = t1.GetCenter();
+      auto const xyz2 = t2.GetCenter();
+
       // try to get drift coord index
       short int dc = geo::CRU60D::getDriftCoord();
-     
- 
+
+
       // sort TPCs in drift volumes
-      if(std::abs(xyz1[dc]-xyz2[dc]) > DistanceTol)
-	return xyz1[dc] < xyz2[dc];
-//	return xyz1[dc] > xyz2[dc];
+      auto const [d1, d2] = std::make_pair(element(xyz1, dc), element(xyz2, dc));
+      if(std::abs(d1 - d2) > DistanceTol)
+        return d1 < d2;
 
       // First sort all TPCs into same-z groups
-      if(std::abs(xyz1[2]-xyz2[2]) > DistanceTol)
-	return xyz1[2] < xyz2[2];
-      
+      if(std::abs(xyz1.Z()-xyz2.Z()) > DistanceTol)
+        return xyz1.Z() < xyz2.Z();
+
       // Within a same-z group, sort TPCs into same-y/x groups
       int other = (dc == 0)?1:0;
-      if (other==1) return (xyz1[other] < xyz2[other]);
-      else if (other==0) return (xyz1[other] > xyz2[other]);
+      if (other==1) return xyz1.Y() < xyz2.Y();
+      else if (other==0) return xyz1.X() > xyz2.X();
       else {throw cet::exception("TPCGeo") << "Drift direction detected is non-X and non-Y.\n";}
-      
     }
 
 
@@ -136,75 +146,72 @@ namespace geo {
     // Define sort order for planes in VD configuration
     static bool sortPlane(const PlaneGeo& p1, const PlaneGeo& p2)
     {
-      double xyz1[3] = {0.};
-      double xyz2[3] = {0.};
-      double local[3] = {0.};
-      p1.LocalToWorld(local, xyz1);
-      p2.LocalToWorld(local, xyz2);
+      auto const xyz1 = p1.GetBoxCenter();
+      auto const xyz2 = p2.GetBoxCenter();
 
       // try to get drift coord index
       short int dc = geo::CRU60D::getDriftCoord();
-      
+
       // drift direction is negative, plane number increases in drift direction
-      return xyz1[dc] > xyz2[dc];
+      return element(xyz1, dc) > element(xyz2, dc);
     }
 
 
     //----------------------------------------------------------------------------
     bool sortWireDX(WireGeo const& w1, WireGeo const& w2){ // X is drift coordinate
       // wire sorting algorithm
- 
+
       //  w1 geo info
-      auto center1 = w1.GetCenter<geo::Point_t>();
-      auto start1  = w1.GetStart<geo::Point_t>();
-      auto end1    = w1.GetEnd<geo::Point_t>();
+      auto center1 = w1.GetCenter();
+      auto start1  = w1.GetStart();
+      auto end1    = w1.GetEnd();
       auto Delta   = end1-start1;
       //double dx1   = Delta.X();
       double dy1   = Delta.Y();
       double dz1   = Delta.Z();
       double thtz  = w1.ThetaZ();
-      
+
       // w2 geo info
-      auto center2 = w2.GetCenter<geo::Point_t>();
-      
-      auto CheckTol = [](double val, double tol = 1.E-4){ 
-	return (std::abs( val ) < tol); 
+      auto center2 = w2.GetCenter();
+
+      auto CheckTol = [](double val, double tol = 1.E-4){
+        return (std::abs( val ) < tol);
       };
-      
+
       if( CheckTol(dz1) ){ // wires perpendicular to z axis
-	return (center1.Z() < center2.Z());
+        return (center1.Z() < center2.Z());
       }
-      
+
       if( CheckTol(dy1) ){ // wires perpendicular to y axis
-	return (center1.Y() < center2.Y());
+        return (center1.Y() < center2.Y());
       }
-      
+
       //cout<<"w1 " << w1.WireInfo("  ", 3)
       //<<" half length " << w1.HalfL()
       //<<" thetaZ = "<<thtz<<endl;
 
       // u-view
-      if( thtz > 1.57 ) { 
+      if( thtz > 1.57 ) {
 
-	// wires at angle with same z center
-	if( CheckTol( center2.Z() - center1.Z() ) ){
-	  if( dz1 < 0 ){ dy1 = -dy1; } // always compare here upstream - downstream ends
-	  if( dy1 < 0 ){ return (center1.Y() < center2.Y()); }
-	  if( dy1 > 0 ){ return (center1.Y() > center2.Y()); }
-	}
-	
-	// otherwise sorted in z
-	return ( center1.Z() < center2.Z() );
+        // wires at angle with same z center
+        if( CheckTol( center2.Z() - center1.Z() ) ){
+          if( dz1 < 0 ){ dy1 = -dy1; } // always compare here upstream - downstream ends
+          if( dy1 < 0 ){ return (center1.Y() < center2.Y()); }
+          if( dy1 > 0 ){ return (center1.Y() > center2.Y()); }
+        }
+
+        // otherwise sorted in z
+        return ( center1.Z() < center2.Z() );
       } // u view
-      
+
       // v view
       // wires at angle with same z center
       if( CheckTol( center2.Z() - center1.Z() ) ){
-	if( dz1 < 0 ){ dy1 = -dy1; } // always compare here upstream - downstream ends
-	if( dy1 < 0 ){ return (center1.Y() > center2.Y()); }
-	if( dy1 > 0 ){ return (center1.Y() < center2.Y()); }
+        if( dz1 < 0 ){ dy1 = -dy1; } // always compare here upstream - downstream ends
+        if( dy1 < 0 ){ return (center1.Y() > center2.Y()); }
+        if( dy1 > 0 ){ return (center1.Y() < center2.Y()); }
       }
-      
+
       // otherwise sorted in -z
       return ( center1.Z() > center2.Z() );
     }
@@ -214,55 +221,55 @@ namespace geo {
       // wire sorting algorithm
 
       //  w1 geo info
-      auto center1 = w1.GetCenter<geo::Point_t>();
-      auto start1  = w1.GetStart<geo::Point_t>();
-      auto end1    = w1.GetEnd<geo::Point_t>();
+      auto center1 = w1.GetCenter();
+      auto start1  = w1.GetStart();
+      auto end1    = w1.GetEnd();
       auto Delta   = end1-start1;
       double dx1   = Delta.X();
       double dz1   = Delta.Z();
       double thtz  = w1.ThetaZ();
-      
+
       // w2 geo info
-      auto center2 = w2.GetCenter<geo::Point_t>();
-      
-      auto CheckTol = [](double val, double tol = 1.E-4){ 
-	return (std::abs( val ) < tol); 
+      auto center2 = w2.GetCenter();
+
+      auto CheckTol = [](double val, double tol = 1.E-4){
+        return (std::abs( val ) < tol);
       };
-      
+
       if( CheckTol(dz1) ){ // wires perpendicular to z axis
-	return (center1.Z() < center2.Z());
+        return (center1.Z() < center2.Z());
       }
-      
+
       if( CheckTol(dx1) ){ // wires perpendicular to x axis
-	return (center1.X() < center2.X());
+        return (center1.X() < center2.X());
       }
-      
+
       //cout<<"w1 " << w1.WireInfo("  ", 3)
       //<<" half length " << w1.HalfL()
       //<<" thetaZ = "<<thtz<<endl;
 
       // u-view
-      if( thtz > 1.57 ) { 
+      if( thtz > 1.57 ) {
 
-	// wires at angle with same z center
-	if( CheckTol( center2.Z() - center1.Z() ) ){
-	  if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
-	  if( dx1 < 0 ){ return (center1.X() < center2.X()); }
-	  if( dx1 > 0 ){ return (center1.X() > center2.X()); }
-	}
-	
-	// otherwise sorted in z
-	return ( center1.Z() < center2.Z() );
+        // wires at angle with same z center
+        if( CheckTol( center2.Z() - center1.Z() ) ){
+          if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
+          if( dx1 < 0 ){ return (center1.X() < center2.X()); }
+          if( dx1 > 0 ){ return (center1.X() > center2.X()); }
+        }
+
+        // otherwise sorted in z
+        return ( center1.Z() < center2.Z() );
       } // u view
-      
+
       // v view
       // wires at angle with same z center
       if( CheckTol( center2.Z() - center1.Z() ) ){
-	if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
-	if( dx1 < 0 ){ return (center1.X() > center2.X()); }
-	if( dx1 > 0 ){ return (center1.X() < center2.X()); }
+        if( dz1 < 0 ){ dx1 = -dx1; } // always compare here upstream - downstream ends
+        if( dx1 < 0 ){ return (center1.X() > center2.X()); }
+        if( dx1 > 0 ){ return (center1.X() < center2.X()); }
       }
-      
+
       // otherwise sorted in -z
       return ( center1.Z() > center2.Z() );
     }
@@ -300,10 +307,10 @@ namespace geo {
   void GeoObjectSorterCRU60D::SortTPCs(std::vector<geo::TPCGeo>  & tgeo) const
   {
     // attempt to get TPC drift direction: 1 - X, 2 - Y, 3 - Z
-    if( !geo::CRU60D::TPCDriftAxis ){ 
+    if( !geo::CRU60D::TPCDriftAxis ){
       geo::CRU60D::TPCDriftAxis = std::abs((*tgeo.begin()).DetectDriftDirection());
       MF_LOG_DEBUG("GeoObjectSorterCRU60D")
-	<<" Retrieved drift axis "<<geo::CRU60D::TPCDriftAxis;
+        <<" Retrieved drift axis "<<geo::CRU60D::TPCDriftAxis;
     }
     std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPC);
 
