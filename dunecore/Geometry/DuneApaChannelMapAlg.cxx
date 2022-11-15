@@ -205,8 +205,6 @@ const PlaneGeo plageo2 = plageo;
             throw cet::exception("DuneApaChannelMapAlg") << __func__
                   << ": View " << view << " is not the expected " << eview[ipla];
           }
-          double xyz[3] = {0.};
-          double xyz_next[3] = {0.};
           Index nAnchoredWires = 0;  // # wires from this TPC plane contributing to the ROP
           // Collection plane.
           Index nwir = fWiresPerPlane[icry][itpc][ipla];
@@ -215,8 +213,8 @@ const PlaneGeo plageo2 = plageo;
           // Induction planes.
           } else {
             for ( unsigned int iwir=0; iwir+1<nwir; ++iwir ) {
-              plageo.Wire(iwir).GetCenter(xyz);
-              plageo.Wire(iwir+1).GetCenter(xyz_next);
+              auto const xyz = plageo.Wire(iwir).GetCenter();
+              auto const xyz_next = plageo.Wire(iwir+1).GetCenter();
               if ( xyz[2] == xyz_next[2] ) {
                 nAnchoredWires = iwir;
                 break;
@@ -246,9 +244,8 @@ const PlaneGeo plageo2 = plageo;
       for ( Index ipla=0; ipla<crygeos[icry].TPC(itpc).Nplanes(); ++ipla ) {
         PlaneData_t& PlaneData = fPlaneData[icry][itpc][ipla];
         const PlaneGeo& thePlane = crygeos[icry].TPC(itpc).Plane(ipla);
-        double xyz[3];
         fPlaneIDs.emplace(icry, itpc, ipla);
-        thePlane.Wire(0).GetCenter(xyz);
+        auto const xyz = thePlane.Wire(0).GetCenter();
         PlaneData.fFirstWireCenterY = xyz[1];
         PlaneData.fFirstWireCenterZ = xyz[2];
         // we are interested in the ordering of wire numbers: we find that a
@@ -259,20 +256,19 @@ const PlaneGeo plageo2 = plageo;
 
 	  // find boundaries of the outside APAs for this plane by looking at endpoints of wires
 
-	  double endpoint[3];
-	  thePlane.Wire(0).GetStart(endpoint);
+          auto endpoint = thePlane.Wire(0).GetStart();
 	  PlaneData.fYmax = endpoint[1];
 	  PlaneData.fYmin = endpoint[1];
 	  PlaneData.fZmax = endpoint[2];
 	  PlaneData.fZmin = endpoint[2];
 	  unsigned int nwires = thePlane.Nwires(); 
 	  for (unsigned int iwire=0;iwire<nwires;iwire++){
-  	    thePlane.Wire(iwire).GetStart(endpoint);
+            endpoint = thePlane.Wire(iwire).GetStart();
 	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
 	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
 	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
 	    PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint[2]);
-  	    thePlane.Wire(iwire).GetEnd(endpoint);
+            endpoint = thePlane.Wire(iwire).GetEnd();
 	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
 	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
 	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
@@ -410,14 +406,6 @@ unsigned int DuneApaChannelMapAlg::Nchannels(ROPID const& ropid) const {
 
 //----------------------------------------------------------------------------
   
-double DuneApaChannelMapAlg::
-WireCoordinate(double YPos, double ZPos, unsigned int PlaneNo, unsigned int TPCNo,
-               unsigned int cstat) const {
-  return WireCoordinate(YPos, ZPos, PlaneID(cstat, TPCNo, PlaneNo));
-}
-  
-//----------------------------------------------------------------------------
-
 double DuneApaChannelMapAlg::
 WireCoordinate(double YPos, double ZPos, PlaneID const& plaid) const {
   const PlaneData_t& PlaneData = AccessElement(fPlaneData, plaid);
