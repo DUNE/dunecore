@@ -82,14 +82,11 @@ namespace geo{
 	    double ThisWirePitch = cgeo[cs].TPC(TPCCount).WirePitch(PlaneCount);
 	    fWireCounts[cs][TPCCount][PlaneCount] = cgeo[cs].TPC(TPCCount).Plane(PlaneCount).Nwires();
 	    
-	    double  WireCentre1[3] = {0.,0.,0.};
-	    double  WireCentre2[3] = {0.,0.,0.};
-	  
 	    const geo::WireGeo& firstWire = cgeo[cs].TPC(TPCCount).Plane(PlaneCount).Wire(0);
 	    const double sth = firstWire.SinThetaZ(), cth = firstWire.CosThetaZ();
 
-	    firstWire.GetCenter(WireCentre1,0);
-	    cgeo[cs].TPC(TPCCount).Plane(PlaneCount).Wire(1).GetCenter(WireCentre2,0);
+            auto const WireCentre1 = firstWire.GetCenter();
+            auto const WireCentre2 = cgeo[cs].TPC(TPCCount).Plane(PlaneCount).Wire(1).GetCenter();
 	    
 	    // figure out if we need to flip the orthogonal vector 
 	    // (should point from wire n -> n+1)
@@ -234,7 +231,7 @@ namespace geo{
       if(NearestWireNumber < 0 ) NearestWireNumber = 0;
       else                       NearestWireNumber = WireCount(planeID) - 1;
       
-      throw InvalidWireIDError("Geometry", wireNumber, NearestWireNumber)
+      throw InvalidWireError("Geometry", wireNumber, NearestWireNumber)
         << "Can't Find Nearest Wire for position (" 
         << worldPos[0] << "," << worldPos[1] << "," << worldPos[2] << ")"
         << " in plane " << std::string(planeID) << " approx wire number # "

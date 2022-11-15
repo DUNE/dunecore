@@ -27,14 +27,14 @@ fwdir  product_dir config_data
 
 product             version
 dunepdlegacy        v1_00_01
-duneutil            v09_62_00d01
+duneutil            v09_63_00d00
 dune_pardata        v01_81_00
 dunedetdataformats  v3_4_0
 dunedaqdataformats  v3_3_3
 nusystematics       v01_01_00
 systematicstools    v01_02_00
 dune_oslibs         v1_0_0         -       optional
-larsoft             v09_62_00
+larsoft             v09_63_00
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
 end_product_list

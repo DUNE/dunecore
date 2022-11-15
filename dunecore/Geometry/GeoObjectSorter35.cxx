@@ -169,10 +169,8 @@ namespace geo{
     {}
 
     bool operator()(WireGeo const& w1, WireGeo const& w2){
-      double xyz1[3] = {0.};
-      double xyz2[3] = {0.};
-
-      w1.GetCenter(xyz1); w2.GetCenter(xyz2);
+      auto const xyz1 = w1.GetCenter();
+      auto const xyz2 = w2.GetCenter();
 
 
       //mf::LogVerbatim("sortWire35") << "Sorting wires: ("
