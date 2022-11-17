@@ -15,7 +15,7 @@
 #           TO DO: exchange x and y in SteelSupport structure (currently, overlaps avoided by changing position
 #                  of volSteelSuport_LS/RS/Bottom/Top)
 #  
-#  V2:      Inclusion of CRT pannels (as in ProtoDUNE-HD)
+#  V2:      Inclusion of CRT panels (as in ProtoDUNE-HD)
 #           Update of the PDS and of FC
 #           Reorganize the "wire" generator algorithm to allow 
 #           easily generating full length strips on the CRU plane
@@ -68,6 +68,13 @@ else
     # Otherwise, stick a "-" before the suffix, so that a suffix of
     # "test" applied to filename.gdml becomes "filename-test.gdml".
     $suffix = "-" . $suffix;
+}
+
+# set wires on to be the default, unless given an input by the user
+$wires_on = 1; # 1=on, 0=off
+if (defined $wires)
+{
+    $wires_on = $wires;
 }
 
 $tpc_on = 1;
