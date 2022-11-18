@@ -22,4 +22,8 @@ cet_make_exec(liblist
     cetlib_except::cetlib_except
 )
 
+install_scripts(
+  fclgrep
+)
+
 install_source()

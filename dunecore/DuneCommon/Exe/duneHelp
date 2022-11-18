@@ -43,6 +43,7 @@ echo "              duneHelp - Display information about the current setup of du
 echo "                   lar - Run the art/larsoft event looop e.g. to process event data."
 echo "  product_sizes_dumper - Display the products and size in an event data file."
 echo "               fcldump - Display the resolved configuration for a fcl file."
+echo "               fclgrep - Search for a pattern in the installed fcl files."
 echo "               liblist - List available plugin libraries."
 echo "        pdChannelRange - Display protoDUNE channel grops and ranges."
 echo "           duneRunData - Display the (fcl-based) run info for a run."
