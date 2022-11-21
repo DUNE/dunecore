@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# fclgrep
+#
+# David Adams
+# November 2022
+
+PAT=$1
+
+for DIR in $FHICL_FILE_PATH; do
+  grep PAT in $DIR/*.fcl
+done
+    

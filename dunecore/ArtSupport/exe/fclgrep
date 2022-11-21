@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# fclgrep
+#
+# David Adams
+# November 2022
+
+HELP=
+VERBOSE=
+PATTERN=
+while true; do
+  ARG=$1
+  shift
+  if [ -z "$ARG" ]; then
+    HELP=true
+    break
+  elif [ ${ARG:0:1} = - ]; then
+    if [ $ARG = -h ]; then
+      HELP=true
+    elif [ $ARG = -v ]; then
+      VERBOSE=true
+    else
+      echo Invalid flag: $ARG >&2
+      exit 2
+    fi
+  else
+    PATTERN=$ARG
+    break
+  fi
+done
+
+if [ -n "$HELP" ]; then
+  echo Usage: $0 [-h] [-v] PATTERN [DIRS]
+  echo "  Searches the directory list or path DIRS for *.fcl files"
+  echo "  containing PATTERN."
+  echo "  If DIRS is omitted, \$FHICL_FILE_PATH is used"
+  exit 0
+fi
+
+PTH="$*"
+if [ -z "$PTH" ]; then
+  if [ -n "$FHICL_FILE_PATH" ]; then
+    PTH=$FHICL_FILE_PATH
+  else
+    echo FHICL_FILE_PATH is not defined >&2
+    exit 1
+  fi
+fi
+
+DIRS=$(echo $PTH | sed 's/:/  /g')
+
+if [ -n "$VERBOSE" ]; then
+  echo '>>>>> Seaching *.fcl for '$PATTERN
+fi
+for DIR in $DIRS; do
+  if [ -n "$VERBOSE" ]; then
+    echo ">>>>> Checking $DIR">&2
+    grep $PATTERN $DIR/*.fcl
+  else
+    grep $PATTERN $DIR/*.fcl 2>/dev/null
+  fi
+done
+    
