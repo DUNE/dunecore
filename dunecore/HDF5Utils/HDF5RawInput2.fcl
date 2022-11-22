@@ -1,0 +1,18 @@
+BEGIN_PROLOG
+
+# HDF5RawInput2 source configuration parameters
+# for the HDF5 file format released by DUNE-DAQ in November 2022
+
+hdf5rawinput2: {
+  raw_data_label:        "daq"           # module label for products put in the event
+  module_type:           HDF5RawInput2   # source plug-in name
+  ClockFrequencyMHz:     62.5            # clock frequency for converting timestamps
+  HandleSequenceOption:  "ignore"        # What to do about multiple sequence IDs
+                                         #   ignore -- just read them in
+                                         #   increment -- renumber events sequentiall
+					 #   shiftadd -- trignum*TrNscale + sequence ID
+  TrnScale:              10000           # if doing shiftadd, the number to scale the trigger id
+  LogLevel: 0                            # debug printout
+}
+
+END_PROLOG
