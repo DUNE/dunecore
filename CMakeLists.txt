@@ -96,6 +96,8 @@ find_ups_product( systematicstools  )
 find_ups_product( fftw )
 find_package(FFTW3 REQUIRED EXPORT)
 find_ups_product( sqlite )
+find_ups_product( nlohmann_json )
+find_ups_product( highfive )
 
 string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
 if( ${BTYPE_UC} MATCHES "DEBUG" )

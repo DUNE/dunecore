@@ -21,6 +21,7 @@
 #include "dunecore/DuneObj/ProtoDUNETimeStamp.h"
 #include "dunecore/DuneObj/RDStatus.h"
 #include "dunecore/DuneObj/DUNEHDF5FileInfo.h"
+#include "dunecore/DuneObj/DUNEHDF5FileInfo2.h"
 #include <vector>
 #include <map>
 //#include <array>

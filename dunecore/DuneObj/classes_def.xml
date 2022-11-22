@@ -123,7 +123,15 @@
   <class name="art::Wrapper<std::vector<raw::RDStatus>>"/>
 
   <class name="art::Ptr<raw::DUNEHDF5FileInfo>"/>
-  <class name="raw::DUNEHDF5FileInfo"/>
+  <class name="raw::DUNEHDF5FileInfo" ClassVersion="10">
+   <version ClassVersion="10" checksum="901317983"/>
+  </class>
   <class name="art::Wrapper<raw::DUNEHDF5FileInfo>"/>
+
+  <class name="art::Ptr<raw::DUNEHDF5FileInfo2>"/>
+  <class name="raw::DUNEHDF5FileInfo2" ClassVersion="10">
+   <version ClassVersion="10" checksum="3054806473"/>
+  </class>
+  <class name="art::Wrapper<raw::DUNEHDF5FileInfo2>"/>
 
 </lcgdict>

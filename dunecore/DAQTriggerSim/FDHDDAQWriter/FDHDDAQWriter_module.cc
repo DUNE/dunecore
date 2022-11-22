@@ -28,8 +28,7 @@
 #include <iomanip>
 #include <vector>
 #include <map>
-//  #include "daqdataformats/TriggerRecordHeader.hpp"
-#include "daqdataformats/Fragment.hpp"
+#include "daqdataformats/v3_3_3/Fragment.hpp"
 #include "detdataformats/wib2/WIB2Frame.hpp"
 #include "lardataobj/RawData/raw.h"
 #include "lardataobj/RawData/RawDigit.h"
@@ -251,9 +250,6 @@ void FDHDDAQWriter::analyze(art::Event const& e)
   H5Gclose(tpcg);
 
   // make our own trigger record header
-
-  //std::vector<dunedaq::daqdataformats::ComponentRequest> crvec(2);
-  //dunedaq::daqdataformats::TriggerRecordHeader trHeader(crvec);
 
   dune::HDF5Utils::HeaderInfo trhinfo;
   trhinfo.runNum = runno;
