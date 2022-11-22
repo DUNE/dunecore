@@ -112,10 +112,12 @@ namespace geo {
       
       // try to get drift coord index
       short int dc = geo::CRU60D::getDriftCoord();
-      
+     
+ 
       // sort TPCs in drift volumes
       if(std::abs(xyz1[dc]-xyz2[dc]) > DistanceTol)
 	return xyz1[dc] < xyz2[dc];
+//	return xyz1[dc] > xyz2[dc];
 
       // First sort all TPCs into same-z groups
       if(std::abs(xyz1[2]-xyz2[2]) > DistanceTol)
@@ -123,7 +125,10 @@ namespace geo {
       
       // Within a same-z group, sort TPCs into same-y/x groups
       int other = (dc == 0)?1:0;
-      return (xyz1[other] < xyz2[other]);
+      if (other==1) return (xyz1[other] < xyz2[other]);
+      else if (other==0) return (xyz1[other] > xyz2[other]);
+      else {throw cet::exception("TPCGeo") << "Drift direction detected is non-X and non-Y.\n";}
+      
     }
 
 
@@ -301,6 +306,7 @@ namespace geo {
 	<<" Retrieved drift axis "<<geo::CRU60D::TPCDriftAxis;
     }
     std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPC);
+
   }
 
   //----------------------------------------------------------------------------
