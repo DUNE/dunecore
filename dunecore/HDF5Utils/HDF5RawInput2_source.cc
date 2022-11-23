@@ -69,8 +69,8 @@ bool dune::HDF5RawInput2Detail::readNext(art::RunPrincipal const* const inR,
   // take the first unprocessed event off the set
 
   auto nextEventRecordID_i = fUnprocessedEventRecordIDs.cbegin();
-  fUnprocessedEventRecordIDs.erase(nextEventRecordID_i);
   auto nextEventRecordID = *nextEventRecordID_i;
+  fUnprocessedEventRecordIDs.erase(nextEventRecordID_i);
 
   uint32_t run_id = rf->get_attribute<uint32_t>("run_number");
 
