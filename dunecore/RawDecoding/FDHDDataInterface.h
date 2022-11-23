@@ -10,7 +10,7 @@
 #include "lardataobj/RawData/RDTimeStamp.h"
 #include "artdaq-core/Data/Fragment.hh"
 #include "dunecore/DuneObj/PDSPTPCDataInterfaceParent.h"
-#include "daqdataformats/Fragment.hpp"
+#include "daqdataformats/v3_3_3/Fragment.hpp"
 #include <hdf5.h>
 
 typedef dunedaq::daqdataformats::Fragment duneFragment;

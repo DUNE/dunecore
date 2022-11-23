@@ -1,3 +1,7 @@
+// utility functions for the HD and VD coldboxes and 
+// Iceberg data taken in 2022 prior to the file format change
+// announced at the September 2022 collaboration meeting
+
 #ifndef HDF5Utils_h
 #define HDF5Utils_h
 
@@ -11,7 +15,7 @@
 
 
 
-#include "daqdataformats/Fragment.hpp"
+#include "daqdataformats/v3_3_3/Fragment.hpp"
 #include "lardataobj/RawData/RawDigit.h"
 #include "lardataobj/RawData/RDTimeStamp.h"
 
