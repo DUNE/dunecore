@@ -57,6 +57,7 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
   bool useApaMap = false;
   bool is35t = false;
 
+
   // If class name is given use it.
   if ( fChannelMapClass.size() ) {
     if ( fChannelMapClass == "DuneApaChannelMapAlg" ) {
@@ -138,7 +139,8 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
       channelMap = std::make_unique<geo::ProtoDUNEChannelMapAlgv8>(pset);
       
     // protoDUNE VD
-    } else if ( detectorName.find("protodunevd_v1") != std::string::npos ) {
+//    } else if ( detectorName.find("protodunevd_v1") != std::string::npos ) {
+    } else if ( detectorName.find("protodunevd") != std::string::npos ) {
       channelMap = std::make_unique<geo::CRPChannelMapAlg>(pset);
       
     // protoDUNE
@@ -158,6 +160,8 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
       throw cet::exception("DUNEGeometryHelper") << "Unsupported detector: '" << detectorName << "'\n";
     }
   }
+
+
 
   if ( useApaMap ) {
     // Find the sorter.

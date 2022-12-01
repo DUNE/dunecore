@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.63.00d01)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.63.01d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -96,6 +96,8 @@ find_ups_product( systematicstools  )
 find_ups_product( fftw )
 find_package(FFTW3 REQUIRED EXPORT)
 find_ups_product( sqlite )
+find_ups_product( nlohmann_json )
+find_ups_product( highfive )
 
 string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
 if( ${BTYPE_UC} MATCHES "DEBUG" )

@@ -2,26 +2,18 @@
 #!/usr/bin/perl
 #
 #  First attempt to make a GDML generator for the ProtoDUNE vertical drift 
-#  detector geometry with 3 views: +/- Xdeg for induction and 90 deg collection. 
-#  !!!NOTE!!!: the readout is on Y plane (drift along horizontal X)
+#  detector geometry with 3 views: +/- 60deg for induction and 90 deg collection. 
+#  !!!NOTE!!!: the readout is on Y plane (drift along vertical Y)
 #              due to current reco limitations).
 #  Simplified treatment of inter-module dead spaces
 #
-#  Created: Mon July 18 2022
-#           Laura Paulucci <lpaulucc@fnal.gov>, based on Vyacheslav Galymov's script for dunevd10kt
+#  Created: Mon October 10 2022
+#           Thomas Kosc <kosc.thomas@gmail.com>, based on Laura Paulucci's script for protodune-vd drift X
 #
 #  Details: Collection pitch = 5.1 mm / Induction pitch = 7.65 mm 
 #           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #           TO DO: exchange x and y in SteelSupport structure (currently, overlaps avoided by changing position
 #                  of volSteelSuport_LS/RS/Bottom/Top)
-#  
-#  V2:      Inclusion of CRT panels (as in ProtoDUNE-HD)
-#           Update of the PDS and of FC
-#           Reorganize the "wire" generator algorithm to allow 
-#           easily generating full length strips on the CRU plane
-#           These are then split through mid-CRU section to make
-#           wire objets for geo planes and geo vol TPCs, as done
-#           by V. Galymov for the ColdBox2
 ##################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
@@ -47,6 +39,7 @@ GetOptions( "help|h" => \$help,
 
 my $FieldCage_switch="on";
 my $Cathode_switch="on";
+my $wires_on=0;
 $GroundGrid_switch="off";
 $ExtractionGrid_switch="off";
 
@@ -70,21 +63,16 @@ else
     $suffix = "-" . $suffix;
 }
 
-# set wires on to be the default, unless given an input by the user
-$wires_on = 1; # 1=on, 0=off
-if (defined $wires)
-{
-    $wires_on = $wires;
-}
-
 $tpc_on = 1;
 $basename="protodune-vd";
 
+my $TESTWIRE=199;
 
 ##################################################################
 ############## Parameters for One Readout Panel ##################
 
-# views and channel counts per CRU (=1/2 of CRP)
+# views and channel counts
+#%nChans = ('Ind1', 286, 'Ind1Bot', 96, 'Ind2', 286, 'Col', 292);
 %nChans = ('Ind1', 476, 'Ind2', 476, 'Col', 2*292);
 $nViews = keys %nChans;
 
@@ -107,20 +95,29 @@ $wirePitchZ      = 0.51;   # cm
 $lengthPCBActive = 149.0;    #cm
 $widthPCBActive  = 335.8;    #cm
 $gapCRU          = 0.1;      #cm
-$borderCRP       = 0.6;      #cm
+$borderCRP = 0.6; # cm
+
+$borderCRM       = 0.34;     # border space aroud each CRM 
+$widthCRM_active  = $widthPCBActive;  
+$lengthCRM_active = $lengthPCBActive; 
+
+$widthCRM  = $widthPCBActive  + 2 * $borderCRM;
+$lengthCRM = $lengthPCBActive + 2 * $borderCRM;
 
 # total area covered by CRP
 $widthCRP  =     $widthPCBActive  + 2 * $borderCRP;
 $lengthCRP = 2 * $lengthPCBActive + 2 * $borderCRP + $gapCRU;
 
-# number of CRMs in y and z
+
+
+# number of CRMs in x and z
 $nCRM_x   = 2 * 2;
 $nCRM_z   = 1 * 2;
 
-# active volume dimensions 
-# only one crp so active area dimensions are given by CRP area
-$widthTPCActive  = $nCRM_x/2 * $widthCRP;
-$lengthTPCActive = $nCRM_z/2 * $lengthCRP; 
+# calculate tpc area based on number of CRMs and their dimensions
+# each CRP should have a 2x2 CRMs
+$widthTPCActive  = $nCRM_x/2 * $widthCRP;  # around 1200 for full module
+$lengthTPCActive = $nCRM_z/2 * $lengthCRP; # around 6000 for full module
 
 # active volume dimensions 
 $driftTPCActive  = 310.0;
@@ -134,23 +131,23 @@ $ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space b/w)!
 ############## Parameters for TPC and inner volume ###############
 
 # inner volume dimensions of the cryostat
-$Argon_x = 790.0;
-$Argon_y = 854.8;
+$Argon_y = 790.0; #modif
+$Argon_x = 854.8; #modif
 $Argon_z = 854.8;
 
 # width of gas argon layer on top
 $HeightGaseousAr = 51.5;
 
 # size of liquid argon buffer
-$xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $ReadoutPlane;
-$yLArBuffer = 0.5 * ($Argon_y - $widthTPCActive);
+$yLArBuffer = $Argon_y - $driftTPCActive - $HeightGaseousAr - $ReadoutPlane; #modif
+$xLArBuffer = 0.5 * ($Argon_x - $widthTPCActive); #modif
 $zLArBuffer = 0.5 * ($Argon_z - $lengthTPCActive);
 
 # cryostat 
 $SteelThickness = 0.2; # membrane
 
-$Cryostat_x = $Argon_x + 2*$SteelThickness; # 854.64
-$Cryostat_y = $Argon_y + 2*$SteelThickness; # 789.84
+$Cryostat_x = $Argon_x + 2*$SteelThickness; # 789.84
+$Cryostat_y = $Argon_y + 2*$SteelThickness; # 854.64
 $Cryostat_z = $Argon_z + 2*$SteelThickness; # 854.64
 
 
@@ -180,8 +177,8 @@ $SpaceSteelSupportToWall    = 200;
 $SpaceSteelSupportToCeiling = 200;
 
 #TO DO: Whole outside structure has to be x--> Y and Y-->X
-$DetEncX   =   $Cryostat_x + 2*($SteelSupport_x + $FoamPadding) + 2*$SpaceSteelSupportToWall;
-$DetEncY  =    $Cryostat_y + 2*($SteelSupport_y + $FoamPadding) + $SpaceSteelSupportToCeiling;
+$DetEncX   =   $Cryostat_x + 2*($SteelSupport_x + $FoamPadding) + $SpaceSteelSupportToCeiling;
+$DetEncY  =    $Cryostat_y + 2*($SteelSupport_y + $FoamPadding) + 2*$SpaceSteelSupportToWall;
 $DetEncZ  =    $Cryostat_z + 2*($SteelSupport_z + $FoamPadding) + 2*$SpaceSteelSupportToWall;
 
 $posCryoInDetEnc_y = 0;
@@ -190,8 +187,8 @@ $posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y;
 $posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y;
 $posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z;
 $posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;
-$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x;
-$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x;
+$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x; #change?
+$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x; #change?
 
 # 2*AirThickness is added to the world volume in x, y and z
 $AirThickness = 3000;
@@ -209,26 +206,30 @@ $OriginZSet =   $DetEncZ/2.0
               - $SteelThickness
               - $zLArBuffer;
 
+print "EACH ELEMENT : $DetEncZ  $SpaceSteelSupportToWall  $SteelSupport_z  $FoamPadding  $SteelThickness  $zLArBuffer  $borderCRM \n";
+
   # We want the world origin to be vertically centered on the cathode
   # This is to be added to the y position of every volume in volWorld
 
 $OriginYSet =   $DetEncY/2.0
-              - $SpaceSteelSupportToCeiling/2.0
+             # - $SpaceSteelSupportToCeiling/2.0
+             - $SpaceSteelSupportToWall
               - $SteelSupport_y
               - $FoamPadding
               - $SteelThickness
               - $yLArBuffer
-              - $widthTPCActive/2;
+              #- $widthTPCActive/2;
+              +$heightCathode/2;
 
 $OriginXSet =  $DetEncX/2.0
-             - $SpaceSteelSupportToWall
+             #- $SpaceSteelSupportToWall
+              - $SpaceSteelSupportToCeiling/2.0
              - $SteelSupport_x
              - $FoamPadding
              - $SteelThickness
              - $xLArBuffer
-#             - $driftTPCActive/2.0;
-              +$heightCathode/2;
-
+              - $widthTPCActive/2;
+              #+$heightCathode/2;
 
 ##################################################################
 ############## Field Cage Parameters ###############
@@ -239,277 +240,48 @@ $FieldShaperOuterRadius = 2.285; #cm
 $FieldShaperOuterRadiusSlim = 0.75; #cm
 $FieldShaperTorRad = 2.3; #cm
 
+
 $FieldShaperLength = $FieldShaperLongTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
 $FieldShaperWidth =  $FieldShaperShortTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
+
 
 $FieldShaperSeparation = 6.0; #cm
 $NFieldShapers = ((2*$driftTPCActive+$heightCathode)/$FieldShaperSeparation) - 1;
 
-$FieldCageSizeX = $FieldShaperSeparation*$NFieldShapers+2;
-$FieldCageSizeY = $FieldShaperWidth+2;
+
+$FieldCageSizeY = $FieldShaperSeparation*$NFieldShapers+2; #modif
+$FieldCageSizeX = $FieldShaperWidth+2; #modif
 $FieldCageSizeZ = $FieldShaperLength+2;
 
-
-###################################################################
-########################  CRT Dimensions ##########################
-
-$CRTPaddleWidth      =  5.0;    
-$CRTPaddleHeight     =  1.0;
-$CRTPaddleLength     =  322.5;
-
-$CRTModWidth         =  162.5;
-$CRTModHeight        =  2.0;
-$CRTModLength        =  322.5;
-
-# SuperModule Centers as per Survey Document
-$CRT_DSTopLeft_x     =  171.2;
-$CRT_DSTopLeft_y     = -473.88;
-$CRT_DSTopLeftFr_z   =  1042.13;
-$CRT_DSTopLeftBa_z   =  1050.13;
-
-$CRT_DSBotLeft_x     =  176.51;
-$CRT_DSBotLeft_y     = -840.6;
-$CRT_DSBotLeftFr_z   =  1041.74;
-$CRT_DSBotLeftBa_z   =  1050.13;
-
-$CRT_DSTopRight_x    = -176.23;
-$CRT_DSTopRight_y    = -474.85;
-$CRT_DSTopRightFr_z  =  1042.64;
-$CRT_DSTopRightBa_z  =  1050.85;
-
-$CRT_DSBotRight_x    = -169.6;
-$CRT_DSBotRight_y    = -840.55;
-$CRT_DSBotRightFr_z  =  1042.88;
-$CRT_DSBotRightBa_z  =  1051.93;
-
-$CRT_USTopLeft_x     =  393.6;
-$CRT_USTopLeft_y     = -401.33;
-$CRT_USTopLeftFr_z   = -295.05;
-$CRT_USTopLeftBa_z   = -286.85;
-
-$CRT_USBotLeft_x     =  394.14;
-$CRT_USBotLeft_y     = -734.48;
-$CRT_USBotLeftFr_z   = -320.24;
-$CRT_USBotLeftBa_z   = -310.88;
-
-$CRT_USTopRight_x    = -38.85;
-$CRT_USTopRight_y    = -400.85;
-$CRT_USTopRightFr_z  = -998.95;
-$CRT_USTopRightBa_z  = -990.97;
-
-$CRT_USBotRight_x    = -31.47;
-$CRT_USBotRight_y    = -735.13;
-$CRT_USBotRightFr_z  = -1022.25;
-$CRT_USBotRightBa_z  = -1015.01;
-
-# Coordinates of Survey origin w.r.t. Steel Plate box center as per penetrations steel plate drawing (flange 1.2)
-$CRTSurveyOrigin_x   = -36.0;
-$CRTSurveyOrigin_y   =  534.43;
-$CRTSurveyOrigin_z   = -344.1;
-
-# Distance between CRT module centers and CRT SuperModule Centers
-$ModuleSMDist        = 85.6;
-$ModuleOff_z         = 1;    # approx. correction for the center of a Module. Survey measures Z to the outside surface. Negative for the most US CRTs (surveyed from behind).
-$ModuleLongCorr      = 5.6;  # allign the the modules at the frame's edge
-
-####################### End of Survey data ##########
-
-
-my @posCRTDS_x = ();
-my @posCRTDS_y = ();
-my @posCRTDS_z = ();
-my @posCRTDS_rot = ();
-
-$posCRTDS_x[0] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopLeft_x - $ModuleSMDist;
-$posCRTDS_y[0] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopLeft_y - $ModuleLongCorr;
-$posCRTDS_z[0] = $CRTSurveyOrigin_z + $CRT_DSTopLeftBa_z + $ModuleOff_z;
-$posCRTDS_rot[0] = "rPlus90AboutX";
-
-$posCRTDS_x[1] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopLeft_x + $ModuleSMDist;
-$posCRTDS_y[1] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopLeft_y - $ModuleLongCorr;
-$posCRTDS_z[1] = $CRTSurveyOrigin_z + $CRT_DSTopLeftBa_z + $ModuleOff_z;
-$posCRTDS_rot[1] = "rPlus90AboutX";
-
-$posCRTDS_x[2] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopLeft_x - $ModuleLongCorr;
-$posCRTDS_y[2] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopLeft_y - $ModuleSMDist;
-$posCRTDS_z[2] = $CRTSurveyOrigin_z + $CRT_DSTopLeftFr_z + $ModuleOff_z;
-$posCRTDS_rot[2] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[3] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopLeft_x - $ModuleLongCorr;
-$posCRTDS_y[3] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopLeft_y + $ModuleSMDist;
-$posCRTDS_z[3] = $CRTSurveyOrigin_z + $CRT_DSTopLeftFr_z + $ModuleOff_z;
-$posCRTDS_rot[3] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[4] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotLeft_x - $ModuleSMDist;
-$posCRTDS_y[4] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotLeft_y + $ModuleLongCorr;
-$posCRTDS_z[4] = $CRTSurveyOrigin_z + $CRT_DSBotLeftFr_z + $ModuleOff_z;
-$posCRTDS_rot[4] = "rPlus90AboutX";
-
-$posCRTDS_x[5] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotLeft_x + $ModuleSMDist;
-$posCRTDS_y[5] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotLeft_y + $ModuleLongCorr;
-$posCRTDS_z[5] = $CRTSurveyOrigin_z + $CRT_DSBotLeftFr_z + $ModuleOff_z;
-$posCRTDS_rot[5] = "rPlus90AboutX";
-
-$posCRTDS_x[6] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotLeft_x - $ModuleLongCorr;
-$posCRTDS_y[6] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotLeft_y - $ModuleSMDist;
-$posCRTDS_z[6] = $CRTSurveyOrigin_z + $CRT_DSBotLeftBa_z + $ModuleOff_z;
-$posCRTDS_rot[6] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[7] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotLeft_x - $ModuleLongCorr;
-$posCRTDS_y[7] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotLeft_y + $ModuleSMDist;
-$posCRTDS_z[7] = $CRTSurveyOrigin_z + $CRT_DSBotLeftBa_z + $ModuleOff_z;
-$posCRTDS_rot[7] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[8] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopRight_x - $ModuleSMDist;
-$posCRTDS_y[8] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopRight_y - $ModuleLongCorr;
-$posCRTDS_z[8] = $CRTSurveyOrigin_z + $CRT_DSTopRightFr_z + $ModuleOff_z;
-$posCRTDS_rot[8] = "rPlus90AboutX";
-
-$posCRTDS_x[9] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopRight_x + $ModuleSMDist;
-$posCRTDS_y[9] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopRight_y - $ModuleLongCorr;
-$posCRTDS_z[9] = $CRTSurveyOrigin_z + $CRT_DSTopRightFr_z + $ModuleOff_z;
-$posCRTDS_rot[9] = "rPlus90AboutX";
-
-$posCRTDS_x[10] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopRight_x + $ModuleLongCorr;
-$posCRTDS_y[10] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopRight_y - $ModuleSMDist;
-$posCRTDS_z[10] = $CRTSurveyOrigin_z + $CRT_DSTopRightBa_z + $ModuleOff_z;
-$posCRTDS_rot[10] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[11] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSTopRight_x + $ModuleLongCorr;
-$posCRTDS_y[11] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSTopRight_y + $ModuleSMDist;
-$posCRTDS_z[11] = $CRTSurveyOrigin_z + $CRT_DSTopRightBa_z + $ModuleOff_z;
-$posCRTDS_rot[11] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[12] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotRight_x - $ModuleSMDist;
-$posCRTDS_y[12] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotRight_y + $ModuleLongCorr;
-$posCRTDS_z[12] = $CRTSurveyOrigin_z + $CRT_DSBotRightBa_z + $ModuleOff_z;
-$posCRTDS_rot[12] = "rPlus90AboutX";
-
-$posCRTDS_x[13] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotRight_x + $ModuleSMDist;
-$posCRTDS_y[13] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotRight_y + $ModuleLongCorr;
-$posCRTDS_z[13] = $CRTSurveyOrigin_z + $CRT_DSBotRightBa_z + $ModuleOff_z;
-$posCRTDS_rot[13] = "rPlus90AboutX";
-
-$posCRTDS_x[14] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotRight_x + $ModuleLongCorr;
-$posCRTDS_y[14] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotRight_y - $ModuleSMDist;
-$posCRTDS_z[14] = $CRTSurveyOrigin_z + $CRT_DSBotRightFr_z + $ModuleOff_z;
-$posCRTDS_rot[14] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTDS_x[15] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_DSBotRight_x + $ModuleLongCorr;
-$posCRTDS_y[15] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_DSBotRight_y + $ModuleSMDist;
-$posCRTDS_z[15] = $CRTSurveyOrigin_z + $CRT_DSBotRightFr_z + $ModuleOff_z;
-$posCRTDS_rot[15] = "rMinus90AboutYMinus90AboutX";
-
-
-my @posCRTUS_x = ();
-my @posCRTUS_y = ();
-my @posCRTUS_z = ();
-my @posCRTUS_rot = ();
-
-
-$posCRTUS_x[0] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopLeft_x - $ModuleSMDist;
-$posCRTUS_y[0] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopLeft_y - $ModuleLongCorr;
-$posCRTUS_z[0] = $CRTSurveyOrigin_z + $CRT_USTopLeftBa_z + $ModuleOff_z;
-$posCRTUS_rot[0] = "rPlus90AboutX";
-
-$posCRTUS_x[1] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopLeft_x + $ModuleSMDist;
-$posCRTUS_y[1] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopLeft_y - $ModuleLongCorr;
-$posCRTUS_z[1] = $CRTSurveyOrigin_z + $CRT_USTopLeftBa_z + $ModuleOff_z;
-$posCRTUS_rot[1] = "rPlus90AboutX";
-
-$posCRTUS_x[2] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopLeft_x - $ModuleLongCorr;
-$posCRTUS_y[2] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopLeft_y - $ModuleSMDist;
-$posCRTUS_z[2] = $CRTSurveyOrigin_z + $CRT_USTopLeftFr_z + $ModuleOff_z;
-$posCRTUS_rot[2] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[3] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopLeft_x - $ModuleLongCorr;
-$posCRTUS_y[3] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopLeft_y + $ModuleSMDist;
-$posCRTUS_z[3] = $CRTSurveyOrigin_z + $CRT_USTopLeftFr_z + $ModuleOff_z;
-$posCRTUS_rot[3] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[4] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotLeft_x - $ModuleSMDist;
-$posCRTUS_y[4] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotLeft_y + $ModuleLongCorr;
-$posCRTUS_z[4] = $CRTSurveyOrigin_z + $CRT_USBotLeftFr_z + $ModuleOff_z;
-$posCRTUS_rot[4] = "rPlus90AboutX";
-
-$posCRTUS_x[5] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotLeft_x + $ModuleSMDist;
-$posCRTUS_y[5] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotLeft_y + $ModuleLongCorr;
-$posCRTUS_z[5] = $CRTSurveyOrigin_z + $CRT_USBotLeftFr_z + $ModuleOff_z;
-$posCRTUS_rot[5] = "rPlus90AboutX";
-
-$posCRTUS_x[6] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotLeft_x - $ModuleLongCorr;
-$posCRTUS_y[6] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotLeft_y - $ModuleSMDist;
-$posCRTUS_z[6] = $CRTSurveyOrigin_z + $CRT_USBotLeftBa_z + $ModuleOff_z;
-$posCRTUS_rot[6] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[7] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotLeft_x - $ModuleLongCorr;
-$posCRTUS_y[7] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotLeft_y + $ModuleSMDist;
-$posCRTUS_z[7] = $CRTSurveyOrigin_z + $CRT_USBotLeftBa_z + $ModuleOff_z;
-$posCRTUS_rot[7] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[8] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopRight_x - $ModuleSMDist;
-$posCRTUS_y[8] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopRight_y - $ModuleLongCorr;
-$posCRTUS_z[8] = $CRTSurveyOrigin_z + $CRT_USTopRightFr_z - $ModuleOff_z;
-$posCRTUS_rot[8] = "rPlus90AboutX";
-
-$posCRTUS_x[9] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopRight_x + $ModuleSMDist;
-$posCRTUS_y[9] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopRight_y - $ModuleLongCorr;
-$posCRTUS_z[9] = $CRTSurveyOrigin_z + $CRT_USTopRightFr_z - $ModuleOff_z;
-$posCRTUS_rot[9] = "rPlus90AboutX";
-
-$posCRTUS_x[10] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopRight_x + $ModuleLongCorr;
-$posCRTUS_y[10] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopRight_y - $ModuleSMDist;
-$posCRTUS_z[10] = $CRTSurveyOrigin_z + $CRT_USTopRightBa_z - $ModuleOff_z;
-$posCRTUS_rot[10] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[11] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USTopRight_x + $ModuleLongCorr;
-$posCRTUS_y[11] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USTopRight_y + $ModuleSMDist;
-$posCRTUS_z[11] = $CRTSurveyOrigin_z + $CRT_USTopRightBa_z - $ModuleOff_z;
-$posCRTUS_rot[11] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[12] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotRight_x - $ModuleSMDist;
-$posCRTUS_y[12] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotRight_y + $ModuleLongCorr;
-$posCRTUS_z[12] = $CRTSurveyOrigin_z + $CRT_USBotRightBa_z - $ModuleOff_z;
-$posCRTUS_rot[12] = "rPlus90AboutX";
-
-$posCRTUS_x[13] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotRight_x + $ModuleSMDist;
-$posCRTUS_y[13] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotRight_y + $ModuleLongCorr;
-$posCRTUS_z[13] = $CRTSurveyOrigin_z + $CRT_USBotRightBa_z - $ModuleOff_z;
-$posCRTUS_rot[13] = "rPlus90AboutX";
-
-$posCRTUS_x[14] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotRight_x + $ModuleLongCorr;
-$posCRTUS_y[14] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotRight_y - $ModuleSMDist;
-$posCRTUS_z[14] = $CRTSurveyOrigin_z + $CRT_USBotRightFr_z - $ModuleOff_z;
-$posCRTUS_rot[14] = "rMinus90AboutYMinus90AboutX";
-
-$posCRTUS_x[15] = $posCryoInDetEnc_x + $CRTSurveyOrigin_x + $CRT_USBotRight_x + $ModuleLongCorr;
-$posCRTUS_y[15] = $posCryoInDetEnc_y + $CRTSurveyOrigin_y + $CRT_USBotRight_y + $ModuleSMDist;
-$posCRTUS_z[15] = $CRTSurveyOrigin_z + $CRT_USBotRightFr_z - $ModuleOff_z;
-$posCRTUS_rot[15] = "rMinus90AboutYMinus90AboutX";
-
+#print "Long tube length = $FieldShaperLongTubeLength \n";
+#print "Short tube length = $FieldShaperShortTubeLength \n"; 
+#print "Field shaper length = $FieldShaperLength \n";
+#print "Field shaper width = $FieldShaperWidth \n"; 
+#print "NField Shapers = $NFieldShapers \n"; 
+#print "Field cage dimensions = $FieldCageSizeX x $FieldCageSizeY x $FieldCageSizeZ \n"; 
 
 ####################################################################
 ######################## ARAPUCA Dimensions ########################
 ## in cm
 
-$ArapucaOut_x = 65.0; 
-$ArapucaOut_y = 2.5;
+$ArapucaOut_x = 2.5; 
+$ArapucaOut_y = 65.0;
 $ArapucaOut_z = 65.0; 
-$ArapucaIn_x = 60.0;
-$ArapucaIn_y = 2.0;
+$ArapucaIn_x = 2.0;
+$ArapucaIn_y = 60.0;
 $ArapucaIn_z = 60.0;
-$ArapucaAcceptanceWindow_x = 60.0;
-$ArapucaAcceptanceWindow_y = 1.0;
+$ArapucaAcceptanceWindow_x = 1.0;
+$ArapucaAcceptanceWindow_y = 60.0;
 $ArapucaAcceptanceWindow_z = 60.0;
 $GapPD = 0.5; #Arapuca distance from Cathode Frame
-$FCToArapucaSpaceLat    =    63.5; #Arapucas' distance from FC.
-$FirstFrameVertDist     =    30.0; #Vertical distance from top/bottom anode (=204.55+85.3 cm above/below cathode) 
-$VerticalPDdist = 85.3; #distance of arapucas (center to center) in the y direction 
+$FrameToArapucaSpace       =    1.0; #Small vertical gap over laterals to avoid overlap
+$FrameToArapucaSpaceLat    =    60.0; #Arapucas 60 cm behind FC. VALUE NEEDS TO BE CHECKED!!!
+$VerticalPDdist = 80.0; #distance of arapucas (center to center) in the y direction 
 
 #Positions of the 4 arapucas with respect to the Frame center --> arapucas over the cathode
-$list_posx_bot[0]=-2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
+$list_posx_bot[0]=-2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_y;
 $list_posz_bot[0]= 0.5*$lengthCathodeVoid + $CathodeBorder;
-$list_posx_bot[1]= - $CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
+$list_posx_bot[1]= - $CathodeBorder - $GapPD - 0.5*$ArapucaOut_y;
 $list_posz_bot[1]=-1.5*$lengthCathodeVoid - 2.0*$CathodeBorder;
 $list_posx_bot[2]=-$list_posx_bot[1];
 $list_posz_bot[2]=-$list_posz_bot[1];
@@ -580,9 +352,14 @@ print DEF <<EOF;
 <?xml version='1.0'?>
 <gdml>
 <define>
+
 <!--
+
+
+
 -->
-   <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/>
+
+   <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/> #change?
    <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
    <rotation name="rPlus45AboutX"       unit="deg" x="45" y="0" z="0"/>
    <rotation name="rPlus90AboutX"       unit="deg" x="90" y="0" z="0"/>
@@ -596,10 +373,16 @@ print DEF <<EOF;
    <rotation name="rIdentity"		unit="deg" x="0" y="0"   z="0"/>
    <rotation name="rUWireAboutX"        unit="deg" x="$wireAngleU" y="0" z="0"/>
    <rotation name="rVWireAboutX"        unit="deg" x="$wireAngleV" y="0" z="0"/>
+
+   <rotation name="rUWireAboutY"        unit="deg" x="0" y="$wireAngleU" z="0"/>
+   <rotation name="rVWireAboutY"        unit="deg" x="0" y="$wireAngleV" z="0"/>
+
    <rotation name="rot04"      unit="deg" x="0" y="270" z="90"/>
    <rotation name="rot07"      unit="deg" x="0" y="90" z="90"/>
+
    <rotation name="rot03"      unit="deg" x="0" y="90" z="270"/>
    <rotation name="rot08"      unit="deg" x="0" y="270" z="270"/>
+
    <rotation name="rot06"      unit="deg" x="180" y="270" z="0"/>
    <rotation name="rot05"      unit="deg" x="180" y="90" z="0"/>
 </define>
@@ -671,19 +454,24 @@ $ExtractionGridSizeX =  $widthCRM_active;
 $ExtractionGridSizeZ = $lengthCRM_active;
 
 print ExtractionGrid <<EOF;
+
 <solids>
       <tube name="solExtractionGridCable" rmin="0" rmax="$ExtractionGridRadious" z="$ExtractionGridSizeZ" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <box name="solExtractionGrid" x="@{[$ExtractionGridSizeX]}" y="@{[$ExtractionGridSizeY]}" z="@{[$ExtractionGridSizeZ]}" lunit="cm"/>
 </solids>
+
 EOF
 
 
 print ExtractionGrid <<EOF;
+
 <structure>
+
 <volume name="volExtractionGridCable">
   <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
   <solidref ref="solExtractionGridCable"/>
 </volume>
+
 <volume name="volExtractionGrid">
   <materialref ref="LAr"/>
   <solidref ref="solExtractionGrid"/>
@@ -782,14 +570,21 @@ sub lineClip {
 
 sub gen_Wires
 {
+
+
     my $length = $_[0];  # 
     my $width  = $_[1];  # 
     my $nch    = $_[2];  # 
+#    my $nchb   = $_[3];  # nch per bottom side
     my $pitch  = $_[3];  # 
     my $theta  = $_[4];  # deg
     my $dia    = $_[5];  #
     my $w1offx = $_[6];  # offset for wire 1 1st coord
     my $w1offy = $_[7];  # offset for wire 1 2nd coord
+
+
+#print "wire length = $length \n";
+#print "wire width = $width \n";
     
     $theta  = $theta * pi()/180.0;
     my @dirw   = (cos($theta), sin($theta));
@@ -802,6 +597,22 @@ sub gen_Wires
     }
     my $dX = $pitch / sin( $alpha );
     my $dY = $pitch / sin( pi()/2 - $alpha );
+
+
+##    if( $length <= 0 ){
+##        $length = $dX * $nchb;
+##    }
+##    if( $width <= 0 ){
+##	$width = $dY * ($nch - $nchb);
+##    }
+
+##    my @orig   = (0, 0);
+##    if( $dirp[0] < 0 ){
+##	$orig[0] = $length;
+##    }
+##    if( $dirp[1] < 0 ){
+##	$orig[1] = $width;
+##    }
 
     my @orig   = ($w1offx, $w1offy);
     if( $dirp[0] < 0 ){
@@ -818,7 +629,7 @@ sub gen_Wires
 
     # gen wires
     my @winfo  = ();
-    my $offset = 0; # starting point is now given by w1offx and w1offy
+    my $offset = 0;
     foreach my $ch (0..$nch-1){
 	#print "Processing $ch\n";
 
@@ -826,6 +637,12 @@ sub gen_Wires
 	my @wcn = (0, 0);
 	$wcn[0] = $orig[0] + $offset * $dirp[0];
 	$wcn[1] = $orig[1] + $offset * $dirp[1];
+
+##if ($ch==$TESTWIRE)
+##	{
+##	print "\n------ in gen_Wires ---------\n";
+##	print "reference point = $wcn[0]  $wcn[1] \n";
+##	}
 
 	# line clip on the rectangle boundary
 	@endpts = lineClip( $wcn[0], $wcn[1], $dirw[0], $dirw[1], $length, $width );
@@ -838,35 +655,75 @@ sub gen_Wires
 
 	# re-center on the mid-point
 	$endpts[0] -= $length/2;
+##	$endpts[0] += $length/2;
 	$endpts[2] -= $length/2;
+##	$endpts[2] += $length/2;
 	$endpts[1] -= $width/2;
 	$endpts[3] -= $width/2;
 
+	# modification to account for driftX-->driftY rotation
+	$endpts[1]*=-1;
+	$endpts[3]*=-1;
+
+##if ($ch==$TESTWIRE)
+##	{
+##	print "centered endpoints = $endpts[0]  $endpts[1] $endpts[2]  $endpts[3] \n";
+##	}
+
 	# calculate the strip center in the rectangle of CRU
-	$wcn[0] = ($endpts[0] + $endpts[2])/2;
+	$wcn[0] = ($endpts[0] + $endpts[2])/2; # minus sign because driftX-->driftY rotation
 	$wcn[1] = ($endpts[1] + $endpts[3])/2;
+
+##if ($ch==$TESTWIRE)
+##	{
+##	print "new strip centers = $wcn[0]  $wcn[1]\n";
+##	}
 
 	# calculate the length
 	my $dx = $endpts[0] - $endpts[2];
 	my $dy = $endpts[1] - $endpts[3];
 	my $wlen = sqrt($dx**2 + $dy**2);
 
+##if ($ch==$TESTWIRE)
+##	{
+##	print "length = $wlen \n";
+##	}
+
 	# put all info together
 	my @wire = ($ch, $wcn[0], $wcn[1], $wlen);
-	push( @wire, @endpts );
+	push( @wire, @endpts ); 
 	push( @winfo, \@wire);
 	$offset = $offset + $pitch;
 	#last;
-    }
+
+##if ($ch==$TESTWIRE)
+##	{ 
+##	print "\nchannelID = $ch \n";
+##	print "endpts : $endpts[0]  $endpts[1] $endpts[2] $endpts[3] \n";
+##	print "wcn : $wcn[0]  $wcn[1] \n"; 
+##	print "length = $wlen\n";
+##	print "Wire info : $wire[0]  $wire[1] $wire[2] $wire[3] $wire[4] $wire[5] $wire[6] $wire[7] \n";
+##	print "------ end gen_Wires ---------\n";
+##	}
+
+   }
+
+	
     return @winfo;
 }
+
+
 
 sub split_wires
 {
     # split wires at y = 0 line (widht / 2)
     # assumes that the CRU wire plane has been
     # centered already on 0,0
-    
+
+## should change variables labeled y to x for more clarity here     
+## it turns out that in regard of actual driftY coordinates, one needs to associate x=z and y=x.
+
+
     # reference to array of wires
     my $wires = $_[0];
     my $width = $_[1];  # split
@@ -881,17 +738,30 @@ sub split_wires
     my @winfo1  = (); # lower half of CRU
     my @winfo2  = (); # upper half of CRU
 
+
     foreach my $wire (@$wires){
+	
+##	if ($wire->[0]==$TESTWIRE){ print "\n------ in split_wires ---------\n";}
 	my $x0 = $wire->[1];
 	my $y0 = $wire->[2];
 	my @endpts = ($wire->[4], $wire->[5],
 		      $wire->[6], $wire->[7]);
+	
+##	if ($wire->[0]==$TESTWIRE){ 
+##		print "input wire center positions = $x0  $y0\n";
+##		print "input wire endpoints : $wire->[4] $wire->[5] $wire->[6] $wire->[7]\n";
+##		}
+
 
 	# min of two y-values
 	my $y1 = ($endpts[1], $endpts[3])[$endpts[1] > $endpts[3]];
 	# max of two y-values
 	my $y2 = ($endpts[1], $endpts[3])[$endpts[1] < $endpts[3]];
-	if( $y2 < $yref )
+
+##	if ($wire->[0]==$TESTWIRE){ print "min and max = $y1  $y2\n";}
+
+##	if( $y2 < $yref )
+	if( $y1 > $yref )
 	{
 	    my @wire1 = ($ich1, $x0, $y0, $wire->[3]);
 	    push( @wire1, @endpts );
@@ -899,7 +769,8 @@ sub split_wires
 	    $ich1++;
 	    next;
 	}
-	elsif( $y1 > $yref )
+##	elsif( $y1 > $yref )
+	elsif( $y2 < $yref )
 	{
 	    my @wire2 = ($ich2, $x0, $y0, $wire->[3]);
 	    push( @wire2, @endpts );
@@ -908,14 +779,18 @@ sub split_wires
 	    next;
 	}
 
+
+
 	# calculate an intercept point with yref
 	$y  = $yref;
-	$x  = $x0 + ($y - $y0) * $nx/$ny;
+##	$x  = $x0 + ($y - $y0) * $nx/$ny;
+	$x  = $x0 - ($y - $y0) * $nx/$ny;
 	
 	# make new endpoints
 	my @endpts1 = @endpts;
 	my @endpts2 = @endpts;
-	if( $endpts[1] < $y )
+##	if( $endpts[1] < $y )
+	if( $endpts[1] > $y )
 	{
 	    $endpts1[2] = $x;
 	    $endpts1[3] = $y;
@@ -929,6 +804,7 @@ sub split_wires
 	    $endpts2[2] = $x;
 	    $endpts2[3] = $y;
 	}
+
 	
 	my @wcn1 = (0, 0);
 	$wcn1[0] = ($endpts1[0] + $endpts1[2])/2;
@@ -951,23 +827,48 @@ sub split_wires
 	push( @wire2, @endpts2 );
 	push( @winfo2, \@wire2 );
 	$ich2++;
-    }
+
+    } # end loop over wires
+
+
+
 
     #return ( \@winfo1, \@winfo2 );
     foreach my $w (@winfo1){
-	$w->[5] -= (-0.25 * $width);
-	$w->[7] -= (-0.25 * $width);
+#	$w->[5] -= (-0.25 * $width);
+#	$w->[7] -= (-0.25 * $width);
+	$w->[5] += (-0.25 * $width);
+	$w->[7] += (-0.25 * $width);
 	$w->[2]  = 0.5 * ($w->[5]+$w->[7]);
     }
 
     foreach my $w (@winfo2){
-	$w->[5] -= (0.25 * $width);
-	$w->[7] -= (0.25 * $width);
+#	$w->[5] -= (0.25 * $width);
+#	$w->[7] -= (0.25 * $width);
+	$w->[5] += (0.25 * $width);
+	$w->[7] += (0.25 * $width);
 	$w->[2]  = 0.5 * ($w->[5]+$w->[7]);
     }
+ 
+## check ############# 
+##foreach my $wire (@winfo1){
+##	if ($wire->[0]==$TESTWIRE)
+##		{ 
+##		print "splited wire_a infos = $wire->[0] $wire->[1] $wire->[2] $wire->[3] $wire->[4] $wire->[5] $wire->[6] $wire->[7] $wire->[8] $wire->[9] $wire->[10] $wire->[11] $wire->[12]  \n";
+##		}
+##	}
+##foreach my $wire (@winfo2){
+##	if ($wire->[0]==$TESTWIRE)
+##		{ 
+##		print "splited wire_b infos = $wire->[0] $wire->[1] $wire->[2] $wire->[3] $wire->[4] $wire->[5] $wire->[6] $wire->[7] $wire->[8] $wire->[9] $wire->[10] $wire->[11] $wire->[12]  \n";
+##		}
+##	}
+##print "-------- end split_wires ----------\n";
+##################
 
     return ( \@winfo1, \@winfo2 );
 }
+
 
 sub flip_wires
 {
@@ -992,7 +893,9 @@ sub flip_wires
     return @winfo;
 }
 
-#
+
+#####################################"
+
 sub gen_crm
 {
     my $quad   = $_[0]; # CRP quadrant: 0, 1, 2, 3
@@ -1003,13 +906,13 @@ sub gen_crm
 
     
     # CRM active volume
-    my $TPCActive_x = $driftTPCActive;
-    my $TPCActive_y = $widthCRP / 2;
+    my $TPCActive_y = $driftTPCActive;
+    my $TPCActive_x = $widthCRP / 2;
     my $TPCActive_z = $lengthCRP / 2;
 
     # CRM total volume
-    my $TPC_x = $TPCActive_x + $ReadoutPlane;
-    my $TPC_y = $TPCActive_y;
+    my $TPC_y = $TPCActive_y + $ReadoutPlane;
+    my $TPC_x = $TPCActive_x;
     my $TPC_z = $TPCActive_z;
 
     # readout plane dimensions
@@ -1055,32 +958,38 @@ print TPC <<EOF;
       z="$TPCActive_z"
       lunit="cm"/>
    <box name="CRMUPlane" 
-      x="$padWidth" 
-      y="$UPlaneWidth" 
+      x="$UPlaneWidth" 
+      y="$padWidth" 
       z="$UPlaneLength"
       lunit="cm"/>
    <box name="CRMVPlane" 
-      x="$padWidth" 
-      y="$VPlaneWidth" 
+      x="$VPlaneWidth" 
+      y="$padWidth" 
       z="$VPlaneLength"
       lunit="cm"/>
    <box name="CRMZPlane" 
-      x="$padWidth"
-      y="$ZPlaneWidth"
+      x="$ZPlaneWidth"
+      y="$padWidth"
       z="$ZPlaneLength"
       lunit="cm"/>
 EOF
 }
     
 #++++++++++++++++++++++++++++ Wire Solids ++++++++++++++++++++++++++++++
+
+
+
 if($wires_on == 1 ){
 
 	foreach my $wire (@$winfoU){
 	    my $wid = $wire->[0];
 	    my $wln = $wire->[3];
+
+##if ($wid != $TESTWIRE){ next};
+
 print TPC <<EOF;
    <tube name="CRMWireU$wid"
-      rmax="0.5*$padWidth"
+      rmax="20"
       z="$wln"               
       deltaphi="360"
       aunit="deg" lunit="cm"/>
@@ -1088,11 +997,14 @@ EOF
 	}
 
 	foreach my $wire (@$winfoV){
+
+##if ($wid != $TESTWIRE){ next};
+
 	    my $wid = $wire->[0];
 	    my $wln = $wire->[3];
 print TPC <<EOF;
    <tube name="CRMWireV$wid"
-      rmax="0.5*$padWidth"
+      rmax="20"
       z="$wln"               
       deltaphi="360"
       aunit="deg" lunit="cm"/>
@@ -1137,6 +1049,7 @@ if($wires_on==1)
 {
 	foreach my $wire (@$winfoU){
 	my $wid = $wire->[0];
+##if ($wid != $TESTWIRE){ next};
 print TPC <<EOF;
     <volume name="volTPCWireU$wid">
       <materialref ref="Copper_Beryllium_alloy25"/>
@@ -1147,6 +1060,7 @@ EOF
 
 	foreach my $wire (@$winfoV){
 	    my $wid = $wire->[0];
+##if ($wid != $TESTWIRE){ next};
 print TPC <<EOF;
     <volume name="volTPCWireV$wid">
       <materialref ref="Copper_Beryllium_alloy25"/>
@@ -1176,17 +1090,23 @@ if ($wires_on==1) # add wires to U plane
     # if the coordinates were computed with a corner at (0,0)
     # we need to move to plane coordinates
     my $offsetZ = 0; 
-    my $offsetY = 0; 
+    my $offsetX = 0; 
     #
     foreach my $wire (@$winfoU) {
+
+##if ($wire->[0] != $TESTWIRE){ next};
+
 	my $wid  = $wire->[0];
 	my $zpos = $wire->[1] + $offsetZ;
-	my $ypos = $wire->[2] + $offsetY;
+	my $xpos = $wire->[2] + $offsetX;
+
+##print "U WIRE #$wid CENTERS FINAL POSITION (z;x) = $wire->[1] $wire->[2] & LENGTH = $wire->[3] \n";
+
 print TPC <<EOF;
      <physvol>
        <volumeref ref="volTPCWireU$wid"/> 
-       <position name="posWireU$wid" unit="cm" x="0" y="$ypos" z="$zpos"/>
-       <rotationref ref="rUWireAboutX"/> 
+       <position name="posWireU$wid" unit="cm" x="$xpos" y="0" z="$zpos"/>
+       <rotationref ref="rUWireAboutY"/> 
      </physvol>
 EOF
     }
@@ -1208,17 +1128,20 @@ if ($wires_on==1) # add wires to V plane
     # if the coordinates were computed with a corner at (0,0)
     # we need to move to plane coordinates
     my $offsetZ = 0; 
-    my $offsetY = 0; 
+    my $offsetX = 0; 
 
     foreach my $wire (@$winfoV) {
+
+##if ($wire->[0] != $TESTWIRE){ next};
+
 	my $wid  = $wire->[0];
 	my $zpos = $wire->[1] + $offsetZ;
-	my $ypos = $wire->[2] + $offsetY;
+	my $xpos = $wire->[2] + $offsetX;
 print TPC <<EOF;
      <physvol>
        <volumeref ref="volTPCWireV$wid"/> 
-       <position name="posWireV$wid" unit="cm" x="0" y="$ypos" z="$zpos"/>
-       <rotationref ref="rVWireAboutX"/> 
+       <position name="posWireV$wid" unit="cm" x="$xpos" y="0" z="$zpos"/>
+       <rotationref ref="rVWireAboutY"/> 
      </physvol>
 EOF
     }
@@ -1244,8 +1167,11 @@ if ($wires_on==1) # add wires to Z plane (plane with wires reading z position)
 
       my $zoffset = $zdelta;
       if( $quad > 1 ){ $zoffset = 0; }
+#my $manbreakZ = 0;
       for($i=0;$i<$nch;++$i)
        {
+#$manbreakZ += 1;
+#if ($manbreakZ != 200){ next};
 	   my $zpos = $zoffset + ( $i + 0.5) * $wirePitchZ - 0.5 * $lengthPCBActive;
 	   if( (0.5 * $lengthPCBActive - abs($zpos)) < 0 ){
 	       die "Cannot place wire $i in view Z, as plane is too small\n";
@@ -1255,7 +1181,7 @@ print TPC <<EOF;
        <physvol>
          <volumeref ref="volTPCWireZ$quad"/>
          <position name="posWireZ$wid" unit="cm" x="0" y="0" z="$zpos"/>
-         <rotationref ref="rPlus90AboutX"/>
+         <rotationref ref="rPlus90AboutY"/>
        </physvol>
 EOF
        }
@@ -1265,42 +1191,44 @@ print TPC <<EOF;
 EOF
 
 # offset of the active area from CRP envelope
-my $pcbOffsetY = 999;
+my $pcbOffsetX = 999;
 my $pcbOffsetZ = 999;
 if( $quad == 0 ){
-    $pcbOffsetY =  $borderCRP/2;
+    $pcbOffsetX =  -$borderCRP/2;
     $pcbOffsetZ = ($borderCRP/2 - $gapCRU/4);
 } elsif( $quad == 1 ){
-    $pcbOffsetY =  -$borderCRP/2;
+    $pcbOffsetX =  $borderCRP/2;
     $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 2 ){
-    $pcbOffsetY =  $borderCRP/2;
+    $pcbOffsetX =  -$borderCRP/2;
     $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } elsif ( $quad == 3 ){
-    $pcbOffsetY = -$borderCRP/2;
+    $pcbOffsetX = $borderCRP/2;
     $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
 } else {
     die "Uknown $quad quadrant index\n";
 }
 
+
+#sign change ?
 my @posUplane = (0, 0, 0);
-$posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
-$posUplane[1] = $pcbOffsetY;
+$posUplane[1] = 0.5*$TPC_y - 2.5*$padWidth;
+$posUplane[0] = $pcbOffsetX;
 $posUplane[2] = $pcbOffsetZ;
 
 my @posVplane = (0, 0, 0);
-$posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[1] = $pcbOffsetY;
+$posVplane[1] = 0.5*$TPC_y - 1.5*$padWidth;
+$posVplane[0] = $pcbOffsetX;
 $posVplane[2] = $pcbOffsetZ;
 
 my @posZplane = (0, 0, 0);
-$posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posZplane[1] = $pcbOffsetY; 
+$posZplane[1] = 0.5*$TPC_y - 0.5*$padWidth;
+$posZplane[0] = $pcbOffsetX; 
 $posZplane[2] = $pcbOffsetZ;
 
 my @posTPCActive = (0, 0, 0);
-$posTPCActive[0] = -$ReadoutPlane/2;
-$posTPCActive[1] = 0;
+$posTPCActive[0] = 0;
+$posTPCActive[1] = -$ReadoutPlane/2;
 $posTPCActive[2] = 0;
 
 
@@ -1330,7 +1258,7 @@ print TPC <<EOF;
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive$quad" unit="cm" 
-        x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
+        x="$posTPCActive[0]" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -1345,11 +1273,13 @@ EOF
 }
 
 
+
+
 sub gen_TopCRP
 {
     # Total volume covered by CRP envelope
-    my $CRP_x = $driftTPCActive + $ReadoutPlane;
-    my $CRP_y = $widthCRP;
+    my $CRP_y = $driftTPCActive + $ReadoutPlane;
+    my $CRP_x = $widthCRP;
     my $CRP_z = $lengthCRP;
     print " CRP vol dimensions     : $CRP_x x $CRP_y x $CRP_z\n";
 
@@ -1359,11 +1289,17 @@ sub gen_TopCRP
     if( $wires_on == 1 ){
 	# normally should do this only once once, but perl is impossible
 	
+print "gen_Wires ARGUMENTS : $lengthPCBActive  $widthPCBActive  $nChans{'Ind2'}   \n";
+print "gen_Wires ARGUMENTS : $wirePitchV  $wireAngleV,  $padWidth   \n";
+print "gen_Wires ARGUMENTS : $offsetUVwire[0]  $offsetUVwire[1]  \n";
+
 	# first CRU
 	my @winfoU1 = gen_Wires( $lengthPCBActive, $widthPCBActive,
 				 $nChans{'Ind1'}, 
 				 $wirePitchU, $wireAngleU, $padWidth,
 				 $offsetUVwire[0], $offsetUVwire[1]);
+
+
 	my @winfoV1 = gen_Wires( $lengthPCBActive, $widthPCBActive,
 				 $nChans{'Ind2'}, 
 				 $wirePitchV, $wireAngleV, $padWidth,
@@ -1392,6 +1328,7 @@ sub gen_TopCRP
 	my $wcountU=0;
 	foreach my $crm_wires (@winfoU){
 	    foreach my $wire (@$crm_wires){
+#		if ($wcountU>5){ last;}
 		$wire->[0] = $wcountU;
 		$wcountU++;
 		#printf ("U%d %.3f %.3f %.3f %.3f %.3f %.3f %.3f\n",
@@ -1405,6 +1342,7 @@ sub gen_TopCRP
 	my $wcountV=0;
 	foreach my $crm_wires (@winfoV){
 	    foreach my $wire (@$crm_wires){
+#		if ($wcountV>5){ last;}
 		$wire->[0] = $wcountV;
 		$wcountV++;
 	    }
@@ -1413,7 +1351,9 @@ sub gen_TopCRP
 
     # generate GDML fragments for 4 CRP quadrants
     for my $quad (0..3)
+##    for my $quad (0..1)
     {
+	   print "CRU #$quad\t";
 	if( $wires_on == 1 ){
 	    gen_crm( $quad, $winfoU[$quad], $winfoV[$quad] );
 	} else {
@@ -1422,6 +1362,10 @@ sub gen_TopCRP
 	}
     }
 }
+
+
+
+
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1444,128 +1388,141 @@ EOF
 #print "lengthTPCActive      : $lengthTPCActive \n";
 #print "widthTPCActive       : $widthTPCActive \n";
 
-
 print FieldCage <<EOF;
 <solids>
      <torus name="FieldShaperCorner" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" rtor="$FieldShaperTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperLongtube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+     <tube name="FieldShaperShorttube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+
      <tube name="FieldShaperLongtubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperShorttube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperShorttubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+
 
     <union name="FSunion1">
       <first ref="FieldShaperLongtube"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot1" unit="deg" x="90" y="0" z="0" />
+   		<position name="esquinapos1" unit="cm" x="0" y="@{[-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot1" unit="deg" x="90" y="0" z="90" />
     </union>
 
     <union name="FSunion2">
       <first ref="FSunion1"/>
       <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos2" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
-   		<rotation name="rot2" unit="deg" x="0" y="90" z="0" />
+   		<position name="esquinapos2" unit="cm" x="0" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
+   		<rotation name="rot2" unit="deg" x="90" y="0" z="0" />
     </union>
+
 
     <union name="FSunion3">
       <first ref="FSunion2"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos3" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot3" unit="deg" x="90" y="270" z="0" />
+   		<position name="esquinapos3" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot3" unit="deg" x="90" y="270" z="90" />
     </union>
-
+    
     <union name="FSunion4">
       <first ref="FSunion3"/>
       <second ref="FieldShaperLongtube"/>
-   		<position name="esquinapos4" unit="cm" x="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" y="0" z="0"/>
+   		<position name="esquinapos4" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" z="0" />
     </union>
-
+    
     <union name="FSunion5">
       <first ref="FSunion4"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos5" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot5" unit="deg" x="90" y="180" z="0" />
+   		<position name="esquinapos5" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot5" unit="deg" x="90" y="90" z="270" />
     </union>
-
+    
     <union name="FSunion6">
       <first ref="FSunion5"/>
       <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos6" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
-		<rotation name="rot6" unit="deg" x="0" y="90" z="0" />
+   		<position name="esquinapos6" unit="cm" x="" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
+		<rotation name="rot6" unit="deg" x="90" y="0" z="0" />
     </union>
 
     <union name="FieldShaperSolid">
       <first ref="FSunion6"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos7" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot7" unit="deg" x="90" y="90" z="0" />
+   		<position name="esquinapos7" unit="cm" x="0" y="@{[-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot7" unit="deg" x="0" y="90" z="0" />
     </union>
     
+
+
+
+   
     <union name="FSunionSlim1">
       <first ref="FieldShaperLongtubeSlim"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot1" unit="deg" x="90" y="0" z="0" />
+   		<position name="esquinapos1" unit="cm" x="0" y="@{[-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot1" unit="deg" x="90" y="0" z="90" />
     </union>
 
     <union name="FSunionSlim2">
       <first ref="FSunionSlim1"/>
       <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos2" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
-   		<rotation name="rot2" unit="deg" x="0" y="90" z="0" />
+   		<position name="esquinapos2" unit="cm" x="0" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
+   		<rotation name="rot2" unit="deg" x="90" y="0" z="0" />
     </union>
 
     <union name="FSunionSlim3">
       <first ref="FSunionSlim2"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos3" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot3" unit="deg" x="90" y="270" z="0" />
+   		<position name="esquinapos3" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot3" unit="deg" x="90" y="270" z="90" />
     </union>
 
     <union name="FSunionSlim4">
       <first ref="FSunionSlim3"/>
       <second ref="FieldShaperLongtubeSlim"/>
-   		<position name="esquinapos4" unit="cm" x="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" y="0" z="0"/>
+   		<position name="esquinapos4" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" z="0"/>
     </union>
+
 
     <union name="FSunionSlim5">
       <first ref="FSunionSlim4"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos5" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot5" unit="deg" x="90" y="180" z="0" />
+   		<position name="esquinapos5" unit="cm" x="0" y="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot5" unit="deg" x="90" y="90" z="270" />
     </union>
 
     <union name="FSunionSlim6">
       <first ref="FSunionSlim5"/>
       <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos6" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
-		<rotation name="rot6" unit="deg" x="0" y="90" z="0" />
+   		<position name="esquinapos6" unit="cm" x="0" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
+		<rotation name="rot6" unit="deg" x="90" y="0" z="0" />
     </union>
 
     <union name="FieldShaperSolidSlim">
       <first ref="FSunionSlim6"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos7" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot7" unit="deg" x="90" y="90" z="0" />
+   		<position name="esquinapos7" unit="cm" x="0" y="@{[-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
+		<rotation name="rot7" unit="deg" x="0" y="90" z="0" />
     </union>
     
 </solids>
+
 EOF
 
 print FieldCage <<EOF;
+
 <structure>
 <volume name="volFieldShaper">
   <materialref ref="Al2O3"/>
   <solidref ref="FieldShaperSolid"/>
+  <rotation name="rotfieldcage" unit="deg" x="0" y="0" z="90" />
 </volume>
 <volume name="volFieldShaperSlim">
   <materialref ref="Al2O3"/>
   <solidref ref="FieldShaperSolidSlim"/>
+  <rotation name="rotfieldcage" unit="deg" x="0" y="0" z="90" />
 </volume>
 </structure>
+
 EOF
 
 print FieldCage <<EOF;
+
 </gdml>
 EOF
 close(FieldCage);
@@ -1606,6 +1563,7 @@ $GroundGridInnerStructureCableRadious = 0.2;
 $GroundGridInnerStructureCableSeparation = $GroundGridInnerStructureSeparation/($GroundGridInnerStructureNumberOfCablesPerInnerSquare+1);
 
 print GroundGrid <<EOF;
+
 <solids>
      <torus name="GroundGridCorner" rmin="$GroundGridInnerRadious" rmax="$GroundGridOuterRadious" rtor="$GroundGridTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="GroundGridtube" rmin="$GroundGridInnerRadious" rmax="$GroundGridOuterRadious" z="$GroundGridTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
@@ -1613,30 +1571,39 @@ print GroundGrid <<EOF;
      <box name="GroundGridInnerBox" x="@{[$GroundGridInnerStructureWidth]}" y="$GroundGridInnerStructureHeight" z="@{[$GroundGridInnerStructureLength]}" lunit="cm"/>
     <box name="GroundGridModule" x="@{[$GroundGridInnerStructureLength+2+$GroundGridOuterRadious]}" y="$GroundGridInnerStructureHeight"    z="@{[$GroundGridInnerStructureLength+2+$GroundGridOuterRadious]}" lunit="cm"/>
      <tube name="GroundGridCable" rmin="0" rmax="$GroundGridInnerStructureCableRadious" z="@{[$GroundGridInnerStructureLength]}" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
+
+
+
     <union name="GGunion1">
       <first ref="GroundGridtube"/>
       <second ref="GroundGridCorner"/>
    		<position name="GGcorner1" unit="cm" x="@{[-$GroundGridTorRad]}" y="0" z="@{[0.5*$GroundGridTubeLength]}"/>
 		<rotation name="GGrot1" unit="deg" x="90" y="0" z="0" />
     </union>
+
     <union name="GGunion2">
       <first ref="GGunion1"/>
       <second ref="GroundGridtube"/>
    		<position name="GGcorner2" unit="cm" x="@{[-0.5*$GroundGridTubeLength-$GroundGridTorRad]}" y="0" z="@{[+0.5*$GroundGridTubeLength+$GroundGridTorRad]}"/>
    		<rotation name="GGrot2" unit="deg" x="0" y="90" z="0" />
     </union>
+
     <union name="GGunion3">
       <first ref="GGunion2"/>
       <second ref="GroundGridInnerBoxBorder"/>
    		<position name="GGcorner3" unit="cm" x="@{[-$GroundGridTubeLength-$GroundGridTorRad+0.25*$GroundGridInnerStructureWidth]}" y="0" z="@{[$GroundGridTorRad-0.5*($GroundGridInnerStructureLength-$GroundGridTubeLength)]}"/>
     </union>
+
+
     <union name="GGunion4">
       <first ref="GGunion3"/>
       <second ref="GroundGridInnerBoxBorder"/>
    		<position name="GGcorner4" unit="cm" x="@{[-0.5*$GroundGridTubeLength-$GroundGridTorRad+0.5*($GroundGridInnerStructureLength-$GroundGridTubeLength)]}" y="0" z="@{[-0.5*$GroundGridTubeLength+0.25*$GroundGridInnerStructureWidth]}"/>
 		<rotation name="GGrot4" unit="deg" x="0" y="90" z="0" />
     </union>
+
 </solids>
+
 EOF
 
 $xGGorigin=0.5*($GroundGridInnerStructureLength+2+$GroundGridOuterRadious)-$GroundGridOuterRadious-2;
@@ -1644,26 +1611,33 @@ $zGGorigin=-0.5*($GroundGridInnerStructureLength+2+$GroundGridOuterRadious)+0.5*
 
 
 print GroundGrid <<EOF;
+
 <structure>
+
 <volume name="volGroundGridCable">
   <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
   <solidref ref="GroundGridCable"/>
 </volume>
+
 <volume name="volGroundGridInnerBox">
   <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
   <solidref ref="GroundGridInnerBox"/>
 </volume>
+
 <volume name="volGGunion">
   <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
   <solidref ref="GGunion4"/>
 </volume>
+
  <volume name="volGroundGrid">
   <materialref ref="LAr"/>
   <solidref ref="GroundGridModule"/>
+
   <physvol>
    <volumeref ref="volGGunion"/>
    <position name="posGG18" unit="cm" x="@{[$xGGorigin]}" y="0" z="@{[$zGGorigin]}"/>
   </physvol>
+
 EOF
 
 $aux=4;
@@ -1739,43 +1713,35 @@ sub gen_Cryostat()
 <gdml>
 EOF
 
-# All the cryostat solids.
+print "Gas argon position : $Argon_x x $HeightGaseousAr x $Argon_z \n"; 
+
+# All the cryostat solids. #modif : I swapped roles of X and Y in block Gaseous argon
 print CRYO <<EOF;
 <solids>
     <box name="Cryostat" lunit="cm" 
       x="$Cryostat_x" 
       y="$Cryostat_y" 
       z="$Cryostat_z"/>
-      
-EOF
 
-print CRYO <<EOF;
     <box name="ArgonInterior" lunit="cm" 
       x="$Argon_x"
       y="$Argon_y"
       z="$Argon_z"/>
-    <box name="GaseousArgonFull" lunit="cm" 
-      x="$HeightGaseousAr"
-      y="$Argon_y"
+
+    <box name="GaseousArgon" lunit="cm" 
+      x="$Argon_x"
+      y="$HeightGaseousAr"
       z="$Argon_z"/>
+
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
       <second ref="ArgonInterior"/>
     </subtraction>
-    <subtraction name="GaseousArgonSub1">
-      <first ref="GaseousArgonFull"/>
-      <second ref="ArapucaOut"/>
-      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr  - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[-$widthCathode - $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
-    </subtraction>
-    <subtraction name="GaseousArgon">
-      <first ref="GaseousArgonSub1"/>
-      <second ref="ArapucaOut"/>
-      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[$widthCathode + $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
-    </subtraction>
+
 </solids>
 EOF
 
-#PDS
+#PDS #change?
 #Optical sensitive volumes cannot be rotated because Larsoft cannot pick up the rotation when obtinaing the lengths needed for the semi-analytic model --> two acceptance windows (for lateral and cathode)
 print CRYO <<EOF;
 <solids>
@@ -1783,32 +1749,39 @@ print CRYO <<EOF;
       x="@{[$ArapucaOut_x]}"
       y="@{[$ArapucaOut_y]}"
       z="@{[$ArapucaOut_z]}"/>
+
     <box name="ArapucaIn" lunit="cm"
-      x="@{[$ArapucaIn_x]}"
-      y="@{[$ArapucaOut_y]}"
+      x="@{[$ArapucaOut_x]}"
+      y="@{[$ArapucaIn_y]}"
       z="@{[$ArapucaIn_z]}"/>
+
      <subtraction name="ArapucaWalls">
       <first  ref="ArapucaOut"/>
       <second ref="ArapucaIn"/>
-      <position name="posArapucaSub" x="0" y="@{[$ArapucaOut_y/2.0]}" z="0." unit="cm"/>
+      <position name="posArapucaSub" x="-@{[$ArapucaOut_x/2.0]}" y="0." z="0." unit="cm"/>
       </subtraction>
+
     <box name="ArapucaAcceptanceWindow" lunit="cm"
       x="@{[$ArapucaAcceptanceWindow_x]}"
       y="@{[$ArapucaAcceptanceWindow_y]}"
       z="@{[$ArapucaAcceptanceWindow_z]}"/>
+
     <box name="ArapucaDoubleIn" lunit="cm"
-      x="@{[$ArapucaIn_x]}"
-      y="@{[$ArapucaOut_y+1.0]}"
+      x="@{[$ArapucaOut_x+1.0]}"
+      y="@{[$ArapucaIn_y]}"
       z="@{[$ArapucaIn_z]}"/>
+
      <subtraction name="ArapucaDoubleWalls">
       <first  ref="ArapucaOut"/>
       <second ref="ArapucaDoubleIn"/>
       <position name="posArapucaDoubleSub" x="0" y="0" z="0" unit="cm"/>
       </subtraction>
+
     <box name="ArapucaDoubleAcceptanceWindow" lunit="cm"
-      x="@{[$ArapucaOut_y-0.02]}"
-      y="@{[$ArapucaAcceptanceWindow_x]}"
+      x="@{[$ArapucaAcceptanceWindow_x]}"
+      y="@{[$ArapucaOut_y-0.02]}"
       z="@{[$ArapucaAcceptanceWindow_z]}"/>
+
 </solids>
 EOF
 
@@ -1828,7 +1801,6 @@ print CRYO <<EOF;
       <solidref ref="GaseousArgon"/>
     </volume>
 EOF
-
 #PDS converage
 for($i=0 ; $i<$nCRM_x/2 ; $i++){ #arapucas over the cathode
 for($j=0 ; $j<$nCRM_z/2 ; $j++){
@@ -1864,6 +1836,7 @@ EOF
 }
 
       print CRYO <<EOF;
+
     <volume name="volCryostat">
       <materialref ref="LAr" />
       <solidref ref="Cryostat" />
@@ -1872,7 +1845,7 @@ EOF
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
       <physvol>
         <volumeref ref="volGaseousArgon"/>
-        <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
+        <position name="posGaseousArgon" unit="cm" x="0" y="@{[$Argon_y/2-$HeightGaseousAr/2]}" z="0"/>
          </physvol>
       <physvol>
         <volumeref ref="volSteelShell"/>
@@ -1885,59 +1858,64 @@ EOF
    # Default is TPC with readout on top so we need to rotate the bottom TPC 180deg about Y.
 if ($tpc_on==1) # place Top and Bottom TPCs inside croystat offsetting each pair of CRMs by borderCRP
 {
-  $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
-  $posXBot = $posX - $driftTPCActive - $heightCathode - $ReadoutPlane;
+
+  $posY =  $Argon_y/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
+  $posYBot = $posY - $driftTPCActive - $heightCathode - $ReadoutPlane;
   $idx = 0;
 
-  my $CRP_y = $widthCRP;
+  my $CRP_x = $widthCRP;
   my $CRP_z = $lengthCRP;
-  my $myposTCPY = 0;
+  my $myposTCPX = 0;
   my $myposTPCZ = 0;
   
   my $posZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$CRP_z;
 
+
+#print "POS Z CHECK : posZ = $posZ \n";
+#print "$Argon_z  $zLArBuffer $CRP_z\n";
+
   for(my $ii=0;$ii<$nCRM_z;$ii++)
   {
     if( $ii % 2 == 0 && $ii>0){$posZ += $CRP_z;}
-    my $posY = -0.5*$Argon_y + $yLArBuffer + 0.5*$CRP_y;
+    my $posX =-( -0.5*$Argon_x + $xLArBuffer + 0.5*$CRP_x );
 
     for(my $jj=0;$jj<$nCRM_x;$jj++)
     {
-	if( $jj % 2 == 0 && $jj>0){$posY += $CRP_y;}
+	if( $jj % 2 == 0 && $jj>0){$posX += -$CRP_x;}
     
 	if($ii%2==0){
 	  if($jj%2==0){
 	    $quad=0;
-	    $myposTPCY = $posY-$CRP_y/4;
+	    $myposTPCX = -( $posX-$CRP_x/4);
 	    $myposTPCZ = $posZ-$CRP_z/4;
 	  }else{
 	    $quad=1;
-	    $myposTPCY = $posY+$CRP_y/4;
+	    $myposTPCX = -( $posX+$CRP_x/4);
 	    $myposTPCZ = $posZ-$CRP_z/4;
           }
 	}else{
 	  if($jj%2==0){
 	    $quad=2;
-	    $myposTPCY = $posY-$CRP_y/4;
+	    $myposTPCX = -($posX-$CRP_x/4);
 	    $myposTPCZ = $posZ+$CRP_z/4;
 	  }else{
 	    $quad=3;
-	    $myposTPCY = $posY+$CRP_y/4;
+	    $myposTPCX = -($posX+$CRP_x/4);
 	    $myposTPCZ = $posZ+$CRP_z/4;
 	    }
 	}
-	
+
 	print CRYO <<EOF;
       <physvol>
         <volumeref ref="volTPC$quad"/>
 	<position name="posTopTPC\-$idx" unit="cm"
-           x="$posX" y="$myposTPCY" z="$myposTPCZ"/>
+           x="$myposTPCX" y="$posY" z="$myposTPCZ"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC$quad"/>
 	<position name="posBotTPC\-$idx" unit="cm"
-           x="$posXBot" y="$myposTPCY" z="$myposTPCZ"/>
-         <rotationref ref="rPlus180AboutY"/>           
+           x="$myposTPCX" y="$posYBot" z="$myposTPCZ"/>
+         <rotationref ref="rPlus180AboutX"/>           
       </physvol>
 EOF
        $idx++;
@@ -1947,33 +1925,27 @@ EOF
 
 #The +50 in the x positions must depend on some other parameter
   if ( $FieldCage_switch eq "on" ) {
+##    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
     for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
     $dist=$i*$FieldShaperSeparation;
-$posX =  $Argon_x/2 - $HeightGaseousAr - 2*($driftTPCActive + $ReadoutPlane) - $heightCathode + $dist;
-	if ($dist<150||$dist>2*($driftTPCActive + $ReadoutPlane)-150){
+$posY =  $Argon_y/2 - $HeightGaseousAr - 2*($driftTPCActive + $ReadoutPlane) - $heightCathode + $dist; #modif swapped x-->y
 	print CRYO <<EOF;
-  <physvol>
+  <physvol> 
      <volumeref ref="volFieldShaperSlim"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
+     <position name="posFieldShaper$i" unit="cm"  x="@{[0.5*$FieldShaperShortTubeLength+$FieldShaperTorRad]}" y="@{[$posY]}" z="0" />
      <rotation name="rotFS$i" unit="deg" x="0" y="0" z="90" />
   </physvol>
 EOF
-	}else{
-	print CRYO <<EOF;
-  <physvol>
-     <volumeref ref="volFieldShaper"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotation name="rotFS$i" unit="deg" x="0" y="0" z="90" />
-  </physvol>
-EOF
-	}
     }
   }
 
+#flagCathode
 
-$CathodePosX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) - 0.5*$heightCathode;
-$CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
+$CathodePosY = $Argon_y/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) - 0.5*$heightCathode; #modif
+$CathodePosX = -( -0.5*$Argon_x + $xLArBuffer + 0.5*$widthCathode); #modif
 $CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
+
+print "nCRM_z/2 = $nCRM_z/2 && nCRM_x/2 = $nCRM_x/2 \n";
 
 $idx = 0;
   if ( $Cathode_switch eq "on" )
@@ -1988,31 +1960,32 @@ $idx = 0;
    <position name="posCathode\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
       </physvol>
 EOF
+#print "!!!! Cathode position #$idx : $CathodePosX ; $CathodePosY ; $CathodePosZ \n";
        $idx++;
-       $CathodePosY += $widthCathode;
+       $CathodePosX += -$widthCathode; #modif y-->x
     }
        $CathodePosZ += $lengthCathode;
-       $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
+       $CathodePosX = -0.5*$Argon_x + $yLArBuffer + 0.5*$widthCathode; #modif y-->x
   }
   }
 
-#for placing the Arapucas over the cathode
-  $FrameCenter_y=-0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
-  $FrameCenter_x=$CathodePosX;
+#for placing the Arapucas over the cathode 
+  $FrameCenter_x=-0.5*$Argon_x + $xLArBuffer + 0.5*$widthCathode;
+  $FrameCenter_y=$CathodePosY;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 for($i=0;$i<$nCRM_x/2;$i++){
 for($j=0;$j<$nCRM_z/2;$j++){
   place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
   $FrameCenter_z+=$lengthCathode;
 }
-  $FrameCenter_y+=$widthCathode;
+  $FrameCenter_x+=$widthCathode;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 }
 
-#for placing the Arapucas on laterals
-  $FrameCenter_x=$CathodePosX +$driftTPCActive +$heightCathode/2;#$posZplane[0]; #anode position
-  $FrameCenter_y= -$widthCathode - $FCToArapucaSpaceLat;
-  $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
+#for placing the Arapucas on laterals 
+  $FrameCenter_y = $CathodePosY +$driftTPCActive +$heightCathode/2;#$posZplane[0]; #anode position
+  $FrameCenter_x = -$widthCathode - $FrameToArapucaSpaceLat;
+  $FrameCenter_z = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
 for($j=0;$j<1;$j++){#nCRM will give the collumn number (1 collumn per frame)
   place_OpDetsLateral($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $j);
@@ -2044,13 +2017,12 @@ sub place_OpDetsCathode()
 
 for ($ara = 0; $ara<4; $ara++)
 {
-             # All Arapuca centers will have the same X coordinate
-             # Y and Z coordinates are defined with respect to the center of the current Frame
+             # All Arapuca centers will have the same Y coordinate
+             # X and Z coordinates are defined with respect to the center of the current Frame
 
- 	     $Ara_Y = $FrameCenter_y+$list_posx_bot[$ara]; #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             $Ara_X = $FrameCenter_x;
+ 	     $Ara_Y = $FrameCenter_y;
+             $Ara_X =-($FrameCenter_x+$list_posx_bot[$ara]);
  	     $Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
-             if($j==1&&$ara==2){$Ara_Z = $FrameCenter_z+$list_posz_bot[0];}
 
 	print CRYO <<EOF;
      <physvol>
@@ -2059,7 +2031,7 @@ for ($ara = 0; $ara<4; $ara++)
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
-       <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
+       <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="0" y="0" z="90"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_ArapucaDouble_$Frame_x\-$Frame_z\-$ara"/>
@@ -2067,6 +2039,7 @@ for ($ara = 0; $ara<4; $ara++)
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
+       <rotation name="rPlus90AboutZ" unit="deg" x="0" y="0" z="90"/>
      </physvol>
 EOF
 
@@ -2090,17 +2063,25 @@ for ($ara = 0; $ara<8; $ara++)
              # X coordinates are on the left and right laterals
              # Y coordinates are defined with respect to the cathode position
 
-$Ara_Y = $FrameCenter_y;
+$Ara_X = -$FrameCenter_x;
+##$Ara_Y = $FrameCenter_y;
 $Ara_Z = $FrameCenter_z;
-             if ($ara<4) {$Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
+##             if ($ara<4) {$Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
+##                         $rot= "rIdentity"; }
+##             else {      $Ara_Y = $Ara_Y+2*$widthCathode + 2*$FrameToArapucaSpaceLat;
+##                         $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
+##                         $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
+
+             if ($ara<4) {$Ara_XSens = $Ara_X -( +0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.01);
                          $rot= "rIdentity"; }
-             else {      $Ara_Y = $Ara_Y+2*$widthCathode + 2*$FCToArapucaSpaceLat;
-                         $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
-                         $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             if ($ara==0||$ara==4) {$Ara_X = $FrameCenter_x-$FirstFrameVertDist;} #first tile's center distance from top anode
-             if ($ara==1||$ara==5) {$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
-             if ($ara==2||$ara==6) {$Ara_X = $FrameCenter_x - $heightCathode -2*$driftTPCActive+$FirstFrameVertDist;} #first tile's center distance from bottom anode
-             if ($ara==3||$ara==7) {$Ara_X+=$VerticalPDdist;} #other tiles separated by VerticalPDdist
+             else {      $Ara_X = $Ara_X -(2*$widthCathode + 2*$FrameToArapucaSpaceLat);
+                         $Ara_XSens = $Ara_X -(-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.01); 
+                         $rot = "rPlus180AboutY";} 
+
+             if ($ara==0||$ara==4) {$Ara_Y = $FrameCenter_y-50.0;} #first tile's center 50 cm bellow top anode
+             if ($ara==1||$ara==5) {$Ara_Y -= $VerticalPDdist;} #other tiles separated by VerticalPDdist
+             if ($ara==2||$ara==6) {$Ara_Y = $FrameCenter_y - $heightCathode -2*$driftTPCActive+50.0;} #first tile's center 50 cm above bottom anode
+             if ($ara==3||$ara==7) {$Ara_Y += $VerticalPDdist;} #other tiles separated by VerticalPDdist
 
 	print CRYO <<EOF;
      <physvol>
@@ -2114,8 +2095,8 @@ $Ara_Z = $FrameCenter_z;
      <physvol>
        <volumeref ref="volOpDetSensitive_ArapucaLat_$Lat_z\-$ara"/>
        <position name="posOpArapuca$ara-Lat\-$Lat_z" unit="cm" 
-         x="@{[$Ara_X]}"
-	 y="@{[$Ara_YSens]}" 
+         x="@{[$Ara_XSens]}"
+	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
@@ -2149,108 +2130,103 @@ EOF
 
 
 # All the detector enclosure solids.
+#print "!!!! cathode dimensions = $widthCathode $heightCathode $lengthCathode \n";
+
 print ENCL <<EOF;
 <solids>
-    <box name="CRTPaddle" lunit="cm" 
-      x="$CRTPaddleWidth"
-      y="$CRTPaddleHeight"
-      z="$CRTPaddleLength"/>
 
-    <box name="CRTModule" lunit="cm" 
-      x="$CRTModWidth"
-      y="$CRTModHeight"
-      z="$CRTModLength"/>
-    
     <box name="CathodeBlock" lunit="cm"
-      x="@{[$heightCathode]}"
-      y="@{[$widthCathode]}"
+      x="@{[$widthCathode]}"
+      y="@{[$heightCathode]}"
       z="@{[$lengthCathode]}" />
 
     <box name="CathodeVoid" lunit="cm"
-      x="@{[$heightCathode+1.0]}"
-      y="@{[$widthCathodeVoid]}"
+      x="@{[$widthCathodeVoid]}"
+      y="@{[$heightCathode+1.0]}"
       z="@{[$lengthCathodeVoid]}" />
 
     <subtraction name="Cathode1">
       <first ref="CathodeBlock"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub1" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub1" x="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" y="0" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode2">
       <first ref="Cathode1"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub2" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub2" x="@{[+1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" y="0" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode3">
       <first ref="Cathode2"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub3" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub3" x="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" y="0" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode4">
       <first ref="Cathode3"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub4" x="0" y="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub4" x="@{[+1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" y="0" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode5">
       <first ref="Cathode4"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub5" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub5" x="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" y="0" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode6">
       <first ref="Cathode5"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub6" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub6" x="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" y="0" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode7">
       <first ref="Cathode6"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub7" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub7" x="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" y="0" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode8">
       <first ref="Cathode7"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub8" x="0" y="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub8" x="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" y="0" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode9">
       <first ref="Cathode8"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub9" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub9" x="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" y="0" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode10">
       <first ref="Cathode9"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub10" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub10" x="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" y="0" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode11">
       <first ref="Cathode10"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub11" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub11" x="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" y="0" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode12">
       <first ref="Cathode11"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub12" x="0" y="@{[0.5*$widthCathodeVoid+1.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub12" x="@{[-0.5*$widthCathodeVoid-1.0*$CathodeBorder]}" y="0" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode13">
       <first ref="Cathode12"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub13" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub13" x="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" y="0" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode14">
       <first ref="Cathode13"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub14" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub14" x="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" y="0" z="@{[-0.5*$lengthCathodeVoid-1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode15">
       <first ref="Cathode14"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub15" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub15" x="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" y="0" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
     <subtraction name="Cathode">
       <first ref="Cathode15"/>
       <second ref="CathodeVoid"/>
-      <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
+      <position name="posCathodeSub16" x="@{[-1.5*$widthCathodeVoid-2.0*$CathodeBorder]}" y="0" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
+
+
 
     <box name="FoamPadBlock" lunit="cm"
       x="@{[$Cryostat_x + 2*$FoamPadding]}"
@@ -2365,7 +2341,16 @@ print ENCL <<EOF;
     <second ref="boxBarTop"/>
     <position name="posUniTop" x="0.45" y="0" z="-17.2" unit="cm"/>
     </union>
-      
+    
+    <!--
+    <subtraction name="boxCryoWallSmUS">
+    <first ref="boxCryoWallSm"/>
+    <second ref="BeamWindowStSu"/>
+    <position name="posBWCryoWallUS" x="-34.5198845542345" y="131.897988017573" z="0." unit="cm"/>
+    < rotationref ref="rBeamW3"/>
+    </subtraction>
+    -->
+    
     <subtraction name="boxWallUHoll">
     <first ref="box21"/>
     <second ref="box22"/>
@@ -2447,111 +2432,8 @@ EOF
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
       <solidref ref="SteelSupport"/>
     </volume>
-EOF
-
-for($imod=0 ; $imod<16 ; $imod++){
-    $modnum = $imod + 1;
-for($i=0 ; $i<64 ; $i++){
-    $padnum = $i+1;
-    $paddleid = "U$modnum"."_$padnum";
-    print ENCL <<EOF;
-    <volume name="volAuxDetSensitive_CRTPaddle_$paddleid">
-      <materialref ref="Polystyrene"/>
-      <solidref ref="CRTPaddle"/>
-    </volume>
-EOF
-}
-    print ENCL <<EOF;
-    <volume name="volAuxDet_CRTModule_U$modnum">
-      <materialref ref="Air"/>
-      <solidref ref="CRTModule"/>
-EOF
-for($i=0 ; $i<32 ; $i++){
-    $paddle_x1 = - $CRTModWidth/2 + $CRTPaddleWidth*($i + 0.5);
-    $paddle_x2 = - $CRTModWidth/2 + $CRTPaddleWidth*($i + 1);
-    $paddle_y1 =   $CRTPaddleHeight/2;
-    $paddle_y2 = - $CRTPaddleHeight/2;
-    $paddle_z = 0;
-    $padnum1 = $i + 1;
-    $padnum2 = $i + 33;
-    $paddleid1 = "U$modnum"."_$padnum1";
-    $paddleid2 = "U$modnum"."_$padnum2";
-    print ENCL <<EOF;
-       <physvol>
-           <volumeref ref="volAuxDetSensitive_CRTPaddle_$paddleid1"/>
-           <position name="posCRTPaddleSensitive_$paddleid1" unit="cm" 
-           x="$paddle_x1" 
-           y="$paddle_y1" 
-           z="$paddle_z"/> 
-           <rotationref ref="rIdentity"/>
-       </physvol>
-       <physvol>
-           <volumeref ref="volAuxDetSensitive_CRTPaddle_$paddleid2"/>
-           <position name="posCRTPaddleSensitive_$paddleid2" unit="cm" 
-           x="$paddle_x2" 
-           y="$paddle_y2" 
-           z="$paddle_z"/> 
-           <rotationref ref="rIdentity"/>
-       </physvol>
-EOF
-}
-      print ENCL <<EOF;
-    </volume>
-EOF
-}
-
-for($imod=0 ; $imod<16 ; $imod++){
-    $modnum = $imod + 1;
-for($i=0 ; $i<64 ; $i++){
-    $padnum = $i+1;
-    $paddleid = "D$modnum"."_$padnum";
-    print ENCL <<EOF;
-    <volume name="volAuxDetSensitive_CRTPaddle_$paddleid">
-      <materialref ref="Polystyrene"/>
-      <solidref ref="CRTPaddle"/>
-    </volume>
-EOF
-}
-    print ENCL <<EOF;
-    <volume name="volAuxDet_CRTModule_D$modnum">
-      <materialref ref="Air"/>
-      <solidref ref="CRTModule"/>
-EOF
-for($i=0 ; $i<32 ; $i++){
-    $paddle_x1 = - $CRTModWidth/2 + $CRTPaddleWidth*($i + 0.5);
-    $paddle_x2 = - $CRTModWidth/2 + $CRTPaddleWidth*($i + 1);
-    $paddle_y1 =   $CRTPaddleHeight/2;
-    $paddle_y2 = - $CRTPaddleHeight/2;
-    $paddle_z = 0;
-    $padnum1 = $i + 1;
-    $padnum2 = $i + 33;
-    $paddleid1 = "D$modnum"."_$padnum1";
-    $paddleid2 = "D$modnum"."_$padnum2";
-    print ENCL <<EOF;
-       <physvol>
-           <volumeref ref="volAuxDetSensitive_CRTPaddle_$paddleid1"/>
-           <position name="posCRTPaddleSensitive_$paddleid1" unit="cm" 
-           x="$paddle_x1" 
-           y="$paddle_y1" 
-           z="$paddle_z"/> 
-          <rotationref ref="rIdentity"/>
-       </physvol>
-       <physvol>
-           <volumeref ref="volAuxDetSensitive_CRTPaddle_$paddleid2"/>
-           <position name="posCRTPaddleSensitive_$paddleid2" unit="cm" 
-           x="$paddle_x2" 
-           y="$paddle_y2" 
-           z="$paddle_z"/> 
-          <rotationref ref="rIdentity"/>
-       </physvol>
-EOF
-}
-      print ENCL <<EOF;
-    </volume>
-EOF
-}
-   
-    print ENCL <<EOF;   
+    
+    
     <volume name="volUnitCent">
     <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
     <solidref ref="UnitCent"/>
@@ -3440,7 +3322,6 @@ EOF
            <volumeref ref="volFoamPadding"/>
            <positionref ref="posCryoInDetEnc"/>
        </physvol>
-
     
     <physvol name="volSteelSupport_Top">
     <volumeref ref="volSteelSupport_TB"/>
@@ -3484,9 +3365,7 @@ EOF
     <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
     </physvol>
     
-EOF
-
-    print ENCL <<EOF;    
+    
     <physvol>
         <volumeref ref="volSteelSupport"/>
         <positionref ref="posCryoInDetEnc"/>
@@ -3498,37 +3377,6 @@ EOF
     </physvol>
 EOF
 
-  for($i=0 ; $i<16 ; $i++){
-    $modnum = $i + 1;
-    $modid  = "U$modnum";
-
-print ENCL <<EOF;
-       <physvol>
-           <volumeref ref="volAuxDet_CRTModule_$modid"/>
-           <position name="posvolAuxDet_CRTModule_$modid" unit="cm"
-            x="$posCRTUS_x[$i]" 
-            y="$posCRTUS_y[$i]" 
-            z="$posCRTUS_z[$i]"/>
-           <rotationref ref="$posCRTUS_rot[$i]"/>
-       </physvol>
-EOF
-  }
-
-  for($i=0 ; $i<16 ; $i++){
-    $modnum = $i + 1; 
-    $modid  = "D$modnum";
-
-print ENCL <<EOF;
-       <physvol>
-           <volumeref ref="volAuxDet_CRTModule_$modid"/>
-           <position name="posvolAuxDet_CRTModule_$modid" unit="cm"
-            x="$posCRTDS_x[$i]" 
-            y="$posCRTDS_y[$i]" 
-            z="$posCRTDS_z[$i]"/>
-           <rotationref ref="$posCRTDS_rot[$i]"/>
-       </physvol>
-EOF
-  }
 
 print ENCL <<EOF;
     </volume>
@@ -3577,16 +3425,20 @@ print WORLD <<EOF;
 </solids>
 EOF
 
+print "origin = $OriginXSet  $OriginYSet  $OriginZSet \n";
+
 # World structure
 print WORLD <<EOF;
 <structure>
     <volume name="volWorld" >
       <materialref ref="Air"/>
       <solidref ref="World"/>
+
       <physvol>
         <volumeref ref="volDetEnclosure"/>
 	<position name="posDetEnclosure" unit="cm" x="$OriginXSet" y="$OriginYSet" z="$OriginZSet"/>
       </physvol>
+
     </volume>
 </structure>
 </gdml>
@@ -3623,11 +3475,15 @@ sub write_fragments()
 
     print OUTPUT <<EOF;
 <?xml version='1.0'?>
+
 <!-- Input to Geometry/gdml/make_gdml.pl; define the GDML fragments
      that will be zipped together to create a detector description. 
      -->
+
 <config>
+
    <constantfiles>
+
       <!-- These files contain GDML <constant></constant>
            blocks. They are read in separately, so they can be
            interpreted into the remaining GDML. See make_gdml.pl for
@@ -3644,9 +3500,13 @@ EOF
     }
 
     print OUTPUT <<EOF;
+
    </constantfiles>
+
    <gdmlfiles>
+
       <!-- The GDML file fragments to be zipped together. -->
+
 EOF
 
     foreach $filename (@gdmlFiles)
@@ -3657,7 +3517,9 @@ EOF
     }
 
     print OUTPUT <<EOF;
+
    </gdmlfiles>
+
 </config>
 EOF
 
@@ -3666,7 +3528,8 @@ EOF
 
 
 print "Some of the principal parameters for this TPC geometry (unit cm unless noted otherwise)\n";
-print "CRP total area        : $widthCRP x $lengthCRP\n";
+print "CRM active area       : $widthCRM_active x $lengthCRM_active\n";
+print "CRM total area        : $widthCRM x $lengthCRM\n";
 print "Wire pitch in U, V, Z : $wirePitchU, $wirePitchV, $wirePitchZ\n";
 print "TPC active volume  : $driftTPCActive x $widthTPCActive x $lengthTPCActive\n";
 print "Argon volume       : ($Argon_x, $Argon_y, $Argon_z) \n"; 
@@ -3681,7 +3544,6 @@ print "ExtractionGrid     : $ExtractionGrid_switch \n";
 
 # run the sub routines that generate the fragments
 
-gen_Extend();
 gen_Define(); 	 # generates definitions at beginning of GDML
 gen_Materials(); # generates materials to be used
 
@@ -3689,11 +3551,12 @@ if ( $FieldCage_switch eq "on" ) {  gen_FieldCage();	}
 #if ( $GroundGrid_switch eq "on" ) {  gen_GroundGrid();	}
 #if ( $Cathode_switch eq "on" ) {  gen_Cathode();	}
 if ( $ExtractionGrid_switch eq "on" ) {  gen_ExtractionGrid();	}
-gen_TopCRP();
+
 #gen_TPC();       # generate TPC for a given unit CRM
+gen_TopCRP();       # generate TPC for a given unit CRM
 gen_Cryostat();  # 
-gen_Enclosure(); # 
-gen_World();	 # places the enclosure among DUSEL Rock
+gen_Enclosure(); # not changed yet. #change?
+gen_World();	 # places the enclosure among DUSEL Rock. #change?
 
 
 write_fragments(); # writes the XML input for make_gdml.pl

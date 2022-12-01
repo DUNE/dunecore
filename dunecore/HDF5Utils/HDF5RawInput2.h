@@ -1,5 +1,8 @@
-#ifndef HDF5RawInput_h
-#define HDF5RawInput_h
+// Input source for the second HDF5 file format version from the DAQ people
+// using the DUNE-DAQ HDF5RawInputFile class
+
+#ifndef HDF5RawInput2_h
+#define HDF5RawInput2_h
 #include "art/Framework/Core/InputSourceMacros.h" 
 #include "art/Framework/IO/Sources/Source.h" 
 #include "art/Framework/IO/Sources/SourceTraits.h"
@@ -15,18 +18,18 @@
 #include "canvas/Persistency/Provenance/FileFormatVersion.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 #include "fhiclcpp/ParameterSet.h"
-#include "HDF5Utils.h"
+#include "art/Framework/Services/Registry/ServiceHandle.h"
+#include "dunecore/HDF5Utils/HDF5RawFile2Service.h"
+#include "dunecore/HDF5Utils/HDF5Utils.h"
 
-
-//Is raw a good namespace?
 namespace dune {
 //Forward declare the class
-class HDF5RawInputDetail;
+class HDF5RawInput2Detail;
 }
 
-class dune::HDF5RawInputDetail {
+class dune::HDF5RawInput2Detail {
  public:
-  HDF5RawInputDetail(fhicl::ParameterSet const & ps,
+  HDF5RawInput2Detail(fhicl::ParameterSet const & ps,
                               art::ProductRegistryHelper & rh,
                               art::SourceHelper const & sh);
 
@@ -39,16 +42,19 @@ class dune::HDF5RawInputDetail {
                 art::EventPrincipal*& outE);
 
   void closeCurrentFile() {
-    if (hdf_file_->filePtr)
-      dune::HDF5Utils::closeFile(std::move(hdf_file_));
+    art::ServiceHandle<dune::HDF5RawFile2Service> rawFileService;
+    rawFileService->Close();
   };
 
  private:
-  std::unique_ptr<dune::HDF5Utils::HDFFileInfo> hdf_file_;
-  std::deque<std::string> unprocessedEventList_;
+  dunedaq::hdf5libs::HDF5RawDataFile::record_id_set fUnprocessedEventRecordIDs;
   std::string pretend_module_name;
   int fLogLevel;
-  double fClockFreqMHz;            // clock frequency in MHz -- used to unpack trigger timestamps for the event
+  double fClockFreqMHz;               // clock frequency in MHz -- used to unpack trigger timestamps for the event
+  std::string fHandleSequenceOption;  // to steer what to do with trigger record sequence numbers
+  unsigned int fTrnScale;             // in case we are doing shiftadd, this the scale factor on trig number
   art::SourceHelper const& pmaker;
+
+  int fLastEvent;
  };
 #endif
