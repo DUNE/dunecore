@@ -31,7 +31,7 @@ duneutil            v09_63_01d00
 dune_pardata        v01_81_00
 dunedetdataformats  v3_6_1
 dunedaqdataformats  v3_4_1
-nusystematics       v01_02_02
+nusystematics       v01_02_03
 systematicstools    v01_02_00
 dune_oslibs         v1_0_0         -       optional
 larsoft             v09_64_00
