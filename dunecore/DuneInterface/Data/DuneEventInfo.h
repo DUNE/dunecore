@@ -2,20 +2,22 @@
 
 // David Adams
 // June 2019
+// June 2022: Add context base.
 //
 // Event info for dataprep in DUNE.
 
 #ifndef DuneEventInfo_H
 #define DuneEventInfo_H
 
+#include "dunecore/DuneInterface/Data/DuneContext.h"
 #include <sstream>
 #include <memory>
 
-class DuneEventInfo {
+class DuneEventInfo : public DuneContext {
 
 public:
 
-  using Index = unsigned int;
+  using Index = DuneContext::Index;
   using LongIndex = unsigned long;
 
   Index run =badIndex();
@@ -27,7 +29,6 @@ public:
   LongIndex triggerClock =badLongIndex();
   LongIndex triggerTick0 =badLongIndex();
 
-  static Index badIndex() { return -1u; }
   static LongIndex badLongIndex() { return -1ul; }
   static const DuneEventInfo& badEventInfo() {
     static DuneEventInfo bei;
@@ -63,6 +64,10 @@ public:
 
   // Is this valid info?
   bool isValid() const { return run != badIndex(); }
+
+  // Accessors for context.
+  Index getRun() const { return run; }
+  Index getEvent() const { return event; }
 
   // Order two event info objects.
   bool operator<(const DuneEventInfo& rhs) {
