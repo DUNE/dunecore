@@ -96,16 +96,15 @@ void setExpectedValuesSpacePoints(Geometry* pgeo) {
   const string myname = "setExpectedValuesSpacePoints: ";
   string ofname = "setExpectedValuesSpacePoints.dat";
   cout << myname << "Writing " << ofname << endl;
-  const CryostatGeo& crygeo = pgeo->Cryostat(0);
-  double origin[3] = {0.0};
-  double crypos[3] = {0.0};
-  crygeo.LocalToWorld(origin, crypos);
-  double cxlo = crypos[0] - crygeo.HalfWidth();
-  double cxhi = crypos[0] + crygeo.HalfWidth();
-  double cylo = crypos[1] - crygeo.HalfHeight();
-  double cyhi = crypos[1] + crygeo.HalfHeight();
-  double czlo = crypos[2] - 0.5*crygeo.Length();
-  double czhi = crypos[2] + 0.5*crygeo.Length();
+  const CryostatGeo& crygeo = pgeo->Cryostat(CryostatID{0});
+  geo::CryostatGeo::LocalPoint_t const origin{};
+  auto const crypos = crygeo.toWorldCoords(origin);
+  double cxlo = crypos.X() - crygeo.HalfWidth();
+  double cxhi = crypos.X() + crygeo.HalfWidth();
+  double cylo = crypos.Y() - crygeo.HalfHeight();
+  double cyhi = crypos.Y() + crygeo.HalfHeight();
+  double czlo = crypos.Z() - 0.5*crygeo.Length();
+  double czhi = crypos.Z() + 0.5*crygeo.Length();
   cout << "Cryostat limits: "
        << "(" << cxlo << ", " << cylo << ", " << czlo << "), "
        << "(" << cxhi << ", " << cyhi << ", " << czhi << ")" << endl;
@@ -119,7 +118,7 @@ void setExpectedValuesSpacePoints(Geometry* pgeo) {
       double y = cylo + yf*(cyhi-cylo);
       for ( double xf : xfs ) {
         double x = cxlo + xf*(cxhi-cxlo);
-        double xyz[3] = {x, y, z};
+        geo::Point_t const xyz{x, y, z};
         cout << "  (" << x << ", " << y << ", " << z << ")" << endl;
         TPCID tpcid = pgeo->FindTPCAtPosition(xyz);
         unsigned int itpc = tpcid.TPC;

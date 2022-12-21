@@ -9,21 +9,18 @@
 #ifndef ChannelGeo_H
 #define ChannelGeo_H
 
+#include "larcorealg/Geometry/GeometryCore.h"
+
 #include <utility>
 #include <vector>
-#include "TVector3.h"
-
-namespace geo {
-  class GeometryCore;
-}
 
 class ChannelGeo {
 
 public:
 
   using Index = unsigned int;
-  using Point = TVector3;
-  using EndPoints = std::pair<Point, Point>;
+  using Point = geo::Point_t;
+  using EndPoints = geo::GeometryCore::Segment_t;
   using EndPointsVector = std::vector<EndPoints>;
 
   // Ctor from channel number and geometry service.

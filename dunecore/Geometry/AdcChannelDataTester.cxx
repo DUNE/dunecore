@@ -107,7 +107,7 @@ strumCryoWires(AdcChannelDataMap& acds, Index icry) {
     return 1;
   }
 
-  const geo::CryostatGeo& gcry = pgeo->Cryostat(icry);
+  const geo::CryostatGeo& gcry = pgeo->Cryostat(geo::CryostatID{icry});
   for ( Index itpc=0; itpc<gcry.NTPC(); ++itpc ) {
     strumTpcWires(acds, itpc, icry);
   }

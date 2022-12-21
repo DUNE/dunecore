@@ -18,9 +18,9 @@ ChannelGeo::ChannelGeo(Index icha, const geo::GeometryCore* pgeo)
   if ( icha >= pgeo->Nchannels() ) return;
   m_valid = true;
   for ( geo::WireID wid : pgeo->ChannelToWire(icha) ) {
-    EndPoints ends = pgeo->WireEndPoints<TVector3>(wid);
+    auto ends = pgeo->WireEndPoints(wid);
     if ( ends.first.y() > ends.second.y() ) {
-      Point firstPoint = ends.first;
+      auto firstPoint = ends.first;
       ends.first = ends.second;
       ends.second = firstPoint;
     }

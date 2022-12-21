@@ -176,7 +176,7 @@ double geo::ColdBoxChannelMapAlg::WireCoordinate
 
 //------------------------------------------------------------------------------
 geo::WireID geo::ColdBoxChannelMapAlg::NearestWireID
-  (const TVector3& worldPos, geo::PlaneID const& planeID) const
+  (const geo::Point_t& worldPos, geo::PlaneID const& planeID) const
 {
   /*
    * this should NOT be called... it shouldn't be here at all!
@@ -455,7 +455,7 @@ void geo::ColdBoxChannelMapAlg::fillChannelToWireMap
           << fPlaneInfo[(*iPlane)->ID()].firstChannel()
           << " -- " << fPlaneInfo[(*iPlane)->ID()].lastChannel() << ";";
         
-        geo::Point_t lastWirePos = (*iPlane)->LastWire().GetCenter<geo::Point_t>();
+        geo::Point_t lastWirePos = (*iPlane)->LastWire().GetCenter();
 	
         while (++iPlane != pend) {
           
@@ -470,9 +470,9 @@ void geo::ColdBoxChannelMapAlg::fillChannelToWireMap
           /*
           mf::LogTrace("ColdBoxChannelMapAlg")
             << (*std::prev(iPlane))->ID() << " W:" << ((*std::prev(iPlane))->Nwires() - 1)
-            << " ending at " << (*std::prev(iPlane))->LastWire().GetEnd<geo::Point_t>()
+            << " ending at " << (*std::prev(iPlane))->LastWire().GetEnd()
             << " matched " << lastMatchedWireID
-            << " which starts at " << plane.Wire(lastMatchedWireID).GetStart<geo::Point_t>()
+            << " which starts at " << plane.Wire(lastMatchedWireID).GetStart()
             ;
           */
           
@@ -495,7 +495,7 @@ void geo::ColdBoxChannelMapAlg::fillChannelToWireMap
             << fPlaneInfo[plane.ID()].lastChannel() << ";";
           
           // update for the next iteration
-          lastWirePos = plane.LastWire().GetCenter<geo::Point_t>();
+          lastWirePos = plane.LastWire().GetCenter();
           
         } // while
         
@@ -733,4 +733,3 @@ std::string geo::ColdBoxChannelMapAlg::PlaneTypeName(PlaneType_t planeType) {
 
 
 // ----------------------------------------------------------------------------
-

@@ -45,7 +45,7 @@ namespace geo{
     
     //@{
     virtual WireID NearestWireID
-      (const TVector3& worldPos, geo::PlaneID const& planeID) const override;
+      (const geo::Point_t& worldPos, geo::PlaneID const& planeID) const override;
     //@}
     
     //@{

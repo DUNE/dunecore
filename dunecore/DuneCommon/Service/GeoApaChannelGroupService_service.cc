@@ -33,7 +33,7 @@ GeoApaChannelGroupService(fhicl::ParameterSet const& pset)
   const string myname = "GeoApaChannelGroupService::ctor: ";
   // Find the total # APAs and assign width for APA index.
   Index ngrp = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->IterateCryostatIDs() ) {
+  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
     ngrp += m_pgeo->NTPCsets(cryid);
   }
   unsigned int w = log10(ngrp-1) + 1;
@@ -42,7 +42,7 @@ GeoApaChannelGroupService(fhicl::ParameterSet const& pset)
   Index igrp = 0;
   Index ncry = m_pgeo->Ncryostats();
   // Loop over cryostats.
-  for ( const geo::CryostatID& cryid : m_pgeo->IterateCryostatIDs() ) {
+  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
     Index napa = m_pgeo->NTPCsets(cryid);
     Index icry = cryid.Cryostat;
     // Loop over APAs.

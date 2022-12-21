@@ -108,18 +108,16 @@ bool util::CrpGainService::checkGeoConfig() const
       return false;
     }
 
-  for (geo::TPCID const& tpcid: m_geo->IterateTPCIDs()) 
+  for (geo::TPCGeo const& tpcgeo: m_geo->Iterate<geo::TPCGeo>())
     {
-      const geo::TPCGeo &tpcgeo = m_geo->TPC(tpcid);
       if(tpcgeo.Nplanes() > 2)
 	{
 	  cout<<myname<<"ERROR wrong number of readout planes\n";
 	  return false;
 	}
       //
-      for(unsigned p = 0; p < tpcgeo.Nplanes(); ++p)
+      for(geo::PlaneGeo const& plane : m_geo->Iterate<geo::PlaneGeo>(tpcgeo.ID()))
 	{
-	  const geo::PlaneGeo& plane = tpcgeo.Plane( p );
 	  unsigned nwires = plane.Nwires();
 	  if( nwires % m_LemViewChans != 0 )
 	    {
@@ -155,7 +153,7 @@ double util::CrpGainService::viewCharge( const sim::SimChannel* psc, unsigned it
   geo::WireID wid  = wids[0];
   
   // get tpc
-  const geo::TPCGeo& tpcgeo = m_geo->TPC(wid.TPC);
+  const geo::TPCGeo& tpcgeo = m_geo->TPC(wid.asPlaneID().asTPCID());
 
   // this plane
   const geo::PlaneGeo& pthis = tpcgeo.Plane( wid.Plane );
