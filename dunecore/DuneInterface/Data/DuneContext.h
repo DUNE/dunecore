@@ -1,4 +1,4 @@
-// DuneContext
+// DuneContext.h
 //
 // David Adams
 // December 2022
@@ -10,6 +10,9 @@
 // This generic interface is used to hold the context in the context
 // manager and is used by many clients to access the data.
 // Those needing more information can cast it up.
+
+#ifndef DuneContext_H
+#define DuneContext_H
 
 class DuneContext {
 
@@ -31,3 +34,5 @@ public:
   virtual Index getEvent() const { return badIndex(); }
 
 };
+
+#endif
