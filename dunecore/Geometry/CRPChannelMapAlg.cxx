@@ -121,9 +121,9 @@ namespace {
     unsigned int nz = 0U;
     auto begin = tpcs.begin();
     auto end   = begin + ntpc_cell;
-    auto c0 = (*begin)->GetCenter<geo::Point_t>();
+    auto c0 = (*begin)->GetCenter();
     for(;begin!=end;++begin){
-	auto c1 = (*begin)->GetCenter<geo::Point_t>();
+        auto c1 = (*begin)->GetCenter();
 	if( CheckTol(c0.Z() - c1.Z()) ){
 	  nz++; // count also the first TPC
 	}
@@ -291,7 +291,7 @@ double geo::CRPChannelMapAlg::WireCoordinate
 
 //------------------------------------------------------------------------------
 geo::WireID geo::CRPChannelMapAlg::NearestWireID
-  (const TVector3& worldPos, geo::PlaneID const& planeID) const
+  (const geo::Point_t&  worldPos, geo::PlaneID const& planeID) const
 {
   /*
    * this should NOT be called... it shouldn't be here at all!
@@ -560,7 +560,7 @@ void geo::CRPChannelMapAlg::fillChannelToWireMap
         raw::ChannelID_t const firstROPchannel = nextChannel;
 	
 	// iterate over all the geo planes assigend to this ROP
-	geo::Point_t lastWirePos = (*planes.begin())->LastWire().GetCenter<geo::Point_t>();
+        geo::Point_t lastWirePos = (*planes.begin())->LastWire().GetCenter();
 	for( auto plane_it = planes.begin(); 
 	     plane_it != planes.end();
 	     plane_it++ ){
@@ -605,7 +605,7 @@ void geo::CRPChannelMapAlg::fillChannelToWireMap
 	      << fPlaneInfo[plane.ID()].lastChannel() << ";";
           
           // update for the next iteration
-          lastWirePos = plane.LastWire().GetCenter<geo::Point_t>();
+          lastWirePos = plane.LastWire().GetCenter();
 	} // for loop over geo planes belonging to a ROP
 	
 	unsigned int const nChannels = nextChannel - firstROPchannel;
@@ -844,4 +844,3 @@ std::string geo::CRPChannelMapAlg::PlaneTypeName(PlaneType_t planeType) {
 
 
 // ----------------------------------------------------------------------------
-

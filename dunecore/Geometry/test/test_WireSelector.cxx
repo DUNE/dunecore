@@ -29,6 +29,7 @@
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "../WireSelector.h"
 
+#include "Math/RotationX.h"
 #include "TGraph.h"
 #include "TH2F.h"
 #include "dunecore/DuneCommon/Utility/TPadManipulator.h"
@@ -58,7 +59,8 @@ using geo::TPCGeo;
 using geo::WireGeo;
 using Index = WireSelector::Index;
 
-string toString(const TVector3& xyz, int w =9) {
+template <typename T>
+string toString(T const& xyz, int w =9) {
   ostringstream sout;
   sout.precision(3);
   sout << "("
@@ -181,8 +183,8 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
          << " nwir=" << nwir
          << " drift distance =" << driftSize << " cm"
          << endl;
-    TVector3 wdir = gpla.GetWireDirection();
-    TVector3 ndir = gpla.GetNormalDirection();
+    auto const wdir = gpla.GetWireDirection();
+    auto const ndir = gpla.GetNormalDirection();
     cout << myname << "    Wire direction: " << toString(wdir) << endl;
     cout << myname << "  Normal direction: " << toString(ndir) << endl;
     Index icha1 = ncha;
@@ -192,6 +194,7 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
     bool usePlane = useView ? gpla.View() == view : fabs(thtx - wireAngle)<0.001;
     if ( ! usePlane ) continue;
     nwirSel += nwir;
+    ROOT::Math::RotationX const rotX{thtx};
     for ( Index iwir=0; iwir<=nwir; ++iwir ) {
       bool showWire = iwir < nShow;
       bool endPlane = iwir == nwir;
@@ -200,18 +203,18 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
       if ( ! endBlock ) {
         WireID wid(pid, iwir);
         const WireGeo* pgwir = pgeo->WirePtr(wid);
-        TVector3 xyzWire = pgwir->GetCenter<TVector3>();
-        TVector3 xyz1 = pgwir->GetStart<TVector3>();
-        TVector3 xyz2 = pgwir->GetEnd<TVector3>();
+        auto xyzWire = pgwir->GetCenter();
+        auto xyz1 = pgwir->GetStart();
+        auto xyz2 = pgwir->GetEnd();
         icha = pgeo->PlaneWireToChannel(wid);
         wout << myname << setw(12) << iwir << " [" << setw(4) << icha << "] " << toString(xyzWire);
-        xyzWire.RotateX(thtx);
+        xyzWire = rotX(xyzWire);
         wout << " --> " << toString(xyzWire) << "\n";
         wout << myname << setw(20) << "" << toString(xyz1);
-        xyz1.RotateX(thtx);
+        xyz1 = rotX(xyz1);
         wout << " --> " << toString(xyz1) << "\n";
         wout << myname << setw(20) << "" << toString(xyz2);
-        xyz2.RotateX(thtx);
+        xyz2 = rotX(xyz2);
         wout << " --> " << toString(xyz2) << "\n";
         assert( icha < ncha );
         if ( icha1 == ncha ) {

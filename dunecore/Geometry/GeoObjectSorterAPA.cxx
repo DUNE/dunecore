@@ -23,20 +23,17 @@ namespace geo{
     // NOTE: This initial sorting is arbitrary, there
     //       are no APAAlg users using AuxDet yet
 
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    ad1.LocalToWorld(local, xyz1);
-    ad2.LocalToWorld(local, xyz2);
+    auto const xyz1 = ad1.GetCenter();
+    auto const xyz2 = ad2.GetCenter();
 
     // First sort all AuxDets into same-y groups
-    if(xyz1[1] < xyz2[1]) return true;
+    if(xyz1.Y() < xyz2.Y()) return true;
 
     // Within a same-y group, sort TPCs into same-z groups
-    if(xyz1[1] == xyz2[1] && xyz1[2] < xyz2[2]) return true;
+    if(xyz1.Y() == xyz2.Y() && xyz1.Z() < xyz2.Z()) return true;
 
     // Within a same-z, same-y group, sort TPCs according to x
-    if(xyz1[2] == xyz2[2] && xyz1[1] == xyz2[1] && xyz1[0] < xyz2[0]) return true;
+    if(xyz1.Z() == xyz2.Z() && xyz1.Y() == xyz2.Y() && xyz1.X() < xyz2.X()) return true;
 
     // none of those are true, so return false
     return false;
@@ -50,20 +47,17 @@ namespace geo{
     // NOTE: This initial sorting is arbitrary, there
     //       are no APAAlg users using AuxDet yet
 
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    ad1.LocalToWorld(local, xyz1);
-    ad2.LocalToWorld(local, xyz2);
+    auto const xyz1 = ad1.GetCenter();
+    auto const xyz2 = ad2.GetCenter();
 
     // First sort all AuxDets into same-y groups
-    if(xyz1[1] < xyz2[1]) return true;
+    if(xyz1.Y() < xyz2.Y()) return true;
 
     // Within a same-y group, sort TPCs into same-z groups
-    if(xyz1[1] == xyz2[1] && xyz1[2] < xyz2[2]) return true;
+    if(xyz1.Y() == xyz2.Y() && xyz1.Z() < xyz2.Z()) return true;
 
     // Within a same-z, same-y group, sort TPCs according to x
-    if(xyz1[2] == xyz2[2] && xyz1[1] == xyz2[1] && xyz1[0] < xyz2[0]) return true;
+    if(xyz1.Z() == xyz2.Z() && xyz1.Y() == xyz2.Y() && xyz1.X() < xyz2.X()) return true;
 
     // none of those are true, so return false
     return false;
@@ -75,12 +69,11 @@ namespace geo{
   //   same as standard
   static bool sortCryoAPA(const CryostatGeo& c1, const CryostatGeo& c2)
   {
-    double xyz1[3] = {0.}, xyz2[3] = {0.};
-    double local[3] = {0.};
-    c1.LocalToWorld(local, xyz1);
-    c2.LocalToWorld(local, xyz2);
+    geo::CryostatGeo::LocalPoint_t const local{};
+    auto const xyz1 = c1.toWorldCoords(local);
+    auto const xyz2 = c2.toWorldCoords(local);
 
-    return xyz1[0] < xyz2[0];
+    return xyz1.X() < xyz2.X();
   }
 
 
@@ -88,24 +81,21 @@ namespace geo{
   // Define sort order for tpcs in APA configuration.
   static bool sortTPCAPA(const TPCGeo& t1, const TPCGeo& t2)
   {
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    t1.LocalToWorld(local, xyz1);
-    t2.LocalToWorld(local, xyz2);
+    auto const xyz1 = t1.GetCenter();
+    auto const xyz2 = t2.GetCenter();
 
     // The goal is to number TPCs first in the x direction so that,
     // in the case of APA configuration, TPCs 2c and 2c+1 make up APA c.
     // then numbering will go in y then in z direction.
 
     // First sort all TPCs into same-z groups
-    if(xyz1[2] < xyz2[2]) return true;
+    if(xyz1.Z() < xyz2.Z()) return true;
 
     // Within a same-z group, sort TPCs into same-y groups
-    if(xyz1[2] == xyz2[2] && xyz1[1] < xyz2[1]) return true;
+    if(xyz1.Z() == xyz2.Z() && xyz1.Y() < xyz2.Y()) return true;
 
     // Within a same-z, same-y group, sort TPCs according to x
-    if(xyz1[2] == xyz2[2] && xyz1[1] == xyz2[1] && xyz1[0] < xyz2[0]) return true;
+    if(xyz1.Z() == xyz2.Z() && xyz1.Y() == xyz2.Y() && xyz1.X() < xyz2.X()) return true;
 
     // none of those are true, so return false
     return false;
@@ -117,13 +107,10 @@ namespace geo{
   //   same as standard, but implemented differently
   static bool sortPlaneAPA(const PlaneGeo& p1, const PlaneGeo& p2)
   {
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    p1.LocalToWorld(local, xyz1);
-    p2.LocalToWorld(local, xyz2);
+    auto const xyz1 = p1.GetBoxCenter();
+    auto const xyz2 = p2.GetBoxCenter();
 
-    return xyz1[0] > xyz2[0];
+    return xyz1.X() > xyz2.X();
   }
 
 
@@ -137,13 +124,13 @@ namespace geo{
     // increasing away from that wire.
 
     // if a top TPC, count from top down
-    if( xyz1[1]>0 && xyz1[1] > xyz2[1] ) return true;
+    if( xyz1.Y()>0 && xyz1.Y() > xyz2.Y() ) return true;
 
     // if a bottom TPC, count from bottom up
-    if( xyz1[1]<0 && xyz1[1] < xyz2[1] ) return true;
+    if( xyz1.Y()<0 && xyz1.Y() < xyz2.Y() ) return true;
 
     // sort the all vertical wires to increase in +z direction
-    if( xyz1[1] == xyz2[1] && xyz1[2] < xyz2[2] ) return true;
+    if( xyz1.Y() == xyz2.Y() && xyz1.Z() < xyz2.Z() ) return true;
 
     return false;
   }

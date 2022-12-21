@@ -89,38 +89,35 @@ void CheckCRPGeometry::analyze(art::Event const & e)
   */
   std::cout<<"Total number of TPC "<<geo->NTPC()<<std::endl;
 
-  for (geo::TPCID const& tpcid: geo->IterateTPCIDs()) {
-    size_t const t = tpcid.TPC;
+  for (geo::TPCGeo const& tpc: geo->Iterate<geo::TPCGeo>(geo::CryostatID{0})) {
+    size_t const t = tpc.ID().TPC;
     //if (t%2==0) continue;
-    double local[3] = {0.,0.,0.};
-    double world[3] = {0.,0.,0.};
-    const geo::TPCGeo &tpc = geo->TPC(t);
-    tpc.LocalToWorld(local,world);
-    if (minx>world[0]-tpc.ActiveHalfWidth())
-      minx = world[0]-tpc.ActiveHalfWidth();
-    if (maxx<world[0]+tpc.ActiveHalfWidth())
-      maxx = world[0]+tpc.ActiveHalfWidth();
-    if (miny>world[1]-tpc.ActiveHalfHeight())
-      miny = world[1]-tpc.ActiveHalfHeight();
-    if (maxy<world[1]+tpc.ActiveHalfHeight())
-      maxy = world[1]+tpc.ActiveHalfHeight();
-    if (minz>world[2]-tpc.ActiveLength()/2.)
-      minz = world[2]-tpc.ActiveLength()/2.;
-    if (maxz<world[2]+tpc.ActiveLength()/2.)
-      maxz = world[2]+tpc.ActiveLength()/2.;
-    
-    
-    TPCBox.push_back(new TBox(world[2]-tpc.ActiveLength()/2.,
-			      world[1]-tpc.ActiveHalfHeight(),
-			      world[2]+tpc.ActiveLength()/2.,
-			      world[1]+tpc.ActiveHalfHeight()));
+    auto const world = tpc.GetCenter();
+    if (minx>world.X()-tpc.ActiveHalfWidth())
+      minx = world.X()-tpc.ActiveHalfWidth();
+    if (maxx<world.X()+tpc.ActiveHalfWidth())
+      maxx = world.X()+tpc.ActiveHalfWidth();
+    if (miny>world.Y()-tpc.ActiveHalfHeight())
+      miny = world.Y()-tpc.ActiveHalfHeight();
+    if (maxy<world.Y()+tpc.ActiveHalfHeight())
+      maxy = world.Y()+tpc.ActiveHalfHeight();
+    if (minz>world.Z()-tpc.ActiveLength()/2.)
+      minz = world.Z()-tpc.ActiveLength()/2.;
+    if (maxz<world.Z()+tpc.ActiveLength()/2.)
+      maxz = world.Z()+tpc.ActiveLength()/2.;
+
+
+    TPCBox.push_back(new TBox(world.Z()-tpc.ActiveLength()/2.,
+                              world.Y()-tpc.ActiveHalfHeight(),
+                              world.Z()+tpc.ActiveLength()/2.,
+                              world.Y()+tpc.ActiveHalfHeight()));
     TPCBox.back()->SetFillStyle(0);
     TPCBox.back()->SetLineStyle(2);
     TPCBox.back()->SetLineWidth(2);
     TPCBox.back()->SetLineColor(16);
 
     // std::cout<<"TPC "<<t<<" has found "<<geo->Nplanes(t)<<" planes"<<std::endl;
-    // std::cout<<"TPC coordinates : "<<world[0]<<" "<<world[1]<<" "<<world[2]<<std::endl;
+    // std::cout<<"TPC coordinates : "<<world.X()<<" "<<world.Y()<<" "<<world.Z()<<std::endl;
     // std::cout<<"Drift direction : ";
     // if(tpc.DriftDirection() == geo::kPosX) std::cout<<"geo::kPosX"<<std::endl;
     // else if(tpc.DriftDirection() == geo::kNegX) std::cout<<"geo::kNegX"<<std::endl;
@@ -129,10 +126,9 @@ void CheckCRPGeometry::analyze(art::Event const & e)
     std::cout<<tpc.TPCInfo("  ", 4)<<std::endl;
     std::cout<<std::endl;
     // scan the planes
-    for (size_t p = 0; p<geo->Nplanes(t);++p)
+    for (auto const& vPlane : geo->Iterate<geo::PlaneGeo>(tpc.ID()))
       {
-	geo::PlaneID planeID(tpcid, p);
-	const geo::PlaneGeo &vPlane = tpc.Plane( planeID );
+        auto const& planeID = vPlane.ID();
 	auto view = vPlane.View();
 	if( view == geo::kU )
 	  std::cout<<"  View type geo::kU"<<std::endl;
@@ -161,16 +157,16 @@ void CheckCRPGeometry::analyze(art::Event const & e)
 
 	double prval    = 0; 
 	double refpitch = 0;
-	for (size_t w = 0; w<geo->Nwires(p,t); ++w){
+        for (geo::WireID const& wid : geo->Iterate<geo::WireID>(planeID)) {
+          auto const [p, w] = std::make_pair(wid.Plane, wid.Wire);
 	  ++nwires;
 	  //++nwires_tpc[t];
-	  double xyz0[3];
-	  double xyz1[3];
-	  unsigned int c = 0;
 	  
 	  if(true)
 	    {
-	      geo->WireEndPoints(c,t,p,w,xyz0,xyz1);
+              double xyz0[3];
+              double xyz1[3];
+              geo->WireEndPoints(wid,xyz0,xyz1);
 	      Wires.push_back(new TLine(xyz0[2],xyz0[1],xyz1[2],xyz1[1]));
 	      
 	      double pitch = 0;
@@ -201,20 +197,11 @@ void CheckCRPGeometry::analyze(art::Event const & e)
     
     double xyz[3];   
     double abc[3];                                                                 
-    int chan;
-    int cryo = geo->Ncryostats();                                                             
-    for (int c=0; c<cryo;++c){                   
-      int tpc =geo->NTPC(c);                                               
-      for (int t=0; t<tpc; ++t){                                            
-	int Nplanes=geo->Nplanes(t,c);                                      
-	for (int p=0;p<Nplanes;++p) {                                        
-	  int Nwires = geo->Nwires(p,t,c);                                  
-	  for (int w=0;w<Nwires;++w){
-	    geo->WireEndPoints(c,t,p,w,xyz,abc);
-	    chan=geo->PlaneWireToChannel(p,w,t,c);  
-	    std::cout << "FLAG " << chan << " " << c << " " << t << " " << p << " " << w << " " << xyz[0] << " " << xyz[1] << " " << xyz[2] <<  " " << abc[0] << " " << abc[1] << " " << abc[2] << std::endl;                                         
-	  }      }}  }
-
+    for (auto const& wid : geo->Iterate<geo::WireID>()) {
+      geo->WireEndPoints(wid,xyz,abc);
+      auto chan=geo->PlaneWireToChannel(wid);
+      std::cout << "FLAG " << chan << " " << wid << " " << xyz[0] << " " << xyz[1] << " " << xyz[2] <<  " " << abc[0] << " " << abc[1] << " " << abc[2] << std::endl;
+    }
   }// dump wires
 
     /*

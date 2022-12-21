@@ -223,7 +223,7 @@ void HardwareMapperService::fillBoardMap(){
       ++NumColPush;
       if( WireSt[2] < ZPosOfColWires[ PushToBoard ][0] ) ZPosOfColWires[ PushToBoard ][0] = WireSt[2];
       if( WireEn[2] > ZPosOfColWires[ PushToBoard ][1] ) ZPosOfColWires[ PushToBoard ][1] = WireEn[2];
-      ZPosOfColWires[ PushToBoard ][2] = fGeometryService->FindTPCAtPosition( WireSt ).TPC;
+      ZPosOfColWires[ PushToBoard ][2] = fGeometryService->FindTPCAtPosition( geo::vect::toPoint(WireSt) ).TPC;
       /*
       std::cout << "   Looking at channel " << channel << " on plane " << fGeometryService->View(channel) << " TPC [[" << fGeometryService->FindTPCAtPosition( WireSt ) << " ]]."
 		<< " Start pos was (" << WireSt[0] << ", " << WireSt[1] << ", " << WireSt[2] << "). "
@@ -261,7 +261,7 @@ void HardwareMapperService::fillBoardMap(){
 		<< std::endl;
       */
       for (unsigned int nb=0; nb<fNBoardsPerAPA; ++nb) {
-	if ( ZPosOfColWires[nb][2] != fGeometryService->FindTPCAtPosition( WireSt ).TPC ) continue;
+        if ( ZPosOfColWires[nb][2] != fGeometryService->FindTPCAtPosition( geo::vect::toPoint(WireSt) ).TPC ) continue;
 	if ( (abs(WireSt[1]) > 600 && WireSt[2] > ZPosOfColWires[nb][0] && WireSt[2] < ZPosOfColWires[nb][1] ) ||
 	     (abs(WireEn[1]) > 600 && WireEn[2] > ZPosOfColWires[nb][0] && WireEn[2] < ZPosOfColWires[nb][1] ) ) {
 	  BoardsFromAPA[ nb ]->addChannel(channel);
@@ -606,4 +606,3 @@ std::set<raw::ChannelID_t> const& HardwareMapperService::getAPAChannelsSet(Hardw
 
 //......................................................
 DEFINE_ART_SERVICE(HardwareMapperService)
-

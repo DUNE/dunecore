@@ -280,19 +280,22 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
 
   cout << myname << line << endl;
   cout << "Check TPC wire plane counts." << endl;
-  for ( Index icry=0; icry<ncry; ++icry ) {
-    Index ntpc = pgeo->NTPC(icry);
+  for ( auto const& cid : pgeo->Iterate<geo::CryostatID>() ) {
+    auto icry = cid.Cryostat;
+    Index ntpc = pgeo->NTPC(cid);
     cout << "  Cryostat " << icry << " has " << ntpc << " TPCs" << endl;
-    for ( Index itpc=0; itpc<ntpc; ++itpc ) {
-      Index npla = pgeo->Nplanes(itpc, icry);
+    for ( auto const& tpcid : pgeo->Iterate<geo::TPCID>(cid)) {
+      auto itpc = tpcid.TPC;
+      Index npla = pgeo->Nplanes(tpcid);
       cout << "    TPC " << itpc << " has " << npla << " planes" << endl;
       assert( npla == 3 );
-      for ( Index ipla=0; ipla<npla; ++ipla ) {
-        Index nwir = pgeo->Nwires(ipla, itpc, icry);
+      for ( auto const& planeid : pgeo->Iterate<geo::PlaneID>(tpcid) ) {
+        auto ipla = planeid.Plane;
+        Index nwir = pgeo->Nwires(planeid);
         Index ich1 = pgeo->Nchannels();
         Index ich2 = 0;
-        for ( Index iwir=0; iwir<nwir; ++iwir ) {
-          Index ich = pgeo->PlaneWireToChannel(ipla, iwir, itpc, icry);
+        for ( auto const& wid : pgeo->Iterate<geo::WireID>(planeid) ) {
+          Index ich = pgeo->PlaneWireToChannel(wid);
           if ( ich < ich1 ) ich1 = ich;
           if ( ich > ich2 ) ich2 = ich;
         }
@@ -307,8 +310,8 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
   cout << myname << line << endl;
   cout << "Check wire planes." << endl;
   const double piOver2 = 0.5*acos(-1.0);
-  for ( PlaneID plaid : pgeo->IteratePlaneIDs() ) {
-    const geo::PlaneGeo& gpla = pgeo->Plane(plaid);
+  for ( auto const& gpla : pgeo->Iterate<geo::PlaneGeo>() ) {
+    auto const& plaid = gpla.ID();
     cout << "  Plane " << plaid << endl;
     cout << "    Signal type: " << pgeo->SignalType(plaid) << endl;
     cout << "           View: " << pgeo->View(plaid) << endl;
@@ -355,8 +358,8 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
       assert( pgeo->SignalType(icha) == ev.sigType[wirid.Cryostat][wirid.TPC][wirid.Plane] );
       checkval("View", pgeo->View(icha), ev.view[wirid.Cryostat][wirid.TPC][wirid.Plane]);
       const WireGeo* pwg = pgeo->WirePtr(wirid);
-      TVector3 p1 = pwg->GetStart();
-      TVector3 p2 = pwg->GetEnd();
+      auto const p1 = pwg->GetStart();
+      auto const p2 = pwg->GetEnd();
       if ( sposs.str().size() ) sposs << ", ";
       sposs << "(" << setw(7) << std::fixed << p1.x() << ", "
                    << setw(7) << std::fixed << p1.y() << ", "
@@ -380,7 +383,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     cout << "Check ROP counts and channels." << endl;
     check("MaxROPs", pgeo->MaxROPs(), ev.nrop);
     Index icry = 0;
-    for ( CryostatID cryid: pgeo->IterateCryostatIDs() ) {
+    for ( auto const& cryid : pgeo->Iterate<geo::CryostatID>() ) {
       Index napa = pgeo->NTPCsets(cryid);
       cout << "  Cryostat " << icry << " has " << napa << " APAs" << endl;
       assert( napa == ev.napa );
@@ -417,7 +420,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     }
     cout << myname << line << endl;
     cout << "Check ROP-TPC mapping." << endl;
-    for ( CryostatID cryid: pgeo->IterateCryostatIDs() ) {
+    for ( auto const& cryid: pgeo->Iterate<geo::CryostatID>() ) {
       Index napa = pgeo->NTPCsets(cryid);
       cout << "  Cryostat " << icry << " has " << napa << " APAs" << endl;
       assert( napa == ev.napa );
@@ -461,7 +464,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
       double x = ev.posXyz[ispt].x;
       double y = ev.posXyz[ispt].y;
       double z = ev.posXyz[ispt].z;
-      double xyz[3] = {x, y, z};
+      geo::Point_t const xyz{x, y, z};
       TPCID tpcid = pgeo->FindTPCAtPosition(xyz);
       cout << "  (" << setw(w) << x << "," << setw(w) << y << "," << setw(w) << z << "): " << tpcid << endl;
       assert( tpcid.Cryostat != CryostatID::InvalidID );
@@ -475,7 +478,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
         assert( ires < ev.posTpc.size() );
         PlaneID plaid(tpcid, ipla);
         WireID wirid;
-        try { wirid = pgeo->NearestWireID(geo::vect::toPoint(xyz), plaid); }
+        try { wirid = pgeo->NearestWireID(xyz, plaid); }
         catch (geo::InvalidWireError const& e) {
           if (!e.hasSuggestedWire()) throw;
           cerr << "ERROR (non-fatal):\n" << e;

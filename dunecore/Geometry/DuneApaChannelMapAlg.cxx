@@ -215,7 +215,7 @@ const PlaneGeo plageo2 = plageo;
             for ( unsigned int iwir=0; iwir+1<nwir; ++iwir ) {
               auto const xyz = plageo.Wire(iwir).GetCenter();
               auto const xyz_next = plageo.Wire(iwir+1).GetCenter();
-              if ( xyz[2] == xyz_next[2] ) {
+              if ( xyz.Z() == xyz_next.Z() ) {
                 nAnchoredWires = iwir;
                 break;
               }
@@ -246,8 +246,8 @@ const PlaneGeo plageo2 = plageo;
         const PlaneGeo& thePlane = crygeos[icry].TPC(itpc).Plane(ipla);
         fPlaneIDs.emplace(icry, itpc, ipla);
         auto const xyz = thePlane.Wire(0).GetCenter();
-        PlaneData.fFirstWireCenterY = xyz[1];
-        PlaneData.fFirstWireCenterZ = xyz[2];
+        PlaneData.fFirstWireCenterY = xyz.Y();
+        PlaneData.fFirstWireCenterZ = xyz.Z();
         // we are interested in the ordering of wire numbers: we find that a
         // point is N wires left of a wire W: is that wire W + N or W - N?
         // In fact, for TPC #0 it is W + N for V and Z planes, W - N for U
@@ -257,22 +257,22 @@ const PlaneGeo plageo2 = plageo;
 	  // find boundaries of the outside APAs for this plane by looking at endpoints of wires
 
           auto endpoint = thePlane.Wire(0).GetStart();
-	  PlaneData.fYmax = endpoint[1];
-	  PlaneData.fYmin = endpoint[1];
-	  PlaneData.fZmax = endpoint[2];
-	  PlaneData.fZmin = endpoint[2];
+          PlaneData.fYmax = endpoint.Y();
+          PlaneData.fYmin = endpoint.Y();
+          PlaneData.fZmax = endpoint.Z();
+          PlaneData.fZmin = endpoint.Z();
 	  unsigned int nwires = thePlane.Nwires(); 
 	  for (unsigned int iwire=0;iwire<nwires;iwire++){
             endpoint = thePlane.Wire(iwire).GetStart();
-	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
-	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
-	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
-	    PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint[2]);
+            PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint.Y());
+            PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint.Y());
+            PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint.Z());
+            PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint.Z());
             endpoint = thePlane.Wire(iwire).GetEnd();
-	    PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint[1]);
-	    PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint[1]);
-	    PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint[2]);
-	    PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint[2]);	    
+            PlaneData.fYmax = std::max(PlaneData.fYmax,endpoint.Y());
+            PlaneData.fYmin = std::min(PlaneData.fYmin,endpoint.Y());
+            PlaneData.fZmax = std::max(PlaneData.fZmax,endpoint.Z());
+            PlaneData.fZmin = std::min(PlaneData.fZmin,endpoint.Z());
 	  } // loop on wire 
 
       } // for plane
@@ -431,7 +431,7 @@ WireCoordinate(double YPos, double ZPos, PlaneID const& plaid) const {
 //----------------------------------------------------------------------------
 
 WireID DuneApaChannelMapAlg::
-NearestWireID(const TVector3& xyz, PlaneID const& plaid) const {
+NearestWireID(const geo::Point_t& xyz, PlaneID const& plaid) const {
 
 
     // cap the position to be within the boundaries of the wire endpoints.

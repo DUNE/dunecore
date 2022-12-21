@@ -3,6 +3,9 @@
 #include "WireSelector.h"
 #include "larcore/Geometry/Geometry.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
+
+#include "Math/RotationX.h"
+
 #include <string>
 #include <iostream>
 
@@ -79,7 +82,7 @@ void WireSelector::selectPlanes() {
   clearData();
   for ( Index icry : cryostats() ) {
     geo::CryostatID cid(icry);
-    for ( geo::TPCID tid : geometry()->IterateTPCIDs(cid) ) {
+    for ( geo::TPCID tid : geometry()->Iterate<geo::TPCID>(cid) ) {
       // Check TPC set.
       if ( m_tpcSets.size() ) {
         Index itps = geometry()->TPCtoTPCset(tid).TPCset;
@@ -93,8 +96,7 @@ void WireSelector::selectPlanes() {
         if ( driftSize < driftMin() ) continue;
         if ( driftSize >= driftMax() ) continue;
       }
-      for ( geo::PlaneID pid : geometry()->IteratePlaneIDs(tid) ) {
-        const geo::PlaneGeo& gpla = geometry()->Plane(pid);
+      for ( geo::PlaneGeo const& gpla : geometry()->Iterate<geo::PlaneGeo>(tid) ) {
         // Check view.
         if ( view() != geo::kUnknown && gpla.View() != view() ) continue;
         // Check wire angle.
@@ -106,7 +108,7 @@ void WireSelector::selectPlanes() {
           if ( fabs(dang) >= wireAngleTolerance() ) continue;
         }
         // Keep this plane.
-        m_pids.push_back(pid);
+        m_pids.push_back(gpla.ID());
       }
     }
   }
@@ -122,15 +124,13 @@ const WireSelector::WireInfoVector& WireSelector::fillData() {
     const geo::PlaneGeo& gpla = geometry()->Plane(pid);
     const geo::TPCGeo& gtpc = geometry()->TPC(pid);
     const geo::PlaneGeo& gplaLast = gtpc.LastPlane();  // Plane furthest from TPC center.
-    double xLastPlane = gplaLast.MiddleWire().GetCenter<TVector3>().x();
-    double xThisPlane = gpla.MiddleWire().GetCenter<TVector3>().x();
+    double xLastPlane = gplaLast.MiddleWire().GetCenter().x();
+    double xThisPlane = gpla.MiddleWire().GetCenter().x();
     double driftOffset = fabs(xThisPlane - xLastPlane);
     for ( Index iwir=0; iwir<gpla.Nwires(); ++iwir ) {
       geo::WireID wid(pid, iwir);
       const geo::WireGeo* pgwir = gpla.WirePtr(wid);
-      double wireAngle = gpla.ThetaZ() - piOver2;
-      TVector3 xyzWire = pgwir->GetCenter<TVector3>();
-      xyzWire.RotateX(wireAngle);
+      auto const xyzWire = ROOT::Math::RotationX{gpla.ThetaZ() - piOver2}(pgwir->GetCenter());
       double driftSign = gpla.GetNormalDirection().x();
       if ( fabs(fabs(driftSign) - 1.0) > 0.001 ) {
         cout << myname << "ERROR: Plane normal is not along x." << endl;
