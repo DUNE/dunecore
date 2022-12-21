@@ -91,8 +91,8 @@ namespace geo{
 	    // figure out if we need to flip the orthogonal vector 
 	    // (should point from wire n -> n+1)
 	    double OrthY = cth, OrthZ = -sth;
-	    if(((WireCentre2[1] - WireCentre1[1])*OrthY 
-		+ (WireCentre2[2] - WireCentre1[2])*OrthZ) < 0){
+            if(((WireCentre2.Y() - WireCentre1.Y())*OrthY
+                + (WireCentre2.Z() - WireCentre1.Z())*OrthZ) < 0){
 	      OrthZ *= -1;
 	      OrthY *= -1;
 	    }
@@ -106,7 +106,7 @@ namespace geo{
           fOrthVectorsY[cs][TPCCount][PlaneCount] = OrthY / ThisWirePitch;
           fOrthVectorsZ[cs][TPCCount][PlaneCount] = OrthZ / ThisWirePitch;
           
-          fFirstWireProj[cs][TPCCount][PlaneCount]  = WireCentre1[1]*OrthY + WireCentre1[2]*OrthZ;
+          fFirstWireProj[cs][TPCCount][PlaneCount]  = WireCentre1.Y()*OrthY + WireCentre1.Z()*OrthZ;
           fFirstWireProj[cs][TPCCount][PlaneCount] /= ThisWirePitch;
           
           // now to count up wires in each plane and get first channel in each plane
@@ -210,7 +210,7 @@ namespace geo{
   
   //----------------------------------------------------------------------------
   WireID ChannelMapCRUAlg::NearestWireID
-    (const TVector3& worldPos, geo::PlaneID const& planeID) const
+    (const geo::Point_t& worldPos, geo::PlaneID const& planeID) const
   {
 
     // This part is the actual calculation of the nearest wire number, where we assume
@@ -233,7 +233,7 @@ namespace geo{
       
       throw InvalidWireError("Geometry", wireNumber, NearestWireNumber)
         << "Can't Find Nearest Wire for position (" 
-        << worldPos[0] << "," << worldPos[1] << "," << worldPos[2] << ")"
+        << worldPos.X() << "," << worldPos.Y() << "," << worldPos.Z() << ")"
         << " in plane " << std::string(planeID) << " approx wire number # "
         << wireNumber << " (capped from " << NearestWireNumber << ")\n";
     }

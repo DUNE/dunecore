@@ -65,12 +65,11 @@ namespace geo {
     // Define sort order for cryostats in VD configuration
     static bool sortCryo(const CryostatGeo& c1, const CryostatGeo& c2)
     {
-      double xyz1[3] = {0.}, xyz2[3] = {0.};
-      double local[3] = {0.};
-      c1.LocalToWorld(local, xyz1);
-      c2.LocalToWorld(local, xyz2);
+      geo::CryostatGeo::LocalPoint_t const local{};
+      auto const xyz1 = c1.toWorldCoords(local);
+      auto const xyz2 = c2.toWorldCoords(local);
 
-      return xyz1[0] < xyz2[0];
+      return xyz1.X() < xyz2.X();
     }
 
 
@@ -78,17 +77,14 @@ namespace geo {
     // Define sort order for tpcs (CRUs) in VD configuration
     static bool sortTPC(const TPCGeo& t1, const TPCGeo& t2)
     {
-      double xyz1[3] = {0.};
-      double xyz2[3] = {0.};
-      double local[3] = {0.};
-      t1.LocalToWorld(local, xyz1);
-      t2.LocalToWorld(local, xyz2);
+      auto const xyz1 = t1.GetCenter();
+      auto const xyz2 = t2.GetCenter();
 
       // First sort all TPCs into same-z groups
-      if(xyz1[2]<xyz2[2]) return true;
+      if(xyz1.Z()<xyz2.Z()) return true;
 
       // Within a same-z group, sort TPCs into same-y groups
-      if(xyz1[2] == xyz2[2] && xyz1[1] < xyz2[1]) return true;
+      if(xyz1.Z() == xyz2.Z() && xyz1.Y() < xyz2.Y()) return true;
 
       return false;
     }
@@ -98,14 +94,11 @@ namespace geo {
     // Define sort order for planes in VD configuration
     static bool sortPlane(const PlaneGeo& p1, const PlaneGeo& p2)
     {
-      double xyz1[3] = {0.};
-      double xyz2[3] = {0.};
-      double local[3] = {0.};
-      p1.LocalToWorld(local, xyz1);
-      p2.LocalToWorld(local, xyz2);
+      auto const xyz1 = p1.GetBoxCenter();
+      auto const xyz2 = p2.GetBoxCenter();
 
       // drift direction is negative, plane number increases in drift direction
-      return xyz1[0] > xyz2[0];
+      return xyz1.X() > xyz2.X();
     }
 
 
@@ -120,16 +113,16 @@ namespace geo {
       //  we assume all wires in the plane are parallel
 
       //  w1 geo info
-      auto center1 = w1.GetCenter<geo::Point_t>();
-      auto start1  = w1.GetStart<geo::Point_t>();
-      auto end1    = w1.GetEnd<geo::Point_t>();
+      auto center1 = w1.GetCenter();
+      auto start1  = w1.GetStart();
+      auto end1    = w1.GetEnd();
       auto Delta   = end1-start1;
       //double dx1   = Delta.X();
       double dy1   = Delta.Y();
       double dz1   = Delta.Z();
       
       // w2 geo info
-      auto center2 = w2.GetCenter<geo::Point_t>();
+      auto center2 = w2.GetCenter();
       
       auto CheckTol = [](double val, double tol = 1.E-4){ 
 	return (std::abs( val ) < tol); 

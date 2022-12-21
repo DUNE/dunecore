@@ -12,6 +12,11 @@ cet_test(test_DataMap SOURCES test_DataMap.cxx
     ROOT_BASIC_LIB_LIST
 )
 
+cet_test(test_DuneEventInfo SOURCES test_DuneEventInfo.cxx
+  LIBRARIES
+    ROOT_BASIC_LIB_LIST
+)
+
 cet_test(test_RunData SOURCES test_RunData.cxx
   LIBRARIES
     ROOT_BASIC_LIB_LIST

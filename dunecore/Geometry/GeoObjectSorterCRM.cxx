@@ -59,12 +59,11 @@ namespace geo{
   // Define sort order for cryostats in dual-phase configuration
   static bool sortCryoCRM(const CryostatGeo& c1, const CryostatGeo& c2)
   {
-    double xyz1[3] = {0.}, xyz2[3] = {0.};
-    double local[3] = {0.};
-    c1.LocalToWorld(local, xyz1);
-    c2.LocalToWorld(local, xyz2);
+    geo::CryostatGeo::LocalPoint_t const local{};
+    auto const xyz1 = c1.toWorldCoords(local);
+    auto const xyz2 = c2.toWorldCoords(local);
 
-    return xyz1[0] < xyz2[0];
+    return xyz1.X() < xyz2.X();
   }
 
 
@@ -72,17 +71,14 @@ namespace geo{
   // Define sort order for tpcs in dual-phase configuration
   static bool sortTPCCRM(const TPCGeo& t1, const TPCGeo& t2)
   {
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    t1.LocalToWorld(local, xyz1);
-    t2.LocalToWorld(local, xyz2);
+    auto const xyz1 = t1.GetCenter();
+    auto const xyz2 = t2.GetCenter();
 
     // First sort all TPCs into same-z groups
-    if(xyz1[2]<xyz2[2]) return true;
+    if(xyz1.Z()<xyz2.Z()) return true;
 
     // Within a same-z group, sort TPCs into same-y groups
-    if(xyz1[2] == xyz2[2] && xyz1[1] < xyz2[1]) return true;
+    if(xyz1.Z() == xyz2.Z() && xyz1.Y() < xyz2.Y()) return true;
 
     return false;
   }
@@ -92,14 +88,11 @@ namespace geo{
   // Define sort order for planes in dual-phase configuration
   static bool sortPlaneCRM(const PlaneGeo& p1, const PlaneGeo& p2)
   {
-    double xyz1[3] = {0.};
-    double xyz2[3] = {0.};
-    double local[3] = {0.};
-    p1.LocalToWorld(local, xyz1);
-    p2.LocalToWorld(local, xyz2);
+    auto const xyz1 = p1.GetBoxCenter();
+    auto const xyz2 = p2.GetBoxCenter();
 
     // drift direction is negative, plane number increases in drift direction
-    return xyz1[0] > xyz2[0];
+    return xyz1.X() > xyz2.X();
   }
 
 
@@ -112,12 +105,12 @@ namespace geo{
     // for dual-phase we have to planes with wires perpendicular to each other
     // sort wires in the increasing coordinate order
 
-    if (std::abs(xyz1[0] - xyz2[0]) < 1.0E-4 && std::abs(xyz1[1] - xyz2[1]) < 1.0E-4 )
-      return xyz1[2] < xyz2[2];
-    else if (std::abs(xyz1[0] - xyz2[0]) < 1.0E-4 && std::abs(xyz1[2] - xyz2[2]) < 1.0E-4 )
-      return xyz1[1] < xyz2[1];
-    else if (std::abs(xyz1[1] - xyz2[1]) < 1.0E-4 && std::abs(xyz1[2] - xyz2[2]) < 1.0E-4 )
-      return xyz1[0] < xyz2[0];
+    if (std::abs(xyz1.X() - xyz2.X()) < 1.0E-4 && std::abs(xyz1.Y() - xyz2.Y()) < 1.0E-4 )
+      return xyz1.Z() < xyz2.Z();
+    else if (std::abs(xyz1.X() - xyz2.X()) < 1.0E-4 && std::abs(xyz1.Z() - xyz2.Z()) < 1.0E-4 )
+      return xyz1.Y() < xyz2.Y();
+    else if (std::abs(xyz1.Y() - xyz2.Y()) < 1.0E-4 && std::abs(xyz1.Z() - xyz2.Z()) < 1.0E-4 )
+      return xyz1.X() < xyz2.X();
     else { // don't know what to do
       throw cet::exception("GeoObjectSorterCRM")
         << "Uknown sorting situation for the wires in a plane\n";
