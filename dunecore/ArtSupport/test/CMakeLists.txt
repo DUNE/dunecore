@@ -26,6 +26,13 @@ cet_test(test_ArtServiceHelper
     ROOT_BASIC_LIB_LIST
 )
 
+cet_test(test_DuneContextManager
+  SOURCES
+    test_DuneContextManager.cxx
+  LIBRARIES
+    dunecore::ArtSupport
+)
+
 cet_test(test_DuneToolManager
   SOURCES
     test_DuneToolManager.cxx
