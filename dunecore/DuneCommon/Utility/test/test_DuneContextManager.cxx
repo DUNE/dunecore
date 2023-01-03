@@ -1,6 +1,6 @@
 // test_DuneContextManager.cxx
 
-#include "dunecore/ArtSupport/DuneContextManager.h"
+#include "dunecore/DuneCommon/Utility/DuneContextManager.h"
 #include "dunecore/DuneInterface/Data/DuneEventInfo.h"
 
 #include <string>

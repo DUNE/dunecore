@@ -23,6 +23,9 @@ public:
   // missing context (null pointer).
   virtual Name getName(const Context* pcon) const =0;
 
+  // Get context from the context manager and call the above method.
+  virtual Name getName() const;
+
 };
 
 #endif

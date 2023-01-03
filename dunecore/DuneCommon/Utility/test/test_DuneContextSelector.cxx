@@ -8,7 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "dunecore/DuneInterface/Utility/DuneContextSelector.h"
+#include "dunecore/DuneCommon/Utility/DuneContextSelector.h"
 
 #undef NDEBUG
 #include <cassert>

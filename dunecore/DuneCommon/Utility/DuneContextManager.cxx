@@ -1,6 +1,6 @@
 // DuneContextManagers_t.cxx
 
-#include "dunecore/ArtSupport/DuneContextManager.h"
+#include "dunecore/DuneCommon/Utility/DuneContextManager.h"
 
 using Context = DuneContextManager::Context;
 
