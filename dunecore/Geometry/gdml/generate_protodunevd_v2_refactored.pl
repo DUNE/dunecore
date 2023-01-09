@@ -176,8 +176,8 @@ $FracMassOfSteel =  0.5; #The steel support is not a solid block, but a mixture 
 $FracMassOfAir   =  1 - $FracMassOfSteel;
 
 
-$SpaceSteelSupportToWall    = 200;
-$SpaceSteelSupportToCeiling = 200;
+$SpaceSteelSupportToWall    = 900;
+$SpaceSteelSupportToCeiling = 900;
 
 #TO DO: Whole outside structure has to be x--> Y and Y-->X
 $DetEncX   =   $Cryostat_x + 2*($SteelSupport_x + $FoamPadding) + 2*$SpaceSteelSupportToWall;
