@@ -700,9 +700,9 @@
     </subtraction>
 
     <box name="DetEnclosure" lunit="cm" 
-      x="1352.4"
-      y="1217.2"
-      z="1417.2"/>
+      x="2752.4"
+      y="1917.2"
+      z="2817.2"/>
 
     <box name="boxCryoTop" x="1016.8" y="1016.8" z="61.8" lunit="cm"/>
     <box name="boxCryoWallLg" x="1140.4" y="1075.6" z="61.8" lunit="cm"/>
@@ -858,9 +858,9 @@
     
 
     <box name="World" lunit="cm" 
-      x="7352.4" 
-      y="7217.2" 
-      z="7417.2"/>
+      x="8752.4" 
+      y="7917.2" 
+      z="8817.2"/>
 </solids>
 <structure>
 <volume name="volFieldShaper">
