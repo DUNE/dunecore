@@ -72,7 +72,8 @@ int test_DuneContextToolRedirector(bool useExistingFcl =false) {
   cout << myname << line << endl;
   cout << myname << "Creating context selector." << endl;
   fhicl::ParameterSet ps;
-  ps.put("tool_redirector");
+  bool istrue = true;
+  ps.put<bool>("tool_redirector", true);
   TestContextToolRedirector sel(ps);
 
   cout << myname << line << endl;
