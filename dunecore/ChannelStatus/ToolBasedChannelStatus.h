@@ -16,6 +16,7 @@
 
 #include "larcoreobj/SimpleTypesAndConstants/RawTypes.h" // raw::ChannelID_t
 #include "larevt/CalibrationDBI/Interface/ChannelStatusProvider.h"
+#include <string>
 #include <memory> // std::unique_ptr<>
 
 // Utility libraries
