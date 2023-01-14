@@ -49,7 +49,7 @@ public:
 
   // Implement the interface.
   // Extract run from context and return the corresponding name.
-  Name getNameInContext(const Context* pcon) const;
+  Name getNameInContext(const Context* pcon) const override;
 
 private:
 
