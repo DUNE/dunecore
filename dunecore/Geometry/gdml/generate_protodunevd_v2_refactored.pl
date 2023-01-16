@@ -2047,10 +2047,11 @@ for ($ara = 0; $ara<4; $ara++)
              # All Arapuca centers will have the same X coordinate
              # Y and Z coordinates are defined with respect to the center of the current Frame
 
- 	     $Ara_Y = $FrameCenter_y+$list_posx_bot[$ara]; #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             $Ara_X = $FrameCenter_x;
  	     $Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
-             if($j==1&&$ara==2){$Ara_Z = $FrameCenter_z+$list_posz_bot[0];}
+ 	     #if($Ara_z==1&&$ara==2){$Ara_Z = $FrameCenter_z+$list_posz_bot[0];} #If Z is longer
+             $Ara_X = $FrameCenter_x;
+             if($Frame_x==1&&$ara==3){$Ara_Y = $FrameCenter_y+$list_posx_bot[2];
+             }else{$Ara_Y = $FrameCenter_y+$list_posx_bot[$ara];} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
 
 	print CRYO <<EOF;
      <physvol>

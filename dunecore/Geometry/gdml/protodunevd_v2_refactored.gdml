@@ -39951,7 +39951,7 @@
        <volumeref ref="volArapucaDouble_1-0-3"/>
        <position name="posArapucaDouble3-Frame-1-0" unit="cm" 
          x="30.44"
-	 y="296.2" 
+	 y="205.5" 
 	 z="-37.5"/>
        <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
      </physvol>
@@ -39959,7 +39959,7 @@
        <volumeref ref="volOpDetSensitive_ArapucaDouble_1-0-3"/>
        <position name="posOpArapucaDouble3-Frame-1-0" unit="cm" 
          x="30.44"
-	 y="296.2" 
+	 y="205.5" 
 	 z="-37.5"/>
      </physvol>
      <physvol>
