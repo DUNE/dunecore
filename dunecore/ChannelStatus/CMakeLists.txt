@@ -7,6 +7,7 @@ install_headers()
 install_source()
 
 art_make(SERVICE_LIBRARIES 
+                           dunecore_ChannelStatus
                            art::Framework_Services_Registry
                            art::Framework_Principal
                            art_Framework_Core

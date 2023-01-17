@@ -24,14 +24,14 @@ class ToolBasedChannelStatusService : public lariov::ChannelStatusService {
 public:
 
   // Constructor: reads the channel IDs from the configuration
-  ToolBasedChannelStatusService(fhicl::ParameterSet const& ps);
+  ToolBasedChannelStatusService(const fhicl::ParameterSet& ps);
 
 private:
 
-  virtual lariov::ChannelStatusProvider& const DoGetProvider() const override {
+  virtual const lariov::ChannelStatusProvider& DoGetProvider() const override {
     return *DoGetProviderPtr();
   }
-  virtual lariov::ChannelStatusProvider* const DoGetProviderPtr() const override {
+  virtual const lariov::ChannelStatusProvider* DoGetProviderPtr() const override {
     return m_provider.get();
   }
 
