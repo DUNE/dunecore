@@ -20,6 +20,9 @@
 // Tool instances are not shared between different tool managers. These
 // managers might be assigned to different threads or used to locate tools
 // that are not defined in the primary fcl file.
+//
+// [January 2023] If the returned tool is a tool redirector, than call it to
+// retrieve the final tool.
 
 #ifndef DuneToolManager_H
 #define DuneToolManager_H
@@ -30,6 +33,7 @@
 #include <iostream>
 #include "fhiclcpp/ParameterSet.h"
 #include "art/Utilities/make_tool.h"
+#include "dunecore/ArtSupport/ToolRedirector.h"
 
 class DuneToolManager {
 
@@ -79,47 +83,68 @@ public:
 
   // Return a private (not shared) copy of a tool.
   template<class T>
-  std::unique_ptr<T> getPrivate(std::string name) {
+  std::unique_ptr<T> getPrivate(std::string name, bool doRedirect =true) {
     std::string myname = "DuneToolManager::getPrivate: ";
     fhicl::ParameterSet psTool;
     if ( name.size() == 0 ) {
-      std::cout << myname << "Tool name is blank" << std::endl;
+      std::cout << myname << "ERROR: Tool name is blank" << std::endl;
       return nullptr;
     } else if ( name[0] == '{' ) {    // Name is a tool cfg string
       makeParameterSet(name, psTool);
     } else if ( std::find(m_toolNames.begin(), m_toolNames.end(), name) != m_toolNames.end() ) {
       psTool = m_pstools.get<fhicl::ParameterSet>(name);
     } else {
-      std::cout << myname << "No such tool name: " << name << std::endl;
+      std::cout << myname << "ERROR: No such tool name: " << name << std::endl;
       return nullptr;
+    }
+    if ( doRedirect && ToolRedirector::isRedirecting(psTool) ) {
+      std::unique_ptr<ToolRedirector> prd = art::make_tool<ToolRedirector>(psTool);
+      Name rname = prd->getName();
+      std::unique_ptr<T> ptoo = getPrivate<T>(rname);
+      if ( ! ptoo ) {
+        std::cout << myname << "ERROR: Redirection with name " << rname << " failed." << std::endl;
+      }
+      return ptoo;
     }
     return art::make_tool<T>(psTool);
   }
 
   // Return a shared tool.
   template<class T>
-  T* getShared(std::string name) {
+  T* getShared(std::string name, bool doRedirect =true) {
     std::string myname = "DuneToolManager::getShared: ";
     SharedToolMap::iterator itoo = m_sharedTools.find(name);
     if ( itoo != m_sharedTools.end() ) {
       SharedToolPtr& pent = itoo->second;
       if ( pent ) {
         TSharedToolEntry<T>* ptent = dynamic_cast<TSharedToolEntry<T>*>(pent.get());
-        return ptent->get();
-      } else {
-        std::cout << myname << "ERROR: Null tool pointer for " << name << "." << std::endl;
+        if ( pent != nullptr ) return ptent->get();
+        TSharedToolEntry<ToolRedirector>* prdent = dynamic_cast<TSharedToolEntry<ToolRedirector>*>(pent.get());
+        ToolRedirector* prd = prdent->get();
+        Name rname = prd->getName();
+        if ( prd != nullptr ) {
+          return getShared<T>(rname);
+        } else {
+          std::cout << myname << "ERROR: Redirection with name " << rname << " failed." << std::endl;
+          return nullptr;
+        }
       }
+      std::cout << myname << "ERROR: Null tool pointer for " << name << "." << std::endl;
+      return nullptr;
     }
     if ( std::find(m_toolNames.begin(), m_toolNames.end(), name) != m_toolNames.end() ) {
       fhicl::ParameterSet psTool = m_pstools.get<fhicl::ParameterSet>(name);
-      std::unique_ptr<T> ptoo = art::make_tool<T>(psTool);
-      TSharedToolEntry<T>* ptent(new TSharedToolEntry<T>(ptoo));
-      SharedToolEntry* pent = ptent;
-      //m_sharedTools[name] = pent;
-      m_sharedTools.emplace(name, pent);
-      return ptent->get();
+      if ( doRedirect && ToolRedirector::isRedirecting(psTool) ) {
+        std::unique_ptr<ToolRedirector> prd = art::make_tool<ToolRedirector>(psTool);
+        m_sharedTools.emplace(name, new TSharedToolEntry<ToolRedirector>(prd));
+      } else {
+        std::unique_ptr<T> ptoo = art::make_tool<T>(psTool);
+        m_sharedTools.emplace(name, new TSharedToolEntry<T>(ptoo));
+      }
+      // Now tool is known. Repeat call to fetch the tool.
+      return getShared<T>(name, doRedirect);
     } else {
-      std::cout << myname << "No such tool name: " << name << std::endl;
+      std::cout << myname << "ERROR: No such tool name: " << name << std::endl;
       return nullptr;
     }
   }

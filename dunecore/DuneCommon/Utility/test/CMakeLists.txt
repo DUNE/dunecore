@@ -105,3 +105,15 @@ cet_test(test_RootParFormula SOURCES test_RootParFormula.cxx
     ROOT_BASIC_LIB_LIST
 )
 
+cet_test(test_DuneContextToolRedirector SOURCES test_DuneContextToolRedirector.cxx
+  LIBRARIES
+    dunecore::DuneCommon_Utility
+)
+
+cet_test(test_DuneContextManager
+  SOURCES
+    test_DuneContextManager.cxx
+  LIBRARIES
+    dunecore::DuneCommon_Utility
+)
+

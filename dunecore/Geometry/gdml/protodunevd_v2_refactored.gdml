@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="GDMLSchema/gdml.xsd">
+<gdml_simple_extension xmlns:gdml_simple_extension="http://www.example.org"
+                       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"          
+                       xs:noNamespaceSchemaLocation="RefactoredGDMLSchema/SimpleExtension.xsd"> 
+
+
+<extension>
+   <color name="magenta"     R="0.0"  G="1.0"  B="0.0"  A="1.0" />
+   <color name="green"       R="0.0"  G="1.0"  B="0.0"  A="1.0" />
+   <color name="red"         R="1.0"  G="0.0"  B="0.0"  A="1.0" />
+   <color name="blue"        R="0.0"  G="0.0"  B="1.0"  A="1.0" />
+   <color name="yellow"      R="1.0"  G="1.0"  B="0.0"  A="1.0" />    
+</extension>
 <define>
 <!--
 -->
@@ -12171,9 +12180,9 @@
     </subtraction>
 
     <box name="DetEnclosure" lunit="cm" 
-      x="1352.4"
-      y="1217.2"
-      z="1417.2"/>
+      x="2752.4"
+      y="1917.2"
+      z="2817.2"/>
 
     <box name="boxCryoTop" x="1016.8" y="1016.8" z="61.8" lunit="cm"/>
     <box name="boxCryoWallLg" x="1140.4" y="1075.6" z="61.8" lunit="cm"/>
@@ -12329,9 +12338,9 @@
     
 
     <box name="World" lunit="cm" 
-      x="7352.4" 
-      y="7217.2" 
-      z="7417.2"/>
+      x="8752.4" 
+      y="7917.2" 
+      z="8817.2"/>
 </solids>
 <structure>
 <volume name="volFieldShaper">
@@ -39942,7 +39951,7 @@
        <volumeref ref="volArapucaDouble_1-0-3"/>
        <position name="posArapucaDouble3-Frame-1-0" unit="cm" 
          x="30.44"
-	 y="296.2" 
+	 y="205.5" 
 	 z="-37.5"/>
        <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
      </physvol>
@@ -39950,7 +39959,7 @@
        <volumeref ref="volOpDetSensitive_ArapucaDouble_1-0-3"/>
        <position name="posOpArapucaDouble3-Frame-1-0" unit="cm" 
          x="30.44"
-	 y="296.2" 
+	 y="205.5" 
 	 z="-37.5"/>
      </physvol>
      <physvol>
@@ -65997,8 +66006,8 @@
     </volume>
 </structure>
 
-<setup name="Default" version="1.0">
-  <world ref="volWorld" />
-</setup>
+  <setup name="Default" version="1.0">
+    <world ref="volWorld"/>
+  </setup>
 
-</gdml>
+</gdml_simple_extension>

@@ -14,11 +14,12 @@ add_subdirectory(test)
 
 art_make(BASENAME_ONLY
          LIB_LIBRARIES
-         art::Persistency_Provenance
-         canvas::canvas
-         ROOT::HistPainter
-         ROOT_BASIC_LIB_LIST
-         FFTW3::FFTW3
+           dunecore_ArtSupport
+           art::Persistency_Provenance
+           canvas::canvas
+           ROOT::HistPainter
+           ROOT_BASIC_LIB_LIST
+           FFTW3::FFTW3
          PUBLIC ROOT::Core
          NO_PLUGINS
         )
