@@ -12,7 +12,7 @@
 // LArSoft libraries
 #include "art/Framework/Services/Registry/ServiceDeclarationMacros.h"
 #include "larevt/CalibrationDBI/Interface/ChannelStatusService.h"
-#include "dunecore/ChannelStatus/ToolBasedChannelStatus.h"
+#include "ToolBasedChannelStatus.h"
 #include <memory>
 
 namespace art {

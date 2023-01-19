@@ -1,6 +1,6 @@
 // ToolBasedChannelStatus.cxx
 
-#include "dunecore/ChannelStatus/ToolBasedChannelStatus.h"
+#include "ToolBasedChannelStatus.h"
 #include "dunecore/ArtSupport/DuneToolManager.h"
 #include "dunecore/DuneInterface/Tool/IndexMapTool.h"  // Interface for channel status tools
 #include "larcoreobj/SimpleTypesAndConstants/RawTypes.h" // raw::isValidChannelID()
