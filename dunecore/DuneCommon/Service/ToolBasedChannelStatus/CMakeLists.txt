@@ -23,4 +23,4 @@ art_make(SERVICE_LIBRARIES
            FFTW3::FFTW3
 )
 
-#add_subdirectory(test)
+add_subdirectory(test)
