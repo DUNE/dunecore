@@ -2,6 +2,6 @@
 
 #include "dunecore/ChannelStatus/ToolBasedChannelStatusService.h"
 
-ToolBasedChannelStatusService::ToolBasedChannelStatusService(fhicl::ParameterSet const& ps)
+ToolBasedChannelStatusService::ToolBasedChannelStatusService(const fhicl::ParameterSet& ps)
 : m_provider(new ToolBasedChannelStatus(ps)) {
 }
