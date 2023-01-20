@@ -59,14 +59,14 @@ ChannelStatusConfigTool::ChannelStatusConfigTool(fhicl::ParameterSet const& ps)
     Index ndup = 0;
     for ( Index idx=0; idx<idxSize; ++idx ) {
       if ( counts[idx] > 1 ) {
-        if ( ndup >= 20 ) {
-          cout << ", ...";
-          break;
-        }
         if ( ndup == 0 ) {
           cout << myname << "Found indices with duplicate entries: ";
         } else {
           cout << ", ";
+        }
+        if ( ndup >= 20 ) {
+          cout << ", ...";
+          break;
         }
         cout << idx;
         ++ndup;

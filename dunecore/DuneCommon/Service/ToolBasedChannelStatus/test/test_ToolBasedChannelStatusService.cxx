@@ -11,6 +11,8 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+#include "dunecore/DuneInterface/Tool/IndexMapTool.h"
+#include "dunecore/ArtSupport/DuneToolManager.h"
 #include "dunecore/ArtSupport/ArtServiceHelper.h"
 #include "dunecore/DuneServiceAccess/DuneServiceAccess.h"
 
@@ -45,16 +47,30 @@ int test_ToolBasedChannelStatusService() {
   fout << "tools: {" << endl;
   fout << "  mytool: {" << endl;
   fout << "    tool_type: ChannelStatusConfigTool" << endl;
-  fout << "    LogLevel: 1" << endl;
+  fout << "    LogLevel: 2" << endl;
   fout << "    DefaultIndex: 0" << endl;
   fout << "    IndexVectors: [" << endl;
   fout << "      []," << endl;
   fout << "      [ 0,  8, 16]," << endl;
-  fout << "      [ 4, 12]" << endl;
+  fout << "      [ 4, 12]," << endl;
+  fout << "      [ 5, 10, 15]" << endl;
   fout << "    ]" << endl;
   fout << "  }" << endl;
   fout << "}" << endl;
   fout.close();
+
+  cout << myname << line << endl;
+  cout << myname << "Fetching tool manager." << endl;
+  DuneToolManager* ptm = DuneToolManager::instance(fclfile);
+  assert ( ptm != nullptr );
+  DuneToolManager& tm = *ptm;
+  tm.print();
+  assert( tm.toolNames().size() >= 1 );
+
+  cout << myname << line << endl;
+  cout << myname << "Check channel status tool." << endl;
+  auto pcst = ptm->getShared<IndexMapTool>("mytool");
+  assert(pcst);
 
   cout << myname << line << endl;
   cout << myname << "Loading services." << endl;
@@ -79,6 +95,24 @@ int test_ToolBasedChannelStatusService() {
   cout << myname << "Check in-range channels." << endl;
   for ( Index icha=0; icha<ncha; ++icha ) {
     cout << setw(4) << icha << ": " << pcsp->Status(icha) << endl;
+    if ( icha%8 == 0 ) {
+      assert( pcsp->Status(icha) == 1 );
+      assert( ! pcsp->IsGood(icha) );
+      assert(   pcsp->IsBad(icha) );
+      assert( ! pcsp->IsNoisy(icha) );
+    } else if ( icha%4 == 0 ) {
+      assert( pcsp->Status(icha) == 2 );
+      assert( ! pcsp->IsGood(icha) );
+      assert( ! pcsp->IsBad(icha) );
+      assert(   pcsp->IsNoisy(icha) );
+    } else {
+      assert(   pcsp->IsGood(icha) );
+      assert( ! pcsp->IsBad(icha) );
+      assert( ! pcsp->IsNoisy(icha) );
+      if ( icha%5 == 0 ) {
+        assert( pcsp->Status(icha) == 3 );
+      }
+    }
   }
 
 /*

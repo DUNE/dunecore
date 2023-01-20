@@ -49,6 +49,9 @@ public:
   // Return whether the specified channel is noisy in the current run
   virtual bool IsNoisy(ChannelID channel) const override;
 
+  // Return the status value for a channel.
+  virtual Status_t Status(ChannelID channel) const  override;
+
   // Returns a copy of set of good channel IDs for the current run
   virtual ChannelSet GoodChannels() const override;
 

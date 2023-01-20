@@ -13,13 +13,25 @@
 using Index     = ToolBasedChannelStatus::Index;
 using Name      = ToolBasedChannelStatus::Name;
 using ChannelID = ToolBasedChannelStatus::ChannelID;
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 
 ToolBasedChannelStatus::ToolBasedChannelStatus(fhicl::ParameterSet const& ps)
 : m_LogLevel(ps.get<Index>("LogLevel")),
   m_NChannel(ps.get<Index>("NChannel")),
-  m_ToolName(ps.get<Name>("ToolName")) { }
+  m_ToolName(ps.get<Name>("ToolName")) {
+  Name myname = "ToolBasedChannelStatus::ctor: ";
+  bool havetool = indexMap() != nullptr;
+  Name msg = havetool ? "INFO: Channel status tool is present." : "WARNING: Channel status tool not found.";
+  if ( m_LogLevel ) {
+    cout << myname << "LogLevel: " << m_LogLevel << endl;
+    cout << myname << "NChannel: " << m_NChannel << endl;
+    cout << myname << "ToolName: " << m_ToolName << endl;
+    cout << myname << msg << endl;
+  }
+}
 
 //**********************************************************************
 
@@ -43,6 +55,13 @@ bool ToolBasedChannelStatus::IsBad(ChannelID channel) const {
 
 bool ToolBasedChannelStatus::IsNoisy(ChannelID channel) const {
   return channelIsNoisy(indexMap(), channel);
+}
+
+//**********************************************************************
+
+ToolBasedChannelStatus::Status_t
+ToolBasedChannelStatus::Status(ChannelID chan) const {
+  return indexMapStatus(indexMap(), chan);
 }
 
 //**********************************************************************
