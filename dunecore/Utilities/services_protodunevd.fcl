@@ -66,4 +66,29 @@ protodunevd_data_reco_services.DetectorPropertiesService: @local::protodunesp_de
 # Dataprep service.
 protodunevd_data_reco_services.RawDigitPrepService.ToolNames: @local::protodune_dataprep_tools_wirecell
 
+
+
+####################
+##### DRIFT Y ######
+####################
+protodunevd_services_driftY: @local::protodune_services
+protodunevd_services_driftY.Geometry:  @local::protodunevd_v1_geo_driftY
+
+protodunevd_simulation_services_driftY: @local::protodunevd_simulation_services
+protodunevd_simulation_services_driftY.Geometry:  @local::protodunevd_v1_geo_driftY
+
+protodunevd_simulation_services_driftY.ParticleInventoryService: @local::standard_particleinventoryservice
+protodunevd_simulation_services_driftY.PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice
+
+# Low memory configuration leaving out some heavy services
+protodunevd_minimal_simulation_services_driftY: @local::protodune_minimal_simulation_services
+protodunevd_minimal_simulation_services_driftY.Geometry: @local::protodunevd_v1_geo_driftY
+
+# reco for sim config
+protodunevd_reco_services_driftY:                    @local::protodunevd_services
+protodunevd_reco_services_driftY.Geometry:  	     @local::protodunevd_v1_geo_driftY
+
+
+
+
 END_PROLOG

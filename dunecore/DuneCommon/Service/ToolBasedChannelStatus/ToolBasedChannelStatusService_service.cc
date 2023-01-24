@@ -1,4 +1,4 @@
-#include "dunecore/ChannelStatus/ToolBasedChannelStatusService.h"
+#include "ToolBasedChannelStatusService.h"
 
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 
