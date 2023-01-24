@@ -30,7 +30,7 @@ public:  // Object methods
 
   // Set the context.
   // Caller creates the object on the heap and relinquishes ownership.
-  // Ther previous context is destroyed.
+  // The previous context is destroyed.
   void setContext(const Context*);
 
   // Return the current context generically.
