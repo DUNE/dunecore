@@ -9,6 +9,7 @@
 #include "fhiclcpp/ParameterSet.h"
 #include <iterator> // std::inserter()
 #include <utility>  // std::pair<>
+#include <iomanip>
 
 using Index     = ToolBasedChannelStatus::Index;
 using Name      = ToolBasedChannelStatus::Name;
@@ -103,8 +104,13 @@ ToolBasedChannelStatus::ChannelSet ToolBasedChannelStatus::NoisyChannels() const
 //**********************************************************************
 
 const IndexMapTool* ToolBasedChannelStatus::indexMap() const {
+  Name myname = "ToolBasedChannelStatus::indexMap: ";
   auto pimt = DuneToolManager::instance()->getShared<IndexMapTool>(m_ToolName);
-  return pimt ? &*pimt : nullptr;
+  auto pimt_bare = pimt ? &*pimt : nullptr;
+  if ( m_LogLevel >= 3 ) {
+    cout << myname << "Fetched tool " << m_ToolName << " @ " << std::hex << pimt_bare << std::dec << endl;
+  }
+  return pimt_bare;
 }
 
 //**********************************************************************
