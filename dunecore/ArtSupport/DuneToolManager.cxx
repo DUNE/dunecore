@@ -140,16 +140,26 @@ DuneToolManager::DuneToolManager(std::string fclname)
 //**********************************************************************
 
 int DuneToolManager::deleteShared(std::string tnam) {
+  int nerr = 0;
   SharedToolMap::iterator itoo = m_sharedTools.find(tnam);
-  if ( itoo == m_sharedTools.end() ) return 1;
-  m_sharedTools.erase(tnam);
-  return 0;
+  if ( itoo == m_sharedTools.end() ) nerr = nerr + 1;
+  else m_sharedTools.erase(tnam);
+  NameSet::iterator inam = m_redirectingNames.find(tnam);
+  if ( inam == m_redirectingNames.end()  ) nerr = nerr + 2;
+  else m_redirectingNames.erase(inam);
+  return nerr;
 }
 
 //**********************************************************************
 
 const std::vector<std::string>& DuneToolManager::toolNames() const {
   return m_toolNames;
+}
+
+//**********************************************************************
+
+bool DuneToolManager::isRedirecting(Name name) const {
+  return m_redirectingNames.find(name) != m_redirectingNames.end();
 }
 
 //**********************************************************************

@@ -60,6 +60,7 @@ private:
 
   // Derived config.
   NameMap m_names;
+  int m_stage;   // 0=ctor, 1=running, 2=dtor
 
 };
 

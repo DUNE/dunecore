@@ -19,7 +19,8 @@ DuneRunToolRedirector::DuneRunToolRedirector(fhicl::ParameterSet const& ps)
 : DuneContextToolRedirector(ps),
   m_LogLevel(ps.get<Index>("LogLevel")),
   m_DefaultName(ps.get<Name>("DefaultName")),
-  m_Ranges(ps.get<NameVector>("Ranges")) {
+  m_Ranges(ps.get<NameVector>("Ranges")),
+  m_stage(0) {
   const Name myname = "DuneRunToolRedirector::ctor: ";
   if ( m_LogLevel >= 1 ) {
     cout << myname << "     LogLevel: " << m_LogLevel << endl;
@@ -63,17 +64,16 @@ DuneRunToolRedirector::DuneRunToolRedirector(fhicl::ParameterSet const& ps)
     // Replace the partially overlapped entry.
     if ( add_run2 ) m_names[run2] = nam2;
   }
-  if ( m_LogLevel >= 2 ) {
-    cout << myname << "     LogLevel: " << m_LogLevel << endl;
-    cout << myname << "  DefaultName: " << m_DefaultName << endl;
-    cout << myname << "Constructed " << m_names.size() << " IOVs:";
-    Name sep = "";
-    for ( NameMap::const_iterator inam=m_names.begin(); inam!=m_names.end(); ++inam ) {
-      cout << sep << "\n" << myname << "  " << setw(6) << inam->first << ": " << inam->second;
-      sep = ",";
+  // Display the map.
+  if (m_LogLevel >= 2 ) {
+    cout << myname << "Tool name map:" << endl;
+    int wrun = 12;
+    cout << myname << setw(wrun) << "Run" << "  Tool name" << endl;
+    for ( const auto& ent : m_names ) {
+        cout << myname << setw(wrun) << ent.first << ": " << ent.second << endl;
     }
-    cout << endl;
   }
+  m_stage = 1;
 }
 
 //**********************************************************************
@@ -81,16 +81,28 @@ DuneRunToolRedirector::DuneRunToolRedirector(fhicl::ParameterSet const& ps)
 Name DuneRunToolRedirector::getNameFromRun(Index run) const {
   const Name myname = "DuneRunToolRedirector::get: ";
   NameMap::const_iterator irun_next = m_names.upper_bound(run);
-  return std::prev(irun_next)->second;
+  Name tnam = std::prev(irun_next)->second;
+  // Display message always at level 4 and when running at level 3.
+  if ( m_LogLevel >= 3 && ( m_LogLevel >=4 || m_stage==1 ) ) {
+    cout << myname << "For run " << run << ", returning tool name " << tnam << endl;
+  }
+  return tnam;
 }
 
 //**********************************************************************
 
 Name DuneRunToolRedirector::getNameInContext(const Context* pcon) const {
-  const Name myname = "DuneRunToolRedirector::get: ";
-  if ( pcon == nullptr ) return m_DefaultName;
+  const Name myname = "DuneRunToolRedirector::getNameInContext: ";
+  bool running = m_stage == 1;
+  if ( pcon == nullptr ) {
+    if ( running ) cout << myname << "ERROR: Context not found." << endl;
+    return m_DefaultName;
+  }
   Index run = pcon->getRun();
-  if ( run == DuneContext::badIndex() ) return m_DefaultName;
+  if ( run == DuneContext::badIndex() ) {
+    if ( running ) cout << myname << "ERROR: Context does not have a run." << endl;
+    return m_DefaultName;
+  }
   return getNameFromRun(run);
 }
 

@@ -35,3 +35,4 @@ add_subdirectory(test)
 
 # Add services with dedicagted directories.
 add_subdirectory(ToolBasedChannelStatus)
+add_subdirectory(EventContext)

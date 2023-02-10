@@ -1,4 +1,4 @@
-// DuneContextManagers_t.cxx
+// DuneContextManager_t.cxx
 
 #include "dunecore/DuneCommon/Utility/DuneContextManager.h"
 

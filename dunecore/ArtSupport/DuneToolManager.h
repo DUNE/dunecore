@@ -41,6 +41,7 @@ public:  // Type aliases and subclasses.
 
   using Name = std::string;
   using NameVector = std::vector<Name>;
+  using NameSet = std::set<Name>;
 
   class SharedToolEntry {
   public:
@@ -69,22 +70,22 @@ public:
   // is made to find the fcl name on the command line following "-c".
   // If a different name is provided in later calls, it is ignored and a
   // warning message is broadcast.
-  static std::string fclFilename(std::string setName ="", int dbg =1);
+  static Name fclFilename(Name setName ="", int dbg =1);
 
   // Return the primary instance of this class.
   // The fcl file returned by fclFilename is read the first time this is called.
-  static DuneToolManager* instance(std::string fclname ="", int dbg =1);
+  static DuneToolManager* instance(Name fclname ="", int dbg =1);
 
   // Display a help message.
   static void help();
 
   // Ctor from FCL file name.
-  explicit DuneToolManager(std::string fclname);
+  explicit DuneToolManager(Name fclname);
 
   // Return a private (not shared) copy of a tool.
   template<class T>
-  std::unique_ptr<T> getPrivate(std::string name, bool doRedirect =true) {
-    std::string myname = "DuneToolManager::getPrivate: ";
+  std::unique_ptr<T> getPrivate(Name name, bool doRedirect =true) {
+    Name myname = "DuneToolManager::getPrivate: ";
     fhicl::ParameterSet psTool;
     if ( name.size() == 0 ) {
       std::cout << myname << "ERROR: Tool name is blank" << std::endl;
@@ -111,22 +112,24 @@ public:
 
   // Return a shared tool.
   template<class T>
-  T* getShared(std::string name, bool doRedirect =true) {
-    std::string myname = "DuneToolManager::getShared: ";
+  T* getShared(Name name, bool doRedirect =true) {
+    Name myname = "DuneToolManager::getShared: ";
     SharedToolMap::iterator itoo = m_sharedTools.find(name);
     if ( itoo != m_sharedTools.end() ) {
       SharedToolPtr& pent = itoo->second;
       if ( pent ) {
-        TSharedToolEntry<T>* ptent = dynamic_cast<TSharedToolEntry<T>*>(pent.get());
-        if ( pent != nullptr ) return ptent->get();
-        TSharedToolEntry<ToolRedirector>* prdent = dynamic_cast<TSharedToolEntry<ToolRedirector>*>(pent.get());
-        ToolRedirector* prd = prdent->get();
-        Name rname = prd->getName();
-        if ( prd != nullptr ) {
+        if ( isRedirecting(name) ) {
+          TSharedToolEntry<ToolRedirector>* prdent = dynamic_cast<TSharedToolEntry<ToolRedirector>*>(pent.get());
+          ToolRedirector* prd = prdent->get();
+          if ( prd == nullptr ) {
+            std::cout << myname << "ERROR: Null redirector with name " << name << "." << std::endl;
+            return nullptr;
+          }
+          Name rname = prd->getName();
           return getShared<T>(rname);
         } else {
-          std::cout << myname << "ERROR: Redirection with name " << rname << " failed." << std::endl;
-          return nullptr;
+          TSharedToolEntry<T>* ptent = dynamic_cast<TSharedToolEntry<T>*>(pent.get());
+          if ( pent != nullptr ) return ptent->get();
         }
       }
       std::cout << myname << "ERROR: Null tool pointer for " << name << "." << std::endl;
@@ -137,6 +140,7 @@ public:
       if ( doRedirect && ToolRedirector::isRedirecting(psTool) ) {
         std::unique_ptr<ToolRedirector> prd = art::make_tool<ToolRedirector>(psTool);
         m_sharedTools.emplace(name, new TSharedToolEntry<ToolRedirector>(prd));
+        m_redirectingNames.insert(name);
       } else {
         std::unique_ptr<T> ptoo = art::make_tool<T>(psTool);
         m_sharedTools.emplace(name, new TSharedToolEntry<T>(ptoo));
@@ -154,23 +158,27 @@ public:
   // These tools are otherwise deleted when the tool manager is deleted. This method
   // provides the opportunity to ensure this destruction occurs before general C++
   // closeout, e.g. before Root objects begin to dissappear.
-  int deleteShared(std::string name);
+  int deleteShared(Name name);
 
   // Return the list of available tool names.
-  const std::vector<std::string>& toolNames() const;
+  const NameVector& toolNames() const;
+
+  // Return if name references a redirecting tool.
+  bool isRedirecting(Name name) const;
 
   // Display the list of available tools.
   void print() const;
 
 private:
 
-  std::string m_fclname;
+  Name m_fclname;
   fhicl::ParameterSet m_pstools;
   NameVector m_toolNames;
   SharedToolMap m_sharedTools;
+  NameSet m_redirectingNames;
 
   // Convert a string into a paramter set.
-  int makeParameterSet(std::string scfg, fhicl::ParameterSet& ps);
+  int makeParameterSet(Name scfg, fhicl::ParameterSet& ps);
   
 };
 
