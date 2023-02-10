@@ -27,6 +27,7 @@
 #include "larcorealg/Geometry/GeoObjectSorter.h"
 #include "dunecore/Geometry/GeoObjectSorterAPA.h"
 #include "dunecore/Geometry/GeoObjectSorter35.h"
+#include "dunecore/Geometry/GeoObjectSorterICEBERG.h"
 
 // C/C++ standard libraries
 #include <string>
@@ -35,6 +36,7 @@ using std::string;
 using geo::GeoObjectSorter;
 using geo::GeoObjectSorterAPA;
 using geo::GeoObjectSorter35;
+using geo::GeoObjectSorterICEBERG;
 using dune::DUNEGeometryHelper;
 
 //**********************************************************************
@@ -56,7 +58,7 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
   // This flag is set if that map is used.
   bool useApaMap = false;
   bool is35t = false;
-
+  bool isICEBERG = false;
 
   // If class name is given use it.
   if ( fChannelMapClass.size() ) {
@@ -151,7 +153,9 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
     // iceberg
     } else if ( detectorName.find("iceberg") != std::string::npos ) {
       channelMap = std::make_unique<geo::ProtoDUNEChannelMapAlg>(pset);
-
+      isICEBERG = true;
+      useApaMap = true;
+      
     // LArND
     } else if ( detectorName.find("larnd") != std::string::npos ) {
       channelMap = std::make_unique<geo::ChannelMapAPAAlg>(pset);
@@ -167,6 +171,8 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
     // Find the sorter.
     bool useApaSort = false;
     bool use35tSort = false;
+    bool useICEBERGSort = false;
+    
     GeoObjectSorter* psort = nullptr;
     if ( fGeoSorterClass.size() ) {
       if ( fGeoSorterClass == "GeoObjectSorterAPA" ) {
@@ -174,16 +180,24 @@ DUNEGeometryHelper::doConfigureChannelMapAlg(fhicl::ParameterSet const& pset,
       } else if ( fGeoSorterClass == "GeoObjectSorter35" ) {
         use35tSort = true;
       }
+      else if ( fGeoSorterClass == "GeoObjectSorterICEBERG" ) {
+	useICEBERGSort = true;
+      }
     } else {
       if ( is35t ) use35tSort = true;
+      else if ( isICEBERG ) useICEBERGSort = true;
       else useApaSort = true;
     }
+
     // Construct the sorter.
     if ( useApaSort ) {
       psort = new GeoObjectSorterAPA(pset);
     } else if ( use35tSort ) {
       psort = new GeoObjectSorter35(pset);
+    } else if ( useICEBERGSort ) {
+      psort = new GeoObjectSorterICEBERG(pset);
     }
+    
     // Create channel map and set sorter.
     auto alg = new geo::DuneApaChannelMapAlg(pset);
     alg->setSorter(*psort);
