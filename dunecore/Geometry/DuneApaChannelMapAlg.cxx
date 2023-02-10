@@ -229,7 +229,6 @@ const PlaneGeo plageo2 = plageo;
 	  if (nAnchoredWires == 0 && nwir >310 && nwir < 320 && view != geo::kZ) nAnchoredWires = 200;
 	  
           fAnchoredWires[icry][itpc][ipla] = nAnchoredWires;
-	  std::cout << "Computed anchored wires: " << icry << " " << itpc << " " << ipla << " " << nAnchoredWires << std::endl;
           fFirstChannelInThisPlane[icry][itpc][ipla] = icha;
           icha += nAnchoredWires;
           fFirstChannelInNextPlane[icry][itpc][ipla] = icha;
