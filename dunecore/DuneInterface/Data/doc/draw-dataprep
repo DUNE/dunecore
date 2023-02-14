@@ -1,0 +1,5 @@
+#!/bin/bash
+
+NAM=dataprep
+
+dot -T png -O $NAM.dot
