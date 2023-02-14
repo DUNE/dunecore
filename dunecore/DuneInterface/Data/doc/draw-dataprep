@@ -2,4 +2,4 @@
 
 NAM=dataprep
 
-dot -T png -O $NAM.dot
+dot -T png -o $NAM.png $NAM.dot
