@@ -1,0 +1,7 @@
+digraph deps {
+ TpcData [label="TpcData" shape="rect"]
+ AdcChannelData [label="AdcChannelData" shape="rect"]
+ Tpc2dRoi [label="Tpc2dRoi" shape="rect"]
+ TpcData -> AdcChannelData
+ TpcData -> Tpc2dRoi
+}

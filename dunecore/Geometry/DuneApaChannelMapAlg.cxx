@@ -221,6 +221,13 @@ const PlaneGeo plageo2 = plageo;
               }
             }
           }
+	  // Tom Junk: a hack for iceberg geometry -- the assumption that Z doesnt change for a wire center in common wires
+	  // in the code above calculating nAnchoredWires doesn't work for iceberg and nAnchoredWires ends up being zero.
+	  // Put some conditions in here so it is unlikely to be triggered in non-Iceberg cases
+	  // if nAnchordWires == 0 subsequent code will crash on an integer divide by zero
+	  
+	  if (nAnchoredWires == 0 && nwir >310 && nwir < 320 && view != geo::kZ) nAnchoredWires = 200;
+	  
           fAnchoredWires[icry][itpc][ipla] = nAnchoredWires;
           fFirstChannelInThisPlane[icry][itpc][ipla] = icha;
           icha += nAnchoredWires;
