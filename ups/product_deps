@@ -34,7 +34,7 @@ dunedaqdataformats  v3_4_1
 nusystematics       v01_02_06
 systematicstools    v01_02_00
 dune_oslibs         v1_0_0         -       optional
-larsoft             v09_66_02
+larsoft             v09_67_00
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_10_4
