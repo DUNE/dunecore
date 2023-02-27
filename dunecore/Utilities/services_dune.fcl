@@ -12,4 +12,3 @@
 #include "services_protodune_singlephase.fcl"
 #include "services_protodunehd.fcl"
 #include "services_protodunevd.fcl"
-#include "services_dunefd_horizdrift_transitionchanges.fcl"
