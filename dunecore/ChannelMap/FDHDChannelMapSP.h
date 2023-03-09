@@ -64,6 +64,8 @@ public:
 
   HDChanInfo_t GetChanInfoFromOfflChan(unsigned int offlchan) const;
 
+  unsigned int getNChans() { return fNChans; }
+
 private:
 
   const unsigned int fNAPAs = 150;

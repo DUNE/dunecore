@@ -38,6 +38,8 @@ public:
 
   dune::FDHDChannelMapSP::HDChanInfo_t GetChanInfoFromOfflChan(unsigned int offlchan) const;
 
+  unsigned int getNChans() { return fHDChanMap.getNChans(); }
+
 private:
 
   dune::FDHDChannelMapSP fHDChanMap;
