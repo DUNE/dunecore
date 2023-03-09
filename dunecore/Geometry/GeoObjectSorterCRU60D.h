@@ -6,6 +6,8 @@
 ///
 /// \version $Id:  $
 /// \author vgalymov@ipnl.in2p3.fr
+///
+/// 3/9/2023 Add a flag for using ProtoDUNE-VD's TPCSorter, wgu@bnl.gov 
 ////////////////////////////////////////////////////////////////////////
 #ifndef GEO_GEOOBJECTSORTERCRU60D_H
 #define GEO_GEOOBJECTSORTERCRU60D_H
@@ -30,6 +32,8 @@ namespace geo{
                              geo::DriftDirection_t                 driftDir) const;
     void SortWires          (std::vector<geo::WireGeo>           & wgeo)     const;
     void SortOpDets         (std::vector<geo::OpDetGeo> & opdet) const;
+
+    bool fSortTPCPDVD;
 
   };
 
