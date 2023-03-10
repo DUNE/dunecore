@@ -8,9 +8,6 @@
 #ifndef GEO_GEOOBJECTSORTER35_H
 #define GEO_GEOOBJECTSORTER35_H
 
-#include <vector>
-#include <string>
-
 #include "fhiclcpp/fwd.h"
 #include "larcorealg/Geometry/GeoObjectSorter.h"
 
@@ -18,19 +15,11 @@ namespace geo{
 
   class GeoObjectSorter35 : public GeoObjectSorter {
   public:
+    explicit GeoObjectSorter35(fhicl::ParameterSet const&);
 
-    GeoObjectSorter35(fhicl::ParameterSet const& p);
-
-    void SortAuxDets        (std::vector<geo::AuxDetGeo>         & adgeo)    const;
-    void SortAuxDetSensitive(std::vector<geo::AuxDetSensitiveGeo>& adgeo)    const;
-    void SortCryostats      (std::vector<geo::CryostatGeo>       & cgeo)     const;
-    void SortTPCs           (std::vector<geo::TPCGeo>            & tgeo)     const;
-    void SortPlanes         (std::vector<geo::PlaneGeo>          & pgeo,
-                             geo::DriftDirection_t                 driftDir) const;
-    void SortWires          (std::vector<geo::WireGeo>           & wgeo)     const;
   private:
-
-    std::string fDetVersion;  ///< string of the detector version
+    bool compareCryostats(CryostatGeo const& c1, CryostatGeo const& c2) const override;
+    bool compareTPCs(TPCGeo const& t1, TPCGeo const& t2) const override;
   };
 
 }

@@ -19,6 +19,7 @@
 
 #undef NDEBUG
 
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include <string>
 #include <iostream>
@@ -48,6 +49,7 @@ using geo::WireID;
 typedef readout::TPCsetID APAID;
 using readout::ROPID;
 using geo::Geometry;
+using geo::WireReadoutGeom;
 using geo::CryostatGeo;
 using geo::TPCGeo;
 using geo::WireGeo;
@@ -192,7 +194,7 @@ struct ExpectedValues {
 // These must be defined externally.
 
 void setExpectedValues(ExpectedValues& ev);
-void setExpectedValuesSpacePoints(Geometry*);
+void setExpectedValuesSpacePoints(Geometry const*, WireReadoutGeom const&);
 
 //**********************************************************************
 
@@ -226,22 +228,26 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     std::stringstream config;
     config << "#include \"geometry_dune.fcl\"" << endl;
     config << "services.Geometry:                   @local::" << ev.gname << endl;
-    config << "services.ExptGeoHelperInterface:     @local::dune_geometry_helper" << endl;
-    if ( ev.chanmap.size() ) {
-      config << "services.ExptGeoHelperInterface.ChannelMapClass: " << ev.chanmap << endl;
+    if (ev.gname.find("dune35t") != std::string::npos) {
+      config << "services.WireReadout:     @local::dune35t_wire_readout" << endl;
+    } else {
+    config << "services.WireReadout:     @local::dune_wire_readout" << endl;
     }
-    //config << "services.ExptGeoHelperInterface.GeoSorterClass: " << ev.sorter << endl;
+    if ( ev.chanmap.size() ) {
+      config << "services.WireReadout.ChannelMapClass: " << ev.chanmap << endl;
+    }
+    //config << "services.WireReadout.GeoSorterClass: " << ev.sorter << endl;
     ArtServiceHelper::load_services(config);
   }
 
   cout << myname << line << endl;
   cout << myname << "Get Geometry service." << endl;
   art::ServiceHandle<geo::Geometry> pgeo;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
 
   cout << myname << line << endl;
   check("Default wiggle", pgeo->DefaultWiggle());
   check("Geometry name", pgeo->DetectorName(), ev.fullname);
-  cout << myname << "ROOT name: " << pgeo->ROOTFile() << endl;
   cout << myname << "GDML name: " << pgeo->GDMLFile() << endl;
 
   cout << myname << line << endl;
@@ -264,19 +270,20 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
   if ( 0 ) check("TotalMass", pgeo->TotalMass());
 
   cout << myname << line << endl;
-  check("CryostatHalfWidth", pgeo->CryostatHalfWidth());
-  check("CryostatHalfHeight", pgeo->CryostatHalfHeight());
-  check("CryostatLength", pgeo->CryostatLength());
+  auto const& cryostat = pgeo->Cryostat();
+  check("CryostatHalfWidth", cryostat.HalfWidth());
+  check("CryostatHalfHeight", cryostat.HalfHeight());
+  check("CryostatLength", cryostat.Length());
   //check("", pgeo->());
 
   cout << myname << line << endl;
   Index ncry = pgeo->Ncryostats();
   check("Ncryostats", ncry, ev.ncry);
   check("MaxTPCs", pgeo->MaxTPCs(), ev.ntpc);
-  check("MaxPlanes", pgeo->MaxPlanes(), ev.npla);
+  check("MaxPlanes", wireReadout.MaxPlanes(), ev.npla);
   check("TotalNTPC", pgeo->TotalNTPC(), ev.ntpc);
-  check("Nviews", pgeo->Nviews(), ev.npla);
-  check("Nchannels", pgeo->Nchannels(), ev.nchatot);
+  check("Nviews", wireReadout.Nviews(), ev.npla);
+  check("Nchannels", wireReadout.Nchannels(), ev.nchatot);
 
   cout << myname << line << endl;
   cout << "Check TPC wire plane counts." << endl;
@@ -286,16 +293,16 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     cout << "  Cryostat " << icry << " has " << ntpc << " TPCs" << endl;
     for ( auto const& tpcid : pgeo->Iterate<geo::TPCID>(cid)) {
       auto itpc = tpcid.TPC;
-      Index npla = pgeo->Nplanes(tpcid);
+      Index npla = wireReadout.Nplanes(tpcid);
       cout << "    TPC " << itpc << " has " << npla << " planes" << endl;
       assert( npla == 3 );
-      for ( auto const& planeid : pgeo->Iterate<geo::PlaneID>(tpcid) ) {
+      for ( auto const& planeid : wireReadout.Iterate<geo::PlaneID>(tpcid) ) {
         auto ipla = planeid.Plane;
-        Index nwir = pgeo->Nwires(planeid);
-        Index ich1 = pgeo->Nchannels();
+        Index nwir = wireReadout.Nwires(planeid);
+        Index ich1 = wireReadout.Nchannels();
         Index ich2 = 0;
-        for ( auto const& wid : pgeo->Iterate<geo::WireID>(planeid) ) {
-          Index ich = pgeo->PlaneWireToChannel(wid);
+        for ( auto const& wid : wireReadout.Iterate<geo::WireID>(planeid) ) {
+          Index ich = wireReadout.PlaneWireToChannel(wid);
           if ( ich < ich1 ) ich1 = ich;
           if ( ich > ich2 ) ich2 = ich;
         }
@@ -310,14 +317,14 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
   cout << myname << line << endl;
   cout << "Check wire planes." << endl;
   const double piOver2 = 0.5*acos(-1.0);
-  for ( auto const& gpla : pgeo->Iterate<geo::PlaneGeo>() ) {
+  for ( auto const& gpla : wireReadout.Iterate<geo::PlaneGeo>() ) {
     auto const& plaid = gpla.ID();
     cout << "  Plane " << plaid << endl;
-    cout << "    Signal type: " << pgeo->SignalType(plaid) << endl;
-    cout << "           View: " << pgeo->View(plaid) << endl;
+    cout << "    Signal type: " << wireReadout.SignalType(plaid) << endl;
+    cout << "           View: " << wireReadout.Plane(plaid).View() << endl;
     cout << "     Wire angle: " << gpla.ThetaZ() - piOver2 << endl;
-    assert( pgeo->SignalType(plaid) == ev.sigType[plaid.Cryostat][plaid.TPC][plaid.Plane] );
-    assert( pgeo->View(plaid) == ev.view[plaid.Cryostat][plaid.TPC][plaid.Plane] );
+    assert( wireReadout.SignalType(plaid) == ev.sigType[plaid.Cryostat][plaid.TPC][plaid.Plane] );
+    assert( wireReadout.Plane(plaid).View() == ev.view[plaid.Cryostat][plaid.TPC][plaid.Plane] );
   }
 
   cout << myname << line << endl;
@@ -331,7 +338,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     for ( Index ipla=0; ipla<ev.npla; ++ipla )
       lastwire[itpc][ipla] = 0;
   for ( Index icha=0; icha<ev.nchatot; ++icha ) {
-    vector<WireID> wirids = pgeo->ChannelToWire(icha);
+    vector<WireID> wirids = wireReadout.ChannelToWire(icha);
     assert( wirids.size() > 0 );
     WireID wirid1 = wirids[0];
     Index itpc1 = wirid1.TPC;
@@ -354,10 +361,10 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
       if ( iwir > lastwire[itpc][ipla] ) lastwire[itpc][ipla] = iwir;
       assert( iapa == iapa1 );
       assert( ipla == ipla1 );
-      checkval("\nPlaneWireToChannel", pgeo->PlaneWireToChannel(wirid), icha );
-      assert( pgeo->SignalType(icha) == ev.sigType[wirid.Cryostat][wirid.TPC][wirid.Plane] );
-      checkval("View", pgeo->View(icha), ev.view[wirid.Cryostat][wirid.TPC][wirid.Plane]);
-      const WireGeo* pwg = pgeo->WirePtr(wirid);
+      checkval("\nPlaneWireToChannel", wireReadout.PlaneWireToChannel(wirid), icha );
+      assert( wireReadout.SignalType(icha) == ev.sigType[wirid.Cryostat][wirid.TPC][wirid.Plane] );
+      checkval("View", wireReadout.View(icha), ev.view[wirid.Cryostat][wirid.TPC][wirid.Plane]);
+      const WireGeo* pwg = wireReadout.WirePtr(wirid);
       auto const p1 = pwg->GetStart();
       auto const p2 = pwg->GetEnd();
       if ( sposs.str().size() ) sposs << ", ";
@@ -381,21 +388,21 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
   if ( dorop ) {
     cout << myname << line << endl;
     cout << "Check ROP counts and channels." << endl;
-    check("MaxROPs", pgeo->MaxROPs(), ev.nrop);
+    check("MaxROPs", wireReadout.MaxROPs(), ev.nrop);
     Index icry = 0;
     for ( auto const& cryid : pgeo->Iterate<geo::CryostatID>() ) {
-      Index napa = pgeo->NTPCsets(cryid);
+      Index napa = wireReadout.NTPCsets(cryid);
       cout << "  Cryostat " << icry << " has " << napa << " APAs" << endl;
       assert( napa == ev.napa );
       for ( Index iapa=0; iapa<napa; ++iapa ) {
         APAID apaid(cryid, iapa);
-        Index nrop = pgeo->NROPs(apaid);
+        Index nrop = wireReadout.NROPs(apaid);
         cout << "    APA " << iapa << " has " << nrop << " ROPs" << endl;
         assert( nrop == ev.nrop );
         for ( Index irop=0; irop<nrop; ++irop ) {
           ROPID ropid(apaid, irop);
-          Index ncha = pgeo->Nchannels(ropid);
-          Index icha1 = pgeo->FirstChannelInROP(ropid);
+          Index ncha = wireReadout.Nchannels(ropid);
+          Index icha1 = wireReadout.FirstChannelInROP(ropid);
           Index icha2 = icha1 + ncha - 1;
           cout << "      ROP " << irop << " has " << ncha << " channels: ["
                << icha1 << ", " << icha2 << "]" << endl;
@@ -410,7 +417,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     cout << "Check channel-ROP mapping." << endl;
     icry = 0;
     for ( Index icha=0; icha<ev.nchatot; ++icha ) {
-      ROPID ropid = pgeo->ChannelToROP(icha);
+      ROPID ropid = wireReadout.ChannelToROP(icha);
       Index icry = ropid.Cryostat;
       Index iapa = ropid.TPCset;
       Index irop = ropid.ROP;
@@ -421,17 +428,17 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     cout << myname << line << endl;
     cout << "Check ROP-TPC mapping." << endl;
     for ( auto const& cryid: pgeo->Iterate<geo::CryostatID>() ) {
-      Index napa = pgeo->NTPCsets(cryid);
+      Index napa = wireReadout.NTPCsets(cryid);
       cout << "  Cryostat " << icry << " has " << napa << " APAs" << endl;
       assert( napa == ev.napa );
       for ( Index iapa=0; iapa<napa; ++iapa ) {
         APAID apaid(cryid, iapa);
-        Index nrop = pgeo->NROPs(apaid);
+        Index nrop = wireReadout.NROPs(apaid);
         cout << "    APA " << iapa << " has " << nrop << " ROPs" << endl;
         assert( nrop == ev.nrop );
         for ( Index irop=0; irop<nrop; ++irop ) {
           ROPID ropid(apaid, irop);
-          std::vector<geo::TPCID> rtpcs = pgeo->ROPtoTPCs(ropid);
+          std::vector<geo::TPCID> rtpcs = wireReadout.ROPtoTPCs(ropid);
           Index nrtpc = rtpcs.size();
           assert( nrtpc > 0 );
           cout << "      ROP " << irop << " TPCs:";
@@ -453,7 +460,7 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
   if ( nspt == 0 ) {
     cout << myname << "No space points found." << endl;
     cout << myname << "Creating space points." << endl;
-    setExpectedValuesSpacePoints(&*pgeo);
+    setExpectedValuesSpacePoints(pgeo.get(), wireReadout);
   } else {
     cout << myname << "Check " << nspt << " space points." << endl;
     assert( ev.posPla.size() == ev.posTpc.size() );
@@ -470,21 +477,20 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
       assert( tpcid.Cryostat != CryostatID::InvalidID );
       unsigned int itpc = tpcid.TPC;
       assert( itpc != TPCID::InvalidID );
-      const TPCGeo& tpcgeo = pgeo->TPC(tpcid);
-      unsigned int npla = tpcgeo.Nplanes();
+      unsigned int npla = wireReadout.Nplanes(tpcid);
       assert( npla == ev.npla );
       assert( npla > 0 );
       for ( unsigned int ipla=0; ipla<npla; ++ipla ) {
         assert( ires < ev.posTpc.size() );
         PlaneID plaid(tpcid, ipla);
         WireID wirid;
-        try { wirid = pgeo->NearestWireID(xyz, plaid); }
+        try { wirid = wireReadout.Plane(plaid).NearestWireID(xyz); }
         catch (geo::InvalidWireError const& e) {
           if (!e.hasSuggestedWire()) throw;
           cerr << "ERROR (non-fatal):\n" << e;
           wirid = e.suggestedWireID();
         }
-        double xwire = pgeo->WireCoordinate(geo::Point_t{0, x, y}, plaid);
+        double xwire = wireReadout.Plane(plaid).WireCoordinate(geo::Point_t{0, x, y});
         cout << "    TPC " << setw(2) << itpc << " plane " << ipla
              << " nearest wire is " << setw(3) << wirid.Wire
              << " and coordinate is " << xwire << endl;
@@ -506,8 +512,8 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
     Index nopchaHardware = ev.nopchaHardware ? ev.nopchaHardware : nopchaReadout;
     cout << " Expected optical readout channel count: " << nopchaReadout << endl;
     cout << "Expected optical hardware channel count: " << nopchaHardware << endl;
-    cout << "         Geometry optical channel count: " << pgeo->NOpChannels() << endl;
-    check("# Optical channels", pgeo->NOpChannels(), nopchaHardware, true, doAssert);
+    cout << "         Geometry optical channel count: " << wireReadout.NOpChannels() << endl;
+    check("# Optical channels", wireReadout.NOpChannels(), nopchaHardware, true, doAssert);
     cout << "Per-detector optical channel counts:" << endl;
     assert( ev.nopdetcha.size() == nopt );
     bool doAssert = true;  // True enable assertions in the indvidual channel checks.
@@ -515,21 +521,21 @@ int test_GeometryDune(const ExpectedValues& ev, bool dorop, Index maxchanprint,
       ostringstream sslab;
       sslab << "  # channels for optical detector " << iopt;
       //bool print = iopt < maxchanprint;
-      check(sslab.str(), pgeo->NOpHardwareChannels(iopt), ev.nopdetcha[iopt], true, doAssert);
+      check(sslab.str(), wireReadout.NOpHardwareChannels(iopt), ev.nopdetcha[iopt], true, doAssert);
     }
     assert(doAssert);
     cout << " Opdet channels:" << endl;
     for ( Index iopt=0; iopt<nopt; ++iopt ) {
-      Index noch = pgeo->NOpHardwareChannels(iopt);
+      Index noch = wireReadout.NOpHardwareChannels(iopt);
       for ( Index ioch=0; ioch<noch; ++ioch ) {
         ostringstream sslab;
         sslab << "  Det " << iopt << ", chan " << ioch;
-        Index icha = pgeo->OpChannel(iopt, ioch);
+        Index icha = wireReadout.OpChannel(iopt, ioch);
         check(sslab.str() + " (channel)", icha, ev.opdetcha[iopt][ioch], true, doAssert);
         if ( nopchaHardware == nopchaReadout ) {
-          check(sslab.str() + " (OpDet)", pgeo->OpDetFromOpChannel(icha), iopt, true, doAssert);
+          check(sslab.str() + " (OpDet)", wireReadout.OpDetFromOpChannel(icha), iopt, true, doAssert);
         }
-        check(sslab.str() + " (HardwareChannel)", pgeo->HardwareChannelFromOpChannel(icha), ioch, true, doAssert);
+        check(sslab.str() + " (HardwareChannel)", wireReadout.HardwareChannelFromOpChannel(icha), ioch, true, doAssert);
       }
     }
   }

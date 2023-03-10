@@ -1,6 +1,7 @@
 // AdcChannelDataTester.cxx
 
 #include "AdcChannelDataTester.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include <ostream>
@@ -46,7 +47,7 @@ strumChannels(AdcChannelDataMap& acds, Index a_ncha) {
       cout << myname << "Geometry not found." << endl;
       return 1;
     }
-    ncha = pgeo->Nchannels();
+    ncha = art::ServiceHandle<geo::WireReadout>()->Get().Nchannels();
   }
   for ( Index icha=0; icha<ncha; ++icha ) {
     channel = icha;
@@ -74,17 +75,16 @@ strumTpcWires(AdcChannelDataMap& acds, Index itpc, Index icry) {
     cout << myname << "TPC not found: " << tid << endl;
     return 2;
   }
-  const geo::TPCGeo& gtpc = pgeo->TPC(tid);
-  Index npla = gtpc.Nplanes();
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
+  Index npla = wireReadout.Nplanes(tid);
   Index nsam = 500;
   Index isam = 0;
   for ( Index ipla=0; ipla<npla; ++ipla ) {
     geo::PlaneID pid(tid, ipla);
-    const geo::PlaneGeo& gpla = gtpc.Plane(ipla);
-    Index nwir = gpla.Nwires();
+    Index nwir = wireReadout.Nwires(pid);
     for ( Index iwir=0; iwir<nwir; ++iwir ) {
       geo::WireID wid(pid, iwir);
-      Index icha = pgeo->PlaneWireToChannel(wid);
+      Index icha = wireReadout.PlaneWireToChannel(wid);
       fill(acds[channel], icha, isam);
       if ( ++isam >= nsam ) isam = 0;
     }

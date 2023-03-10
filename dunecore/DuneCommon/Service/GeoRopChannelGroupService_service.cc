@@ -4,8 +4,7 @@
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 #include <sstream>
 #include <iomanip>
-#include "larcorealg/Geometry/GeometryCore.h"
-#include "larcorealg/Geometry/ChannelMapAlg.h"
+#include "larcorealg/Geometry/WireReadoutGeom.h"
 
 using std::cout;
 using std::ostream;
@@ -30,18 +29,18 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
 : m_size(0) {
   // Find the total # APAs and assign width for APA index.
   Index napatot = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
-    napatot += m_pgeo->NTPCsets(cryid);
+  for ( const geo::CryostatID& cryid : m_geometry->Iterate<geo::CryostatID>() ) {
+    napatot += m_wireReadout->NTPCsets(cryid);
   }
   unsigned int w = log10(napatot-1) + 1;
   // Loop over cryostats.
   Index krop = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
-    Index napa = m_pgeo->NTPCsets(cryid);
+  for ( const geo::CryostatID& cryid : m_geometry->Iterate<geo::CryostatID>() ) {
+    Index napa = m_wireReadout->NTPCsets(cryid);
     // Loop over APAs.
     for ( Index iapa=0; iapa<napa; ++iapa ) {
       APAID apaid(cryid, iapa);
-      Index nrop = m_pgeo->NROPs(apaid);
+      Index nrop = m_wireReadout->NROPs(apaid);
       // Loop over ROPs.
       unsigned int nvu = 0;
       unsigned int nvv = 0;
@@ -49,7 +48,7 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
       // First pass to get the number of each view.
       for ( Index irop=0; irop<nrop; ++irop ) {
         ROPID ropid(apaid, irop);
-        geo::View_t view = m_pgeo->View(ropid);
+        geo::View_t view = m_wireReadout->View(ropid);
         if      ( view == geo::kU ) ++nvu;
         else if ( view == geo::kV ) ++nvv;
         else if ( view == geo::kZ ) ++nvz;
@@ -65,7 +64,7 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
         // Build name.
         ostringstream ssname;
         ssname << "apa" << setfill('0') << setw(w) << iapa;
-        geo::View_t view = m_pgeo->View(ropid);
+        geo::View_t view = m_wireReadout->View(ropid);
         if        ( view == geo::kU ) {
           ssname << "u";
           ++ivu;
@@ -83,8 +82,8 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
         }
         m_names[krop] = ssname.str();
         // Find channels.
-        Index icha1 = m_pgeo->FirstChannelInROP(ropid); 
-        Index icha2 = icha1 + m_pgeo->Nchannels(ropid);
+        Index icha1 = m_wireReadout->FirstChannelInROP(ropid);
+        Index icha2 = icha1 + m_wireReadout->Nchannels(ropid);
         for ( unsigned int icha=icha1; icha<icha2; ++icha ) m_chanvecs[krop].push_back(icha);
         ++krop;
       }
@@ -92,12 +91,6 @@ GeoRopChannelGroupService(fhicl::ParameterSet const& pset)
   }
   m_size = krop;
 }
-
-//**********************************************************************
-
-GeoRopChannelGroupService::
-GeoRopChannelGroupService(fhicl::ParameterSet const& pset, art::ActivityRegistry&)
-: GeoRopChannelGroupService(pset) { }
 
 //**********************************************************************
 

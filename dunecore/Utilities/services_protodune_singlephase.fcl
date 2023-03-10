@@ -7,8 +7,9 @@ BEGIN_PROLOG
 ##############################
 
 protodune_services: {
- ExptGeoHelperInterface:       @local::dune_geometry_helper
+ WireReadout:       @local::dune_wire_readout
  GeometryConfigurationWriter:  {}
+AuxDetGeometry: @local::protodune_auxdet_geo
  Geometry:                     @local::protodune_geo
  DetectorClocksService:        @local::protodune_detectorclocks
  DetectorPropertiesService:    @local::protodune_detproperties
@@ -27,8 +28,9 @@ protodune_services: {
 
 
 protodune_rawdecoding_services: {
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:       @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
+AuxDetGeometry: @local::protodune_auxdet_geo
   Geometry:                     @local::protodune_geo
   DetectorClocksService:        @local::protodune_detectorclocks
   DetectorPropertiesService:    @local::protodune_detproperties
@@ -41,8 +43,9 @@ protodune_rawdecoding_services: {
 }
 
 iceberg_rawdecoding_services: {
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:       @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
+AuxDetGeometry: @local::protodune_auxdet_geo
   Geometry:                     @local::iceberg_geo
   DetectorClocksService:        @local::protodune_detectorclocks
   DetectorPropertiesService:    @local::protodune_detproperties
@@ -54,8 +57,9 @@ iceberg_rawdecoding_services: {
 }
 
 protodune_data_services: {
- ExptGeoHelperInterface:       @local::dune_geometry_helper
+ WireReadout:       @local::dune_wire_readout
  GeometryConfigurationWriter:  {}
+AuxDetGeometry: @local::protodune_auxdet_geo
  Geometry:                     @local::protodune_geo
  DetectorClocksService:        @local::protodune_detectorclocks
  DetectorPropertiesService:    @local::protodune_detproperties
@@ -79,8 +83,9 @@ protodune_data_services: {
 protodune_minimal_simulation_services: {
  LArFFT:                       @local::dunefd_larfft
  LArG4Parameters:              @local::protodune_largeantparameters
- ExptGeoHelperInterface:       @local::dune_geometry_helper
+ WireReadout:       @local::dune_wire_readout
  GeometryConfigurationWriter:  {}
+AuxDetGeometry: @local::protodune_auxdet_geo
  Geometry:                     @local::protodune_geo
  DetectorClocksService:        @local::protodune_detectorclocks
  DetectorPropertiesService:    @local::protodune_detproperties
