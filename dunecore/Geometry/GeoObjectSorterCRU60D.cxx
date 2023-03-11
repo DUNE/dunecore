@@ -18,6 +18,7 @@
 
 #include "canvas/Utilities/Exception.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+#include "fhiclcpp/ParameterSet.h"
 
 #include <array>
 #include <string>
@@ -139,6 +140,30 @@ namespace geo {
       if (other==1) return xyz1.Y() < xyz2.Y();
       else if (other==0) return xyz1.X() > xyz2.X();
       else {throw cet::exception("TPCGeo") << "Drift direction detected is non-X and non-Y.\n";}
+    }
+
+    // Sort TPC for ProtoDUNE VD
+    static bool sortTPCPDVD(const TPCGeo& t1, const TPCGeo& t2)
+    {
+      auto const xyz1 = t1.GetCenter();
+      auto const xyz2 = t2.GetCenter();
+
+      // try to get drift coord index
+      short int dc = geo::CRU60D::getDriftCoord();
+
+
+      // sort TPCs in drift volumes
+      auto const [d1, d2] = std::make_pair(element(xyz1, dc), element(xyz2, dc));
+      if(std::abs(d1 - d2) > DistanceTol)
+        return d1 < d2;
+
+      if (xyz1.Y() * xyz2.Y() < 0)
+        return xyz1.Y() < xyz2.Y();
+      else {
+        if (std::abs(xyz1.Z() - xyz2.Z()) > DistanceTol )
+          return xyz1.Z() < xyz2.Z();
+        return xyz1.Y() < xyz2.Y();
+      }
     }
 
 
@@ -283,7 +308,8 @@ namespace geo {
   } // namespace geo::CRU60D
 
   //----------------------------------------------------------------------------
-  GeoObjectSorterCRU60D::GeoObjectSorterCRU60D(fhicl::ParameterSet const&){}
+  GeoObjectSorterCRU60D::GeoObjectSorterCRU60D(fhicl::ParameterSet const& pset)
+    : fSortTPCPDVD(pset.get<bool>("SortTPCPDVD")){}
 
   //----------------------------------------------------------------------------
   void GeoObjectSorterCRU60D::SortAuxDets(std::vector<geo::AuxDetGeo> & adgeo) const
@@ -312,7 +338,8 @@ namespace geo {
       MF_LOG_DEBUG("GeoObjectSorterCRU60D")
         <<" Retrieved drift axis "<<geo::CRU60D::TPCDriftAxis;
     }
-    std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPC);
+    if (fSortTPCPDVD) std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPCPDVD);
+    else              std::sort(tgeo.begin(), tgeo.end(), CRU60D::sortTPC);
 
   }
 
