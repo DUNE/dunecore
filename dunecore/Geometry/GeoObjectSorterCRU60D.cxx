@@ -309,7 +309,7 @@ namespace geo {
 
   //----------------------------------------------------------------------------
   GeoObjectSorterCRU60D::GeoObjectSorterCRU60D(fhicl::ParameterSet const& pset)
-    : fSortTPCPDVD(pset.get<bool>("SortTPCPDVD")){}
+    : fSortTPCPDVD(pset.get<bool>("SortTPCPDVD", false)){}
 
   //----------------------------------------------------------------------------
   void GeoObjectSorterCRU60D::SortAuxDets(std::vector<geo::AuxDetGeo> & adgeo) const
