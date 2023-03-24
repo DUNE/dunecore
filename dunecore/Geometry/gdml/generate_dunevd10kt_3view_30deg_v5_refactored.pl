@@ -42,7 +42,8 @@
 #           LAr buffer around the active volume in Y and Z has been adapted in the workspace geometries to fit
 #           the numbers of the full geometry.
 #           PDS:
-#                Arapucas in the short laterals included in all 8-CRMs-width workspace geometries.
+#                Arapucas in the short laterals included in all 8-CRMs-width workspace geometries, with a slim
+#                field cage "window" in front of them.
 #                Distance Membrane to Arapuca is set to 10cm.
 #                Field Cage is set to Aluminum_Al, cathode is set to G10.
 #           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml)
@@ -324,6 +325,7 @@ $FieldShaperInnerRadius = 0.5; #cm
 $FieldShaperOuterRadius = 2.285; #cm
 $FieldShaperOuterRadiusSlim = 0.75; #cm
 $FieldShaperTorRad = 2.3; #cm
+$FieldCageArapucaWindowLength = 670; #cm
 
 $FieldShaperLength = $FieldShaperLongTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
 $FieldShaperWidth =  $FieldShaperShortTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
@@ -1236,6 +1238,41 @@ print FieldCage <<EOF;
      <tube name="FieldShaperLongtube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperLongtubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperShorttube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+EOF
+
+if ($nCRM_x==8){
+
+#Create "windows" for the XArapucas in the short walls.
+print FieldCage <<EOF;
+     <tube name="FieldShaperShorttubeWindowSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="@{[$FieldCageArapucaWindowLength]}" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+     <tube name="FieldShaperShorttubeWindowNotSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="@{[0.5*($FieldShaperShortTubeLength - $FieldCageArapucaWindowLength)]}" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+
+
+    <union name="FSunionWindow1">
+      <first ref="FieldShaperShorttubeWindowSlim"/>
+      <second ref="FieldShaperShorttubeWindowNotSlim"/>
+      <position name="posFieldShaperShortTube_shift1" unit="cm" x="0" y="0" z="@{[+0.25*($FieldCageArapucaWindowLength+$FieldShaperShortTubeLength)]}"/>
+    </union>
+
+    <union name="FieldShaperShorttubeSlim">
+      <first ref="FSunionWindow1"/>
+      <second ref="FieldShaperShorttubeWindowNotSlim"/>
+      <position name="posFieldShaperShortTube_shift2" unit="cm" x="0" y="0" z="@{[-0.25*($FieldCageArapucaWindowLength+$FieldShaperShortTubeLength)]}"/>
+    </union>
+
+EOF
+} else {
+#Thick FieldShaperShorttube for the option withouth XArapucas in the short walls.
+
+print FieldCage <<EOF;
+     <tube name="FieldShaperShorttubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+
+EOF
+}
+
+print FieldCage <<EOF;
+
+
 
     <union name="FSunion1">
       <first ref="FieldShaperLongtube"/>
@@ -1294,7 +1331,7 @@ print FieldCage <<EOF;
 
     <union name="FSunionSlim2">
       <first ref="FSunionSlim1"/>
-      <second ref="FieldShaperShorttube"/>
+      <second ref="FieldShaperShorttubeSlim"/>
    		<position name="esquinapos9" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
    		<rotationref ref="rPlus90AboutY"/>
     </union>
@@ -1321,7 +1358,7 @@ print FieldCage <<EOF;
 
     <union name="FSunionSlim6">
       <first ref="FSunionSlim5"/>
-      <second ref="FieldShaperShorttube"/>
+      <second ref="FieldShaperShorttubeSlim"/>
    		<position name="esquinapos12" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
 		<rotationref ref="rPlus90AboutY"/>
     </union>
@@ -1504,10 +1541,6 @@ print CRYO <<EOF;
       <colorref ref="green"/>
     </volume>
 
-    <volume name="volArapucaShortLat">
-      <materialref ref="G10"/>
-      <solidref ref="ArapucaWalls"/>
-    </volume>
     <volume name="volOpDetSensitive">
       <materialref ref="LAr"/>
       <solidref ref="ArapucaAcceptanceWindow"/>
@@ -1542,60 +1575,6 @@ EOF
 #      <materialref ref="LAr"/>
 #      <solidref ref="ArapucaDoubleAcceptanceWindow"/>
 #    </volume>
-if ($pdsconfig == 0){  #4-pi PDS converage
-for($i=0 ; $i<$nCRM_x/2 ; $i++){ #arapucas over the cathode
-for($j=0 ; $j<$nCRM_z/2 ; $j++){
-for($p=0 ; $p<4 ; $p++){
-  print CRYO <<EOF;
-    <volume name="volArapucaDouble_$i\-$j\-$p">
-      <materialref ref="G10" />
-      <solidref ref="ArapucaWalls" />
-    </volume>
-    <volume name="volOpDetSensitive_ArapucaDouble_$i\-$j\-$p">
-      <materialref ref="LAr"/>
-      <solidref ref="ArapucaCathodeAcceptanceWindow"/>
-    </volume>
-EOF
-}
-}
-}
-}
-
-if ($nCRM_x==8){ #arapucas on the laterals
-for($j=0 ; $j<$nCRM_z/2 ; $j++){
-for($p=0 ; $p<8 ; $p++){
-  print CRYO <<EOF;
-    <volume name="volArapucaLat_$j\-$p">
-      <materialref ref="G10" />
-      <solidref ref="ArapucaWalls" />
-    </volume>
-    <volume name="volOpDetSensitive_ArapucaLat_$j\-$p">
-      <materialref ref="LAr"/>
-      <solidref ref="ArapucaAcceptanceWindow"/>
-    </volume>
-EOF
-}
-}
-}
-
-if ($pdsconfig == 1){  #Membrane PDS converage
-if ($nCRM_x==8) { #arapucas on the laterals
-for($j=0 ; $j<$nCRM_z/2 ; $j++){
-for($p=8 ; $p<18 ; $p++){
-  print CRYO <<EOF;
-    <volume name="volArapucaLat_$j\-$p">
-      <materialref ref="G10" />
-      <solidref ref="ArapucaWalls" />
-    </volume>
-    <volume name="volOpDetSensitive_ArapucaLat_$j\-$p">
-      <materialref ref="LAr"/>
-      <solidref ref="ArapucaAcceptanceWindow"/>
-    </volume>
-EOF
-}
-}
-}
-}
 
       print CRYO <<EOF;
 
@@ -1837,19 +1816,12 @@ for ($ara = 0; $ara<4; $ara++)
 
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapucaDouble_$Frame_x\-$Frame_z\-$ara"/>
+       <volumeref ref="volArapuca"/>
        <position name="posArapucaDouble$ara-Frame\-$Frame_x\-$Frame_z" unit="cm" 
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
-     </physvol>
-     <physvol>
-       <volumeref ref="volOpDetSensitive_ArapucaDouble_$Frame_x\-$Frame_z\-$ara"/>
-       <position name="posOpArapucaDouble$ara-Frame\-$Frame_x\-$Frame_z" unit="cm" 
-         x="@{[$Ara_X+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01]}"
-	 y="@{[$Ara_Y]}" 
-	 z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
 
@@ -1888,19 +1860,12 @@ for ($ara = 0; $ara<8; $ara++)
         
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapucaLat_$Lat_z\-$ara"/>
+       <volumeref ref="volArapuca"/>
        <position name="posArapuca$ara-Lat\-$Lat_z" unit="cm" 
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
        <rotationref ref="$rot"/>
-     </physvol>
-     <physvol>
-       <volumeref ref="volOpDetSensitive_ArapucaLat_$Lat_z\-$ara"/>
-       <position name="posOpArapuca$ara-Lat\-$Lat_z" unit="cm" 
-         x="@{[$Ara_X]}"
-	 y="@{[$Ara_YSens]}" 
-	 z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
         
@@ -1945,7 +1910,7 @@ sub place_OpDetsShortLateral()
     print CRYO <<EOF;
      <physvol>
        <volumeref ref="volArapuca"/>
-       <position name="posArapuca$ara-ShortLat\-$Lat_z" unit="cm" 
+       <position name="posArapuca$ara-ShortLat$FrameCenter_y" unit="cm" 
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
@@ -1989,19 +1954,12 @@ for ($ara = 0; $ara<18; $ara++)
         
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapucaLat_$Lat_z\-$ara"/>
+       <volumeref ref="volArapuca"/>
        <position name="posArapuca$ara-Lat\-$Lat_z" unit="cm" 
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
        <rotationref ref="$rot"/>
-     </physvol>
-     <physvol>
-       <volumeref ref="volOpDetSensitive_ArapucaLat_$Lat_z\-$ara"/>
-       <position name="posOpArapuca$ara-Lat\-$Lat_z" unit="cm" 
-         x="@{[$Ara_X]}"
-	 y="@{[$Ara_YSens]}" 
-	 z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
         
