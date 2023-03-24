@@ -27,7 +27,7 @@ fwdir  product_dir config_data
 
 product             version
 dunepdlegacy        v1_00_01
-duneutil            v09_69_01g01
+duneutil            v09_70_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v3_6_1
 dunedaqdataformats  v3_4_1
