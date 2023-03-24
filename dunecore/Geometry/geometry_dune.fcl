@@ -155,6 +155,19 @@ dune10kt_workspace_geo.Name: "dune10kt_v1_workspace"
 dune10kt_workspace_geo.GDML: "dune10kt_v1_workspace.gdml"
 dune10kt_workspace_geo.ROOT: "dune10kt_v1_workspace.gdml"
 
+dune10kt_1x2x2_v4_geo:      @local::dune10kt_geo
+dune10kt_1x2x2_v4_geo.Name: "dune10kt_v4_1x2x2"
+dune10kt_1x2x2_v4_geo.GDML: "dune10kt_v4_1x2x2.gdml"
+dune10kt_1x2x2_v4_geo.ROOT: "dune10kt_v4_1x2x2.gdml"
+
+dune10kt_1x2x2_v4_refactored_geo:      @local::dune10kt_1x2x2_v4_geo
+dune10kt_1x2x2_v4_refactored_geo.GDML: "dune10kt_v4_refactored_1x2x2.gdml"
+dune10kt_1x2x2_v4_refactored_geo.ROOT: "dune10kt_v4_refactored_1x2x2.gdml"
+
+dune10kt_1x2x2_geo:              @local::dune10kt_1x2x2_v4_geo
+dune10kt_1x2x2_refactored_geo:   @local::dune10kt_1x2x2_v4_refactored_geo
+
+
 dune10kt_1x2x6_v1_geo:      @local::dune10kt_geo
 dune10kt_1x2x6_v1_geo.Name: "dune10kt_v1_1x2x6"
 dune10kt_1x2x6_v1_geo.GDML: "dune10kt_v1_1x2x6.gdml"
