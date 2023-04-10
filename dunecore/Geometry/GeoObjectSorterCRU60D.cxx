@@ -157,12 +157,23 @@ namespace geo {
       if(std::abs(d1 - d2) > DistanceTol)
         return d1 < d2;
 
-      if (xyz1.Y() * xyz2.Y() < 0)
-        return xyz1.Y() < xyz2.Y();
+      if (dc == 0) {
+        if (xyz1.Y() * xyz2.Y() < 0)
+          return xyz1.Y() < xyz2.Y();
+        else {
+          if (std::abs(xyz1.Z() - xyz2.Z()) > DistanceTol )
+            return xyz1.Z() < xyz2.Z();
+          return xyz1.Y() < xyz2.Y();
+        }
+      }
       else {
-        if (std::abs(xyz1.Z() - xyz2.Z()) > DistanceTol )
-          return xyz1.Z() < xyz2.Z();
-        return xyz1.Y() < xyz2.Y();
+        if (xyz1.X() * xyz2.X() < 0)
+          return xyz1.X() > xyz2.X();
+        else {
+          if (std::abs(xyz1.Z() - xyz2.Z()) > DistanceTol )
+            return xyz1.Z() < xyz2.Z();
+          return xyz1.X() > xyz2.X();
+        }
       }
     }
 
