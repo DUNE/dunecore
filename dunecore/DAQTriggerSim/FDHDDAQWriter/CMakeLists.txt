@@ -11,7 +11,7 @@ art_make(MODULE_LIBRARIES
                         messagefacility::MF_MessageLogger
                         CETLIB
                         ROOT_BASIC_LIB_LIST
-			LIBHDF5
+			HDF5::HDF5
                         dunecore::ChannelMap_FDHDChannelMapService_service
                         BASENAME_ONLY
 )

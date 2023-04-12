@@ -98,15 +98,7 @@ find_package(FFTW3 REQUIRED EXPORT)
 find_ups_product( sqlite )
 find_ups_product( nlohmann_json )
 find_ups_product( highfive )
-
-string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
-if( ${BTYPE_UC} MATCHES "DEBUG" )
- find_library( LIBHDF5 NAMES hdf5_debug PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
-else()
- find_library( LIBHDF5 NAMES hdf5 PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
-endif()
-include_directories(${HDF5_INCLUDE_DIRS})
-
+find_package(HDF5 REQUIRED EXPORT)
 
 # Define an export set for tool support to enable simpler per-tool build
 # call.
