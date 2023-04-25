@@ -13,7 +13,7 @@ art_make(
 		    cetlib::cetlib 
 		    cetlib_except::cetlib_except
 		    ROOT_BASIC_LIB_LIST
-                    LIBHDF5
+                    HDF5::HDF5
   DICT_LIBRARIES
   #  EXCLUDE OpDetDivRec.h OpDetDivRec.cc
   )

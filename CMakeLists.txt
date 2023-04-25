@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.72.00d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.72.01d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
@@ -66,7 +66,6 @@ find_ups_product( clhep v2_1_3_0 )
 find_ups_product( dunepdlegacy )
 find_ups_product( fhiclcpp )
 find_ups_product( genie )
-find_ups_product( hdf5 v1_12_0b )
 find_ups_product( hep_concurrency )
 find_ups_product( ifdh_art )
 find_ups_product( ifdhc )
@@ -98,15 +97,7 @@ find_package(FFTW3 REQUIRED EXPORT)
 find_ups_product( sqlite )
 find_ups_product( nlohmann_json )
 find_ups_product( highfive )
-
-string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
-if( ${BTYPE_UC} MATCHES "DEBUG" )
- find_library( LIBHDF5 NAMES hdf5_debug PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
-else()
- find_library( LIBHDF5 NAMES hdf5 PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
-endif()
-include_directories(${HDF5_INCLUDE_DIRS})
-
+find_package(HDF5 REQUIRED EXPORT)
 
 # Define an export set for tool support to enable simpler per-tool build
 # call.

@@ -9,7 +9,7 @@ art_make_library(LIBRARY_NAME HDF5Utils
          art::Framework_Core
          art::Framework_Principal
          art::Framework_Services_Registry
-         LIBHDF5 
+         HDF5::HDF5
          pthread
          z
 )
