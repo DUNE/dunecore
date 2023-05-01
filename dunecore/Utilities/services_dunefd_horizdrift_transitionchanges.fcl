@@ -17,6 +17,13 @@ dunefd_1x2x6_simulation_services:               @local::dunefd_1x2x6_simulation_
 dunefd_1x2x6_reco_services_refactored:    @local::dunefd_1x2x6_reco_services
 dunefd_1x2x6_reco_services:               @local::dunefd_1x2x6_reco_services_legacy
 
+dunefd_1x2x2_services_refactored:    @local::dunefd_1x2x2_services
+
+dunefd_1x2x2_simulation_services_refactored:    @local::dunefd_1x2x2_simulation_services
+
+dunefd_1x2x2_reco_services_refactored:    @local::dunefd_1x2x2_reco_services
+
+
 dunefd_services_refactored:    @local::dunefd_services
 dunefd_services:               @local::dunefd_services_legacy
 
