@@ -2128,10 +2128,10 @@ EOF
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
       </physvol>
-      <!--physvol>
+      <physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
-      </physvol-->
+      </physvol>
 EOF
 
 print CRYO <<EOF;
@@ -3801,7 +3801,6 @@ EOF
       <materialref ref="Air"/>
       <solidref ref="DetEnclosure"/>
 
-<!--
        <physvol>
            <volumeref ref="volFoamPadding"/>
            <positionref ref="posCryoInDetEnc"/>
@@ -3850,16 +3849,13 @@ EOF
     <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
     </physvol>
     
-    -->
 EOF
 
     print ENCL <<EOF;    
-    <!--
     <physvol>
         <volumeref ref="volSteelSupport"/>
         <positionref ref="posCryoInDetEnc"/>
     </physvol>
-    -->
 
     <physvol>
        <volumeref ref="volBeamWinFoam"/>
