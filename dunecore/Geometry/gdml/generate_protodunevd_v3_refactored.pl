@@ -171,6 +171,7 @@ $lengthCathodeVoid=67.0;
 $SteelSupport_x  =  1;
 $SteelSupport_y  =  1;
 $SteelSupport_z  =  1;
+$SteelPlate      =  1.0;
 $FoamPadding     =  80;
 
 $FracMassOfSteel =  0.5; #The steel support is not a solid block, but a mixture of air and steel
@@ -235,29 +236,32 @@ $OriginXSet =  $DetEncX/2.0
 ###################################################################
 ######################## Beam Window 2 Parameters ###################
 
-$thetaYZ = 11.342;
-$theta2XZ = 8.189;
-
-$BeamTheta2 = atan (sqrt(tan(deg2rad($theta2XZ))**2 +tan(deg2rad($thetaYZ))**2));
-$BeamPhi2   = atan (tan(deg2rad($thetaYZ))/tan(deg2rad($theta2XZ)));
-
-$thetaYZprime = rad2deg(atan(sin($BeamTheta2)*sin($BeamPhi2+deg2rad(180))/sqrt(cos($BeamTheta2)**2 + sin($BeamTheta2)**2*cos($BeamPhi2)**2)));
-
-print "thetaYZprime =".$thetaYZprime."\n";
-
-$DeltaXZ2      = tan($BeamTheta2)*cos($BeamPhi2);
-$DeltaYZ2      = tan($BeamTheta2)*sin($BeamPhi2);
-
-print "DeltaXZ2 = ".$DeltaXZ2."\n";
-print "DeltaYZ2 = ".$DeltaYZ2."\n";
-
-$BeamTheta2Deg	= rad2deg($BeamTheta2);
-$BeamPhi2Deg	= rad2deg($BeamPhi2);	
+# $thetaYZ = 11.342;
+# $theta2XZ = 8.189;
+# 
+# $BeamTheta2 = atan (sqrt(tan(deg2rad($theta2XZ))**2 +tan(deg2rad($thetaYZ))**2));
+# $BeamPhi2   = atan (tan(deg2rad($thetaYZ))/tan(deg2rad($theta2XZ)));
+# 
+# $thetaYZprime = rad2deg(atan(sin($BeamTheta2)*sin($BeamPhi2+deg2rad(180))/sqrt(cos($BeamTheta2)**2 + sin($BeamTheta2)**2*cos($BeamPhi2)**2)));
+# 
+# print "thetaYZprime =".$thetaYZprime."\n";
+# 
+# $DeltaXZ2      = tan($BeamTheta2)*cos($BeamPhi2);
+# $DeltaYZ2      = tan($BeamTheta2)*sin($BeamPhi2);
+# 
+# print "DeltaXZ2 = ".$DeltaXZ2."\n";
+# print "DeltaYZ2 = ".$DeltaYZ2."\n";
+# 
+# $BeamTheta2Deg	= rad2deg($BeamTheta2);
+# $BeamPhi2Deg	= rad2deg($BeamPhi2);	
 
 ######################### Beam Window 3 Parameters ###################
 
-$thetaYZ  = 11.671;
-$theta3XZ = 10.578;
+# $thetaYZ  = 11.671;
+# $theta3XZ = 10.578;
+
+$thetaYZ  = 45.0;
+$theta3XZ = 7.7;
 
 #######   Version 1 #####################################################
 #### $thetaYZ  = 11.342;
@@ -266,16 +270,17 @@ $theta3XZ = 10.578;
 $BeamTheta3 = atan (sqrt(tan(deg2rad($theta3XZ))**2 +tan(deg2rad($thetaYZ))**2));
 $BeamPhi3   = atan (tan(deg2rad($thetaYZ))/tan(deg2rad($theta3XZ)));
 
-print "BeamTheta3 = ".$BeamTheta3."\n";
-print "BeamPhi3 = ".$BeamPhi3."\n";
-
+print "BeamTheta3 = ".rad2deg($BeamTheta3)."\n";
+print "BeamPhi3 = ".rad2deg($BeamPhi3)."\n";
 
 $thetaYZ3prime = rad2deg(atan(sin($BeamTheta3)*sin($BeamPhi3+deg2rad(180))/sqrt(cos($BeamTheta3)**2 + sin($BeamTheta3)**2*cos($BeamPhi3)**2)));
 
-print "thetaYZ3prime =".$thetaYZ3prime."\n";
+print "thetaYZ3prime =".rad2deg($thetaYZ3prime)."\n";
 
 $DeltaXZ3      = tan($BeamTheta3)*cos($BeamPhi3);
 $DeltaYZ3      = tan($BeamTheta3)*sin($BeamPhi3);
+print "DeltaXZ3 =".$DeltaXZ3."\n";
+print "DeltaYZ3 =".$DeltaYZ3."\n";
 
 $BeamPipeRad      =   12.5;
 $BeamVaPipeRad    =   $BeamPipeRad - 0.2;
@@ -283,44 +288,43 @@ $BeamPipeLe       =   900.0;
 $BeamVaPipeLe     =   $BeamPipeLe;
 $BeamWFoLe        =   52.0;
 $BeamWGlLe        =   10.0;
-$BeamWStPlateFF_x = - 44.0;
-#$BeamWStPlateFF_x = - 41.0;
-$BeamWStPlateFF_y =  125.7;
+$BeamWStPlateFF_x = 200.0;
+$BeamWStPlateFF_y =  450.0;
 $BeamWStPlateFF_z =  - ($Cryostat_z/2 + $FoamPadding + $SteelPlate);
-print "BeamWStPlateFF_z = ".$BeamWStPlateFF_z."\n";
-#$BeamWStPlateFF_z = -508.4; 
 
 $BeamWStPlateLe   = $SteelPlate/cos($BeamTheta3)+0.001;
-$BeamWStPlate_x   = $BeamWStPlateFF_x - ($SteelPlate/2)*$DeltaXZ3;
-$BeamWStPlate_y   = $BeamWStPlateFF_y - ($SteelPlate/2)*$DeltaYZ3;
-$BeamWStPlate_z   = $BeamWStPlateFF_z + $SteelPlate/2;
+$BeamWStPlate_x   = $BeamWStPlateFF_x - ($SteelPlate/2.0)*$DeltaXZ3;
+$BeamWStPlate_y   = $BeamWStPlateFF_y - ($SteelPlate/2.0)*$DeltaYZ3;
+$BeamWStPlate_z   = $BeamWStPlateFF_z + $SteelPlate/2.0;
 
 $BeamWFoRemLe     = $FoamPadding/cos($BeamTheta3)+0.001;
-$BeamWFoRemPosDZ  = $SteelPlate + $FoamPadding/2;
+$BeamWFoRemPosDZ  = $SteelPlate + $FoamPadding/2.0;
 $BeamWFoRem_x     = $BeamWStPlateFF_x - $BeamWFoRemPosDZ*$DeltaXZ3;
 $BeamWFoRem_y     = $BeamWStPlateFF_y - $BeamWFoRemPosDZ*$DeltaYZ3;
 $BeamWFoRem_z     = $BeamWStPlateFF_z + $BeamWFoRemPosDZ;
 
 $BeamWStSuLe      = ($SteelSupport_z - $SteelPlate)/cos($BeamTheta3)+0.001;
-$BeamWStSuPosDZ   = - ($SteelSupport_z - $SteelPlate)/2;   # going upstream from the steel plate 
+$BeamWStSuPosDZ   = - ($SteelSupport_z - $SteelPlate)/2.0;   # going upstream from the steel plate 
 $BeamWStSu_x      = $BeamWStPlateFF_x - $BeamWStSuPosDZ*$DeltaXZ3;
 $BeamWStSu_y      = $BeamWStPlateFF_y - $BeamWStSuPosDZ*$DeltaYZ3;
 $BeamWStSu_z      = $BeamWStPlateFF_z + $BeamWStSuPosDZ;
 
-$BeamWFoPosDZ     = $SteelPlate + $FoamPadding - $BeamWFoLe*cos($BeamTheta3)/2;
+$BeamWFoPosDZ     = $SteelPlate + $FoamPadding - $BeamWFoLe*cos($BeamTheta3)/2.0;
 $BeamWFo_x        = $BeamWStPlateFF_x - $BeamWFoPosDZ*$DeltaXZ3;
 $BeamWFo_y        = $BeamWStPlateFF_y - $BeamWFoPosDZ*$DeltaYZ3 + $posCryoInDetEnc_y;
 $BeamWFo_z        = $BeamWStPlateFF_z + $BeamWFoPosDZ;
+print "BeamWFoPosDZ = ".$BeamWFoPosDZ."\n";
 
-$BeamWGlPosDZ     = $SteelPlate + $FoamPadding - ($BeamWFoLe + $BeamWGlLe/2)*cos($BeamTheta3);
+$BeamWGlPosDZ     = $SteelPlate + $FoamPadding - ($BeamWFoLe + $BeamWGlLe/2.0)*cos($BeamTheta3);
 $BeamWGl_x        = $BeamWStPlateFF_x - $BeamWGlPosDZ*$DeltaXZ3;
 $BeamWGl_y        = $BeamWStPlateFF_y - $BeamWGlPosDZ*$DeltaYZ3 + $posCryoInDetEnc_y;
 $BeamWGl_z        = $BeamWStPlateFF_z + $BeamWGlPosDZ;
 
-$BeamWVaPosDZ     = $SteelPlate + $FoamPadding - ($BeamWFoLe + $BeamWGlLe + $BeamPipeLe/2)*cos($BeamTheta3);
+$BeamWVaPosDZ     = $SteelPlate + $FoamPadding - ($BeamWFoLe + $BeamWGlLe + $BeamPipeLe/2.0)*cos($BeamTheta3);
 $BeamWVa_x        = $BeamWStPlateFF_x - $BeamWVaPosDZ*$DeltaXZ3; 
 $BeamWVa_y        = $BeamWStPlateFF_y - $BeamWVaPosDZ*$DeltaYZ3 + $posCryoInDetEnc_y;
 $BeamWVa_z        = $BeamWStPlateFF_z + $BeamWVaPosDZ;
+print "BeamWVaPosDZ = ".$BeamWVaPosDZ."\n";
 
 $BeamPlugRad      = 10.48;
 $BeamPlugNiRad    = 9.72;
@@ -368,7 +372,7 @@ $BWFFCoord3Y   =       $BeamWStPlateFF_y - $BeamWStSuPosDZ*$DeltaYZ3*2
                     +  $OriginYSet + $posCryoInDetEnc_y;   
 $BWFFCoord3Z   =    -  ($Cryostat_z/2 + $SteelSupport_z + $FoamPadding)
                     +  $OriginZSet;
-print "BeamWStPlateFF_x=".$BeamWStPlateFF_x.", BeamWStPlateFF_y=".$BeamWStPlateFF_y."\n";
+print "BeamWStPlateFF_x=".$BeamWStPlateFF_x.", BeamWStPlateFF_y=".$BeamWStPlateFF_y.", BeamWStPlateFF_z = ".$BeamWStPlateFF_z."\n";
 print "BeamWStSuPosDZ= $BeamWStSuPosDZ; "." DeltaYZ3=".$DeltaYZ3."\n";
 print "BWFFCoord3X =".$BWFFCoord3X."\n";
 print "BWFFCoord3Y =".$BWFFCoord3Y."\n";
@@ -385,14 +389,17 @@ print "BW3StPlCoordZ =".$BW3StPlCoordZ."\n";
 ##################################################################
 ####################### PD2 Beam Plug ############################
 
-$thetaIIYZ  = 11.671;
-$thetaII3XZ = 10.578;
+# $thetaIIYZ  = 11.671;
+# $thetaII3XZ = 10.578;
+
+$thetaIIYZ  = 45;
+$thetaII3XZ = 7.7;
 
 $BeamThetaII3 = atan (sqrt(tan(deg2rad($thetaII3XZ))**2 +tan(deg2rad($thetaIIYZ))**2));
 $BeamPhiII3   = atan (tan(deg2rad($thetaIIYZ))/tan(deg2rad($thetaII3XZ)));
 
-print "BeamThetaII3 = ".$BeamThetaII3."\n";
-print "BeamPhiII3 = ".$BeamPhiII3."\n";
+print "BeamThetaII3 = ".rad2deg($BeamThetaII3)."\n";
+print "BeamPhiII3 = ".rad2deg($BeamPhiII3)."\n";
 
 
 $thetaIIYZ3prime = rad2deg(atan(sin($BeamThetaII3)*sin($BeamPhiII3+deg2rad(180))/sqrt(cos($BeamThetaII3)**2 + sin($BeamThetaII3)**2*cos($BeamPhiII3)**2)));
@@ -404,25 +411,26 @@ $DeltaIIYZ3      = tan($BeamThetaII3)*sin($BeamPhiII3);
 print "DeltaIIXZ3 = ".$DeltaIIXZ3."\n";
 print "DeltaIIYZ3 = ".$DeltaIIYZ3."\n";
 
-$BeamPlIIMem_x	 = - 59.42;
-$BeamPlIIMem_y	 =  108.96; 
-$BeamPlIIMem_z	 = -427.28;
+$BeamPlIIMem_x	 = $BeamPlugMemb_x;
+$BeamPlIIMem_y	 = $BeamPlugMemb_y;
+$BeamPlIIMem_z	 = $BeamPlugMemb_z;
 
 $BeamPlIIRad      = 11*$inch/2;
 $BeamPlIINiRad    = 10*$inch/2;;
 $BeamPlIIUSAr     = 1/cos($BeamThetaII3); # 1 cm US LAr layer between beam plug and primary membrane
-$BeamPlIILe       = (200)/cos($BeamThetaII3); #with current geometry and 49.22 Dz the flange's front face just touches the active volume.
+$BeamPlIILe       = ($zLArBuffer)/cos($BeamThetaII3); #with current geometry and 49.22 Dz the flange's front face just touches the active volume.
+print "BeamPlIILe = ".$BeamPlIILe."\n";
 $BeamPlIINiLe     = $BeamPlIILe;
 $BeamPlIICapDZ    = 0.5*cos($BeamThetaII3);
  
-$BeamPlIIPosDZ    = $BeamPlIICapDZ + $BeamPlIILe*cos($BeamThetaII3)/2;
+$BeamPlIIPosDZ    = $BeamPlIICapDZ + $BeamPlIILe*cos($BeamThetaII3)/2.0;
 $BeamPlII_x       = $BeamPlIIMem_x - $BeamPlIIPosDZ*$DeltaIIXZ3;
 $BeamPlII_y       = $BeamPlIIMem_y - $BeamPlIIPosDZ*$DeltaIIYZ3;
 $BeamPlII_z       = $BeamPlIIMem_z + $BeamPlIIPosDZ;
 
-$BeamPlIIUSCap_x  = $BeamPlIIMem_x - $BeamPlIICapDZ/2*$DeltaIIXZ3;
-$BeamPlIIUSCap_y  = $BeamPlIIMem_y - $BeamPlIICapDZ/2*$DeltaIIYZ3;
-$BeamPlIIUSCap_z  = $BeamPlIIMem_z + $BeamPlIICapDZ/2;
+$BeamPlIIUSCap_x  = $BeamPlIIMem_x - $BeamPlIICapDZ/2.0*$DeltaIIXZ3;
+$BeamPlIIUSCap_y  = $BeamPlIIMem_y - $BeamPlIICapDZ/2.0*$DeltaIIYZ3;
+$BeamPlIIUSCap_z  = $BeamPlIIMem_z + $BeamPlIICapDZ/2.0;
 
 $BeamPlIIDSPosDZ  = $BeamPlIICapDZ + $BeamPlIILe*cos($BeamThetaII3) + $BeamPlIICapDZ/2;
 $BeamPlIIDSCap_x  = $BeamPlIIMem_x - $BeamPlIIDSPosDZ*$DeltaIIXZ3;
@@ -792,8 +800,6 @@ print DEF <<EOF;
 <?xml version='1.0'?>
 <gdml>
 <define>
-<!--
--->
    <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/>
    <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
    <rotation name="rPlus45AboutX"       unit="deg" x="45" y="0" z="0"/>
@@ -814,12 +820,14 @@ print DEF <<EOF;
    <rotation name="rot08"      unit="deg" x="0" y="270" z="270"/>
    <rotation name="rot06"      unit="deg" x="180" y="270" z="0"/>
    <rotation name="rot05"      unit="deg" x="180" y="90" z="0"/>
-   <position name="posBeamWAr3"         unit="cm" x="$BeamPlug_x" y="$BeamPlug_y" z="$BeamPlug_z"/>
+   <!--position name="posBeamWAr3"         unit="cm" x="$BeamPlug_x" y="$BeamPlug_y" z="$BeamPlug_z"/>
    <rotation name="rBeamW2"             unit="deg" x="0" y="-$BeamTheta2Deg" z="$BeamPhi2Deg"/>
-   <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/>
+   <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/-->
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
-   <rotation name="rBeamWRev3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
+   <!--rotation name="rBeamWRev3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
+   <rotation name="rBeamPlII3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/-->
+   <rotation name="rBeamWRev3"          unit="deg" x="-45.0" y="7.7" z="0"/>
+   <rotation name="rBeamPlII3"          unit="deg" x="-45.0" y="7.7" z="0"/>
 </define>
 </gdml>
 EOF
@@ -2120,10 +2128,10 @@ EOF
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
       </physvol>
-      <physvol>
+      <!--physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
-      </physvol>
+      </physvol-->
 EOF
 
 print CRYO <<EOF;
@@ -3793,6 +3801,7 @@ EOF
       <materialref ref="Air"/>
       <solidref ref="DetEnclosure"/>
 
+<!--
        <physvol>
            <volumeref ref="volFoamPadding"/>
            <positionref ref="posCryoInDetEnc"/>
@@ -3841,13 +3850,16 @@ EOF
     <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
     </physvol>
     
+    -->
 EOF
 
     print ENCL <<EOF;    
+    <!--
     <physvol>
         <volumeref ref="volSteelSupport"/>
         <positionref ref="posCryoInDetEnc"/>
     </physvol>
+    -->
 
     <physvol>
        <volumeref ref="volBeamWinFoam"/>
