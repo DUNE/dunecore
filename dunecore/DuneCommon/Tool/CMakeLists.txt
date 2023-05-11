@@ -99,6 +99,16 @@ cet_build_plugin(BlockIndexMapTool  art::tool
                 ROOT_BASIC_LIB_LIST
              )
 
+cet_build_plugin(TextIndexMapTool  art::tool
+                dunecore_DuneCommon_Utility
+                art::Framework_Services_Registry
+                art::Utilities
+                canvas::canvas
+                cetlib::cetlib
+                cetlib_except::cetlib_except
+                ROOT_BASIC_LIB_LIST
+             )
+
 cet_build_plugin(DuneRunToolRedirector  art::tool
                 dunecore_DuneCommon_Utility
                 art::Framework_Services_Registry
