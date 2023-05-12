@@ -288,9 +288,9 @@ $BeamPipeLe       =   900.0;
 $BeamVaPipeLe     =   $BeamPipeLe;
 $BeamWFoLe        =   52.0;
 $BeamWGlLe        =   10.0;
-$BeamWStPlateFF_x = 200.0;
-$BeamWStPlateFF_y =  450.0;
-$BeamWStPlateFF_z =  - ($Cryostat_z/2 + $FoamPadding + $SteelPlate);
+$BeamWStPlateFF_x =   634.2 - $Cryostat_x / 2.0;
+$BeamWStPlateFF_y =   $Cryostat_y / 2.0 + $SteelSupport_y + $FoamPadding;
+$BeamWStPlateFF_z =   - ($Cryostat_z/2 + $FoamPadding + $SteelPlate);
 
 $BeamWStPlateLe   = $SteelPlate/cos($BeamTheta3)+0.001;
 $BeamWStPlate_x   = $BeamWStPlateFF_x - ($SteelPlate/2.0)*$DeltaXZ3;
@@ -392,8 +392,8 @@ print "BW3StPlCoordZ =".$BW3StPlCoordZ."\n";
 # $thetaIIYZ  = 11.671;
 # $thetaII3XZ = 10.578;
 
-$thetaIIYZ  = 45;
-$thetaII3XZ = 7.7;
+$thetaIIYZ  = $thetaYZ;
+$thetaII3XZ = $theta3XZ;
 
 $BeamThetaII3 = atan (sqrt(tan(deg2rad($thetaII3XZ))**2 +tan(deg2rad($thetaIIYZ))**2));
 $BeamPhiII3   = atan (tan(deg2rad($thetaIIYZ))/tan(deg2rad($thetaII3XZ)));
@@ -826,8 +826,8 @@ print DEF <<EOF;
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
    <!--rotation name="rBeamWRev3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
    <rotation name="rBeamPlII3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/-->
-   <rotation name="rBeamWRev3"          unit="deg" x="-45.0" y="7.7" z="0"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-45.0" y="7.7" z="0"/>
+   <rotation name="rBeamWRev3"          unit="deg" x="-$thetaYZ" y="$theta3XZ" z="0"/>
+   <rotation name="rBeamPlII3"          unit="deg" x="-$thetaYZ" y="$theta3XZ" z="0"/>
 </define>
 </gdml>
 EOF
@@ -2613,8 +2613,8 @@ print ENCL <<EOF;
 
     <subtraction name="SteelSupport">
       <first ref="SteelSupportNoBW"/>
-      <second ref="BeamWindowStSu"/>
-      <position name="posBWStSu" x="$BeamWStSu_x" y="$BeamWStSu" z="$BeamWStSu_z" unit="cm"/>
+      <second ref="BeamWindowStPlate"/>
+      <position name="posBWStPl" x="$BeamWStPlate_x" y="$BeamWStPlate_y" z="$BeamWStPlate_z" unit="cm"/>
       <rotationref ref="rBeamW3"/>
     </subtraction>
 
