@@ -13,10 +13,9 @@ dunefd_properties.LoadExtraMatProperties: true
 dunefd_properties.ScintYield: 24000
 dunefd_properties.ScintPreScale: 0.05
 dunefd_properties.EnableCerenkovLight: false
-
+dunefd_properties.ScintYieldRatio: 0.23
 
 dunefdvd_properties:                 @local::dunefd_properties
-dunefdvd_properties.ScintYieldRatio: 0.23
 
 dunefddphase_properties:             @local::standard_properties
 
