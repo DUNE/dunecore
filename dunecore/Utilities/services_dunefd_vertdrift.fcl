@@ -28,6 +28,7 @@ dunefdvd_simulation_services: {
     LArPropertiesService:      @local::dunefdvd_properties
     LArG4Parameters:           @local::dunefdvd_largeantparameters
     LArPropertiesService:      @local::dunefdvd_properties
+    LArG4Parameters:           @local::dunefdvd_largeantparameters
 }
 
 dunefdvd_reco_services: {
