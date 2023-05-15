@@ -7,6 +7,13 @@ dune35t_properties:                  @local::standard_properties
 dunefd_properties:                   @local::standard_properties
 # Load TPB properties for photon simulation
 dunefd_properties.LoadExtraMatProperties: true 
+# Settings for optical simulation in the FD. Optical simulation not on by default
+# for FD, turned on by custom physics list and defining a photon visibility
+# services is workspace g4 fhicl file.
+dunefd_properties.ScintYield: 24000
+dunefd_properties.ScintPreScale: 0.05
+dunefd_properties.EnableCerenkovLight: false
+
 
 dunefdvd_properties:                 @local::dunefd_properties
 dunefdvd_properties.UseModLarqlRecomb: true
