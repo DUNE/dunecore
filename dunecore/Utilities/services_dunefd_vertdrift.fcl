@@ -14,6 +14,7 @@ dunefdvd_services: {
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     ChannelGroupService:       @erase
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
+    LArPropertiesService:      @local::dunefdvd_properties
 }
 
 dunefdvd_simulation_services: {
@@ -24,8 +25,8 @@ dunefdvd_simulation_services: {
     ParticleListAction:        @local::dunefdvd_particle_list_action
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
     PhotonVisibilityService:   @local::dune10kt_vd_photonvisibilityservice_ArXe # The PhotonVisibilityService is used for the hybrid model for light simulation. 
+    LArPropertiesService:      @local::dunefdvd_properties
 }
-dunefdvd_simulation_services.LArPropertiesService.ScintYieldRatio: 0.23   
 
 dunefdvd_reco_services: {
     @table::dunefd_reco_services
@@ -33,6 +34,7 @@ dunefdvd_reco_services: {
     DetectorClocksService:     @local::dunefdvd_detectorclocks
     Geometry:                  @local::dunevd10kt_geo
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
+    LArPropertiesService:      @local::dunefdvd_properties
 }
 
 END_PROLOG
