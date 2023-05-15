@@ -26,6 +26,7 @@ dunefdvd_simulation_services: {
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
     PhotonVisibilityService:   @local::dune10kt_vd_photonvisibilityservice_ArXe # The PhotonVisibilityService is used for the hybrid model for light simulation. 
     LArPropertiesService:      @local::dunefdvd_properties
+    LArG4Parameters:           @local::dunefdvd_largeantparameters
 }
 
 dunefdvd_reco_services: {
