@@ -8,6 +8,10 @@ dunefd_properties:                   @local::standard_properties
 # Load TPB properties for photon simulation
 dunefd_properties.LoadExtraMatProperties: true 
 
+dunefdvd_properties:                 @local::dunefd_properties
+dunefdvd_properties.UseModLarqlRecomb: true
+dunefdvd_properties.ScintYieldRatio: 0.23
+
 dunefddphase_properties:             @local::standard_properties
 
 END_PROLOG
