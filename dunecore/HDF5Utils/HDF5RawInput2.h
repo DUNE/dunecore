@@ -6,7 +6,7 @@
 #include "art/Framework/Core/InputSourceMacros.h" 
 #include "art/Framework/IO/Sources/Source.h" 
 #include "art/Framework/IO/Sources/SourceTraits.h"
-#include "art/Framework/Core/Frameworkfwd.h"
+#include "art/Framework/Core/fwd.h"
 #include "art/Framework/Core/FileBlock.h"
 #include "art/Framework/Core/ProductRegistryHelper.h"
 #include "art/Framework/IO/Sources/SourceHelper.h"

@@ -31,7 +31,7 @@ const StringVector& StringManipulator::split(string seps, bool fullSplit) {
   // Split.
   string word;
   bool isSep = false;
-  for ( char ch : m_str ) {
+  for ( char ch : str ) {
     isSep = ch == csep;
     if ( isSep ) {
       if ( fullSplit || word.size() ) {

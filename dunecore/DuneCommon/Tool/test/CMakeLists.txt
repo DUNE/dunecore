@@ -149,6 +149,20 @@ cet_test(test_BlockIndexMapTool SOURCES test_BlockIndexMapTool.cxx
     Boost::filesystem
 )
 
+cet_test(test_TextIndexMapTool SOURCES test_TextIndexMapTool.cxx
+  LIBRARIES
+    dunecore_ArtSupport
+    dunecore_DuneCommon_Utility
+    art::Utilities
+    canvas::canvas
+    fhiclcpp::fhiclcpp
+    cetlib::cetlib
+    cetlib_except::cetlib_except
+    ROOT_BASIC_LIB_LIST
+    SQLITE3
+    Boost::filesystem
+)
+
 cet_test(test_DuneRunToolRedirector SOURCES test_DuneRunToolRedirector.cxx
   LIBRARIES
     dunecore_DuneCommon_Utility

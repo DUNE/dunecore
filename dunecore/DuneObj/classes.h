@@ -22,6 +22,12 @@
 #include "dunecore/DuneObj/RDStatus.h"
 #include "dunecore/DuneObj/DUNEHDF5FileInfo.h"
 #include "dunecore/DuneObj/DUNEHDF5FileInfo2.h"
+
+#include "daqdataformats/v3_4_1/SourceID.hpp"
+#include "detdataformats/trigger/TriggerPrimitive.hpp"
+#include "detdataformats/trigger/TriggerActivityData.hpp"
+#include "detdataformats/trigger/TriggerCandidateData.hpp"
+
 #include <vector>
 #include <map>
 //#include <array>

@@ -4,7 +4,7 @@ art_make(
 	 cetlib::cetlib
          cetlib_except::cetlib_except
          messagefacility::MF_MessageLogger
-         LIBHDF5 
+         HDF5::HDF5
          pthread
          z
 )

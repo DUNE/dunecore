@@ -410,7 +410,8 @@ inline void AdcChannelData::clear() {
 
 //**********************************************************************
 
-inline void AdcChannelData::roisFromSignal() {
+inline
+void AdcChannelData::roisFromSignal() {
   rois.clear();
   bool inRoi = false;
   for ( unsigned int isig=0; isig<signal.size(); ++isig ) {
@@ -429,6 +430,7 @@ inline void AdcChannelData::roisFromSignal() {
 
 //**********************************************************************
 
+inline
 AdcChannelData::NameVector AdcChannelData::viewNames() const {
   NameVector vnams;
   for ( ViewMap::value_type ivie : m_views ) {
@@ -439,6 +441,7 @@ AdcChannelData::NameVector AdcChannelData::viewNames() const {
 
 //**********************************************************************
 
+inline
 bool AdcChannelData::hasView(Name vpnam) const {
   if ( vpnam.size() == 0 ) return true;
   Name::size_type ipos = vpnam.find("/");
@@ -454,6 +457,7 @@ bool AdcChannelData::hasView(Name vpnam) const {
 
 //**********************************************************************
 
+inline
 const AdcChannelData::View& AdcChannelData::view(Name vnam) const {
   static const View empty;
   ViewMap::const_iterator ivie = m_views.find(vnam);
@@ -463,6 +467,7 @@ const AdcChannelData::View& AdcChannelData::view(Name vnam) const {
  
 //**********************************************************************
 
+inline
 AdcChannelData::View& AdcChannelData::updateView(Name vnam) {
   const Name myname = "AdcChannelData::updateView: ";
   if ( vnam.size() == 0 ) {
@@ -478,6 +483,7 @@ AdcChannelData::View& AdcChannelData::updateView(Name vnam) {
 
 //**********************************************************************
 
+inline
 AdcIndex AdcChannelData::viewSize(Name vpnam) const {
   if ( vpnam.size() == 0 ) return 1;
   Name::size_type ipos = vpnam.find("/");
@@ -491,6 +497,7 @@ AdcIndex AdcChannelData::viewSize(Name vpnam) const {
 
 //**********************************************************************
 
+inline
 const AdcChannelData* AdcChannelData::viewEntry(Name vpnam, AdcIndex ient) const {
   if ( vpnam.size() == 0 ) {
     if ( ient == 0 ) return this;
@@ -515,6 +522,7 @@ const AdcChannelData* AdcChannelData::viewEntry(Name vpnam, AdcIndex ient) const
   
 //**********************************************************************
 
+inline
 AdcChannelData* AdcChannelData::mutableViewEntry(Name vpnam, AdcIndex ient) {
   if ( vpnam.size() == 0 ) {
     if ( ient == 0 ) return this;
