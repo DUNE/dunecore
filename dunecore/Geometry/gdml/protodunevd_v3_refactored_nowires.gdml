@@ -1137,6 +1137,9 @@
     <volume name="volBeamPlIINi">
       <materialref ref="NiGas1atm80K"/>
       <solidref ref="BeamPlIIIn"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
     </volume>
     <volume name="volBeamPlIIMod">
       <materialref ref="G10"/>
