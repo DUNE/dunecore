@@ -178,8 +178,8 @@ $FracMassOfSteel =  0.5; #The steel support is not a solid block, but a mixture 
 $FracMassOfAir   =  1 - $FracMassOfSteel;
 
 
-$SpaceSteelSupportToWall    = 900;
-$SpaceSteelSupportToCeiling = 900;
+$SpaceSteelSupportToWall    = 1500; # 900;
+$SpaceSteelSupportToCeiling = 1500; # 900;
 
 #TO DO: Whole outside structure has to be x--> Y and Y-->X
 $DetEncX   =   $Cryostat_x + 2*($SteelSupport_x + $FoamPadding) + 2*$SpaceSteelSupportToWall;
@@ -418,7 +418,7 @@ $BeamPlIIMem_z	 = $BeamPlugMemb_z;
 $BeamPlIIRad      = 11*$inch/2;
 $BeamPlIINiRad    = 10*$inch/2;;
 $BeamPlIIUSAr     = 1/cos($BeamThetaII3); # 1 cm US LAr layer between beam plug and primary membrane
-$BeamPlIILe       = ($zLArBuffer)/cos($BeamThetaII3); #with current geometry and 49.22 Dz the flange's front face just touches the active volume.
+$BeamPlIILe       = ($zLArBuffer - 5.3)/cos($BeamThetaII3); #with current geometry and 49.22 Dz the flange's front face just touches the active volume.
 print "BeamPlIILe = ".$BeamPlIILe."\n";
 $BeamPlIINiLe     = $BeamPlIILe;
 $BeamPlIICapDZ    = 0.5*cos($BeamThetaII3);
@@ -824,10 +824,8 @@ print DEF <<EOF;
    <rotation name="rBeamW2"             unit="deg" x="0" y="-$BeamTheta2Deg" z="$BeamPhi2Deg"/>
    <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/-->
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
-   <!--rotation name="rBeamWRev3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/-->
-   <rotation name="rBeamWRev3"          unit="deg" x="-$thetaYZ" y="$theta3XZ" z="0"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-$thetaYZ" y="$theta3XZ" z="0"/>
+   <rotation name="rBeamWRev3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
+   <rotation name="rBeamPlII3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
 </define>
 </gdml>
 EOF
@@ -1977,11 +1975,12 @@ EOF
 
 print CRYO <<EOF;
 
-    <cutTube name="BeamPlIIOut" rmin="0" rmax="$BeamPlIIRad" z="$BeamPlIILe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPlIIIn" rmin="0" rmax="$BeamPlIINiRad" z="$BeamPlIILe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPlIIOut" rmin="0" rmax="$BeamPlIIRad" z="$BeamPlIILe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPlIICap" rmin="0" rmax="$BeamPlIIRad" z="0.5" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPlIIIn" rmin="0" rmax="$BeamPlIINiRad" z="$BeamPlIILe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
+
+    <cutTube name="BeamPlIICap" rmin="0" rmax="$BeamPlIIRad" z="0.5" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
     <box name="ArgonInterior" lunit="cm" 
       x="$Argon_x"
@@ -2063,6 +2062,9 @@ print CRYO <<EOF;
     <volume name="volBeamPlIINi">
       <materialref ref="NiGas1atm80K"/>
       <solidref ref="BeamPlIIIn"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
     </volume>
     <volume name="volBeamPlIIMod">
       <materialref ref="G10"/>
@@ -2128,6 +2130,7 @@ EOF
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
@@ -2135,23 +2138,23 @@ EOF
 EOF
 
 print CRYO <<EOF;
-
       <physvol>
         <volumeref ref="volBeamPlIIMod"/>
         <position name="posBeamPlII3" unit="cm" x="$BeamPlII_x" y="$BeamPlII_y" z="$BeamPlII_z"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volBeamPlIIUSCap"/>
         <position name="posBeamPlUSII3" unit="cm" x="$BeamPlIIUSCap_x" y="$BeamPlIIUSCap_y" z="$BeamPlIIUSCap_z"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volBeamPlIIDSCap"/>
         <position name="posBeamPlDSII3" unit="cm" x="$BeamPlIIDSCap_x" y="$BeamPlIIDSCap_y" z="$BeamPlIIDSCap_z"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
-
 EOF
 print "Beam Plug position x=".$BePlFlange_x." y=".$BePlFlange_y." z=".$BePlFlange_z."\n";
 
@@ -2564,21 +2567,19 @@ print ENCL <<EOF;
       <positionref ref="posCenter"/>
     </subtraction-->
 
+    <cutTube name="BeamWindowFoam" rmin="0" rmax="$BeamPipeRad" z="$BeamWFoLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowFoam" rmin="0" rmax="$BeamPipeRad" z="$BeamWFoLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowGlassWool" rmin="0" rmax="$BeamPipeRad" z="$BeamWGlLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowGlassWool" rmin="0" rmax="$BeamPipeRad" z="$BeamWGlLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPipe" rmin="0" rmax="$BeamPipeRad" z="$BeamPipeLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPipe" rmin="0" rmax="$BeamPipeRad" z="$BeamPipeLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPipeVacuum" rmin="0" rmax="$BeamVaPipeRad" z="$BeamVaPipeLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPipeVacuum" rmin="0" rmax="$BeamVaPipeRad" z="$BeamVaPipeLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowStPlate" rmin="0" rmax="$BeamPipeRad" z="$BeamWStPlateLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowStPlate" rmin="0" rmax="$BeamPipeRad" z="$BeamWStPlateLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowFoamRem" rmin="0" rmax="$BeamPipeRad" z="$BeamWFoRemLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowFoamRem" rmin="0" rmax="$BeamPipeRad" z="$BeamWFoRemLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
-
-    <cutTube name="BeamWindowStSu" rmin="0" rmax="$BeamPipeRad" z="$BeamWStSuLe" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
-
+    <cutTube name="BeamWindowStSu" rmin="0" rmax="$BeamPipeRad" z="$BeamWStSuLe" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
     <!--subtraction name="SteelPlate">
       <first ref="SteelPlateNoBW"/>
@@ -3865,6 +3866,7 @@ EOF
          z="$BeamWFo_z"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
+
     <physvol>
        <volumeref ref="volBeamWinGlassWool"/>
        <position name="posBeamWinGlassWool" unit="cm"
@@ -3873,6 +3875,7 @@ EOF
          z="$BeamWGl_z"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
+
     <physvol>
        <volumeref ref="volBeamPipe"/>
        <position name="posBeamPipe" unit="cm"
@@ -3881,7 +3884,7 @@ EOF
          z="$BeamWVa_z"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
-    
+
     <physvol>
            <volumeref ref="volCryostat"/>
            <positionref ref="posCryoInDetEnc"/>

@@ -36,10 +36,8 @@
    <rotation name="rBeamW2"             unit="deg" x="0" y="-" z=""/>
    <rotation name="rBeamWRev2"          unit="deg" x="-11.342" y="8.03118195044" z="-55.1415281209"/-->
    <rotation name="rBeamW3"             unit="deg" x="0" y="-45.2594803759" z="82.3"/>
-   <!--rotation name="rBeamWRev3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-11.671" y="10.3640909807" z="-48.9461923604"/-->
-   <rotation name="rBeamWRev3"          unit="deg" x="-45" y="7.7" z="0"/>
-   <rotation name="rBeamPlII3"          unit="deg" x="-45" y="7.7" z="0"/>
+   <rotation name="rBeamWRev3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
+   <rotation name="rBeamPlII3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
 </define>
 <materials>
   <element name="videRef" formula="VACUUM" Z="1">  <atom value="1"/> </element>
@@ -560,11 +558,12 @@
       z="855.2"/>
       
 
-    <cutTube name="BeamPlIIOut" rmin="0" rmax="13.97" z="394.588866214565" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPlIIIn" rmin="0" rmax="12.7" z="394.588866214565" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPlIIOut" rmin="0" rmax="13.97" z="387.059357696339" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPlIICap" rmin="0" rmax="13.97" z="0.5" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPlIIIn" rmin="0" rmax="12.7" z="387.059357696339" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
+
+    <cutTube name="BeamPlIICap" rmin="0" rmax="13.97" z="0.5" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
     <box name="ArgonInterior" lunit="cm" 
       x="790"
@@ -726,21 +725,19 @@
       <positionref ref="posCenter"/>
     </subtraction-->
 
+    <cutTube name="BeamWindowFoam" rmin="0" rmax="12.5" z="52" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowFoam" rmin="0" rmax="12.5" z="52" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowGlassWool" rmin="0" rmax="12.5" z="10" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowGlassWool" rmin="0" rmax="12.5" z="10" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPipe" rmin="0" rmax="12.5" z="900" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPipe" rmin="0" rmax="12.5" z="900" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamPipeVacuum" rmin="0" rmax="12.3" z="900" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017" aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamPipeVacuum" rmin="0" rmax="12.3" z="900" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589" aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowStPlate" rmin="0" rmax="12.5" z="1.42166198457089" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowStPlate" rmin="0" rmax="12.5" z="1.42166198457089" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
+    <cutTube name="BeamWindowFoamRem" rmin="0" rmax="12.5" z="113.653958765671" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
-    <cutTube name="BeamWindowFoamRem" rmin="0" rmax="12.5" z="113.653958765671" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
-
-    <cutTube name="BeamWindowStSu" rmin="0" rmax="12.5" z="0.001" startphi="0" deltaphi="360" lowX="-0.2682581665" lowY="0" lowZ="-0.9633470589" highX="0.2682581665" highY="0" highZ="0.9633470589"  aunit="deg" lunit="cm"/>
-
+    <cutTube name="BeamWindowStSu" rmin="0" rmax="12.5" z="0.001" startphi="0" deltaphi="360" lowX="-0.71030185483404029" lowY="0" lowZ="-0.70389720486682006" highX="0.71030185483404018" highY="0" highZ="0.70389720486682017"  aunit="deg" lunit="cm"/>
 
     <!--subtraction name="SteelPlate">
       <first ref="SteelPlateNoBW"/>
@@ -781,9 +778,9 @@
     </subtraction>
 
     <box name="DetEnclosure" lunit="cm" 
-      x="2752.4"
-      y="1917.2"
-      z="2817.2"/>
+      x="3952.4"
+      y="2517.2"
+      z="4017.2"/>
 
     <box name="boxCryoTop" x="1016.8" y="1016.8" z="61.8" lunit="cm"/>
     <box name="boxCryoWallLg" x="1140.4" y="1075.6" z="61.8" lunit="cm"/>
@@ -939,9 +936,9 @@
     
 
     <box name="World" lunit="cm" 
-      x="8752.4" 
-      y="7917.2" 
-      z="8817.2"/>
+      x="9952.4" 
+      y="8517.2" 
+      z="10017.2"/>
 </solids>
 <structure>
 <volume name="volFieldShaper">
@@ -1360,27 +1357,28 @@
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="369.25" y="0" z="0"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
       </physvol>
-
       <physvol>
         <volumeref ref="volBeamPlIIMod"/>
-        <position name="posBeamPlII3" unit="cm" x="209.197107261624" y="288.173051397566" z="-288.173051397567"/>
+        <position name="posBeamPlII3" unit="cm" x="209.555401318941" y="290.823051397567" z="-290.823051397567"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volBeamPlIIUSCap"/>
         <position name="posBeamPlUSII3" unit="cm" x="227.997536603593" y="427.224025698783" z="-427.224025698783"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volBeamPlIIDSCap"/>
-        <position name="posBeamPlDSII3" unit="cm" x="190.396677919655" y="149.12207709635" z="-149.12207709635"/>
+        <position name="posBeamPlDSII3" unit="cm" x="191.113266034289" y="154.42207709635" z="-154.42207709635"/>
         <rotationref ref="rBeamPlII3"/>
       </physvol>
-
       <physvol>
         <volumeref ref="volTPC0"/>
 	<position name="posTopTPC-0" unit="cm"
@@ -27918,6 +27916,7 @@
          z="-445.901327326537"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
+
     <physvol>
        <volumeref ref="volBeamWinGlassWool"/>
        <position name="posBeamWinGlassWool" unit="cm"
@@ -27926,6 +27925,7 @@
          z="-467.722140677409"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
+
     <physvol>
        <volumeref ref="volBeamPipe"/>
        <position name="posBeamPipe" unit="cm"
@@ -27934,7 +27934,7 @@
          z="-787.995368891812"/>
        <rotationref ref="rBeamWRev3"/>
     </physvol>
-    
+
     <physvol>
            <volumeref ref="volCryostat"/>
            <positionref ref="posCryoInDetEnc"/>
