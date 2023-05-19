@@ -4,6 +4,7 @@
 #include "dunecore/DuneCommon/Utility/StringManipulator.h"
 #include "fhiclcpp/make_ParameterSet.h"
 #include "TSystem.h"
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 
