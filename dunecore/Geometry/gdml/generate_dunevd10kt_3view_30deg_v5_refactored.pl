@@ -34,8 +34,8 @@
 #           This is included together with the cathode switch on. In order to avoid overlaps, the gaseous argon
 #           was decreased and displaced by $anodePlateWidth = 0.01 cm. Currently the material of this plate is 
 #           set to vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
-#    V5:    LAr buffer around the active volume in Y and Z has been adapted in the workspace geometries to fit
-#           the numbers of the full geometry.
+#    V5:    José Soto (jsoto@cern.ch) LAr buffer around the active volume in Y and Z has been adapted in the
+#           workspace geometries to fit the numbers of the full geometry.
 #           PDS:
 #                Arapucas in the short laterals included in all 8-CRMs-width workspace geometries, with a slim
 #                field cage "window" in front of them.
