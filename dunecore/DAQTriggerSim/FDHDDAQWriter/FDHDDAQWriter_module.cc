@@ -103,9 +103,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 
   // this will throw an exception if the raw digits cannot be found.
 
-  auto rawdigithandle = e.getValidHandle< std::vector<raw::RawDigit> >(fRawDigitLabel);
-  std::vector< art::Ptr<raw::RawDigit> > RawDigits;
-  art::fill_ptr_vector(RawDigits, rawdigithandle);
+  auto const& RawDigits = e.getProduct< std::vector<raw::RawDigit> >(fRawDigitLabel);
 
   // need a map of indices to raw digits sorted by channel number
   // check that all raw digits have the same number of samples
@@ -114,8 +112,8 @@ void FDHDDAQWriter::analyze(art::Event const& e)
   size_t nSamples = 0;
   for (uint32_t iptn=0; iptn<RawDigits.size(); ++iptn)
     {
-      rdmap[RawDigits[iptn]->Channel()] = iptn;
-      size_t nSc = RawDigits[iptn]->Samples();
+      rdmap[RawDigits[iptn].Channel()] = iptn;
+      size_t nSc = RawDigits[iptn].Samples();
       if (nSamples == 0)
 	{
 	  nSamples = nSc;
@@ -202,8 +200,8 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 		    }
 		  else
 		    {
-		      int pedestal = (int) (RawDigits[rdmi->second]->GetPedestal() + 0.5);  // nearest integer
-                      raw::Uncompress(RawDigits[rdmi->second]->ADCs(), uncompressed, pedestal, RawDigits[rdmi->second]->Compression());
+                      int pedestal = (int) (RawDigits[rdmi->second].GetPedestal() + 0.5);  // nearest integer
+                      raw::Uncompress(RawDigits[rdmi->second].ADCs(), uncompressed, pedestal, RawDigits[rdmi->second].Compression());
 		      for (size_t isample=0; isample<nSamples; ++isample)
 			{
 			  auto adc = uncompressed.at(isample) + pedestaloffset;
