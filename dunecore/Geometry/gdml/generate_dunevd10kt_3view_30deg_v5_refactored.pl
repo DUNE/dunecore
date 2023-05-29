@@ -36,12 +36,12 @@
 #           set to vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
 #    V5:    José Soto (jsoto@cern.ch) LAr buffer around the active volume in Y and Z has been adapted in the
 #           workspace geometries to fit the numbers of the full geometry.
+#           volCryostat tagged as SensDet, in order to simulate the energy deposit in the full LAr volume.
 #           PDS:
 #                Arapucas in the short laterals included in all 8-CRMs-width workspace geometries, with a slim
 #                field cage "window" in front of them.
 #                Distance Membrane to Arapuca is set to 10cm.
 #                Field Cage is set to Aluminum_Al, cathode is set to G10.
-#           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml)
 #
 #################################################################################
 
@@ -1171,21 +1171,6 @@ print CRYO <<EOF;
       y="$Argon_y"
       z="$Argon_z"/>
 
-    <box name="ExternalAuxOut" lunit="cm" 
-      x="@{[$Argon_x - $xLArBuffer]}"
-      y="@{[$Argon_y - 2*$ArapucaOut_y - 2*$FrameToArapucaSpaceLat]}"
-      z="$Argon_z"/>
-
-    <box name="ExternalAuxIn" lunit="cm" 
-      x="$Argon_x"
-      y="$FieldCageSizeY"
-      z="@{[$Argon_z + 1]}"/>
-
-   <subtraction name="ExternalActive">
-      <first ref="ExternalAuxOut"/>
-      <second ref="ExternalAuxIn"/>
-    </subtraction>
-
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
       <second ref="ArgonInterior"/>
@@ -1263,14 +1248,6 @@ print CRYO <<EOF;
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
     </volume>
-    <volume name="volExternalActive">
-      <materialref ref="LAr"/>
-      <solidref ref="ExternalActive"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
-      <colorref ref="green"/>
-    </volume>
 
     <volume name="volOpDetSensitive">
       <materialref ref="LAr"/>
@@ -1312,6 +1289,10 @@ EOF
     <volume name="volCryostat">
       <materialref ref="LAr" />
       <solidref ref="Cryostat" />
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+
       <physvol>
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2+$anodePlateWidth/2]}" y="0" z="0"/>
@@ -1319,10 +1300,6 @@ EOF
       <physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volExternalActive"/>
-        <position name="posExternalActive" unit="cm" x="-$xLArBuffer/2" y="0" z="0"/>
       </physvol>
 EOF
 

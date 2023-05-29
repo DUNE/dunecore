@@ -3462,21 +3462,6 @@
       y="1507.6048"
       z="1110.52"/>
 
-    <box name="ExternalAuxOut" lunit="cm" 
-      x="750.08"
-      y="1482.6048"
-      z="1110.52"/>
-
-    <box name="ExternalAuxIn" lunit="cm" 
-      x="850.08"
-      y="1356.7748"
-      z="1111.52"/>
-
-   <subtraction name="ExternalActive">
-      <first ref="ExternalAuxOut"/>
-      <second ref="ExternalAuxIn"/>
-    </subtraction>
-
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
       <second ref="ArgonInterior"/>
@@ -10302,14 +10287,6 @@
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
     </volume>
-    <volume name="volExternalActive">
-      <materialref ref="LAr"/>
-      <solidref ref="ExternalActive"/>
-      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
-      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
-      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
-      <colorref ref="green"/>
-    </volume>
 
     <volume name="volOpDetSensitive">
       <materialref ref="LAr"/>
@@ -10338,6 +10315,10 @@
     <volume name="volCryostat">
       <materialref ref="LAr" />
       <solidref ref="Cryostat" />
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+
       <physvol>
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="375.045" y="0" z="0"/>
@@ -10345,10 +10326,6 @@
       <physvol>
         <volumeref ref="volSteelShell"/>
         <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volExternalActive"/>
-        <position name="posExternalActive" unit="cm" x="-100/2" y="0" z="0"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
