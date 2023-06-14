@@ -134,7 +134,7 @@ sub gen_Materials
     <fraction n="0.0053" ref="Na2O"/>
     <fraction n="0.00070" ref="P2O5"/>
     <fraction n="0.0771" ref="oxygen"/>
-  </material> 
+  </material>
 
   <material formula="Air" name="Air">
    <D value="0.001205" unit="g/cm3"/>
@@ -160,6 +160,16 @@ sub gen_Materials
    <D value="0.09" unit="g/cm3"/>
    <fraction n="0.95" ref="Air"/>
    <fraction n="0.05" ref="fibrous_glass"/>
+  </material>
+
+  <!-- USE THIS NOW for FD and protoDUNEs - Juergen Reichenbacher (6/13/2023) -->
+  <!-- Foam density is 90 kg / m^3 for the assayed protoDUNE R-PUF at SD Mines -->
+  <material name="foam_protoDUNE_RPUF_assayedSample">
+   <D value="0.09" unit="g/cm3"/>
+   <composite n="54" ref="carbon"/>
+   <composite n="60" ref="hydrogen"/>
+   <composite n="4" ref="nitrogen"/>
+   <composite n="15" ref="oxygen"/>
   </material>
 
   <!-- Foam density is 70 kg / m^3 for the 3x1x1 -->
