@@ -124,7 +124,7 @@ $widthTPCActive  = $nCRM_x/2 * $widthCRP;
 $lengthTPCActive = $nCRM_z/2 * $lengthCRP; 
 
 # active volume dimensions 
-$driftTPCActive  = 310.0;
+$driftTPCActive  = 338.5;
 
 # model anode strips as wires of some diameter
 $padWidth          = 0.02;
