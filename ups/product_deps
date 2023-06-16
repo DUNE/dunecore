@@ -32,7 +32,6 @@ dune_pardata        v01_84_00
 dunedetdataformats  v3_6_1
 dunedaqdataformats  v3_4_1
 nusystematics       v01_03_08
-systematicstools    v01_03_01
 larsoft             v09_75_01
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
@@ -43,11 +42,11 @@ end_product_list
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier        dunepdlegacy         larsoft     duneutil  nusystematics  systematicstools    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
-c7:debug         c7:debug             c7:debug    c7:debug  c7:debug       c7:debug               -nq-                -nq-                   -nq-       -nq-    c7:debug       c7:debug  
-c7:prof          c7:prof              c7:prof     c7:prof   c7:prof        c7:prof                -nq-                -nq-                   -nq-       -nq-    c7:prof   	   c7:prof   
-e20:debug        e20:debug            e20:debug   e20:debug e20:debug      e20:debug              -nq-                -nq-                   -nq-       -nq-    e20:debug 	   e20:debug 
-e20:prof         e20:prof             e20:prof    e20:prof  e20:prof       e20:prof               -nq-                -nq-                   -nq-       -nq-    e20:prof  	   e20:prof  
+qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
+c7:debug         c7:debug             c7:debug    c7:debug  c7:debug            -nq-                -nq-                   -nq-       -nq-    c7:debug       c7:debug  
+c7:prof          c7:prof              c7:prof     c7:prof   c7:prof             -nq-                -nq-                   -nq-       -nq-    c7:prof   	   c7:prof   
+e20:debug        e20:debug            e20:debug   e20:debug e20:debug           -nq-                -nq-                   -nq-       -nq-    e20:debug 	   e20:debug 
+e20:prof         e20:prof             e20:prof    e20:prof  e20:prof            -nq-                -nq-                   -nq-       -nq-    e20:prof  	   e20:prof  
 
 end_qualifier_list
 
