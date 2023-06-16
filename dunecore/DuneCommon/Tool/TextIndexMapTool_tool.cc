@@ -31,6 +31,7 @@ TextIndexMapTool::TextIndexMapTool(fhicl::ParameterSet const& ps)
   // this is set up in case the current working directory is not (yet) added to FW_SEARCH_PATH
   // in order to make the unit test work.
   const char* pcfnam = nullptr;
+  String pcfnamestr;
   try {
     FILE *fptr = fopen(m_FileName.c_str(),"r");
     if (fptr)
@@ -41,7 +42,6 @@ TextIndexMapTool::TextIndexMapTool(fhicl::ParameterSet const& ps)
     else
       {
         cet::search_path sp("FW_SEARCH_PATH");
-        String pcfnamestr;
         sp.find_file(m_FileName,pcfnamestr);
         pcfnam = pcfnamestr.c_str();
       }
