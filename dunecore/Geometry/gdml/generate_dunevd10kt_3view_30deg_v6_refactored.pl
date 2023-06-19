@@ -158,46 +158,46 @@ $lengthCRM = $lengthPCBActive + 2 * $borderCRM;
 $borderCRP = 0.5; # cm
 
 # number of CRMs in y and z
-$nCRM_x   = 4 * 2;
+$nCRM_y   = 4 * 2;
 $nCRM_z   = 20 * 2;
 
 # create a smaller geometry
 if( $workspace == 1 )
 {
-    $nCRM_x = 1 * 2;
+    $nCRM_y = 1 * 2;
     $nCRM_z = 1 * 2;
 }
 
 # create a smaller geometry
 if( $workspace == 2 )
 {
-    $nCRM_x = 2 * 2;
+    $nCRM_y = 2 * 2;
     $nCRM_z = 2 * 2;
 }
 
 # create a smaller geometry (1x8x6)
 if( $workspace == 3 )
 {
-    $nCRM_x = 4 * 2;
+    $nCRM_y = 4 * 2;
     $nCRM_z = 3 * 2;
 }
 
 # create pds geometry (1x8x14)
 if( $workspace == 4 )
 {
-    $nCRM_x = 4 * 2;
+    $nCRM_y = 4 * 2;
     $nCRM_z = 7 * 2;
 }
 # create full geometry with only one drift volume
 if( $workspace == 5 )
 {
-    $nCRM_x = 4 * 2;
+    $nCRM_y = 4 * 2;
     $nCRM_z = 20 * 2;
 }
 
 # calculate tpc area based on number of CRMs and their dimensions
 # each CRP should have a 2x2 CRMs
-$widthTPCActive  = $nCRM_x * $widthCRM + $nCRM_x * $borderCRP;  # around 1200 for full module
+$widthTPCActive  = $nCRM_y * $widthCRM + $nCRM_y * $borderCRP;  # around 1200 for full module
 $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP; # around 6000 for full module
 
 # active volume dimensions
@@ -971,7 +971,7 @@ print FieldCage <<EOF;
      <tube name="FieldShaperShorttube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
 EOF
 
-if ($nCRM_x==8){
+if ($nCRM_y==8){
 
 #Create "windows" for the XArapucas in the short walls.
 print FieldCage <<EOF;
@@ -1317,7 +1317,7 @@ if ($tpc_on==1) # place TPC inside croysotat offsetting each pair of CRMs by bor
 	}
     }
     my $posY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCRM;
-    for(my $jj=0;$jj<$nCRM_x;$jj++)
+    for(my $jj=0;$jj<$nCRM_y;$jj++)
     {
 	if( $jj % 2 == 0 ){
 	    $posY += $borderCRP;
@@ -1386,7 +1386,7 @@ $idx = 0;
   {
   for(my $ii=0;$ii<$nCRM_z/2;$ii++)
   {
-    for(my $jj=0;$jj<$nCRM_x/2;$jj++)
+    for(my $jj=0;$jj<$nCRM_y/2;$jj++)
     {
 	print CRYO <<EOF;
       <physvol>
@@ -1410,10 +1410,10 @@ EOF
 if ($pdsconfig == 0) {  #4-pi PDS converage
 
 #for placing the Arapucas over the cathode
-  $FrameCenter_y=-0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;#-1.5*$FrameLenght_x+(4-$nCRM_x/2)/2*$FrameLenght_x;
+  $FrameCenter_y=-0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;#-1.5*$FrameLenght_x+(4-$nCRM_y/2)/2*$FrameLenght_x;
   $FrameCenter_x=$CathodePosX;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;#-9.5*$FrameLenght_z+(20-$nCRM_z/2)/2*$FrameLenght_z;
-for($i=0;$i<$nCRM_x/2;$i++){
+for($i=0;$i<$nCRM_y/2;$i++){
 for($j=0;$j<$nCRM_z/2;$j++){
   place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
   $FrameCenter_z+=$lengthCathode;
@@ -1425,7 +1425,7 @@ for($j=0;$j<$nCRM_z/2;$j++){
 
 if ($pdsconfig == 0) {  #4-pi PDS converage
 #for placing the Arapucas on laterals
-  if ($nCRM_x==8) {
+  if ($nCRM_y==8) {
     $FrameCenter_x=0.5*($driftTPCActive + $ReadoutPlane) - 0.5*$padWidth; #anode position
     $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
     for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
@@ -1442,7 +1442,7 @@ if ($pdsconfig == 0) {  #4-pi PDS converage
 
     #8 arapucas por cathode, in a similar way as place_OpDetsLateral.
     #$FrameCenter_x=-0.5*$widthTPCActive+0.5*$widthCathode;
-    #for($j=0;$j<$nCRM_x/2;$j++)
+    #for($j=0;$j<$nCRM_y/2;$j++)
     #{
     #  $FrameCenter_y=$posZplane[0];
     #  $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
@@ -1454,7 +1454,7 @@ if ($pdsconfig == 0) {  #4-pi PDS converage
 } else {  #membrane only PDS converage
 
 if($pdsconfig == 1){
-if ($nCRM_x==8) {
+if ($nCRM_y==8) {
   $FrameCenter_x=$posZplane[0]; #anode position
   $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
 for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
@@ -1517,7 +1517,7 @@ sub place_OpDetsCathode()
 	if ($Frame_x==0 and $ara==0) {
 	    $Ara_Y=$FrameCenter_y+$list_posx_bot[1];
 	}
-	if ($Frame_x==$nCRM_x/2-1 and $ara==3) {
+	if ($Frame_x==$nCRM_y/2-1 and $ara==3) {
 	    $Ara_Y=$FrameCenter_y+$list_posx_bot[2];
 	}
 
@@ -1544,7 +1544,7 @@ sub place_OpDetsLateral()
     $FrameCenter_z = $_[1];
     $Lat_z = $_[2];
 
-#Placing Arapucas on the laterals if nCRM_x=8 -- Single Sided
+#Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
 for ($ara = 0; $ara<8; $ara++)
 {
              # Arapucas on laterals
@@ -1586,7 +1586,7 @@ sub place_OpDetsShortLateral()
   $FrameCenter_y = $_[1];
   $FrameCenter_z = $_[2];
 
-  #Placing Arapucas on the laterals if nCRM_x=8 -- Single Sided
+  #Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
   for ($ara = 0; $ara<8; $ara++)
   {
              # Arapucas on the short laterals (along X).
@@ -1638,7 +1638,7 @@ sub place_OpDetsMembOnly()
     $FrameCenter_z = $_[1];
     $Lat_z = $_[2];
 
-#Placing Arapucas on the laterals if nCRM_x=8 -- Single Sided
+#Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
 for ($ara = 0; $ara<18; $ara++)
 {
              # Arapucas on laterals
