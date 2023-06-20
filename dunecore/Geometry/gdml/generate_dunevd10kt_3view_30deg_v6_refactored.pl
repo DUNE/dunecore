@@ -1391,45 +1391,15 @@ EOF
   }
 }
 
-#The +50 in the x positions must depend on some other parameter
-#
-# FIXME (vpec): don't depend on OriginXset. Placement of the fieldcage
-# within the cryostat must be independent of the position of
-# volDetEnclosure within the World volume. - DONE
   if ( $FieldCage_switch eq "on" ) {
-    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
-    $dist=$i*$FieldShaperSeparation;
-    $posX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) + ($i+0.5)*$FieldShaperSeparation;
-    # $posX = -$OriginXSet+50+($i-$NFieldShapers*0.5)*$FieldShaperSeparation;
-	if ($pdsconfig==0){
-		if ($dist>250){
-	print CRYO <<EOF;
-  <physvol>
-     <volumeref ref="volFieldShaperSlim"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotationref ref="rPlus90AboutZ"/>
-  </physvol>
-EOF
-		}else{
-	print CRYO <<EOF;
-  <physvol>
-     <volumeref ref="volFieldShaper"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotationref ref="rPlus90AboutZ"/>
-  </physvol>
-EOF
-		}
-	}else{
-	print CRYO <<EOF;
-  <physvol>
-     <volumeref ref="volFieldShaperSlim"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotationref ref="rPlus90AboutZ"/>
-  </physvol>
-EOF
-	}
-    }
+      my $reversed = 0;
+      place_FieldShaper($reversed);
+      if ( $nCRM_x == 2 ) {
+        $reversed = 1;
+	place_FieldShaper($reversed);
+      }
   }
+
 
 # FIXME (vpec): Remove OrigineXSet. This is placement within cryostat,
 # must be independent of volDetEnclosure placement - DONE.
@@ -1549,6 +1519,65 @@ EOF
 
 close(CRYO);
 }
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++ place_FieldShaper +++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub place_FieldShaper()
+{
+    my $reversed = 0; # are these bottom field shapers, in reversed order?
+    if (scalar(@_) > 0) {
+	$reversed = @_[0]
+    }
+
+    #The +50 in the x positions must depend on some other parameter
+    #
+    # FIXME (vpec): don't depend on OriginXset. Placement of the fieldcage
+    # within the cryostat must be independent of the position of
+    # volDetEnclosure within the World volume. - DONE
+    my $posX;
+    my $posY;
+    my $posZ;
+
+    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
+	$dist=$i*$FieldShaperSeparation;
+	if ( !$reversed ) {
+	    $posX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) + ($i+0.5)*$FieldShaperSeparation;
+	} else  {
+	    $posX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane + $heightCathode) - ($i+0.5)*$FieldShaperSeparation;
+	}
+	if ($pdsconfig==0){
+	    if ($dist>250){
+		print CRYO <<EOF;
+    <physvol>
+      <volumeref ref="volFieldShaperSlim"/>
+      <position name="posFieldShaper_$reversed_$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
+      <rotationref ref="rPlus90AboutZ"/>
+    </physvol>
+EOF
+	    }else{
+		print CRYO <<EOF;
+    <physvol>
+      <volumeref ref="volFieldShaper"/>
+      <position name="posFieldShaper_$reversed_$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
+      <rotationref ref="rPlus90AboutZ"/>
+    </physvol>
+EOF
+	    }
+	}else{
+	    print CRYO <<EOF;
+    <physvol>
+    	<volumeref ref="volFieldShaperSlim"/>
+    	<position name="posFieldShaper_$reversed_$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
+        <rotationref ref="rPlus90AboutZ"/>
+    </physvol>
+EOF
+	}
+    }
+}
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++ place_OpDets +++++++++++++++++++++++++++++++++++++++
