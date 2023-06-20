@@ -1619,26 +1619,40 @@ sub place_OpDetsLateral()
     $FrameCenter_z = $_[1];
     $Lat_z = $_[2];
 
-#Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
-for ($ara = 0; $ara<8; $ara++)
-{
-             # Arapucas on laterals
-             # All Arapuca centers on a given collumn will have the same Z coordinate
-             # X coordinates are on the left and right laterals
-             # Y coordinates are defined with respect to the cathode position
-             # There are two collumns per frame on each side.
+    #Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
+    for ($ara = 0; $ara<8*$nCRM_x; $ara++)
+    {
+	# Arapucas on laterals
+	# All Arapuca centers on a given collumn will have the same Z coordinate
+	# X coordinates are on the left and right laterals
+	# Y coordinates are defined with respect to the cathode position
+	# There are two collumns per frame on each side.
 
-             if ($ara<4) {$Ara_Y = -0.5*$Argon_y + $FrameToArapucaSpaceLat;
-                         $Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
-                         $rot= "rIdentity"; }
-             else {$Ara_Y = 0.5*$Argon_y - $FrameToArapucaSpaceLat;
-                         $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
-                         $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             if($ara==0||$ara==4) {$Ara_X = $FrameCenter_x-$FirstFrameVertDist;} #first tile's center 40 cm bellow anode
-             else{$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
-             $Ara_Z = $FrameCenter_z;
+	if ($ara%8 < 4) {
+	    $Ara_Y = -0.5*$Argon_y + $FrameToArapucaSpaceLat;
+	    $Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
+	    $rot= "rIdentity";
+	} else {
+	    $Ara_Y = 0.5*$Argon_y - $FrameToArapucaSpaceLat;
+	    $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
+	    $rot = "rPlus180AboutX";
+	}
+	if($ara%4==0) { #first tile's center 40 cm bellow anode
+	    if ($ara < 8) {
+		$Ara_X = $FrameCenter_x-$FirstFrameVertDist;
+	    } else { # bottom TPC arapucas
+		$Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist;
+	    }
+	} else { #other tiles separated by VerticalPDdist
+	    if ($ara < 8) {
+		$Ara_X-=$VerticalPDdist;
+	    } else {
+		$Ara_X+=$VerticalPDdist;
+	    }
+	}
+	$Ara_Z = $FrameCenter_z;
 
-    #print " ArapucaPos Lateral $ara :    x=@{[$Ara_X]} y= @{[$Ara_Y]}  z= @{[$Ara_Z]}\n";
+	#print " ArapucaPos Lateral $ara :    x=@{[$Ara_X]} y= @{[$Ara_Y]}  z= @{[$Ara_Z]}\n";
 
 	print CRYO <<EOF;
      <physvol>
@@ -1662,14 +1676,14 @@ sub place_OpDetsShortLateral()
   $FrameCenter_z = $_[2];
 
   #Placing Arapucas on the laterals if nCRM_y=8 -- Single Sided
-  for ($ara = 0; $ara<8; $ara++)
+  for ($ara = 0; $ara<8*$nCRM_x; $ara++)
   {
              # Arapucas on the short laterals (along X).
              # All Arapuca centers on a given collumn will have the same X coordinate
              # Y coordinates are defined with respect to the cathode position
              # There are two collumns per frame on each side.
 
-    if ($ara<4) {
+    if ($ara%8<4) {
       $Ara_Z = -0.5*$Argon_z + $FrameToArapucaSpaceLat;
       $Ara_ZSens = ($Ara_Z+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
       $rot= "rMinus90AboutX";
@@ -1679,13 +1693,20 @@ sub place_OpDetsShortLateral()
       $Ara_ZSens = ($Ara_Z-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
       $rot = "rPlus90AboutX";
     }
-    #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-    if ($ara==0||$ara==4) {
-      $Ara_X = $FrameCenter_x-$FirstFrameVertDist;;
-    } #first tile's center 40 cm bellow anode
-    else {
-      $Ara_X-=$VerticalPDdist; #drift direction
-    } #other tiles separated by VerticalPDdist
+
+    if($ara%4==0) { #first tile's center 40 cm bellow anode
+	if ($ara < 8) {
+	    $Ara_X = $FrameCenter_x-$FirstFrameVertDist;
+	} else { # bottom TPC arapucas
+	    $Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist;
+	}
+    } else { #other tiles separated by VerticalPDdist
+	if ($ara < 8) {
+	    $Ara_X-=$VerticalPDdist;
+	} else {
+	    $Ara_X+=$VerticalPDdist;
+	}
+    }
     $Ara_Y = $FrameCenter_y;
 
     #print " ArapucaPos ShortLAteral $ara :    x=@{[$Ara_X]} y= @{[$Ara_Y]}  z= @{[$Ara_Z]}\n";
