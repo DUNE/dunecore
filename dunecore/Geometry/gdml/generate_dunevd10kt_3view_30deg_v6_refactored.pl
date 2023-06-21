@@ -229,8 +229,8 @@ $anodePlateWidth   = $padWidth/2.;
 ############## Cathode Parameters ###############
 $heightCathode=4.0; #cm
 $CathodeBorder=4.0; #cm
-$widthCathode=2*$widthCRM;
-$lengthCathode=2*$lengthCRM;
+$widthCathode=2*$widthCRM + 2*$borderCRP; # need to add the border of the CRP in order to cover the whole TPC active area
+$lengthCathode=2*$lengthCRM + 2*$borderCRP;
 $widthCathodeVoid=76.35;
 $lengthCathodeVoid=67.0;
 
@@ -1341,7 +1341,8 @@ EOF
 
 if ($tpc_on==1) # place TPC inside croysotat offsetting each pair of CRMs by borderCRP
 {
-  $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
+  my $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
+  my $posXbottom = -$Argon_x/2 + $xLArBuffer + 0.5*($driftTPCActive + $ReadoutPlane);
   $idx = 0;
   my $posZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCRM;
   for(my $ii=0;$ii<$nCRM_z;$ii++)
@@ -1378,7 +1379,7 @@ EOF
 	    <physvol>
 		<volumeref ref="volTPC"/>
 		<position name="posTPC\-$idx" unit="cm"
-		    x="@{[-$Argon_x/2 + $xLArBuffer + 0.5*($driftTPCActive + $ReadoutPlane)]}" y="$posY" z="$posZ"/>
+		    x="$posXbottom" y="$posY" z="$posZ"/>
 		<rotationref ref="rPlus180AboutY"/>
             </physvol>
 EOF
