@@ -1253,13 +1253,8 @@ print CRYO <<EOF;
       </subtraction>
 
     <box name="ArapucaDoubleAcceptanceWindow" lunit="cm"
-      x="@{[$ArapucaOut_y-0.02]}"
-      y="@{[$ArapucaAcceptanceWindow_x]}"
-      z="@{[$ArapucaAcceptanceWindow_z]}"/>
-
-    <box name="ArapucaCathodeAcceptanceWindow" lunit="cm"
-      x="@{[$ArapucaAcceptanceWindow_y]}"
-      y="@{[$ArapucaAcceptanceWindow_x]}"
+      x="@{[$ArapucaAcceptanceWindow_x]}"
+      y="@{[$ArapucaOut_y-0.02]}"
       z="@{[$ArapucaAcceptanceWindow_z]}"/>
 
 </solids>
@@ -1307,20 +1302,40 @@ print CRYO <<EOF;
         <position name="opdetshift" unit="cm" x="0" y="@{[$ArapucaAcceptanceWindow_y/2.0]}" z="0"/>
       </physvol>
     </volume>
-
 EOF
-#including single sided arapucas over the cathode while there is only the top volume
-#if double sided, use
-#    <volume name="volArapucaDouble_$i\-$j\-$p">
-#      <materialref ref="G10" />
-#      <solidref ref="ArapucaDoubleWalls" />
-#    </volume>
-#    <volume name="volOpDetSensitive_ArapucaDouble_$i\-$j\-$p">
-#      <materialref ref="LAr"/>
-#      <solidref ref="ArapucaDoubleAcceptanceWindow"/>
-#    </volume>
 
+  # Deal with double-sided cathode arapucas, for the case of 2 drift volumes
+  if ( $nCRM_x == 2 ) {
+      #including single sided arapucas over the cathode while there is only the top volume
+      #if double sided, use
       print CRYO <<EOF;
+
+      <volume name="volOpDetSensitiveDouble">
+        <materialref ref="LAr"/>
+        <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+      </volume>
+
+      <volume name="ArapucaDouble">
+        <materialref ref="G10" />
+        <solidref ref="ArapucaDoubleWalls" />
+      </volume>
+
+      <volume name="volArapucaDouble">
+        <materialref ref="LAr" />
+	<solidref ref="ArapucaOut" />
+        <physvol>
+          <volumeref ref="ArapucaDouble"/>
+          <positionref ref="posCenter"/>
+        </physvol>
+        <physvol>
+          <volumeref ref="volOpDetSensitiveDouble"/>
+          <positionref ref="posCenter"/>
+        </physvol>
+      </volume>
+EOF
+  }
+  # build the cryostat
+  print CRYO <<EOF;
 
     <volume name="volCryostat">
       <materialref ref="LAr" />
@@ -1605,30 +1620,40 @@ sub place_OpDetsCathode()
     #else
     for ($ara = 0; $ara<4; $ara++)
     {
-	# All Arapuca centers will have the same Y coordinate
-	# X and Z coordinates are defined with respect to the center of the current Frame
+        # All Arapuca centers will have the same Y coordinate
+        # X and Z coordinates are defined with respect to the center of the current Frame
 
-	$Ara_Y = $FrameCenter_y+$list_posx_bot[$ara]; #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-	$Ara_X = $FrameCenter_x;
-	$Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
+        $Ara_Y = $FrameCenter_y+$list_posx_bot[$ara]; #GEOMETRY IS ROTATED: X--> Y AND Y--> X
+        $Ara_X = $FrameCenter_x;
+        $Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
 
-	#If an arapuca is at a wall, move it inward. This also takes care of corner cases.
-	if ($Frame_z==0 and $ara==1) {
-	    $Ara_Z=$FrameCenter_z+$list_posz_bot[3];
-	}
-	if ($Frame_z==$nCRM_z/2-1 and $ara==2){
-	    $Ara_Z=$FrameCenter_z+$list_posz_bot[0];
-	}
-	if ($Frame_x==0 and $ara==0) {
-	    $Ara_Y=$FrameCenter_y+$list_posx_bot[1];
-	}
-	if ($Frame_x==$nCRM_y/2-1 and $ara==3) {
-	    $Ara_Y=$FrameCenter_y+$list_posx_bot[2];
-	}
+        #If an arapuca is at a wall, move it inward. This also takes care of corner cases.
+        if ($Frame_z==0 and $ara==1) {
+            $Ara_Z=$FrameCenter_z+$list_posz_bot[3];
+        }
+        if ($Frame_z==$nCRM_z/2-1 and $ara==2){
+            $Ara_Z=$FrameCenter_z+$list_posz_bot[0];
+        }
+        if ($Frame_x==0 and $ara==0) {
+            $Ara_Y=$FrameCenter_y+$list_posx_bot[1];
+        }
+        if ($Frame_x==$nCRM_y/2-1 and $ara==3) {
+            $Ara_Y=$FrameCenter_y+$list_posx_bot[2];
+        }
 
-	print CRYO <<EOF;
+        print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapuca"/>
+EOF
+        if ( $nCRM_x == 1 ) { # single drift volume
+	    print CRYO <<EOF;
+	<volumeref ref="volArapuca"/>
+EOF
+        } else { # 2 drift volumes - use double-sided arapucas on the cathode
+	    print CRYO <<EOF;
+	<volumeref ref="volArapucaDouble"/>
+EOF
+        }
+       print CRYO <<EOF;
        <position name="posArapucaDouble$ara-Frame\-$Frame_x\-$Frame_z" unit="cm"
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}"
