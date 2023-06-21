@@ -46,12 +46,6 @@ dunefd_simulation_services_legacy: {
  OpDetResponseInterface:       @local::dunefd_opdetresponse
  ChannelStatusService:         @local::dunefd_channel_status
 }
-# Settings for optical simulation in the FD. Optical simulation not on by default
-# for FD, turned on by custom physics list and defining a photon visibility
-# services is workspace g4 fhicl file.
-dunefd_simulation_services_legacy.LArPropertiesService.ScintYield: 24000
-dunefd_simulation_services_legacy.LArPropertiesService.ScintPreScale: 0.05
-dunefd_simulation_services_legacy.LArPropertiesService.EnableCerenkovLight: false
 
 dunefd_reco_services_legacy: {
     @table::dunefd_services_legacy

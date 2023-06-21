@@ -16,7 +16,7 @@ cet_build_plugin(FDHDDataInterface   art::tool
                         art::Persistency_Provenance
                         messagefacility::MF_MessageLogger
                         dunecore::HDF5Utils
-                        LIBHDF5
+                        HDF5::HDF5
              )
 
 install_headers()

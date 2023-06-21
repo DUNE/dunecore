@@ -26,29 +26,27 @@ fwdir  product_dir config_data
 # Add the dependent product and version
 
 product             version
-dunepdlegacy        v1_00_01
-duneutil            v09_71_00d00
+dunepdlegacy        v1_00_03
+duneutil            v09_75_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v3_6_1
 dunedaqdataformats  v3_4_1
-nusystematics       v01_02_09
-systematicstools    v01_02_00
-dune_oslibs         v1_0_0         -       optional
-larsoft             v09_71_00
+nusystematics       v01_03_08
+larsoft             v09_75_01
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
-nlohmann_json       v3_10_4
-highfive            v2_4_1
+nlohmann_json       v3_10_4_1
+highfive            v2_4_1_2
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier        dunepdlegacy         larsoft     duneutil  nusystematics  systematicstools    dunedetdataformats   dunedaqdataformats  dune_oslibs  dune_pardata valgrind  nlohmann_json  highfive   notes
-c7:debug         c7:debug             c7:debug    c7:debug  c7:debug       c7:debug               -nq-                -nq-                    -nq-       -nq-       -nq-    c7:debug       c7:debug  
-c7:prof          c7:prof              c7:prof     c7:prof   c7:prof        c7:prof                -nq-                -nq-                    -nq-       -nq-       -nq-    c7:prof   	   c7:prof   
-e20:debug        e20:debug            e20:debug   e20:debug e20:debug      e20:debug              -nq-                -nq-                    -nq-       -nq-       -nq-    e20:debug 	   e20:debug 
-e20:prof         e20:prof             e20:prof    e20:prof  e20:prof       e20:prof               -nq-                -nq-                    -nq-       -nq-       -nq-    e20:prof  	   e20:prof  
+qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
+c7:debug         c7:debug             c7:debug    c7:debug  c7:debug            -nq-                -nq-                   -nq-       -nq-    c7:debug       c7:debug  
+c7:prof          c7:prof              c7:prof     c7:prof   c7:prof             -nq-                -nq-                   -nq-       -nq-    c7:prof   	   c7:prof   
+e20:debug        e20:debug            e20:debug   e20:debug e20:debug           -nq-                -nq-                   -nq-       -nq-    e20:debug 	   e20:debug 
+e20:prof         e20:prof             e20:prof    e20:prof  e20:prof            -nq-                -nq-                   -nq-       -nq-    e20:prof  	   e20:prof  
 
 end_qualifier_list
 
