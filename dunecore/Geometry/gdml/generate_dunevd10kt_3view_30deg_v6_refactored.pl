@@ -44,6 +44,8 @@
 #                Field Cage is set to Aluminum_Al, cathode is set to G10.
 #    v6:    Jun 2023: Viktor Pec (viktor.pec@fzu.cz) based on changes by Laura Pauluci and Abdulrahman Kauther:
 #               - outer cathode arapucas shifted inwards
+#               - implemented bottom drift volume, together with double-sided arapucas on the cathode
+#               - arapucas on the outer sides of the cathode shifted inwards
 #
 #################################################################################
 
@@ -207,6 +209,13 @@ if( $workspace == 6 )
 {
     $nCRM_y = 4 * 2;
     $nCRM_z = 3 * 2;
+    $nCRM_x = 2;
+}
+# create a smaller geometry with both drift volumes (2x8x14)
+if( $workspace == 7 )
+{
+    $nCRM_y = 4 * 2;
+    $nCRM_z = 7 * 2;
     $nCRM_x = 2;
 }
 
