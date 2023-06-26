@@ -27,12 +27,26 @@ TextIndexMapTool::TextIndexMapTool(fhicl::ParameterSet const& ps)
   m_ValueIndex(ps.get<Index>("ValueIndex")),
   m_DefaultValue(ps.get<Index>("DefaultValue")) {
   const String myname = "TextIndexMapTool::ctor: ";
-  // Open the file.
+  // Open the file.  See if we can open it as is, otherwise look in FW_SEARCH_PATH
+  // this is set up in case the current working directory is not (yet) added to FW_SEARCH_PATH
+  // in order to make the unit test work.
   const char* pcfnam = nullptr;
+  String pcfnamestr;
   try {
-    pcfnam = gSystem->ExpandPathName(m_FileName.c_str());
+    FILE *fptr = fopen(m_FileName.c_str(),"r");
+    if (fptr)
+      {
+	pcfnam = m_FileName.c_str();
+	fclose(fptr);
+      }
+    else
+      {
+        cet::search_path sp("FW_SEARCH_PATH");
+        sp.find_file(m_FileName,pcfnamestr);
+        pcfnam = pcfnamestr.c_str();
+      }
   } catch(...) {
-    cout << myname << "ERROR: Unable to pars file name:" << m_FileName << endl;
+    cout << myname << "ERROR: Unable to parse file name:" << m_FileName << endl;
     return;
   }
   if ( pcfnam == nullptr ) {

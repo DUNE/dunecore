@@ -68,7 +68,7 @@ dunefd_simulation_services: {
     @table::dunefd_simulation_services_legacy
     @table::common_larg4_services
     NuRandomService:       @local::dune_prod_seedservice
-    ParticleListAction: @local::dune_particle_list_action
+    ParticleListAction: @local::dunefd_particle_list_action
     PhysicsList:        @local::dune_physics_list_fastoptical
     #LArG4Detector:      No refactored full FD geom, required for this to run
     BackTrackerService:           @local::dunefd_backtrackerservice
