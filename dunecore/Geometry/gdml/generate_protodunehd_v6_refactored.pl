@@ -980,7 +980,7 @@ sub gen_Define()
 # Create the <define> fragment file name, 
 # add file to list of fragments,
 # and open it
-    $DEF = "pdhd_v5_Def" . $suffix . ".gdml";
+    $DEF = "pdhd_v6_Def" . $suffix . ".gdml";
     push (@gdmlFiles, $DEF);
     $DEF = ">" . $DEF;
     open(DEF) or die("Could not open file $DEF for writing");
@@ -1048,7 +1048,7 @@ sub gen_Materials()
 # Create the <materials> fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $MAT = "pdhd_v5_Materials" . $suffix . ".gdml";
+    $MAT = "pdhd_v6_Materials" . $suffix . ".gdml";
     push (@gdmlFiles, $MAT);
     $MAT = ">" . $MAT;
 
@@ -1105,7 +1105,7 @@ sub gen_TPC
 # Create the TPC fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $TPC = "pdhd_v5_TPC_${_[3]}" . $suffix . ".gdml";
+    $TPC = "pdhd_v6_TPC_${_[3]}" . $suffix . ".gdml";
     push (@gdmlFiles, $TPC);
     $TPC = ">" . $TPC;
     open(TPC) or die("Could not open file $TPC for writing");
@@ -1883,7 +1883,7 @@ sub gen_Cryostat()
 # Create the cryostat fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $CRYO = "pdhd_v5_Cryostat" . $suffix . ".gdml";
+    $CRYO = "pdhd_v6_Cryostat" . $suffix . ".gdml";
     push (@gdmlFiles, $CRYO);
     $CRYO = ">" . $CRYO;
     open(CRYO) or die("Could not open file $CRYO for writing");
@@ -3394,7 +3394,7 @@ sub gen_Enclosure()
 # Create the detector enclosure fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $ENCL = "pdhd_v5_DetEnclosure" . $suffix . ".gdml";
+    $ENCL = "pdhd_v6_DetEnclosure" . $suffix . ".gdml";
     push (@gdmlFiles, $ENCL);
     $ENCL = ">" . $ENCL;
     open(ENCL) or die("Could not open file $ENCL for writing");
@@ -4261,7 +4261,7 @@ sub gen_World()
 # Create the WORLD fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $WORLD = "pdhd_v5_World" . $suffix . ".gdml";
+    $WORLD = "pdhd_v6_World" . $suffix . ".gdml";
     push (@gdmlFiles, $WORLD);
     $WORLD = ">" . $WORLD;
     open(WORLD) or die("Could not open file $WORLD for writing");
