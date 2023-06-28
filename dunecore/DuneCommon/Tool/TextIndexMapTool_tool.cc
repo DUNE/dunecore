@@ -97,7 +97,7 @@ TextIndexMapTool::TextIndexMapTool(fhicl::ParameterSet const& ps)
         emsg = "String conversion failed for \"" + sval + "\".";
       }
     } else {
-      emsg = "Too few values on line.";
+      emsg = "Too few values on line: " + std::to_string(mpos) + " > " + std::to_string(svals.size()) + "; seps = \"" + seps + "\".";
     }
     if ( emsg.size() ) {
       if ( m_LogLevel >= 1 ) {
