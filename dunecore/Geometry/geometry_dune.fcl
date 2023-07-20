@@ -433,6 +433,12 @@ protodunevd_v1_geo_driftY.GDML: "protodunevd_v1_driftY_refactored.gdml"
 protodunevd_v1_geo_driftY.ROOT: "protodunevd_v1_driftY_refactored.gdml"
 protodunevd_v1_geo_driftY.SortingParameters.SortTPCPDVD: true
 
+protodunevd_v3_geo_driftY: @local::dune10kt_geo
+protodunevd_v3_geo_driftY.Name: "protodunevd_v3_driftY"
+protodunevd_v3_geo_driftY.GDML: "protodunevd_v3_driftY.gdml" 
+protodunevd_v3_geo_driftY.ROOT: "protodunevd_v3_driftY.gdml"
+protodunevd_v3_geo_driftY.SortingParameters.SortTPCPDVD: true
+
 iceberg_geo: @local::dune10kt_geo
 iceberg_geo.Name: "iceberg" # will be made lower case anyway
 iceberg_geo.GDML: "iceberg_v2.gdml"
