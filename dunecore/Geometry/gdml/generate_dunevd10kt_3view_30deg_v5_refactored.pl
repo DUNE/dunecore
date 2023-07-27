@@ -42,6 +42,8 @@
 #                field cage "window" in front of them.
 #                Distance Membrane to Arapuca is set to 10cm.
 #                Field Cage is set to Aluminum_Al, cathode is set to G10.
+#           Viktor Pec (viktor.pec@fzu.cz), Jul 27, 2023 Update:
+#                Implementing a new foam material based on a survey
 #
 #################################################################################
 
