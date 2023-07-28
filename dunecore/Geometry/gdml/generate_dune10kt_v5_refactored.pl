@@ -15,6 +15,7 @@
 #
 # Update: 2023/07/28, Viktor Pec (viktor.pec@fzu.cz)
 #   Adding new refactored version (v5). Based on the legacy perl script v4.
+#   Adding new foam material based on survey for ProtoDUNE
 #
 ###
 
@@ -2168,7 +2169,7 @@ EOF
     print ENCL <<EOF;
 <structure>
     <volume name="volFoamPadding">
-      <materialref ref="FD_foam"/>
+      <materialref ref="foam_protoDUNE_RPUF_assayedSample"/>
       <solidref ref="FoamPadding"/>
     </volume>
 

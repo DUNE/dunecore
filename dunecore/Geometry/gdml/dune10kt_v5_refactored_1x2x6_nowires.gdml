@@ -9719,7 +9719,7 @@ z="706.975"/>
     </volume>
 
     <volume name="volFoamPadding">
-      <materialref ref="FD_foam"/>
+      <materialref ref="foam_protoDUNE_RPUF_assayedSample"/>
       <solidref ref="FoamPadding"/>
     </volume>
 
