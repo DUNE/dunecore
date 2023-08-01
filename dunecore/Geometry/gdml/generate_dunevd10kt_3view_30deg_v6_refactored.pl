@@ -398,10 +398,10 @@ $VerticalPDdist = 75.0; #distance of arapucas (center to center) in the y direct
 $FirstFrameVertDist = 40.0; #Vertical distance from top/bottom anode (=204.55+85.3 cm above/below cathode)
 
 #Positions of the 4 arapucas with respect to the Frame center --> arapucas over the cathode
-$list_posy_bot[0]=-2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
-$list_posz_bot[0]= 0.5*$lengthCathodeVoid + $CathodeBorder;
-$list_posy_bot[1]= - $CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
-$list_posz_bot[1]=-1.5*$lengthCathodeVoid - 2.0*$CathodeBorder;
+$list_posy_bot[0]= -2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
+$list_posz_bot[0]= -(0.5*$lengthCathodeVoid + $CathodeBorder);
+$list_posy_bot[1]=  ($CathodeBorder + $GapPD + 0.5*$ArapucaOut_x);
+$list_posz_bot[1]= -(1.5*$lengthCathodeVoid + 2.0*$CathodeBorder);
 $list_posy_bot[2]=-$list_posy_bot[1];
 $list_posz_bot[2]=-$list_posz_bot[1];
 $list_posy_bot[3]=-$list_posy_bot[0];
@@ -1638,16 +1638,16 @@ sub place_OpDetsCathode()
 
         #If an arapuca is at a wall, move it inward. This also takes care of corner cases.
         if ($Frame_z==0 and $ara==1) {
-            $Ara_Z=$FrameCenter_z+$list_posz_bot[3];
-        }
-        if ($Frame_z==$nCRM_z/2-1 and $ara==2){
             $Ara_Z=$FrameCenter_z+$list_posz_bot[0];
         }
+        if ($Frame_z==$nCRM_z/2-1 and $ara==2){
+            $Ara_Z=$FrameCenter_z+$list_posz_bot[3];
+        }
         if ($Frame_x==0 and $ara==0) {
-            $Ara_Y=$FrameCenter_y+$list_posy_bot[1];
+            $Ara_Y=$FrameCenter_y+$list_posy_bot[2];
         }
         if ($Frame_x==$nCRM_y/2-1 and $ara==3) {
-            $Ara_Y=$FrameCenter_y+$list_posy_bot[2];
+            $Ara_Y=$FrameCenter_y+$list_posy_bot[1];
         }
 
         print CRYO <<EOF;
