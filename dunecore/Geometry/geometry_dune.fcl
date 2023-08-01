@@ -45,7 +45,7 @@ dunefd_geo:
 dune10kt_geo:
 {
  Name:      "dune10kt_v1"
- 
+
  GDML:      "dune10kt_v1.gdml"
  ROOT:      "dune10kt_v1.gdml"
 
@@ -60,7 +60,7 @@ dune10kt_geo:
 dunedphase10kt_geo:
 {
  Name:      "dunedphase10kt_v2"
- 
+
  GDML:      "dunedphase10kt_v2.gdml"
  ROOT:      "dunedphase10kt_v2.gdml"
 
@@ -74,7 +74,7 @@ dunedphase10kt_geo:
 dunedphase10kt_driftY_geo:
 {
  Name:      "dunedphase10kt_v2_driftY"
- 
+
  GDML:      "dunedphase10kt_v2_driftY.gdml"
  ROOT:      "dunedphase10kt_v2_driftY.gdml"
 
@@ -100,7 +100,7 @@ protodunedphase_geo:
  SortingParameters:    {ChannelsPerOpDet:    1}
  SurfaceY: 0.0                       # Underground option. 4850 feet to cm. from DocDb-3833
  DisableWiresInG4:   true
-} 
+}
 
 protodunedphase_driftY_geo:
 {
@@ -112,7 +112,7 @@ protodunedphase_driftY_geo:
  SortingParameters:    {ChannelsPerOpDet:    1}
  SurfaceY: 0.0                       # Underground option. 4850 feet to cm. from DocDb-3833
  DisableWiresInG4:   true
-} 
+}
 
 protodunedphase_driftY_uniform_geo:
 {
@@ -124,7 +124,7 @@ protodunedphase_driftY_uniform_geo:
  SortingParameters:    {ChannelsPerOpDet:    1}
  SurfaceY: 0.0                       # Underground option. 4850 feet to cm. from DocDb-3833
  DisableWiresInG4:   true
-} 
+}
 
 dphase3x1x1_geo:
 {
@@ -197,8 +197,13 @@ dune10kt_1x2x6_v4_refactored_geo:      @local::dune10kt_1x2x6_v4_geo
 dune10kt_1x2x6_v4_refactored_geo.GDML: "dune10kt_v4_refactored_1x2x6.gdml"
 dune10kt_1x2x6_v4_refactored_geo.ROOT: "dune10kt_v4_refactored_1x2x6.gdml"
 
+dune10kt_1x2x6_v5_refactored_geo:      @local::dune10kt_geo
+dune10kt_1x2x6_v5_refactored_geo.Name: "dune10kt_v5_1x2x6"
+dune10kt_1x2x6_v5_refactored_geo.GDML: "dune10kt_v5_refactored_1x2x6.gdml"
+dune10kt_1x2x6_v5_refactored_geo.ROOT: "dune10kt_v5_refactored_1x2x6.gdml"
+
 dune10kt_1x2x6_geo:              @local::dune10kt_1x2x6_v4_geo
-dune10kt_1x2x6_refactored_geo:   @local::dune10kt_1x2x6_v4_refactored_geo
+dune10kt_1x2x6_refactored_geo:   @local::dune10kt_1x2x6_v5_refactored_geo
 
 #VD 1x6x6 geo
 
@@ -264,7 +269,7 @@ dunevd10kt_1x8x14_3view_30deg_geo: @local::dunevd10kt_1x8x14_3view_30deg_v4_geo
 
 dunevd10kt_1x8x6_2view_geo: @local::dune10kt_geo
 dunevd10kt_1x8x6_2view_geo.Name: "dunevd10kt_2view_v2_refactored_1x8x6ref"
-dunevd10kt_1x8x6_2view_geo.GDML: "dunevd10kt_2view_v2_refactored_1x8x6ref.gdml" 
+dunevd10kt_1x8x6_2view_geo.GDML: "dunevd10kt_2view_v2_refactored_1x8x6ref.gdml"
 dunevd10kt_1x8x6_2view_geo.ROOT: "dunevd10kt_2view_v2_refactored_1x8x6ref.gdml"
 
 dunevd10kt_1x8x6_3view_v2_geo: @local::dune10kt_geo
@@ -429,7 +434,7 @@ protodunevd_v2_geo.SortingParameters.SortTPCPDVD: true
 # protoDUNE VD with driftY
 protodunevd_v1_geo_driftY: @local::dune10kt_geo
 protodunevd_v1_geo_driftY.Name: "protodunevd_v1_driftY"
-protodunevd_v1_geo_driftY.GDML: "protodunevd_v1_driftY_refactored.gdml" 
+protodunevd_v1_geo_driftY.GDML: "protodunevd_v1_driftY_refactored.gdml"
 protodunevd_v1_geo_driftY.ROOT: "protodunevd_v1_driftY_refactored.gdml"
 protodunevd_v1_geo_driftY.SortingParameters.SortTPCPDVD: true
 
@@ -438,7 +443,7 @@ iceberg_geo.Name: "iceberg" # will be made lower case anyway
 iceberg_geo.GDML: "iceberg_v2.gdml"
 iceberg_geo.ROOT: "iceberg_v2.gdml"
 
-# first vertical drift CRP in coldbox 
+# first vertical drift CRP in coldbox
 dunevdcb_geo: @local::dune10kt_geo
 dunevdcb_geo.Name: "dunevdcb1"
 dunevdcb_geo.GDML: "dunevdcb1_refactored.gdml"
@@ -468,10 +473,10 @@ dune35t_geo:
  # Choose GDML file and set detector version similarly
  GDML:         "dune35t4apa_v6.gdml"
  ROOT:         "dune35t4apa_v6.gdml"
- SortingParameters: { 
+ SortingParameters: {
     DetectorVersion: "dune35t4apa_v6"
     ChannelsPerOpDet:	12
- } 
+ }
 
  SurfaceY:           0.0e2               #in cm, vertical distance to the surface
  DisableWiresInG4:   true
