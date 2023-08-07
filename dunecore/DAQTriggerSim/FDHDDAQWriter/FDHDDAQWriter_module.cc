@@ -173,7 +173,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 	      uint32_t sloc = slot & 0x7;  // but use this for channel map lookup
 	      uint32_t daqlink = ilink % 2;
 
-              std::vector<dunedaq::detdataformats::wib2::WIB2Frame> frames(nSamples);
+              std::vector<dunedaq::fddetdataformats::WIB2Frame> frames(nSamples);
 	      for (size_t isample=0; isample<nSamples; ++isample)
 		{
 		  frames.at(isample).header.version = 2;
@@ -219,7 +219,7 @@ void FDHDDAQWriter::analyze(art::Event const& e)
 		    }
 		}
 
-              dunedaq::daqdataformats::Fragment frag(&frames[0],frames.size()*sizeof(dunedaq::detdataformats::wib2::WIB2Frame));
+              dunedaq::daqdataformats::Fragment frag(&frames[0],frames.size()*sizeof(dunedaq::fddetdataformats::WIB2Frame));
 	      frag.set_run_number(runno);
 	      frag.set_trigger_number(evtno);
 	      frag.set_trigger_timestamp(0);
