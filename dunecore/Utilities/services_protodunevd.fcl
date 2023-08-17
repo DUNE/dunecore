@@ -85,7 +85,7 @@ protodunevd_minimal_simulation_services_driftY: @local::protodune_minimal_simula
 protodunevd_minimal_simulation_services_driftY.Geometry: @local::protodunevd_v3_geo_driftY
 
 # reco for sim config
-protodunevd_reco_services_driftY:                    @local::protodunevd_services
+protodunevd_reco_services_driftY:                    @local::protodunevd_reco_services
 protodunevd_reco_services_driftY.Geometry:  	     @local::protodunevd_v3_geo_driftY
 
 
