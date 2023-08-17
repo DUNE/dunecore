@@ -172,7 +172,7 @@ namespace geo{
       { return fSorter; }
   
     /// Photon detectors
-    unsigned int NOpChannels(unsigned int NOpDets)                           const;
+    unsigned int NOpChannels(unsigned int NOpDets)                           const override;
     unsigned int MaxOpChannel(unsigned int NOpDets)                          const override;
     unsigned int NOpHardwareChannels(unsigned int opDet)                     const override;
     unsigned int OpChannel(unsigned int OpDet, unsigned int hwCh)            const override;
