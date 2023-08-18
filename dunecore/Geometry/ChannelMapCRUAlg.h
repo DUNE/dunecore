@@ -4,6 +4,7 @@
 ///
 /// \version $Id:  $
 /// \author  vgalymov@ipnl.in2p3.fr
+/// \Modified by lpaulucc@fnal.gov to include Optical Channel map
 ////////////////////////////////////////////////////////////////////////
 #ifndef GEO_CHANNELMAPCRUALG_H
 #define GEO_CHANNELMAPCRUALG_H
@@ -11,6 +12,7 @@
 #include <vector>
 #include <set>
 #include <iostream>
+#include <map>
 
 #include "larcoreobj/SimpleTypesAndConstants/readout_types.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
@@ -169,6 +171,16 @@ namespace geo{
     virtual geo::GeoObjectSorter const& Sorter() const override
       { return fSorter; }
   
+    /// Photon detectors
+    unsigned int NOpChannels(unsigned int NOpDets)                           const override;
+    unsigned int MaxOpChannel(unsigned int NOpDets)                          const override;
+    unsigned int NOpHardwareChannels(unsigned int opDet)                     const override;
+    unsigned int OpChannel(unsigned int OpDet, unsigned int hwCh)            const override;
+    unsigned int OpDetFromOpChannel(unsigned int opChannel)                  const override;
+    unsigned int HardwareChannelFromOpChannel(unsigned int opChannel)        const override;
+    bool  IsValidOpChannel(unsigned int opChannel, unsigned int /*NOpDets*/) const override
+    {return fOpDet.count(opChannel); }
+
   private:
     
     unsigned int                  fNcryostat;      ///< number of cryostats in the detector
@@ -193,8 +205,15 @@ namespace geo{
     PlaneInfoMap_t<unsigned int>  fWiresPerPlane;  ///< The number of wires in this plane 
                                                    ///< in the heirachy
     geo::GeoObjectSorterCRU  fSorter;              ///< class to sort geo objects
-    
-    
+ 
+
+    /// Photon detectors   
+    unsigned int fMaxOpDets;
+    unsigned int fMaxOpChannel;
+    unsigned int fNOpChannels;
+    std::map<unsigned int, unsigned int> fOpDet;
+    std::map<unsigned int, unsigned int> fHWChannel;
+
     /// Retrieved the wire cound for the specified plane ID
     unsigned int WireCount(geo::PlaneID const& id) const
     { return AccessElement(fWireCounts, id); }

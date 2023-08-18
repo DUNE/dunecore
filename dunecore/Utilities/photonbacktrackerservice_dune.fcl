@@ -16,7 +16,8 @@ dunefd_photonbacktrackerservice:
 }
 
 dunefdvd_photonbacktrackerservice: @local::standard_photonbacktrackerservice
-dunefdvd_photonbacktrackerservice.PhotonBackTracker.G4ModuleLabels: ["PDFastSimAr", "PDFastSimXe", "PDFastSimExternal"]
+#dunefdvd_photonbacktrackerservice.PhotonBackTracker.G4ModuleLabels: ["PDFastSimAr", "PDFastSimXe", "PDFastSimExternal"] #for geo up to v4
+dunefdvd_photonbacktrackerservice.PhotonBackTracker.G4ModuleLabels: ["PDFastSimAr", "PDFastSimXe", "PDFastSimArExternal", "PDFastSimXeExternal"] #for geo after v5
 
 
 # Legacy definitions
