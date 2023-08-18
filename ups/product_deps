@@ -32,7 +32,7 @@ dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
 dunedaqdataformats  v4_0_0
 nusystematics       v01_03_11
-larsoft             v09_78_00
+larsoft             v09_78_01
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_10_4_1
