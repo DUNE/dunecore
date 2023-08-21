@@ -17,6 +17,8 @@
 
 #include "messagefacility/MessageLogger/MessageLogger.h" 
 
+using std::map;
+
 namespace geo{
 
   //----------------------------------------------------------------------------
@@ -129,6 +131,29 @@ namespace geo{
 
     MF_LOG_DEBUG("ChannelMapCRU") << "# of channels is " << fNchannels;
 
+    // PHOTON DETECTORS: enable OpDet + HW channel -> OpChannel
+    // Fill the maps below by looping through
+    // all possible OpDet and HW Channel combinations
+    
+    fMaxOpDets = cgeo[0].NOpDet();
+    fMaxOpChannel = 0;
+    fNOpChannels = 0;
+
+    for (unsigned int opDet = 0; opDet < fMaxOpDets; opDet++) {
+      for (unsigned int hwCh = 0; hwCh < NOpHardwareChannels(opDet); hwCh++) {
+
+        // Find the channel number for this opDet and hw channel
+        unsigned int opChannel = OpChannel(opDet, hwCh);
+        
+        // Count channels and record the maximum possible channel
+        if (opChannel > fMaxOpChannel) fMaxOpChannel = opChannel;
+          fNOpChannels++;
+        
+        // Fill maps for opChannel -> opDet and hwChannel
+        fOpDet[opChannel] = opDet;
+        fHWChannel[opChannel] = hwCh;
+      }
+    }
 
     return;
   }
@@ -561,7 +586,47 @@ namespace geo{
       };
   } // ChannelMapCRUAlg::ConvertROPtoWirePlane()
   
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::NOpChannels(unsigned int /*NOpDets*/) const {
+    return fNOpChannels;
+  } // ChannelMapCRUAlg::NOpChannels
+
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::MaxOpChannel(unsigned int /*NOpDets*/) const {
+    return fMaxOpChannel;
+  } // ChannelMapCRUAlg::MaxOpChannel
+
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::NOpHardwareChannels(unsigned int opDet) const {
+
+    return 2; //number of readout channels per megacell 
+  } // ChannelMapCRUAlg::NOpHardwareChannels
+
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::OpChannel(unsigned int OpDet, unsigned int hwCh) const {
+
+    unsigned int opCh = 10*OpDet + hwCh;
+    return opCh;
+  } // ChannelMapCRUAlg::OpChannel
+
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::OpDetFromOpChannel(unsigned int opChannel) const {
+    if (!IsValidOpChannel(opChannel, fMaxOpDets)) {
+      mf::LogWarning("ProtoDUNEChannelMapAlg") << "Requesting an OpDet number for an uninstrumented channel, " << opChannel;
+      return 99999;
+    }
+    return fOpDet.at(opChannel);
+  } // ChannelMapCRUAlg::OpDetFromOpChannel
+
+  //----------------------------------------------------------------------------
+  unsigned int ChannelMapCRUAlg::HardwareChannelFromOpChannel(unsigned int opChannel) const {
+    if (!IsValidOpChannel(opChannel, fMaxOpDets)) {
+      mf::LogWarning("ProtoDUNEChannelMapAlg") << "Requesting an OpDet number for an uninstrumented channel, " << opChannel;
+      return 99999;
+    }
+    return fHWChannel.at(opChannel);
+  } // ChannelMapCRUAlg::HardwareChannelFromOpChannel
   
   //----------------------------------------------------------------------------
-  
+
 } // namespace

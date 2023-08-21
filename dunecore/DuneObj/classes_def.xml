@@ -134,22 +134,27 @@
   </class>
   <class name="art::Wrapper<raw::DUNEHDF5FileInfo2>"/>
 
-  <class name="dunedaq::daqdataformats::SourceID"/>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerCandidateDa\
-ta> > >"/>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerPrimitive> \
-> >"/>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerActivityDat\
-a> > >"/>
-  <class name="dunedaq::detdataformats::trigger::TriggerCandidateData"/>
-  <class name="dunedaq::detdataformats::trigger::TriggerPrimitive"/>
-  <class name="dunedaq::detdataformats::trigger::TriggerActivityData"/>
-  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerCandidateData> >"/>
-  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerPrimitive> >"/>
-  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::detdataformats::trigger::TriggerActivityData> >"/>
-  <class name="std::vector<dunedaq::detdataformats::trigger::TriggerCandidateData>"/>
-  <class name="std::vector<dunedaq::detdataformats::trigger::TriggerPrimitive>"/>
-  <class name="std::vector<dunedaq::detdataformats::trigger::TriggerActivityData>"/>
+  <class name="dunedaq::daqdataformats::SourceID" ClassVersion="10">
+   <version ClassVersion="10" checksum="3885252001"/>
+  </class>
+  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerCandidateData> > >"/>
+  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerPrimitive> > >"/>
+  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerActivityData> > >"/>
+  <class name="dunedaq::trgdataformats::TriggerCandidateData" ClassVersion="10">
+   <version ClassVersion="10" checksum="2442584095"/>
+  </class>
+  <class name="dunedaq::trgdataformats::TriggerPrimitive" ClassVersion="10">
+   <version ClassVersion="10" checksum="356762401"/>
+  </class>
+  <class name="dunedaq::trgdataformats::TriggerActivityData" ClassVersion="10">
+   <version ClassVersion="10" checksum="3029379803"/>
+  </class>
+  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerCandidateData> >"/>
+  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerPrimitive> >"/>
+  <class name="std::map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerActivityData> >"/>
+  <class name="std::vector<dunedaq::trgdataformats::TriggerCandidateData>"/>
+  <class name="std::vector<dunedaq::trgdataformats::TriggerPrimitive>"/>
+  <class name="std::vector<dunedaq::trgdataformats::TriggerActivityData>"/>
 
 
 </lcgdict>
