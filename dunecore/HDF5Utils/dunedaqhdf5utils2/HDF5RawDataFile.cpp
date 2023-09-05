@@ -22,6 +22,7 @@
 #include <utility>
 #include <vector>
 #include <chrono>
+#include <cstdio>
 
 namespace dunedaq {
 namespace hdf5libs {
@@ -98,7 +99,9 @@ HDF5RawDataFile::~HDF5RawDataFile()
     m_file_ptr->flush();
 
     // rename file to the bare name
-    std::filesystem::rename(m_file_ptr->getName(), m_bare_file_name);
+    // seems to break under the c7 compiler use cstdio version instead
+    //std::filesystem::rename(m_file_ptr->getName(), m_bare_file_name);
+    rename(m_file_ptr->getName().c_str(), m_bare_file_name.c_str());
   }
 
   // explicit destruction; not really needed, but nice to be clear...
