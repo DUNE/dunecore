@@ -220,10 +220,10 @@ $UVPlaneBoundNudge = $TPCWireThickness;
 # APA z-dimensions:
 # The following are all widths about the z center of an APA
 $Zactive_z    = ($nZChannelsPerAPA/2-1)*$XWirePitch + $TPCWireThickness;
-$APAFrame_z   = 231.59 - 2*(2*$G10thickness+$WrapCover);
+$APAphys_z    = 231.59;
+$APAFrame_z   = $APAphys_z - 2*(2*$G10thickness+$WrapCover);
 $Vactive_z    = $APAFrame_z;
 $Uactive_z    = $APAFrame_z + 2*$G10thickness;
-$APAphys_z    = 231.59;
 
 
 # APA y-dimensions:
