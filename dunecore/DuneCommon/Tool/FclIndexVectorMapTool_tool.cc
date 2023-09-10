@@ -18,7 +18,7 @@ FclIndexVectorMapTool::FclIndexVectorMapTool(fhicl::ParameterSet const& ps)
 : m_LogLevel(ps.get<Index>("LogLevel")),
   m_Entries(ps.get<IndexVectorVector>("Entries")) {
   const Name myname = "FclIndexVectorMapTool::ctor: ";
-  for ( const IndexVector ent : m_Entries ) {
+  for ( const IndexVector &ent : m_Entries ) {
     if ( ent.size() == 0 ) continue;
     Index ient = ent.front();
     IndexVector& vals = m_entryMap[ient];
