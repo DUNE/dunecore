@@ -26,7 +26,7 @@ fwdir  product_dir config_data
 # Add the dependent product and version
 
 product             version
-dunepdlegacy        v1_00_03
+dunepdlegacy        v1_01_00
 duneutil            v09_78_03d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
