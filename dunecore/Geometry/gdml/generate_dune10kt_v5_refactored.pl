@@ -16,6 +16,10 @@
 # Update: 2023/07/28, Viktor Pec (viktor.pec@fzu.cz)
 #   Adding new refactored version (v5). Based on the legacy perl script v4.
 #   Adding new foam material based on survey for ProtoDUNE
+# Update: 2023/09/13, Viktor Pec (viktor.pec@fzu.cz)
+#   Changed material of wire boards from G10 to FR4.
+#   Added more of the FR4 material: thicker wire boards, additional readout boards, CPA now thicker (3 mm), made of FR-4.
+#   Fixed a bug where no clearance was given between the filed cage and the APA/CPA. It now should be 1 cm in the vertical direction. However, the fieldcage now also overlap the TPC by 1 cm in z direction.
 #
 ###
 
