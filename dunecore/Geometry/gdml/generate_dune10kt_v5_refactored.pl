@@ -253,7 +253,7 @@ $TPC_y    =   $APAphys_y + $APAGap_y;
 $CPATube_OD = 5.066;
 #$CPATube_ID = 4.747;
 
-$Cathode_x                 =    0.016;
+$Cathode_x                 =    0.3; #0.016; temporary fix for thicker FR-4 board
 $Cathode_y                 =    $APAphys_y - $CPATube_OD;
 $Cathode_z                 =    $APAphys_z - $CPATube_OD;
 
@@ -1531,7 +1531,7 @@ print CRYO <<EOF;
       <solidref ref="GaseousArgon"/>
     </volume>
     <volume name="volCathode">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
+      <materialref ref="FR4SussexAPA" />
       <solidref ref="Cathode" />
     </volume>
 EOF
