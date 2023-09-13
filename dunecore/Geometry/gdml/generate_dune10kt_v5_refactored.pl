@@ -179,7 +179,7 @@ elsif($workspace==2){
 $nAPAs                 =     $nAPAWide*$nAPAHigh*$nAPALong;
 
 
-$G10thickness = $inch/8;
+$G10thickness = 3*$inch/16;
 $WrapCover    = $inch/16;
 
 $SpaceAPAToCryoWall    =     15;
@@ -273,6 +273,12 @@ $Argon_x            =       ($nAPAWide-1)*$APAToAPA
                               + $APA_UtoU_x + $TPCWirePlaneThickness
                               + 2*$SpaceAPAToCryoWall;
 
+# FR-4 readout boards at the APA head
+$G10HeadBoard_y = 16.5;
+$G10HeadBoard_x = 8*$G10thickness;
+$G10HeadBoard_z = $APAFrame_z;
+
+
 
 #FIELD CAGE IN (FCI)
 $FC_x                   =       ($nAPAWide-1)*$APAToAPA
@@ -294,13 +300,12 @@ $Argon_z               =      $nAPALong*$APAphys_z
                                 + ($nAPALong-1)*$APAGap_z
                                 + $UpstreamLArPadding + $DownstreamLArPadding;
 
+$FC_b                  =      2; #2 cm buffer for FC
 $FCI_y                 =      $nAPAHigh*$TPC_y+$FC_b; #The +FC_b is an arbitrary +2cm to make sure the FC doesn't contact the APA or CPAs.
 $FCO_y                 =      $FCI_y+(0.1*$inch)*2; #The outer boundary of the Fied Cage
 $FCI_z                 =      $nAPALong*$TPC_z
                                 + $FC_b; #the plus FC_b is +2 cm arbitrarily. This makes sure the FC doesn't contact the APAs.
 $FCO_z                 =      $FCI_z+(0.1*$inch)*2;
-
-$FC_b                  =      2; #2 cm buffer for FC
 
 $Cryostat_x            =      $Argon_x  + 2*$SteelThickness;
 $Cryostat_y            =      $Argon_y + 2*$SteelThickness;
@@ -1508,6 +1513,12 @@ print CRYO <<EOF;
       y="@{[$G10BoardZSide_y]}"
       z="@{[$G10BoardZSide_z]}"/>
 
+      <!-- Approximate stack of FR-4 readout boards at APA head -->
+     <box name="G10HeadBoards" lunit="cm"
+      x="@{[$G10HeadBoard_x]}"
+      y="@{[$G10HeadBoard_y]}"
+      z="@{[$G10HeadBoard_z]}"/>
+
 </solids>
 EOF
 
@@ -1586,6 +1597,11 @@ print CRYO <<EOF;
     <volume name="volG10BoardZSideCenterSeg">
       <materialref ref="FR4SussexAPA"/>
       <solidref ref="G10BoardZSideCenterSeg"/>
+    </volume>
+
+    <volume name="volG10HeadBoards">
+      <materialref ref="FR4SussexAPA"/>
+      <solidref ref="G10HeadBoards"/>
     </volume>
 
     <volume name="volCryostat">
@@ -1942,21 +1958,37 @@ $G10BoardZSide_x = $APAFrame_x;
 $G10BoardZSide_y = $G10thickness;
 $G10BoardZSide_z = $APAFrame_z;
 
-if($_[4]==1)    # top APAs
-{
-    $posG10ZSideZ_y    = $APAFrameCenter_y - $APAFrame_y/2 - (0+.5)*($G10BoardZSide_y);
-    $posG10ZSideV_y    = $APAFrameCenter_y - $APAFrame_y/2 - (1+.5)*($G10BoardZSide_y);
-    $posG10ZSideU_y    = $APAFrameCenter_y - $APAFrame_y/2 - (2+.5)*($G10BoardZSide_y);
-    $posG10ZSideGrid_y = $APAFrameCenter_y - $APAFrame_y/2 - (3+.5)*($G10BoardZSide_y);
-}
-elsif($_[4]==0) # bottom APAs
-{
-    $posG10ZSideZ_y    = $APAFrameCenter_y + $APAFrame_y/2 + (0+.5)*($G10BoardZSide_y);
-    $posG10ZSideV_y    = $APAFrameCenter_y + $APAFrame_y/2 + (1+.5)*($G10BoardZSide_y);
-    $posG10ZSideU_y    = $APAFrameCenter_y + $APAFrame_y/2 + (2+.5)*($G10BoardZSide_y);
-    $posG10ZSideGrid_y = $APAFrameCenter_y + $APAFrame_y/2 + (3+.5)*($G10BoardZSide_y);
-}
-else{ print "APA not labeled as top or bottom"; }
+
+    if ($_[4] != 0 && $_[4] != 1){
+	print "APA not labeled as top or bottom";
+    }
+
+
+# Readout boards - approximated as a single box equivalent to a stack of 8 single FR-4 boards, make clearance for field cage
+    $posG10Head_y = $APAFrameCenter_y + (2*$_[4]-1)*($APAFrame_y/2 + $G10HeadBoard_y/2 + ($FCO_y - $FCI_y)/2 + $FC_b);
+
+# wire boards at the foot of APA: top or bottom based on $_[4]
+    $posG10ZSideZ_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (0+.5)*($G10BoardZSide_y));
+    $posG10ZSideV_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (1+.5)*($G10BoardZSide_y));
+    $posG10ZSideU_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (2+.5)*($G10BoardZSide_y));
+    $posG10ZSideGrid_y = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (3+.5)*($G10BoardZSide_y));
+
+
+#     if($_[4]==1)    # top APAs
+# {
+#     $posG10ZSideZ_y    = $APAFrameCenter_y - $APAFrame_y/2 - (0+.5)*($G10BoardZSide_y);
+#     $posG10ZSideV_y    = $APAFrameCenter_y - $APAFrame_y/2 - (1+.5)*($G10BoardZSide_y);
+#     $posG10ZSideU_y    = $APAFrameCenter_y - $APAFrame_y/2 - (2+.5)*($G10BoardZSide_y);
+#     $posG10ZSideGrid_y = $APAFrameCenter_y - $APAFrame_y/2 - (3+.5)*($G10BoardZSide_y);
+# }
+# elsif($_[4]==0) # bottom APAs
+# {
+#     $posG10ZSideZ_y    = $APAFrameCenter_y + $APAFrame_y/2 + (0+.5)*($G10BoardZSide_y);
+#     $posG10ZSideV_y    = $APAFrameCenter_y + $APAFrame_y/2 + (1+.5)*($G10BoardZSide_y);
+#     $posG10ZSideU_y    = $APAFrameCenter_y + $APAFrame_y/2 + (2+.5)*($G10BoardZSide_y);
+#     $posG10ZSideGrid_y = $APAFrameCenter_y + $APAFrame_y/2 + (3+.5)*($G10BoardZSide_y);
+# }
+# else{ print "APA not labeled as top or bottom"; }
 
    # First put in the frame
 #  print CRYO <<EOF;
@@ -2019,16 +2051,27 @@ else{ print "APA not labeled as top or bottom"; }
       - There are two boards on each the up and downstream end,
           one each to wrap the U and V views around the APA frame
       - There are 4 on the bottom which anchor the U V and Z wires and the grid plane
-      - The rest of the parts of the G10 boards must be placed directly in volTPC   -->
+      FIXME: This is not true -> - The rest of the parts of the G10 boards must be placed directly in volTPC   -->
+
+      <!-- Position readout boards -->
+      <physvol>
+        <volumeref ref="volG10HeadBoards"/>
+        <position name="posG10HeadBoards\-$APA_i" unit="cm"
+	  x="@{[$APAFrameCenter_x]}"
+	  y="@{[$posG10Head_y]}"
+      	  z="@{[$APAFrameCenter_z]}"/>
+        <rotationref ref="rIdentity"/>
+      </physvol>
 
       <physvol>
         <volumeref ref="volG10BoardYSideCenterSeg"/>
         <position name="posG10BoardYSideCenterSeg\-Vup\-$APA_i" unit="cm"
-      x="@{[$APAFrameCenter_x]}"
-      y="@{[$APAFrameCenter_y]}"
-      z="@{[$APAFrameCenter_z - $APAFrame_z/2 - (0+.5)*($G10BoardYSide_z)]}"/>
-        <rotationref ref="rIdentity"/>
+         x="@{[$APAFrameCenter_x]}"
+         y="@{[$APAFrameCenter_y]}"
+         z="@{[$APAFrameCenter_z - $APAFrame_z/2 - (0+.5)*($G10BoardYSide_z)]}"/>
+         <rotationref ref="rIdentity"/>
       </physvol>
+
       <physvol>
         <volumeref ref="volG10BoardYSideCenterSeg"/>
         <position name="posG10BoardYSideCenterSeg\-Uup\-$APA_i" unit="cm"
