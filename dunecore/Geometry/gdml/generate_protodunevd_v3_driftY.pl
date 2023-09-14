@@ -2,9 +2,8 @@
 #
 #  First attempt to make a GDML generator for the ProtoDUNE vertical drift 
 #  detector geometry with 3 views: +/- Xdeg for induction and 90 deg collection. 
-#  !!!NOTE!!!: the readout is on Y plane (drift along horizontal X)
-#              due to current reco limitations).
 #  Simplified treatment of inter-module dead spaces
+#  drift implemented along the Y-axis
 #
 #  Created: Mon July 18 2022
 #           Laura Paulucci <lpaulucc@fnal.gov>, based on Vyacheslav Galymov's script for dunevd10kt
@@ -52,7 +51,7 @@ GetOptions( "help|h" => \$help,
 
 my $FieldCage_switch="on";
 my $Cathode_switch="on";
-my $wires_on=0;
+$wires_on = 0; # 1=on, 0=off
 $GroundGrid_switch="off";
 $ExtractionGrid_switch="off";
 
@@ -81,7 +80,6 @@ else
 }
 
 # set wires on to be the default, unless given an input by the user
-$wires_on = 1; # 1=on, 0=off
 if (defined $wires)
 {
     $wires_on = $wires;
@@ -3390,6 +3388,7 @@ EOF
     <volume name="volAuxDetSensitive_CRTDPTOP_$padnum">
         <materialref ref="Polystyrene"/>
         <solidref ref="scintBox_Top"/>
+        <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
     </volume>
 EOF
         }
@@ -3399,6 +3398,7 @@ EOF
     <volume name="volAuxDetSensitive_CRTDPBOTTOM_$padnum">
         <materialref ref="Polystyrene"/>
         <solidref ref="scintBox_Bottom"/>
+        <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
     </volume>
 EOF
         }
