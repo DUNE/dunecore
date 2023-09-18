@@ -193,12 +193,15 @@ $posCryoInDetEnc_x = 0;
 $posCryoInDetEnc_y = 0;
 $posCryoInDetEnc_z = 0;
 
-$posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y + 61.8/2; ## JS Real, add boxCryoTop dz/2.
-$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y  - 61.8/2;;
-$posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z + 61.8/2;  ## JS Real, add boxCryoWallSm dz/2.;
-$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z - 61.8/2;;
-$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x  + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
-$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x  + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
+$posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y; #+ 61.8/2; ## JS Real, add boxCryoTop dz/2.
+$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y; # - 61.8/2;;
+$posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z;# + 61.8/2;  ## JS Real, add boxCryoWallSm dz/2.;
+$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;# - 61.8/2;;
+$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x; # + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
+$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x;#  + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
+
+$posTopSteelStruct -= 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise
+$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on"; 
 
 # 2*AirThickness is added to the world volume in x, y and z
 $AirThickness = 3000;
@@ -1572,7 +1575,7 @@ print TPC <<EOF;
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive$quad" unit="cm" 
-        x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
+        x="$posTPCActive[0]" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -2984,8 +2987,9 @@ EOF
         my @poscrttop = ($TopCRTDPModHeight/2. - $TopCRTDPPaddleHeight/2., 0., 0.);
         for($i=0 ; $i<8 ; $i++){
             $padnum = $i+1;
+            $paddleindex = $padnum;
             print ENCL <<EOF;
-    <physvol name="CRTDPTOP$padnum">
+    <physvol name="CRTDPTOP$padnum" copynumber="$paddleindex">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
         <position name="posCRTPaddleSensitiveTop1" unit="mm" x="$poscrttop[0]" y="0" z="0"/> 
         <rotationref ref="rMinus90AboutX"/>
@@ -3007,8 +3011,9 @@ EOF
         # loop over paddles
         for($i=0 ; $i<8 ; $i++){
             $padnum = $i+1;
+            $paddleindex = 8+$padnum;
         print ENCL <<EOF;
-    <physvol name="CRTDPBOTTOM$padnum">
+    <physvol name="CRTDPBOTTOM$padnum" copynumber="$paddleindex">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
       <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="$poscrtbottom[0]" y="0" z="0"/> 
       <rotationref ref="rMinus90AboutX"/>

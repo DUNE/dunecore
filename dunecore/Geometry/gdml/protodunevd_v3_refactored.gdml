@@ -19099,7 +19099,7 @@
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive0" unit="cm" 
-        x="-0.03" y="" z="0"/>
+        x="-0.03" y="0" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -25761,7 +25761,7 @@
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive1" unit="cm" 
-        x="-0.03" y="" z="0"/>
+        x="-0.03" y="0" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -32423,7 +32423,7 @@
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive2" unit="cm" 
-        x="-0.03" y="" z="0"/>
+        x="-0.03" y="0" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -39085,7 +39085,7 @@
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive3" unit="cm" 
-        x="-0.03" y="" z="0"/>
+        x="-0.03" y="0" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -41275,7 +41275,7 @@
     
     <physvol name="volSteelSupport_Top">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Top" x="0" y="600.4" z="0" unit="cm"/>
+    <position name="posSteelSupport_Top" x="0" y="539.8" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_Top" x="90" y="0" z="0" unit="deg"/>
     
     </physvol>
@@ -41283,35 +41283,35 @@
     
     <physvol name="volSteelSupport_Bottom">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Bottom" x="0" y="-600.4" z="0" unit="cm"/>
+    <position name="posSteelSupport_Bottom" x="0" y="-539.8" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_Bottom" x="-90" y="0" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol>
     <volumeref ref="volSteelSupport_US"/>
-    <position name="posSteelSupport_US" x="0" y="0" z="-570.4" unit="cm"/>
+    <position name="posSteelSupport_US" x="0" y="0" z="-539.5" unit="cm"/>
     <rotation name="rotSteelSupport_Front" x="0" y="0" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_DS">
     <volumeref ref="volSteelSupport_WS"/>
-    <position name="posSteelSupport_DS" x="0" y="0" z="570.4" unit="cm"/>
+    <position name="posSteelSupport_DS" x="0" y="0" z="539.5" unit="cm"/>
     <rotation name="rotSteelSupport_Back" x="0" y="0" z="" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_LS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_LS" x="572" y="0" z="0" unit="cm"/>
+    <position name="posSteelSupport_LS" x="541.1" y="0" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_LS" x="0" y="-90" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_RS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_RS" x="-510.2" y="0" z="0" unit="cm"/>
+    <position name="posSteelSupport_RS" x="-541.1" y="0" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
     </physvol>
     
