@@ -40320,88 +40320,88 @@
 <volume name="volAuxDetCRTDPModuleTop">
       <materialref ref="Air"/>
       <solidref ref="ModulescintBox_Top"/>
-    <physvol name="CRTDPTOP1">
+    <physvol name="CRTDPTOP1" copynumber="1">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
         <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="497" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP2">
+    <physvol name="CRTDPTOP2" copynumber="2">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="355" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop2" unit="mm" x="0" y="355" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP3">
+    <physvol name="CRTDPTOP3" copynumber="3">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="213" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop3" unit="mm" x="0" y="213" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP4">
+    <physvol name="CRTDPTOP4" copynumber="4">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="71" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop4" unit="mm" x="0" y="71" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP5">
+    <physvol name="CRTDPTOP5" copynumber="5">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="-71" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop5" unit="mm" x="0" y="-71" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP6">
+    <physvol name="CRTDPTOP6" copynumber="6">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="-213" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop6" unit="mm" x="0" y="-213" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP7">
+    <physvol name="CRTDPTOP7" copynumber="7">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="-355" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop7" unit="mm" x="0" y="-355" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPTOP8">
+    <physvol name="CRTDPTOP8" copynumber="8">
         <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="0" y="-497" z="0"/> 
+        <position name="posCRTPaddleSensitiveTop8" unit="mm" x="0" y="-497" z="0"/> 
         <rotationref ref="rMinus90AboutY"/>
     </physvol>
 </volume>
 <volume name="volAuxDetCRTDPModuleBottom">
       <materialref ref="Air"/>
       <solidref ref="ModulescintBox_Bottom"/>
-    <physvol name="CRTDPBOTTOM1">
+    <physvol name="CRTDPBOTTOM1" copynumber="9">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
       <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="497" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM2">
+    <physvol name="CRTDPBOTTOM2" copynumber="10">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="355" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom2" unit="mm" x="0" y="355" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM3">
+    <physvol name="CRTDPBOTTOM3" copynumber="11">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="213" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom3" unit="mm" x="0" y="213" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM4">
+    <physvol name="CRTDPBOTTOM4" copynumber="12">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="71" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom4" unit="mm" x="0" y="71" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM5">
+    <physvol name="CRTDPBOTTOM5" copynumber="13">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="-71" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom5" unit="mm" x="0" y="-71" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM6">
+    <physvol name="CRTDPBOTTOM6" copynumber="14">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="-213" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom6" unit="mm" x="0" y="-213" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM7">
+    <physvol name="CRTDPBOTTOM7" copynumber="15">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="-355" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom7" unit="mm" x="0" y="-355" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
-    <physvol name="CRTDPBOTTOM8">
+    <physvol name="CRTDPBOTTOM8" copynumber="16">
       <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="0" y="-497" z="0"/> 
+      <position name="posCRTPaddleSensitiveBottom8" unit="mm" x="0" y="-497" z="0"/> 
       <rotationref ref="rMinus90AboutY"/>
     </physvol>
 	</volume>

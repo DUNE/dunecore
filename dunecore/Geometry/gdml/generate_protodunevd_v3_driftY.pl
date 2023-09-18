@@ -2,8 +2,9 @@
 #
 #  First attempt to make a GDML generator for the ProtoDUNE vertical drift 
 #  detector geometry with 3 views: +/- Xdeg for induction and 90 deg collection. 
+#  !!!NOTE!!!: the readout is on Y plane (drift along horizontal X)
+#              due to current reco limitations).
 #  Simplified treatment of inter-module dead spaces
-#  drift implemented along the Y-axis
 #
 #  Created: Mon July 18 2022
 #           Laura Paulucci <lpaulucc@fnal.gov>, based on Vyacheslav Galymov's script for dunevd10kt
@@ -20,12 +21,12 @@
 #           These are then split through mid-CRU section to make
 #           wire objets for geo planes and geo vol TPCs, as done
 #           by V. Galymov for the ColdBox2
-#  V3.1:      JS Real, June 15 2023
-#           Add the existing CRTs on NP02, used for the previous Double Phase data taking
-#           Add switches for CRT of ProtoDUNE-HD, CRT of NP02 DP
-#           The Physvol volSteelSupport_Top and volSteelSupport_Bottom have to been move back to the rigth position otherwise with have overlap with the NP02 CRTs
-#           this is done by subtracting (adding) 29.7 cm to $posTopSteelStruct ($posBotSteelStruct) when the switch $DP_CRT_switch is on
-#           With this move, the posSteelSupport_Top overlaps with beam plug (to be fixed)
+#  V3.1:      JS Real, Julay 21 2023
+#           -Add the existing CRTs on NP02, used for the previous Double Phase data taking
+#           -Add switches for CRT of ProtoDUNE-HD, CRT of NP02 DP
+#           -NP02 CRT's position are optimized for VD module 0 (centered on active volume, and lower position for bottom CRTs to better match bottom drift volume)
+#           -Since we are in driftY configuration x and y of the SteelSupport structure does not have to be flipped. overlap does not exist anymore and
+#            volSteelSuport_LS/RS/Bottom/Top have been moved back to their nominal position
 ##################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
@@ -51,7 +52,7 @@ GetOptions( "help|h" => \$help,
 
 my $FieldCage_switch="on";
 my $Cathode_switch="on";
-$wires_on = 0; # 1=on, 0=off
+my $wires_on=0;
 $GroundGrid_switch="off";
 $ExtractionGrid_switch="off";
 
@@ -79,7 +80,6 @@ else
     $suffix = "-" . $suffix;
 }
 
-# set wires on to be the default, unless given an input by the user
 if (defined $wires)
 {
     $wires_on = $wires;
@@ -202,17 +202,13 @@ $posCryoInDetEnc_x = 0;
 $posCryoInDetEnc_y = 0;
 $posCryoInDetEnc_z = 0;
 
-$posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y;
-$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y;
-$posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z;
-$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;
-$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x;
-$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x;
+$posTopSteelStruct = $Argon_y/2+$FoamPadding+ 2*$SteelSupport_y + 61.8/2; ## JS Real, add boxCryoTop dz/2.
+$posBotSteelStruct = -$Argon_y/2-$FoamPadding- 2*$SteelSupport_y - 61.8/2;
+$posZBackSteelStruct = $Argon_z/2+$FoamPadding+ 2*$SteelSupport_z + 61.8/2;  ## JS Real, add boxCryoWallSm dz/2.
+$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding- 2*$SteelSupport_z - 61.8/2;
+$posLeftSteelStruct = $Argon_x/2+$FoamPadding+ 2*$SteelSupport_x + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.
+$posRightSteelStruct = -$Argon_x/2-$FoamPadding- 2*$SteelSupport_x - 61.8/2;
 
-
-#$posTopSteelStruct -= 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise #flag : get this silent since there should be no issue with the driftY
-#$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise
-#flag : steel structure going silent in dirftY geometry
 
 # 2*AirThickness is added to the world volume in x, y and z
 $AirThickness = 3000;
@@ -557,6 +553,24 @@ $CRTPaddleLength     =  322.5;
 $CRTModWidth         =  162.5;
 $CRTModHeight        =  2.0;
 $CRTModLength        =  322.5;
+
+
+$TopCRTDPPaddleWidth      =  20; #mm 
+$TopCRTDPPaddleHeight     =  132; #mm
+$TopCRTDPPaddleLength     =  1440; #mm
+$BottomCRTDPPaddleWidth   =  20; #mm 
+$BottomCRTDPPaddleHeight  =  116; #mm
+$BottomCRTDPPaddleLength  =  1440; #mm
+$CRTDPPaddleSpacing       = 132+10; # spacing between two consecutive paddles (edge to edge) (mm)
+
+$TopCRTDPModWidth         =  21; #mm
+$TopCRTDPModHeight        =  1126; #mm
+$TopCRTDPModLength        =  1440; #mm
+$BottomCRTDPModWidth      =  21; #mm
+$BottomCRTDPModHeight     =  1110; #mm
+$BottomCRTDPModLength     =  1440; #mm
+        
+
 
 # SuperModule Centers as per Survey Document
 $CRT_DSTopLeft_x     =  171.2;
@@ -1652,7 +1666,7 @@ print TPC <<EOF;
 EOF
 
 # offset of the active area from CRP envelope
-my $pcbOffsetY = 999;
+my $pcbOffsetX = 999;
 my $pcbOffsetZ = 999;
 if( $quad == 0 ){
     #$pcbOffsetY =  $borderCRP/2; #flag
@@ -1702,7 +1716,7 @@ print TPC <<EOF;
        <solidref ref="CRM"/>
        <physvol>
        <volumeref ref="volTPCPlaneU$quad"/>
-       <position name="posPlaneU$quad" unit="cm" 
+       <position name="posPlaneU$quad" unit="cm"
          x="$posUplane[0]" y="$posUplane[1]" z="$posUplane[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
@@ -1721,7 +1735,7 @@ print TPC <<EOF;
      <physvol>
        <volumeref ref="volTPCActive"/>
        <position name="posActive$quad" unit="cm" 
-        x="$posTPCActive[0]" y="$posTPCAtive[1]" z="$posTPCActive[2]"/>
+        x="$posTPCActive[0]" y="$posTPCActive[1]" z="$posTPCActive[2]"/>
        <rotationref ref="rIdentity"/>
      </physvol>
    </volume>
@@ -2688,7 +2702,7 @@ for($j=0;$j<$nCRM_z/2;$j++){
   #$FrameCenter_x=$CathodePosX +$driftTPCActive +$heightCathode/2; #flag x --> y
   $FrameCenter_y = $CathodePosY +$driftTPCActive +$heightCathode/2;
   #$FrameCenter_y= -$widthCathode - $FCToArapucaSpaceLat; flag y --> x
-  $FrameCenter_x = -$widthCathode - $FrameToArapucaSpaceLat;
+  $FrameCenter_x = -$widthCathode - $FCToArapucaSpaceLat;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
 for($j=0;$j<1;$j++){#nCRM will give the collumn number (1 collumn per frame)
@@ -2790,7 +2804,7 @@ $Ara_Z = $FrameCenter_z;
              #            $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
              if ($ara<4) {$Ara_XSens = $Ara_X -( +0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.01);
                          $rot= "rIdentity"; }
-             else {      $Ara_X = $Ara_X -(2*$widthCathode + 2*$FrameToArapucaSpaceLat);
+             else {      $Ara_X = $Ara_X -(2*$widthCathode + 2*$FCToArapucaSpaceLat);
                          $Ara_XSens = $Ara_X -(-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.01); 
                          $rot = "rPlus180AboutY";}
              
@@ -2874,8 +2888,10 @@ EOF
     #flag swap x and y values below
     if($DP_CRT_switch eq "on"){
         print ENCL <<EOF;
-        <box name="scintBox_Top" lunit="mm" x="1440" y="132" z="20"/>
-        <box name="scintBox_Bottom" lunit="mm"  x="1440" y="116" z="20"/>
+        <box name="scintBox_Top" lunit="mm" x="$TopCRTDPPaddleLength" y="$TopCRTDPPaddleHeight" z="$TopCRTDPPaddleWidth"/>
+        <box name="scintBox_Bottom" lunit="mm"  x="$BottomCRTDPPaddleLength" y="$BottomCRTDPPaddleHeight" z="$BottomCRTDPPaddleWidth"/>
+        <box name="ModulescintBox_Top" lunit="mm" x="$TopCRTDPModWidth" y="$TopCRTDPModHeight" z="$TopCRTDPModLength"/>
+        <box name="ModulescintBox_Bottom" lunit="mm" x="$BottomCRTDPModWidth" y="$BottomCRTDPModHeight" z="$BottomCRTDPModLength"/>
 EOF
     }
 #flag below, change x and y dimensions for cathode blocks
@@ -3325,6 +3341,8 @@ EOF
 EOF
         }
         
+
+
         for($imod=0 ; $imod<16 ; $imod++){
             $modnum = $imod + 1;
             for($i=0 ; $i<64 ; $i++){
@@ -3381,29 +3399,78 @@ EOF
     
     
 #############  existing NP02 CRT, used for Double Phase data taking
+
+
+
     if($DP_CRT_switch eq "on"){
+ 
+	#change
+	# VD CRT
+	print ENCL <<EOF;
+    <volume name="volAuxDetSensitiveCRTDPPaddleTop">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Top"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+    <volume name="volAuxDetSensitiveCRTDPPaddleBottom">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Bottom"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+EOF
+
+# top CRT-DP module
+#my $widthPalette=132+10; # spacing between paddle (mm)
+print ENCL <<EOF;
+<volume name="volAuxDetCRTDPModuleTop">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Top"/>
+EOF
+        my @poscrttop = (0., $TopCRTDPModHeight/2. - $TopCRTDPPaddleHeight/2., 0.);
         for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
+            $padnum = $i;
+            $paddleindex = $padnum;
             print ENCL <<EOF;
-    <volume name="volAuxDetSensitive_CRTDPTOP_$padnum">
-        <materialref ref="Polystyrene"/>
-        <solidref ref="scintBox_Top"/>
-        <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
-    </volume>
+    <physvol name="CRTDPTOP$padnum" copynumber="$paddleindex">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop$padnum" unit="mm" x="0" y="$poscrttop[1]" z="0"/> 
+        <rotationref ref="rMinus90AboutY"/>
+    </physvol>
 EOF
+        $poscrttop[1] -= $CRTDPPaddleSpacing;
         }
+print ENCL <<EOF;
+</volume>
+EOF
+
+# bottom CRT-DP module
+        my @poscrtbottom = (0., $BottomCRTDPModHeight/2. - $BottomCRTDPPaddleHeight/2., 0.);
+print ENCL <<EOF;
+<volume name="volAuxDetCRTDPModuleBottom">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Bottom"/>
+EOF
+        # loop over paddles
         for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
+            $padnum = $i;
+            $paddleindex = 8+$padnum;
         print ENCL <<EOF;
-    <volume name="volAuxDetSensitive_CRTDPBOTTOM_$padnum">
-        <materialref ref="Polystyrene"/>
-        <solidref ref="scintBox_Bottom"/>
-        <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
-    </volume>
+    <physvol name="CRTDPBOTTOM$padnum" copynumber="$paddleindex">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom$padnum" unit="mm" x="0" y="$poscrtbottom[1]" z="0"/> 
+      <rotationref ref="rMinus90AboutY"/>
+    </physvol>
 EOF
-        }
+        $poscrtbottom[1] -= $CRTDPPaddleSpacing;
+        } # end loop over CRT-DP bottom modules
+	print ENCL <<EOF;
+	</volume>
+EOF
     } # end of $DP_CRT_switch eq "on"
 
+    #flag : for DP-CRT above, change <rotationref ref="rMinus90AboutX"/> --> <rotationref ref="rMinus90AboutY"/>
     
     
     print ENCL <<EOF;   
@@ -4299,7 +4366,7 @@ EOF
     
     <physvol name="volSteelSupport_Top">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Top" x="0" y="@{[$posTopSteelStruct+61.1]}" z="0" unit="cm"/>
+    <position name="posSteelSupport_Top" x="0" y="@{[$posTopSteelStruct]}" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_Top" x="90" y="0" z="0" unit="deg"/>
     
     </physvol>
@@ -4307,35 +4374,35 @@ EOF
     
     <physvol name="volSteelSupport_Bottom">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Bottom" x="0" y="@{[$posBotSteelStruct-61.1]}" z="0" unit="cm"/>
+    <position name="posSteelSupport_Bottom" x="0" y="@{[$posBotSteelStruct]}" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_Bottom" x="-90" y="0" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol>
     <volumeref ref="volSteelSupport_US"/>
-    <position name="posSteelSupport_US" x="0" y="0" z="@{[$posZFrontSteelStruct-31.1]}" unit="cm"/>
+    <position name="posSteelSupport_US" x="0" y="0" z="@{[$posZFrontSteelStruct]}" unit="cm"/>
     <rotation name="rotSteelSupport_Front" x="0" y="0" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_DS">
     <volumeref ref="volSteelSupport_WS"/>
-    <position name="posSteelSupport_DS" x="0" y="0" z="@{[$posZBackSteelStruct+31.1]}" unit="cm"/>
+    <position name="posSteelSupport_DS" x="0" y="0" z="@{[$posZBackSteelStruct]}" unit="cm"/>
     <rotation name="rotSteelSupport_Back" x="0" y="0" z="" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_LS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_LS" x="@{[$posLeftSteelStruct+65.1]}" y="0" z="0" unit="cm"/>
+    <position name="posSteelSupport_LS" x="@{[$posLeftSteelStruct]}" y="0" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_LS" x="0" y="-90" z="0" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_RS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_RS" x="@{[$posRightSteelStruct-65.1]}" y="0" z="0" unit="cm"/>
+    <position name="posSteelSupport_RS" x="@{[$posRightSteelStruct]}" y="0" z="0" unit="cm"/>
     <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
     </physvol>
     
@@ -4419,45 +4486,61 @@ EOF
     
     #############  existing NP02 CRT, used for Double Phase data taking
     if($DP_CRT_switch eq "on"){
-        ## position for driftX
-        #my @posCRT_DP_top = (4517.4,5882,-1656); #mm
-        ##position for driftY
-        my @posCRT_DP_top = (-5882, 4517, -1656); #mm #flag
-        
-        my $widthPalette=132; # spacing between paddle (mm)
-        for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
-            print ENCL <<EOF;
+        ## position for driftX  original DP NP02 position
+        #my @posCRT_DP_top = (4345, 5882, -1656); #mm
+        ##position for driftY original DP NP02 position
+        #my @posCRT_DP_top = (-5882, 4345, -1656); #mm #flag
+        ##position for driftY module0
+        my @posCRT_DP_top = ( -5882, 4345, 0); #mm #flag
+        print ENCL <<EOF;
     <physvol>
-        <volumeref ref="volAuxDetSensitive_CRTDPTOP_$padnum"/>
-        <position name="posCRTDPTOPSensitive_$padnum" unit="mm" x="$posCRT_DP_top[0]" y="$posCRT_DP_top[1]" z="$posCRT_DP_top[2]"/>
-        <rotationref ref="rMinus90AboutY"/>
+        <volumeref ref="volAuxDetCRTDPModuleTop"/>
+        <position name="posCRTDPTOPSensitive_1" unit="mm" x="-5882" y="3848" z="0"/>
+        <rotationref ref="rIdentity"/>
     </physvol>
 EOF
-            #$posCRT_DP_top[0]-=$widthPalette;
-            $posCRT_DP_top[1]-=$widthPalette; #flag
-        }
-        ## position for driftX
-	#my @posCRT_DP_bot = (-564.6,-5882,-1656); #mm
-        ##position for dirftY
-        my @posCRT_DP_bot = (5882, -564.6, -1656); #mm #flag
-        for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
-            print ENCL <<EOF;
+##        my $widthPalette=132+10; # spacing between paddle (mm)
+##        for($i=0 ; $i<8 ; $i++){
+##            $padnum = $i+1;
+##            print ENCL <<EOF;
+##    <physvol>
+##        <volumeref ref="volAuxDetSensitiveCRTDPTOP$padnum"/>
+##        <position name="posCRTDPTOPSensitive_$padnum" unit="mm" x="$posCRT_DP_top[0]" y="$posCRT_DP_top[1]" z="$posCRT_DP_top[2]"/>
+##        <rotationref ref="rMinus90AboutY"/>
+##    </physvol>
+##EOF
+##            #$posCRT_DP_top[0]-=$widthPalette;
+##            $posCRT_DP_top[1]-=$widthPalette; #flag
+##        }
+        ## position for driftX original DP NP02 position
+        #my @posCRT_DP_bot = (-737, -5882, -1656); #mm
+        ##position for driftY original DP NP02 position
+        #my @posCRT_DP_bot = (5882, -737, -1656); #mm #flag
+        ##position for driftY module0
+        my @posCRT_DP_bot = (5882, -3909, -0); #mm #flag
+        print ENCL <<EOF;
     <physvol>
-        <volumeref ref="volAuxDetSensitive_CRTDPBOTTOM_$padnum"/>
-        <position name="posCRTDPBOTTOMSensitive_$padnum" unit="mm" x="$posCRT_DP_bot[0]" y="$posCRT_DP_bot[1]" z="$posCRT_DP_bot[2]"/>
-        <rotationref ref="rMinus90AboutY"/>
+        <volumeref ref="volAuxDetCRTDPModuleBottom"/>
+        <position name="posCRTDPBOTTOMSensitive_1" unit="mm" x="5882" y="-4406" z="0"/>
+        <rotationref ref="rIdentity"/>
     </physvol>
 EOF
+##        for($i=0 ; $i<8 ; $i++){
+##            $padnum = $i+1;
+##            print ENCL <<EOF;
+##    <physvol>
+ ##       <volumeref ref="volAuxDetSensitiveCRTDPBOTTOM$padnum"/>
+##        <position name="posCRTDPBOTTOMSensitive_$padnum" unit="mm" x="$posCRT_DP_bot[0]" y="$posCRT_DP_bot[1]" z="$posCRT_DP_bot[2]"/>
+##        <rotationref ref="rMinus90AboutY"/>
+##    </physvol>
+##EOF
             #$posCRT_DP_bot[0]-=$widthPalette;
-            $posCRT_DP_bot[1]-=$widthPalette; #flag
-        }
+##            $posCRT_DP_bot[1]-=$widthPalette; #flag
+##        }
     } # end of $DP_CRT_switch eq "on"
 
     
     
-    #flag : for CRT above, change <rotationref ref="rMinus90AboutX"/> --> <rotationref ref="rMinus90AboutY"/>
     
     
     
