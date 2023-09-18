@@ -13,7 +13,7 @@
 #           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
 #           TO DO: exchange x and y in SteelSupport structure (currently, overlaps avoided by changing position
 #                  of volSteelSuport_LS/RS/Bottom/Top)
-#  
+#
 #  V2:      Inclusion of CRT panels (as in ProtoDUNE-HD)
 #           Update of the PDS and of FC
 #           Reorganize the "wire" generator algorithm to allow 
@@ -21,6 +21,11 @@
 #           These are then split through mid-CRU section to make
 #           wire objets for geo planes and geo vol TPCs, as done
 #           by V. Galymov for the ColdBox2
+#  V3.1:      JS Real, July 21 2023
+#           -Add the existing CRTs on NP02, used for the previous Double Phase data taking
+#           -Add switches for CRT of ProtoDUNE-HD, CRT of NP02 DP
+#           -NP02 CRT's position are optimized for VD module 0 (centered on active volume, and lower position for bottom CRTs to better match bottom drift volume)
+#
 ##################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
