@@ -78,7 +78,7 @@ else
 }
 
 # set wires on to be the default, unless given an input by the user
-$wires_on = 1; # 1=on, 0=off
+$wires_on = 0; # 1=on, 0=off
 if (defined $wires)
 {
     $wires_on = $wires;
@@ -2474,7 +2474,7 @@ EOF
     if($DP_CRT_switch eq "on"){
         print ENCL <<EOF;
         <box name="scintBox_Top" lunit="mm" x="$TopCRTDPPaddleHeight" y="$TopCRTDPPaddleLength" z="$TopCRTDPPaddleWidth"/>
-        <box name="scintBox_Bottom" lunit="mm"  x="$BottomCRTDPPaddleHeight" y="$BottomCRTDPPaddleLenght" z="$BottomCRTDPPaddleWidth"/>
+        <box name="scintBox_Bottom" lunit="mm"  x="$BottomCRTDPPaddleHeight" y="$BottomCRTDPPaddleLength" z="$BottomCRTDPPaddleWidth"/>
         <box name="ModulescintBox_Top" lunit="mm" x="$TopCRTDPModHeight" y="$TopCRTDPModWidth" z="$TopCRTDPModLength"/>
         <box name="ModulescintBox_Bottom" lunit="mm" x="$BottomCRTDPModHeight" y="$BottomCRTDPModWidth" z="$BottomCRTDPModLength"/>
 EOF
@@ -2991,7 +2991,7 @@ print ENCL <<EOF;
 EOF
         my @poscrttop = ($TopCRTDPModHeight/2. - $TopCRTDPPaddleHeight/2., 0., 0.);
         for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
+            $padnum = $i;
             $paddleindex = $padnum;
             print ENCL <<EOF;
     <physvol name="CRTDPTOP$padnum" copynumber="$paddleindex">
@@ -3015,7 +3015,7 @@ print ENCL <<EOF;
 EOF
         # loop over paddles
         for($i=0 ; $i<8 ; $i++){
-            $padnum = $i+1;
+            $padnum = $i;
             $paddleindex = 8+$padnum;
         print ENCL <<EOF;
     <physvol name="CRTDPBOTTOM$padnum" copynumber="$paddleindex">

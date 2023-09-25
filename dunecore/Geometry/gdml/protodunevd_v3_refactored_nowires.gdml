@@ -599,7 +599,7 @@
     </subtraction>
 
         <box name="scintBox_Top" lunit="mm" x="132" y="1440" z="20"/>
-        <box name="scintBox_Bottom" lunit="mm"  x="116" y="" z="20"/>
+        <box name="scintBox_Bottom" lunit="mm"  x="116" y="1440" z="20"/>
         <box name="ModulescintBox_Top" lunit="mm" x="1126" y="21" z="1440"/>
         <box name="ModulescintBox_Bottom" lunit="mm" x="1110" y="21" z="1440"/>
     <box name="CathodeBlock" lunit="cm"
