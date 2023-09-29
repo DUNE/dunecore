@@ -6,3 +6,8 @@ The subdirectories of this directory (listed below) contain interfaces most used
 
 [Data](Data) - Data classes.
 
+[Utility](Utility) - Classes withut art decoration, i.e. not tools or services.
+
+[Tool](Tool) - Art tool interfaces.
+
+[Service](Service) - Art service interfaces
