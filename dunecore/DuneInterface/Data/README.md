@@ -3,7 +3,7 @@ David Adams
 September 2023
 
 This directory holds simple data classes.
-They are completely defined in header files, i.e. no library.
+They are completely defined in header files, i.e. no library (mostly?).
 Most have Root dictionaries.
 They are mostly (but not exclusively) used in dataprep code.
 The list below provides brief descriptions along with links to the headers which have
