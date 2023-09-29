@@ -22,6 +22,8 @@ AdcChannelDataMap - Channel-indexed map of channel data is used to desribe a pla
 [Tpc2dRoi](Tpc2dRoi.h) - Dataprep class describing a 2D (channel-tick) ROI.  
 [TpcData](TpcData.h) - Dataprep class holding a collection of planes a nd corresponding 2D ROIs.
 
+[DataMap](DataMap.h) - Name-value map supporting multiple and many value types.
+
 [IndexRange](IndexRange.h) - Contiguopus range of indices, e.g. channels.  
 [IndexRangeGroup](IndesRangeGroup) - Collection of ranges used to describe a possibly non-contiguous collection of indices.
 
