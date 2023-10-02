@@ -612,10 +612,13 @@ HDF5RawDataFile::get_timeslice_header_dataset_paths()
 std::string
 HDF5RawDataFile::get_record_header_dataset_path(const record_id_t& rid)
 {
-  // c14: error: object backing the pointer will be destroyed at the end of the full-expression [-Werror,-Wdangling-gsl]
-  // The problem appears to be the call to find
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  // this used to just call get_all_record_ids().find(rid) but the c14 compiler complained that hte
+  // object backing it was temporary.  Create a local variable allrecids to store the record ids; shouldn't
+  // be too prohibitive in storage and it goes out of scope at the end of the method.  This pattern is repeated
+  // multiple times in this source file
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   if (get_version() <= 2) {
@@ -685,8 +688,9 @@ HDF5RawDataFile::get_all_fragment_dataset_paths()
 std::vector<std::string>
 HDF5RawDataFile::get_fragment_dataset_paths(const record_id_t& rid)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   std::vector<std::string> frag_paths;
@@ -745,8 +749,9 @@ HDF5RawDataFile::get_fragment_dataset_paths(const std::string& subsystem_name)
 std::vector<std::string>
 HDF5RawDataFile::get_fragment_dataset_paths(const record_id_t& rid, const daqdataformats::SourceID::Subsystem subsystem)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   if (get_version() <= 2) {
@@ -837,8 +842,9 @@ HDF5RawDataFile::get_all_geo_ids()
 std::set<uint64_t> // NOLINT(build/unsigned)
 HDF5RawDataFile::get_geo_ids(const record_id_t& rid)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -856,8 +862,9 @@ std::set<uint64_t> // NOLINT(build/unsigned)
 HDF5RawDataFile::get_geo_ids_for_subdetector(const record_id_t& rid,
                                              const detdataformats::DetID::Subdetector subdet)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -883,8 +890,9 @@ HDF5RawDataFile::get_geo_ids_for_subdetector(const record_id_t& rid,
 std::set<daqdataformats::SourceID>
 HDF5RawDataFile::get_source_ids(const record_id_t& rid)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -895,8 +903,9 @@ HDF5RawDataFile::get_source_ids(const record_id_t& rid)
 daqdataformats::SourceID
 HDF5RawDataFile::get_record_header_source_id(const record_id_t& rid)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -907,8 +916,9 @@ HDF5RawDataFile::get_record_header_source_id(const record_id_t& rid)
 std::set<daqdataformats::SourceID>
 HDF5RawDataFile::get_fragment_source_ids(const record_id_t& rid)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -920,8 +930,9 @@ std::set<daqdataformats::SourceID>
 HDF5RawDataFile::get_source_ids_for_subsystem(const record_id_t& rid,
                                               const daqdataformats::SourceID::Subsystem subsystem)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -932,8 +943,9 @@ HDF5RawDataFile::get_source_ids_for_subsystem(const record_id_t& rid,
 std::set<daqdataformats::SourceID>
 HDF5RawDataFile::get_source_ids_for_fragment_type(const record_id_t& rid, const daqdataformats::FragmentType frag_type)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -944,8 +956,9 @@ HDF5RawDataFile::get_source_ids_for_fragment_type(const record_id_t& rid, const 
 std::set<daqdataformats::SourceID>
 HDF5RawDataFile::get_source_ids_for_subdetector(const record_id_t& rid, const detdataformats::DetID::Subdetector subdet)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -985,8 +998,9 @@ HDF5RawDataFile::get_frag_ptr(const record_id_t& rid, const daqdataformats::Sour
   if (get_version() < 2)
     throw cet::exception("HDF5RawDataFile.cpp") << "Incompatible File Layout Version: " <<  get_version() << " 2 " << MAX_FILELAYOUT_VERSION;
 
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -1074,8 +1088,9 @@ HDF5RawDataFile::get_trh_ptr(const record_id_t& rid)
   if (get_version() < 2)
     throw cet::exception("HDF5RawDataFile.cpp") << "Incompatible File Layout Version: " <<  get_version() << " 2 " << MAX_FILELAYOUT_VERSION;
 
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -1099,8 +1114,9 @@ HDF5RawDataFile::get_tsh_ptr(const record_id_t& rid)
   if (get_version() < 2)
     throw cet::exception("HDF5RawDataFile.cpp") << "Incompatible File Layout Version: " <<  get_version() << " 2 " << MAX_FILELAYOUT_VERSION;
 
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -1134,8 +1150,9 @@ HDF5RawDataFile::get_timeslice(const daqdataformats::timeslice_number_t ts_num)
 std::vector<uint64_t> // NOLINT(build/unsigned)
 HDF5RawDataFile::get_geo_ids_for_source_id(const record_id_t& rid, const daqdataformats::SourceID& source_id)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
@@ -1147,8 +1164,9 @@ daqdataformats::SourceID
 HDF5RawDataFile::get_source_id_for_geo_id(const record_id_t& rid,
                                           const uint64_t requested_geo_id) // NOLINT(build/unsigned)
 {
-  auto rec_id = get_all_record_ids().find(rid);
-  if (rec_id == get_all_record_ids().end())
+  auto allrecids = get_all_record_ids();
+  auto rec_id = allrecids.find(rid);
+  if (rec_id == allrecids.end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;
 
   add_record_level_info_to_caches_if_needed(rid);
