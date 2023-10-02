@@ -165,6 +165,7 @@ dune10kt_1x2x2_v4_refactored_geo.GDML: "dune10kt_v4_refactored_1x2x2.gdml"
 dune10kt_1x2x2_v4_refactored_geo.ROOT: "dune10kt_v4_refactored_1x2x2.gdml"
 
 dune10kt_1x2x2_v5_refactored_geo:      @local::dune10kt_geo
+dune10kt_1x2x2_v5_refactored_geo.Name: "dune10kt_v5_1x2x2"
 dune10kt_1x2x2_v5_refactored_geo.GDML: "dune10kt_v5_refactored_1x2x2.gdml"
 dune10kt_1x2x2_v5_refactored_geo.ROOT: "dune10kt_v5_refactored_1x2x2.gdml"
 
@@ -444,6 +445,12 @@ protodunevd_v2_geo.Name: "protodunevd_v2"
 protodunevd_v2_geo.GDML: "protodunevd_v2_refactored.gdml" #nowires.gdml
 protodunevd_v2_geo.ROOT: "protodunevd_v2_refactored.gdml"
 protodunevd_v2_geo.SortingParameters.SortTPCPDVD: true
+
+protodunevd_v3_geo: @local::dune10kt_geo
+protodunevd_v3_geo.Name: "protodunevd_v3"
+protodunevd_v3_geo.GDML: "protodunevd_v3_refactored.gdml" #nowires.gdml
+protodunevd_v3_geo.ROOT: "protodunevd_v3_refactored.gdml"
+protodunevd_v3_geo.SortingParameters.SortTPCPDVD: true
 
 # protoDUNE VD with driftY
 protodunevd_v1_geo_driftY: @local::dune10kt_geo
