@@ -194,6 +194,11 @@ sub gen_Materials
    <fraction n="0.53" ref="fibrous_glass"/>
   </material>
 
+  <material name="FR4SussexAPA">
+   <D value="1.75" unit="g/cm3"/>
+   <fraction n="1" ref="FR4"/>
+  </material>
+
   <material name="STEEL_STAINLESS_Fe7Cr2Ni" formula="STEEL_STAINLESS_Fe7Cr2Ni">
    <D value="7.9300" unit="g/cm3"/>
    <fraction n="0.0010" ref="carbon"/>
