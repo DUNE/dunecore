@@ -612,6 +612,8 @@ HDF5RawDataFile::get_timeslice_header_dataset_paths()
 std::string
 HDF5RawDataFile::get_record_header_dataset_path(const record_id_t& rid)
 {
+  // c14: error: object backing the pointer will be destroyed at the end of the full-expression [-Werror,-Wdangling-gsl]
+  // The problem appears to be the call to find
   auto rec_id = get_all_record_ids().find(rid);
   if (rec_id == get_all_record_ids().end())
     throw cet::exception("HDF5RawDataFile.cpp") << "Record ID Not Found: " << rid.first << " " << rid.second;

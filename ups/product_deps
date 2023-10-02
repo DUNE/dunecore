@@ -26,7 +26,7 @@ fwdir  product_dir config_data
 # Add the dependent product and version
 
 product             version
-dunepdlegacy        v1_00_03
+dunepdlegacy        v1_01_00
 duneutil            v09_78_03d01
 dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
@@ -43,8 +43,12 @@ end_product_list
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
+c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-   c14:debug      c14:debug  
+c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-   c14:prof   	  c14:prof   
 c7:debug         c7:debug             c7:debug    c7:debug  c7:debug            -nq-                -nq-                   -nq-       -nq-    c7:debug       c7:debug  
 c7:prof          c7:prof              c7:prof     c7:prof   c7:prof             -nq-                -nq-                   -nq-       -nq-    c7:prof   	   c7:prof   
+e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    e26:debug 	   e26:debug 
+e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    e26:prof  	   e26:prof  
 e20:debug        e20:debug            e20:debug   e20:debug e20:debug           -nq-                -nq-                   -nq-       -nq-    e20:debug 	   e20:debug 
 e20:prof         e20:prof             e20:prof    e20:prof  e20:prof            -nq-                -nq-                   -nq-       -nq-    e20:prof  	   e20:prof  
 
