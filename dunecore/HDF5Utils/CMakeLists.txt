@@ -28,6 +28,14 @@ simple_plugin(HDF5RawInput2 "source"
   dunecore::HDF5Utils_HDF5RawFile2Service_service
 )
 
+simple_plugin(HDF5TPStreamInput2 "source"
+  dunepdlegacy_Overlays
+  HDF5Utils
+  dunecore::dunedaqhdf5utils2
+  art::Framework_Services_Registry
+  dunecore::HDF5Utils_HDF5RawFile2Service_service
+)
+
 simple_plugin(HDF5RawFile2Service "service"
               ${ART_PERSISTENCY_ROOTDB}
               art::Framework_Services_Registry
