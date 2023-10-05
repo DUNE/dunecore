@@ -563,17 +563,20 @@ sub gen_TPC
 #  -volTPCPlaneV: with wires angled from vertical slightly differently than in U
 #  -volTPCPlaneX: with vertical wires
 
-
+    #### Temporary fix #####
     # these are temporary variables, used to revert the wire geometry back, before changes of the G10 geometry
     my $G10thickness_fix = $inch/8;
 
     my $APAFrame_z_fix = 231.59 - 2*(2*$G10thickness_fix+$WrapCover);
+
     my $Uactive_y_fix = $APAFrame_y + 2*$G10thickness_fix - $ReadoutBoardOverlap;
     my $Uactive_z_fix = $APAFrame_z_fix + 2*$G10thickness_fix;
-    my $FirstUWireOffset_fix = .55 + $G10thickness_fix + 2*$G10thickness_fix*$TanUAngle - $UWire_zint;
-    my $NumberSideUWires_fix = int( $Uactive_y_fix/$UWire_yint );
 
+    my $Vactive_y_fix = $APAFrame_y + 1*$G10thickness_fix - $ReadoutBoardOverlap;
+    my $Vactive_z_fix = $APAFrame_z_fix;
 
+    my $Zactive_y_fix    = $APAFrame_y + 0*$G10thickness_fix - $ReadoutBoardOverlap;
+    ########################
 
 # Create the TPC fragment file name,
 # add file to list of output GDML fragments,
@@ -607,11 +610,11 @@ print TPC <<EOF;
       z="@{[$Uactive_z_fix + $UVPlaneBoundNudge]}"/>
     <box name="${_[3]}VPlane" lunit="cm"
       x="@{[$TPCWirePlaneThickness]}"
-      y="@{[$Vactive_y + $UVPlaneBoundNudge]}"
-      z="@{[$Vactive_z + $UVPlaneBoundNudge]}"/>
+      y="@{[$Vactive_y_fix + $UVPlaneBoundNudge]}"
+      z="@{[$Vactive_z_fix + $UVPlaneBoundNudge]}"/>
     <box name="${_[3]}ZPlane" lunit="cm"
       x="@{[$TPCWirePlaneThickness]}"
-      y="@{[$Zactive_y]}"
+      y="@{[$Zactive_y_fix]}"
       z="@{[$Zactive_z]}"/>
     <box name="${_[3]}Active" lunit="cm"
       x="@{[$TPCActive_x]}"
@@ -626,7 +629,7 @@ print TPC <<EOF;
 
     <tube name="${_[3]}WireVert"
       rmax="@{[0.5*$TPCWireThickness]}"
-      z="@{[$Zactive_y]}"
+      z="@{[$Zactive_y_fix]}"
       deltaphi="360"
       aunit="deg"
       lunit="cm"/>
@@ -649,15 +652,15 @@ if ($wires_on == 1)
    # Number of wires in one corner
 $NumberCornerUWires = int( $APAFrame_z_fix/($UWirePitch/$CosUAngle) );
 
-$NumberCornerVWires = int( $APAFrame_z/($VWirePitch/$CosVAngle) );
+$NumberCornerVWires = int( $APAFrame_z_fix/($VWirePitch/$CosVAngle) );
 
 
    # Total number of wires touching one vertical (longer) side
    # Note that the total number of wires per plane is this + another set of corner wires
-$NumberSideUWires = int( $Uactive_y/$UWire_yint );
+$NumberSideUWires = int( $Uactive_y_fix/$UWire_yint );
 if($Pitch3mmVersion==1){ $NumberSideUWires = $NumberSideUWires-1; }
 
-$NumberSideVWires = int( $Vactive_y/$VWire_yint );
+$NumberSideVWires = int( $Vactive_y_fix/$VWire_yint );
 
    # Number of wires per side that aren't cut off by the corner
 $NumberCommonUWires = $NumberSideUWires - $NumberCornerUWires;
@@ -688,7 +691,7 @@ print $wout "$NumberCommonVWires V common wires\n";
 
 # hard codeed number will be a factor determined from engineering spreadsheets on wire endpoints,
 # but since that won't exist for a while, use this number to avoid overlaps
-my $FirstUWireOffset = .55 + $G10thickness + 2*$G10thickness*$TanUAngle - $UWire_zint;
+my $FirstUWireOffset = .55 + $G10thickness_fix + 2*$G10thickness_fix*$TanUAngle - $UWire_zint;
 my $FirstVWireOffset = .5; # doesnt include a G10 board in width
 
 if($Pitch3mmVersion==1){
@@ -702,17 +705,17 @@ if($UVAngle45Option==1){$FirstVWireOffset = .7;}
 my $FirstTopUWire_yspan =
     $Uactive_y_fix/2
     - ( - $Uactive_y_fix/2
-        + $FirstUWireOffset_fix/$TanUAngle      # walk us up to the first wire
-        + $UWire_yint*($NumberSideUWires_fix-1) # up to the top of the top common wire
+        + $FirstUWireOffset/$TanUAngle      # walk us up to the first wire
+        + $UWire_yint*($NumberSideUWires-1) # up to the top of the top common wire
         - $Uactive_z_fix/$TanUAngle             # back to the bottom of the top common wire
       + $UWire_yint);                     # nudge up to bottom of the first top corner wire
 
 my $FirstTopVWire_yspan =
-    $Vactive_y/2
-    - ( - $Vactive_y/2
+    $Vactive_y_fix/2
+    - ( - $Vactive_y_fix/2
         + $FirstVWireOffset/$TanVAngle      # walk us up to the first wire
         + $VWire_yint*($NumberSideVWires-1) # up to the top of the top common wire
-        - $Vactive_z/$TanVAngle             # back to the bottom of the top common wire
+        - $Vactive_z_fix/$TanVAngle             # back to the bottom of the top common wire
       + $VWire_yint);                     # nudge up to bottom of the first top corner wire
 
 
@@ -721,7 +724,7 @@ if ($wires_on==1)
 {
     for ($i = 0; $i < $NumberCornerUWires; $i++)
     {
-      $CornerUWireLength[$i] = ($FirstUWireOffset_fix + $i*$UWire_zint)/$SinUAngle;
+      $CornerUWireLength[$i] = ($FirstUWireOffset + $i*$UWire_zint)/$SinUAngle;
 
    print TPC <<EOF;
     <tube name="${_[3]}WireU$i"
@@ -750,7 +753,7 @@ EOF
 
       $TopCornerUWireLength[$i] = ($FirstTopUWire_yspan - $i*$UWire_yint)/$CosUAngle;
 
-      $j = $i + $NumberSideUWires_fix;
+      $j = $i + $NumberSideUWires;
 
    print TPC <<EOF;
     <tube name="${_[3]}WireU$j"
@@ -789,7 +792,7 @@ EOF
     # The wire used many times in the middle of the V plane
     # Same subtraction as U common
 
-    $CommonVWireLength = $Vactive_z/$SinVAngle;
+    $CommonVWireLength = $Vactive_z_fix/$SinVAngle;
 
    print TPC <<EOF;
     <tube name="${_[3]}WireVCommon"
@@ -857,7 +860,7 @@ EOF
 
 
   # Top Corner U wires logical volumes
-  for ($j = $NumberSideUWires; $j < $NumberSideUWires_fix + $NumberCornerUWires; ++$j)
+  for ($j = $NumberSideUWires; $j < $NumberSideUWires + $NumberCornerUWires; ++$j)
   {
   print TPC <<EOF;
     <volume name="volTPCWireU$j${_[3]}">
@@ -946,8 +949,8 @@ if ($wires_on==1)
         # the lower left corner.
    # rotation: same as common wire in code below
 
-    $FirstU_ypos = - $Uactive_y_fix/2 + $FirstUWireOffset_fix/$TanUAngle/2;
-    $FirstU_zpos = + $Uactive_z_fix/2 - $FirstUWireOffset_fix/2;
+    $FirstU_ypos = - $Uactive_y_fix/2 + $FirstUWireOffset/$TanUAngle/2;
+    $FirstU_zpos = + $Uactive_z_fix/2 - $FirstUWireOffset/2;
 
 for ($i = 0; $i < $NumberCornerUWires; ++$i)
 {
@@ -991,7 +994,7 @@ $lastZpos = $zpos;
 
 my $StartCommonUWires_ypos = $lastYpos + $UWire_yint - abs( $lastZpos )/$TanUAngle;
 
-for ($i = $NumberCornerUWires; $i < $NumberSideUWires_fix; ++$i)
+for ($i = $NumberCornerUWires; $i < $NumberSideUWires; ++$i)
 {
 
     $j = $i - $NumberCornerUWires;
@@ -1037,10 +1040,10 @@ my $StartTopUWires_zpos =  - $Uactive_z_fix/2 + $FirstTopUWire_zspan/2;
    # rotation: same as common wire in code above
 # note that the counter maintains wire number shown in the position name
 
-for ($j = $NumberSideUWires_fix; $j < $NumberSideUWires_fix+$NumberCornerUWires; ++$j)
+for ($j = $NumberSideUWires; $j < $NumberSideUWires+$NumberCornerUWires; ++$j)
 {
 
-$i = $j - $NumberSideUWires_fix;
+$i = $j - $NumberSideUWires;
 
 my $ypos = $StartTopUWires_ypos + ($i)*0.5*$UWire_yint;
 my $zpos = $StartTopUWires_zpos - ($i)*0.5*$UWire_zint;
@@ -1088,8 +1091,8 @@ print TPC <<EOF;
 EOF
 
 print $wout "\n-     Wires for V plane  -\n\n";
-print $wout " Vplane_y: $Vactive_y\n";
-print $wout " Vplane_z: $Vactive_z\n";
+print $wout " Vplane_y: $Vactive_y_fix\n";
+print $wout " Vplane_z: $Vactive_z_fix\n";
 
 if ($wires_on==1)
 {
@@ -1104,8 +1107,8 @@ if ($wires_on==1)
         # the lower right corner.
    # rotation: same as common wire in code below
 
-    $FirstV_ypos = - $Vactive_y/2 + $FirstVWireOffset/$TanVAngle/2;
-    $FirstV_zpos = - $Vactive_z/2 + $FirstVWireOffset/2;
+    $FirstV_ypos = - $Vactive_y_fix/2 + $FirstVWireOffset/$TanVAngle/2;
+    $FirstV_zpos = - $Vactive_z_fix/2 + $FirstVWireOffset/2;
 
 for ($i = 0; $i < $NumberCornerVWires; ++$i)
 {
@@ -1171,8 +1174,8 @@ $lastYpos = $ypos;
 
 
 my $FirstTopVWire_zspan = $FirstTopVWire_yspan*$TanVAngle;
-my $StartTopVWires_ypos =  + $Vactive_y/2 - $FirstTopVWire_yspan/2;
-my $StartTopVWires_zpos =  + $Vactive_z/2 - $FirstTopVWire_zspan/2;
+my $StartTopVWires_ypos =  + $Vactive_y_fix/2 - $FirstTopVWire_yspan/2;
+my $StartTopVWires_zpos =  + $Vactive_z_fix/2 - $FirstTopVWire_zspan/2;
 
 # Finally moving to the corner wires on the top right:
    # x=0 to center the wires in the plane
