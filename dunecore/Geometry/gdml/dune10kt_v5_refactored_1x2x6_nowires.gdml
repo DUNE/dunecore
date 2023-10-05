@@ -400,12 +400,12 @@
       z="232.39"/>
     <box name="InnerUPlane" lunit="cm"
       x="0.015"
-      y="599.3575"
-      z="230.335"/>
+      y="599.04"
+      z="230.6525"/>
     <box name="InnerVPlane" lunit="cm"
       x="0.015"
-      y="598.88125"
-      z="229.3825"/>
+      y="598.7225"
+      z="230.0175"/>
     <box name="InnerZPlane" lunit="cm"
       x="0.015"
       y="598.39"
@@ -428,12 +428,12 @@
       z="232.39"/>
     <box name="OuterUPlane" lunit="cm"
       x="0.015"
-      y="599.3575"
-      z="230.335"/>
+      y="599.04"
+      z="230.6525"/>
     <box name="OuterVPlane" lunit="cm"
       x="0.015"
-      y="598.88125"
-      z="229.3825"/>
+      y="598.7225"
+      z="230.0175"/>
     <box name="OuterZPlane" lunit="cm"
       x="0.015"
       y="598.39"
