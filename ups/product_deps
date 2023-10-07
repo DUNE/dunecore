@@ -5,7 +5,7 @@
 
 parent dunecore
 
-defaultqual e20
+defaultqual e26
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -27,12 +27,12 @@ fwdir  product_dir config_data
 
 product             version
 dunepdlegacy        v1_01_00
-duneutil            v09_78_06d00
+duneutil            v09_79_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
 dunedaqdataformats  v4_0_0
-nusystematics       v01_03_11
-larsoft             v09_78_06
+nusystematics       v01_03_12
+larsoft             v09_79_00
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_10_4_1
@@ -45,12 +45,8 @@ end_product_list
 qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
 c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-   c14:debug      c14:debug  
 c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-   c14:prof   	  c14:prof   
-c7:debug         c7:debug             c7:debug    c7:debug  c7:debug            -nq-                -nq-                   -nq-       -nq-    c7:debug       c7:debug  
-c7:prof          c7:prof              c7:prof     c7:prof   c7:prof             -nq-                -nq-                   -nq-       -nq-    c7:prof   	   c7:prof   
 e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    e26:debug 	   e26:debug 
 e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    e26:prof  	   e26:prof  
-e20:debug        e20:debug            e20:debug   e20:debug e20:debug           -nq-                -nq-                   -nq-       -nq-    e20:debug 	   e20:debug 
-e20:prof         e20:prof             e20:prof    e20:prof  e20:prof            -nq-                -nq-                   -nq-       -nq-    e20:prof  	   e20:prof  
 
 end_qualifier_list
 
