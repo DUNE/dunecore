@@ -10,7 +10,9 @@
 #           Laura Paulucci <lpaulucc@fnal.gov>, based on Vyacheslav Galymov's script for dunevd10kt
 #
 #  Details: Collection pitch = 5.1 mm / Induction pitch = 7.65 mm 
-#           TO DO: include perforated PCB in the gdml (see LEMs in dual phase gdml) 
+#           TO DO: solve overlaps (3) on account of beam pipe
+#           TO DO: include perforated PCB in the gdml (LEMs in dual phase gdml are not perforated) 
+#           TO DO: add electronic box for PDs modules.
 #           TO DO: exchange x and y in SteelSupport structure (currently, overlaps avoided by changing position
 #                  of volSteelSuport_LS/RS/Bottom/Top)
 #
@@ -21,11 +23,39 @@
 #           These are then split through mid-CRU section to make
 #           wire objets for geo planes and geo vol TPCs, as done
 #           by V. Galymov for the ColdBox2
+#
 #  V3.1:      JS Real, July 21 2023
 #           -Add the existing CRTs on NP02, used for the previous Double Phase data taking
 #           -Add switches for CRT of ProtoDUNE-HD, CRT of NP02 DP
-#           -NP02 CRT's position are optimized for VD module 0 (centered on active volume, and lower position for bottom CRTs to better match bottom drift volume)
+#           -NP02 CRT's position are optimized for VD module 0 (centered on active volume,
+#            and lower position for bottom CRTs to better match bottom drift volume)
 #
+#  V4:                    Updates on Mon October 16th 2023
+##################################################################################
+#                     Hamza Amar Es-sghir <Hamza.Amar@ific.uv.es>
+#                       José Alfonso Soto Otón <j.soto@cern.ch>
+#
+############################# New foam material ##################################
+# As assayed by School of Mines (Juergen Reichenbacher)
+# and remarked by Viktor Pěč (Institute of Physics — FZU).
+################################ FC profiles #####################################
+# Number of field shapers 104 --> 114
+# Number of thin field shapers 50 --> 72
+# Number of thick field shapers 54 --> 42
+# FC material: Al₂O₃ --> Al
+# Realistic field cage profiles
+################################## Cathode #######################################
+# Cathode frame material: Stainless steel --> G10
+# Cathode-Field cage distance 0 --> 15.1 cm
+# Cathode mesh, built-in cathode frame
+################################# X-ARAPUCAs #####################################
+# Frame size (width & length): 65.0 --> 65.3 cm
+# Distance of arapucas (center to center) in the drift direction: 85.3 --> 75.8 cm
+# Vertical position of top/bottom X-As center from cathode center ± 283 cm --> + 302.18 & - 283.03 cm
+# Membrane X-ARAPUCA mesh
+############################## Dual Phase PMTs ###################################
+# Added by:
+#                  Pablo Barham Alzás <pablo.barham@cern.ch>
 ##################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
@@ -47,7 +77,9 @@ Math::BigFloat->precision(-16);
 GetOptions( "help|h" => \$help,
 	    "suffix|s:s" => \$suffix,
 	    "output|o:s" => \$output,
-	    "wires|w:s" => \$wires);
+	    "wires|w:s" => \$wires,
+      "optical|opt:s" => \$optical);
+
 
 my $FieldCage_switch="on";
 my $Cathode_switch="on";
@@ -55,7 +87,7 @@ $GroundGrid_switch="off";
 $ExtractionGrid_switch="off";
 
 my $HD_CRT_switch="off";
-my $DP_CRT_switch="on";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
+my $DP_CRT_switch="off";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
 
 if ( defined $help )
 {
@@ -76,6 +108,22 @@ else
     # "test" applied to filename.gdml becomes "filename-test.gdml".
     $suffix = "-" . $suffix;
 }
+
+
+if (defined $optical)
+{
+    if ($optical==1)
+    {
+      $ArapucaMesh_switch="on";
+      $basename = $basename."_optical";
+    }
+
+    else
+    {
+      $ArapucaMesh_switch="off";
+    }
+}
+
 
 # set wires on to be the default, unless given an input by the user
 $wires_on = 0; # 1=on, 0=off
@@ -132,7 +180,7 @@ $widthTPCActive  = $nCRM_x/2 * $widthCRP;
 $lengthTPCActive = $nCRM_z/2 * $lengthCRP; 
 
 # active volume dimensions 
-$driftTPCActive  = 338.5;
+$driftTPCActive  = 338.5; # cm, in cold
 
 # model anode strips as wires of some diameter
 $padWidth          = 0.02;
@@ -143,15 +191,17 @@ $ReadoutPlane      = $nViews * $padWidth; # 3 readout planes (no space b/w)!
 ############## Parameters for TPC and inner volume ###############
 
 # inner volume dimensions of the cryostat
-$Argon_x = 790.0;
-$Argon_y = 854.8;
-$Argon_z = 854.8;
+$Argon_x = 789.6; #790.0 --> 789.6;
+$Argon_y = 854.4; #854.8 --> 854.4;
+$Argon_z = 854.4; #854.8 --> 854.4;
 
 # width of gas argon layer on top
-$HeightGaseousAr = 51.5;
+$HeightGaseousAr = 49.7; #51.5 --> 49.7;
 
 # size of liquid argon buffer
 $xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $ReadoutPlane;
+$Upper_xLArBuffer = 23.6 - $ReadoutPlane;
+$Lower_xLArBuffer = 34.7 - $ReadoutPlane; # Upper: 23.6 cm Lower: 34.7 cm
 $yLArBuffer = 0.5 * ($Argon_y - $widthTPCActive);
 $zLArBuffer = 0.5 * ($Argon_z - $lengthTPCActive);
 
@@ -163,15 +213,129 @@ $Cryostat_y = $Argon_y + 2*$SteelThickness; # 789.84
 $Cryostat_z = $Argon_z + 2*$SteelThickness; # 854.64
 
 
+# Adding PMTs (from DP)
+##################################################################
+################### Parameters for PMTs ####################
+
+$HeightPMT = 37.0; #cm
+
+# "Horizontal PMT heights"
+$HorizontalLowerPMT = 0.0;
+$HorizontalUpperPMT = 10.0;
+
+# PMTs not equally spaced:
+
+# Print the value of pmtdist to the screen
+$pmtdist = 0;
+print "pmt distribution: $pmtdist\n";
+
+if ( $pmtdist == 0 ) #new non uniform distribution
+{
+  # List of TPB-coated PMTs   
+  @pmt_TPB = (0,1,2,3);
+  # List of left-rotated PMTs
+  @pmt_left_rotated = (2,3);
+  # List of right-rotated PMTs
+  @pmt_right_rotated = (0,1);
+
+  $y1 = -$Argon_y/2 + 36.0 + 34.0 * 6.5;
+  $y2 = -$Argon_y/2 + 36.0 + 34.0 * 10.5;
+  $y3 = -$Argon_y/2 + 36.0 + 34.0 * 12.5;
+  $y4 = -$Argon_y/2 + 36.0 + 34.0 * 16.5;
+  $y5 = -$Argon_y/2 + 36.0 + 34.0 * 4.5;
+  $y6 = -$Argon_y/2 + 36.0 + 34.0 * 8.5;
+  $y7 = -$Argon_y/2 + 36.0 + 34.0 * 11.5;
+  $y8 = -$Argon_y/2 + 36.0 + 34.0 * 14.5;
+  $y9 = -$Argon_y/2 + 36.0 + 34.0 * 18.5;
+
+  $z1 = -$Argon_z/2 + 36.0 + 34.0 * 2.5;
+  $z2 = -$Argon_z/2 + 36.0 + 34.0 * 5.5;
+  $z3 = -$Argon_z/2 + 36.0 + 34.0 * 17.5;
+  $z4 = -$Argon_z/2 + 36.0 + 34.0 * 20.5;
+
+  $pos0 = " z=\"$z1\" y=\"$y1\" ";
+  $pos1 = " z=\"$z1\" y=\"$y2\" ";
+  $pos2 = " z=\"$z1\" y=\"$y3\" ";
+  $pos3 = " z=\"$z1\" y=\"$y4\" ";
+  $pos4 = " z=\"$z2\" y=\"$y5\" ";
+  $pos5 = " z=\"$z2\" y=\"$y6\" ";
+  $pos6 = " z=\"$z2\" y=\"$y7\" ";
+  $pos7 = " z=\"$z2\" y=\"$y8\" ";
+  $pos8a = " x=\"-309.59\" z=\"$z2\" y=\"$y9\" "; # Horizontal PMTs
+  $pos8b = " x=\"-233.79\" z=\"$z2\" y=\"$y9\" "; # Horizontal PMTs
+
+  $pos9 = " z=\"$z4\" y=\"$y1\" ";
+  $pos10 = " z=\"$z4\" y=\"$y2\" ";
+  $pos11 = " z=\"$z4\" y=\"$y3\" ";
+  $pos12 = " z=\"$z4\" y=\"$y4\" ";
+  $pos13 = " z=\"$z3\" y=\"$y5\" ";
+  $pos14 = " z=\"$z3\" y=\"$y6\" ";
+  $pos15 = " z=\"$z3\" y=\"$y7\" ";
+  $pos16 = " z=\"$z3\" y=\"$y8\" ";
+  $pos17a = " x=\"-303.03\" z=\"$z3\" y=\"$y9\" "; # Horizontal PMTs ## $CathodePosX - $Lower_FirstFrameVertDist
+  $pos17b = " x=\"-227.23\" z=\"$z3\" y=\"$y9\" "; # Horizontal PMTs ## $CathodePosX - $Lower_FirstFrameVertDist + $VerticalPDdist
+  # x is the position of the X-ARAPUCA window center for bottom PD modules
+  
+  @pmt_pos = (
+    $pos8a, $pos8b, $pos17a, $pos17b,
+		$pos0, $pos1, $pos2, $pos3, $pos4, $pos5, $pos6, $pos7,
+    $pos9, $pos10, $pos11, $pos12, $pos13, $pos14, $pos15, $pos16)
+}
+else #old and deprecated uniform distribution.
+{
+ # Violently quit program
+    die "ERROR: PMT distribution not implemented yet\n";
+}
+##################################################################
+
+
 ##################################################################
 ############## Cathode Parameters ###############
-$heightCathode=6.0; #cm
-$CathodeBorder=4.0; #cm
-$widthCathode=$widthCRP;
-$lengthCathode=$lengthCRP;
-$widthCathodeVoid=76.35;
-$lengthCathodeVoid=67.0;
+$heightCathode = 6.0; #cm
+$CathodeBorder = 4.0; #cm
+$widthCathode = $widthCRP;
+$lengthCathode = $lengthCRP;
+$widthCathodeVoid = 77.25; # 76.35 --> 77.25 cm
+$lengthCathodeVoid = 67.25; # 67.0 --> 67.25 cm
 
+##################################################################
+############## Cathode Mesh Parameters ###############
+$CathodeMeshInnerStructureLength_vertical = $lengthCathodeVoid;
+$CathodeMeshInnerStructureLength_horizontal = $widthCathodeVoid;
+$CathodeMeshInnerStructureWidth = 0.25;
+$CathodeMeshInnerStructureThickness = 0.05; #No info about it in blueprints
+$CathodeMeshInnerStructureSeparation = 2.5;
+$CathodeMeshInnerStructureNumberOfStrips_vertical = 30;
+$CathodeMeshInnerStructureNumberOfStrips_horizontal = 26;
+
+##################################################################
+############## Cathode Frame Parameters ###############
+$CathodeMeshOffset_Y =  87.625; #cm The Y coordinate of the first cathode mesh in place. 
+# We have chosen the square depicted below. Filling by columns, i.e., downwards.
+################ Bottom view ##################
+################    Axes     ##################
+################    ^        ##################
+################   Y|        ##################
+################    |___ >   ##################
+################      Z      ##################
+
+########## ########## ########## ########## 
+#++++++++# #        # #        # #        #
+#++++++++# #        # #        # #        #
+#++++++++# #        # #        # #        #
+########## ########## ########## ##########
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+########## ########## ########## ##########
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+########## ########## ########## ##########
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+#        # #        # #        # #        #
+########## ########## ########## ##########
 
 ##################################################################
 ############## DetEnc and World relevant parameters  #############
@@ -199,14 +363,14 @@ $posCryoInDetEnc_y = 0;
 $posCryoInDetEnc_z = 0;
 
 $posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y; #+ 61.8/2; ## JS Real, add boxCryoTop dz/2.
-$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y; # - 61.8/2;;
+$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y; # - 61.8/2;
 $posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z;# + 61.8/2;  ## JS Real, add boxCryoWallSm dz/2.;
-$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;# - 61.8/2;;
+$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;# - 61.8/2;
 $posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x; # + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
 $posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x;#  + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
 
 $posTopSteelStruct -= 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise
-$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on"; 
+$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on";
 
 # 2*AirThickness is added to the world volume in x, y and z
 $AirThickness = 3000;
@@ -242,7 +406,8 @@ $OriginXSet =  $DetEncX/2.0
              - $SteelThickness
              - $xLArBuffer
 #             - $driftTPCActive/2.0;
-              +$heightCathode/2;
+             + $heightCathode/2
+             + $Upper_xLArBuffer;
 
 ###################################################################
 ######################## Beam Window 2 Parameters ###################
@@ -448,25 +613,26 @@ $BeamPlIIDSCap_x  = $BeamPlIIMem_x - $BeamPlIIDSPosDZ*$DeltaIIXZ3;
 $BeamPlIIDSCap_y  = $BeamPlIIMem_y - $BeamPlIIDSPosDZ*$DeltaIIYZ3;
 $BeamPlIIDSCap_z  = $BeamPlIIMem_z + $BeamPlIIDSPosDZ;
 
-##################################################################
+####################################################
 ############## Field Cage Parameters ###############
-$FieldShaperLongTubeLength  =  $lengthTPCActive;
-$FieldShaperShortTubeLength =  $widthTPCActive;
-$FieldShaperInnerRadius = 0.5; #cm
-$FieldShaperOuterRadius = 2.285; #cm
-$FieldShaperOuterRadiusSlim = 0.75; #cm
-$FieldShaperTorRad = 2.3; #cm
+####################################################
+$FieldShaperInnerRadius = 1.758; #0.5; #cm
+$FieldShaperOuterRadius = 1.858; #2.285; #cm
+$FieldShaperSlimInnerRadius = 0.65;
+$FieldShaperSlimOuterRadius = 0.80;
+$FieldShaperTorRad = 10; #2.3; #cm
 
-$FieldShaperLength = $FieldShaperLongTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
-$FieldShaperWidth =  $FieldShaperShortTubeLength + 2*$FieldShaperOuterRadius+ 2*$FieldShaperTorRad;
+$FieldShaperLength = 329.4 - 2*$FieldShaperTorRad;
+$FieldShaperWidth  = 704.5 - 2*$FieldShaperTorRad;
+$FieldShaperCutLength = $FieldShaperLength + 0.02;
+$FieldShaperCutWidth  = $FieldShaperWidth + 0.02;
 
 $FieldShaperSeparation = 6.0; #cm
-$NFieldShapers = ((2*$driftTPCActive+$heightCathode)/$FieldShaperSeparation) - 1;
+$NFieldShapers = 114;
 
 $FieldCageSizeX = $FieldShaperSeparation*$NFieldShapers+2;
 $FieldCageSizeY = $FieldShaperWidth+2;
 $FieldCageSizeZ = $FieldShaperLength+2;
-
 
 ###################################################################
 ########################  CRT Dimensions ##########################
@@ -738,9 +904,9 @@ $posCRTUS_rot[15] = "rMinus90AboutYMinus90AboutX";
 ######################## ARAPUCA Dimensions ########################
 ## in cm
 
-$ArapucaOut_x = 65.0; 
+$ArapucaOut_x = 65.3;
 $ArapucaOut_y = 2.5;
-$ArapucaOut_z = 65.0; 
+$ArapucaOut_z = 65.3;
 $ArapucaIn_x = 60.0;
 $ArapucaIn_y = 2.0;
 $ArapucaIn_z = 60.0;
@@ -748,9 +914,14 @@ $ArapucaAcceptanceWindow_x = 60.0;
 $ArapucaAcceptanceWindow_y = 1.0;
 $ArapucaAcceptanceWindow_z = 60.0;
 $GapPD = 0.5; #Arapuca distance from Cathode Frame
-$FCToArapucaSpaceLat    =    63.5; #Arapucas' distance from FC.
-$FirstFrameVertDist     =    30.0; #Vertical distance from top/bottom anode (=204.55+85.3 cm above/below cathode) 
-$VerticalPDdist = 85.3; #distance of arapucas (center to center) in the y direction 
+$CathodeFrameToFC    = 15.1;
+$FCToArapucaSpaceLat = 65 + $ArapucaOut_y; #X-ARAPUCA frame distance from FC. 65 cm to X-ARAPUCA window.
+$FirstFrameVertDist  = 37.57; # 30.0 --> 37.57 cm # Vertical distance from top/bottom anode (=204.55+85.3 cm above/below cathode)
+$Upper_FirstFrameVertDist = 301.08 + 1.1;
+$Lower_FirstFrameVertDist = 284.13 - 1.1; #Vertical distance from cathode center in cold
+#$Upper_FirstFrameVertDist = 301.08;
+#$Lower_FirstFrameVertDist = 284.13; #Vertical distance from cathode center in warm
+$VerticalPDdist = 75.8; #distance between arapucas (center to center) in the y direction
 
 #Positions of the 4 arapucas with respect to the Frame center --> arapucas over the cathode
 $list_posx_bot[0]=-2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
@@ -789,7 +960,7 @@ sub gen_Extend()
     push (@gdmlFiles, $DEF);
     $DEF = ">" . $DEF;
     open(DEF) or die("Could not open file $DEF for writing");
-
+#Check out
 print DEF <<EOF;
 <?xml version='1.0'?>
 <gdml>
@@ -798,7 +969,8 @@ print DEF <<EOF;
    <color name="green"       R="0.0"  G="1.0"  B="0.0"  A="1.0" />
    <color name="red"         R="1.0"  G="0.0"  B="0.0"  A="1.0" />
    <color name="blue"        R="0.0"  G="0.0"  B="1.0"  A="1.0" />
-   <color name="yellow"      R="1.0"  G="1.0"  B="0.0"  A="1.0" />    
+   <color name="yellow"      R="1.0"  G="1.0"  B="0.0"  A="1.0" /> 
+   <color name="black"       R="0.0"  G="0.0"  B="0.0"  A="1.0" />    
 </extension>
 </gdml>
 EOF
@@ -852,6 +1024,37 @@ print DEF <<EOF;
    <rotation name="rBeamW3"             unit="deg" x="0" y="-$BeamTheta3Deg" z="$BeamPhi3Deg"/>
    <rotation name="rBeamWRev3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
    <rotation name="rBeamPlII3"          unit="deg" x="-45" y="5.4611410351968113" z="-84.563498378865177"/>
+   <!--Cathode frame mesh-->
+   <!--First column-->
+   <position name="posCathodeMeshTop11" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom11" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshTop21" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom21" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshTop41" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom41" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[-1.5*$lengthCathodeVoid-2.0*$CathodeBorder]}"/>
+   <!--Second column-->
+   <position name="posCathodeMeshTop12" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom12" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshTop22" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom22" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshTop32" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom32" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshTop42" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom42" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[-0.5*$lengthCathodeVoid - $CathodeBorder]}"/>
+   <!--Third column-->
+   <position name="posCathodeMeshTop13" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom13" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <position name="posCathodeMeshTop23" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom23" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - $widthCathodeVoid - $CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <position name="posCathodeMeshTop33" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom33" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid + $CathodeBorder]}"/>
+   <!--Fourth column-->
+   <position name="posCathodeMeshTop14" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom14" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshTop34" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom34" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 2*$widthCathodeVoid - 3*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshTop44" unit="cm" x="@{[($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
+   <position name="posCathodeMeshBottom44" unit="cm" x="@{[-($heightCathode - $CathodeMeshInnerStructureThickness)/2]}" y="@{[$CathodeMeshOffset_Y - 3*$widthCathodeVoid - 4*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}"/>
 </define>
 </gdml>
 EOF
@@ -1673,9 +1876,8 @@ sub gen_TopCRP
     }
 }
 
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#++++++++++++++++++++++++++++++++++++++ gen_FieldCage +++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++ gen_FieldCage +++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 sub gen_FieldCage {
@@ -1690,127 +1892,408 @@ print FieldCage <<EOF;
    <?xml version='1.0'?>
    <gdml>
 EOF
-# The printing solids used in the Field Cage
-#print "lengthTPCActive      : $lengthTPCActive \n";
-#print "widthTPCActive       : $widthTPCActive \n";
-
 
 print FieldCage <<EOF;
 <solids>
-     <torus name="FieldShaperCorner" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" rtor="$FieldShaperTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperLongtube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperLongtubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperLongTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperShorttube" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperShorttubeSlim" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadiusSlim" z="$FieldShaperShortTubeLength" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+    <torus name="FieldShaperCorner" rmin="$FieldShaperInnerRadius" rmax="$FieldShaperOuterRadius" rtor="$FieldShaperTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
+    <torus name="FieldShaperSlimCorner" rmin="$FieldShaperSlimInnerRadius" rmax="$FieldShaperSlimOuterRadius" rtor="$FieldShaperTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
 
+    <!-- Thick Field cage profiles -->
+    
+    <!-- Short FC profiles -->
+    <tube name="ShortFChalfcirc" rmax="3.18" z="@{[10*$FieldShaperLength]}" startphi="-90" deltaphi="180" aunit="deg" lunit="mm" />
+    <box name="ShortFCrect" x="10.42" y="1" z="@{[10*$FieldShaperLength]}" lunit="mm"/>
+    <box name="ShortFCcutter" x=".51" y="6.37" z="@{[10*$FieldShaperCutLength]}" lunit="mm"/>
+    <tube name="ShortFCarc1" rmax="28.58" rmin="27.58" z="@{[10*$FieldShaperLength]}" startphi="56" deltaphi="25" aunit="deg" lunit="mm" />
+    <tube name="ShortFCarc2" rmax="65.09" rmin="64.09" z="@{[10*$FieldShaperLength]}" startphi="81" deltaphi="9" aunit="deg" lunit="mm" />
+    
+    <subtraction name="ShortFChalfcircCut">
+    <first ref="ShortFChalfcirc"/>
+    <second ref="ShortFCcutter"/>
+    <position name="pos" y="0" x=".249" z="0" unit="mm" />
+    </subtraction>
+    
+    <union name="ShortFCcircAndRect">
+      <first ref="ShortFChalfcircCut"/>
+      <second ref="ShortFCrect"/>
+      <position name="pos" x="-4.705" y="-2.68" z="0" unit="mm" />
+    </union>
+    
+    <union name="ShortFCwithArc1">
+      <first ref="ShortFCcircAndRect"/>
+      <second ref="ShortFCarc1"/>
+      <position name="pos" x="-14.204" y="-21.1" z="0" unit="mm" />
+    </union>
+    
+    <union name="ShortFCwithArc2" >
+      <first ref="ShortFCwithArc1"/>
+      <second ref="ShortFCarc2"/>
+      <position name="pos" x="-19.84" y="-57.16" z="0" unit="mm" />
+    </union>
+    
+    <union name="ShortFCProfile">
+    <first ref="ShortFCwithArc2"/>
+    <second ref="ShortFCwithArc2"/>
+    <position name="pos" x="-39.68" y="0" z="0" unit="mm" />
+    <rotation name="rot" y="180" unit="deg" />
+    </union>
+    
+
+    <!--  Long FC profiles -->
+    <tube name="LongFChalfcirc" rmax="3.18" z="@{[10*$FieldShaperWidth]}" startphi="-90" deltaphi="180" aunit="deg" lunit="mm" />
+    <box name="LongFCrect" x="10.42" y="1" z="@{[10*$FieldShaperWidth]}" lunit="mm" />
+    <box name="LongFCcutter" x=".51" y="6.37" z="@{[10*$FieldShaperCutWidth]}" lunit="mm" />
+    <tube name="LongFCarc1" rmax="28.58" rmin="27.58" z="@{[10*$FieldShaperWidth]}" startphi="56" deltaphi="25" aunit="deg" lunit="mm" />
+    <tube name="LongFCarc2" rmax="65.09" rmin="64.09" z="@{[10*$FieldShaperWidth]}" startphi="81" deltaphi="9" aunit="deg" lunit="mm" />
+
+    <subtraction name="LongFChalfcircCut">
+    <first ref="LongFChalfcirc"/>
+    <second ref="LongFCcutter"/>
+    <position name="pos" y="0" x=".249" z="0" unit="mm" />
+    </subtraction>
+
+    <union name="LongFCcircAndRect">
+      <first ref="LongFChalfcircCut"/>
+      <second ref="LongFCrect"/>
+      <position name="pos" x="-4.705" y="-2.68" z="0" unit="mm" />
+    </union>
+
+    <union name="LongFCwithArc1">
+      <first ref="LongFCcircAndRect"/>
+      <second ref="LongFCarc1"/>
+      <position name="pos" x="-14.204" y="-21.1" z="0" unit="mm" />
+    </union>
+
+    <union name="LongFCwithArc2">
+      <first ref="LongFCwithArc1"/>
+      <second ref="LongFCarc2"/>
+      <position name="pos" x="-19.84" y="-57.16" z="0" unit="mm" />
+    </union>
+
+    <union name="LongFCProfile">
+    <first ref="LongFCwithArc2"/>
+    <second ref="LongFCwithArc2"/>
+    <position name="pos" x="-39.68" y="0" z="0" unit="mm" />
+    <rotation name="rot" y="180" unit="deg" />
+    </union>
+    <!-- End Full-length FC Profile -->
+    
+    
+    <!-- Slim Field cage profiles  --> ########################################
+    
+    <!-- Long Slim FC profiles -->
+    <xtru name="LongFCProfileSlim" lunit="mm">
+        <twoDimVertex x="3.719961039" y="-0.1389959507" />
+        <twoDimVertex x="3.571767039" y="1.831707049" />
+        <twoDimVertex x="3.129995039" y="3.452312049" />
+        <twoDimVertex x="2.779043039" y="4.059650951" />
+        <twoDimVertex x="2.404897039" y="4.869304049" />
+        <twoDimVertex x="2.357290039" y="4.929363049" />
+        <twoDimVertex x="2.300893039" y="4.981365049" />
+        <twoDimVertex x="2.218862039" y="5.034099049" />
+        <twoDimVertex x="2.108022039" y="5.075359049" />
+        <twoDimVertex x="1.990712039" y="5.089275049" />
+        <twoDimVertex x="-1.277475961"  y="5.089275049" />
+        <twoDimVertex x="-1.277475961"  y="3.089275049" />
+        <twoDimVertex x="-1.292001961"  y="2.969646049" />
+        <twoDimVertex x="-1.334726961"  y="2.856853049" />
+        <twoDimVertex x="-1.403207961"  y="2.757732049" />
+        <twoDimVertex x="-1.493417961"  y="2.677898049" />
+        <twoDimVertex x="-1.600229961"  y="2.621746049" />
+        <twoDimVertex x="-1.717172961"  y="2.592937049" />
+        <twoDimVertex x="-1.837778961"  y="2.592937049" />
+        <twoDimVertex x="-1.954721961"  y="2.621746049" />
+        <twoDimVertex x="-2.061533961"  y="2.677898049" />
+        <twoDimVertex x="-2.151743961"  y="2.757732049" />
+        <twoDimVertex x="-2.220224961"  y="2.856853049" />
+        <twoDimVertex x="-2.262949961"  y="2.969646049" />
+        <twoDimVertex x="-2.277475961"  y="3.089275049" />
+        <twoDimVertex x="-2.277475961"  y="6.372722049" />
+        <twoDimVertex x="-2.250742961"  y="6.602214049" />
+        <twoDimVertex x="-2.172128961"  y="6.819500049" />
+        <twoDimVertex x="-2.045663961"  y="7.013103049" />
+        <twoDimVertex x="-1.878183961"  y="7.172283049" />
+        <twoDimVertex x="-1.678598961"  y="7.288738049" />
+        <twoDimVertex x="-1.036630961"  y="7.502361049" />
+        <twoDimVertex x="-0.3783059606" y="7.587810049" />
+        <twoDimVertex x="0.4213770394"  y="7.515545049" />
+        <twoDimVertex x="1.198232039"   y="7.255291049" />
+        <twoDimVertex x="2.028676039"   y="6.743816049" />
+        <twoDimVertex x="2.970571039"   y="5.791179049" />
+        <twoDimVertex x="3.796865039"   y="4.436443049" />
+        <twoDimVertex x="4.324453039"   y="3.021892049" />
+        <twoDimVertex x="4.633535039"   y="1.497966049" />
+        <twoDimVertex x="4.700551039"   y="-0.6121409507" />
+        <twoDimVertex x="4.413686039"   y="-2.505695951" />
+        <twoDimVertex x="4.633535039"   y="-1.497966049" />
+        <twoDimVertex x="4.324453039"   y="-3.021892049" />
+        <twoDimVertex x="3.796865039"   y="-4.436443049" />
+        <twoDimVertex x="2.970571039"   y="-5.791179049" />
+        <twoDimVertex x="2.028676039"   y="-6.743816049" />
+        <twoDimVertex x="1.198232039"   y="-7.255291049" />
+        <twoDimVertex x="0.4213770394"  y="-7.515545049" />
+        <twoDimVertex x="-0.3783059606" y="-7.587810049" />
+        <twoDimVertex x="-1.036630961"  y="-7.502361049" />
+        <twoDimVertex x="-1.678598961"  y="-7.288738049" />
+        <twoDimVertex x="-1.878183961"  y="-7.172283049" />
+        <twoDimVertex x="-2.045663961"  y="-7.013103049" />
+        <twoDimVertex x="-2.172128961"  y="-6.819500049" />
+        <twoDimVertex x="-2.250742961"  y="-6.602214049" />
+        <twoDimVertex x="-2.277475961"  y="-6.372722049" />
+        <twoDimVertex x="-2.277475961"  y="-3.089275049" />
+        <twoDimVertex x="-2.262949961"  y="-2.969646049" />
+        <twoDimVertex x="-2.220224961"  y="-2.856853049" />
+        <twoDimVertex x="-2.151743961"  y="-2.757732049" />
+        <twoDimVertex x="-2.061533961"  y="-2.677898049" />
+        <twoDimVertex x="-1.954721961"  y="-2.621746049" />
+        <twoDimVertex x="-1.837778961"  y="-2.592937049" />
+        <twoDimVertex x="-1.717172961"  y="-2.592937049" />
+        <twoDimVertex x="-1.600229961"  y="-2.621746049" />
+        <twoDimVertex x="-1.493417961"  y="-2.677898049" />
+        <twoDimVertex x="-1.403207961"  y="-2.757732049" />
+         <twoDimVertex x="-1.334726961"  y="-2.856853049" />
+         <twoDimVertex x="-1.292001961"  y="-2.969646049" />
+         <twoDimVertex x="-1.277475961"  y="-3.089275049" />
+        <twoDimVertex x="-1.277475961"  y="-5.089275049" />
+        <twoDimVertex x="1.990712039" y="-5.089275049" />
+        <twoDimVertex x="2.108022039" y="-5.075359049" />
+        <twoDimVertex x="2.218862039" y="-5.034099049" />
+        <twoDimVertex x="2.300893039" y="-4.981365049" />
+        <twoDimVertex x="2.357290039" y="-4.929363049" />
+        <twoDimVertex x="2.404897039" y="-4.869304049" />
+        <twoDimVertex x="2.779043039" y="-4.059650951" />
+        <twoDimVertex x="3.129995039" y="-3.452312049" />
+        <twoDimVertex x="3.571767039" y="-1.831707049" />
+    
+        <section zOrder="0" zPosition="@{[-0.5*10*$FieldShaperWidth]}" xOffset="0" yOffset="0" scalingFactor="1"/>
+        <section zOrder="1" zPosition="@{[0.5*10*$FieldShaperWidth]}" xOffset="0" yOffset="0" scalingFactor="1"/>
+    </xtru>
+    
+    <!-- Short FC profiles -->
+    <xtru name="ShortFCProfileSlim" lunit="mm">
+        <twoDimVertex x="3.719961039" y="-0.1389959507" />
+        <twoDimVertex x="3.571767039" y="1.831707049" />
+        <twoDimVertex x="3.129995039" y="3.452312049" />
+        <twoDimVertex x="2.779043039" y="4.059650951" />
+        <twoDimVertex x="2.404897039" y="4.869304049" />
+        <twoDimVertex x="2.357290039" y="4.929363049" />
+        <twoDimVertex x="2.300893039" y="4.981365049" />
+        <twoDimVertex x="2.218862039" y="5.034099049" />
+        <twoDimVertex x="2.108022039" y="5.075359049" />
+        <twoDimVertex x="1.990712039" y="5.089275049" />
+        <twoDimVertex x="-1.277475961"  y="5.089275049" />
+        <twoDimVertex x="-1.277475961"  y="3.089275049" />
+        <twoDimVertex x="-1.292001961"  y="2.969646049" />
+        <twoDimVertex x="-1.334726961"  y="2.856853049" />
+        <twoDimVertex x="-1.403207961"  y="2.757732049" />
+        <twoDimVertex x="-1.493417961"  y="2.677898049" />
+        <twoDimVertex x="-1.600229961"  y="2.621746049" />
+        <twoDimVertex x="-1.717172961"  y="2.592937049" />
+        <twoDimVertex x="-1.837778961"  y="2.592937049" />
+        <twoDimVertex x="-1.954721961"  y="2.621746049" />
+        <twoDimVertex x="-2.061533961"  y="2.677898049" />
+        <twoDimVertex x="-2.151743961"  y="2.757732049" />
+        <twoDimVertex x="-2.220224961"  y="2.856853049" />
+        <twoDimVertex x="-2.262949961"  y="2.969646049" />
+        <twoDimVertex x="-2.277475961"  y="3.089275049" />
+        <twoDimVertex x="-2.277475961"  y="6.372722049" />
+        <twoDimVertex x="-2.250742961"  y="6.602214049" />
+        <twoDimVertex x="-2.172128961"  y="6.819500049" />
+        <twoDimVertex x="-2.045663961"  y="7.013103049" />
+        <twoDimVertex x="-1.878183961"  y="7.172283049" />
+        <twoDimVertex x="-1.678598961"  y="7.288738049" />
+        <twoDimVertex x="-1.036630961"  y="7.502361049" />
+        <twoDimVertex x="-0.3783059606" y="7.587810049" />
+        <twoDimVertex x="0.4213770394"  y="7.515545049" />
+        <twoDimVertex x="1.198232039"   y="7.255291049" />
+        <twoDimVertex x="2.028676039"   y="6.743816049" />
+        <twoDimVertex x="2.970571039"   y="5.791179049" />
+        <twoDimVertex x="3.796865039"   y="4.436443049" />
+        <twoDimVertex x="4.324453039"   y="3.021892049" />
+        <twoDimVertex x="4.633535039"   y="1.497966049" />
+        <twoDimVertex x="4.700551039"   y="-0.6121409507" />
+        <twoDimVertex x="4.413686039"   y="-2.505695951" />
+        <twoDimVertex x="4.633535039"   y="-1.497966049" />
+        <twoDimVertex x="4.324453039"   y="-3.021892049" />
+        <twoDimVertex x="3.796865039"   y="-4.436443049" />
+        <twoDimVertex x="2.970571039"   y="-5.791179049" />
+        <twoDimVertex x="2.028676039"   y="-6.743816049" />
+        <twoDimVertex x="1.198232039"   y="-7.255291049" />
+        <twoDimVertex x="0.4213770394"  y="-7.515545049" />
+        <twoDimVertex x="-0.3783059606" y="-7.587810049" />
+        <twoDimVertex x="-1.036630961"  y="-7.502361049" />
+        <twoDimVertex x="-1.678598961"  y="-7.288738049" />
+        <twoDimVertex x="-1.878183961"  y="-7.172283049" />
+        <twoDimVertex x="-2.045663961"  y="-7.013103049" />
+        <twoDimVertex x="-2.172128961"  y="-6.819500049" />
+        <twoDimVertex x="-2.250742961"  y="-6.602214049" />
+        <twoDimVertex x="-2.277475961"  y="-6.372722049" />
+        <twoDimVertex x="-2.277475961"  y="-3.089275049" />
+        <twoDimVertex x="-2.262949961"  y="-2.969646049" />
+        <twoDimVertex x="-2.220224961"  y="-2.856853049" />
+        <twoDimVertex x="-2.151743961"  y="-2.757732049" />
+        <twoDimVertex x="-2.061533961"  y="-2.677898049" />
+        <twoDimVertex x="-1.954721961"  y="-2.621746049" />
+        <twoDimVertex x="-1.837778961"  y="-2.592937049" />
+        <twoDimVertex x="-1.717172961"  y="-2.592937049" />
+        <twoDimVertex x="-1.600229961"  y="-2.621746049" />
+        <twoDimVertex x="-1.493417961"  y="-2.677898049" />
+        <twoDimVertex x="-1.403207961"  y="-2.757732049" />
+         <twoDimVertex x="-1.334726961"  y="-2.856853049" />
+         <twoDimVertex x="-1.292001961"  y="-2.969646049" />
+         <twoDimVertex x="-1.277475961"  y="-3.089275049" />
+        <twoDimVertex x="-1.277475961"  y="-5.089275049" />
+        <twoDimVertex x="1.990712039" y="-5.089275049" />
+        <twoDimVertex x="2.108022039" y="-5.075359049" />
+        <twoDimVertex x="2.218862039" y="-5.034099049" />
+        <twoDimVertex x="2.300893039" y="-4.981365049" />
+        <twoDimVertex x="2.357290039" y="-4.929363049" />
+        <twoDimVertex x="2.404897039" y="-4.869304049" />
+        <twoDimVertex x="2.779043039" y="-4.059650951" />
+        <twoDimVertex x="3.129995039" y="-3.452312049" />
+        <twoDimVertex x="3.571767039" y="-1.831707049" />
+    
+        <section zOrder="0" zPosition="@{[-0.5*10*$FieldShaperLength]}" xOffset="0" yOffset="0" scalingFactor="1"/>
+        <section zOrder="1" zPosition="@{[0.5*10*$FieldShaperLength]}" xOffset="0" yOffset="0" scalingFactor="1"/>
+    </xtru>
+<!-- #########################################   End Field Cage Volumes   #########################################
+    -->
+
+
+    <!-- Thick Field Cage structure -->
+    
     <union name="FSunion1">
-      <first ref="FieldShaperLongtube"/>
+      <first ref="ShortFCProfile"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot1" unit="deg" x="90" y="0" z="0" />
+   		<position name="cornerpos1" unit="cm" x="-2" y="@{[-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLength]}"/>
+        <rotation name="rot1" unit="deg" x="90" y="0" z="90" />
     </union>
 
     <union name="FSunion2">
       <first ref="FSunion1"/>
-      <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos2" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
-   		<rotation name="rot2" unit="deg" x="0" y="90" z="0" />
+      <second ref="LongFCProfile"/>
+   		<position name="LongFCProfile1" unit="cm" x="0" y="@{[-0.5*$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[+0.5*$FieldShaperLength+$FieldShaperTorRad]}"/>
+   		<rotation name="rot2" unit="deg" x="90" y="0" z="0" />
     </union>
 
     <union name="FSunion3">
       <first ref="FSunion2"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos3" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot3" unit="deg" x="90" y="270" z="0" />
+   		<position name="cornerpos2" unit="cm" x="-2" y="@{[-$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLength]}"/>
+        <rotation name="rot3" unit="deg" y="270" x="270" z="270" />
     </union>
 
     <union name="FSunion4">
       <first ref="FSunion3"/>
-      <second ref="FieldShaperLongtube"/>
-   		<position name="esquinapos4" unit="cm" x="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" y="0" z="0"/>
+      <second ref="ShortFCProfile"/>
+   		<position name="ShortFCProfile2" unit="cm" x="-3.968" y="@{[-$FieldShaperWidth-2*$FieldShaperTorRad]}" z="0"/>
+        <rotation name="rot4" unit="deg" x="0" y="0" z="180" />
     </union>
 
     <union name="FSunion5">
       <first ref="FSunion4"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos5" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot5" unit="deg" x="90" y="180" z="0" />
+   		<position name="cornerpos3" unit="cm" x="-2" y="@{[-$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLength]}"/>
+        <rotation name="rot5" unit="deg" x="90" y="180" z="90" />
     </union>
 
     <union name="FSunion6">
       <first ref="FSunion5"/>
-      <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos6" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
-		<rotation name="rot6" unit="deg" x="0" y="90" z="0" />
+      <second ref="LongFCProfile"/>
+   		<position name="LongFCProfile2" unit="cm" x="0" y="@{[-0.5*$FieldShaperWidth-$FieldShaperTorRad]}"  z="@{[-0.5*$FieldShaperLength-$FieldShaperTorRad]}"/>
+        <rotation name="rot6" unit="deg" x="270" y="0" z="0" />
     </union>
 
     <union name="FieldShaperSolid">
       <first ref="FSunion6"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos7" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot7" unit="deg" x="90" y="90" z="0" />
+   		<position name="cornerpos4" unit="cm" x="-2" y="@{[-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLength]}"/>
+        <rotation name="rot7" unit="deg" x="90" y="90" z="90" />
     </union>
     
-    <union name="FSunionSlim1">
-      <first ref="FieldShaperLongtubeSlim"/>
-      <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot1" unit="deg" x="90" y="0" z="0" />
+    
+    
+    <!-- Slim Field Cage structure -->
+    
+    <union name="FSunion1_Slim">
+      <first ref="LongFCProfileSlim"/>
+      <second ref="FieldShaperSlimCorner"/>
+           <position name="cornerposSlim1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperWidth]}"/>
+        <rotation name="rot1" unit="deg" x="90" y="0" z="0" />
     </union>
 
-    <union name="FSunionSlim2">
-      <first ref="FSunionSlim1"/>
-      <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos2" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperLongTubeLength+$FieldShaperTorRad]}"/>
-   		<rotation name="rot2" unit="deg" x="0" y="90" z="0" />
+    
+    <union name="FSunion2_Slim">
+      <first ref="FSunion1_Slim"/>
+      <second ref="ShortFCProfileSlim"/>
+           <position name="ShortFCProfileSlim1" unit="cm" x="@{[-0.5*$FieldShaperLength-$FieldShaperTorRad]}" y="0" z="@{[+0.5*$FieldShaperWidth+$FieldShaperTorRad]}"/>
+           <rotation name="rot2" unit="deg" x="0" y="-90" z="0" />
     </union>
 
-    <union name="FSunionSlim3">
-      <first ref="FSunionSlim2"/>
-      <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos3" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot3" unit="deg" x="90" y="270" z="0" />
+    <union name="FSunion3_Slim">
+      <first ref="FSunion2_Slim"/>
+      <second ref="FieldShaperSlimCorner"/>
+           <position name="cornerposSlim2" unit="cm" x="@{[-$FieldShaperLength-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperWidth]}"/>
+        <rotation name="rot3" unit="deg" x="90" y="-90" z="0" />
     </union>
 
-    <union name="FSunionSlim4">
-      <first ref="FSunionSlim3"/>
-      <second ref="FieldShaperLongtubeSlim"/>
-   		<position name="esquinapos4" unit="cm" x="@{[-$FieldShaperShortTubeLength-2*$FieldShaperTorRad]}" y="0" z="0"/>
+    <union name="FSunion4_Slim">
+      <first ref="FSunion3_Slim"/>
+      <second ref="LongFCProfileSlim"/>
+           <position name="LongFCProfileSlim3" unit="cm" x="@{[-$FieldShaperLength-2*$FieldShaperTorRad]}" y="0" z="0"/>
+        <rotation name="rot4" unit="deg" x="0" y="0" z="180" />
+    </union>
+    
+    <union name="FSunion5_Slim">
+      <first ref="FSunion4_Slim"/>
+      <second ref="FieldShaperSlimCorner"/>
+           <position name="cornerposSlim3" unit="cm" x="@{[-$FieldShaperLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperWidth]}"/>
+        <rotation name="rot5" unit="deg" x="90" y="180" z="0" />
     </union>
 
-    <union name="FSunionSlim5">
-      <first ref="FSunionSlim4"/>
-      <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos5" unit="cm" x="@{[-$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot5" unit="deg" x="90" y="180" z="0" />
-    </union>
-
-    <union name="FSunionSlim6">
-      <first ref="FSunionSlim5"/>
-      <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos6" unit="cm" x="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength-$FieldShaperTorRad]}"/>
-		<rotation name="rot6" unit="deg" x="0" y="90" z="0" />
+    <union name="FSunion6_Slim">
+      <first ref="FSunion5_Slim"/>
+      <second ref="ShortFCProfileSlim"/>
+           <position name="ShortFCProfileSlim2" unit="cm" x="@{[-0.5*$FieldShaperLength-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperWidth-$FieldShaperTorRad]}"/>
+        <rotation name="rot6" unit="deg" x="270" y="90" z="90" />
     </union>
 
     <union name="FieldShaperSolidSlim">
-      <first ref="FSunionSlim6"/>
-      <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos7" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperLongTubeLength]}"/>
-		<rotation name="rot7" unit="deg" x="90" y="90" z="0" />
+      <first ref="FSunion6_Slim"/>
+      <second ref="FieldShaperSlimCorner"/>
+           <position name="cornerposSlim4" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[-0.5*$FieldShaperWidth]}"/>
+        <rotation name="rot7" unit="deg" x="90" y="90" z="0" />
     </union>
-    
 </solids>
 EOF
+    
+################################################# Field Cage #################################################
 
 print FieldCage <<EOF;
 <structure>
 <volume name="volFieldShaper">
-  <materialref ref="Al2O3"/>
+  <materialref ref="ALUMINUM_Al"/>
   <solidref ref="FieldShaperSolid"/>
 </volume>
 <volume name="volFieldShaperSlim">
-  <materialref ref="Al2O3"/>
+  <materialref ref="ALUMINUM_Al"/>
   <solidref ref="FieldShaperSolidSlim"/>
+</volume>
+<volume name="volShortFieldShaper">
+  <materialref ref="ALUMINUM_Al"/>
+  <solidref ref="ShortFCProfile"/>
+</volume>
+<volume name="volLongFieldShaper">
+      <materialref ref="ALUMINUM_Al"/>
+      <solidref ref="LongFCProfile"/>
+</volume>
+ <volume name="volShortFieldShaperSlim">
+  <materialref ref="ALUMINUM_Al"/>
+  <solidref ref="ShortFCProfileSlim"/>
+</volume>
+<volume name="volLongFieldShaperSlim">
+  <materialref ref="ALUMINUM_Al"/>
+  <solidref ref="LongFCProfileSlim"/>
 </volume>
 </structure>
 EOF
@@ -1819,6 +2302,360 @@ print FieldCage <<EOF;
 </gdml>
 EOF
 close(FieldCage);
+}
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++ Cathode mesh ++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub gen_CathodeMesh {
+
+    $CathodeMesh = $basename."_CathodeMesh" . $suffix . ".gdml";
+    push (@gdmlFiles, $CathodeMesh);
+    $CathodeMesh = ">" . $CathodeMesh;
+    open(CathodeMesh) or die("Could not open file $CathodeMesh for writing");
+
+# The standard XML prefix and starting the gdml
+print CathodeMesh <<EOF;
+   <?xml version='1.0'?>
+   <gdml>
+EOF
+
+#Cathode Mesh SOLIDS
+print CathodeMesh <<EOF;
+<solids>
+    <box name="CathodeMeshModule" x="@{[$CathodeMeshInnerStructureThickness + 1e-9]}" y="@{[$CathodeMeshInnerStructureLength_horizontal + 1e-9]}" z="@{[$CathodeMeshInnerStructureLength_vertical + 1e-9]}" lunit="cm"/> 
+    <box name="CathodeMeshStrip_horizontal" x="@{[$CathodeMeshInnerStructureThickness]}" y="@{[$CathodeMeshInnerStructureLength_horizontal]}" z="@{[$CathodeMeshInnerStructureWidth]}" lunit="cm"/> 
+    <box name="CathodeMeshStrip_vertical" x="@{[$CathodeMeshInnerStructureThickness]}" y="@{[$CathodeMeshInnerStructureWidth]}" z="@{[$CathodeMeshInnerStructureLength_vertical]}" lunit="cm"/>    
+EOF
+# First cathode mesh vertical strip
+print CathodeMesh <<EOF;
+    <union name="CathodeMeshunion1">
+      <first ref="CathodeMeshStrip_vertical"/>
+      <second ref="CathodeMeshStrip_vertical"/>
+      <position name="posMeshStrip_vertical1" unit="cm" x="0" y="@{[$CathodeMeshInnerStructureSeparation]}" z="0"/>
+    </union>
+EOF
+for($ii=2; $ii<$CathodeMeshInnerStructureNumberOfStrips_vertical; $ii++)
+{
+  print CathodeMesh <<EOF;
+  <union name="CathodeMeshunion$ii">
+    <first ref="CathodeMeshunion@{[$ii-1]}"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical$ii" unit="cm" x="0" y="@{[($ii)*$CathodeMeshInnerStructureSeparation]}" z="0"/>
+  </union>
+EOF
+}
+print CathodeMesh <<EOF;
+    <union name="CathodeMeshunion$ii">
+      <first ref="CathodeMeshunion@{[$ii-1]}"/>
+      <second ref="CathodeMeshStrip_horizontal"/>
+      <position name="posMeshStrip_horizontal0" unit="cm" x="0" y="@{[0.5*$CathodeMeshInnerStructureLength_horizontal - $CathodeMeshInnerStructureSeparation + 0.5*$CathodeMeshInnerStructureWidth]}" z="@{[- 0.5*$CathodeMeshInnerStructureLength_vertical + $CathodeMeshInnerStructureSeparation - 0.5*$CathodeMeshInnerStructureWidth]}"/>
+    </union>
+EOF
+for($jj=1; $jj<$CathodeMeshInnerStructureNumberOfStrips_horizontal; $jj++)
+{
+  print CathodeMesh <<EOF;
+  <union name="CathodeMeshunion@{[$ii+$jj]}">
+    <first ref="CathodeMeshunion@{[$ii+$jj-1]}"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal$jj" unit="cm" x="0" y="@{[0.5*$CathodeMeshInnerStructureLength_horizontal - $CathodeMeshInnerStructureSeparation + 0.5*$CathodeMeshInnerStructureWidth]}" z="@{[- 0.5*$CathodeMeshInnerStructureLength_vertical + $CathodeMeshInnerStructureSeparation - 0.5*$CathodeMeshInnerStructureWidth + ($jj)*$CathodeMeshInnerStructureSeparation]}"/>
+  </union>
+EOF
+} 
+print CathodeMesh <<EOF;
+</solids>
+EOF
+
+print CathodeMesh <<EOF;
+<structure>
+<volume name="volCathodeMeshStrip_vertical">
+  <materialref ref="G10"/>
+  <solidref ref="CathodeMeshStrip_vertical"/>
+</volume>
+<volume name="volCathodeMeshStrip_horizontal">
+  <materialref ref="G10"/>
+  <solidref ref="CathodeMeshStrip_horizontal"/>
+</volume>
+<volume name="volCathodeMeshunion">
+  <materialref ref="G10"/>
+  <solidref ref="CathodeMeshunion@{[$ii+$jj-1]}"/>
+</volume>
+<volume name="volCathodeMesh">
+  <materialref ref="LAr"/>
+  <solidref ref="CathodeMeshModule"/>
+  <physvol>
+   <volumeref ref="volCathodeMeshunion"/>
+   <position name="posCathodeMesh" unit="cm" x="0" y="0" z="@{[- 0.5*$CathodeMeshInnerStructureLength_horizontal + $CathodeMeshInnerStructureSeparation - 0.5*$CathodeMeshInnerStructureWidth]}"/>
+  </physvol>
+</volume>
+</structure>
+</gdml>
+EOF
+close(CathodeMesh);
+}
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++ X-ARAPUCA mesh ++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub gen_ArapucaMesh {
+
+    $ArapucaMesh = $basename."_ArapucaMesh" . $suffix . ".gdml";
+    push (@gdmlFiles, $ArapucaMesh);
+    $ArapucaMesh = ">" . $ArapucaMesh;
+    open(ArapucaMesh) or die("Could not open file $ArapucaMesh for writing");
+
+# The standard XML prefix and starting the gdml
+print ArapucaMesh <<EOF;
+   <?xml version='1.0'?>
+   <gdml>
+EOF
+
+#X-ARAPUCA Mesh SOLIDS
+$ArapucaMeshTubeLength_vertical = 65.3;
+$ArapucaMeshTubeLength_horizontal = 72.4;
+$ArapucaMeshInnerRadious = 0;
+$ArapucaMeshOuterRadious = 0.6;
+$ArapucaMeshTorRad = 5;
+
+$ArapucaMeshInnerStructureLength_vertical = 73.5;
+$ArapucaMeshInnerStructureLength_horizontal = 80.9;
+$ArapucaMeshRodInnerRadious = 0;
+$ArapucaMeshRodOuterRadious = 0.1;
+$ArapucaMeshInnerStructureSeparation = 7.388 + $ArapucaMeshRodOuterRadious;
+$ArapucaMeshInnerStructureNumberOfBars_vertical = 11;
+$ArapucaMeshInnerStructureNumberOfBars_horizontal = 9;
+    
+$Distance_Mesh_Arapuca_window = 1.8 + $ArapucaMeshOuterRadious;
+
+print ArapucaMesh <<EOF;
+<solids>
+    <torus name="ArapucaMeshCorner" rmin="$ArapucaMeshInnerRadious" rmax="$ArapucaMeshOuterRadious" rtor="$ArapucaMeshTorRad" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshtube_vertical" rmin="$ArapucaMeshInnerRadious" rmax="$ArapucaMeshOuterRadious" z="$ArapucaMeshTubeLength_vertical" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshtube_horizontal" rmin="$ArapucaMeshInnerRadious" rmax="$ArapucaMeshOuterRadious" z="$ArapucaMeshTubeLength_horizontal" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+    
+    <box name="ArapucaMeshModule" x="@{[$ArapucaMeshInnerStructureLength_horizontal + 2*($ArapucaMeshOuterRadious + $ArapucaMeshTorRad)]}" y="@{[2*$ArapucaMeshRodOuterRadious + 1]}" z="@{[$ArapucaMeshInnerStructureLength_vertical + 2*($ArapucaMeshOuterRadious + $ArapucaMeshTorRad)]}" lunit="cm"/>
+    
+    <tube name="ArapucaMeshRod_vertical" rmin="$ArapucaMeshRodInnerRadious" rmax="$ArapucaMeshRodOuterRadious" z="@{[$ArapucaMeshInnerStructureLength_vertical]}" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshRod_horizontal" rmin="$ArapucaMeshRodInnerRadious" rmax="$ArapucaMeshRodOuterRadious" z="@{[$ArapucaMeshInnerStructureLength_horizontal]}" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
+
+    <rotation name="rot90AboutY" unit="deg" x="0" y="90" z="0"/>
+
+    <union name="Meshunion1">
+      <first ref="ArapucaMeshtube_vertical"/>
+      <second ref="ArapucaMeshCorner"/>
+           <position name="Meshcorner1" unit="cm" x="@{[-$ArapucaMeshTorRad]}" y="0" z="@{[0.5*$ArapucaMeshTubeLength_vertical]}"/>
+        <rotation name="Meshrot1" unit="deg" x="90" y="0" z="0" />
+    </union>
+    
+    <union name="Meshunion2">
+      <first ref="Meshunion1"/>
+      <second ref="ArapucaMeshtube_horizontal"/>
+           <position name="Meshside2" unit="cm" x="@{[-0.5*$ArapucaMeshTubeLength_horizontal-$ArapucaMeshTorRad]}" y="0" z="@{[+0.5*$ArapucaMeshTubeLength_vertical+$ArapucaMeshTorRad]}"/>
+           <rotation name="Meshrot2" unit="deg" x="0" y="90" z="0" />
+    </union>
+    
+    <union name="Meshunion3">
+      <first ref="Meshunion2"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner2" unit="cm" x="@{[-$ArapucaMeshTubeLength_horizontal-$ArapucaMeshTorRad]}" y="0" z="@{[0.5*$ArapucaMeshTubeLength_vertical]}"/>
+        <rotation name="Meshrot3" unit="deg" x="90" y="270" z="0" />
+    </union>
+    
+    <union name="Meshunion4">
+      <first ref="Meshunion3"/>
+      <second ref="ArapucaMeshtube_vertical"/>
+           <position name="Meshside3" unit="cm" x="@{[-$ArapucaMeshTubeLength_horizontal-2*$ArapucaMeshTorRad]}" y="0" z="0" />
+    </union>
+    
+    <union name="Meshunion5">
+      <first ref="Meshunion4"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner3" unit="cm" x="@{[-$ArapucaMeshTubeLength_horizontal-$ArapucaMeshTorRad]}" y="0" z="@{[-0.5*$ArapucaMeshTubeLength_vertical]}"/>
+        <rotation name="Meshrot5" unit="deg" x="90" y="180" z="0" />
+    </union>
+    
+    <union name="Meshunion6">
+      <first ref="Meshunion5"/>
+      <second ref="ArapucaMeshtube_horizontal"/>
+        <position name="Meshside4" unit="cm" x="@{[-0.5*$ArapucaMeshTubeLength_horizontal-$ArapucaMeshTorRad]}" y="0" z="@{[-0.5*$ArapucaMeshTubeLength_vertical-$ArapucaMeshTorRad]}"/>
+        <rotation name="Meshrot6" unit="deg" x="0" y="90" z="0" />
+    </union>
+    
+    <union name="Meshunion7">
+      <first ref="Meshunion6"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner4" unit="cm" x="@{[-$ArapucaMeshTorRad]}" y="0" z="@{[-0.5*$ArapucaMeshTubeLength_vertical]}"/>
+        <rotation name="Meshrot7" unit="deg" x="90" y="90" z="0" />
+    </union>
+</solids>
+EOF
+
+$xMeshorigin = 0.5*$ArapucaMeshTubeLength_horizontal + $ArapucaMeshTorRad;
+    
+$zMeshorigin = 0;
+
+print ArapucaMesh <<EOF;
+<structure>
+<volume name="volArapucaMeshRod_vertical">
+  <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+  <solidref ref="ArapucaMeshRod_vertical"/>
+</volume>
+<volume name="volArapucaMeshRod_horizontal">
+  <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+  <solidref ref="ArapucaMeshRod_horizontal"/>
+</volume>
+<volume name="volMeshunion">
+  <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+  <solidref ref="Meshunion7"/>
+</volume>
+ <volume name="volArapucaMesh">
+  <materialref ref="LAr"/>
+  <solidref ref="ArapucaMeshModule"/>
+  <physvol>
+   <volumeref ref="volMeshunion"/>
+   <position name="posMesh18" unit="cm" x="@{[$xMeshorigin]}" y="0" z="@{[$zMeshorigin]}"/>
+  </physvol>
+EOF
+
+for($ii=0; $ii<$ArapucaMeshInnerStructureNumberOfBars_vertical; $ii++)
+{
+    print ArapucaMesh <<EOF;
+  <physvol>
+   <volumeref ref="volArapucaMeshRod_vertical"/>
+   <position name="posMeshRod_vertical$ii" unit="cm" x="@{[-5*$ArapucaMeshInnerStructureSeparation + ($ii)*$ArapucaMeshInnerStructureSeparation]}" y="@{[0.00001 + 2*$ArapucaMeshRodOuterRadious]}" z="0"/>
+  </physvol>
+EOF
+}
+
+for($ii=0; $ii<$ArapucaMeshInnerStructureNumberOfBars_horizontal; $ii++)
+{
+    print ArapucaMesh <<EOF;
+  <physvol>
+   <volumeref ref="volArapucaMeshRod_horizontal"/>
+   <position name="posMeshRod_horizontal$ii" unit="cm" x="0" y="0" z="@{[-4*$ArapucaMeshInnerStructureSeparation + ($ii)*$ArapucaMeshInnerStructureSeparation]}"/>
+    <rotationref ref="rot90AboutY"/>
+   </physvol>
+EOF
+}
+    print ArapucaMesh <<EOF;
+  
+  </volume>
+</structure>
+</gdml>
+EOF
+close(ArapucaMesh);
+}
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++ gen_pmt ++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+sub gen_pmt {
+
+    $PMT = $basename."_PMT" . $suffix . ".gdml";
+    push (@gdmlFiles, $PMT);
+    $PMT = ">" . $PMT;
+    open(PMT) or die("Could not open file $PMT for writing");
+
+	print PMT <<EOF;
+
+<solids>
+
+ <tube name="PMT_PENPlate"
+  rmax="12"
+  z="0.125"
+  deltaphi="360"
+  aunit="deg"
+  lunit="cm"/>
+
+ <tube name="PMTVolume"
+  rmax="@{[(6.5*2.54)]}"
+  z="@{[(11.1*2.54)]}"
+  deltaphi="360"
+  aunit="deg"
+  lunit="cm"/>
+
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="pmtMiddleCylinder" rmax="102.351822048586" rmin="100.351822048586" startphi="0" z="54"/>
+    <sphere aunit="deg" deltaphi="360" deltatheta="50" lunit="mm" name="sphPartTop" rmax="133" rmin="131" startphi="0" starttheta="0"/>
+    <union name="pmt0x7fb8f489dfe0">
+      <first ref="pmtMiddleCylinder"/>
+      <second ref="sphPartTop"/>
+      <position name="pmt0x7fb8f489dfe0_pos" unit="mm" x="0" y="0" z="-57.2051768689367"/>
+    </union>
+    <sphere aunit="deg" deltaphi="360" deltatheta="31.477975238527" lunit="mm" name="sphPartBtm" rmax="133" rmin="131" startphi="0" starttheta="130"/>
+    <union name="pmt0x7fb8f48a0d50">
+      <first ref="pmt0x7fb8f489dfe0"/>
+      <second ref="sphPartBtm"/>
+      <position name="pmt0x7fb8f48a0d50_pos" unit="mm" x="0" y="0" z="57.2051768689367"/>
+    </union>
+    <tube aunit="deg" deltaphi="360" lunit="mm" name="pmtBtmTube" rmax="44.25" rmin="42.25" startphi="0" z="72"/>
+    <union name="solidpmt">
+      <first ref="pmt0x7fb8f48a0d50"/>
+      <second ref="pmtBtmTube"/>
+      <position name="solidpmt_pos" unit="mm" x="0" y="0" z="-104.905637496842"/>
+    </union>
+    <sphere aunit="deg" deltaphi="360" deltatheta="50" lunit="mm" name="pmt0x7fb8f48a1eb0" rmax="133.2" rmin="133" startphi="0" starttheta="0"/>
+    <sphere aunit="deg" deltaphi="360" deltatheta="46.5" lunit="mm" name="pmt0x7fb8f48a4860" rmax="131" rmin="130.999" startphi="0" starttheta="0"/>
+
+
+</solids>
+
+<structure>
+ <volume name="pmtCoatVol">
+  <materialref ref="LAr"/>
+  <solidref ref="pmt0x7fb8f48a1eb0"/>
+  <auxiliary auxtype="SensDet" auxvalue="PhotonDetector"/>
+  </volume>
+
+ <volume name="allpmt">
+  <materialref ref="Glass"/>
+  <solidref ref="solidpmt"/>
+  </volume>
+
+<volume name="volPMT_coated">
+  <materialref ref="LAr"/>
+  <solidref ref="PMTVolume"/>
+
+  <physvol>
+   <volumeref ref="allpmt"/>
+   <position name="posallpmt" unit="cm" x="0" y="0" z="@{[1.27*2.54]}"/>
+  </physvol>
+
+ <physvol name="volOpDetSensitive">
+  <volumeref ref="pmtCoatVol"/>
+  <position name="posOpDetSensitive0" unit="cm" x="0" y="0" z="@{[1.27*2.54 - (2.23*2.54)]}"/>
+  </physvol>
+
+ </volume>
+
+
+ <volume name="pmtFoilVol">
+  <materialref ref="LAr"/>
+  <solidref ref="PMT_PENPlate"/>
+  <auxiliary auxtype="SensDet" auxvalue="PhotonDetector"/>
+  </volume>
+
+<volume name="volPMT_foil">
+  <materialref ref="LAr"/>
+  <solidref ref="PMTVolume"/>
+
+  <physvol>
+   <volumeref ref="allpmt"/>
+   <position name="posallpmt2" unit="cm" x="0" y="0" z="@{[1.27*2.54]}"/>
+  </physvol>
+
+ <physvol name="volOpDetSensitive">
+  <volumeref ref="pmtFoilVol"/>
+  <position name="posOpDetSensitive1" unit="cm" x="0" y="0" z="@{[1.27*2.54+7.9]}"/>
+  </physvol>
+
+ </volume>
+</structure>
+
+EOF
 }
 
 
@@ -2023,12 +2860,12 @@ print CRYO <<EOF;
     <subtraction name="GaseousArgonSub1">
       <first ref="GaseousArgonFull"/>
       <second ref="ArapucaOut"/>
-      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr  - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[-$widthCathode - $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
+      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer  - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[-$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
     </subtraction>
     <subtraction name="GaseousArgon">
       <first ref="GaseousArgonSub1"/>
       <second ref="ArapucaOut"/>
-      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[$widthCathode + $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
+      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[$widthCathode + $CathodeFrameToFC + $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
     </subtraction>
 </solids>
 EOF
@@ -2077,9 +2914,15 @@ print CRYO <<EOF;
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="SteelShell" />
     </volume>
-    <volume name="volCathode">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
-      <solidref ref="Cathode" />
+    <volume name="volCathode_nonTCOSide">
+      <materialref ref="G10" />
+      <solidref ref="Cathode_nonTCOSide"/>
+      <colorref ref="black"/>
+    </volume>
+    <volume name="volCathode_TCOSide">
+      <materialref ref="G10" />
+      <solidref ref="Cathode_TCOSide"/>
+      <colorref ref="black"/>
     </volume>
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
@@ -2152,6 +2995,7 @@ EOF
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
       <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+    
       <physvol>
         <volumeref ref="volGaseousArgon"/>
         <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2]}" y="0" z="0"/>
@@ -2189,7 +3033,8 @@ print "Beam Plug position x=".$BePlFlange_x." y=".$BePlFlange_y." z=".$BePlFlang
    # Default is TPC with readout on top so we need to rotate the bottom TPC 180deg about Y.
 if ($tpc_on==1) # place Top and Bottom TPCs inside croystat offsetting each pair of CRMs by borderCRP
 {
-  $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
+  $posX =  $Argon_x/2 - $HeightGaseousAr - $Upper_xLArBuffer - 0.5*($driftTPCActive + $ReadoutPlane);
+  $CathodePosX = $Argon_x/2 - $HeightGaseousAr - $Upper_xLArBuffer - ($driftTPCActive + $ReadoutPlane) - 0.5*$heightCathode;
   $posXBot = $posX - $driftTPCActive - $heightCathode - $ReadoutPlane;
   $idx = 0;
 
@@ -2248,34 +3093,35 @@ EOF
     }
   }
 }
-
-#The +50 in the x positions must depend on some other parameter
+    
+#Field cage profiles structure
   if ( $FieldCage_switch eq "on" ) {
-    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
-    $dist=$i*$FieldShaperSeparation;
-$posX =  $Argon_x/2 - $HeightGaseousAr - 2*($driftTPCActive + $ReadoutPlane) - $heightCathode + $dist;
-	if ($dist<150||$dist>2*($driftTPCActive + $ReadoutPlane)-150){
+    for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) { # $NFieldShapers = 144: 36 slim + 42 thick + 36 slim
+    $dist = $i*$FieldShaperSeparation;
+    $FirstFieldShaper_to_MembraneRoof = 76; #cm
+    $posX = $Cryostat_x/2 - $FirstFieldShaper_to_MembraneRoof - $dist;
+    if ($i<36||$i>77){
 	print CRYO <<EOF;
   <physvol>
      <volumeref ref="volFieldShaperSlim"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotation name="rotFS$i" unit="deg" x="0" y="0" z="90" />
+     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="0" z="@{[0.5*$FieldShaperLength+$FieldShaperTorRad]}" />
+     <rotation name="rotFS$i" unit="deg" x="90" y="0" z="90" />
   </physvol>
 EOF
 	}else{
 	print CRYO <<EOF;
   <physvol>
      <volumeref ref="volFieldShaper"/>
-     <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[-0.5*$FieldShaperShortTubeLength-$FieldShaperTorRad]}" z="0" />
-     <rotation name="rotFS$i" unit="deg" x="0" y="0" z="90" />
+        <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="@{[0.5*$FieldShaperWidth+$FieldShaperTorRad]}" z="0" />
+     <rotation name="rotFS$i" unit="deg" x="0" y="0" z="0" />
   </physvol>
 EOF
 	}
     }
   }
 
-
-$CathodePosX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) - 0.5*$heightCathode;
+#Cathode    
+$CathodePosX = $Argon_x/2 - $HeightGaseousAr - $Upper_xLArBuffer - ($driftTPCActive + $ReadoutPlane) - 0.5*$heightCathode;
 $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
 $CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
@@ -2286,12 +3132,26 @@ $idx = 0;
   {
     for(my $jj=0;$jj<$nCRM_x/2;$jj++)
     {
-	print CRYO <<EOF;
-      <physvol>
-   <volumeref ref="volCathode"/>
-   <position name="posCathode\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
-      </physvol>
+      if($idx==0)
+      {
+        print CRYO <<EOF;
+        <physvol>
+        <volumeref ref="volCathode_nonTCOSide"/>
+        <position name="posCathode\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+        </physvol>
 EOF
+      }
+
+      else
+      {
+         print CRYO <<EOF;
+        <physvol>
+        <volumeref ref="volCathode_TCOSide"/>
+        <position name="posCathode\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+        </physvol>
+EOF
+      }
+
        $idx++;
        $CathodePosY += $widthCathode;
     }
@@ -2300,28 +3160,87 @@ EOF
   }
   }
 
+# Adding Dual Phase PMTs
+
+  # Get the PMT array length
+  $pmt_array_length = scalar @pmt_pos;
+  $pmt_pos_x =  -$Argon_x/2 + 0.5*($HeightPMT);
+  $jj=0;
+  for ( $i=0; $i<$pmt_array_length; $i=$i+1 ) {
+
+    # Define the rotation string and the x positions
+    if ( grep { $_ == $i } @pmt_left_rotated ) {
+      $rot = "rPlus180AboutX";
+    } elsif ( grep { $_ == $i } @pmt_right_rotated ) {
+      $rot = "rIdentity";
+    } else {
+      $rot = "rMinus90AboutY";
+    }
+
+    # Defune the PMT type string
+    if ( grep { $_ == $i } @pmt_TPB ) {
+      $pmt_type = "volPMT_coated";
+    } else {
+      $pmt_type = "volPMT_foil";
+    }
+
+    if ( grep { $_ == $i } @pmt_left_rotated or grep { $_ == $i } @pmt_right_rotated ) {
+
+      print CRYO <<EOF;
+<physvol>
+  <volumeref ref="$pmt_type"/>
+  <position name="posPMT$i" unit="cm" @pmt_pos[$i]/>
+  <rotationref ref="$rot"/>
+</physvol>
+EOF
+      $jj=$jj+1;
+    }
+
+    else{
+      print CRYO <<EOF;
+<physvol>
+  <volumeref ref="$pmt_type"/>
+  <position name="posPMT$i" unit="cm" x="$pmt_pos_x" @pmt_pos[$i]/>
+  <rotationref ref="$rot"/>
+</physvol>
+EOF
+    }
+  }
+
+# End adding Dual Phase PMTs
+
 #for placing the Arapucas over the cathode
   $FrameCenter_y=-0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
   $FrameCenter_x=$CathodePosX;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 for($i=0;$i<$nCRM_x/2;$i++){
-for($j=0;$j<$nCRM_z/2;$j++){
-  place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
-  $FrameCenter_z+=$lengthCathode;
-}
+  for($j=0;$j<$nCRM_z/2;$j++){
+    place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
+    $FrameCenter_z+=$lengthCathode;
+  }
   $FrameCenter_y+=$widthCathode;
   $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 }
 
 #for placing the Arapucas on laterals
-  $FrameCenter_x=$CathodePosX +$driftTPCActive +$heightCathode/2;#$posZplane[0]; #anode position
-  $FrameCenter_y= -$widthCathode - $FCToArapucaSpaceLat;
-  $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
+  $FrameCenter_x = $CathodePosX;
+  $FrameCenter_y = -$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat + $ArapucaOut_y/2;
+  $FrameCenter_z = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
 
-for($j=0;$j<1;$j++){#nCRM will give the collumn number (1 collumn per frame)
+for($j=0;$j<1;$j++){#nCRM will give the column number (1 column per frame)
   place_OpDetsLateral($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $j);
   $FrameCenter_z+=2*$lengthCathode;
 }
+
+
+$MeshCenter_x = $CathodePosX + 0.34/2;
+$MeshCenter_y = -$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat + $ArapucaOut_y;
+$MeshCenter_z = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode; # + 0.34;
+#for placing the X-ARAPUCA meshes on laterals
+for($j=0;$j<1;$j++){#nCRM will give the column number (1 column per frame)
+    place_MeshLateral($MeshCenter_x, $MeshCenter_y, $MeshCenter_z, $j);
+}
+
 
 print CRYO <<EOF;
     </volume>
@@ -2391,20 +3310,24 @@ sub place_OpDetsLateral()
 for ($ara = 0; $ara<8; $ara++)
 {
              # Arapucas on laterals
-             # All Arapuca centers on a given collumn will have the same Z coordinate
+             # All Arapuca centers on a given column will have the same Z coordinate
              # X coordinates are on the left and right laterals
              # Y coordinates are defined with respect to the cathode position
 
 $Ara_Y = $FrameCenter_y;
 $Ara_Z = $FrameCenter_z;
-             if ($ara<4) {$Ara_YSens = ($Ara_Y+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
+             if ($ara<4) {$Ara_YSens = ($Ara_Y + 0.5*$ArapucaOut_y - 0.5*$ArapucaAcceptanceWindow_y - 0.01);
                          $rot= "rIdentity"; }
-             else {      $Ara_Y = $Ara_Y+2*$widthCathode + 2*$FCToArapucaSpaceLat;
-                         $Ara_YSens = ($Ara_Y-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
+             else {      $Ara_Y = $Ara_Y + 2*$widthCathode + 2*($CathodeFrameToFC + $FCToArapucaSpaceLat - $ArapucaOut_y/2);
+                         $Ara_YSens = ($Ara_Y -0.5*$ArapucaOut_y + 0.5*$ArapucaAcceptanceWindow_y + 0.01);
                          $rot = "rPlus180AboutX";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-             if ($ara==0||$ara==4) {$Ara_X = $FrameCenter_x-$FirstFrameVertDist;} #first tile's center distance from top anode
+             if ($ara==0||$ara==4) {#$Ara_X = $FrameCenter_x-$FirstFrameVertDist;
+                 $Ara_X = $FrameCenter_x + $Upper_FirstFrameVertDist;
+             } #first tile center distance from top anode
              if ($ara==1||$ara==5) {$Ara_X-=$VerticalPDdist;} #other tiles separated by VerticalPDdist
-             if ($ara==2||$ara==6) {$Ara_X = $FrameCenter_x - $heightCathode -2*$driftTPCActive+$FirstFrameVertDist;} #first tile's center distance from bottom anode
+             if ($ara==2||$ara==6) {#$Ara_X = $FrameCenter_x - $heightCathode -2*$driftTPCActive+$FirstFrameVertDist;
+                 $Ara_X = $FrameCenter_x - $Lower_FirstFrameVertDist;
+             } #first tile center distance from bottom anode
              if ($ara==3||$ara==7) {$Ara_X+=$VerticalPDdist;} #other tiles separated by VerticalPDdist
 
 	print CRYO <<EOF;
@@ -2412,23 +3335,70 @@ $Ara_Z = $FrameCenter_z;
        <volumeref ref="volArapucaLat_$Lat_z\-$ara"/>
        <position name="posArapuca$ara-Lat\-$Lat_z" unit="cm" 
          x="@{[$Ara_X]}"
-	 y="@{[$Ara_Y]}" 
-	 z="@{[$Ara_Z]}"/>
+         y="@{[$Ara_Y]}"
+         z="@{[$Ara_Z]}"/>
        <rotationref ref="$rot"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_ArapucaLat_$Lat_z\-$ara"/>
        <position name="posOpArapuca$ara-Lat\-$Lat_z" unit="cm" 
          x="@{[$Ara_X]}"
-	 y="@{[$Ara_YSens]}" 
-	 z="@{[$Ara_Z]}"/>
+         y="@{[$Ara_YSens]}"
+         z="@{[$Ara_Z]}"/>
      </physvol>
 EOF
-        
+    
 }#end Ara for-loop
 
 }
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++ place X-ARAPUCA Mesh +++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if($ArapucaMesh_switch eq "on")
+{
+    # Membrane mesh
+    sub place_MeshLateral()
+    {
+
+        $MeshCenter_x = $_[0];
+        $MeshCenter_y = $_[1];
+        $MeshCenter_z = $_[2];
+        $Lat_z = $_[3];
+
+        #Placing X-ARAPUCA meshes on the laterals
+        for ($mesh = 0; $mesh<8; $mesh++)
+        {
+                    # X-ARAPUCA mesh on laterals
+                    # All mesh centers on a given column will have the same Z coordinate
+                    # X coordinates are on the left and right laterals
+                    # Y coordinates are defined with respect to the cathode position
+    
+            $Mesh_Y = $MeshCenter_y;
+            $Mesh_Z = $MeshCenter_z;
+                if ($mesh<4) {$Mesh_Y = ($Mesh_Y + $Distance_Mesh_Arapuca_window);
+                            $rot= "rot90AboutY"; }
+                else {$Mesh_Y = $Mesh_Y + 2*$widthCathode + 2*($CathodeFrameToFC + $FCToArapucaSpaceLat - $ArapucaOut_y) - $Distance_Mesh_Arapuca_window;
+                            $rot = "rot05";} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
+                if ($mesh==0||$mesh==4) {$Mesh_X = $MeshCenter_x + $Upper_FirstFrameVertDist;} #first mesh center distance from top anode
+                if ($mesh==1||$mesh==5) {$Mesh_X-=$VerticalPDdist;}
+                if ($mesh==2||$mesh==6) {$Mesh_X = $MeshCenter_x - $Lower_FirstFrameVertDist;} #first mesh center distance from bottom anode
+                if ($mesh==3||$mesh==7) {$Mesh_X+=$VerticalPDdist;}
+        
+            print CRYO <<EOF;
+            <physvol>
+            <volumeref ref="volArapucaMesh"/>
+            <position name="posMesh$mesh-Lat\-$Lat_z" unit="cm"
+            x="@{[$Mesh_X]}"
+            y="@{[$Mesh_Y]}"
+            z="@{[$Mesh_Z]}"/>
+            <rotationref ref="$rot"/>
+            </physvol>
+EOF
+        }#end Mesh lateral for-loop
+
+    }
+}
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++ gen_Enclosure +++++++++++++++++++++++++++++++++++++
@@ -2452,6 +3422,8 @@ sub gen_Enclosure()
 <gdml>
 EOF
 
+
+# All the detector enclosure solids.
 print ENCL <<EOF;
 <solids>
 EOF
@@ -2566,11 +3538,148 @@ EOF
       <second ref="CathodeVoid"/>
       <position name="posCathodeSub15" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[0.5*$lengthCathodeVoid+1.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
-    <subtraction name="Cathode">
+    <subtraction name="CathodeFrame">
       <first ref="Cathode15"/>
       <second ref="CathodeVoid"/>
       <position name="posCathodeSub16" x="0" y="@{[1.5*$widthCathodeVoid+2.0*$CathodeBorder]}" z="@{[1.5*$lengthCathodeVoid+2.0*$CathodeBorder]}" unit="cm"/>
     </subtraction>
+    <union name="CathodeFrame_MeshTop11">
+    <first ref="CathodeFrame"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop11"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom11">
+    <first ref="CathodeFrame_MeshTop11"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom11"/>
+    </union>
+    <union name="CathodeFrame_MeshTop21">
+    <first ref="CathodeFrame_MeshBottom11"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop21"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom21">
+    <first ref="CathodeFrame_MeshTop21"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom21"/>
+    </union>
+    <union name="CathodeFrame_MeshTop41">
+    <first ref="CathodeFrame_MeshBottom21"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop41"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom41">
+    <first ref="CathodeFrame_MeshTop41"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom41"/>
+    </union>
+    <union name="CathodeFrame_MeshTop32">
+    <first ref="CathodeFrame_MeshBottom41"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop32"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom32">
+    <first ref="CathodeFrame_MeshTop32"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom32"/>
+    </union>
+    <union name="CathodeFrame_MeshTop42">
+    <first ref="CathodeFrame_MeshBottom32"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop42"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom42">
+    <first ref="CathodeFrame_MeshTop42"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom42"/>
+    </union>
+    
+    <union name="CathodeFrame_MeshTop13">
+    <first ref="CathodeFrame_MeshBottom42"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop13"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom13">
+    <first ref="CathodeFrame_MeshTop13"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom13"/>
+    </union>
+    <union name="CathodeFrame_MeshTop23">
+    <first ref="CathodeFrame_MeshBottom13"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop23"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom23">
+    <first ref="CathodeFrame_MeshTop23"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom23"/>
+    </union>
+    <union name="CathodeFrame_MeshTop33">
+    <first ref="CathodeFrame_MeshBottom23"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop33"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom33">
+    <first ref="CathodeFrame_MeshTop33"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom33"/>
+    </union>
+
+    <union name="CathodeFrame_MeshTop14">
+    <first ref="CathodeFrame_MeshBottom33"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop14"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom14">
+    <first ref="CathodeFrame_MeshTop14"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom14"/>
+    </union>
+    <union name="CathodeFrame_MeshTop34">
+    <first ref="CathodeFrame_MeshBottom14"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop34"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom34">
+    <first ref="CathodeFrame_MeshTop34"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom34"/>
+    </union>
+    <union name="CathodeFrame_MeshTop44">
+    <first ref="CathodeFrame_MeshBottom34"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop44"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom44">
+    <first ref="CathodeFrame_MeshTop44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom44"/>
+    </union>
+
+   
+    <!--Non-TCO Side-->
+    <union name="CathodeFrame_MeshTop22">
+    <first ref="CathodeFrame_MeshBottom44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop22"/>
+    </union>
+    <union name="Cathode_nonTCOSide">
+    <first ref="CathodeFrame_MeshTop22"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom22"/>
+    </union>
+    <!--TCO Side-->
+    <union name="CathodeFrame_MeshTop12">
+    <first ref="CathodeFrame_MeshBottom44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop12"/>
+    </union>
+    <union name="Cathode_TCOSide">
+    <first ref="CathodeFrame_MeshTop12"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom12"/>
+    </union>
+
 
     <box name="FoamPadBlock" lunit="cm"
       x="@{[$Cryostat_x + 2*$FoamPadding]}"
@@ -2846,7 +3955,7 @@ EOF
     </volume>
 
     <volume name="volFoamPadding">
-      <materialref ref="foam_protoDUNEdp"/>
+      <materialref ref="foam_protoDUNE_RPUF_assayedSample"/>
       <solidref ref="FoamPadding"/>
     </volume>
 
@@ -2855,7 +3964,7 @@ EOF
       <solidref ref="SteelSupport"/>
     </volume>
 EOF
-    
+
 if($HD_CRT_switch eq "on"){
 
 for($imod=0 ; $imod<16 ; $imod++){
@@ -3032,15 +4141,6 @@ EOF
     } # end of $DP_CRT_switch eq "on"
 
     #flag : for DP-CRT above, change <rotationref ref="rMinus90AboutX"/> --> <rotationref ref="rMinus90AboutY"/>
-    
-
-
-
-
-
-
-
-
 
    
     print ENCL <<EOF;   
@@ -4075,12 +5175,6 @@ EOF
 EOF
     } # end of $DP_CRT_switch eq "on"
 
-    
-    
-    
-    
-    
-
 
 print ENCL <<EOF;
     </volume>
@@ -4222,14 +5316,16 @@ print "CRP total area        : $widthCRP x $lengthCRP\n";
 print "Wire pitch in U, V, Z : $wirePitchU, $wirePitchV, $wirePitchZ\n";
 print "TPC active volume  : $driftTPCActive x $widthTPCActive x $lengthTPCActive\n";
 print "Argon volume       : ($Argon_x, $Argon_y, $Argon_z) \n"; 
-print "Argon buffer       : ($xLArBuffer, $yLArBuffer, $zLArBuffer) \n"; 
+print "Argon buffer       : (Upper: $Upper_xLArBuffer & Lower: $Lower_xLArBuffer, $yLArBuffer, $zLArBuffer) \n";
 print "Detector enclosure : $DetEncX x $DetEncY x $DetEncZ\n";
 print "TPC Origin         : ($OriginXSet, $OriginYSet, $OriginZSet) \n";
-print "Field Cage         : $FieldCage_switch \n";
 print "Cathode            : $Cathode_switch \n";
 print "Wires              : $wires \n";
-print "GroundGrid         : $GroundGrid_switch \n";
-print "ExtractionGrid     : $ExtractionGrid_switch \n";
+print "GroundGrid         : $GroundGrid_switch \n"; # Do we need it? It is always set off
+print "ExtractionGrid     : $ExtractionGrid_switch \n"; # Do we need it? It is always set off
+print "Optical            : $optical \n"; 
+print "X-ARAPUCA mesh     : $ArapucaMesh_switch \n";
+print "PMTs               : $PMT_switch \n";
 
 # run the sub routines that generate the fragments
 
@@ -4237,10 +5333,14 @@ gen_Extend();
 gen_Define(); 	 # generates definitions at beginning of GDML
 gen_Materials(); # generates materials to be used
 
+
 if ( $FieldCage_switch eq "on" ) {  gen_FieldCage();	}
 #if ( $GroundGrid_switch eq "on" ) {  gen_GroundGrid();	}
 #if ( $Cathode_switch eq "on" ) {  gen_Cathode();	}
+if ( $ArapucaMesh_switch eq "on" ) {  gen_ArapucaMesh();    } # generates X-ARAPUCA mesh for membrane PDs
 if ( $ExtractionGrid_switch eq "on" ) {  gen_ExtractionGrid();	}
+gen_CathodeMesh(); # generates cathode mesh
+gen_pmt();      # generates PMTs from DP
 gen_TopCRP();
 #gen_TPC();       # generate TPC for a given unit CRM
 gen_Cryostat();  # 
