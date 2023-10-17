@@ -77,17 +77,17 @@ Math::BigFloat->precision(-16);
 GetOptions( "help|h" => \$help,
 	    "suffix|s:s" => \$suffix,
 	    "output|o:s" => \$output,
-	    "wires|w:s" => \$wires,
-      "optical|opt:s" => \$optical);
+	    "wires|w:s" => \$wires);
 
 
 my $FieldCage_switch="on";
 my $Cathode_switch="on";
 $GroundGrid_switch="off";
 $ExtractionGrid_switch="off";
+$ArapucaMesh_switch="on";
 
 my $HD_CRT_switch="off";
-my $DP_CRT_switch="off";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
+my $DP_CRT_switch="on";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
 
 if ( defined $help )
 {
@@ -109,20 +109,6 @@ else
     $suffix = "-" . $suffix;
 }
 
-
-if (defined $optical)
-{
-    if ($optical==1)
-    {
-      $ArapucaMesh_switch="on";
-      $basename = $basename."_optical";
-    }
-
-    else
-    {
-      $ArapucaMesh_switch="off";
-    }
-}
 
 
 # set wires on to be the default, unless given an input by the user
@@ -1000,6 +986,7 @@ print DEF <<EOF;
 <define>
    <position name="posCryoInDetEnc"     unit="cm" x="$posCryoInDetEnc_x" y="0" z="0"/>
    <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
+   <rotation name="rot90AboutY" unit="deg" x="0" y="90" z="0"/>
    <rotation name="rPlus45AboutX"       unit="deg" x="45" y="0" z="0"/>
    <rotation name="rPlus90AboutX"       unit="deg" x="90" y="0" z="0"/>
    <rotation name="rPlus90AboutY"       unit="deg" x="90" y="90" z="0"/>
@@ -2440,7 +2427,6 @@ print ArapucaMesh <<EOF;
     <tube name="ArapucaMeshRod_vertical" rmin="$ArapucaMeshRodInnerRadious" rmax="$ArapucaMeshRodOuterRadious" z="@{[$ArapucaMeshInnerStructureLength_vertical]}" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
     <tube name="ArapucaMeshRod_horizontal" rmin="$ArapucaMeshRodInnerRadious" rmax="$ArapucaMeshRodOuterRadious" z="@{[$ArapucaMeshInnerStructureLength_horizontal]}" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
 
-    <rotation name="rot90AboutY" unit="deg" x="0" y="90" z="0"/>
 
     <union name="Meshunion1">
       <first ref="ArapucaMeshtube_vertical"/>
@@ -3237,10 +3223,12 @@ $MeshCenter_x = $CathodePosX + 0.34/2;
 $MeshCenter_y = -$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat + $ArapucaOut_y;
 $MeshCenter_z = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode; # + 0.34;
 #for placing the X-ARAPUCA meshes on laterals
-for($j=0;$j<1;$j++){#nCRM will give the column number (1 column per frame)
+if($ArapucaMesh_switch eq "on")
+{
+  for($j=0;$j<1;$j++){#nCRM will give the column number (1 column per frame)
     place_MeshLateral($MeshCenter_x, $MeshCenter_y, $MeshCenter_z, $j);
+  }
 }
-
 
 print CRYO <<EOF;
     </volume>
@@ -4408,12 +4396,12 @@ EOF
     <physvol name="volUnitUSW_0">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitUSW_0" x="-454.2" y="-320" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSW_0" x="180" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitUSW_0" x="180" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitUSN_0">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitUSN_0" x="-320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSN_0" x="0" y="180" z="-270" unit="deg"/>
+    <rotation name="rotUnitUSN_0" x="0" y="180" z="-270" unit="deg"/>
     </physvol>
     
     
@@ -4459,12 +4447,12 @@ EOF
     <physvol name="volUnitUSW_1">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitUSW_1" x="-454.2" y="-160" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSW_1" x="180" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitUSW_1" x="180" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitUSN_1">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitUSN_1" x="-160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSN_1" x="0" y="180" z="-270" unit="deg"/>
+    <rotation name="rotUnitUSN_1" x="0" y="180" z="-270" unit="deg"/>
     </physvol>
     
     
@@ -4510,12 +4498,12 @@ EOF
     <physvol name="volUnitUSW_2">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitUSW_2" x="-454.2" y="0" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSW_2" x="180" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitUSW_2" x="180" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitUSN_2">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitUSN_2" x="0" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSN_2" x="0" y="180" z="-270" unit="deg"/>
+    <rotation name="rotUnitUSN_2" x="0" y="180" z="-270" unit="deg"/>
     </physvol>
     
     
@@ -4561,12 +4549,12 @@ EOF
     <physvol name="volUnitUSW_3">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitUSW_3" x="-454.2" y="160" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSW_3" x="180" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitUSW_3" x="180" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitUSN_3">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitUSN_3" x="160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSN_3" x="0" y="180" z="-270" unit="deg"/>
+    <rotation name="rotUnitUSN_3" x="0" y="180" z="-270" unit="deg"/>
     </physvol>
     
     
@@ -4612,12 +4600,12 @@ EOF
     <physvol name="volUnitUSW_4">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitUSW_4" x="-454.2" y="320" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSW_4" x="180" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitUSW_4" x="180" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitUSN_4">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitUSN_4" x="320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitUSN_4" x="0" y="180" z="-270" unit="deg"/>
+    <rotation name="rotUnitUSN_4" x="0" y="180" z="-270" unit="deg"/>
     </physvol>
     </volume>
     
@@ -4658,12 +4646,12 @@ EOF
     <physvol name="volUnitWSW_0">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitWSW_0" x="-454.2" y="-320" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSW_0" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitWSW_0" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSN_0">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitWSN_0" x="-320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSN_0" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitWSN_0" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSCent_1-0">
     <volumeref ref="volUnitCent"/>
@@ -4697,12 +4685,12 @@ EOF
     <physvol name="volUnitWSW_1">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitWSW_1" x="-454.2" y="-160" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSW_1" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitWSW_1" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSN_1">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitWSN_1" x="-160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSN_1" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitWSN_1" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSCent_2-0">
     <volumeref ref="volUnitCent"/>
@@ -4736,12 +4724,12 @@ EOF
     <physvol name="volUnitWSW_2">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitWSW_2" x="-454.2" y="0" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSW_2" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitWSW_2" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSN_2">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitWSN_2" x="0" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSN_2" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitWSN_2" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSCent_3-0">
     <volumeref ref="volUnitCent"/>
@@ -4775,12 +4763,12 @@ EOF
     <physvol name="volUnitWSW_3">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitWSW_3" x="-454.2" y="160" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSW_3" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitWSW_3" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSN_3">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitWSN_3" x="160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSN_3" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitWSN_3" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSCent_4-0">
     <volumeref ref="volUnitCent"/>
@@ -4814,12 +4802,12 @@ EOF
     <physvol name="volUnitWSW_4">
     <volumeref ref="volUnitTop"/>
     <position name="posUnitWSW_4" x="-454.2" y="320" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSW_4" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitWSW_4" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitWSN_4">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitWSN_4" x="320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitWSN_4" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitWSN_4" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     </volume>
     
@@ -4859,12 +4847,12 @@ EOF
     <physvol name="volUnitLRW_0">
     <volumeref ref="volUnitWallL"/>
     <position name="posUnitLRW_0" x="-485.1" y="-320" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRW_0" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitLRW_0" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRN_0">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitLRN_0" x="-320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRN_0" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitLRN_0" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRCent_1-0">
     <volumeref ref="volUnitCent"/>
@@ -4898,12 +4886,12 @@ EOF
     <physvol name="volUnitLRW_1">
     <volumeref ref="volUnitWallL"/>
     <position name="posUnitLRW_1" x="-485.1" y="-160" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRW_1" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitLRW_1" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRN_1">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitLRN_1" x="-160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRN_1" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitLRN_1" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRCent_2-0">
     <volumeref ref="volUnitCent"/>
@@ -4937,12 +4925,12 @@ EOF
     <physvol name="volUnitLRW_2">
     <volumeref ref="volUnitWallL"/>
     <position name="posUnitLRW_2" x="-485.1" y="0" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRW_2" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitLRW_2" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRN_2">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitLRN_2" x="0" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRN_2" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitLRN_2" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRCent_3-0">
     <volumeref ref="volUnitCent"/>
@@ -4976,12 +4964,12 @@ EOF
     <physvol name="volUnitLRW_3">
     <volumeref ref="volUnitWallL"/>
     <position name="posUnitLRW_3" x="-485.1" y="160" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRW_3" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitLRW_3" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRN_3">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitLRN_3" x="160" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRN_3" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitLRN_3" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRCent_4-0">
     <volumeref ref="volUnitCent"/>
@@ -5015,12 +5003,12 @@ EOF
     <physvol name="volUnitLRW_4">
     <volumeref ref="volUnitWallL"/>
     <position name="posUnitLRW_4" x="-485.1" y="320" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRW_4" x="0" y="0" z="-180" unit="deg"/>
+    <rotation name="rotUnitLRW_4" x="0" y="0" z="-180" unit="deg"/>
     </physvol>
     <physvol name="volUnitLRN_4">
     <volumeref ref="volUnitWallS"/>
     <position name="posUnitLRN_4" x="320" y="-468.9" z="0" unit="cm"/>
-    <rotation  name="rotUnitLRN_4" x="0" y="0" z="-270" unit="deg"/>
+    <rotation name="rotUnitLRN_4" x="0" y="0" z="-270" unit="deg"/>
     </physvol>
     </volume>
 
@@ -5338,7 +5326,7 @@ if ( $FieldCage_switch eq "on" ) {  gen_FieldCage();	}
 #if ( $GroundGrid_switch eq "on" ) {  gen_GroundGrid();	}
 #if ( $Cathode_switch eq "on" ) {  gen_Cathode();	}
 if ( $ArapucaMesh_switch eq "on" ) {  gen_ArapucaMesh();    } # generates X-ARAPUCA mesh for membrane PDs
-if ( $ExtractionGrid_switch eq "on" ) {  gen_ExtractionGrid();	}
+#if ( $ExtractionGrid_switch eq "on" ) {  gen_ExtractionGrid();	}
 gen_CathodeMesh(); # generates cathode mesh
 gen_pmt();      # generates PMTs from DP
 gen_TopCRP();
