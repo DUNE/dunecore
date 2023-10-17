@@ -87,7 +87,8 @@ $ExtractionGrid_switch="off";
 $ArapucaMesh_switch="on";
 
 my $HD_CRT_switch="off";
-my $DP_CRT_switch="on";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
+my $DP_CRT_switch="off";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
+# DP_CRT switch is OFF due to overlaps with the beam pipe. Once solved it should be turned ON. 
 
 if ( defined $help )
 {
