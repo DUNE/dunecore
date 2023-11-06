@@ -999,6 +999,7 @@ print DEF <<EOF;
    <rotation name="rPlus90AboutY"       unit="deg" x="90" y="90" z="0"/>
    <rotation name="rMinus90AboutX"      unit="deg" x="270" y="0" z="0"/>
    <rotation name="rMinus90AboutY"      unit="deg" x="0" y="270" z="0"/>
+   <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
    <rotation name="rMinus90AboutYMinus90AboutX"       unit="deg" x="270" y="270" z="0"/>
    <rotation name="rPlus180AboutX"	unit="deg" x="180" y="0"   z="0"/>
    <rotation name="rPlus180AboutY"	unit="deg" x="0" y="180"   z="0"/>
@@ -1824,31 +1825,31 @@ print FieldCage <<EOF;
     <subtraction name="ShortFChalfcircCut">
     <first ref="ShortFChalfcirc"/>
     <second ref="ShortFCcutter"/>
-    <position name="pos" y="0" x=".249" z="0" unit="mm" />
+    <position name="posfc1" y="0" x=".249" z="0" unit="mm" />
     </subtraction>
     
     <union name="ShortFCcircAndRect">
       <first ref="ShortFChalfcircCut"/>
       <second ref="ShortFCrect"/>
-      <position name="pos" x="-4.705" y="-2.68" z="0" unit="mm" />
+      <position name="posfc2" x="-4.705" y="-2.68" z="0" unit="mm" />
     </union>
     
     <union name="ShortFCwithArc1">
       <first ref="ShortFCcircAndRect"/>
       <second ref="ShortFCarc1"/>
-      <position name="pos" x="-14.204" y="-21.1" z="0" unit="mm" />
+      <position name="posfc3" x="-14.204" y="-21.1" z="0" unit="mm" />
     </union>
     
     <union name="ShortFCwithArc2" >
       <first ref="ShortFCwithArc1"/>
       <second ref="ShortFCarc2"/>
-      <position name="pos" x="-19.84" y="-57.16" z="0" unit="mm" />
+      <position name="posfc4" x="-19.84" y="-57.16" z="0" unit="mm" />
     </union>
     
     <union name="ShortFCProfile">
     <first ref="ShortFCwithArc2"/>
     <second ref="ShortFCwithArc2"/>
-    <position name="pos" x="-39.68" y="0" z="0" unit="mm" />
+    <position name="posfc5" x="-39.68" y="0" z="0" unit="mm" />
     <rotation name="rot" y="180" unit="deg" />
     </union>
     
@@ -1863,37 +1864,37 @@ print FieldCage <<EOF;
     <subtraction name="LongFChalfcircCut">
     <first ref="LongFChalfcirc"/>
     <second ref="LongFCcutter"/>
-    <position name="pos" y="0" x=".249" z="0" unit="mm" />
+    <position name="posfc6" y="0" x=".249" z="0" unit="mm" />
     </subtraction>
 
     <union name="LongFCcircAndRect">
       <first ref="LongFChalfcircCut"/>
       <second ref="LongFCrect"/>
-      <position name="pos" x="-4.705" y="-2.68" z="0" unit="mm" />
+      <position name="posfc7" x="-4.705" y="-2.68" z="0" unit="mm" />
     </union>
 
     <union name="LongFCwithArc1">
       <first ref="LongFCcircAndRect"/>
       <second ref="LongFCarc1"/>
-      <position name="pos" x="-14.204" y="-21.1" z="0" unit="mm" />
+      <position name="posfc8" x="-14.204" y="-21.1" z="0" unit="mm" />
     </union>
 
     <union name="LongFCwithArc2">
       <first ref="LongFCwithArc1"/>
       <second ref="LongFCarc2"/>
-      <position name="pos" x="-19.84" y="-57.16" z="0" unit="mm" />
+      <position name="posfc9" x="-19.84" y="-57.16" z="0" unit="mm" />
     </union>
 
     <union name="LongFCProfile">
     <first ref="LongFCwithArc2"/>
     <second ref="LongFCwithArc2"/>
-    <position name="pos" x="-39.68" y="0" z="0" unit="mm" />
-    <rotation name="rot" y="180" unit="deg" />
+    <position name="posfc10" x="-39.68" y="0" z="0" unit="mm" />
+    <rotation name="rotfc" y="180" unit="deg" />
     </union>
     <!-- End Full-length FC Profile -->
     
     
-    <!-- Slim Field cage profiles  --> ########################################
+    <!-- Slim Field cage profiles  -->
     
     <!-- Long Slim FC profiles -->
     <xtru name="LongFCProfileSlim" lunit="mm">
@@ -2080,49 +2081,49 @@ print FieldCage <<EOF;
       <first ref="ShortFCProfile"/>
       <second ref="FieldShaperCorner"/>
    		<position name="cornerpos1" unit="cm" x="-2" y="@{[-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLength]}"/>
-        <rotation name="rot1" unit="deg" x="90" y="0" z="90" />
+        <rotationref ref="rPlus90AboutXPlus90AboutZ" />
     </union>
 
     <union name="FSunion2">
       <first ref="FSunion1"/>
       <second ref="LongFCProfile"/>
    		<position name="LongFCProfile1" unit="cm" x="0" y="@{[-0.5*$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[+0.5*$FieldShaperLength+$FieldShaperTorRad]}"/>
-   		<rotation name="rot2" unit="deg" x="90" y="0" z="0" />
+   		<rotationref ref="rPlus90AboutX"/>
     </union>
 
     <union name="FSunion3">
       <first ref="FSunion2"/>
       <second ref="FieldShaperCorner"/>
    		<position name="cornerpos2" unit="cm" x="-2" y="@{[-$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[0.5*$FieldShaperLength]}"/>
-        <rotation name="rot3" unit="deg" y="270" x="270" z="270" />
+        <rotation name="rotfs3" unit="deg" y="270" x="270" z="270" />
     </union>
 
     <union name="FSunion4">
       <first ref="FSunion3"/>
       <second ref="ShortFCProfile"/>
    		<position name="ShortFCProfile2" unit="cm" x="-3.968" y="@{[-$FieldShaperWidth-2*$FieldShaperTorRad]}" z="0"/>
-        <rotation name="rot4" unit="deg" x="0" y="0" z="180" />
+        <rotation name="rotfs4" unit="deg" x="0" y="0" z="180" />
     </union>
 
     <union name="FSunion5">
       <first ref="FSunion4"/>
       <second ref="FieldShaperCorner"/>
    		<position name="cornerpos3" unit="cm" x="-2" y="@{[-$FieldShaperWidth-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLength]}"/>
-        <rotation name="rot5" unit="deg" x="90" y="180" z="90" />
+        <rotation name="rotfs5" unit="deg" x="90" y="180" z="90" />
     </union>
 
     <union name="FSunion6">
       <first ref="FSunion5"/>
       <second ref="LongFCProfile"/>
    		<position name="LongFCProfile2" unit="cm" x="0" y="@{[-0.5*$FieldShaperWidth-$FieldShaperTorRad]}"  z="@{[-0.5*$FieldShaperLength-$FieldShaperTorRad]}"/>
-        <rotation name="rot6" unit="deg" x="270" y="0" z="0" />
+        <rotation name="rotfs6" unit="deg" x="270" y="0" z="0" />
     </union>
 
     <union name="FieldShaperSolid">
       <first ref="FSunion6"/>
       <second ref="FieldShaperCorner"/>
    		<position name="cornerpos4" unit="cm" x="-2" y="@{[-$FieldShaperTorRad]}" z="@{[-0.5*$FieldShaperLength]}"/>
-        <rotation name="rot7" unit="deg" x="90" y="90" z="90" />
+        <rotation name="rotfs7" unit="deg" x="90" y="90" z="90" />
     </union>
     
     
@@ -2133,7 +2134,7 @@ print FieldCage <<EOF;
       <first ref="LongFCProfileSlim"/>
       <second ref="FieldShaperSlimCorner"/>
            <position name="cornerposSlim1" unit="cm" x="@{[-$FieldShaperTorRad]}" y="0" z="@{[0.5*$FieldShaperWidth]}"/>
-        <rotation name="rot1" unit="deg" x="90" y="0" z="0" />
+        <rotationref ref="rPlus90AboutX" />
     </union>
 
     
@@ -2371,7 +2372,7 @@ print ArapucaMesh <<EOF;
       <first ref="ArapucaMeshtube_vertical"/>
       <second ref="ArapucaMeshCorner"/>
            <position name="Meshcorner1" unit="cm" x="@{[-$ArapucaMeshTorRad]}" y="0" z="@{[0.5*$ArapucaMeshTubeLength_vertical]}"/>
-        <rotation name="Meshrot1" unit="deg" x="90" y="0" z="0" />
+        <rotationref ref="rPlus90AboutX" />
     </union>
     
     <union name="Meshunion2">
@@ -2467,7 +2468,7 @@ for($ii=0; $ii<$ArapucaMeshInnerStructureNumberOfBars_horizontal; $ii++)
     print ArapucaMesh <<EOF;
   <physvol>
    <volumeref ref="volArapucaMeshRod_horizontal"/>
-   <position name="posMeshRod_horizontal$ii" unit="cm" x="0" y="0" z="@{[-4*$ArapucaMeshInnerStructureSeparation + ($ii)*$ArapucaMeshInnerStructureSeparation]}"/>
+   <position name="posMeshRod_horizontal1$ii" unit="cm" x="0" y="0" z="@{[-4*$ArapucaMeshInnerStructureSeparation + ($ii)*$ArapucaMeshInnerStructureSeparation]}"/>
     <rotationref ref="rot90AboutY"/>
    </physvol>
 EOF
@@ -2495,7 +2496,7 @@ for($ii=0; $ii<$CathodeArapucaMeshNumberOfBars_horizontal; $ii++)
     print ArapucaMesh <<EOF;
   <physvol>
    <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
-   <position name="posMeshRod_horizontal$ii" unit="cm" x="@{[($CathodeArapucaMeshRodRadious + 1e-9/2)]}" y="0" z="@{[-$widthCathodeVoid/2 + $CathodeArapucaMesh_horizontalOffset + ($ii)*$CathodeArapucaMeshRodSeparation]}"/>
+   <position name="posMeshRod_horizontal2$ii" unit="cm" x="@{[($CathodeArapucaMeshRodRadious + 1e-9/2)]}" y="0" z="@{[-$widthCathodeVoid/2 + $CathodeArapucaMesh_horizontalOffset + ($ii)*$CathodeArapucaMeshRodSeparation]}"/>
    <rotationref ref="rPlus90AboutX"/>
   </physvol>
 EOF
@@ -2584,7 +2585,7 @@ sub gen_pmt {
    <position name="posallpmt" unit="cm" x="0" y="0" z="@{[1.27*2.54]}"/>
   </physvol>
 
- <physvol name="volOpDetSensitive">
+ <physvol name="volOpDetSensitive_CoatedPMT">
   <volumeref ref="pmtCoatVol"/>
   <position name="posOpDetSensitive0" unit="cm" x="0" y="0" z="@{[1.27*2.54 - (2.23*2.54)]}"/>
   </physvol>
@@ -2607,7 +2608,7 @@ sub gen_pmt {
    <position name="posallpmt2" unit="cm" x="0" y="0" z="@{[1.27*2.54]}"/>
   </physvol>
 
- <physvol name="volOpDetSensitive">
+ <physvol name="volOpDetSensitive_FoilPMT">
   <volumeref ref="pmtFoilVol"/>
   <position name="posOpDetSensitive1" unit="cm" x="0" y="0" z="@{[1.27*2.54+7.9]}"/>
   </physvol>
@@ -2680,7 +2681,7 @@ print CRYO <<EOF;
     <subtraction name="GaseousArgon">
       <first ref="GaseousArgonSub1"/>
       <second ref="ArapucaOut"/>
-      <position name="posGasArSub1" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[$widthCathode + $CathodeFrameToFC + $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
+      <position name="posGasArSub2" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer  - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[-$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
     </subtraction>
 </solids>
 EOF
@@ -2919,7 +2920,7 @@ EOF
   <physvol>
      <volumeref ref="volFieldShaperSlim"/>
      <position name="posFieldShaper$i" unit="cm"  x="@{[$posX]}" y="0" z="@{[0.5*$FieldShaperLength+$FieldShaperTorRad]}" />
-     <rotation name="rotFS$i" unit="deg" x="90" y="0" z="90" />
+     <rotationref ref="rPlus90AboutXPlus90AboutZ" />
   </physvol>
 EOF
 	}else{
@@ -3104,7 +3105,7 @@ for ($ara = 0; $ara<4; $ara++)
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}" 
 	 z="@{[$Ara_Z]}"/>
-       <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
        <volumeref ref="volOpDetSensitive_ArapucaDouble_$Frame_x\-$Frame_z\-$ara"/>
@@ -3208,19 +3209,19 @@ if($ArapucaMesh_switch eq "on")
         print CRYO <<EOF;
         <physvol>
         <volumeref ref="volCathodeArapucaMesh"/>
-        <position name="posMesh$mesh-Frame\-$Frame_x\-$Frame_z" unit="cm"
+        <position name="posMesh0$mesh-Frame\-$Frame_x\-$Frame_z" unit="cm"
         x="@{[$Mesh_X + $heightCathode/2 - 2*$CathodeArapucaMeshRodRadious]}"
         y="@{[$Mesh_Y]}"
         z="@{[$Mesh_Z]}"/>
-        <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="0"/>
+        <rotationref ref="rPlus90AboutX" />
         </physvol>
         <physvol>
         <volumeref ref="volCathodeArapucaMesh"/>
-        <position name="posMesh$mesh-Frame\-$Frame_x\-$Frame_z" unit="cm"
+        <position name="posMesh1$mesh-Frame\-$Frame_x\-$Frame_z" unit="cm"
         x="@{[$Mesh_X - $heightCathode/2 + 2*$CathodeArapucaMeshRodRadious]}"
         y="@{[$Mesh_Y]}"
         z="@{[$Mesh_Z]}"/>
-        <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="0"/>
+        <rotationref ref="rPlus90AboutX"/>
         </physvol>
 EOF
 
