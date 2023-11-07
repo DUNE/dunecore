@@ -2681,7 +2681,7 @@ print CRYO <<EOF;
     <subtraction name="GaseousArgon">
       <first ref="GaseousArgonSub1"/>
       <second ref="ArapucaOut"/>
-      <position name="posGasArSub2" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer  - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[-$widthCathode - $CathodeFrameToFC - $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
+      <position name="posGasArSub2" x="@{[-0.5*$HeightGaseousAr - $Upper_xLArBuffer - $FirstFrameVertDist - $ReadoutPlane]}" y="@{[$widthCathode + $CathodeFrameToFC + $FCToArapucaSpaceLat]}" z="@{[-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode]}" unit="cm"/>
     </subtraction>
 </solids>
 EOF
