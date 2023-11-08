@@ -12760,7 +12760,7 @@
     <subtraction name="GaseousArgon">
       <first ref="GaseousArgonSub1"/>
       <second ref="ArapucaOut"/>
-      <position name="posGasArSub2" x="-86.02" y="-419.6" z="-2.8421709430404e-14" unit="cm"/>
+      <position name="posGasArSub2" x="-86.02" y="419.6" z="-2.8421709430404e-14" unit="cm"/>
     </subtraction>
 
     <box name="CathodeBlock" lunit="cm"
@@ -41569,122 +41569,122 @@
         </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT0" unit="cm" x="-357.6"  z="68.1" y="-405.3" />
+  <position name="posPMT0" unit="cm" x="-367.6"  z="68.1" y="-405.3" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT1" unit="cm" x="-357.6"  z="0" y="-405.3" />
+  <position name="posPMT1" unit="cm" x="-367.6"  z="0" y="-405.3" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT2" unit="cm" x="-357.6"  z="0" y="405.3" />
+  <position name="posPMT2" unit="cm" x="-367.6"  z="0" y="405.3" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT3" unit="cm" x="-357.6"  z="68.1" y="405.3" />
+  <position name="posPMT3" unit="cm" x="-367.6"  z="68.1" y="405.3" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT4" unit="cm" x="-357.6"  z="204" y="170" />
+  <position name="posPMT4" unit="cm" x="-367.6"  z="204" y="170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT5" unit="cm" x="-357.6"  z="204" y="0" />
+  <position name="posPMT5" unit="cm" x="-367.6"  z="204" y="0" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT6" unit="cm" x="-357.6"  z="204" y="-170" />
+  <position name="posPMT6" unit="cm" x="-367.6"  z="204" y="-170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT7" unit="cm" x="-357.6"  z="306" y="170" />
+  <position name="posPMT7" unit="cm" x="-367.6"  z="306" y="170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT8" unit="cm" x="-357.6"  z="306" y="0" />
+  <position name="posPMT8" unit="cm" x="-367.6"  z="306" y="0" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT9" unit="cm" x="-357.6"  z="306" y="-170" />
+  <position name="posPMT9" unit="cm" x="-367.6"  z="306" y="-170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT10" unit="cm"  x="-330.7" z="228.9" y="221.0" />
+  <position name="posPMT10" unit="cm"  x="-225.9" z="228.9" y="221.0" />
   <rotationref ref="rPlus180AboutX"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT11" unit="cm"  x="-262.8" z="228.9" y="221.0" />
+  <position name="posPMT11" unit="cm"  x="-301.7" z="228.9" y="221.0" />
   <rotationref ref="rPlus180AboutX"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT12" unit="cm"  x="-330.7" z="228.9" y="-221.0" />
+  <position name="posPMT12" unit="cm"  x="-225.9" z="228.9" y="-221.0" />
   <rotationref ref="rPlus180AboutX"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT13" unit="cm"  x="-262.8" z="228.9" y="-221.0" />
+  <position name="posPMT13" unit="cm"  x="-301.7" z="228.9" y="-221.0" />
   <rotationref ref="rPlus180AboutX"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT14" unit="cm" x="-357.6"  z="-204" y="170" />
+  <position name="posPMT14" unit="cm" x="-367.6"  z="-204" y="170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT15" unit="cm" x="-357.6"  z="-204" y="0" />
+  <position name="posPMT15" unit="cm" x="-367.6"  z="-204" y="0" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT16" unit="cm" x="-357.6"  z="-204" y="-170" />
+  <position name="posPMT16" unit="cm" x="-367.6"  z="-204" y="-170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT17" unit="cm" x="-357.6"  z="-306" y="170" />
+  <position name="posPMT17" unit="cm" x="-367.6"  z="-306" y="170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT18" unit="cm" x="-357.6"  z="-306" y="0" />
+  <position name="posPMT18" unit="cm" x="-367.6"  z="-306" y="0" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT19" unit="cm" x="-357.6"  z="-306" y="-170" />
+  <position name="posPMT19" unit="cm" x="-367.6"  z="-306" y="-170" />
   <rotationref ref="rMinus90AboutY"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT20" unit="cm"  x="-330.7" z="-228.9" y="221.0" />
+  <position name="posPMT20" unit="cm"  x="-225.9" z="-228.9" y="221.0" />
   <rotationref ref="rIdentity"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_foil"/>
-  <position name="posPMT21" unit="cm"  x="-262.8" z="-228.9" y="221.0" />
+  <position name="posPMT21" unit="cm"  x="-301.7" z="-228.9" y="221.0" />
   <rotationref ref="rIdentity"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT22" unit="cm"  x="-330.7" z="-228.9" y="-221.0" />
+  <position name="posPMT22" unit="cm"  x="-225.9" z="-228.9" y="-221.0" />
   <rotationref ref="rIdentity"/>
 </physvol>
 <physvol>
   <volumeref ref="volPMT_coated"/>
-  <position name="posPMT23" unit="cm"  x="-262.8" z="-228.9" y="-221.0" />
+  <position name="posPMT23" unit="cm"  x="-301.7" z="-228.9" y="-221.0" />
   <rotationref ref="rIdentity"/>
 </physvol>
      <physvol>

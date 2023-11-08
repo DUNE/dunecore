@@ -256,17 +256,19 @@ if ( $pmtdist == 0 ) #new non uniform distribution
   $pos19 = " z=\"$z4\" y=\"$y3\" ";
   $pos20 = " z=\"$z4\" y=\"$y4\" ";
 
-  $pos11 = " x=\"-330.7\" z=\"228.9\" y=\"221.0\" "; # Horizontal PMTs
-  $pos12 = " x=\"-262.8\" z=\"228.9\" y=\"221.0\" "; # Horizontal PMTs
+  $HorizontalPMTpos_bot = -301.7;
+  $HorizontalPMTpos_top = -225.9;
+  $pos11 = " x=\"$HorizontalPMTpos_top\" z=\"228.9\" y=\"221.0\" "; # Horizontal PMTs
+  $pos12 = " x=\"$HorizontalPMTpos_bot\" z=\"228.9\" y=\"221.0\" "; # Horizontal PMTs
 
-  $pos13 = " x=\"-330.7\" z=\"228.9\" y=\"-221.0\" "; # Horizontal PMTs
-  $pos14 = " x=\"-262.8\" z=\"228.9\" y=\"-221.0\" "; # Horizontal PMTs
+  $pos13 = " x=\"$HorizontalPMTpos_top\" z=\"228.9\" y=\"-221.0\" "; # Horizontal PMTs
+  $pos14 = " x=\"$HorizontalPMTpos_bot\" z=\"228.9\" y=\"-221.0\" "; # Horizontal PMTs
   
-  $pos21 = " x=\"-330.7\" z=\"-228.9\" y=\"221.0\" "; # Horizontal PMTs
-  $pos22 = " x=\"-262.8\" z=\"-228.9\" y=\"221.0\" "; # Horizontal PMTs
+  $pos21 = " x=\"$HorizontalPMTpos_top\" z=\"-228.9\" y=\"221.0\" "; # Horizontal PMTs
+  $pos22 = " x=\"$HorizontalPMTpos_bot\" z=\"-228.9\" y=\"221.0\" "; # Horizontal PMTs
 
-  $pos23 = " x=\"-330.7\" z=\"-228.9\" y=\"-221.0\" "; # Horizontal PMTs
-  $pos24 = " x=\"-262.8\" z=\"-228.9\" y=\"-221.0\" "; # Horizontal PMTs
+  $pos23 = " x=\"$HorizontalPMTpos_top\" z=\"-228.9\" y=\"-221.0\" "; # Horizontal PMTs
+  $pos24 = " x=\"$HorizontalPMTpos_bot\" z=\"-228.9\" y=\"-221.0\" "; # Horizontal PMTs
 
   @pmt_pos = (
 		$pos1, $pos2, $pos3, $pos4, $pos5, $pos6, $pos7, $pos8,
@@ -2978,7 +2980,7 @@ EOF
 # Adding Dual Phase PMTs
   # Get the PMT array length
   $pmt_array_length = scalar @pmt_pos;
-  $pmt_pos_x = -357.6;
+  $pmt_pos_x = -367.6; # Hardcoded value to ensure a distance of 38cm from the photocathode to the membrane floor!
   $jj=0;
   for ( $i=0; $i<$pmt_array_length; $i=$i+1 ) {
 
