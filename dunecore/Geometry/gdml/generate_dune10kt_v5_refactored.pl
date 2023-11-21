@@ -1553,7 +1553,7 @@ for($i=0 ; $i<$nAPAs ; $i++){
 for($p=0 ; $p<10 ; $p++){
 print CRYO <<EOF;
    <volume name="volArapuca_$i\-$p">
-     <materialref ref="FR4SussexAPA"/>
+     <materialref ref="G10"/>
      <solidref ref="ArapucaWalls"/>
    </volume>
 EOF
@@ -1579,12 +1579,12 @@ print CRYO <<EOF;
     </volume>
 
     <volume name="volG10BoardYSideCenterSeg">
-      <materialref ref="FR4SussexAPA"/>
+      <materialref ref="G10"/>
       <solidref ref="G10BoardYSideCenterSeg"/>
     </volume>
 
     <volume name="volG10BoardZSideCenterSeg">
-      <materialref ref="FR4SussexAPA"/>
+      <materialref ref="G10"/>
       <solidref ref="G10BoardZSideCenterSeg"/>
     </volume>
 
