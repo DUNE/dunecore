@@ -59,6 +59,13 @@
 #                  Pablo Barham Alzás <pablo.barham@cern.ch>
 ##################################################################################
 
+# v4.1		tkosc (thomas.kosc@proton.me) 27th November 2023
+#		- Rotated (-90° along z) the Steel Structure of cryostat (as indicated in todo list of v1)
+#		This concerns the following physical volumes : 
+#			* volSteelSupport_Top, volSteelSupport_Bottom, volSteelSupport_TUS, volSteelSupport_DS
+#			* volSteelSupport_LS, volSteelSupport_RS
+
+
 # Each subroutine generates a fragment GDML file, and the last subroutine
 # creates an XML file that make_gdml.pl will use to appropriately arrange
 # the fragment GDML files to create the final desired DUNE GDML file, 
