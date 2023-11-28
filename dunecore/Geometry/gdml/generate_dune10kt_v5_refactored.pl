@@ -16,10 +16,6 @@
 # Update: 2023/07/28, Viktor Pec (viktor.pec@fzu.cz)
 #   Adding new refactored version (v5). Based on the legacy perl script v4.
 #   Adding new foam material based on survey for ProtoDUNE
-# Update: 2023/09/13, Viktor Pec (viktor.pec@fzu.cz)
-#   Changed material of wire boards from G10 to FR4.
-#   Added more of the FR4 material: thicker wire boards, additional readout boards, CPA now thicker (3 mm), made of FR-4.
-#   Fixed a bug where no clearance was given between the filed cage and the APA/CPA. It now should be 1 cm in the vertical direction. However, the fieldcage now also overlap the TPC by 1 cm in z direction.
 #
 ###
 
@@ -183,7 +179,7 @@ elsif($workspace==2){
 $nAPAs                 =     $nAPAWide*$nAPAHigh*$nAPALong;
 
 
-$G10thickness = 3*$inch/16;
+$G10thickness = $inch/8;
 $WrapCover    = $inch/16;
 
 $SpaceAPAToCryoWall    =     15;
@@ -257,7 +253,7 @@ $TPC_y    =   $APAphys_y + $APAGap_y;
 $CPATube_OD = 5.066;
 #$CPATube_ID = 4.747;
 
-$Cathode_x                 =    0.3; #0.016; temporary fix for thicker FR-4 board
+$Cathode_x                 =    0.016;
 $Cathode_y                 =    $APAphys_y - $CPATube_OD;
 $Cathode_z                 =    $APAphys_z - $CPATube_OD;
 
@@ -276,12 +272,6 @@ $HeightGaseousAr        =       50;
 $Argon_x            =       ($nAPAWide-1)*$APAToAPA
                               + $APA_UtoU_x + $TPCWirePlaneThickness
                               + 2*$SpaceAPAToCryoWall;
-
-# FR-4 readout boards at the APA head
-$G10HeadBoard_y = 16.5;
-$G10HeadBoard_x = 8*$G10thickness;
-$G10HeadBoard_z = $APAFrame_z;
-
 
 
 #FIELD CAGE IN (FCI)
@@ -304,12 +294,13 @@ $Argon_z               =      $nAPALong*$APAphys_z
                                 + ($nAPALong-1)*$APAGap_z
                                 + $UpstreamLArPadding + $DownstreamLArPadding;
 
-$FC_b                  =      2; #2 cm buffer for FC
 $FCI_y                 =      $nAPAHigh*$TPC_y+$FC_b; #The +FC_b is an arbitrary +2cm to make sure the FC doesn't contact the APA or CPAs.
 $FCO_y                 =      $FCI_y+(0.1*$inch)*2; #The outer boundary of the Fied Cage
 $FCI_z                 =      $nAPALong*$TPC_z
                                 + $FC_b; #the plus FC_b is +2 cm arbitrarily. This makes sure the FC doesn't contact the APAs.
 $FCO_z                 =      $FCI_z+(0.1*$inch)*2;
+
+$FC_b                  =      2; #2 cm buffer for FC
 
 $Cryostat_x            =      $Argon_x  + 2*$SteelThickness;
 $Cryostat_y            =      $Argon_y + 2*$SteelThickness;
@@ -563,20 +554,6 @@ sub gen_TPC
 #  -volTPCPlaneV: with wires angled from vertical slightly differently than in U
 #  -volTPCPlaneX: with vertical wires
 
-    #### Temporary fix #####
-    # these are temporary variables, used to revert the wire geometry back, before changes of the G10 geometry
-    my $G10thickness_fix = $inch/8;
-
-    my $APAFrame_z_fix = 231.59 - 2*(2*$G10thickness_fix+$WrapCover);
-
-    my $Uactive_y_fix = $APAFrame_y + 2*$G10thickness_fix - $ReadoutBoardOverlap;
-    my $Uactive_z_fix = $APAFrame_z_fix + 2*$G10thickness_fix;
-
-    my $Vactive_y_fix = $APAFrame_y + 1*$G10thickness_fix - $ReadoutBoardOverlap;
-    my $Vactive_z_fix = $APAFrame_z_fix;
-
-    my $Zactive_y_fix    = $APAFrame_y + 0*$G10thickness_fix - $ReadoutBoardOverlap;
-    ########################
 
 # Create the TPC fragment file name,
 # add file to list of output GDML fragments,
@@ -606,15 +583,15 @@ print TPC <<EOF;
       z="@{[$_[2]]}"/>
     <box name="${_[3]}UPlane" lunit="cm"
       x="@{[$TPCWirePlaneThickness]}"
-      y="@{[$Uactive_y_fix + $UVPlaneBoundNudge]}"
-      z="@{[$Uactive_z_fix + $UVPlaneBoundNudge]}"/>
+      y="@{[$Uactive_y + $UVPlaneBoundNudge]}"
+      z="@{[$Uactive_z + $UVPlaneBoundNudge]}"/>
     <box name="${_[3]}VPlane" lunit="cm"
       x="@{[$TPCWirePlaneThickness]}"
-      y="@{[$Vactive_y_fix + $UVPlaneBoundNudge]}"
-      z="@{[$Vactive_z_fix + $UVPlaneBoundNudge]}"/>
+      y="@{[$Vactive_y + $UVPlaneBoundNudge]}"
+      z="@{[$Vactive_z + $UVPlaneBoundNudge]}"/>
     <box name="${_[3]}ZPlane" lunit="cm"
       x="@{[$TPCWirePlaneThickness]}"
-      y="@{[$Zactive_y_fix]}"
+      y="@{[$Zactive_y]}"
       z="@{[$Zactive_z]}"/>
     <box name="${_[3]}Active" lunit="cm"
       x="@{[$TPCActive_x]}"
@@ -629,7 +606,7 @@ print TPC <<EOF;
 
     <tube name="${_[3]}WireVert"
       rmax="@{[0.5*$TPCWireThickness]}"
-      z="@{[$Zactive_y_fix]}"
+      z="@{[$Zactive_y]}"
       deltaphi="360"
       aunit="deg"
       lunit="cm"/>
@@ -650,17 +627,17 @@ my $NumberVerticalWires = 0;
 if ($wires_on == 1)
 {
    # Number of wires in one corner
-$NumberCornerUWires = int( $APAFrame_z_fix/($UWirePitch/$CosUAngle) );
+$NumberCornerUWires = int( $APAFrame_z/($UWirePitch/$CosUAngle) );
 
-$NumberCornerVWires = int( $APAFrame_z_fix/($VWirePitch/$CosVAngle) );
+$NumberCornerVWires = int( $APAFrame_z/($VWirePitch/$CosVAngle) );
 
 
    # Total number of wires touching one vertical (longer) side
    # Note that the total number of wires per plane is this + another set of corner wires
-$NumberSideUWires = int( $Uactive_y_fix/$UWire_yint );
+$NumberSideUWires = int( $Uactive_y/$UWire_yint );
 if($Pitch3mmVersion==1){ $NumberSideUWires = $NumberSideUWires-1; }
 
-$NumberSideVWires = int( $Vactive_y_fix/$VWire_yint );
+$NumberSideVWires = int( $Vactive_y/$VWire_yint );
 
    # Number of wires per side that aren't cut off by the corner
 $NumberCommonUWires = $NumberSideUWires - $NumberCornerUWires;
@@ -691,7 +668,7 @@ print $wout "$NumberCommonVWires V common wires\n";
 
 # hard codeed number will be a factor determined from engineering spreadsheets on wire endpoints,
 # but since that won't exist for a while, use this number to avoid overlaps
-my $FirstUWireOffset = .55 + $G10thickness_fix + 2*$G10thickness_fix*$TanUAngle - $UWire_zint;
+my $FirstUWireOffset = .55 + $G10thickness + 2*$G10thickness*$TanUAngle - $UWire_zint;
 my $FirstVWireOffset = .5; # doesnt include a G10 board in width
 
 if($Pitch3mmVersion==1){
@@ -703,19 +680,19 @@ if($UVAngle45Option==1){$FirstVWireOffset = .7;}
 
 
 my $FirstTopUWire_yspan =
-    $Uactive_y_fix/2
-    - ( - $Uactive_y_fix/2
+    $Uactive_y/2
+    - ( - $Uactive_y/2
         + $FirstUWireOffset/$TanUAngle      # walk us up to the first wire
         + $UWire_yint*($NumberSideUWires-1) # up to the top of the top common wire
-        - $Uactive_z_fix/$TanUAngle             # back to the bottom of the top common wire
+        - $Uactive_z/$TanUAngle             # back to the bottom of the top common wire
       + $UWire_yint);                     # nudge up to bottom of the first top corner wire
 
 my $FirstTopVWire_yspan =
-    $Vactive_y_fix/2
-    - ( - $Vactive_y_fix/2
+    $Vactive_y/2
+    - ( - $Vactive_y/2
         + $FirstVWireOffset/$TanVAngle      # walk us up to the first wire
         + $VWire_yint*($NumberSideVWires-1) # up to the top of the top common wire
-        - $Vactive_z_fix/$TanVAngle             # back to the bottom of the top common wire
+        - $Vactive_z/$TanVAngle             # back to the bottom of the top common wire
       + $VWire_yint);                     # nudge up to bottom of the first top corner wire
 
 
@@ -737,7 +714,7 @@ EOF
 
     }
 
-    $CommonUWireLength = $Uactive_z_fix/$SinUAngle;
+    $CommonUWireLength = $Uactive_z/$SinUAngle;
 
    print TPC <<EOF;
     <tube name="${_[3]}WireUCommon"
@@ -792,7 +769,7 @@ EOF
     # The wire used many times in the middle of the V plane
     # Same subtraction as U common
 
-    $CommonVWireLength = $Vactive_z_fix/$SinVAngle;
+    $CommonVWireLength = $Vactive_z/$SinVAngle;
 
    print TPC <<EOF;
     <tube name="${_[3]}WireVCommon"
@@ -933,8 +910,8 @@ EOF
 
 
 print $wout "\n-     Wires for U plane  -\n\n";
-print $wout " Uplane_y: $Uactive_y_fix\n";
-print $wout " Uplane_z: $Uactive_z_fix\n";
+print $wout " Uplane_y: $Uactive_y\n";
+print $wout " Uplane_z: $Uactive_z\n";
 
 
 if ($wires_on==1)
@@ -949,8 +926,8 @@ if ($wires_on==1)
         # the lower left corner.
    # rotation: same as common wire in code below
 
-    $FirstU_ypos = - $Uactive_y_fix/2 + $FirstUWireOffset/$TanUAngle/2;
-    $FirstU_zpos = + $Uactive_z_fix/2 - $FirstUWireOffset/2;
+    $FirstU_ypos = - $Uactive_y/2 + $FirstUWireOffset/$TanUAngle/2;
+    $FirstU_zpos = + $Uactive_z/2 - $FirstUWireOffset/2;
 
 for ($i = 0; $i < $NumberCornerUWires; ++$i)
 {
@@ -1030,8 +1007,8 @@ $lastZpos = 0;
 
 
 my $FirstTopUWire_zspan = $FirstTopUWire_yspan*$TanUAngle;
-my $StartTopUWires_ypos =  + $Uactive_y_fix/2 - $FirstTopUWire_yspan/2;
-my $StartTopUWires_zpos =  - $Uactive_z_fix/2 + $FirstTopUWire_zspan/2;
+my $StartTopUWires_ypos =  + $Uactive_y/2 - $FirstTopUWire_yspan/2;
+my $StartTopUWires_zpos =  - $Uactive_z/2 + $FirstTopUWire_zspan/2;
 
 # Finally moving to the corner wires on the top right:
    # x=0 to center the wires in the plane
@@ -1091,8 +1068,8 @@ print TPC <<EOF;
 EOF
 
 print $wout "\n-     Wires for V plane  -\n\n";
-print $wout " Vplane_y: $Vactive_y_fix\n";
-print $wout " Vplane_z: $Vactive_z_fix\n";
+print $wout " Vplane_y: $Vactive_y\n";
+print $wout " Vplane_z: $Vactive_z\n";
 
 if ($wires_on==1)
 {
@@ -1107,8 +1084,8 @@ if ($wires_on==1)
         # the lower right corner.
    # rotation: same as common wire in code below
 
-    $FirstV_ypos = - $Vactive_y_fix/2 + $FirstVWireOffset/$TanVAngle/2;
-    $FirstV_zpos = - $Vactive_z_fix/2 + $FirstVWireOffset/2;
+    $FirstV_ypos = - $Vactive_y/2 + $FirstVWireOffset/$TanVAngle/2;
+    $FirstV_zpos = - $Vactive_z/2 + $FirstVWireOffset/2;
 
 for ($i = 0; $i < $NumberCornerVWires; ++$i)
 {
@@ -1174,8 +1151,8 @@ $lastYpos = $ypos;
 
 
 my $FirstTopVWire_zspan = $FirstTopVWire_yspan*$TanVAngle;
-my $StartTopVWires_ypos =  + $Vactive_y_fix/2 - $FirstTopVWire_yspan/2;
-my $StartTopVWires_zpos =  + $Vactive_z_fix/2 - $FirstTopVWire_zspan/2;
+my $StartTopVWires_ypos =  + $Vactive_y/2 - $FirstTopVWire_yspan/2;
+my $StartTopVWires_zpos =  + $Vactive_z/2 - $FirstTopVWire_zspan/2;
 
 # Finally moving to the corner wires on the top right:
    # x=0 to center the wires in the plane
@@ -1531,12 +1508,6 @@ print CRYO <<EOF;
       y="@{[$G10BoardZSide_y]}"
       z="@{[$G10BoardZSide_z]}"/>
 
-      <!-- Approximate stack of FR-4 readout boards at APA head -->
-     <box name="G10HeadBoards" lunit="cm"
-      x="@{[$G10HeadBoard_x]}"
-      y="@{[$G10HeadBoard_y]}"
-      z="@{[$G10HeadBoard_z]}"/>
-
 </solids>
 EOF
 
@@ -1560,7 +1531,7 @@ print CRYO <<EOF;
       <solidref ref="GaseousArgon"/>
     </volume>
     <volume name="volCathode">
-      <materialref ref="FR4SussexAPA" />
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="Cathode" />
     </volume>
 EOF
@@ -1582,7 +1553,7 @@ for($i=0 ; $i<$nAPAs ; $i++){
 for($p=0 ; $p<10 ; $p++){
 print CRYO <<EOF;
    <volume name="volArapuca_$i\-$p">
-     <materialref ref="FR4SussexAPA"/>
+     <materialref ref="G10"/>
      <solidref ref="ArapucaWalls"/>
    </volume>
 EOF
@@ -1608,18 +1579,13 @@ print CRYO <<EOF;
     </volume>
 
     <volume name="volG10BoardYSideCenterSeg">
-      <materialref ref="FR4SussexAPA"/>
+      <materialref ref="G10"/>
       <solidref ref="G10BoardYSideCenterSeg"/>
     </volume>
 
     <volume name="volG10BoardZSideCenterSeg">
-      <materialref ref="FR4SussexAPA"/>
+      <materialref ref="G10"/>
       <solidref ref="G10BoardZSideCenterSeg"/>
-    </volume>
-
-    <volume name="volG10HeadBoards">
-      <materialref ref="FR4SussexAPA"/>
-      <solidref ref="G10HeadBoards"/>
     </volume>
 
     <volume name="volCryostat">
@@ -1976,37 +1942,21 @@ $G10BoardZSide_x = $APAFrame_x;
 $G10BoardZSide_y = $G10thickness;
 $G10BoardZSide_z = $APAFrame_z;
 
-
-    if ($_[4] != 0 && $_[4] != 1){
-	print "APA not labeled as top or bottom";
-    }
-
-
-# Readout boards - approximated as a single box equivalent to a stack of 8 single FR-4 boards, make clearance for field cage
-    $posG10Head_y = $APAFrameCenter_y + (2*$_[4]-1)*($APAFrame_y/2 + $G10HeadBoard_y/2 + ($FCO_y - $FCI_y)/2 + $FC_b);
-
-# wire boards at the foot of APA: top or bottom based on $_[4]
-    $posG10ZSideZ_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (0+.5)*($G10BoardZSide_y));
-    $posG10ZSideV_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (1+.5)*($G10BoardZSide_y));
-    $posG10ZSideU_y    = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (2+.5)*($G10BoardZSide_y));
-    $posG10ZSideGrid_y = $APAFrameCenter_y - (2*$_[4]-1)*($APAFrame_y/2 + (3+.5)*($G10BoardZSide_y));
-
-
-#     if($_[4]==1)    # top APAs
-# {
-#     $posG10ZSideZ_y    = $APAFrameCenter_y - $APAFrame_y/2 - (0+.5)*($G10BoardZSide_y);
-#     $posG10ZSideV_y    = $APAFrameCenter_y - $APAFrame_y/2 - (1+.5)*($G10BoardZSide_y);
-#     $posG10ZSideU_y    = $APAFrameCenter_y - $APAFrame_y/2 - (2+.5)*($G10BoardZSide_y);
-#     $posG10ZSideGrid_y = $APAFrameCenter_y - $APAFrame_y/2 - (3+.5)*($G10BoardZSide_y);
-# }
-# elsif($_[4]==0) # bottom APAs
-# {
-#     $posG10ZSideZ_y    = $APAFrameCenter_y + $APAFrame_y/2 + (0+.5)*($G10BoardZSide_y);
-#     $posG10ZSideV_y    = $APAFrameCenter_y + $APAFrame_y/2 + (1+.5)*($G10BoardZSide_y);
-#     $posG10ZSideU_y    = $APAFrameCenter_y + $APAFrame_y/2 + (2+.5)*($G10BoardZSide_y);
-#     $posG10ZSideGrid_y = $APAFrameCenter_y + $APAFrame_y/2 + (3+.5)*($G10BoardZSide_y);
-# }
-# else{ print "APA not labeled as top or bottom"; }
+if($_[4]==1)    # top APAs
+{
+    $posG10ZSideZ_y    = $APAFrameCenter_y - $APAFrame_y/2 - (0+.5)*($G10BoardZSide_y);
+    $posG10ZSideV_y    = $APAFrameCenter_y - $APAFrame_y/2 - (1+.5)*($G10BoardZSide_y);
+    $posG10ZSideU_y    = $APAFrameCenter_y - $APAFrame_y/2 - (2+.5)*($G10BoardZSide_y);
+    $posG10ZSideGrid_y = $APAFrameCenter_y - $APAFrame_y/2 - (3+.5)*($G10BoardZSide_y);
+}
+elsif($_[4]==0) # bottom APAs
+{
+    $posG10ZSideZ_y    = $APAFrameCenter_y + $APAFrame_y/2 + (0+.5)*($G10BoardZSide_y);
+    $posG10ZSideV_y    = $APAFrameCenter_y + $APAFrame_y/2 + (1+.5)*($G10BoardZSide_y);
+    $posG10ZSideU_y    = $APAFrameCenter_y + $APAFrame_y/2 + (2+.5)*($G10BoardZSide_y);
+    $posG10ZSideGrid_y = $APAFrameCenter_y + $APAFrame_y/2 + (3+.5)*($G10BoardZSide_y);
+}
+else{ print "APA not labeled as top or bottom"; }
 
    # First put in the frame
 #  print CRYO <<EOF;
@@ -2069,27 +2019,16 @@ $G10BoardZSide_z = $APAFrame_z;
       - There are two boards on each the up and downstream end,
           one each to wrap the U and V views around the APA frame
       - There are 4 on the bottom which anchor the U V and Z wires and the grid plane
-      FIXME: This is not true -> - The rest of the parts of the G10 boards must be placed directly in volTPC   -->
-
-      <!-- Position readout boards -->
-      <physvol>
-        <volumeref ref="volG10HeadBoards"/>
-        <position name="posG10HeadBoards\-$APA_i" unit="cm"
-	  x="@{[$APAFrameCenter_x]}"
-	  y="@{[$posG10Head_y]}"
-      	  z="@{[$APAFrameCenter_z]}"/>
-        <rotationref ref="rIdentity"/>
-      </physvol>
+      - The rest of the parts of the G10 boards must be placed directly in volTPC   -->
 
       <physvol>
         <volumeref ref="volG10BoardYSideCenterSeg"/>
         <position name="posG10BoardYSideCenterSeg\-Vup\-$APA_i" unit="cm"
-         x="@{[$APAFrameCenter_x]}"
-         y="@{[$APAFrameCenter_y]}"
-         z="@{[$APAFrameCenter_z - $APAFrame_z/2 - (0+.5)*($G10BoardYSide_z)]}"/>
-         <rotationref ref="rIdentity"/>
+      x="@{[$APAFrameCenter_x]}"
+      y="@{[$APAFrameCenter_y]}"
+      z="@{[$APAFrameCenter_z - $APAFrame_z/2 - (0+.5)*($G10BoardYSide_z)]}"/>
+        <rotationref ref="rIdentity"/>
       </physvol>
-
       <physvol>
         <volumeref ref="volG10BoardYSideCenterSeg"/>
         <position name="posG10BoardYSideCenterSeg\-Uup\-$APA_i" unit="cm"

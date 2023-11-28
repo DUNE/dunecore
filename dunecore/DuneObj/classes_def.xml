@@ -155,6 +155,9 @@
   <class name="std::vector<dunedaq::trgdataformats::TriggerCandidateData>"/>
   <class name="std::vector<dunedaq::trgdataformats::TriggerPrimitive>"/>
   <class name="std::vector<dunedaq::trgdataformats::TriggerActivityData>"/>
+  <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerCandidateData> >"/>
+  <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerPrimitive> >"/>
+  <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerActivityData> >"/>
 
 
 </lcgdict>
