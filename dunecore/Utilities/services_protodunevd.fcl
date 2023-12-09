@@ -8,18 +8,22 @@ BEGIN_PROLOG
 ##############################
 
 protodunevd_services: @local::protodune_services 
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_services.Geometry:  @local::protodunevd_v3_geo
 protodunevd_services.DetectorPropertiesService.NumberTimeSamples:     10000
 protodunevd_services.DetectorPropertiesService.ReadOutWindowSize:     10000
 
 protodunevd_rawdecoding_services: @local::protodune_rawdecoding_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_rawdecoding_services.Geometry: @local::protodunevd_v3_geo
 
 protodunevd_data_services: @local::protodune_data_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_data_services.Geometry: @local::protodunevd_v3_geo
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services: @local::protodune_minimal_simulation_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_minimal_simulation_services.Geometry: @local::protodunevd_v3_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService.NumberTimeSamples:     10000
 protodunevd_minimal_simulation_services.DetectorPropertiesService.ReadOutWindowSize:     10000
@@ -72,9 +76,11 @@ protodunevd_data_reco_services.RawDigitPrepService.ToolNames: @local::protodune_
 ##### DRIFT Y ######
 ####################
 protodunevd_services_driftY: @local::protodune_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY: @local::protodunevd_simulation_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_simulation_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY.ParticleInventoryService: @local::standard_particleinventoryservice
@@ -82,10 +88,12 @@ protodunevd_simulation_services_driftY.PhotonBackTrackerService:     @local::dun
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services_driftY: @local::protodune_minimal_simulation_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_minimal_simulation_services_driftY.Geometry: @local::protodunevd_v3_geo_driftY
 
 # reco for sim config
 protodunevd_reco_services_driftY:                    @local::protodunevd_reco_services
+services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_reco_services_driftY.Geometry:  	     @local::protodunevd_v3_geo_driftY
 
 

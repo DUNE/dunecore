@@ -9,7 +9,8 @@
 #ifndef ChannelGeo_H
 #define ChannelGeo_H
 
-#include "larcorealg/Geometry/GeometryCore.h"
+#include "larcorealg/Geometry/fwd.h"
+#include "larcorealg/Geometry/WireReadoutGeom.h"
 
 #include <utility>
 #include <vector>
@@ -20,11 +21,11 @@ public:
 
   using Index = unsigned int;
   using Point = geo::Point_t;
-  using EndPoints = geo::GeometryCore::Segment_t;
+  using EndPoints = geo::WireReadoutGeom::Segment;
   using EndPointsVector = std::vector<EndPoints>;
 
   // Ctor from channel number and geometry service.
-  ChannelGeo(Index icha, const geo::GeometryCore* pgeo);
+  ChannelGeo(Index icha, const geo::WireReadoutGeom* wireReadout);
 
   // Ctor from channel number using the current geometry service.
   ChannelGeo(Index icha);

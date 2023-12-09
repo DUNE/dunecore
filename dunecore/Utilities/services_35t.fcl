@@ -7,7 +7,8 @@
 BEGIN_PROLOG
 
 dune35t_basic_services_legacy: {
-  ExptGeoHelperInterface:     @local::dune_geometry_helper
+  AuxDetGeometry:  @local::dune35t_auxdet_geo
+  WireReadout:     @local::dune35t_wire_readout
   GeometryConfigurationWriter: {}
   Geometry:                   @local::dune35t_geo
   DetectorClocksService:      @local::dune35t_detectorclocks
@@ -124,4 +125,3 @@ dune35t_milliblock_simulation_services:                           @local::dune35
 dune35t_milliblock_simulation_services.DetectorPropertiesService: @local::dune35t_milliblock_detproperties
 
 END_PROLOG
-

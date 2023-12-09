@@ -8,11 +8,13 @@
 #ifndef HARDWAREMAPPERSERVICE_H
 #define HARDWAREMAPPERSERVICE_H
 
+#include "art/Framework/Principal/Run.h"
 //The service declaration macros are defined in here
-#include "art/Framework/Services/Registry/ServiceMacros.h"
+#include "art/Framework/Services/Registry/ServiceDeclarationMacros.h"
 //Needed to get a service handle
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 //We need the geometry service for the hardwaremapper to work -- how else would it know what detector it was?!
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 //We need this for the preBeginRun thingy
 #include "larcoreobj/SummaryData/RunData.h"
@@ -23,9 +25,7 @@
 #include <vector>
 #include <set>
 #include <iostream>
-#ifndef __GCCXML__
 #include <iosfwd> // std::ostream
-#endif
 
 //Forward Class Declarations
 namespace fhicl {
@@ -76,6 +76,7 @@ class HardwareMapperService{
   std::string fServiceName;
 
   art::ServiceHandle<geo::Geometry> fGeometryService;
+  geo::WireReadoutGeom const* fWireReadoutGeom = &art::ServiceHandle<geo::WireReadout>{}->Get();
 
   std::string fDetectorNameFromGeometry;
   std::string fDetectorNameFromFile;

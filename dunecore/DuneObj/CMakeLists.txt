@@ -12,6 +12,7 @@ art_make(
 		    messagefacility::MF_MessageLogger
 		    cetlib::cetlib 
 		    cetlib_except::cetlib_except
+                    lardataobj::RecoBase
 		    ROOT_BASIC_LIB_LIST
                     HDF5::HDF5
   DICT_LIBRARIES

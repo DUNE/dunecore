@@ -8,8 +8,6 @@
 #ifndef GEO_GEOOBJECTSORTERICEBERG_H
 #define GEO_GEOOBJECTSORTERICEBERG_H
 
-#include <vector>
-
 #include "fhiclcpp/fwd.h"
 #include "larcorealg/Geometry/GeoObjectSorter.h"
 
@@ -17,18 +15,12 @@ namespace geo{
 
   class GeoObjectSorterICEBERG : public GeoObjectSorter {
   public:
-
     GeoObjectSorterICEBERG(fhicl::ParameterSet const& p);
 
-    void SortAuxDets        (std::vector<geo::AuxDetGeo>            & adgeo)    const;
-    void SortAuxDetSensitive(std::vector<geo::AuxDetSensitiveGeo>   & adgeo)    const;
-    void SortCryostats      (std::vector<geo::CryostatGeo>          & cgeo)     const;
-    void SortTPCs           (std::vector<geo::TPCGeo>               & tgeo)     const;
-    void SortPlanes         (std::vector<geo::PlaneGeo>             & pgeo,
-                             geo::DriftDirection_t                    driftDir) const;
-    void SortWires          (std::vector<geo::WireGeo>              & wgeo)     const;
-    void SortOpDets         (std::vector<geo::OpDetGeo> & opdet) const;
-
+  private:
+    bool compareCryostats(geo::CryostatGeo const& c1, geo::CryostatGeo const& c2) const override;
+    bool compareTPCs(geo::TPCGeo const& t1, geo::TPCGeo const& t2) const override;
+    bool compareOpDets(OpDetGeo const& t1, OpDetGeo const& t2) const override;
   };
 
 }

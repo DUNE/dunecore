@@ -8,8 +8,9 @@ services:
   TFileService: { fileName: "ss_test_dune35t.root" }
 }
 
-services.ExptGeoHelperInterface: @local::dune_geometry_helper
+services.WireReadout: @local::dune_wire_readout
 services.GeometryConfigurationWriter: {}
+services.AuxDetGeometry: @local::dune35t_auxdet_geo
 services.Geometry:           @local::dune35t_geo
 services.DetectorClocksService:        @local::dune35t_detectorclocks
 services.DetectorPropertiesService: @local::dune35t_detproperties
