@@ -169,8 +169,13 @@ dune10kt_1x2x2_v5_refactored_geo.Name: "dune10kt_v5_1x2x2"
 dune10kt_1x2x2_v5_refactored_geo.GDML: "dune10kt_v5_refactored_1x2x2.gdml"
 dune10kt_1x2x2_v5_refactored_geo.ROOT: "dune10kt_v5_refactored_1x2x2.gdml"
 
+dune10kt_1x2x2_v6_refactored_geo:      @local::dune10kt_geo
+dune10kt_1x2x2_v6_refactored_geo.Name: "dune10kt_v6_1x2x2"
+dune10kt_1x2x2_v6_refactored_geo.GDML: "dune10kt_v6_refactored_1x2x2.gdml"
+dune10kt_1x2x2_v6_refactored_geo.ROOT: "dune10kt_v6_refactored_1x2x2.gdml"
+
 dune10kt_1x2x2_geo:              @local::dune10kt_1x2x2_v4_geo
-dune10kt_1x2x2_refactored_geo:   @local::dune10kt_1x2x2_v5_refactored_geo
+dune10kt_1x2x2_refactored_geo:   @local::dune10kt_1x2x2_v6_refactored_geo
 
 
 dune10kt_1x2x6_v1_geo:      @local::dune10kt_geo
@@ -207,8 +212,13 @@ dune10kt_1x2x6_v5_refactored_geo.Name: "dune10kt_v5_1x2x6"
 dune10kt_1x2x6_v5_refactored_geo.GDML: "dune10kt_v5_refactored_1x2x6.gdml"
 dune10kt_1x2x6_v5_refactored_geo.ROOT: "dune10kt_v5_refactored_1x2x6.gdml"
 
+dune10kt_1x2x6_v6_refactored_geo:      @local::dune10kt_geo
+dune10kt_1x2x6_v6_refactored_geo.Name: "dune10kt_v6_1x2x6"
+dune10kt_1x2x6_v6_refactored_geo.GDML: "dune10kt_v6_refactored_1x2x6.gdml"
+dune10kt_1x2x6_v6_refactored_geo.ROOT: "dune10kt_v6_refactored_1x2x6.gdml"
+
 dune10kt_1x2x6_geo:              @local::dune10kt_1x2x6_v4_geo
-dune10kt_1x2x6_refactored_geo:   @local::dune10kt_1x2x6_v5_refactored_geo
+dune10kt_1x2x6_refactored_geo:   @local::dune10kt_1x2x6_v6_refactored_geo
 
 #VD 1x6x6 geo
 
@@ -461,7 +471,7 @@ protodunevd_v1_geo_driftY.SortingParameters.SortTPCPDVD: true
 
 protodunevd_v3_geo_driftY: @local::dune10kt_geo
 protodunevd_v3_geo_driftY.Name: "protodunevd_v3_driftY"
-protodunevd_v3_geo_driftY.GDML: "protodunevd_v3_driftY.gdml" 
+protodunevd_v3_geo_driftY.GDML: "protodunevd_v3_driftY.gdml"
 protodunevd_v3_geo_driftY.ROOT: "protodunevd_v3_driftY.gdml"
 protodunevd_v3_geo_driftY.SortingParameters.SortTPCPDVD: true
 
