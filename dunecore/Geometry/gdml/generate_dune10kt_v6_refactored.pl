@@ -1533,7 +1533,7 @@ print CRYO <<EOF;
       <solidref ref="GaseousArgon"/>
     </volume>
     <volume name="volCathode">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
+      <materialref ref="FR4SussexAPA" />
       <solidref ref="Cathode" />
     </volume>
 EOF
