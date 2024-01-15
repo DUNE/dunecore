@@ -255,7 +255,7 @@ $TPC_y    =   $APAphys_y + $APAGap_y;
 $CPATube_OD = 5.066;
 #$CPATube_ID = 4.747;
 
-$Cathode_x                 =    0.016;
+$Cathode_x                 =    0.3;
 $Cathode_y                 =    $APAphys_y - $CPATube_OD;
 $Cathode_z                 =    $APAphys_z - $CPATube_OD;
 

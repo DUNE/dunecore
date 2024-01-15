@@ -457,19 +457,19 @@
       aunit="deg"
       lunit="cm"/>
     <box name="Cryostat" lunit="cm"
-      x="759.3241"
+      x="759.8921"
       y="1357.6975"
       z="816.92"/>
     <box name="ArgonInterior" lunit="cm"
-      x="756.7841"
+      x="757.3521"
       y="1355.1575"
       z="814.38"/>
     <box name="FieldCageOut" lunit="cm"
-      x="726.7841"
+      x="727.3521"
       y="1216.1655"
       z="465.288"/>
     <box name="FieldCageIn" lunit="cm"
-      x="727.7841"
+      x="728.3521"
       y="1215.6575"
       z="464.78"/>
     <subtraction name="FieldCage">
@@ -477,7 +477,7 @@
       <second ref="FieldCageIn"/>
     </subtraction>
     <box name="GaseousArgon" lunit="cm"
-      x="756.7841"
+      x="757.3521"
       y="50"
       z="814.38"/>
     <subtraction name="SteelShell">
@@ -485,7 +485,7 @@
       <second ref="ArgonInterior"/>
     </subtraction>
     <box name="Cathode" lunit="cm"
-      x="0.016"
+      x="0.3"
       y="602.36275"
       z="226.524"/>
 
@@ -574,12 +574,12 @@
 
 
     <box name="FoamPadBlock" lunit="cm"
-      x="919.3241"
+      x="919.8921"
       y="1517.6975"
       z="976.92" />
 
     <box name="FoamPadInner" lunit="cm"
-      x="759.3341"
+      x="759.9021"
       y="1357.7075"
       z="816.93" />
 
@@ -590,12 +590,12 @@
     </subtraction>
 
     <box name="SteelSupportBlock" lunit="cm"
-      x="1119.3241"
+      x="1119.8921"
       y="1617.6975"
       z="1176.92" />
 
     <box name="SteelSupportInner" lunit="cm"
-      x="919.3341"
+      x="919.9021"
       y="1517.7075"
       z="976.93" />
 
@@ -606,13 +606,13 @@
     </subtraction>
 
     <box name="DetEnclosure" lunit="cm"
-      x="1219.3241"
+      x="1219.8921"
       y="1817.6975"
       z="1376.92"/>
 
 
     <box name="World" lunit="cm"
-      x="7219.3241"
+      x="7219.8921"
       y="7817.6975"
       z="7376.92"/>
 </solids>
@@ -2134,7 +2134,7 @@ z="9.80499999999994"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-1-0" unit="cm"
-      x="-363.38405"
+      x="-363.52605"
       y="-324.664375"
       z="9.80499999999994"/>
         <rotationref ref="rIdentity"/>
@@ -2142,7 +2142,7 @@ z="9.80499999999994"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-1-1" unit="cm"
-      x="363.38405"
+      x="363.52605"
       y="-324.664375"
       z="9.80499999999994"/>
         <rotationref ref="rIdentity"/>
@@ -2677,7 +2677,7 @@ z="9.80499999999994"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-2-0" unit="cm"
-      x="-363.38405"
+      x="-363.52605"
       y="283.164375"
       z="9.80499999999994"/>
         <rotationref ref="rIdentity"/>
@@ -2685,7 +2685,7 @@ z="9.80499999999994"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-2-1" unit="cm"
-      x="363.38405"
+      x="363.52605"
       y="283.164375"
       z="9.80499999999994"/>
         <rotationref ref="rIdentity"/>
@@ -3220,7 +3220,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-3-0" unit="cm"
-      x="-363.38405"
+      x="-363.52605"
       y="-324.664375"
       z="242.195"/>
         <rotationref ref="rIdentity"/>
@@ -3228,7 +3228,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-3-1" unit="cm"
-      x="363.38405"
+      x="363.52605"
       y="-324.664375"
       z="242.195"/>
         <rotationref ref="rIdentity"/>
@@ -3763,7 +3763,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-4-0" unit="cm"
-      x="-363.38405"
+      x="-363.52605"
       y="283.164375"
       z="242.195"/>
         <rotationref ref="rIdentity"/>
@@ -3771,7 +3771,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-4-1" unit="cm"
-      x="363.38405"
+      x="363.52605"
       y="283.164375"
       z="242.195"/>
         <rotationref ref="rIdentity"/>
