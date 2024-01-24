@@ -96,7 +96,7 @@ protodune_detproperties.TimeOffsetZ:       0.
 protodunevd_detproperties:                   @local::standard_detproperties
 protodunevd_detproperties.Temperature:       87.68
 protodunevd_detproperties.Electronlifetime:  35.0e3
-protodunevd_detproperties.Efield:           [0.495, 4.0, 0.0]   #(predicted for microBooNE)
+protodunevd_detproperties.Efield:           [0.495, 3.125, 0.5, 3.125]   #(planned for PDVD)
 protodunevd_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 protodunevd_detproperties.NumberTimeSamples: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
 protodunevd_detproperties.ReadOutWindowSize: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
