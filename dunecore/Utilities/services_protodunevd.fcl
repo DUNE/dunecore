@@ -7,22 +7,23 @@ BEGIN_PROLOG
 ### ProtoDUNE-VD           ###
 ##############################
 
-protodunevd_services: @local::protodune_services 
-protodunevd_services.Geometry:  @local::protodunevd_v3_geo
-protodunevd_services.DetectorPropertiesService.NumberTimeSamples:     10000
-protodunevd_services.DetectorPropertiesService.ReadOutWindowSize:     10000
+protodunevd_services:                                       @local::protodune_services 
+protodunevd_services.Geometry:                              @local::protodunevd_v3_geo
+protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
 
-protodunevd_rawdecoding_services: @local::protodune_rawdecoding_services
-protodunevd_rawdecoding_services.Geometry: @local::protodunevd_v3_geo
+protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
+protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v3_geo
+protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
 
-protodunevd_data_services: @local::protodune_data_services
-protodunevd_data_services.Geometry: @local::protodunevd_v3_geo
+protodunevd_data_services:                                  @local::protodune_data_services
+protodunevd_data_services.Geometry:                         @local::protodunevd_v3_geo
+protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
 
 # Low memory configuration leaving out some heavy services
-protodunevd_minimal_simulation_services: @local::protodune_minimal_simulation_services
-protodunevd_minimal_simulation_services.Geometry: @local::protodunevd_v3_geo
-protodunevd_minimal_simulation_services.DetectorPropertiesService.NumberTimeSamples:     10000
-protodunevd_minimal_simulation_services.DetectorPropertiesService.ReadOutWindowSize:     10000
+protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
+protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v3_geo
+protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
+
 
 # Full service configuration which includes memory-intensive services
 protodunevd_simulation_services: 
@@ -58,11 +59,11 @@ protodunevd_data_reco_services:                       @local::protodunevd_reco_s
 protodunevd_data_reco_services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
 protodunevd_data_reco_services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
 # Use channel service for data
-protodunevd_data_reco_services.ChannelStatusService: @local::protodunevd_channel_status
+protodunevd_data_reco_services.ChannelStatusService:          @local::protodunevd_channel_status
 # Add the photon detector calibrator service
-protodunevd_data_reco_services.IPhotonCalibrator:    @local::protodunesp_photoncalibrator
+protodunevd_data_reco_services.IPhotonCalibrator:             @local::protodunesp_photoncalibrator
 # ProtoDUNE detector properties service
-protodunevd_data_reco_services.DetectorPropertiesService: @local::protodunesp_detproperties
+protodunevd_data_reco_services.DetectorPropertiesService:     @local::protodunevd_detproperties
 # Dataprep service.
 protodunevd_data_reco_services.RawDigitPrepService.ToolNames: @local::protodune_dataprep_tools_wirecell
 
