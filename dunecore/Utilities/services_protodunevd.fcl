@@ -8,20 +8,20 @@ BEGIN_PROLOG
 ##############################
 
 protodunevd_services:                                       @local::protodune_services 
-protodunevd_services.Geometry:                              @local::protodunevd_v3_geo
+protodunevd_services.Geometry:                              @local::protodunevd_v4_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
 
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
-protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v3_geo
+protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v4_geo
 protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
 
 protodunevd_data_services:                                  @local::protodune_data_services
-protodunevd_data_services.Geometry:                         @local::protodunevd_v3_geo
+protodunevd_data_services.Geometry:                         @local::protodunevd_v4_geo
 protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
-protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v3_geo
+protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
 
 
