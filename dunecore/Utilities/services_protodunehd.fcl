@@ -9,12 +9,15 @@ BEGIN_PROLOG
 
 protodunehd_services: @local::protodune_services 
 protodunehd_services.Geometry:  @local::protodunehdv6_geo
+protodunehd_services.DetectorClocksService: @local::protodunehd_detectorclocks
 
 protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
 protodunehd_rawdecoding_services.Geometry: @local::protodunehdv6_geo
+protodunehd_rawdecoding_services.DetectorClocksService: @local::protodunehd_detectorclocks
 
 protodunehd_data_services: @local::protodune_data_services
 protodunehd_data_services.Geometry: @local::protodunehdv6_geo
+protodunehd_data_services.DetectorClocksService: @local::protodunehd_detectorclocks
 
 # Low memory configuration leaving out some heavy services
 protodunehd_minimal_simulation_services: @local::protodune_minimal_simulation_services
@@ -27,6 +30,7 @@ protodunehd_simulation_services:
   SignalShapingServiceDUNE:     @local::protodunesp_signalshapingservice
   PhotonVisibilityService:      @local::protodune_hd_photonvisibilityservice
   OpDetResponseInterface:       @local::protodune_opdetresponse
+  DetectorClocksService: @local::protodunehd_detectorclocks
 }
 
 # Reco services for ProtoDUNE simulation.
