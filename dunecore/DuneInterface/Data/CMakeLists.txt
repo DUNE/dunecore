@@ -9,7 +9,7 @@ add_subdirectory(test)
 
 art_make(BASENAME_ONLY
          NO_PLUGINS
-        )
+        ) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 # Including DataMap.h confers a transitive dependency on ROOT::Hist
 cet_make_library(LIBRARY_NAME dunecore::DuneInterface_Data_DataMap INTERFACE

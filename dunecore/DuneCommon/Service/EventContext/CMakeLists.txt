@@ -14,6 +14,6 @@ art_make(SERVICE_LIBRARIES
            art::Persistency_Provenance
            messagefacility::MF_MessageLogger
            ROOT::Core
-)
+) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 add_subdirectory(test)

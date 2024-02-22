@@ -11,8 +11,7 @@ art_make( BASENAME_ONLY
                         art::Framework_Services_Registry
                         art::Utilities
                         canvas::canvas
-                        ROOT_BASIC_LIB_LIST
-                        ROOT_GEOM
+                        ROOT::Geom
                         
           SERVICE_LIBRARIES larcorealg::Geometry
                         dunecore_Geometry
@@ -21,9 +20,8 @@ art_make( BASENAME_ONLY
 			cetlib_except::cetlib_except
                         ROOT::Geom
                         ROOT::XMLIO
-                        ROOT_Gdml
-                        ROOT_BASIC_LIB_LIST
-        )
+                        ROOT::Gdml
+        ) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 cet_build_plugin ( CheckGeometry art::module
                      larcorealg::Geometry
@@ -43,9 +41,8 @@ cet_build_plugin ( CheckGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
-
+                     ROOT::Gpad
                BASENAME_ONLY
           )
 
@@ -67,8 +64,8 @@ cet_build_plugin ( CheckDPhaseGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
+		     ROOT::Gpad
                BASENAME_ONLY
           )
 
@@ -90,8 +87,8 @@ cet_build_plugin ( CheckCRPGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
+		     ROOT::Gpad
                BASENAME_ONLY
           )
 

@@ -1,25 +1,18 @@
 #include_directories("${CMAKE_SOURCE_DIR/")
 
-set( dune_util_lib_list lardata_Utilities_LArFFT_service
-                        lardataalg_DetectorInfo
-			larcorealg_Geometry
-			larcore_Geometry_Geometry_service
-			lardata_Utilities
-  			ART_FRAMEWORK_CORE
-			ART_FRAMEWORK_PRINCIPAL
-			ART_FRAMEWORK_SERVICES_REGISTRY
+set( dune_util_lib_list lardata::Utilities_LArFFT_service
+                        lardataalg::DetectorInfo
+			larcorealg::Geometry
+			larcore::Geometry_Geometry_service
+			lardata::Utilities
 			art::Persistency_Common canvas
 			art::Persistency_Provenance canvas
-			ART_ROOT_IO_TFILE_SUPPORT
 			ROOT::Core
-			ART_ROOT_IO_TFILESERVICE_SERVICE
-			ART_FRAMEWORK_SERVICES_SYSTEM_FILECATALOGMETADATA_SERVICE
 			art::Utilities canvas
 			messagefacility::MF_MessageLogger
 			
 			cetlib::cetlib cetlib_except
-			ROOT_BASIC_LIB_LIST
-                        ROOT_GEOM
+                        ROOT::Geom
     )
 
 
@@ -61,11 +54,10 @@ cet_build_plugin( TFileMetadataDUNE art::service
 
 cet_build_plugin(CrpGainService   art::service
                 dunecore_ArtSupport
-                larcorealg_Geometry
-		lardataobj_Simulation
+                larcorealg::Geometry
+		lardataobj::Simulation
 		art::Utilities canvas
                 cetlib::cetlib cetlib_except
-                ROOT_BASIC_LIB_LIST
 		BASENAME_ONLY
              )
 

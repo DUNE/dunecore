@@ -29,6 +29,7 @@ cet_make_library(LIBRARY_NAME RunDataTool INTERFACE
   SOURCE RunDataTool.h
   LIBRARIES INTERFACE
   dunecore::DuneInterface_Data_RunData
+  ROOT::Core
   )
 
 cet_make_library(LIBRARY_NAME TpcDataTool INTERFACE

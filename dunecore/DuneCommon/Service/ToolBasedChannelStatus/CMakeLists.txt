@@ -19,8 +19,7 @@ art_make(SERVICE_LIBRARIES
            art::Persistency_Provenance
            canvas::canvas
            ROOT::HistPainter
-           ROOT_BASIC_LIB_LIST
            FFTW3::FFTW3
-)
+) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 add_subdirectory(test)

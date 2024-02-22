@@ -15,7 +15,6 @@ cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib cetlib_except
     cetlib_except::cetlib_except
-    SQLITE3
     Boost::filesystem
 )
 
@@ -28,6 +27,5 @@ cet_test(test_TpcDataTool SOURCES test_TpcDataTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib cetlib_except
     cetlib_except::cetlib_except
-    SQLITE3
     Boost::filesystem
 )

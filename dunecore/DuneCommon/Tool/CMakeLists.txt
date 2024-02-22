@@ -10,7 +10,7 @@ cet_build_plugin(FclRunDataTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(FclIndexRangeTool  art::tool
@@ -18,7 +18,7 @@ cet_build_plugin(FclIndexRangeTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(FclIndexVectorMapTool  art::tool
@@ -26,7 +26,7 @@ cet_build_plugin(FclIndexVectorMapTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(FixedTimeOffsetTool  art::tool
@@ -34,7 +34,7 @@ cet_build_plugin(FixedTimeOffsetTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(TimingRawDecoderOffsetTool  art::tool
@@ -45,7 +45,7 @@ cet_build_plugin(TimingRawDecoderOffsetTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(FclFloatArray  art::tool
@@ -53,7 +53,7 @@ cet_build_plugin(FclFloatArray  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(FclFileFloatArray  art::tool
@@ -61,7 +61,7 @@ cet_build_plugin(FclFileFloatArray  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(SimpleHistogramManager  art::tool
@@ -69,7 +69,7 @@ cet_build_plugin(SimpleHistogramManager  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(ChannelStatusServiceTool  art::tool
@@ -78,7 +78,7 @@ cet_build_plugin(ChannelStatusServiceTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(ChannelStatusConfigTool  art::tool
@@ -87,7 +87,7 @@ cet_build_plugin(ChannelStatusConfigTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(BlockIndexMapTool  art::tool
@@ -96,7 +96,7 @@ cet_build_plugin(BlockIndexMapTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(TextIndexMapTool  art::tool
@@ -106,7 +106,7 @@ cet_build_plugin(TextIndexMapTool  art::tool
                 canvas::canvas
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 cet_build_plugin(DuneRunToolRedirector  art::tool
@@ -117,7 +117,7 @@ cet_build_plugin(DuneRunToolRedirector  art::tool
                 fhiclcpp::fhiclcpp
                 cetlib::cetlib
                 cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+		ROOT::Core
              )
 
 add_subdirectory(test)

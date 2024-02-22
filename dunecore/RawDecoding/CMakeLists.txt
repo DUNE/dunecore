@@ -1,5 +1,4 @@
 cet_build_plugin(FDHDDataInterface   art::tool
-                        art_utilities
                         canvas::canvas
                         cetlib::cetlib
                         cetlib_except::cetlib_except

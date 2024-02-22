@@ -9,5 +9,5 @@ cet_build_plugin(TestTool   art::tool
                 art::Utilities canvas
                 cetlib::cetlib 
 		cetlib_except::cetlib_except
-                ROOT_BASIC_LIB_LIST
+                ROOT::Core
              )

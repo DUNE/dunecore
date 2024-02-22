@@ -23,7 +23,6 @@ cet_test(test_ArtServiceHelper
     dunecore_ArtSupport
     art_root_io::TFileService_service
     art::Framework_Services_Optional_RandomNumberGenerator_service
-    ROOT_BASIC_LIB_LIST
 )
 
 cet_test(test_DuneToolManager

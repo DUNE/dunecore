@@ -18,11 +18,10 @@ art_make(BASENAME_ONLY
            art::Persistency_Provenance
            canvas::canvas
            ROOT::HistPainter
-           ROOT_BASIC_LIB_LIST
            FFTW3::FFTW3
          PUBLIC ROOT::Core
          NO_PLUGINS
-        )
+        ) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 install_source()
 install_headers()

@@ -7,14 +7,11 @@ art_make(MODULE_LIBRARIES
                         art_root_io::tfile_support
                         ROOT::Core
                         art_root_io::TFileService_service
-                        ART_PERSISTENCY_PROVENANCE
                         messagefacility::MF_MessageLogger
-                        CETLIB
-                        ROOT_BASIC_LIB_LIST
 			HDF5::HDF5
                         dunecore::ChannelMap_FDHDChannelMapService_service
                         BASENAME_ONLY
-)
+) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 install_headers()
 install_fhicl()
