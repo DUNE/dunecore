@@ -252,7 +252,7 @@ dune_pardata		v01_84_00	-
 dunedaqdataformats	v4_0_0		-
 dunedetdataformats	v4_1_0		-
 dunepdlegacy		v1_01_00	-
-duneutil		v09_82_02d01	-
+duneutil		v09_83_01d00	-
 highfive		v2_4_1_2	-
 larsoft			v09_82_02	-
 nlohmann_json		v3_10_4_1	-
