@@ -39,8 +39,7 @@ cet_build_plugin(FixedTimeOffsetTool  art::tool
 
 cet_build_plugin(TimingRawDecoderOffsetTool  art::tool
                 dunecore_ArtSupport
-                #dunepdlegacy::dunepdlegacy_Services_ChannelMap_PdspChannelMapService_service
-                dunepdlegacy_Services_ChannelMap_PdspChannelMapService_service
+                dunepdlegacy::Services_ChannelMap_PdspChannelMapService_service
                 art::Utilities
                 canvas::canvas
                 cetlib::cetlib
@@ -73,6 +72,8 @@ cet_build_plugin(SimpleHistogramManager  art::tool
              )
 
 cet_build_plugin(ChannelStatusServiceTool  art::tool
+		larevt::CalibrationDBI_Providers
+		larcore::ServiceUtil
                 art::Framework_Services_Registry
                 art::Utilities
                 canvas::canvas
@@ -82,6 +83,8 @@ cet_build_plugin(ChannelStatusServiceTool  art::tool
              )
 
 cet_build_plugin(ChannelStatusConfigTool  art::tool
+		larevt::CalibrationDBI_Providers
+		larcore::ServiceUtil
                 art::Framework_Services_Registry
                 art::Utilities
                 canvas::canvas

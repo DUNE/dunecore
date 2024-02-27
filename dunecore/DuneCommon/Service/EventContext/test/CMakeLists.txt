@@ -13,7 +13,9 @@ cet_test(test_EventContextService
   SOURCES
     test_EventContextService.cxx
   LIBRARIES
-    dunecore_DuneCommon_Utility
+    dunecore::DuneCommon_Utility
     dunecore::ArtSupport
+    larcoreobj::SimpleTypesAndConstants
+    lardataobj::RawData
 )
 

@@ -5,13 +5,14 @@ set( dune_util_lib_list lardata::Utilities_LArFFT_service
 			larcorealg::Geometry
 			larcore::Geometry_Geometry_service
 			lardata::Utilities
-			art::Persistency_Common canvas
-			art::Persistency_Provenance canvas
+			art::Persistency_Common
+			art::Persistency_Provenance
 			ROOT::Core
-			art::Utilities canvas
+			art::Utilities
+			canvas::canvas
 			messagefacility::MF_MessageLogger
-			
-			cetlib::cetlib cetlib_except
+			cetlib::cetlib
+			cetlib_except::cetlib_except
                         ROOT::Geom
     )
 
@@ -48,16 +49,20 @@ cet_build_plugin( FileCatalogMetadataDUNE art::service
 	)
 
 cet_build_plugin( TFileMetadataDUNE art::service
-               ${dune_util_lib_list}
-	       BASENAME_ONLY
+  ${dune_util_lib_list}
+  art_root_io::RootDB
+  BASENAME_ONLY
 	)
 
 cet_build_plugin(CrpGainService   art::service
-                dunecore_ArtSupport
+  dunecore::ArtSupport
+  larcore::Geometry_Geometry_service
                 larcorealg::Geometry
 		lardataobj::Simulation
-		art::Utilities canvas
-                cetlib::cetlib cetlib_except
+		art::Utilities
+		canvas::canvas
+                cetlib::cetlib
+		cetlib_except::cetlib_except
 		BASENAME_ONLY
              )
 

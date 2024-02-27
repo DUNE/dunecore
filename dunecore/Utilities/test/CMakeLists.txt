@@ -5,13 +5,14 @@ art_make( NO_PLUGINS
           LIBRARY_NAME  dunecore_Utilities
 	  MODULE_LIBRARIES lardata::Utilities
 			ROOT::Core
-			art::Persistency_Common canvas
-			art::Persistency_Provenance canvas
-			art::Utilities canvas
+			art::Persistency_Common
+			art::Persistency_Provenance
+			art::Utilities
+			canvas::canvas
 			messagefacility::MF_MessageLogger
-			
 	                fhiclcpp::fhiclcpp
-			cetlib::cetlib cetlib_except
+			cetlib::cetlib
+			cetlib_except::cetlib_except
                         ROOT::Geom
                         ROOT::XMLIO
                         ROOT::GDML

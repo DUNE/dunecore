@@ -1,3 +1,7 @@
+
+include_directories( $ENV{DUNEDAQDATAFORMATS_INC} )
+include_directories( $ENV{DUNEDETDATAFORMATS_INC} )
+
 cet_build_plugin(FDHDDataInterface   art::tool
                         canvas::canvas
                         cetlib::cetlib

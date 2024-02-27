@@ -15,6 +15,7 @@ cet_test(test_GeometryDune35t SOURCES test_GeometryDune35t.cxx
     dunecore::ArtSupport
     larcorealg::Geometry
     ROOT::Geom
+    larcore::Geometry_Geometry_service
 )
 
 cet_test(test_GeometryDune10kt SOURCES test_GeometryDune10kt.cxx
@@ -22,6 +23,7 @@ cet_test(test_GeometryDune10kt SOURCES test_GeometryDune10kt.cxx
     dunecore::ArtSupport
     larcorealg::Geometry
     ROOT::Geom
+    larcore::Geometry_Geometry_service
 )
 
 cet_test(test_GeometryProtoDune SOURCES test_GeometryProtoDune.cxx
@@ -29,6 +31,7 @@ cet_test(test_GeometryProtoDune SOURCES test_GeometryProtoDune.cxx
     dunecore::ArtSupport
     larcorealg::Geometry
     ROOT::Geom
+    larcore::Geometry_Geometry_service
 )
 
 cet_test(test_WireSelector SOURCES test_WireSelector.cxx
@@ -38,4 +41,5 @@ cet_test(test_WireSelector SOURCES test_WireSelector.cxx
     dunecore::DuneCommon_Utility
     larcorealg::Geometry
     ROOT::Geom
+    larcore::Geometry_Geometry_service
 )

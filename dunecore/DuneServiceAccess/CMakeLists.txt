@@ -12,14 +12,15 @@ art_make_library(
   LIBRARY_NAME dunecore_DuneServiceAccess
   SOURCE ${src_files}
   LIBRARIES
-    dunecore::SignalShapingServiceDUNE_service
+  dunecore::SignalShapingServiceDUNE_service
+  larevt::CalibrationDBI_Providers
     art::Framework_Services_Registry
     art::Framework_Core
     art::Framework_Principal
     art::Utilities
     canvas::canvas
     cetlib::cetlib
-    cetlib_except::cetlib_except
+    cetlib_except::cetlib_except   
 )
 
 install_headers()

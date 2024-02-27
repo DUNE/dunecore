@@ -12,7 +12,8 @@ cet_enable_asserts()
 cet_test(test_GeoRopChannelGroupService
   SOURCES
     test_GeoRopChannelGroupService.cxx
-  LIBRARIES
+    LIBRARIES
+    larcore::Geometry_Geometry_service
     larcorealg::Geometry
     lardataalg::DetectorInfo
     dunecore::ArtSupport
@@ -21,7 +22,8 @@ cet_test(test_GeoRopChannelGroupService
 cet_test(test_GeoApaChannelGroupService
   SOURCES
     test_GeoApaChannelGroupService.cxx
-  LIBRARIES
+    LIBRARIES
+    larcore::Geometry_Geometry_service
     larcorealg::Geometry
     dunecore::ArtSupport
 )

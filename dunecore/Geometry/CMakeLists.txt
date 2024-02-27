@@ -4,6 +4,7 @@ art_make( BASENAME_ONLY
 	  EXCLUDE CheckGeometry_module.cc CheckCRPGeometry_module.cc CheckDPhaseGeometry_module.cc issue19191_module.cc
 	  LIBRARY_NAME dunecore_Geometry
 	  LIB_LIBRARIES larcorealg::Geometry
+	                larcore::Geometry_Geometry_service
                         messagefacility::MF_MessageLogger
                         cetlib::cetlib 
 			cetlib_except::cetlib_except
@@ -12,8 +13,8 @@ art_make( BASENAME_ONLY
                         art::Utilities
                         canvas::canvas
                         ROOT::Geom
-                        
-          SERVICE_LIBRARIES larcorealg::Geometry
+			SERVICE_LIBRARIES larcorealg::Geometry
+			larcore::Geometry_Geometry_service
                         dunecore_Geometry
                         fhiclcpp::fhiclcpp
                         cetlib::cetlib
@@ -25,7 +26,8 @@ art_make( BASENAME_ONLY
 
 cet_build_plugin ( CheckGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
+		     lardata::DetectorInfoServices_DetectorPropertiesServiceStandard_service
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry
@@ -48,7 +50,7 @@ cet_build_plugin ( CheckGeometry art::module
 
 cet_build_plugin ( CheckDPhaseGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry
@@ -71,7 +73,7 @@ cet_build_plugin ( CheckDPhaseGeometry art::module
 
 cet_build_plugin ( CheckCRPGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry

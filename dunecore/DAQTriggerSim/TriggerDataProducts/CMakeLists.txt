@@ -8,7 +8,7 @@ art_make(
 	  art::Persistency_Provenance
 	  canvas::canvas
 	  messagefacility::MF_MessageLogger
-	  cetlib::cetlib cetlib_except
+	  cetlib::cetlib cetlib_except::cetlib_except
 	) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
 
 install_headers()

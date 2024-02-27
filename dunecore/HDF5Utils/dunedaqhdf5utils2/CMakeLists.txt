@@ -1,3 +1,6 @@
+include_directories( $ENV{NLOHMANN_JSON_INC} )
+include_directories( $ENV{HIGHFIVE_INC} )
+
 art_make(
 	 LIBRARY_NAME dunedaqhdf5utils2
          LIB_LIBRARIES

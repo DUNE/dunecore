@@ -1,6 +1,13 @@
 
-art_make(MODULE_LIBRARIES
-                        lardataobj_RawData
+# these are temporary hacks -- may need to refactor these header-only products
+# in a way that cmake can find the headers
+
+include_directories( $ENV{DUNEDAQDATAFORMATS_INC} )
+include_directories( $ENV{DUNEDETDATAFORMATS_INC} )
+
+cet_build_plugin(FDHDDAQWriter art::Analyzer
+  LIBRARIES
+                        lardataobj::RawData
                         art::Framework_Core
                         art::Framework_Principal
                         art::Framework_Services_Registry
@@ -11,7 +18,7 @@ art_make(MODULE_LIBRARIES
 			HDF5::HDF5
                         dunecore::ChannelMap_FDHDChannelMapService_service
                         BASENAME_ONLY
-) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use art_make_library(), art_dictonary(), and cet_build_plugin() with explicit source lists and plugin base types
+) 
 
 install_headers()
 install_fhicl()
