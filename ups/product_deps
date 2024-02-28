@@ -256,7 +256,7 @@ duneutil		v09_83_01d00	-
 highfive		v2_4_1_2	-
 larsoft			v09_83_01	-
 nlohmann_json		v3_10_4_1	-
-nusystematics		v01_03_12	-
+nusystematics		v01_03_13	-
 valgrind		v3_17_0		-
 cetmodules		v3_22_02	-	only_for_build
 end_product_list
