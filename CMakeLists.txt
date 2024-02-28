@@ -67,6 +67,7 @@ find_package( cetlib REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups
 find_package( CLHEP 2.1.3.0 REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(clhep v2_1_3_0 ...) -> find_package(clhep 2.1.3.0 REQUIRED ...)
 find_package( dunepdlegacy REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(dunepdlegacy ...) -> find_package(dunepdlegacy REQUIRED ...)
 find_package( fhiclcpp REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(fhiclcpp ...) -> find_package(fhiclcpp REQUIRED ...)
+find_package( nufinder REQUIRED )
 find_package( GENIE REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(genie ...) -> find_package(genie REQUIRED ...)
 find_package( hep_concurrency REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(hep_concurrency ...) -> find_package(hep_concurrency REQUIRED ...)
 find_package( ifdh_art REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(ifdh_art ...) -> find_package(ifdh_art REQUIRED ...)
