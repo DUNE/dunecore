@@ -6,6 +6,7 @@
 # Add plugin for each service.
 
 cet_build_plugin(GeoRopChannelGroupService   art::service
+                larcore::headers
                 larcorealg::Geometry
                 art::Utilities
 		canvas::canvas
@@ -14,6 +15,7 @@ cet_build_plugin(GeoRopChannelGroupService   art::service
              )
 
 cet_build_plugin(GeoApaChannelGroupService   art::service
+                larcore::headers
                 larcorealg::Geometry
                 art::Utilities 
 		canvas::canvas

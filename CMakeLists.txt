@@ -48,7 +48,7 @@ cet_set_compiler_flags(DIAGS CAUTIOUS
 cet_report_compiler_flags() ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - add args: REPORT_THRESHOLD VERBOSE
 
 # these are minimum required versions, not the actual product versions
-find_package( Boost REQUIRED ) # Needs to be first to cover for a missing transitive ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(...) -> find_package(REQUIRED ...)
+find_package( Boost REQUIRED COMPONENTS system) # Needs to be first to cover for a missing transitive ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(...) -> find_package(REQUIRED ...)
                   # dependency from artdaq_core.
 find_package( Geant4 REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(...) -> find_package(REQUIRED ...)
 find_package( ROOT REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(...) -> find_package(REQUIRED ...)
@@ -97,6 +97,7 @@ find_package(FFTW3 REQUIRED EXPORT)
 find_package(  SQLite3 REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(sqlite ...) -> find_package(SQLite3 REQUIRED ...)
 find_package( nlohmann_json REQUIRED ) ### MIGRATE-CHANGED (migrate-3.22.02) - find_ups_product(nlohmann_json ...) -> find_package(nlohmann_json REQUIRED ...)
 find_package( HDF5 REQUIRED)
+find_package( HighFive REQUIRED )
 # Define an export set for tool support to enable simpler per-tool build
 # call.
 cet_register_export_set(SET_NAME PluginTypes NAMESPACE art_plugin_types)

@@ -1,3 +1,7 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
+#cet_make( LIBRARIES canvas::canvas
+#                  messagefacility::MF_MessageLogger 
 #		    MF_Utilities
 #		    cetlib::cetlib 
 #                   cetlib_except::cetlib_except
@@ -10,6 +14,7 @@ art_make(
 		    messagefacility::MF_MessageLogger
 		    cetlib::cetlib 
 		    cetlib_except::cetlib_except
+                    lardataobj::RecoBase
                     HDF5::HDF5
   DICT_LIBRARIES
   #  EXCLUDE OpDetDivRec.h OpDetDivRec.cc

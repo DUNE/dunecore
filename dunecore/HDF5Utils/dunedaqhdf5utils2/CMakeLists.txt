@@ -1,3 +1,7 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
+include_directories("${nlohmann_json_DIR}/../../../include")
+include_directories("${HighFive_DIR}/../../../include")
 art_make(
 	 LIBRARY_NAME dunedaqhdf5utils2
          LIB_LIBRARIES

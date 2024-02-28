@@ -1,3 +1,8 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
+include_directories("${nlohmann_json_DIR}/../../../include")
+include_directories("${HighFive_DIR}/../../../include")
+
 cet_build_plugin(FDHDDataInterface   art::tool
                         canvas::canvas
                         cetlib::cetlib

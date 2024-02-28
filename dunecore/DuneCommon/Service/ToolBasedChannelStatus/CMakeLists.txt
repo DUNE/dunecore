@@ -10,12 +10,18 @@ art_make(SERVICE_LIBRARIES
                            dunecore_DuneCommon_Service_ToolBasedChannelStatus
                            art::Framework_Services_Registry
                            art::Framework_Principal
-                           art_Framework_Core
+                           art::Framework_Core
                            art::Persistency_Provenance
                            messagefacility::MF_MessageLogger
                            ROOT::Core
+                           larevt::CalibrationDBI_Providers
+                           larcoreobj::headers
+                           larcore::headers
          LIB_LIBRARIES
            dunecore_ArtSupport
+           larevt::CalibrationDBI_Providers
+           larcoreobj::headers
+           larcore::headers
            art::Persistency_Provenance
            canvas::canvas
            ROOT::HistPainter

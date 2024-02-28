@@ -1,6 +1,8 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
 
 art_make(MODULE_LIBRARIES
-                        lardataobj_RawData
+                        lardataobj::RawData
                         art::Framework_Core
                         art::Framework_Principal
                         art::Framework_Services_Registry
