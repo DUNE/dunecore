@@ -23,7 +23,7 @@ simple_plugin(HDF5RawInput "source"
   dunepdlegacy::Overlays
   HDF5Utils
   art::Framework_Services_Registry
-) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use cet_build_plugin() with explicit source lists and plugin base types
+)
 
 simple_plugin(HDF5RawInput2 "source"
   dunepdlegacy::Overlays
@@ -31,7 +31,7 @@ simple_plugin(HDF5RawInput2 "source"
   dunecore::dunedaqhdf5utils2
   art::Framework_Services_Registry
   dunecore::HDF5Utils_HDF5RawFile2Service_service
-) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use cet_build_plugin() with explicit source lists and plugin base types
+)
 
 simple_plugin(HDF5TPStreamInput2 "source"
   dunepdlegacy::Overlays
@@ -39,7 +39,7 @@ simple_plugin(HDF5TPStreamInput2 "source"
   dunecore::dunedaqhdf5utils2
   art::Framework_Services_Registry
   dunecore::HDF5Utils_HDF5RawFile2Service_service
-) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use cet_build_plugin() with explicit source lists and plugin base types
+)
 
 simple_plugin(HDF5RawFile2Service "service"
               ${ART_PERSISTENCY_ROOTDB}
@@ -49,7 +49,7 @@ simple_plugin(HDF5RawFile2Service "service"
               messagefacility::MF_MessageLogger
               ${CETLIB_LIBS}
 	      dunecore::dunedaqhdf5utils2
-) ### MIGRATE-ACTION-RECOMMENDED (migrate-3.22.02) - deprecated: use cet_build_plugin() with explicit source lists and plugin base types
+)
 
 add_subdirectory(dunedaqhdf5utils2)
 
