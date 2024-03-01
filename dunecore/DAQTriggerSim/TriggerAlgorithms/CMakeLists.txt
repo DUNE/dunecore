@@ -19,7 +19,6 @@ art_make(
   cetlib::cetlib 
   cetlib_except::cetlib_except
   Boost::filesystem              
-  ROOT_BASIC_LIB_LIST
   messagefacility::MF_MessageLogger
   fhiclcpp::fhiclcpp
   dunecore::DAQTriggerSim_TriggerDataProducts

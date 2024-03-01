@@ -15,8 +15,6 @@ cet_test(test_FclRunDataTool SOURCES test_FclRunDataTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -28,8 +26,6 @@ cet_test(test_FclIndexRangeTool SOURCES test_FclIndexRangeTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -41,8 +37,6 @@ cet_test(test_FclIndexVectorMapTool SOURCES test_FclIndexVectorMapTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -54,8 +48,6 @@ cet_test(test_FixedTimeOffsetTool SOURCES test_FixedTimeOffsetTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -67,8 +59,6 @@ cet_test(test_TimingRawDecoderOffsetTool SOURCES test_TimingRawDecoderOffsetTool
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -80,9 +70,8 @@ cet_test(test_SimpleHistogramManager SOURCES test_SimpleHistogramManager.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
+    ROOT::Hist
 )
 
 cet_test(test_FclFloatArray SOURCES test_FclFloatArray.cxx
@@ -93,8 +82,6 @@ cet_test(test_FclFloatArray SOURCES test_FclFloatArray.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 cet_test(test_FclFileFloatArray SOURCES test_FclFileFloatArray.cxx
@@ -105,8 +92,6 @@ cet_test(test_FclFileFloatArray SOURCES test_FclFileFloatArray.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -118,8 +103,6 @@ cet_test(test_ChannelStatusServiceTool SOURCES test_ChannelStatusServiceTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -131,8 +114,6 @@ cet_test(test_ChannelStatusConfigTool SOURCES test_ChannelStatusConfigTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -144,8 +125,6 @@ cet_test(test_BlockIndexMapTool SOURCES test_BlockIndexMapTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -158,8 +137,6 @@ cet_test(test_TextIndexMapTool SOURCES test_TextIndexMapTool.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 
@@ -172,8 +149,6 @@ cet_test(test_DuneRunToolRedirector SOURCES test_DuneRunToolRedirector.cxx
     fhiclcpp::fhiclcpp
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_BASIC_LIB_LIST
-    SQLITE3
     Boost::filesystem
 )
 

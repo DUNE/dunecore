@@ -13,9 +13,8 @@ cet_test(test_AdcChannelTool SOURCES test_AdcChannelTool.cxx
     art::Utilities
     canvas::canvas
     fhiclcpp::fhiclcpp
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib
     cetlib_except::cetlib_except
-    SQLITE3
     Boost::filesystem
 )
 
@@ -26,8 +25,7 @@ cet_test(test_TpcDataTool SOURCES test_TpcDataTool.cxx
     art::Utilities
     canvas::canvas
     fhiclcpp::fhiclcpp
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib
     cetlib_except::cetlib_except
-    SQLITE3
     Boost::filesystem
 )
