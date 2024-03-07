@@ -22,7 +22,7 @@ find_package(cetbuildtools REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.83.01d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.85.00d00)
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
 # set(dunecore_NAMESPACE dune)
