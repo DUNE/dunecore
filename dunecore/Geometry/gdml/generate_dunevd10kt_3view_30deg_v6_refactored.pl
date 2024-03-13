@@ -270,11 +270,11 @@ if( $workspace != 0 )
 # size of liquid argon buffer
 if ( $nCRM_x == 1 )
 {
-    $xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $ReadoutPlane;
+    $xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $heightCathode - $ReadoutPlane; # cathode not part of the buffer
 }
 else
 {
-    $xLArBuffer = $Argon_x - 2*$driftTPCActive - $HeightGaseousAr - 2*$ReadoutPlane - $heightCathode; # in double-drift option, cathode not part of the buffer
+    $xLArBuffer = $Argon_x - 2*$driftTPCActive - $HeightGaseousAr - 2*$ReadoutPlane - $heightCathode; # cathode not part of the buffer
 }
 $yLArBuffer = 0.5 * ($Argon_y - $widthTPCActive);
 $zLArBuffer = 0.5 * ($Argon_z - $lengthTPCActive);
@@ -322,6 +322,7 @@ $OriginXSet =  $DetEncX/2.0
              - $FoamPadding
              - $SteelThickness
              - $xLArBuffer
+             - $heightCathode
              - $driftTPCActive/2.0;
 
 if ( $nCRM_x == 2 )
@@ -694,9 +695,9 @@ sub gen_TPC()
     my $TPCActive_z = $lengthCRM_active;
 
     # CRM total volume
-    my $TPC_x = $TPCActive_x + $ReadoutPlane;
-    my $TPC_y = $widthCRM;
-    my $TPC_z = $lengthCRM;
+    $TPC_x = $TPCActive_x + $ReadoutPlane;
+    $TPC_y = $widthCRM;
+    $TPC_z = $lengthCRM;
 
     print " TPC dimensions     : $TPC_x x $TPC_y x $TPC_z\n";
 
@@ -978,6 +979,7 @@ print TPC <<EOF;
      </physvol>
    </volume>
 EOF
+
 print TPC <<EOF;
  </structure>
  </gdml>
@@ -1179,6 +1181,69 @@ close(FieldCage);
 #++++++++++++++++++++++++++++++++++++++ gen_Cryostat +++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+sub placeCathodeAndAnode() {
+    # to placed in volTPCEnclosure
+
+    $CathodePosX = 0.5*$TPCEnclosure_x - $TPC_x - $anodePlateWidth - $heightCathode/2;
+    $CathodePosY = -0.5*$TPCEnclosure_y + 0.5*$widthCathode;
+    $CathodePosZ = -0.5*$TPCEnclosure_z + 0.5*$lengthCathode;
+    $posAnodePlate = 0.5*$TPCEnclosure_x - 0.5*$anodePlateWidth;#right above TPC vol and right below GAr; Note here, that $HeightGaseousAr already contains the thicknes of the anode plate!
+    $posAnodePlateBottom = -0.5*$TPCEnclosure_x + 0.5*$anodePlateWidth;
+
+    $idx = 0;
+    if ( $Cathode_switch eq "on" )
+    {
+	for(my $ii=0;$ii<$nCRM_z/2;$ii++)
+	{
+	    for(my $jj=0;$jj<$nCRM_y/2;$jj++)
+	    {
+		print CRYO <<EOF;
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate\-$idx" unit="cm" x="$posAnodePlate" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+EOF
+		if ($nCRM_x == 2)
+		{
+		    print CRYO <<EOF;
+      <physvol>
+       <volumeref ref="volAnodePlate"/>
+       <position name="posAnodePlateBottom\-$idx" unit="cm" x="$posAnodePlateBottom" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+EOF
+		}
+
+		$idx++;
+		$CathodePosY += $widthCathode;
+	    }
+	    $CathodePosZ += $lengthCathode;
+	    $CathodePosY = -0.5*$TPCEnclosure_y + 0.5*$widthCathode;
+	}
+    }
+
+    # place cathode PDS here, within TPCEnclosure. Lateral PDS is in the cryostat
+    if ($pdsconfig == 0) {  #4-pi PDS coverage
+	#for placing the Arapucas over the cathode
+	$FrameCenter_y=-0.5*$TPCEnclosure_y + 0.5*$widthCathode;
+	$FrameCenter_x=$CathodePosX;
+	$FrameCenter_z=-0.5*$TPCEnclosure_z + 0.5*$lengthCathode;
+	for($i=0;$i<$nCRM_y/2;$i++){
+	    for($j=0;$j<$nCRM_z/2;$j++){
+		place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
+		$FrameCenter_z+=$lengthCathode;
+	    }
+	    $FrameCenter_y+=$widthCathode;
+	    $FrameCenter_z=-0.5*$TPCEnclosure_z + 0.5*$lengthCathode;
+	}
+    }
+} # sub place cathode
+
 sub gen_Cryostat()
 {
 
@@ -1227,12 +1292,19 @@ EOF
 #PDS
 #Double sided detectors should only be included when both top and bottom volumes become available
 #Optical sensitive volumes cannot be rotated because Larsoft cannot pick up the rotation when obtinaing the lengths needed for the semi-analytic model --> two acceptance windows for single sided lateral and cathode
+# Off-setting dimension of Arapuca frame so that there's space between the enclosure and the fram and the sensitive detector
+
 print CRYO <<EOF;
 <solids>
-    <box name="ArapucaOut" lunit="cm"
+    <box name="ArapucaEnclosure" lunit="cm"
       x="@{[$ArapucaOut_x]}"
       y="@{[$ArapucaOut_y]}"
       z="@{[$ArapucaOut_z]}"/>
+
+    <box name="ArapucaOut" lunit="cm"
+      x="@{[$ArapucaOut_x - 0.05]}"
+      y="@{[$ArapucaOut_y - 0.05]}"
+      z="@{[$ArapucaOut_z - 0.05]}"/>
 
     <box name="ArapucaIn" lunit="cm"
       x="@{[$ArapucaIn_x]}"
@@ -1269,6 +1341,22 @@ print CRYO <<EOF;
 </solids>
 EOF
 
+    # TPC Enclosure
+    $TPCEnclosure_x = $Argon_x - $HeightGaseousAr + $nCRM_x*$anodePlateWidth - $xLArBuffer;
+    $TPCEnclosure_y = $nCRM_y * ($widthCRM + $borderCRP);
+    $TPCEnclosure_z = $nCRM_z * ($lengthCRM + $borderCRP);
+
+    print CRYO <<EOF;
+<solids>
+    <box name="TPCEnclosure" lunit="cm"
+      x="@{[$TPCEnclosure_x]}"
+      y="@{[$TPCEnclosure_y]}"
+      z="@{[$TPCEnclosure_z]}"/>
+</solids>
+EOF
+
+
+
 # Cryostat structure
 print CRYO <<EOF;
 <structure>
@@ -1301,7 +1389,7 @@ print CRYO <<EOF;
 
     <volume name="volArapuca">
       <materialref ref="LAr"/>
-      <solidref ref="ArapucaOut"/>
+      <solidref ref="ArapucaEnclosure"/>
       <physvol>
         <volumeref ref="Arapuca"/>
         <positionref ref="posCenter"/>
@@ -1331,7 +1419,7 @@ EOF
 
       <volume name="volArapucaDouble">
         <materialref ref="LAr" />
-	<solidref ref="ArapucaOut" />
+	<solidref ref="ArapucaEnclosure" />
         <physvol>
           <volumeref ref="ArapucaDouble"/>
           <positionref ref="posCenter"/>
@@ -1343,8 +1431,84 @@ EOF
       </volume>
 EOF
   }
+
+    # Build volume volTPCEnclosure, which is holding all the TPCs
+    #   This is needed for keeping all SimEnergyDeposits relevant for reconstruction and simulations.
+
+    if ($tpc_on==1) # place TPC inside the TPC enclosure offsetting each pair of CRMs by borderCRP
+    {
+	print CRYO <<EOF;
+   <volume name="volTPCEnclosure">
+     <materialref ref="LAr"/>
+     <solidref ref="TPCEnclosure"/>
+     <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+     <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5208*cm"/>
+     <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+EOF
+
+	my $posX =  0.5*$TPCEnclosure_x - 0.5*$TPC_x - $anodePlateWidth;
+	my $posXbottom = -0.5*$TPCEnclosure_x + 0.5*$TPC_x + $anodePlateWidth;
+	$idx = 0;
+	my $posZ = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM;
+	for(my $ii=0;$ii<$nCRM_z;$ii++)
+	{
+	    if( $ii % 2 == 0 ){
+		$posZ += $borderCRP;
+		if( $ii>0 ){
+		    $posZ += $borderCRP;
+		}
+	    }
+	    my $posY = -0.5*$TPCEnclosure_y + 0.5*$widthCRM;
+	    for(my $jj=0;$jj<$nCRM_y;$jj++)
+	    {
+		if( $jj % 2 == 0 ){
+		    $posY += $borderCRP;
+		    if( $jj>0 ){
+			$posY += $borderCRP;
+		    }
+		}
+		print CRYO <<EOF;
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC\-$idx" unit="cm"
+           x="$posX" y="$posY" z="$posZ"/>
+      </physvol>
+EOF
+
+
+		# deal with bottom TPC
+		if ( $nCRM_x == 2 )
+		{
+		    $idx++;
+		    print CRYO <<EOF;
+       <physvol>
+         <volumeref ref="volTPC"/>
+         <position name="posTPC\-$idx" unit="cm"
+         	   x="$posXbottom" y="$posY" z="$posZ"/>
+         <rotationref ref="rPlus180AboutY"/>
+       </physvol>
+EOF
+		}
+		$idx++;
+		$posY += $widthCRM;
+	    }
+
+	    $posZ += $lengthCRM;
+	}
+    }
+
+    placeCathodeAndAnode();
+
+    print CRYO <<EOF;
+</volume>
+EOF
+
+
+
+
+
   # build the cryostat
-  print CRYO <<EOF;
+    print CRYO <<EOF;
 
     <volume name="volCryostat">
       <materialref ref="LAr" />
@@ -1363,178 +1527,61 @@ EOF
       </physvol>
 EOF
 
-if ($tpc_on==1) # place TPC inside croysotat offsetting each pair of CRMs by borderCRP
-{
-  my $posX =  $Argon_x/2 - $HeightGaseousAr - 0.5*($driftTPCActive + $ReadoutPlane);
-  my $posXbottom = -$Argon_x/2 + $xLArBuffer + 0.5*($driftTPCActive + $ReadoutPlane);
-  $idx = 0;
-  my $posZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCRM;
-  for(my $ii=0;$ii<$nCRM_z;$ii++)
-  {
-    if( $ii % 2 == 0 ){
-	$posZ += $borderCRP;
-	if( $ii>0 ){
-	    $posZ += $borderCRP;
-	}
+# Insert volume volTPCEnclosure, which is holding all the TPCs
+#   This is needed for keeping all SimEnergyDeposits relevant for reconstruction and simulations.
+    if ($tpc_on == 1) {
+	print CRYO <<EOF;
+
+      <physvol>
+        <volumeref ref="volTPCEnclosure"/>
+        <position name="posTPCEnclosure" unit="cm" x="@{[0.5*($Argon_x-$TPCEnclosure_x)-$HeightGaseousAr+$anodePlateWidth]}" y="0" z="0"/>
+      </physvol>
+EOF
     }
-    my $posY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCRM;
-    for(my $jj=0;$jj<$nCRM_y;$jj++)
-    {
-	if( $jj % 2 == 0 ){
-	    $posY += $borderCRP;
-	    if( $jj>0 ){
-		$posY += $borderCRP;
+
+    # Place lateral arapucas/PDS. Cathode PDS are placed within the TPCEnclosure
+    if ($pdsconfig == 0) {  #4-pi PDS coverage
+	#for placing the Arapucas on laterals
+	if ($nCRM_y==8) {
+	    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
+	    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
+	    for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
+		place_OpDetsLateral($FrameCenter_x, $FrameCenter_z, $j);
+		$FrameCenter_z+=$lengthCathode;
+	    }
+
+	    #16 arapucas, 8 at y=-2.2m and 8 at y=2.2m.
+
+	    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
+	    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
+	    place_OpDetsShortLateral($FrameCenter_x,-220, $FrameCenter_z);
+	    place_OpDetsShortLateral($FrameCenter_x,220, $FrameCenter_z);
+	}
+    } else {  #membrane only PDS coverage
+	if($pdsconfig == 1){
+	    if ($nCRM_y==8) {
+		$FrameCenter_x=$posZplane[0]; #anode position
+		$FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
+		for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
+		    place_OpDetsMembOnly($FrameCenter_x, $FrameCenter_z, $j);
+		    $FrameCenter_z+=$lengthCathode;
+		}
 	    }
 	}
-	print CRYO <<EOF;
-      <physvol>
-        <volumeref ref="volTPC"/>
-	<position name="posTPC\-$idx" unit="cm"
-           x="$posX" y="$posY" z="$posZ"/>
-      </physvol>
-EOF
-
-
-	# deal with bottom TPC
-	if ( $nCRM_x == 2 )
-	{
-	    $idx++;
-	    print CRYO <<EOF;
-	    <physvol>
-		<volumeref ref="volTPC"/>
-		<position name="posTPC\-$idx" unit="cm"
-		    x="$posXbottom" y="$posY" z="$posZ"/>
-		<rotationref ref="rPlus180AboutY"/>
-            </physvol>
-EOF
-	}
-       	$idx++;
-       	$posY += $widthCRM;
     }
 
-    $posZ += $lengthCRM;
-  }
-}
 
-  if ( $FieldCage_switch eq "on" ) {
-      my $reversed = 0;
-      place_FieldShaper($reversed);
-      if ( $nCRM_x == 2 ) {
-        $reversed = 1;
+    # Place field cage
+    if ( $FieldCage_switch eq "on" ) {
+	my $reversed = 0;
 	place_FieldShaper($reversed);
-      }
-  }
-
-
-# FIXME (vpec): Remove OrigineXSet. This is placement within cryostat,
-# must be independent of volDetEnclosure placement - DONE.
-# FIXME (vpec): Place an Anode plate at the bottom for 2 drift-volume case.
-#$CathodePosX =-$OriginXSet+50+(-1-$NFieldShapers*0.5)*$FieldShaperSeparation + $tpc_x_disp;
-$CathodePosX = $Argon_x/2 - $HeightGaseousAr - $driftTPCActive - $ReadoutPlane - $heightCathode/2;
-$CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
-$CathodePosZ = -0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
-$posAnodePlate = $Argon_x/2 - $HeightGaseousAr + $anodePlateWidth/2;#right above TPC vol and right below GAr; Note here, that $HeightGaseousAr already contains the thicknes of the anode plate!
-$posAnodePlateBottom = -$Argon_x/2 + $xLArBuffer - $anodePlateWidth/2;
-
-$idx = 0;
-  if ( $Cathode_switch eq "on" )
-  {
-  for(my $ii=0;$ii<$nCRM_z/2;$ii++)
-  {
-    for(my $jj=0;$jj<$nCRM_y/2;$jj++)
-    {
-	print CRYO <<EOF;
-      <physvol>
-   <volumeref ref="volCathodeGrid"/>
-   <position name="posCathodeGrid\-$idx" unit="cm" x="$CathodePosX" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
-      </physvol>
-      <physvol>
-       <volumeref ref="volAnodePlate"/>
-       <position name="posAnodePlate\-$idx" unit="cm" x="$posAnodePlate" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
-       <rotationref ref="rIdentity"/>
-     </physvol>
-EOF
-      if ($nCRM_x == 2)
-      {
-	  print CRYO <<EOF;
-      <physvol>
-       <volumeref ref="volAnodePlate"/>
-       <position name="posAnodePlateBottom\-$idx" unit="cm" x="$posAnodePlateBottom" y="@{[$CathodePosY]}" z="@{[$CathodePosZ]}"/>
-       <rotationref ref="rIdentity"/>
-     </physvol>
-EOF
-      }
-
-       $idx++;
-       $CathodePosY += $widthCathode;
-    }
-       $CathodePosZ += $lengthCathode;
-       $CathodePosY = -0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;
-  }
-  }
-
-if ($pdsconfig == 0) {  #4-pi PDS converage
-
-    #for placing the Arapucas over the cathode
-    $FrameCenter_y=-0.5*$Argon_y + $yLArBuffer + 0.5*$widthCathode;#-1.5*$FrameLenght_x+(4-$nCRM_y/2)/2*$FrameLenght_x;
-    $FrameCenter_x=$CathodePosX;
-    $FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;#-9.5*$FrameLenght_z+(20-$nCRM_z/2)/2*$FrameLenght_z;
-    for($i=0;$i<$nCRM_y/2;$i++){
-	for($j=0;$j<$nCRM_z/2;$j++){
-	    place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
-	    $FrameCenter_z+=$lengthCathode;
+	if ( $nCRM_x == 2 ) {
+	    $reversed = 1;
+	    place_FieldShaper($reversed);
 	}
-	$FrameCenter_y+=$widthCathode;
-	$FrameCenter_z=-0.5*$Argon_z + $zLArBuffer + 0.5*$lengthCathode;
-    }
-}
-
-# FIXME (vpec): calculate x coordinates properly, add option for 2
-# drift volumes.
-if ($pdsconfig == 0) {  #4-pi PDS converage
-#for placing the Arapucas on laterals
-  if ($nCRM_y==8) {
-    #$FrameCenter_x=0.5*($driftTPCActive + $ReadoutPlane) - 0.5*$padWidth; #anode position
-    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
-    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
-    for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
-      place_OpDetsLateral($FrameCenter_x, $FrameCenter_z, $j);
-      $FrameCenter_z+=$lengthCathode;
     }
 
-    #16 arapucas, 8 at y=-2.2m and 8 at y=2.2m.
 
-    #$FrameCenter_x=0.5*($driftTPCActive + $ReadoutPlane) - 0.5*$padWidth; #anode position
-    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
-    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
-    place_OpDetsShortLateral($FrameCenter_x,-220, $FrameCenter_z);
-    place_OpDetsShortLateral($FrameCenter_x,220, $FrameCenter_z);
-
-    #8 arapucas por cathode, in a similar way as place_OpDetsLateral.
-    #$FrameCenter_x=-0.5*$widthTPCActive+0.5*$widthCathode;
-    #for($j=0;$j<$nCRM_y/2;$j++)
-    #{
-    #  $FrameCenter_y=$posZplane[0];
-    #  $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
-    #  place_OpDetsShortLateral(220,$FrameCenter_y, $FrameCenter_z);
-    #  $FrameCenter_x+=$widthCathode;
-    #}
-  }
-
-} else {  #membrane only PDS converage
-
-if($pdsconfig == 1){
-if ($nCRM_y==8) {
-  $FrameCenter_x=$posZplane[0]; #anode position
-  $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
-for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
-  place_OpDetsMembOnly($FrameCenter_x, $FrameCenter_z, $j);
-  $FrameCenter_z+=$lengthCathode;
-}
-}
-}
-
-}
 
  print CRYO <<EOF;
     </volume>
@@ -1705,7 +1752,7 @@ sub place_OpDetsLateral()
 	    if ($ara < 8) {
 		$Ara_X = $FrameCenter_x-$FirstFrameVertDist;
 	    } else { # bottom TPC arapucas
-		$Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist;
+		$Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
 	    }
 	} else { #other tiles separated by VerticalPDdist
 	    if ($ara < 8) {
@@ -1762,7 +1809,7 @@ sub place_OpDetsShortLateral()
 	if ($ara < 8) {
 	    $Ara_X = $FrameCenter_x-$FirstFrameVertDist;
 	} else { # bottom TPC arapucas
-	    $Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist;
+	    $Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
 	}
     } else { #other tiles separated by VerticalPDdist
 	if ($ara < 8) {
