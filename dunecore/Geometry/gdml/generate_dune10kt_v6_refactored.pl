@@ -18,6 +18,10 @@
 #   Adding new foam material based on survey for ProtoDUNE
 # Update: 2024/01/15, Viktor Pec (viktor.pec@fzu.cz)
 #   Changed material of wire boards from G10 to FR4.
+# Update: 2024/03/01, Laura Paulucci (lpaulucc@fnal.gov)
+#   Created two separate active volumes separated along the drift direction by the APA.
+#   This will enable turning off energy deposits in half the volume for background studies emulating the
+#   lateral APA. This change will not be needed in future geo since we will be moving to the 10kton.
 #
 ###
 
@@ -2353,7 +2357,7 @@ gen_Define();        # generates definitions at beginning of GDML
 gen_Materials(); # generates materials to be used
 
 
-    gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner0');
+    gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner0'); #for one active volume, change name to "Inner" and remove next line
     gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner1');
     gen_TPC( $TPCOuter_x,  $TPC_y,  $TPC_z,  'Outer');
 
