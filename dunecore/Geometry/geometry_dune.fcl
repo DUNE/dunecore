@@ -279,11 +279,16 @@ dunevd10kt_1x8x14_3view_30deg_v5_geo.Name: "dunevd10kt_3view_30deg_v5_refactored
 dunevd10kt_1x8x14_3view_30deg_v5_geo.GDML: "dunevd10kt_3view_30deg_v5_refactored_1x8x14ref.gdml"
 dunevd10kt_1x8x14_3view_30deg_v5_geo.ROOT: "dunevd10kt_3view_30deg_v5_refactored_1x8x14ref.gdml"
 
+dunevd10kt_1x8x14_3view_30deg_v6_geo: @local::dune10kt_geo
+dunevd10kt_1x8x14_3view_30deg_v6_geo.Name: "dunevd10kt_3view_30deg_v6_refactored_1x8x14"
+dunevd10kt_1x8x14_3view_30deg_v6_geo.GDML: "dunevd10kt_3view_30deg_v6_refactored_1x8x14.gdml"
+dunevd10kt_1x8x14_3view_30deg_v6_geo.ROOT: "dunevd10kt_3view_30deg_v6_refactored_1x8x14.gdml"
+
 #VD 1x8x14 default geo
 dunevd10kt_1x8x14_2view_geo: @local::dunevd10kt_1x8x14_2view_v2_geo
 dunevd10kt_1x8x14backup_3view_geo: @local::dunevd10kt_1x8x14backup_3view_v2_geo
 dunevd10kt_1x8x14_3view_geo: @local::dunevd10kt_1x8x14_3view_v4_geo
-dunevd10kt_1x8x14_3view_30deg_geo: @local::dunevd10kt_1x8x14_3view_30deg_v5_geo
+dunevd10kt_1x8x14_3view_30deg_geo: @local::dunevd10kt_1x8x14_3view_30deg_v6_geo
 
 #VD 1x8x6 geo
 
@@ -327,9 +332,14 @@ dunevd10kt_1x8x6_3view_30deg_v5_geo.Name: "dunevd10kt_3view_30deg_v5_refactored_
 dunevd10kt_1x8x6_3view_30deg_v5_geo.GDML: "dunevd10kt_3view_30deg_v5_refactored_1x8x6ref.gdml"
 dunevd10kt_1x8x6_3view_30deg_v5_geo.ROOT: "dunevd10kt_3view_30deg_v5_refactored_1x8x6ref.gdml"
 
+dunevd10kt_1x8x6_3view_30deg_v6_geo: @local::dune10kt_geo
+dunevd10kt_1x8x6_3view_30deg_v6_geo.Name: "dunevd10kt_3view_30deg_v6_refactored_1x8x6"
+dunevd10kt_1x8x6_3view_30deg_v6_geo.GDML: "dunevd10kt_3view_30deg_v6_refactored_1x8x6.gdml"
+dunevd10kt_1x8x6_3view_30deg_v6_geo.ROOT: "dunevd10kt_3view_30deg_v6_refactored_1x8x6.gdml"
+
 #Default 1x8x6 VD geometry
 dunevd10kt_1x8x6_3view_geo: @local::dunevd10kt_1x8x6_3view_v3_geo
-dunevd10kt_1x8x6_3view_30deg_geo: @local::dunevd10kt_1x8x6_3view_30deg_v5_geo
+dunevd10kt_1x8x6_3view_30deg_geo: @local::dunevd10kt_1x8x6_3view_30deg_v6_geo
 
 # temporarily assign workspace geometry
 dunevd10kt_geo : @local::dunevd10kt_1x6x6_geo
@@ -484,7 +494,7 @@ protodunevd_v3_geo_driftY.SortingParameters.SortTPCPDVD: true
 
 protodunevd_v4_geo_driftY: @local::dune10kt_geo
 protodunevd_v4_geo_driftY.Name: "protodunevd_v4_driftY"
-protodunevd_v4_geo_driftY.GDML: "protodunevd_v4_driftY.gdml" 
+protodunevd_v4_geo_driftY.GDML: "protodunevd_v4_driftY.gdml"
 protodunevd_v4_geo_driftY.ROOT: "protodunevd_v4_driftY.gdml"
 protodunevd_v4_geo_driftY.SortingParameters.SortTPCPDVD: true
 protodunevd_v4_geo_driftY.SortingParameters.ChannelsPerOpDet: 2
