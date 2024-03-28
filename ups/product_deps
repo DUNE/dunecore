@@ -26,13 +26,13 @@ fwdir  product_dir config_data
 # Add the dependent product and version
 
 product             version
-dunepdlegacy        v1_01_03
+dunepdlegacy        v1_01_04
 duneutil            v09_85_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
 dunedaqdataformats  v4_0_0
-nusystematics       v01_04_03
-larsoft             v09_86_00
+nusystematics       v01_04_06
+larsoft             v09_88_00
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_11_2
