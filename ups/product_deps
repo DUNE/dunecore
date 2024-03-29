@@ -26,27 +26,27 @@ fwdir  product_dir config_data
 # Add the dependent product and version
 
 product             version
-dunepdlegacy        v1_01_02
-duneutil            v09_85_00d00
+dunepdlegacy        v1_01_04
+duneutil            v09_88_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_1_0
 dunedaqdataformats  v4_0_0
-nusystematics       v01_03_14
-larsoft             v09_85_00
+nusystematics       v01_04_06
+larsoft             v09_88_00
 cetbuildtools       v8_20_00    -       only_for_build
 valgrind            v3_17_0
-nlohmann_json       v3_10_4_1
-highfive            v2_4_1_2
+nlohmann_json       v3_11_2
+highfive            v2_4_1_3
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
-c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-   c14:debug      c14:debug  
-c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-   c14:prof   	  c14:prof   
-e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    e26:debug 	   e26:debug 
-e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    e26:prof  	   e26:prof  
+c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-    -nq-           c14:debug  
+c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-    -nq-   	     c14:prof   
+e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    -nq- 	     e26:debug 
+e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    -nq-  	     e26:prof  
 
 end_qualifier_list
 
