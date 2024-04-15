@@ -23,7 +23,7 @@ find_package(cetmodules REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.83.01d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.89.01d00)
 set(${PROJECT_NAME}_FW_DIR "config_data")
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
@@ -93,7 +93,7 @@ find_package( nutools REQUIRED )
 find_package( dunedaqdataformats REQUIRED )
 find_package( dunedetdataformats REQUIRED )
 find_package( PostgreSQL 9.1.5 REQUIRED )
-find_package(FFTW3 REQUIRED EXPORT)
+find_package( FFTW3 REQUIRED EXPORT )
 find_package(  SQLite3 REQUIRED )
 find_package( nlohmann_json REQUIRED )
 find_package( HDF5 REQUIRED)
