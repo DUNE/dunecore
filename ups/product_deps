@@ -254,7 +254,7 @@ dunedetdataformats  v4_1_0
 dunedaqdataformats  v4_0_0
 nusystematics       v01_04_06
 larsoft             v09_89_01
-cetbuildtools       v8_20_00    -       only_for_build
+cetmodules          v3_24_01    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_11_2
 highfive            v2_4_1_3
