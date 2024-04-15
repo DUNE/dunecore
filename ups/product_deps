@@ -246,23 +246,21 @@ gdmldir	product_dir	gdml
 # * It is an error for more than one non-(<qual-trigger> == "-default-")
 #   entry to match for a given product.
 #
-####################################
-product			version		qual	flags		<table_format=2>
-dune_pardata		v01_84_00	-
-dunedaqdataformats	v4_0_0		-
-dunedetdataformats	v4_1_0		-
-dunepdlegacy		v1_01_00	-
-duneutil		v09_83_01d00	-
-highfive		v2_4_1_2	-
-larsoft			v09_83_01	-
-nlohmann_json		v3_10_4_1	-
-nusystematics		v01_03_13	-
-valgrind		v3_17_0		-
-cetmodules		v3_22_02	-	only_for_build
+product             version
+dunepdlegacy        v1_01_04
+duneutil            v09_89_01d00
+dune_pardata        v01_84_00
+dunedetdataformats  v4_1_0
+dunedaqdataformats  v4_0_0
+nusystematics       v01_04_06
+larsoft             v09_89_01
+cetbuildtools       v8_20_00    -       only_for_build
+valgrind            v3_17_0
+nlohmann_json       v3_11_2
+highfive            v2_4_1_3
 end_product_list
 ####################################
 
-####################################
 # Qualifier table.
 #
 # For each valid qualifer set of the parent, specify how dependencies
@@ -312,12 +310,15 @@ end_product_list
 #   *required* unless the only_for_build flag is specified, in which
 #   case it is optional.
 #
-####################################
-qualifier	dunepdlegacy	larsoft		duneutil	nusystematics	dunedetdataformats	dunedaqdataformats	dune_pardata	valgrind	nlohmann_json	highfive	notes
-c14:debug	c14:debug	c14:debug	c14:debug	c14:debug	-nq-			-nq-			-nq-		-nq-		c14:debug	c14:debug
-c14:prof	c14:prof	c14:prof	c14:prof	c14:prof	-nq-			-nq-			-nq-		-nq-		c14:prof	c14:prof
-e26:debug	e26:debug	e26:debug	e26:debug	e26:debug	-nq-			-nq-			-nq-		-nq-		e26:debug	e26:debug
-e26:prof	e26:prof	e26:prof	e26:prof	e26:prof	-nq-			-nq-			-nq-		-nq-		e26:prof	e26:prof
+
+# We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
+# Make a table by adding columns before "notes".
+qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
+c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-    -nq-           c14:debug  
+c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-    -nq-   	     c14:prof   
+e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    -nq- 	     e26:debug 
+e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    -nq-  	     e26:prof  
+
 end_qualifier_list
 ####################################
 
