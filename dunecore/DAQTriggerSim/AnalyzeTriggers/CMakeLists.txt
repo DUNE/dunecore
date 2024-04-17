@@ -9,7 +9,7 @@ art_make(
                            art::Framework_Principal
                            art::Framework_Services_Registry
                            art_root_io::tfile_support
-                           ROOT::Core
+			   ROOT::Core ROOT::Tree
                            art_root_io::TFileService_service
                            art::Persistency_Common 
                            art::Persistency_Provenance 
@@ -18,7 +18,6 @@ art_make(
                            messagefacility::MF_MessageLogger
                            cetlib::cetlib 
 			   cetlib_except::cetlib_except
-                           ROOT_BASIC_LIB_LIST
 	 )
 
 install_fhicl()

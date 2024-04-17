@@ -1,3 +1,8 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
+include_directories("${nlohmann_json_DIR}/../../../include")
+include_directories("${HighFive_DIR}/../../../include")
+
 art_make_library(LIBRARY_NAME HDF5Utils
          SOURCE HDF5Utils.cc
          LIBRARIES
@@ -15,13 +20,13 @@ art_make_library(LIBRARY_NAME HDF5Utils
 )
 
 simple_plugin(HDF5RawInput "source"
-  dunepdlegacy_Overlays
+  dunepdlegacy::Overlays
   HDF5Utils
   art::Framework_Services_Registry
 )
 
 simple_plugin(HDF5RawInput2 "source"
-  dunepdlegacy_Overlays
+  dunepdlegacy::Overlays
   HDF5Utils
   dunecore::dunedaqhdf5utils2
   art::Framework_Services_Registry
@@ -29,7 +34,7 @@ simple_plugin(HDF5RawInput2 "source"
 )
 
 simple_plugin(HDF5TPStreamInput2 "source"
-  dunepdlegacy_Overlays
+  dunepdlegacy::Overlays
   HDF5Utils
   dunecore::dunedaqhdf5utils2
   art::Framework_Services_Registry
