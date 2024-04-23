@@ -8,7 +8,7 @@
 #define DUNEDAQ_HDF5LIBS_HDF5RAWDATAFILE_NLJS_HPP
 
 // My structs
-#include "dunecore/HDF5Utils/dunedaqhdf5utils2/hdf5rawdatafile/Structs.hpp"
+#include "dunecore/HDF5Utils/dunedaqhdf5utils3/hdf5rawdatafile/Structs.hpp"
 
 #include <nlohmann/json.hpp>
 
