@@ -10,18 +10,18 @@
  * Licensing/copyright details are in the COPYING file that you should have
  * received with this code.
  * 
- * Modified November 2021 Tom Junk -- remove ERS and add offline equivalents
+ * Modified April 2024 Tom Junk -- update from dunedaqhdf5utils2
  */
 
 #ifndef HDF5LIBS_INCLUDE_HDF5LIBS_HDF5FILELAYOUT_HPP_
 #define HDF5LIBS_INCLUDE_HDF5LIBS_HDF5FILELAYOUT_HPP_
 
-#include "dunecore/HDF5Utils/dunedaqhdf5utils2/hdf5filelayout/Structs.hpp"
+#include "dunecore/HDF5Utils/dunedaqhdf5utils3/hdf5filelayout/Structs.hpp"
 
-#include "daqdataformats/v3_4_1/Fragment.hpp"
-#include "daqdataformats/v3_4_1/SourceID.hpp"
-#include "daqdataformats/v3_4_1/TimeSliceHeader.hpp"
-#include "daqdataformats/v3_4_1/TriggerRecordHeader.hpp"
+#include "daqdataformats/v4_4_0/Fragment.hpp"
+#include "daqdataformats/v4_4_0/SourceID.hpp"
+#include "daqdataformats/v4_4_0/TimeSliceHeader.hpp"
+#include "daqdataformats/v4_4_0/TriggerRecordHeader.hpp"
 
 #include "nlohmann/json.hpp"
 
@@ -49,7 +49,7 @@ public:
   /**
    * @brief Constructor from json conf, used in DataWriter. Version always most recent.
    */
-  explicit HDF5FileLayout(hdf5filelayout::FileLayoutParams conf, uint32_t version = 4); // NOLINT(build/unsigned)
+  explicit HDF5FileLayout(hdf5filelayout::FileLayoutParams conf, uint32_t version = 5); // NOLINT(build/unsigned)
 
   uint32_t get_version() const noexcept // NOLINT(build/unsigned)
   {
