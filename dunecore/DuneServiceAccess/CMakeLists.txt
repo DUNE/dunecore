@@ -20,6 +20,8 @@ art_make_library(
     canvas::canvas
     cetlib::cetlib
     cetlib_except::cetlib_except
+    larevt::CalibrationDBI_Providers
+    larcoreobj::headers
 )
 
 install_headers()

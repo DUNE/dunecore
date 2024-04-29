@@ -10,7 +10,7 @@ art_make(SERVICE_LIBRARIES
            dunecore_DuneCommon_Utility
            art::Framework_Services_Registry
            art::Framework_Principal
-           art_Framework_Core
+           art::Framework_Core
            art::Persistency_Provenance
            messagefacility::MF_MessageLogger
            ROOT::Core
