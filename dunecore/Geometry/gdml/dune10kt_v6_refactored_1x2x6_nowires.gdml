@@ -2,8 +2,6 @@
 <gdml_simple_extension xmlns:gdml_simple_extension="http://www.example.org"
                        xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"          
                        xs:noNamespaceSchemaLocation="RefactoredGDMLSchema/SimpleExtension.xsd"> 
-
-
 <extension></extension>
 <define>
 
@@ -394,28 +392,56 @@
 
 </materials>
 <solids>
-    <box name="Inner" lunit="cm"
+    <box name="Inner0" lunit="cm"
       x="360.843"
       y="607.82875"
       z="232.39"/>
-    <box name="InnerUPlane" lunit="cm"
+    <box name="Inner0UPlane" lunit="cm"
       x="0.015"
       y="599.04"
       z="230.6525"/>
-    <box name="InnerVPlane" lunit="cm"
+    <box name="Inner0VPlane" lunit="cm"
       x="0.015"
       y="598.7225"
       z="230.0175"/>
-    <box name="InnerZPlane" lunit="cm"
+    <box name="Inner0ZPlane" lunit="cm"
       x="0.015"
       y="598.39"
       z="229.456"/>
-    <box name="InnerActive" lunit="cm"
+    <box name="Inner0Active" lunit="cm"
       x="359.415"
       y="600.01875"
       z="232.39"/>
 
-    <tube name="InnerWireVert"
+    <tube name="Inner0WireVert"
+      rmax="0.0075"
+      z="598.39"
+      deltaphi="360"
+      aunit="deg"
+      lunit="cm"/>
+
+    <box name="Inner1" lunit="cm"
+      x="360.843"
+      y="607.82875"
+      z="232.39"/>
+    <box name="Inner1UPlane" lunit="cm"
+      x="0.015"
+      y="599.04"
+      z="230.6525"/>
+    <box name="Inner1VPlane" lunit="cm"
+      x="0.015"
+      y="598.7225"
+      z="230.0175"/>
+    <box name="Inner1ZPlane" lunit="cm"
+      x="0.015"
+      y="598.39"
+      z="229.456"/>
+    <box name="Inner1Active" lunit="cm"
+      x="359.415"
+      y="600.01875"
+      z="232.39"/>
+
+    <tube name="Inner1WireVert"
       rmax="0.0075"
       z="598.39"
       deltaphi="360"
@@ -617,59 +643,117 @@
       z="8306.48"/>
 </solids>
 <structure>
-    <volume name="volTPCActiveInner">
+    <volume name="volTPCActiveInner0">
       <materialref ref="LAr"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
-      <solidref ref="InnerActive"/>
+      <solidref ref="Inner0Active"/>
     </volume>
 
-    <volume name="volTPCPlaneUInner">
+    <volume name="volTPCPlaneUInner0">
       <materialref ref="LAr"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
-      <solidref ref="InnerUPlane"/>
+      <solidref ref="Inner0UPlane"/>
     </volume>
 
-    <volume name="volTPCPlaneVInner">
+    <volume name="volTPCPlaneVInner0">
       <materialref ref="LAr"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
-      <solidref ref="InnerVPlane"/>
+      <solidref ref="Inner0VPlane"/>
     </volume>
 
-    <volume name="volTPCPlaneZInner">
+    <volume name="volTPCPlaneZInner0">
       <materialref ref="LAr"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
-      <solidref ref="InnerZPlane"/>
+      <solidref ref="Inner0ZPlane"/>
     </volume>
-    <volume name="volTPCInner">
+    <volume name="volTPCInner0">
       <materialref ref="LAr"/>
       <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
       <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
-      <solidref ref="Inner"/>
+      <solidref ref="Inner0"/>
      <physvol>
-       <volumeref ref="volTPCPlaneZInner"/>
-       <position name="posInnerPlaneZ" unit="cm"
+       <volumeref ref="volTPCPlaneZInner0"/>
+       <position name="posInner0PlaneZ" unit="cm"
          x="-179.953" y="-3.09062500000005" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCPlaneVInner"/>
-       <position name="posInnerPlaneV" unit="cm"
+       <volumeref ref="volTPCPlaneVInner0"/>
+       <position name="posInner0PlaneV" unit="cm"
          x="-179.477" y="-3.24937500000004" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCPlaneUInner"/>
-       <position name="posInnerPlaneU" unit="cm"
+       <volumeref ref="volTPCPlaneUInner0"/>
+       <position name="posInner0PlaneU" unit="cm"
          x="-179.001" y="-3.40812500000004" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
-       <volumeref ref="volTPCActiveInner"/>
-       <position name="posInnerActive" unit="cm"
+       <volumeref ref="volTPCActiveInner0"/>
+       <position name="posInner0Active" unit="cm"
+         x="0.713999999999999" y="-3.90500000000003" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+    </volume>
+
+    <volume name="volTPCActiveInner1">
+      <materialref ref="LAr"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
+      <solidref ref="Inner1Active"/>
+    </volume>
+
+    <volume name="volTPCPlaneUInner1">
+      <materialref ref="LAr"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
+      <solidref ref="Inner1UPlane"/>
+    </volume>
+
+    <volume name="volTPCPlaneVInner1">
+      <materialref ref="LAr"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
+      <solidref ref="Inner1VPlane"/>
+    </volume>
+
+    <volume name="volTPCPlaneZInner1">
+      <materialref ref="LAr"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
+      <solidref ref="Inner1ZPlane"/>
+    </volume>
+    <volume name="volTPCInner1">
+      <materialref ref="LAr"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxvalue="0.4" auxunit="mm"/>
+      <solidref ref="Inner1"/>
+     <physvol>
+       <volumeref ref="volTPCPlaneZInner1"/>
+       <position name="posInner1PlaneZ" unit="cm"
+         x="-179.953" y="-3.09062500000005" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneVInner1"/>
+       <position name="posInner1PlaneV" unit="cm"
+         x="-179.477" y="-3.24937500000004" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneUInner1"/>
+       <position name="posInner1PlaneU" unit="cm"
+         x="-179.001" y="-3.40812500000004" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCActiveInner1"/>
+       <position name="posInner1Active" unit="cm"
          x="0.713999999999999" y="-3.90500000000003" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
@@ -3715,7 +3799,7 @@ z="-454.975"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-0" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -3723,7 +3807,7 @@ z="-454.975"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-1" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -4258,7 +4342,7 @@ z="-454.975"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-2" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -4266,7 +4350,7 @@ z="-454.975"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-3" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -4801,7 +4885,7 @@ z="-222.585"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-4" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -4809,7 +4893,7 @@ z="-222.585"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-5" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -5344,7 +5428,7 @@ z="-222.585"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-6" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -5352,7 +5436,7 @@ z="-222.585"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-7" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -5887,7 +5971,7 @@ z="9.80500000000006"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-8" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -5895,7 +5979,7 @@ z="9.80500000000006"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-9" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -6430,7 +6514,7 @@ z="9.80500000000006"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-10" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -6438,7 +6522,7 @@ z="9.80500000000006"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-11" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -6973,7 +7057,7 @@ z="242.195"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-12" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -6981,7 +7065,7 @@ z="242.195"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-13" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -7516,7 +7600,7 @@ z="242.195"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-14" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -7524,7 +7608,7 @@ z="242.195"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-15" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -8059,7 +8143,7 @@ z="474.585"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-16" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -8067,7 +8151,7 @@ z="474.585"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-17" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -8602,7 +8686,7 @@ z="474.585"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-18" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -8610,7 +8694,7 @@ z="474.585"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-19" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -9145,7 +9229,7 @@ z="706.975"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-20" unit="cm"
         x="-182.95455"
         y="-324.664375"
@@ -9153,7 +9237,7 @@ z="706.975"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-21" unit="cm"
         x="182.95455"
         y="-324.664375"
@@ -9688,7 +9772,7 @@ z="706.975"/>
      </physvol>
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC-22" unit="cm"
         x="-182.95455"
         y="283.164375"
@@ -9696,7 +9780,7 @@ z="706.975"/>
         <rotationref ref="rPlus180AboutY"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC-23" unit="cm"
         x="182.95455"
         y="283.164375"
@@ -9762,9 +9846,7 @@ z="706.975"/>
 
     </volume>
 </structure>
-
   <setup name="Default" version="1.0">
     <world ref="volWorld"/>
   </setup>
-
 </gdml_simple_extension>
