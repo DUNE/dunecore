@@ -18,6 +18,10 @@
 #   Adding new foam material based on survey for ProtoDUNE
 # Update: 2024/01/15, Viktor Pec (viktor.pec@fzu.cz)
 #   Changed material of wire boards from G10 to FR4.
+# Update: 2024/03/01, Laura Paulucci (lpaulucc@fnal.gov)
+#   Created two separate active volumes separated along the drift direction by the APA.
+#   This will enable turning off energy deposits in half the volume for background studies emulating the
+#   lateral APA. This change will not be needed in future geo since we will be moving to the 10kton.
 #
 ###
 
@@ -457,7 +461,7 @@ sub gen_Define()
 # Create the <define> fragment file name,
 # add file to list of fragments,
 # and open it
-    $DEF = "dune10kt_v4_Def" . $suffix . ".gdml";
+    $DEF = "dune10kt_v6_Def" . $suffix . ".gdml";
     push (@gdmlFiles, $DEF);
     $DEF = ">" . $DEF;
     open(DEF) or die("Could not open file $DEF for writing");
@@ -505,7 +509,7 @@ sub gen_Materials()
 # Create the <materials> fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $MAT = "dune10kt_v4_Materials" . $suffix . ".gdml";
+    $MAT = "dune10kt_v6_Materials" . $suffix . ".gdml";
     push (@gdmlFiles, $MAT);
     $MAT = ">" . $MAT;
 
@@ -560,7 +564,7 @@ sub gen_TPC
 # Create the TPC fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $TPC = "dune10kt_v4_TPC_${_[3]}" . $suffix . ".gdml";
+    $TPC = "dune10kt_v6_TPC_${_[3]}" . $suffix . ".gdml";
     push (@gdmlFiles, $TPC);
     $TPC = ">" . $TPC;
     open(TPC) or die("Could not open file $TPC for writing");
@@ -1323,7 +1327,7 @@ sub gen_Cryostat()
 # Create the cryostat fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $CRYO = "dune10kt_v4_Cryostat" . $suffix . ".gdml";
+    $CRYO = "dune10kt_v6_Cryostat" . $suffix . ".gdml";
     push (@gdmlFiles, $CRYO);
     $CRYO = ">" . $CRYO;
     open(CRYO) or die("Could not open file $CRYO for writing");
@@ -1665,8 +1669,8 @@ if ($tpc_on==1) {
             $tpc_1 = 2*$apa_i+1;
             $apa_i++;
 
-            $SelectTPC_0 = "Inner";
-            $SelectTPC_1 = "Inner";
+            $SelectTPC_0 = "Inner0";
+            $SelectTPC_1 = "Inner1";
             $TPC_0_x     = $TPCInner_x;
             $TPC_1_x     = $TPCInner_x;
             $rot_0       = "rPlus180AboutY";
@@ -1746,7 +1750,7 @@ EOF
 print CRYO <<EOF;
 
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner0"/>
         <position name="posTPC\-$tpc_0" unit="cm"
         x="@{[$APACenter_x - $APAFrame_x/2 - $TPCInner_x/2]}"
         y="@{[$APACenter_y]}"
@@ -1754,7 +1758,7 @@ print CRYO <<EOF;
         <rotationref ref="$rot_0"/>
       </physvol>
       <physvol>
-        <volumeref ref="volTPCInner"/>
+        <volumeref ref="volTPCInner1"/>
         <position name="posTPC\-$tpc_1" unit="cm"
         x="@{[$APACenter_x + $APAFrame_x/2 + $TPCInner_x/2]}"
         y="@{[$APACenter_y]}"
@@ -2108,7 +2112,7 @@ sub gen_Enclosure()
 # Create the detector enclosure fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $ENCL = "dune10kt_v4_DetEnclosure" . $suffix . ".gdml";
+    $ENCL = "dune10kt_v6_DetEnclosure" . $suffix . ".gdml";
     push (@gdmlFiles, $ENCL);
     $ENCL = ">" . $ENCL;
     open(ENCL) or die("Could not open file $ENCL for writing");
@@ -2223,7 +2227,7 @@ sub gen_World()
 # Create the WORLD fragment file name,
 # add file to list of output GDML fragments,
 # and open it
-    $WORLD = "dune10kt_v4_World" . $suffix . ".gdml";
+    $WORLD = "dune10kt_v6_World" . $suffix . ".gdml";
     push (@gdmlFiles, $WORLD);
     $WORLD = ">" . $WORLD;
     open(WORLD) or die("Could not open file $WORLD for writing");
@@ -2353,7 +2357,8 @@ gen_Define();        # generates definitions at beginning of GDML
 gen_Materials(); # generates materials to be used
 
 
-    gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner');
+    gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner0'); #for one active volume, change name to "Inner" and remove next line
+    gen_TPC( $TPCInner_x,  $TPC_y,  $TPC_z,  'Inner1');
     gen_TPC( $TPCOuter_x,  $TPC_y,  $TPC_z,  'Outer');
 
 close $wout;
