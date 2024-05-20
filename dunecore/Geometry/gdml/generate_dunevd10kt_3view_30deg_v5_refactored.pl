@@ -1326,7 +1326,7 @@ print CRYO <<EOF;
       <physvol>
         <volumeref ref="Arapuca"/>
         <positionref ref="posCenter"/>
-        <rotation />
+        <rotationref ref="rMinus90AboutX" />
       </physvol>
       <physvol>
         <volumeref ref="volOpDetSensitiveShortLat"/>
