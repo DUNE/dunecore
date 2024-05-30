@@ -1825,7 +1825,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU254"
       rmax="0.5*0.02"
-      z="58.0063815454843"
+      z="58.0063815454842"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU255"
@@ -1855,17 +1855,17 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU260"
       rmax="0.5*0.02"
-      z="47.406230603163"
+      z="47.4062306031629"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU261"
       rmax="0.5*0.02"
-      z="45.6395387794427"
+      z="45.6395387794426"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU262"
       rmax="0.5*0.02"
-      z="43.8728469557225"
+      z="43.8728469557224"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU263"
@@ -1890,7 +1890,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU267"
       rmax="0.5*0.02"
-      z="35.0393878371214"
+      z="35.0393878371213"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU268"
@@ -1965,22 +1965,22 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU282"
       rmax="0.5*0.02"
-      z="8.53901048131801"
+      z="8.53901048131799"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU283"
       rmax="0.5*0.02"
-      z="6.7723186575978"
+      z="6.77231865759777"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU284"
       rmax="0.5*0.02"
-      z="5.00562683387757"
+      z="5.00562683387755"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireU285"
       rmax="0.5*0.02"
-      z="3.23893501015734"
+      z="3.23893501015732"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV0"
@@ -2185,7 +2185,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV40"
       rmax="0.5*0.02"
-      z="71.5510188606703"
+      z="71.5510188606704"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV41"
@@ -3255,7 +3255,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV254"
       rmax="0.5*0.02"
-      z="58.0063815454843"
+      z="58.0063815454842"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV255"
@@ -3290,12 +3290,12 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV261"
       rmax="0.5*0.02"
-      z="45.6395387794427"
+      z="45.6395387794426"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV262"
       rmax="0.5*0.02"
-      z="43.8728469557225"
+      z="43.8728469557224"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV263"
@@ -3320,7 +3320,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV267"
       rmax="0.5*0.02"
-      z="35.0393878371214"
+      z="35.0393878371213"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV268"
@@ -3345,7 +3345,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV272"
       rmax="0.5*0.02"
-      z="26.2059287185203"
+      z="26.2059287185202"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV273"
@@ -3360,7 +3360,7 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV275"
       rmax="0.5*0.02"
-      z="20.9058532473596"
+      z="20.9058532473595"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV276"
@@ -3395,22 +3395,22 @@
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV282"
       rmax="0.5*0.02"
-      z="8.53901048131802"
+      z="8.53901048131799"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV283"
       rmax="0.5*0.02"
-      z="6.7723186575978"
+      z="6.77231865759777"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV284"
       rmax="0.5*0.02"
-      z="5.00562683387757"
+      z="5.00562683387755"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireV285"
       rmax="0.5*0.02"
-      z="3.23893501015735"
+      z="3.23893501015732"
       deltaphi="360"
       aunit="deg" lunit="cm"/>
    <tube name="CRMWireZ"
@@ -6365,7 +6365,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU83"/>
-       <position name="posWireU83" unit="cm" x="0" y="-47.0381698065518" z="-10.5825"/>
+       <position name="posWireU83" unit="cm" x="0" y="-47.0381698065517" z="-10.5825"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6610,7 +6610,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU132"/>
-       <position name="posWireU132" unit="cm" x="0" y="-9.86402934910468" z="0"/>
+       <position name="posWireU132" unit="cm" x="0" y="-9.86402934910467" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6625,7 +6625,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU135"/>
-       <position name="posWireU135" unit="cm" x="0" y="-7.2139916135243" z="0"/>
+       <position name="posWireU135" unit="cm" x="0" y="-7.21399161352429" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6665,12 +6665,12 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU143"/>
-       <position name="posWireU143" unit="cm" x="0" y="-0.147224318643268" z="0"/>
+       <position name="posWireU143" unit="cm" x="0" y="-0.147224318643264" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU144"/>
-       <position name="posWireU144" unit="cm" x="0" y="0.736121593216858" z="0"/>
+       <position name="posWireU144" unit="cm" x="0" y="0.736121593216861" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6680,7 +6680,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU146"/>
-       <position name="posWireU146" unit="cm" x="0" y="2.50281341693712" z="0"/>
+       <position name="posWireU146" unit="cm" x="0" y="2.50281341693714" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6690,12 +6690,12 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU148"/>
-       <position name="posWireU148" unit="cm" x="0" y="4.26950524065738" z="0"/>
+       <position name="posWireU148" unit="cm" x="0" y="4.26950524065739" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU149"/>
-       <position name="posWireU149" unit="cm" x="0" y="5.15285115251751" z="0"/>
+       <position name="posWireU149" unit="cm" x="0" y="5.15285115251752" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6705,12 +6705,12 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU151"/>
-       <position name="posWireU151" unit="cm" x="0" y="6.91954297623776" z="0"/>
+       <position name="posWireU151" unit="cm" x="0" y="6.91954297623777" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU152"/>
-       <position name="posWireU152" unit="cm" x="0" y="7.80288888809789" z="0"/>
+       <position name="posWireU152" unit="cm" x="0" y="7.80288888809791" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -6755,7 +6755,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU161"/>
-       <position name="posWireU161" unit="cm" x="0" y="15.753002094839" z="0"/>
+       <position name="posWireU161" unit="cm" x="0" y="15.7530020948391" z="0"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -7310,7 +7310,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireU272"/>
-       <position name="posWireU272" unit="cm" x="0" y="77.366379447082" z="63.1124999999986"/>
+       <position name="posWireU272" unit="cm" x="0" y="77.366379447082" z="63.1124999999987"/>
        <rotationref ref="rUWireAboutX"/>
      </physvol>
      <physvol>
@@ -7774,7 +7774,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV78"/>
-       <position name="posWireV78" unit="cm" x="0" y="49.2465345862021" z="-14.4075"/>
+       <position name="posWireV78" unit="cm" x="0" y="49.2465345862021" z="-14.4074999999999"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -7784,7 +7784,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV80"/>
-       <position name="posWireV80" unit="cm" x="0" y="48.3631886743419" z="-12.8775"/>
+       <position name="posWireV80" unit="cm" x="0" y="48.3631886743419" z="-12.8774999999999"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -7794,7 +7794,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV82"/>
-       <position name="posWireV82" unit="cm" x="0" y="47.4798427624818" z="-11.3475"/>
+       <position name="posWireV82" unit="cm" x="0" y="47.4798427624818" z="-11.3474999999999"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8029,7 +8029,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV129"/>
-       <position name="posWireV129" unit="cm" x="0" y="12.5140670846851" z="0"/>
+       <position name="posWireV129" unit="cm" x="0" y="12.514067084685" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8059,7 +8059,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV135"/>
-       <position name="posWireV135" unit="cm" x="0" y="7.2139916135243" z="0"/>
+       <position name="posWireV135" unit="cm" x="0" y="7.21399161352428" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8069,7 +8069,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV137"/>
-       <position name="posWireV137" unit="cm" x="0" y="5.44729978980404" z="0"/>
+       <position name="posWireV137" unit="cm" x="0" y="5.44729978980403" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8079,7 +8079,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV139"/>
-       <position name="posWireV139" unit="cm" x="0" y="3.68060796608379" z="0"/>
+       <position name="posWireV139" unit="cm" x="0" y="3.68060796608378" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8104,7 +8104,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV144"/>
-       <position name="posWireV144" unit="cm" x="0" y="-0.736121593216858" z="0"/>
+       <position name="posWireV144" unit="cm" x="0" y="-0.736121593216868" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8124,7 +8124,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV148"/>
-       <position name="posWireV148" unit="cm" x="0" y="-4.26950524065738" z="0"/>
+       <position name="posWireV148" unit="cm" x="0" y="-4.26950524065739" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8139,12 +8139,12 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV151"/>
-       <position name="posWireV151" unit="cm" x="0" y="-6.91954297623776" z="0"/>
+       <position name="posWireV151" unit="cm" x="0" y="-6.91954297623777" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV152"/>
-       <position name="posWireV152" unit="cm" x="0" y="-7.80288888809789" z="0"/>
+       <position name="posWireV152" unit="cm" x="0" y="-7.8028888880979" z="0"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -8744,7 +8744,7 @@
      </physvol>
      <physvol>
        <volumeref ref="volTPCWireV272"/>
-       <position name="posWireV272" unit="cm" x="0" y="-77.366379447082" z="63.1124999999986"/>
+       <position name="posWireV272" unit="cm" x="0" y="-77.366379447082" z="63.1124999999987"/>
        <rotationref ref="rVWireAboutX"/>
      </physvol>
      <physvol>
@@ -10382,7 +10382,7 @@
       </physvol>
       <physvol>
         <volumeref ref="volOpDetSensitiveShortLat"/>
-        <position name="opdetshift" unit="cm" x="0" y="0.5" z="0"/>
+        <position name="opdetshift" unit="cm" x="0" y="0" z="0.5"/>
       </physvol>
     </volume>
 
@@ -10396,7 +10396,7 @@
       </physvol>
       <physvol>
         <volumeref ref="volOpDetSensitiveCathode"/>
-        <position name="opdetshift" unit="cm" x="0" y="0.5" z="0"/>
+        <position name="opdetshift" unit="cm" x="0.5" y="0" z="0"/>
       </physvol>
     </volume>
 

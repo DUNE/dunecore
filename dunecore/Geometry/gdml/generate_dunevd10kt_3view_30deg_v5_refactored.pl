@@ -1330,7 +1330,7 @@ print CRYO <<EOF;
       </physvol>
       <physvol>
         <volumeref ref="volOpDetSensitiveShortLat"/>
-        <position name="opdetshift" unit="cm" x="0" y="@{[$ArapucaAcceptanceWindow_y/2.0]}" z="0"/>
+        <position name="opdetshift" unit="cm" x="0" y="0" z="@{[$ArapucaAcceptanceWindow_y/2.0]}"/>
       </physvol>
     </volume>
 
@@ -1344,7 +1344,7 @@ print CRYO <<EOF;
       </physvol>
       <physvol>
         <volumeref ref="volOpDetSensitiveCathode"/>
-        <position name="opdetshift" unit="cm" x="0" y="@{[$ArapucaAcceptanceWindow_y/2.0]}" z="0"/>
+        <position name="opdetshift" unit="cm" x="@{[$ArapucaAcceptanceWindow_y/2.0]}" y="0" z="0"/>
       </physvol>
     </volume>
 
