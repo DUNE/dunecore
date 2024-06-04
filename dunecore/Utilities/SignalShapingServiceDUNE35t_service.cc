@@ -8,6 +8,7 @@
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 #include "cetlib_except/exception.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/TPCGeo.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
@@ -190,11 +191,11 @@ util::SignalShapingServiceDUNE35t::SignalShaping(unsigned int channel) const
 
   // Figure out plane type.
 
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
 
   // Return appropriate shaper.
 
@@ -214,12 +215,11 @@ return fColSignalShaping;
 //-----Give Gain Settings to SimWire-----//jyoti
 double util::SignalShapingServiceDUNE35t::GetASICGain(unsigned int const channel) const
 {
-  art::ServiceHandle<geo::Geometry> geom;
-    
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
   
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
   
   double gain = 0;
   if(view == geo::kU)
@@ -238,11 +238,11 @@ double util::SignalShapingServiceDUNE35t::GetASICGain(unsigned int const channel
 //-----Give Shaping time to SimWire-----//jyoti
 double util::SignalShapingServiceDUNE35t::GetShapingTime(unsigned int const channel) const
 {
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
 
   double shaping_time = 0;
 
@@ -261,11 +261,11 @@ double util::SignalShapingServiceDUNE35t::GetShapingTime(unsigned int const chan
 double util::SignalShapingServiceDUNE35t::GetRawNoise(unsigned int const channel) const
 {
   unsigned int plane;
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
 
   if(view == geo::kU)
     plane = 0;
@@ -301,11 +301,11 @@ double util::SignalShapingServiceDUNE35t::GetRawNoise(unsigned int const channel
 double util::SignalShapingServiceDUNE35t::GetDeconNoise(unsigned int const channel) const
 {
   unsigned int plane;
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
   
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
   
   if(view == geo::kU)
     plane = 0;
@@ -409,13 +409,13 @@ void util::SignalShapingServiceDUNE35t::SetFieldResponse(detinfo::DetectorClocks
 {
   // Get services.
 
-  art::ServiceHandle<geo::Geometry> geo;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
 
   // Get plane pitch.
   // should always have at least 2 planes
   constexpr geo::TPCID tpcid{0, 0};
-  auto const xyz1 = geo->Plane(geo::PlaneID{tpcid, 0}).GetBoxCenter();
-  auto const xyz2 = geo->Plane(geo::PlaneID{tpcid, 1}).GetBoxCenter();
+  auto const xyz1 = wireReadout.Plane(geo::PlaneID{tpcid, 0}).GetBoxCenter();
+  auto const xyz2 = wireReadout.Plane(geo::PlaneID{tpcid, 1}).GetBoxCenter();
 
   // this assumes all planes are equidistant from each other,
   // probably not a bad assumption
@@ -526,7 +526,6 @@ void util::SignalShapingServiceDUNE35t::SetElectResponse(double shapingtime, dou
 {
   // Get services.
 
-  art::ServiceHandle<geo::Geometry> geo;
   art::ServiceHandle<util::LArFFT> fft;
 
   MF_LOG_DEBUG("SignalShapingDUNE35t") << "Setting DUNE35t electronics response function...";
@@ -667,7 +666,6 @@ void util::SignalShapingServiceDUNE35t::SetFilters(detinfo::DetectorClocksData c
 void util::SignalShapingServiceDUNE35t::SetResponseSampling(detinfo::DetectorClocksData const& clockData)
 {
   // Get services
-  art::ServiceHandle<geo::Geometry> geo;
   art::ServiceHandle<util::LArFFT> fft;
 
   // Operation permitted only if output of rebinning has a larger bin size
@@ -775,11 +773,11 @@ void util::SignalShapingServiceDUNE35t::SetResponseSampling(detinfo::DetectorClo
 int util::SignalShapingServiceDUNE35t::FieldResponseTOffset(detinfo::DetectorClocksData const& clockData,
                                                             unsigned int const channel) const
 {
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
  
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
 
   double time_offset = 0;
 

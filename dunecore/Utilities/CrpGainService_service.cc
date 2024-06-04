@@ -11,10 +11,10 @@
 
 #include "CrpGainService.h"
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
-#include "art/Framework/Services/Registry/ActivityRegistry.h"
-#include "art/Framework/Services/Registry/ServiceMacros.h"
 #include "fhiclcpp/ParameterSet.h"
 
+#include "larcore/Geometry/WireReadout.h"
+#include "larcore/Geometry/Geometry.h"
 #include "lardataobj/Simulation/SimChannel.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
@@ -29,7 +29,7 @@ using std::endl;
 using std::string;
 
 // ctor
-util::CrpGainService::CrpGainService(fhicl::ParameterSet const& ps, art::ActivityRegistry& areg)
+util::CrpGainService::CrpGainService(fhicl::ParameterSet const& ps)
 {
   const string myname = "util::CrpGainService::ctor: ";
   m_LogLevel     = ps.get<int>("LogLevel");
@@ -65,7 +65,8 @@ util::CrpGainService::CrpGainService(fhicl::ParameterSet const& ps, art::Activit
   m_UseDefGain = ((m_plemeff == nullptr) && (m_lemgainmap.empty()));
   
   // geo service
-  m_geo   = &*art::ServiceHandle<geo::Geometry>();
+  m_geo   = art::ServiceHandle<geo::Geometry>().get();
+  m_wireReadout = &art::ServiceHandle<geo::WireReadout>()->Get();
 
   if(m_LogLevel >= 1 )
     {
@@ -108,15 +109,15 @@ bool util::CrpGainService::checkGeoConfig() const
       return false;
     }
 
-  for (geo::TPCGeo const& tpcgeo: m_geo->Iterate<geo::TPCGeo>())
+  for (geo::TPCID const& tpcid: m_geo->Iterate<geo::TPCID>())
     {
-      if(tpcgeo.Nplanes() > 2)
+      if(m_wireReadout->Nplanes(tpcid) > 2)
 	{
 	  cout<<myname<<"ERROR wrong number of readout planes\n";
 	  return false;
 	}
       //
-      for(geo::PlaneGeo const& plane : m_geo->Iterate<geo::PlaneGeo>(tpcgeo.ID()))
+      for(geo::PlaneGeo const& plane : m_wireReadout->Iterate<geo::PlaneGeo>(tpcid))
 	{
 	  unsigned nwires = plane.Nwires();
 	  if( nwires % m_LemViewChans != 0 )
@@ -149,29 +150,29 @@ double util::CrpGainService::viewCharge( const sim::SimChannel* psc, unsigned it
   //
   // otherwise ... 
 
-  std::vector< geo::WireID > wids = m_geo->ChannelToWire( psc->Channel() );
+  std::vector< geo::WireID > wids = m_wireReadout->ChannelToWire( psc->Channel() );
   geo::WireID wid  = wids[0];
   
   // get tpc
-  const geo::TPCGeo& tpcgeo = m_geo->TPC(wid.asPlaneID().asTPCID());
+  geo::TPCID const& tpcid = wid;
 
   // this plane
-  const geo::PlaneGeo& pthis = tpcgeo.Plane( wid.Plane );
+  const geo::PlaneGeo& pthis = m_wireReadout->Plane(wid);
   // wire number in this plane
   int wire   = (int)(wid.Wire);
 
   // other plane
   unsigned widother = 0;
   if(wid.Plane == 0 ) widother = 1;
-  const geo::PlaneGeo& pother = tpcgeo.Plane( widother );
+  const geo::PlaneGeo& pother = m_wireReadout->Plane({tpcid, widother});
   
   // get drift axis
-  int drift = std::abs(tpcgeo.DetectDriftDirection())-1;  //x:0, y:1, z:2
+  auto const [axis, _] = m_geo->TPC(wid).DriftAxisWithSign();
   int tcoord = -1;
   if( pthis.View() == geo::kZ )
     {
-      if( drift == 0 ) tcoord = 1;
-      else if( drift == 1 ) tcoord = 0;
+      if( axis == geo::Coordinate::X ) tcoord = 1;
+      else if( axis == geo::Coordinate::Y ) tcoord = 0;
     }
   else if( pthis.View() == geo::kX || pthis.View() == geo::kY )
     {
@@ -204,7 +205,7 @@ double util::CrpGainService::viewCharge( const sim::SimChannel* psc, unsigned it
       return q;
     }
   
-  unsigned tpcid = wid.TPC;
+  unsigned tpcnum = wid.TPC;
   
   //
   double qsum = 0.0;
@@ -222,11 +223,11 @@ double util::CrpGainService::viewCharge( const sim::SimChannel* psc, unsigned it
       double G = 0;
       if( tcoord < 2 ) // we are in view kZ
 	{
-	  G = getCrpGain( tpcid, wire, wother );
+          G = getCrpGain( tpcnum, wire, wother );
 	}
       else // we are in view kX or kY
 	{
-	  G = getCrpGain( tpcid, wother, wire );
+          G = getCrpGain( tpcnum, wother, wire );
 	}
       // the charge is divided equially between collectiong views
       // so the effective gain per view is 1/2 of the total effective CRP gain
@@ -250,16 +251,18 @@ double util::CrpGainService::crpGain( geo::Point_t const &pos ) const
   
   // get tpc
   geo::TPCGeo const *tpcgeo = m_geo->PositionToTPCptr( pos );
-  
   if( !tpcgeo )
     {
       cout << myname << "WARNING cannot find the point in a TPC" << endl;
       return crpDefaultGain();
     }
   
+  auto const& tpcid = tpcgeo->ID();
+
   // get the planes: should be only 2 (see checkGeoConfig)
-  const geo::PlaneGeo& pfirst = tpcgeo->FirstPlane();
-  const geo::PlaneGeo& plast  = tpcgeo->LastPlane();
+  auto const num_planes = m_wireReadout->Nplanes(tpcid);
+  const geo::PlaneGeo& pfirst = m_wireReadout->Plane({tpcid, 0});
+  const geo::PlaneGeo& plast  = m_wireReadout->Plane({tpcid, num_planes - 1});
   
   //pthis.View() == geo::kX || pthis.View() == geo::kY
   int ch[2] = {-1, -1};

@@ -17,6 +17,7 @@
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 
 #include "TFile.h"
@@ -77,6 +78,7 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
 
   // get geometry
   art::ServiceHandle<geo::Geometry> geo;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
   /*
   // check channel map
   for( unsigned ch = 0; ch < geo->Nchannels(); ++ch ){
@@ -125,7 +127,7 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
     std::cout<<tpc.TPCInfo("  ", 4)<<std::endl;
     std::cout<<std::endl;
     // scan the planes
-    for (geo::PlaneGeo const& vPlane : geo->Iterate<geo::PlaneGeo>(tpc.ID()))
+    for (geo::PlaneGeo const& vPlane : wireReadout.Iterate<geo::PlaneGeo>(tpc.ID()))
       {
         auto const& planeID = vPlane.ID();
 	auto view = vPlane.View();
@@ -142,7 +144,7 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
 	else 
 	  std::cout<<"  View "<<view<<" uknown"<<std::endl;
 	
-	auto sigtype = geo->SignalType(planeID);
+        auto sigtype = wireReadout.SignalType(planeID);
 	if(  sigtype == geo::kCollection )
 	  std::cout<<"  View is geo::kCollection"<<std::endl;
 	else if( sigtype == geo::kInduction )
@@ -156,7 +158,7 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
 
 	double prval    = 0; 
 	double refpitch = 0;
-        for (auto const& wid : geo->Iterate<geo::WireID>(planeID)) {
+        for (auto const& wid : wireReadout.Iterate<geo::WireID>(planeID)) {
           auto const [p, w] = std::make_pair(wid.Plane, wid.Wire);
 	  ++nwires;
 	  //++nwires_tpc[t];
@@ -165,7 +167,7 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
 	    {
               double xyz0[3];
               double xyz1[3];
-              geo->WireEndPoints(wid,xyz0,xyz1);
+              wireReadout.WireEndPoints(wid,xyz0,xyz1);
 	      Wires.push_back(new TLine(xyz0[2],xyz0[1],xyz1[2],xyz1[1]));
 	      
 	      double pitch = 0;
@@ -196,9 +198,9 @@ void CheckDPhaseGeometry::analyze(art::Event const & e)
     
     double xyz[3];   
     double abc[3];                                                                 
-    for (auto const& wid : geo->Iterate<geo::WireID>()) {
-      geo->WireEndPoints(wid,xyz,abc);
-      auto chan=geo->PlaneWireToChannel(wid);
+    for (auto const& wid : wireReadout.Iterate<geo::WireID>()) {
+      wireReadout.WireEndPoints(wid,xyz,abc);
+      auto chan=wireReadout.PlaneWireToChannel(wid);
       std::cout << "FLAG " << chan << " " << wid << " " << xyz[0] << " " << xyz[1] << " " << xyz[2] <<  " " << abc[0] << " " << abc[1] << " " << abc[2] << std::endl;
     }
   }// dump wires

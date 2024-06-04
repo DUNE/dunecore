@@ -9,64 +9,32 @@
 
 #include "art/Framework/Core/EDAnalyzer.h"
 #include "art/Framework/Core/ModuleMacros.h"
-#include "art/Framework/Principal/Event.h"
-#include "art/Framework/Principal/Handle.h"
-#include "art/Framework/Principal/Run.h"
-#include "art/Framework/Principal/SubRun.h"
-#include "canvas/Utilities/InputTag.h"
-#include "fhiclcpp/ParameterSet.h"
-#include "messagefacility/MessageLogger/MessageLogger.h"
+#include "art/Framework/Principal/fwd.h"
+#include "fhiclcpp/fwd.h"
 
-#include "larcore/Geometry/Geometry.h"
-
-
+#include "larcore/Geometry/WireReadout.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
 #include <cassert>
-#include <iostream>
-
-class issue19191;
-
 
 class issue19191 : public art::EDAnalyzer {
 public:
-  explicit issue19191(fhicl::ParameterSet const & p);
-  // The compiler-generated destructor is fine for non-base
-  // classes without bare pointers or other resource use.
-
-  // Plugins should not be copied or assigned.
-  issue19191(issue19191 const &) = delete;
-  issue19191(issue19191 &&) = delete;
-  issue19191 & operator = (issue19191 const &) = delete;
-  issue19191 & operator = (issue19191 &&) = delete;
-
-  // Required functions.
-  void analyze(art::Event const & e) override;
+  explicit issue19191(fhicl::ParameterSet const& p);
 
 private:
-
-  // Declare member data here.
-
+  void analyze(art::Event const& e) override;
 };
 
+issue19191::issue19191(fhicl::ParameterSet const& p) : EDAnalyzer(p) {}
 
-issue19191::issue19191(fhicl::ParameterSet const & p)
-  :
-  EDAnalyzer(p)  // ,
- // More initializers here.
-{}
-
-void issue19191::analyze(art::Event const & )
+void issue19191::analyze(art::Event const&)
 {
-  art::ServiceHandle<geo::Geometry> geom;
-  auto const *gcore = geom.get();
-  std::vector<raw::ChannelID_t> channels;
-  channels.reserve(gcore->Nchannels());
-  channels = gcore->ChannelsInTPCs();
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
+  auto channels = wireReadout.ChannelsInTPCs();
   assert(std::is_sorted(channels.begin(), channels.end()));
-  assert(std::unique(channels.begin(), channels.end())==channels.end());
-  assert(std::adjacent_find(channels.begin(), channels.end())==channels.end());
-  assert(channels.size() == gcore->Nchannels());
+  assert(std::unique(channels.begin(), channels.end()) == channels.end());
+  assert(std::adjacent_find(channels.begin(), channels.end()) == channels.end());
+  assert(channels.size() == wireReadout.Nchannels());
 }
 
 DEFINE_ART_MODULE(issue19191)

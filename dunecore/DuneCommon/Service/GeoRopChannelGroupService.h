@@ -11,6 +11,7 @@
 #include "dunecore/DuneInterface/Service/ChannelGroupService.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "larcore/Geometry/Geometry.h"
+#include "larcore/Geometry/WireReadout.h"
 
 class GeoRopChannelGroupService : public ChannelGroupService {
 
@@ -18,9 +19,6 @@ public:
 
   // Ctor.
   GeoRopChannelGroupService(fhicl::ParameterSet const& pset);
-
-  // Ctor.
-  GeoRopChannelGroupService(fhicl::ParameterSet const& pset, art::ActivityRegistry&);
 
   // Dtor.
   ~GeoRopChannelGroupService() =default;
@@ -42,7 +40,8 @@ private:
   typedef std::vector<Name> NameVector;
   typedef std::vector<ChannelVector> ChannelVectorVector;
  
-  art::ServiceHandle<geo::Geometry> m_pgeo;
+  art::ServiceHandle<geo::Geometry> m_geometry;
+  geo::WireReadoutGeom const* m_wireReadout = &art::ServiceHandle<geo::WireReadout>()->Get();
 
   Index m_size;
   NameVector m_names;

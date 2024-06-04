@@ -8,6 +8,7 @@
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 #include "cetlib_except/exception.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/TPCGeo.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
@@ -189,10 +190,11 @@ util::SignalShapingServiceDUNE10kt::SignalShaping(unsigned int channel) const
   // Figure out plane type.
 
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
    // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
 
   // Return appropriate shaper.
 
@@ -213,10 +215,11 @@ return fColSignalShaping;
 double util::SignalShapingServiceDUNE10kt::GetASICGain(unsigned int const channel) const
 {
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
    // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
   
   double gain = 0;
   if(view == geo::kU)
@@ -236,10 +239,11 @@ double util::SignalShapingServiceDUNE10kt::GetASICGain(unsigned int const channe
 double util::SignalShapingServiceDUNE10kt::GetShapingTime(unsigned int const channel) const
 {
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel); 
+  geo::View_t view = wireReadout.View(channel);
 
   double shaping_time = 0;
 
@@ -259,10 +263,11 @@ double util::SignalShapingServiceDUNE10kt::GetRawNoise(unsigned int const channe
 {
   unsigned int plane;
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
  
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
 
   if(view == geo::kU)
     plane = 0;
@@ -299,10 +304,11 @@ double util::SignalShapingServiceDUNE10kt::GetDeconNoise(unsigned int const chan
 {
   unsigned int plane;
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
 
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
   
   if(view == geo::kU)
     plane = 0;
@@ -409,13 +415,13 @@ void util::SignalShapingServiceDUNE10kt::SetFieldResponse(detinfo::DetectorClock
 {
   // Get services.
 
-  art::ServiceHandle<geo::Geometry> geo;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
 
   // Get plane pitch.
   // should always have at least 2 planes
   constexpr geo::TPCID tpcid{0, 0};
-  auto const xyz1 = geo->Plane(geo::PlaneID{tpcid, 0}).GetBoxCenter();
-  auto const xyz2 = geo->Plane(geo::PlaneID{tpcid, 1}).GetBoxCenter();
+  auto const xyz1 = wireReadout.Plane(geo::PlaneID{tpcid, 0}).GetBoxCenter();
+  auto const xyz2 = wireReadout.Plane(geo::PlaneID{tpcid, 1}).GetBoxCenter();
 
   // this assumes all planes are equidistant from each other,
   // probably not a bad assumption
@@ -752,10 +758,11 @@ int util::SignalShapingServiceDUNE10kt::FieldResponseTOffset(detinfo::DetectorCl
                                                              unsigned int const channel) const
 {
   art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   //geo::SigType_t sigtype = geom->SignalType(channel);
  
   // we need to distinguis between the U and V planes
-  geo::View_t view = geom->View(channel);
+  geo::View_t view = wireReadout.View(channel);
 
   double time_offset = 0;
 
