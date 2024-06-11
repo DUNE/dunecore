@@ -137,9 +137,6 @@
   <class name="dunedaq::daqdataformats::SourceID" ClassVersion="10">
    <version ClassVersion="10" checksum="3885252001"/>
   </class>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerCandidateData> > >"/>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerPrimitive> > >"/>
-  <class name="art::Wrapper<map<dunedaq::daqdataformats::SourceID,std::vector<dunedaq::trgdataformats::TriggerActivityData> > >"/>
   <class name="dunedaq::trgdataformats::TriggerCandidateData" ClassVersion="10">
    <version ClassVersion="10" checksum="2442584095"/>
   </class>
@@ -155,9 +152,28 @@
   <class name="std::vector<dunedaq::trgdataformats::TriggerCandidateData>"/>
   <class name="std::vector<dunedaq::trgdataformats::TriggerPrimitive>"/>
   <class name="std::vector<dunedaq::trgdataformats::TriggerActivityData>"/>
+  <class name="art::Ptr<dunedaq::trgdataformats::TriggerPrimitive>"/>
+  <class name="art::Ptr<dunedaq::trgdataformats::TriggerActivityData>"/>
+  <class name="art::Ptr<dunedaq::trgdataformats::TriggerCandidateData>"/>
+  <class name="art::PtrVector<dunedaq::trgdataformats::TriggerPrimitive>"/>
+  <class name="art::PtrVector<dunedaq::trgdataformats::TriggerActivityData>"/>
+  <class name="art::PtrVector<dunedaq::trgdataformats::TriggerCandidateData>"/>
   <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerCandidateData> >"/>
   <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerPrimitive> >"/>
   <class name="art::Wrapper<std::vector<dunedaq::trgdataformats::TriggerActivityData> >"/>
+  <class name="art::Wrapper<art::PtrVector<dunedaq::trgdataformats::TriggerCandidateData> >"/>
+  <class name="art::Wrapper<art::PtrVector<dunedaq::trgdataformats::TriggerPrimitive> >"/>
+  <class name="art::Wrapper<art::PtrVector<dunedaq::trgdataformats::TriggerActivityData> >"/>
+  <class name="std::pair< art::Ptr<dunedaq::trgdataformats::TriggerActivityData>, art::Ptr<dunedaq::trgdataformats::TriggerPrimitive> >"/>
+  <class name="std::pair< art::Ptr<dunedaq::trgdataformats::TriggerCandidateData>, art::Ptr<dunedaq::trgdataformats::TriggerActivityData> >"/>
+  <class name="art::Assns<dunedaq::trgdataformats::TriggerActivityData,dunedaq::trgdataformats::TriggerPrimitive,void>"/>
+  <class name="art::Assns<dunedaq::trgdataformats::TriggerPrimitive,dunedaq::trgdataformats::TriggerActivityData,void>"/>
+  <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerActivityData,dunedaq::trgdataformats::TriggerPrimitive,void>>"/>
+  <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerPrimitive,dunedaq::trgdataformats::TriggerActivityData,void>>"/>
+  <class name="art::Assns<dunedaq::trgdataformats::TriggerCandidateData,dunedaq::trgdataformats::TriggerActivityData,void>"/>
+  <class name="art::Assns<dunedaq::trgdataformats::TriggerActivityData,dunedaq::trgdataformats::TriggerCandidateData,void>"/>
+  <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerCandidateData,dunedaq::trgdataformats::TriggerActivityData,void>>"/>
+  <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerActivityData,dunedaq::trgdataformats::TriggerCandidateData,void>>"/>
 
 
 </lcgdict>
