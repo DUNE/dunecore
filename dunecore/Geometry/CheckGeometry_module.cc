@@ -16,6 +16,8 @@
 #include "canvas/Utilities/InputTag.h"
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+#include "larcore/Geometry/AuxDetGeometry.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
 #include "TCanvas.h"
@@ -70,6 +72,8 @@ dune::CheckGeometry::CheckGeometry(fhicl::ParameterSet const & p)
 void dune::CheckGeometry::analyze(art::Event const & evt)
 {
   art::ServiceHandle<geo::Geometry> geo;
+  auto const& auxDetGeom = art::ServiceHandle<geo::AuxDetGeometry>()->GetProvider();
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
 
   //std::cout<<"channel = "<<geo->PlaneWireToChannel(0,600,1)<<std::endl;
 
@@ -119,7 +123,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     TPCBox.back()->SetLineWidth(2);
     TPCBox.back()->SetLineColor(16);
     
-    for (auto const& wid : geo->Iterate<geo::WireID>(tpc.ID())) {
+    for (auto const& wid : wireReadout.Iterate<geo::WireID>(tpc.ID())) {
       auto const [p, w] = std::make_pair(wid.Plane, wid.Wire);
 	++nwires;
 	++nwires_tpc[t];
@@ -130,7 +134,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
         if ((t==2||t==6||t==10)&&p==0&&w%10==0){
         double xyz0[3];
         double xyz1[3];
-        geo->WireEndPoints(wid,xyz0,xyz1);
+        wireReadout.WireEndPoints(wid,xyz0,xyz1);
 	  Wires.push_back(new TLine(xyz0[2],xyz0[1],xyz1[2],xyz1[1]));
 	}
       //std::cout<<wid<<" "<<xyz0[0]<<" "<<xyz0[1]<<" "<<xyz0[2]<<std::endl;
@@ -162,8 +166,8 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
   std::vector<double> pixel_x(32);
   std::vector<double> pixel_y(32);
   std::vector<double> pixel_z(32);
-  for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
-    auto& auxdet = geo->AuxDet(i);
+  for (unsigned int i = 0; i < auxDetGeom.NAuxDets(); ++i){
+    auto& auxdet = auxDetGeom.AuxDet(i);
     //std::cout<<"Aux "<<i<<" "<<xyz[0]<<" "<<xyz[1]<<" "<<xyz[2]<<" "<<auxdet.HalfWidth1()<<" "<<auxdet.HalfHeight()<<" "<<auxdet.Length()/2<<std::endl;
     geo::AuxDetGeo::LocalPoint_t const auxdet0{-auxdet.HalfWidth1(), auxdet.HalfHeight(), -auxdet.Length()/2};
     geo::AuxDetGeo::LocalPoint_t const auxdet1{auxdet.HalfWidth1(), auxdet.HalfHeight(), auxdet.Length()/2};
@@ -294,7 +298,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     module[0] = fChannelMap[vect[i].first];
     module[1] = fChannelMap[vect[i].second];
     for (size_t j = 0; j<2; ++j){
-      auto& auxdet = geo->AuxDet(module[j]);
+      auto& auxdet = auxDetGeom.AuxDet(module[j]);
       auto const xyz = auxdet.GetCenter();
       x[j] = xyz.X();
       y[j] = xyz.Y();
@@ -346,8 +350,8 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
 
   TLatex tt;
   tt.SetTextSize(0.02);
-  for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
-    auto& auxdet = geo->AuxDet(i);
+  for (unsigned int i = 0; i < auxDetGeom.NAuxDets(); ++i){
+    auto& auxdet = auxDetGeom.AuxDet(i);
     auto const xyz = auxdet.GetCenter();
     if (xyz.Z() < 0){ //front
       if (auxdet.HalfWidth1()>auxdet.HalfHeight()){//horizontal
@@ -378,8 +382,8 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     //tex.DrawLatex(pixel_x[i], pixel_y[i], Form("CH %d",i));
   }
 
-  for (unsigned int i = 0; i < geo->NAuxDets(); ++i){
-    auto& auxdet = geo->AuxDet(i);
+  for (unsigned int i = 0; i < auxDetGeom.NAuxDets(); ++i){
+    auto& auxdet = auxDetGeom.AuxDet(i);
     auto const xyz = auxdet.GetCenter();
     if (xyz.Z() > 0){ //front
       for (int j = 0; j<1; ++j){
@@ -396,7 +400,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
 
   tt.SetTextColor(1);
   for (int i = 0; i<2; ++i){
-    auto& auxdet = geo->AuxDet(i*2);
+    auto& auxdet = auxDetGeom.AuxDet(i*2);
     for (size_t j = 0; j<auxdet.NSensitiveVolume(); ++j){
       auto& auxdetsen = auxdet.SensitiveVolume(j);
       LocalPoint_t const auxdet0{-auxdetsen.HalfWidth1(), -auxdetsen.HalfHeight(), 0};
@@ -442,7 +446,7 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
     for (size_t j = 0; j<CRTStrips[i].size(); ++j){
       CRTStrips[i][j]->Draw();
     }
-    auto& auxdet = geo->AuxDet(i*2);
+    auto& auxdet = auxDetGeom.AuxDet(i*2);
     for (size_t j = 0; j<auxdet.NSensitiveVolume(); ++j){
       auto& auxdetsen = auxdet.SensitiveVolume(j);
       auto const xyz = auxdetsen.GetCenter();
@@ -463,8 +467,8 @@ void dune::CheckGeometry::analyze(art::Event const & evt)
   //convert channel number to t/p/w
   outfile.clear();
   outfile.open("channelmap.txt");
-  for (size_t i = 0; i<geo->Nchannels(); ++i){
-    auto wire = geo->ChannelToWire(i)[0];
+  for (size_t i = 0; i<wireReadout.Nchannels(); ++i){
+    auto wire = wireReadout.ChannelToWire(i)[0];
     outfile<<i<<" "<<wire.TPC<<" "<<wire.Plane<<" "<<wire.Wire<<std::endl;
   }
 

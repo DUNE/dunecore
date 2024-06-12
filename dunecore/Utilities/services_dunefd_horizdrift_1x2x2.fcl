@@ -9,11 +9,13 @@ BEGIN_PROLOG
 
 dunefd_1x2x2_services_legacy: {
     @table::dunefd_services_legacy
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_geo
 }
 
 dunefd_1x2x2_simulation_services_legacy: {
     @table::dunefd_simulation_services_legacy
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_geo
     PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice
     LArG4Parameters: {
@@ -33,22 +35,26 @@ dunefd_1x2x2_simulation_services_legacy: {
                                                         
 dunefd_1x2x2_reco_services_legacy: {
     @table::dunefd_reco_services_legacy
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_geo
 }
 
 dunefd_1x2x2_services: {
     @table::dunefd_services
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_refactored_geo
 }
 
 dunefd_1x2x2_simulation_services: {
     @table::dunefd_simulation_services
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_refactored_geo
     LArG4Detector:      @local::dune10kt_1x2x2_v4_larg4detector
 }
 
 dunefd_1x2x2_reco_services: {
     @table::dunefd_reco_services
+AuxDetGeometry: @local::dune10kt_1x2x2_auxdet_geo
     Geometry: @local::dune10kt_1x2x2_refactored_geo
 }
 

@@ -8,11 +8,12 @@ BEGIN_PROLOG
 ########################
 dunedphase3x1x1_services_legacy: {
  DatabaseUtil:                   @local::dunefd_database
- ExptGeoHelperInterface:         @local::dune_geometry_helper
+ WireReadout:         @local::dune_wire_readout
  GeometryConfigurationWriter:    {}
  ChannelStatusService:           @local::dunedphase3x1x1_channel_status
  LArFFT:                         @local::dunefd_larfft
  NuRandomService:                @local::dune_seedservice
+AuxDetGeometry: @local::dphase3x1x1_auxdet_geo
  Geometry:                       @local::dphase3x1x1_geo
  DetectorClocksService:          @local::dunedphase3x1x1_detectorclocks
  DetectorPropertiesService:      @local::dphase3x1x1_detproperties
@@ -28,7 +29,7 @@ dunedphase3x1x1_simulation_services_legacy: {
  ParticleInventoryService:       @local::standard_particleinventoryservice
  LArFFT:                         @local::dunefd_larfft
  LArG4Parameters:                @local::protodune_largeantparameters
- ExptGeoHelperInterface:         @local::dune_geometry_helper
+ WireReadout:         @local::dune_wire_readout
  GeometryConfigurationWriter:    {}
  LArVoxelCalculator:             @local::dunefd_larvoxelcalculator
  MagneticField:                  @local::no_mag_larsoft
@@ -37,6 +38,7 @@ dunedphase3x1x1_simulation_services_legacy: {
  OpDetResponseInterface:         @local::dunefd_opdetresponse_legacy
  PhotonBackTrackerService:       @local::standard_photonbacktrackerservice
  ChannelStatusService:           @local::dunedphase3x1x1_channel_status
+AuxDetGeometry: @local::dphase3x1x1_auxdet_geo
  Geometry:                       @local::dphase3x1x1_geo
  DetectorClocksService:          @local::dunedphase3x1x1_detectorclocks
  DetectorPropertiesService:      @local::dphase3x1x1_detproperties

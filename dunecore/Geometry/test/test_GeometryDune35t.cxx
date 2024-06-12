@@ -103,7 +103,7 @@ void setExpectedValues(ExpectedValues& ev) {
 
 //**********************************************************************
 
-void setExpectedValuesSpacePoints(Geometry* pgeo) {
+void setExpectedValuesSpacePoints(Geometry const* pgeo, WireReadoutGeom const& wireReadout) {
   const string myname = "setExpectedValuespacePoints: ";
   string ofname = "set35tSpacePoints.dat";
   cout << myname << "Writing " << ofname << endl;
@@ -132,12 +132,11 @@ void setExpectedValuesSpacePoints(Geometry* pgeo) {
         geo::Point_t const xyz{x, y, z};
         TPCID tpcid = pgeo->FindTPCAtPosition(xyz);
         unsigned int itpc = tpcid.TPC;
-        const TPCGeo& tpcgeo = pgeo->TPC(tpcid);
-        unsigned int npla = tpcgeo.Nplanes();
+        unsigned int npla = wireReadout.Nplanes(tpcid);
         fout << "  ev.posXyz.push_back(SpacePoint(" << x << ", " << y << ", " << z << "));" << endl;
         for ( unsigned int ipla=0; ipla<npla; ++ipla ) {
           PlaneID plaid(tpcid, ipla);
-          double xwire = pgeo->WireCoordinate(geo::Point_t{0, x, y}, plaid);
+          double xwire = wireReadout.Plane(plaid).WireCoordinate(geo::Point_t{0, x, y});
           fout << "  ev.posTpc.push_back(" << itpc << ");" << endl;
           fout << "  ev.posPla.push_back(" << ipla << ");" << endl;
           fout << "  ev.posWco.push_back(" << xwire << ");" << endl;

@@ -103,7 +103,7 @@ void FDHDDataInterface::getFragmentsForEvent(hid_t the_group, RawDigits& raw_dig
   using namespace dune::HDF5Utils;
   using dunedaq::fddetdataformats::WIB2Frame;
 
-  art::ServiceHandle<dune::FDHDChannelMapService> channelMap;
+  art::ServiceHandle<dune::FDHDChannelMapService> wireReadout;
 
   std::deque<std::string> det_types
     = getMidLevelGroupNames(the_group);
@@ -198,7 +198,7 @@ void FDHDDataInterface::getFragmentsForEvent(hid_t the_group, RawDigits& raw_dig
                   uint32_t slotloc = slot;
                   slotloc &= 0x7;
 
-                  auto hdchaninfo = channelMap->GetChanInfoFromWIBElements (crate, slotloc, link_from_frameheader, iChan); 
+                  auto hdchaninfo = wireReadout->GetChanInfoFromWIBElements (crate, slotloc, link_from_frameheader, iChan); 
                   unsigned int offline_chan = hdchaninfo.offlchan;
 
                   if (offline_chan > fMaxChan) continue;
