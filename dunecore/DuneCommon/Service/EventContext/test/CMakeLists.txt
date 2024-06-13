@@ -15,5 +15,7 @@ cet_test(test_EventContextService
   LIBRARIES
     dunecore_DuneCommon_Utility
     dunecore::ArtSupport
+    larcoreobj::headers
+    lardataobj::RawData
 )
 

@@ -13,6 +13,7 @@ cet_test(test_GeoRopChannelGroupService
   SOURCES
     test_GeoRopChannelGroupService.cxx
   LIBRARIES
+    larcore::headers
     larcorealg::Geometry
     lardataalg::DetectorInfo
     dunecore::ArtSupport
@@ -22,6 +23,7 @@ cet_test(test_GeoApaChannelGroupService
   SOURCES
     test_GeoApaChannelGroupService.cxx
   LIBRARIES
+    larcore::headers
     larcorealg::Geometry
     dunecore::ArtSupport
 )

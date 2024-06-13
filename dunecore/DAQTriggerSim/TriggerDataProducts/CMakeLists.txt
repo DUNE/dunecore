@@ -8,8 +8,7 @@ art_make(
 	  art::Persistency_Provenance
 	  canvas::canvas
 	  messagefacility::MF_MessageLogger
-	  cetlib::cetlib cetlib_except
-	  ROOT_BASIC_LIB_LIST
+	  cetlib::cetlib cetlib_except::cetlib_except
 	)
 
 install_headers()
