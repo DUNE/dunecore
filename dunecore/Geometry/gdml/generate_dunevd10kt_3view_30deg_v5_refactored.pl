@@ -1190,6 +1190,18 @@ print CRYO <<EOF;
       x="@{[$ArapucaOut_x]}"
       y="@{[$ArapucaOut_y]}"
       z="@{[$ArapucaOut_z]}"/>
+    <box name="ArapucaOutLongLat" lunit="cm"
+      x="@{[$ArapucaOut_x]}"
+      y="@{[$ArapucaOut_y]}"
+      z="@{[$ArapucaOut_z]}"/>
+    <box name="ArapucaOutShortLat" lunit="cm"
+      x="@{[$ArapucaOut_x]}"
+      y="@{[$ArapucaOut_z]}"
+      z="@{[$ArapucaOut_y]}"/> <!-- swithing the role of Y and Z dimension -->
+    <box name="ArapucaOutCathode" lunit="cm"
+      x="@{[$ArapucaOut_y]}"
+      y="@{[$ArapucaOut_z]}"
+      z="@{[$ArapucaOut_x]}"/> <!-- switching the role of all dims, equivalent to rotation 90 deg around X and 90 deg around Y -->
 
     <box name="ArapucaIn" lunit="cm"
       x="@{[$ArapucaIn_x]}"
@@ -1206,6 +1218,14 @@ print CRYO <<EOF;
       x="@{[$ArapucaAcceptanceWindow_x]}"
       y="@{[$ArapucaAcceptanceWindow_y]}"
       z="@{[$ArapucaAcceptanceWindow_z]}"/>
+    <box name="ArapucaAcceptanceWindowShortLat" lunit="cm"
+      x="@{[$ArapucaAcceptanceWindow_x]}"
+      y="@{[$ArapucaAcceptanceWindow_z]}"
+      z="@{[$ArapucaAcceptanceWindow_y]}"/>
+    <box name="ArapucaAcceptanceWindowCathode" lunit="cm"
+      x="@{[$ArapucaAcceptanceWindow_y]}"
+      y="@{[$ArapucaAcceptanceWindow_z]}"
+      z="@{[$ArapucaAcceptanceWindow_x]}"/>
 
     <box name="ArapucaDoubleIn" lunit="cm"
       x="@{[$ArapucaIn_x]}"
@@ -1255,6 +1275,18 @@ print CRYO <<EOF;
       <materialref ref="LAr"/>
       <solidref ref="ArapucaAcceptanceWindow"/>
     </volume>
+    <volume name="volOpDetSensitiveLongLat">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaAcceptanceWindow"/>
+    </volume>
+    <volume name="volOpDetSensitiveShortLat">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaAcceptanceWindowShortLat"/>
+    </volume>
+    <volume name="volOpDetSensitiveCathode">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaAcceptanceWindowCathode"/>
+    </volume>
 
     <volume name="Arapuca">
       <materialref ref="G10" />
@@ -1271,6 +1303,48 @@ print CRYO <<EOF;
       <physvol>
         <volumeref ref="volOpDetSensitive"/>
         <position name="opdetshift" unit="cm" x="0" y="@{[$ArapucaAcceptanceWindow_y/2.0]}" z="0"/>
+      </physvol>
+    </volume>
+
+
+    <volume name="volArapucaLongLat">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaOut"/>
+      <physvol>
+        <volumeref ref="Arapuca"/>
+        <positionref ref="posCenter"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volOpDetSensitiveLongLat"/>
+        <position name="opdetshift" unit="cm" x="0" y="@{[$ArapucaAcceptanceWindow_y/2.0]}" z="0"/>
+      </physvol>
+    </volume>
+
+    <volume name="volArapucaShortLat">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaOutShortLat"/>
+      <physvol>
+        <volumeref ref="Arapuca"/>
+        <positionref ref="posCenter"/>
+        <rotationref ref="rMinus90AboutX" />
+      </physvol>
+      <physvol>
+        <volumeref ref="volOpDetSensitiveShortLat"/>
+        <position name="opdetshift" unit="cm" x="0" y="0" z="@{[$ArapucaAcceptanceWindow_y/2.0]}"/>
+      </physvol>
+    </volume>
+
+    <volume name="volArapucaCathode">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaOutCathode"/>
+      <physvol>
+        <volumeref ref="Arapuca"/>
+        <positionref ref="posCenter"/>
+        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volOpDetSensitiveCathode"/>
+        <position name="opdetshift" unit="cm" x="@{[$ArapucaAcceptanceWindow_y/2.0]}" y="0" z="0"/>
       </physvol>
     </volume>
 
@@ -1511,12 +1585,11 @@ for ($ara = 0; $ara<4; $ara++)
 
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapuca"/>
+       <volumeref ref="volArapucaCathode"/>
        <position name="posArapucaDouble$ara-Frame\-$Frame_x\-$Frame_z" unit="cm"
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}"
 	 z="@{[$Ara_Z]}"/>
-       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
 EOF
 
@@ -1555,7 +1628,7 @@ for ($ara = 0; $ara<8; $ara++)
 
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapuca"/>
+       <volumeref ref="volArapucaLongLat"/>
        <position name="posArapuca$ara-Lat\-$Lat_z" unit="cm"
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}"
@@ -1585,12 +1658,14 @@ sub place_OpDetsShortLateral()
     if ($ara<4) {
       $Ara_Z = -0.5*$Argon_z + $FrameToArapucaSpaceLat;
       $Ara_ZSens = ($Ara_Z+0.5*$ArapucaOut_y-0.5*$ArapucaAcceptanceWindow_y-0.01);
-      $rot= "rMinus90AboutX";
+      #$rot= "rMinus90AboutX";
+      $rot= "rIdentity";
     }
     else {
       $Ara_Z = 0.5*$Argon_z - $FrameToArapucaSpaceLat;
       $Ara_ZSens = ($Ara_Z-0.5*$ArapucaOut_y+0.5*$ArapucaAcceptanceWindow_y+0.01);
-      $rot = "rPlus90AboutX";
+      #$rot = "rPlus90AboutX";
+      $rot = "rPlus180AboutX";
     }
     #GEOMETRY IS ROTATED: X--> Y AND Y--> X
     if ($ara==0||$ara==4) {
@@ -1604,7 +1679,7 @@ sub place_OpDetsShortLateral()
     #print " ArapucaPos ShortLAteral $ara :    x=@{[$Ara_X]} y= @{[$Ara_Y]}  z= @{[$Ara_Z]}\n";
     print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapuca"/>
+       <volumeref ref="volArapucaShortLat"/>
        <position name="posArapuca$ara-ShortLat$FrameCenter_y" unit="cm"
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}"
@@ -1649,7 +1724,7 @@ for ($ara = 0; $ara<18; $ara++)
 
 	print CRYO <<EOF;
      <physvol>
-       <volumeref ref="volArapuca"/>
+       <volumeref ref="volArapucaLongLat"/>
        <position name="posArapuca$ara-Lat\-$Lat_z" unit="cm"
          x="@{[$Ara_X]}"
 	 y="@{[$Ara_Y]}"
