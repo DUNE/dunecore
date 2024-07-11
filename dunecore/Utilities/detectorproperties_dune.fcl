@@ -110,8 +110,8 @@ protodunehd_detproperties.Temperature:       87.68
 protodunehd_detproperties.Electronlifetime:  35.0e3
 protodunehd_detproperties.Efield:           [0.4867,0.666,0.8]  #(predicted for microBooNE)
 protodunehd_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
-protodunehd_detproperties.NumberTimeSamples: 5888         # PDHD Now uses 5888 time samples in its readout
-protodunehd_detproperties.ReadOutWindowSize: 5888
+protodunehd_detproperties.NumberTimeSamples: 5859         # PDHD Now uses 5859 time samples in its readout
+protodunehd_detproperties.ReadOutWindowSize: 5859
 protodunehd_detproperties.TimeOffsetU:       0.
 protodunehd_detproperties.TimeOffsetV:       0.
 protodunehd_detproperties.TimeOffsetZ:       0.
