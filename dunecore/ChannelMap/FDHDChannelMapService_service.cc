@@ -16,23 +16,23 @@
 
 dune::FDHDChannelMapService::FDHDChannelMapService(fhicl::ParameterSet const& pset) {
 
-  std::string channelMapFile = pset.get<std::string>("ChannelMapFile");
+  std::string wireReadoutFile = pset.get<std::string>("ChannelMapFile");
   std::string crateMapFile = pset.get<std::string>("CrateMapFile");
 
   std::string chanmapfullname;
   std::string cratemapfullname;
   cet::search_path sp("FW_SEARCH_PATH");
-  sp.find_file(channelMapFile, chanmapfullname);
+  sp.find_file(wireReadoutFile, chanmapfullname);
   sp.find_file(crateMapFile, cratemapfullname);
 
   if (chanmapfullname.empty()) {
-    throw cet::exception("FDHDChannelMapService") << "Input channel map file " << channelMapFile << " not found" << std::endl;
+    throw cet::exception("FDHDChannelMapService") << "Input channel map file " << wireReadoutFile << " not found" << std::endl;
   }
   if (cratemapfullname.empty()) {
     throw cet::exception("FDHDChannelMapService") << "Input crate map file " << crateMapFile << " not found" << std::endl;
   }
   
-  MF_LOG_INFO("FDHDChannelMapService") << "Building FDHD wiremap from file " << channelMapFile << " and crate map: " << crateMapFile << std::endl;
+  MF_LOG_INFO("FDHDChannelMapService") << "Building FDHD wiremap from file " << wireReadoutFile << " and crate map: " << crateMapFile << std::endl;
 
   fHDChanMap.ReadMapFromFiles(chanmapfullname,cratemapfullname);
 }

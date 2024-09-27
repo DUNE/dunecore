@@ -3,7 +3,9 @@
 #include "IcebergChannelGeo.h"
 
 #include "art/Framework/Services/Registry/ServiceHandle.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
+#include "larcorealg/Geometry/WireReadoutGeom.h"
 #include <string>
 #include <iostream>
 
@@ -14,22 +16,25 @@ using std::endl;
 //**********************************************************************
 
 IcebergChannelGeo::IcebergChannelGeo(Index icha)
-: IcebergChannelGeo(icha, &*art::ServiceHandle<geo::Geometry>()) { }
+  : IcebergChannelGeo(icha,
+                      art::ServiceHandle<geo::Geometry>().get(),
+                      art::ServiceHandle<geo::WireReadout>()->Get())
+{ }
 
 //**********************************************************************
 
-IcebergChannelGeo::IcebergChannelGeo(Index icha, const geo::GeometryCore* pgeo)
+IcebergChannelGeo::IcebergChannelGeo(Index icha, const geo::GeometryCore* pgeo, geo::WireReadoutGeom const& wireReadout)
 : m_icha(icha), m_valid(false) {
   const string myname = "IcebergChannelGeo::ctor: ";
   if ( pgeo == nullptr ) return;
-  if ( icha >= pgeo->Nchannels() ) return;
+  if ( icha >= wireReadout.Nchannels() ) return;
   m_valid = true;
   if ( pgeo->DetectorName() != "iceberg" ) {
     cout << myname << "WARNING: Iceberg mod is applied to non-Iceberg detector channels." << endl;
   }
   double ylo = 173.819 - 95.23;
-  for ( geo::WireID wid : pgeo->ChannelToWire(icha) ) {
-    EndPoints ends = pgeo->WireEndPoints(wid);
+  for ( geo::WireID wid : wireReadout.ChannelToWire(icha) ) {
+    EndPoints ends = wireReadout.WireEndPoints(wid);
     if ( ends.first.y() > ends.second.y() ) {
       Point firstPoint = ends.first;
       ends.first = ends.second;

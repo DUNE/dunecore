@@ -3,22 +3,23 @@
 #include "ChannelGeo.h"
 
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "larcore/Geometry/Geometry.h"
+#include "larcore/Geometry/WireReadout.h"
 
 //**********************************************************************
 
 ChannelGeo::ChannelGeo(Index icha)
-: ChannelGeo(icha, &*art::ServiceHandle<geo::Geometry>()) { }
+: ChannelGeo(icha,
+             &art::ServiceHandle<geo::WireReadout>()->Get()) { }
 
 //**********************************************************************
 
-ChannelGeo::ChannelGeo(Index icha, const geo::GeometryCore* pgeo)
+ChannelGeo::ChannelGeo(Index icha,
+                       const geo::WireReadoutGeom* wireReadout)
 : m_icha(icha), m_valid(false) {
-  if ( pgeo == nullptr ) return;
-  if ( icha >= pgeo->Nchannels() ) return;
+  if ( icha >= wireReadout->Nchannels() ) return;
   m_valid = true;
-  for ( geo::WireID wid : pgeo->ChannelToWire(icha) ) {
-    auto ends = pgeo->WireEndPoints(wid);
+  for ( geo::WireID wid : wireReadout->ChannelToWire(icha) ) {
+    auto ends = wireReadout->WireEndPoints(wid);
     if ( ends.first.y() > ends.second.y() ) {
       auto firstPoint = ends.first;
       ends.first = ends.second;
