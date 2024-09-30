@@ -133,13 +133,17 @@ dune10kt_1x2x2_v4_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x2_v4_refactor
 
 dune10kt_1x2x2_v5_refactored_geo:      @local::dune10kt_geo
 dune10kt_1x2x2_v5_refactored_geo.GDML: "dune10kt_v5_refactored_1x2x2.gdml"
+dune10kt_1x2x2_v5_refactored_geo.Name: "dune10kt_v5_1x2x2"
 dune10kt_1x2x2_v5_refactored_auxdet_geo:      @local::dune10kt_auxdet_geo
 dune10kt_1x2x2_v5_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x2_v5_refactored_geo.GDML
+dune10kt_1x2x2_v5_refactored_auxdet_geo.Name: "dune10kt_v5_1x2x2"
 
 dune10kt_1x2x2_v6_refactored_geo:      @local::dune10kt_geo
 dune10kt_1x2x2_v6_refactored_geo.GDML: "dune10kt_v6_refactored_1x2x2.gdml"
+dune10kt_1x2x2_v5_refactored_geo.Name: "dune10kt_v6_1x2x2"
 dune10kt_1x2x2_v6_refactored_auxdet_geo:      @local::dune10kt_auxdet_geo
 dune10kt_1x2x2_v6_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x2_v6_refactored_geo.GDML
+dune10kt_1x2x2_v5_refactored_auxdet_geo.Name: "dune10kt_v6_1x2x2"
 
 dune10kt_1x2x2_geo:              @local::dune10kt_1x2x2_v4_geo
 dune10kt_1x2x2_refactored_geo:   @local::dune10kt_1x2x2_v6_refactored_geo
@@ -523,6 +527,7 @@ protodunevd_v1_auxdet_geo_driftY.GDML: @local::protodunevd_v1_geo_driftY.Name
 protodunevd_v1_auxdet_geo_driftY.GDML: @local::protodunevd_v1_geo_driftY.GDML
 
 protodunevd_v3_geo_driftY: @local::dune10kt_geo
+protodunevd_v3_geo_driftY.Name: "protodunevd_v3_driftY"
 protodunevd_v3_geo_driftY.GDML: "protodunevd_v3_driftY.gdml"
 protodunevd_v3_geo_driftY.SortingParameters: {
   tool_type: GeoObjectSorterCRU60D
@@ -530,6 +535,7 @@ protodunevd_v3_geo_driftY.SortingParameters: {
 }
 protodunevd_v3_auxdet_geo_driftY: @local::standard_auxdet_sorter
 protodunevd_v3_auxdet_geo_driftY.GDML: @local::protodunevd_v3_geo_driftY.GDML
+protodunevd_v3_auxdet_geo_driftY.Name: @local::protodunevd_v3_geo_driftY.Name
 
 protodunevd_v4_geo_driftY: @local::dune10kt_geo
 protodunevd_v4_geo_driftY.Name: "protodunevd_v4_driftY"
