@@ -527,7 +527,6 @@ protodunevd_v1_auxdet_geo_driftY.GDML: @local::protodunevd_v1_geo_driftY.Name
 protodunevd_v1_auxdet_geo_driftY.GDML: @local::protodunevd_v1_geo_driftY.GDML
 
 protodunevd_v3_geo_driftY: @local::dune10kt_geo
-protodunevd_v3_geo_driftY.Name: "protodunevd_v3_driftY"
 protodunevd_v3_geo_driftY.GDML: "protodunevd_v3_driftY.gdml"
 protodunevd_v3_geo_driftY.SortingParameters: {
   tool_type: GeoObjectSorterCRU60D
@@ -535,7 +534,6 @@ protodunevd_v3_geo_driftY.SortingParameters: {
 }
 protodunevd_v3_auxdet_geo_driftY: @local::standard_auxdet_sorter
 protodunevd_v3_auxdet_geo_driftY.GDML: @local::protodunevd_v3_geo_driftY.GDML
-protodunevd_v3_auxdet_geo_driftY.Name: @local::protodunevd_v3_geo_driftY.Name
 
 protodunevd_v4_geo_driftY: @local::dune10kt_geo
 protodunevd_v4_geo_driftY.Name: "protodunevd_v4_driftY"
