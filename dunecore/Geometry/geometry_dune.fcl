@@ -514,7 +514,7 @@ protodunevd_v4_geo.ROOT: "protodunevd_v4_refactored.gdml"
 protodunevd_v4_geo.SortingParameters.SortTPCPDVD: true
 
 protodunevd_v4_auxdet_geo: @local::standard_auxdet_sorter
-protodunevd_v4_auxdet_geo.GDML: @local::protodunevd_v4_geo.Name
+protodunevd_v4_auxdet_geo.Name: @local::protodunevd_v4_geo.Name
 protodunevd_v4_auxdet_geo.GDML: @local::protodunevd_v4_geo.GDML
 
 # protoDUNE VD with driftY
