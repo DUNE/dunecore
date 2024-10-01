@@ -16,7 +16,7 @@
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
-#include "larcore/Geometry/Geometry.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
 #include "larcoreobj/SimpleTypesAndConstants/RawTypes.h"
 
@@ -91,8 +91,7 @@ bool triggersim::ActivityTrigger::TriggerOnTPC( std::vector< raw::RawDigit> rawT
   // --- If for some reason you changed your mind about making this trigger...
   if (!fMakeTrig) return false;
 
-  // --- It is often helpful to make a geometry service handle.
-  art::ServiceHandle<geo::Geometry> geom;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
   
   // --- Now do stuff...
   fNumber = rawTPC.size();
@@ -111,9 +110,9 @@ bool triggersim::ActivityTrigger::TriggerOnTPC( std::vector< raw::RawDigit> rawT
     } // If Dig < 5
 
     // --- It can be useful to select only specific types of channels, normally you just continue for one of them.
-    if (geom->SignalType(ThisDig.Channel()) == geo::kCollection) {
+    if (wireReadout.SignalType(ThisDig.Channel()) == geo::kCollection) {
       // --- Something for collection plane wires...
-    } else if (geom->SignalType(ThisDig.Channel()) == geo::kInduction) {
+    } else if (wireReadout.SignalType(ThisDig.Channel()) == geo::kInduction) {
       // --- Something for induction plane wires...
     }
 

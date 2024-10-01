@@ -193,13 +193,12 @@ void HardwareMapperService::fillBoardMap(){
     double ThisAPA_MaxZ = -DBL_MAX;
     int    TotColWires  = 0;
     for(auto channel : apa_ptr->getChannels()) {
-      if (fGeometryService->View(channel) != 2) continue; // Collection planes wires are view 2.
+      if (fWireReadoutGeom->View(channel) != 2) continue; // Collection planes wires are view 2.
       ++TotColWires; // Got a collection plane wire.
       // Work out the Z position of this wire.
-      double WireSt[3], WireEn[3];
-      fGeometryService->WireEndPoints( fGeometryService->ChannelToWire(channel)[0], WireSt, WireEn );
-      if (WireSt[2] < ThisAPA_MinZ ) ThisAPA_MinZ = WireSt[2];
-      if (WireSt[2] > ThisAPA_MaxZ ) ThisAPA_MaxZ = WireSt[2];
+      auto const [WireSt, WireEn] = fWireReadoutGeom->WireEndPoints( fWireReadoutGeom->ChannelToWire(channel)[0] );
+      if (WireSt.Z() < ThisAPA_MinZ ) ThisAPA_MinZ = WireSt.Z();
+      if (WireSt.Z() > ThisAPA_MaxZ ) ThisAPA_MaxZ = WireSt.Z();
     }
     // --- Work out the number of collection plane wires per board.
     const int NumColWiresPerBoard = TotColWires/fNBoardsPerAPA;
@@ -215,17 +214,16 @@ void HardwareMapperService::fillBoardMap(){
     // --- Set the collection plane wires on our boards.
     int NumColPush = 0, PushToBoard = 0;
     for(auto channel : apa_ptr->getChannels()) {
-      if (fGeometryService->View(channel) != 2) continue; // Collection planes wires are view 2.
+      if (fWireReadoutGeom->View(channel) != 2) continue; // Collection planes wires are view 2.
       // Get the start and end points of the first wire segment for this channel.
-      double WireSt[3], WireEn[3];
-      fGeometryService->WireEndPoints( fGeometryService->ChannelToWire(channel)[0], WireSt, WireEn );
+      auto const [WireSt, WireEn] = fWireReadoutGeom->WireEndPoints( fWireReadoutGeom->ChannelToWire(channel)[0] );
       BoardsFromAPA[ PushToBoard ]->addChannel(channel);
       ++NumColPush;
-      if( WireSt[2] < ZPosOfColWires[ PushToBoard ][0] ) ZPosOfColWires[ PushToBoard ][0] = WireSt[2];
-      if( WireEn[2] > ZPosOfColWires[ PushToBoard ][1] ) ZPosOfColWires[ PushToBoard ][1] = WireEn[2];
+      if( WireSt.Z() < ZPosOfColWires[ PushToBoard ][0] ) ZPosOfColWires[ PushToBoard ][0] = WireSt.Z();
+      if( WireEn.Z() > ZPosOfColWires[ PushToBoard ][1] ) ZPosOfColWires[ PushToBoard ][1] = WireEn.Z();
       ZPosOfColWires[ PushToBoard ][2] = fGeometryService->FindTPCAtPosition( geo::vect::toPoint(WireSt) ).TPC;
       /*
-      std::cout << "   Looking at channel " << channel << " on plane " << fGeometryService->View(channel) << " TPC [[" << fGeometryService->FindTPCAtPosition( WireSt ) << " ]]."
+      std::cout << "   Looking at channel " << channel << " on plane " << fWireReadoutGeom->View(channel) << " TPC [[" << fGeometryService->FindTPCAtPosition( WireSt ) << " ]]."
 		<< " Start pos was (" << WireSt[0] << ", " << WireSt[1] << ", " << WireSt[2] << "). "
 		<< " Endin pos was (" << WireEn[0] << ", " << WireEn[1] << ", " << WireEn[2] << ").\n"
 		<< "        Pushing it back to board " << PushToBoard << ", now pushed back " << NumColPush << " wires."
@@ -247,23 +245,22 @@ void HardwareMapperService::fillBoardMap(){
     int NumIndPush = 0;
     
     for(auto channel : apa_ptr->getChannels()) {
-      if (fGeometryService->View(channel) == 2) continue; // Collection planes wires are view 2.
+      if (fWireReadoutGeom->View(channel) == 2) continue; // Collection planes wires are view 2.
       // --- When looking at induction plane wires whether I look at start or end wire pos depends on APA and TPC number.
       // --- When looking at even APA number - WireEnd   for even TPCs, WireStart for odd TPCs.
       // --- When looking at odd  APA number - WireStart for odd TPCs, WireEnd   for even TPCs.
       // Get the start and end points of the first wire segment for this channel.
-      double WireSt[3], WireEn[3];
-      fGeometryService->WireEndPoints( fGeometryService->ChannelToWire(channel)[0], WireSt, WireEn );
+      auto const [WireSt, WireEn] = fWireReadoutGeom->WireEndPoints( fWireReadoutGeom->ChannelToWire(channel)[0] );
       /*
-      std::cout << "\nLooking at channel " << channel << " on plane " << fGeometryService->View(channel) << " TPC [[" << fGeometryService->FindTPCAtPosition( WireSt ) << " ]]."
+      std::cout << "\nLooking at channel " << channel << " on plane " << fWireReadoutGeom->View(channel) << " TPC [[" << fGeometryService->FindTPCAtPosition( WireSt ) << " ]]."
 		<< " Start pos was (" << WireSt[0] << ", " << WireSt[1] << ", " << WireSt[2] << "). "
 		<< " Endin pos was (" << WireEn[0] << ", " << WireEn[1] << ", " << WireEn[2] << ")."
 		<< std::endl;
       */
       for (unsigned int nb=0; nb<fNBoardsPerAPA; ++nb) {
         if ( ZPosOfColWires[nb][2] != fGeometryService->FindTPCAtPosition( geo::vect::toPoint(WireSt) ).TPC ) continue;
-	if ( (abs(WireSt[1]) > 600 && WireSt[2] > ZPosOfColWires[nb][0] && WireSt[2] < ZPosOfColWires[nb][1] ) ||
-	     (abs(WireEn[1]) > 600 && WireEn[2] > ZPosOfColWires[nb][0] && WireEn[2] < ZPosOfColWires[nb][1] ) ) {
+        if ( (abs(WireSt.Y()) > 600 && WireSt.Z() > ZPosOfColWires[nb][0] && WireSt.Z() < ZPosOfColWires[nb][1] ) ||
+             (abs(WireEn.Y()) > 600 && WireEn.Z() > ZPosOfColWires[nb][0] && WireEn.Z() < ZPosOfColWires[nb][1] ) ) {
 	  BoardsFromAPA[ nb ]->addChannel(channel);
 	  /*
 	  std::cout << "   Pushing this channel onto board: " << BoardsFromAPA[ nb ]->getID()
@@ -297,11 +294,11 @@ void HardwareMapperService::fillTPCMap(){
   const std::string func_name = "fillTPCMap";
   mf::LogInfo loginfo(fServiceName);
   if(fLogLevel>1) loginfo << "In Function: " << func_name << "\n";
-  unsigned int Nchannels   = fGeometryService->Nchannels();
+  unsigned int Nchannels   = fWireReadoutGeom->Nchannels();
   loginfo  << "Filling TPC Map with " << Nchannels << " channels" << "\n";
 
   for(raw::ChannelID_t channel=0; channel<Nchannels ;channel++){
-    std::vector<geo::WireID> const Wires = fGeometryService->ChannelToWire(channel);
+    std::vector<geo::WireID> const Wires = fWireReadoutGeom->ChannelToWire(channel);
     for(auto wire : Wires){
       auto tpc_id = wire.TPC;
       //jpd -- See if we have already created a TPC object for this tpc_id in our map
@@ -331,11 +328,11 @@ void HardwareMapperService::fillAPAMap(){
   mf::LogInfo loginfo(fServiceName);
   if(fLogLevel>1)  loginfo << "In Function: " << func_name << "\n";
 
-  unsigned int Nchannels   = fGeometryService->Nchannels();
+  unsigned int Nchannels   = fWireReadoutGeom->Nchannels();
   loginfo  << "Filling APA Map with " << Nchannels << " channels" << "\n";
 
   for(raw::ChannelID_t channel=0; channel<Nchannels ;channel++){
-    std::vector<geo::WireID> const Wires = fGeometryService->ChannelToWire(channel);
+    std::vector<geo::WireID> const Wires = fWireReadoutGeom->ChannelToWire(channel);
     for(auto wire : Wires){
       auto apa_id = wire.TPC / 2;
       //jpd -- See if we have already created a APA object for this apa_id in our map
@@ -372,8 +369,8 @@ void HardwareMapperService::fillHardwareMaps(){
     loginfo << "DetectorName: " << fGeometryService->DetectorName() << "\n";
     loginfo << "Ncryostats:   " << fGeometryService->Ncryostats()   << "\n";
     loginfo << "TotalNTPC:    " << fGeometryService->TotalNTPC()    << "\n";
-    loginfo << "Nchannels:    " << fGeometryService->Nchannels()    << "\n";
-    loginfo << "NOpChannels:  " << fGeometryService->NOpChannels()  << "\n";
+    loginfo << "Nchannels:    " << fWireReadoutGeom->Nchannels()    << "\n";
+    loginfo << "NOpChannels:  " << fWireReadoutGeom->NOpChannels()  << "\n";
   }//using annonymous namespace to force mf::LogInfo destructor call to flush output
 
   fillTPCMap();
@@ -501,8 +498,8 @@ void HardwareMapperService::printGeometryInfo(){
     loginfo << "TotalMass: " << fGeometryService->TotalMass() << "\n";
     unsigned int Ncryostats  = fGeometryService->Ncryostats();
     unsigned int TotalNTPC   = fGeometryService->TotalNTPC();
-    unsigned int Nchannels   = fGeometryService->Nchannels();
-    unsigned int NOpChannels = fGeometryService->NOpChannels();
+    unsigned int Nchannels   = fWireReadoutGeom->Nchannels();
+    unsigned int NOpChannels = fWireReadoutGeom->NOpChannels();
     loginfo << "Ncryostats:   " << Ncryostats   << "\n";
     loginfo << "TotalNTPC:    " << TotalNTPC    << "\n";
     loginfo << "Nchannels:    " << Nchannels    << "\n";

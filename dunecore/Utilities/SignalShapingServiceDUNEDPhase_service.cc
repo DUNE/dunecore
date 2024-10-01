@@ -9,6 +9,7 @@
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 #include "cetlib_except/exception.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/TPCGeo.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
@@ -125,13 +126,11 @@ util::SignalShapingServiceDUNEDPhase::SignalShaping(unsigned int channel) const
   if( !fHave1mView ) return fColSignalShaping;
   
   //
-  auto const* geom = lar::providerFrom<geo::Geometry>();
-  std::vector<geo::WireID> Wires =  geom->ChannelToWire(channel);
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
+  std::vector<geo::WireID> Wires = wireReadout.ChannelToWire(channel);
 
-  double wirestartpoint[3];
-  double wireendpoint[3];
-  geom->WireEndPoints(Wires[0],wirestartpoint,wireendpoint);
-  double wirelength = sqrt(pow(wirestartpoint[0]-wireendpoint[0],2) + pow(wirestartpoint[1]-wireendpoint[1],2) + pow(wirestartpoint[2]-wireendpoint[2],2));
+  auto const [wirestartpoint, wireendpoint] = wireReadout.WireEndPoints(Wires[0]);
+  double wirelength = (wireendpoint - wirestartpoint).R();
 
   if((int)wirelength == 300)
     return fColSignalShaping;
@@ -139,7 +138,7 @@ util::SignalShapingServiceDUNEDPhase::SignalShaping(unsigned int channel) const
     return fColSignalShaping1m;
   else
     throw cet::exception("SignalShapingServiceDUNEDPhase")
-        << "unexpected signal type " << geom->SignalType(channel)
+        << "unexpected signal type " << wireReadout.SignalType(channel)
         << " for channel #" << channel << "\n";
 /*
   switch (geom->SignalType(channel)) {
@@ -211,12 +210,10 @@ double util::SignalShapingServiceDUNEDPhase::GetASICGain(unsigned int const chan
 
   //
   double gain = 0;
-  art::ServiceHandle<geo::Geometry> geom;
-  std::vector<geo::WireID> Wires =  geom->ChannelToWire(channel);
-  double wirestartpoint[3];
-  double wireendpoint[3];
-  geom->WireEndPoints(Wires[0],wirestartpoint,wireendpoint);
-  double wirelength = sqrt(pow(wirestartpoint[0]-wireendpoint[0],2) + pow(wirestartpoint[1]-wireendpoint[1],2) + pow(wirestartpoint[2]-wireendpoint[2],2));
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
+  std::vector<geo::WireID> Wires = wireReadout.ChannelToWire(channel);
+  auto const [wirestartpoint, wireendpoint] = wireReadout.WireEndPoints(Wires[0]);
+  double wirelength = (wireendpoint - wirestartpoint).R();
 
   if((int)wirelength == 300)
     gain = fPulseHeight;
@@ -236,12 +233,10 @@ double util::SignalShapingServiceDUNEDPhase::GetAreaNorm(unsigned int const chan
 
   //
   double gain = 0;
-  art::ServiceHandle<geo::Geometry> geom;
-  std::vector<geo::WireID> Wires =  geom->ChannelToWire(channel);
-  double wirestartpoint[3];
-  double wireendpoint[3];
-  geom->WireEndPoints(Wires[0],wirestartpoint,wireendpoint);
-  double wirelength = sqrt(pow(wirestartpoint[0]-wireendpoint[0],2) + pow(wirestartpoint[1]-wireendpoint[1],2) + pow(wirestartpoint[2]-wireendpoint[2],2));
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>{}->Get();
+  std::vector<geo::WireID> Wires = wireReadout.ChannelToWire(channel);
+  auto const [wirestartpoint, wireendpoint] = wireReadout.WireEndPoints(Wires[0]);
+  double wirelength = (wireendpoint - wirestartpoint).R();
 
   if((int)wirelength == 300)
     gain = fAreaNorm;

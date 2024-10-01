@@ -4,8 +4,9 @@
 #include "art/Framework/Services/Registry/ServiceDefinitionMacros.h"
 #include <sstream>
 #include <iomanip>
+#include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/GeometryCore.h"
-#include "larcorealg/Geometry/ChannelMapAlg.h"
+#include "larcorealg/Geometry/WireReadoutGeom.h"
 
 using std::cout;
 using std::ostream;
@@ -33,22 +34,22 @@ GeoApaChannelGroupService(fhicl::ParameterSet const& pset)
   const string myname = "GeoApaChannelGroupService::ctor: ";
   // Find the total # APAs and assign width for APA index.
   Index ngrp = 0;
-  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
-    ngrp += m_pgeo->NTPCsets(cryid);
+  for ( const geo::CryostatID& cryid : m_geometry->Iterate<geo::CryostatID>() ) {
+    ngrp += m_wireReadout->NTPCsets(cryid);
   }
   unsigned int w = log10(ngrp-1) + 1;
   m_names.resize(ngrp);
   m_chanvecs.resize(ngrp);
   Index igrp = 0;
-  Index ncry = m_pgeo->Ncryostats();
+  Index ncry = art::ServiceHandle<geo::Geometry>()->Ncryostats();
   // Loop over cryostats.
-  for ( const geo::CryostatID& cryid : m_pgeo->Iterate<geo::CryostatID>() ) {
-    Index napa = m_pgeo->NTPCsets(cryid);
+  for ( const geo::CryostatID& cryid : m_geometry->Iterate<geo::CryostatID>() ) {
+    Index napa = m_wireReadout->NTPCsets(cryid);
     Index icry = cryid.Cryostat;
     // Loop over APAs.
     for ( Index iapa=0; iapa<napa; ++iapa, ++igrp ) {
       APAID apaid(cryid, iapa);
-      Index nrop = m_pgeo->NROPs(apaid);
+      Index nrop = m_wireReadout->NROPs(apaid);
       // Build name.
       ostringstream ssname;
       if ( ncry > 1 ) ssname << "cry" << icry << "-";
@@ -70,8 +71,8 @@ GeoApaChannelGroupService(fhicl::ParameterSet const& pset)
         if ( skipRop[irop] ) continue;
         ROPID ropid(apaid, irop);
         // Find channels.
-        Index icha1 = m_pgeo->FirstChannelInROP(ropid); 
-        Index icha2 = icha1 + m_pgeo->Nchannels(ropid);
+        Index icha1 = m_wireReadout->FirstChannelInROP(ropid);
+        Index icha2 = icha1 + m_wireReadout->Nchannels(ropid);
         for ( unsigned int icha=icha1; icha<icha2; ++icha ) m_chanvecs[igrp].push_back(icha);
         ++nropUsed;
       }
@@ -84,12 +85,6 @@ GeoApaChannelGroupService(fhicl::ParameterSet const& pset)
   }
   m_size = ngrp;
 }
-
-//**********************************************************************
-
-GeoApaChannelGroupService::
-GeoApaChannelGroupService(fhicl::ParameterSet const& pset, art::ActivityRegistry&)
-: GeoApaChannelGroupService(pset) { }
 
 //**********************************************************************
 
