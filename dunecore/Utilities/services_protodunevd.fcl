@@ -22,6 +22,7 @@ protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
 protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
+protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v4_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
 
 
