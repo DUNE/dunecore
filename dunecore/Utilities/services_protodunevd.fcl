@@ -9,6 +9,7 @@ BEGIN_PROLOG
 
 protodunevd_services:                                       @local::protodune_services 
 protodunevd_services.Geometry:                              @local::protodunevd_v4_geo
+protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v4_auxdet_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
 
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
@@ -24,7 +25,6 @@ protodunevd_minimal_simulation_services:                           @local::proto
 protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
 protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v4_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
-
 
 # Full service configuration which includes memory-intensive services
 protodunevd_simulation_services: 
