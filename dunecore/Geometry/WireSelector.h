@@ -18,13 +18,10 @@
 #ifndef WireSelector_H
 #define WireSelector_H
 
+#include "larcorealg/Geometry/fwd.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
 #include <vector>
 #include <map>
-
-namespace geo {
-class GeometryCore;
-}
 
 class WireSelector {
 
@@ -33,6 +30,7 @@ public:
   using Index = unsigned int;
   using IndexVector = std::vector<Index>;
   using GeometryCore = geo::GeometryCore;
+  using WireReadoutGeom = geo::WireReadoutGeom;
   using View = geo::View_t;
   using PlaneID = geo::PlaneID;
   using PlaneIDVector = std::vector<PlaneID>;
@@ -104,6 +102,7 @@ public:
 
   // Return the geometry.
   const GeometryCore* geometry() const { return m_pgeo; }
+  const WireReadoutGeom* wireReadout() const { return m_wireReadout; }
 
   // Return the selected cryostats.
   const IndexVector& cryostats() const { return m_icrys; }
@@ -174,6 +173,7 @@ public:
 private:
 
   const GeometryCore* m_pgeo =nullptr;
+  const geo::WireReadoutGeom* m_wireReadout = nullptr;
   IndexVector m_icrys;
   View m_view =geo::kUnknown;
   double m_wireAngle =999.;

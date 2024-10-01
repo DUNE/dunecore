@@ -1,0 +1,2592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gdml_simple_extension xmlns:gdml_simple_extension="http://www.example.org"
+                       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"          
+                       xs:noNamespaceSchemaLocation="RefactoredGDMLSchema/SimpleExtension.xsd"> 
+
+
+<extension>
+   <color name="magenta"     R="0.0"  G="1.0"  B="0.0"  A="1.0" />
+   <color name="green"       R="0.0"  G="1.0"  B="0.0"  A="1.0" />
+   <color name="red"         R="1.0"  G="0.0"  B="0.0"  A="1.0" />
+   <color name="blue"        R="0.0"  G="0.0"  B="1.0"  A="1.0" />
+   <color name="yellow"      R="1.0"  G="1.0"  B="0.0"  A="1.0" />    
+</extension>
+<define>
+  
+  <!--
+  
+  
+  
+  -->
+  
+  <position name="posCryoInDetEnc"     unit="cm" x="-50" y="0" z="0"/>
+  <position name="posCenter"           unit="cm" x="0" y="0" z="0"/>
+  <rotation name="rUWireAboutX"        unit="deg" x="150" y="0" z="0"/>
+  <rotation name="rVWireAboutX"        unit="deg" x="30" y="0" z="0"/>
+  <rotation name="rot90AboutY"         unit="deg" x="0" y="90" z="0"/>
+  <rotation name="rPlus90AboutX"       unit="deg" x="90" y="0" z="0"/>
+  <rotation name="rPlus90AboutY"       unit="deg" x="0" y="90" z="0"/>
+  <rotation name="rPlus90AboutXPlus90AboutY" unit="deg" x="90" y="90" z="0"/>
+  <rotation name="rPlus90AboutXPlus90AboutZ" unit="deg" x="90" y="0" z="90"/>
+  <rotation name="rMinus90AboutX"      unit="deg" x="270" y="0" z="0"/>
+  <rotation name="rMinus90AboutY"      unit="deg" x="0" y="270" z="0"/>
+  <rotation name="rMinus90AboutYMinus90AboutX"       unit="deg" x="270" y="270" z="0"/>
+  <rotation name="rPlus180AboutX"	unit="deg" x="180" y="0"   z="0"/>
+  <rotation name="rPlus180AboutY"	unit="deg" x="0" y="180"   z="0"/>
+  <rotation name="rPlus180AboutXPlus180AboutY"	unit="deg" x="180" y="180"   z="0"/>
+  <rotation name="rot05"      unit="deg" x="180" y="90" z="0"/>
+  <rotation name="rIdentity"		unit="deg" x="0" y="0"   z="0"/>
+  
+  <!--Cathode frame mesh-->
+  <!--First column-->
+  <position name="posCathodeMeshTop11"    unit="cm" x="2.975"  y="87.625"   z="-108.875"/>
+  <position name="posCathodeMeshBottom11" unit="cm" x="-2.975" y="87.625"   z="-108.875"/>
+  <position name="posCathodeMeshTop21"    unit="cm" x="2.975"  y="6.375"    z="-108.875"/>
+  <position name="posCathodeMeshBottom21" unit="cm" x="-2.975" y="6.375"    z="-108.875"/>
+  <position name="posCathodeMeshTop41"    unit="cm" x="2.975"  y="-160.125" z="-108.875"/>
+  <position name="posCathodeMeshBottom41" unit="cm" x="-2.975" y="-160.125" z="-108.875"/>
+  <!--Second column-->
+  <position name="posCathodeMeshTop12"    unit="cm" x="2.975"  y="87.625"   z="-37.625"/>
+  <position name="posCathodeMeshBottom12" unit="cm" x="-2.975" y="87.625"   z="-37.625"/>
+  <position name="posCathodeMeshTop22"    unit="cm" x="2.975"  y="6.375"    z="-37.625"/>
+  <position name="posCathodeMeshBottom22" unit="cm" x="-2.975" y="6.375"    z="-37.625"/>
+  <position name="posCathodeMeshTop32"    unit="cm" x="2.975"  y="-78.875"  z="-37.625"/>
+  <position name="posCathodeMeshBottom32" unit="cm" x="-2.975" y="-78.875"  z="-37.625"/>
+  <position name="posCathodeMeshTop42"    unit="cm" x="2.975"  y="-160.125" z="-37.625"/>
+  <position name="posCathodeMeshBottom42" unit="cm" x="-2.975" y="-160.125" z="-37.625"/>
+  <!--Third column-->
+  <position name="posCathodeMeshTop13"    unit="cm" x="2.975"  y="87.625"   z="37.625"/>
+  <position name="posCathodeMeshBottom13" unit="cm" x="-2.975" y="87.625"   z="37.625"/>
+  <position name="posCathodeMeshTop23"    unit="cm" x="2.975"  y="6.375"    z="37.625"/>
+  <position name="posCathodeMeshBottom23" unit="cm" x="-2.975" y="6.375"    z="37.625"/>
+  <position name="posCathodeMeshTop33"    unit="cm" x="2.975"  y="-78.875"  z="37.625"/>
+  <position name="posCathodeMeshBottom33" unit="cm" x="-2.975" y="-78.875"  z="37.625"/>
+  <!--Fourth column-->
+  <position name="posCathodeMeshTop14"    unit="cm" x="2.975"  y="87.625"   z="108.875"/>
+  <position name="posCathodeMeshBottom14" unit="cm" x="-2.975" y="87.625"   z="108.875"/>
+  <position name="posCathodeMeshTop34"    unit="cm" x="2.975"  y="-78.875"  z="108.875"/>
+  <position name="posCathodeMeshBottom34" unit="cm" x="-2.975" y="-78.875"  z="108.875"/>
+  <position name="posCathodeMeshTop44"    unit="cm" x="2.975"  y="-160.125" z="108.875"/>
+  <position name="posCathodeMeshBottom44" unit="cm" x="-2.975" y="-160.125" z="108.875"/>
+
+  
+</define>
+<materials>
+  <element name="videRef" formula="VACUUM" Z="1">  <atom value="1"/> </element>
+  <element name="copper" formula="Cu" Z="29">  <atom value="63.546"/>  </element>
+  <element name="beryllium" formula="Be" Z="4">  <atom value="9.0121831"/>  </element>
+  <element name="bromine" formula="Br" Z="35"> <atom value="79.904"/> </element>
+  <element name="hydrogen" formula="H" Z="1">  <atom value="1.0079"/> </element>
+  <element name="nitrogen" formula="N" Z="7">  <atom value="14.0067"/> </element>
+  <element name="oxygen" formula="O" Z="8">  <atom value="15.999"/> </element>
+  <element name="aluminum" formula="Al" Z="13"> <atom value="26.9815"/>  </element>
+  <element name="silicon" formula="Si" Z="14"> <atom value="28.0855"/>  </element>
+  <element name="carbon" formula="C" Z="6">  <atom value="12.0107"/>  </element>
+  <element name="potassium" formula="K" Z="19"> <atom value="39.0983"/>  </element>
+  <element name="chromium" formula="Cr" Z="24"> <atom value="51.9961"/>  </element>
+  <element name="iron" formula="Fe" Z="26"> <atom value="55.8450"/>  </element>
+  <element name="nickel" formula="Ni" Z="28"> <atom value="58.6934"/>  </element>
+  <element name="calcium" formula="Ca" Z="20"> <atom value="40.078"/>   </element>
+  <element name="magnesium" formula="Mg" Z="12"> <atom value="24.305"/>   </element>
+  <element name="sodium" formula="Na" Z="11"> <atom value="22.99"/>    </element>
+  <element name="titanium" formula="Ti" Z="22"> <atom value="47.867"/>   </element>
+  <element name="argon" formula="Ar" Z="18"> <atom value="39.9480"/>  </element>
+  <element name="sulphur" formula="S" Z="16"> <atom value="32.065"/>  </element>
+  <element name="phosphorus" formula="P" Z="15"> <atom value="30.973"/>  </element>
+
+  <material name="Vacuum" formula="Vacuum">
+   <D value="1.e-25" unit="g/cm3"/>
+   <fraction n="1.0" ref="videRef"/>
+  </material>
+
+  <material name="ALUMINUM_Al" formula="ALUMINUM_Al">
+   <D value="2.6990" unit="g/cm3"/>
+   <fraction n="1.0000" ref="aluminum"/>
+  </material>
+
+  <material name="SILICON_Si" formula="SILICON_Si">
+   <D value="2.3300" unit="g/cm3"/>
+   <fraction n="1.0000" ref="silicon"/>
+  </material>
+
+  <material name="epoxy_resin" formula="C38H40O6Br4">
+   <D value="1.1250" unit="g/cm3"/>
+   <composite n="38" ref="carbon"/>
+   <composite n="40" ref="hydrogen"/>
+   <composite n="6" ref="oxygen"/>
+   <composite n="4" ref="bromine"/>
+  </material>
+
+  <material name="SiO2" formula="SiO2">
+   <D value="2.2" unit="g/cm3"/>
+   <composite n="1" ref="silicon"/>
+   <composite n="2" ref="oxygen"/>
+  </material>
+
+  <material name="Al2O3" formula="Al2O3">
+   <D value="3.97" unit="g/cm3"/>
+   <composite n="2" ref="aluminum"/>
+   <composite n="3" ref="oxygen"/>
+  </material>
+
+  <material name="Fe2O3" formula="Fe2O3">
+   <D value="5.24" unit="g/cm3"/>
+   <composite n="2" ref="iron"/>
+   <composite n="3" ref="oxygen"/>
+  </material>
+
+  <material name="CaO" formula="CaO">
+   <D value="3.35" unit="g/cm3"/>
+   <composite n="1" ref="calcium"/>
+   <composite n="1" ref="oxygen"/>
+  </material>
+
+  <material name="Delrin" formula="CH2O">
+    <D value="1.41" unit="g/cm3"/>
+    <composite n="1" ref="carbon"/>
+    <composite n="2" ref="hydrogen"/>
+    <composite n="1" ref="oxygen"/>
+  </material>
+
+  <material name="MgO" formula="MgO">
+   <D value="3.58" unit="g/cm3"/>
+   <composite n="1" ref="magnesium"/>
+   <composite n="1" ref="oxygen"/>
+  </material>
+
+  <material name="Na2O" formula="Na2O">
+   <D value="2.27" unit="g/cm3"/>
+   <composite n="2" ref="sodium"/>
+   <composite n="1" ref="oxygen"/>
+  </material>
+
+  <material name="TiO2" formula="TiO2">
+   <D value="4.23" unit="g/cm3"/>
+   <composite n="1" ref="titanium"/>
+   <composite n="2" ref="oxygen"/>
+  </material>
+
+  <material name="FeO" formula="FeO">
+   <D value="5.745" unit="g/cm3"/>
+   <composite n="1" ref="iron"/>
+   <composite n="1" ref="oxygen"/>
+  </material>
+
+  <material name="CO2" formula="CO2">
+   <D value="1.562" unit="g/cm3"/>
+   <composite n="1" ref="iron"/>
+   <composite n="2" ref="oxygen"/>
+  </material>
+
+  <material name="P2O5" formula="P2O5">
+   <D value="1.562" unit="g/cm3"/>
+   <composite n="2" ref="phosphorus"/>
+   <composite n="5" ref="oxygen"/>
+  </material>
+
+  <material formula=" " name="DUSEL_Rock">
+    <D value="2.82" unit="g/cm3"/>
+    <fraction n="0.5267" ref="SiO2"/>
+    <fraction n="0.1174" ref="FeO"/>
+    <fraction n="0.1025" ref="Al2O3"/>
+    <fraction n="0.0473" ref="MgO"/>
+    <fraction n="0.0422" ref="CO2"/>
+    <fraction n="0.0382" ref="CaO"/>
+    <fraction n="0.0240" ref="carbon"/>
+    <fraction n="0.0186" ref="sulphur"/>
+    <fraction n="0.0053" ref="Na2O"/>
+    <fraction n="0.00070" ref="P2O5"/>
+    <fraction n="0.0771" ref="oxygen"/>
+  </material> 
+
+  <material formula="Air" name="Air">
+   <D value="0.001205" unit="g/cm3"/>
+   <fraction n="0.781154" ref="nitrogen"/>
+   <fraction n="0.209476" ref="oxygen"/>
+   <fraction n="0.00934" ref="argon"/>
+  </material>
+
+  <material name="fibrous_glass">
+   <D value="2.74351" unit="g/cm3"/>
+   <fraction n="0.600" ref="SiO2"/>
+   <fraction n="0.118" ref="Al2O3"/>
+   <fraction n="0.001" ref="Fe2O3"/>
+   <fraction n="0.224" ref="CaO"/>
+   <fraction n="0.034" ref="MgO"/>
+   <fraction n="0.010" ref="Na2O"/>
+   <fraction n="0.013" ref="TiO2"/>
+  </material>
+
+  <!-- density referenced from EHN1-Cold Cryostats Technical Requirements:
+       https://edms.cern.ch/document/1543254 -->
+  <material name="FD_foam">
+   <D value="0.09" unit="g/cm3"/>
+   <fraction n="0.95" ref="Air"/>
+   <fraction n="0.05" ref="fibrous_glass"/>
+  </material>
+
+  <!-- Foam density is 70 kg / m^3 for the 3x1x1 -->
+  <material name="foam_3x1x1dp">
+   <D value="0.07" unit="g/cm3"/>
+   <fraction n="0.95" ref="Air"/>
+   <fraction n="0.05" ref="fibrous_glass"/>
+  </material>
+
+  <!-- Copied from protodune_v4.gdml -->
+  <material name="foam_protoDUNEdp">
+   <D value="0.135" unit="g/cm3"/>
+   <composite n="17" ref="carbon"/>
+   <composite n="16" ref="hydrogen"/>
+   <composite n="2" ref="nitrogen"/>
+   <composite n="4" ref="oxygen"/>
+  </material>
+
+  <material name="FR4">
+   <D value="1.98281" unit="g/cm3"/>
+   <fraction n="0.47" ref="epoxy_resin"/>
+   <fraction n="0.53" ref="fibrous_glass"/>
+  </material>
+
+  <material name="STEEL_STAINLESS_Fe7Cr2Ni" formula="STEEL_STAINLESS_Fe7Cr2Ni">
+   <D value="7.9300" unit="g/cm3"/>
+   <fraction n="0.0010" ref="carbon"/>
+   <fraction n="0.1792" ref="chromium"/>
+   <fraction n="0.7298" ref="iron"/>
+   <fraction n="0.0900" ref="nickel"/>
+  </material>
+
+  <material name="Copper_Beryllium_alloy25" formula="Copper_Beryllium_alloy25">
+   <D value="8.26" unit="g/cm3"/>
+   <fraction n="0.981" ref="copper"/>
+   <fraction n="0.019" ref="beryllium"/>
+  </material>
+
+  <material name="LAr" formula="LAr">
+   <D value="1.40" unit="g/cm3"/>
+   <fraction n="1.0000" ref="argon"/>
+  </material>
+
+  <material name="ArGas" formula="ArGas">
+   <D value="0.00166" unit="g/cm3"/>
+   <fraction n="1.0" ref="argon"/>
+  </material>
+
+  <material formula=" " name="G10">
+   <D value="1.7" unit="g/cm3"/>
+   <fraction n="0.2805" ref="silicon"/>
+   <fraction n="0.3954" ref="oxygen"/>
+   <fraction n="0.2990" ref="carbon"/>
+   <fraction n="0.0251" ref="hydrogen"/>
+  </material>
+
+  <material formula=" " name="Granite">
+   <D value="2.7" unit="g/cm3"/>
+   <fraction n="0.438" ref="oxygen"/>
+   <fraction n="0.257" ref="silicon"/>
+   <fraction n="0.222" ref="sodium"/>
+   <fraction n="0.049" ref="aluminum"/>
+   <fraction n="0.019" ref="iron"/>
+   <fraction n="0.015" ref="potassium"/>
+  </material>
+
+  <material formula=" " name="ShotRock">
+   <D value="1.62" unit="g/cm3"/>
+   <fraction n="0.438" ref="oxygen"/>
+   <fraction n="0.257" ref="silicon"/>
+   <fraction n="0.222" ref="sodium"/>
+   <fraction n="0.049" ref="aluminum"/>
+   <fraction n="0.019" ref="iron"/>
+   <fraction n="0.015" ref="potassium"/>
+  </material>
+
+  <material formula=" " name="Dirt">
+   <D value="1.7" unit="g/cm3"/>
+   <fraction n="0.438" ref="oxygen"/>
+   <fraction n="0.257" ref="silicon"/>
+   <fraction n="0.222" ref="sodium"/>
+   <fraction n="0.049" ref="aluminum"/>
+   <fraction n="0.019" ref="iron"/>
+   <fraction n="0.015" ref="potassium"/>
+  </material>
+
+  <material formula=" " name="Concrete">
+   <D value="2.3" unit="g/cm3"/>
+   <fraction n="0.530" ref="oxygen"/>
+   <fraction n="0.335" ref="silicon"/>
+   <fraction n="0.060" ref="calcium"/>
+   <fraction n="0.015" ref="sodium"/>
+   <fraction n="0.020" ref="iron"/>
+   <fraction n="0.040" ref="aluminum"/>
+  </material>
+
+  <material formula="H2O" name="Water">
+   <D value="1.0" unit="g/cm3"/>
+   <fraction n="0.1119" ref="hydrogen"/>
+   <fraction n="0.8881" ref="oxygen"/>
+  </material>
+
+  <material formula="Ti" name="Titanium">
+   <D value="4.506" unit="g/cm3"/>
+   <fraction n="1." ref="titanium"/>
+  </material>
+
+  <material name="TPB" formula="TPB">
+   <D value="1.40" unit="g/cm3"/>
+   <fraction n="1.0000" ref="argon"/>
+  </material>
+
+  <material name="Glass">
+   <D value="2.74351" unit="g/cm3"/>
+   <fraction n="0.600" ref="SiO2"/>
+   <fraction n="0.118" ref="Al2O3"/>
+   <fraction n="0.001" ref="Fe2O3"/>
+   <fraction n="0.224" ref="CaO"/>
+   <fraction n="0.034" ref="MgO"/>
+   <fraction n="0.010" ref="Na2O"/>
+   <fraction n="0.013" ref="TiO2"/>
+  </material>
+
+  <material name="Acrylic">
+   <D value="1.19" unit="g/cm3"/>
+   <fraction n="0.600" ref="carbon"/>
+   <fraction n="0.320" ref="oxygen"/>
+   <fraction n="0.080" ref="hydrogen"/>
+  </material>
+
+  <material name="NiGas1atm80K">
+   <D value="0.0039" unit="g/cm3"/>
+   <fraction n="1.000" ref="nitrogen"/>
+  </material>
+
+  <material name="NiGas">
+   <D value="0.001165" unit="g/cm3"/>
+   <fraction n="1.000" ref="nitrogen"/>
+  </material>
+
+  <material name="PolyurethaneFoam">
+   <D value="0.088" unit="g/cm3"/>
+   <composite n="17" ref="carbon"/>
+   <composite n="16" ref="hydrogen"/>
+   <composite n="2" ref="nitrogen"/>
+   <composite n="4" ref="oxygen"/>
+  </material>
+
+  <material name="ProtoDUNEFoam">
+   <D value="0.135" unit="g/cm3"/>
+   <composite n="17" ref="carbon"/>
+   <composite n="16" ref="hydrogen"/>
+   <composite n="2" ref="nitrogen"/>
+   <composite n="4" ref="oxygen"/>
+  </material>
+
+  <material name="LightPolyurethaneFoam">
+   <D value="0.009" unit="g/cm3"/>
+   <composite n="17" ref="carbon"/>
+   <composite n="16" ref="hydrogen"/>
+   <composite n="2" ref="nitrogen"/>
+   <composite n="4" ref="oxygen"/>
+  </material>
+
+  <material name="ProtoDUNEBWFoam">
+   <D value="0.021" unit="g/cm3"/>
+   <composite n="17" ref="carbon"/>
+   <composite n="16" ref="hydrogen"/>
+   <composite n="2" ref="nitrogen"/>
+   <composite n="4" ref="oxygen"/>
+  </material>
+
+  <material name="GlassWool">
+   <D value="0.035" unit="g/cm3"/>
+   <fraction n="0.65" ref="SiO2"/>
+   <fraction n="0.09" ref="Al2O3"/>
+   <fraction n="0.07" ref="CaO"/>
+   <fraction n="0.03" ref="MgO"/>
+   <fraction n="0.16" ref="Na2O"/>
+  </material>
+
+  <material name="Polystyrene">
+   <D value="1.06" unit="g/cm3"/>
+   <composite n="8" ref="carbon"/>
+   <composite n="8" ref="hydrogen"/>
+  </material>
+
+
+
+  <!-- preliminary values -->
+  <material name="AirSteelMixture" formula="AirSteelMixture">
+   <D value=" 0.001205*(1-0.5) + 7.9300*0.5 " unit="g/cm3"/>
+   <fraction n="0.5" ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+   <fraction n="0.5"   ref="Air"/>
+  </material>
+  <material name="vm2000" formula="vm2000">
+    <D value="1.2" unit="g/cm3"/>
+    <composite n="2" ref="carbon"/>
+    <composite n="4" ref="hydrogen"/>
+  </material>
+
+</materials>
+<solids>
+  
+  
+  
+  
+   <box name="CRM"
+      x="23.06" 
+      y="168.5" 
+      z="149.65"
+      lunit="cm"/>
+   <box name="CRMActive" 
+      x="23"
+      y="168.5"
+      z="149.65"
+      lunit="cm"/>
+   <box name="CRMUPlane" 
+      x="0.02" 
+      y="167.9" 
+      z="149"
+      lunit="cm"/>
+   <box name="CRMVPlane" 
+      x="0.02" 
+      y="167.9" 
+      z="149"
+      lunit="cm"/>
+   <box name="CRMZPlane" 
+      x="0.02"
+      y="167.9"
+      z="149"
+      lunit="cm"/>
+
+<!-- xARAPUCA tiles -->
+
+<box name="TileOut" lunit="cm"
+  x="2.5"
+  y="32.5"
+  z="65"/>
+
+<box name="TileIn" lunit="cm"
+  x="2.5"
+  y="30"
+  z="60"/>
+
+ <subtraction name="TileWalls">
+  <first  ref="TileOut"/>
+  <second ref="TileIn"/>
+  <position name="posTileSub" x="1.25" y="0" z="0." unit="cm"/>
+  </subtraction>
+
+<box name="TileAcceptanceWindow" lunit="cm"
+  x="1"
+  y="30"
+  z="60"/>
+
+  <box name="MembraneArapucaOut" lunit="cm"
+    x="32.5"
+    y="2.5"
+    z="65"/>
+
+  <box name="MembraneArapucaIn" lunit="cm"
+    x="30"
+    y="2.5"
+    z="60"/>
+
+   <subtraction name="MembraneArapucaWalls">
+    <first  ref="MembraneArapucaOut"/>
+    <second ref="MembraneArapucaIn"/>
+    <position name="posMembraneArapucaSub" x="0." y="1.25" z="0." unit="cm"/>
+    </subtraction>
+
+  <box name="MembraneArapucaAcceptanceWindow" lunit="cm"
+    x="30"
+    y="1"
+    z="60"/>
+
+<!-- xARAPUCA tiles -->
+
+    <box name="Cryostat" lunit="cm"
+      x="100.24" 
+      y="389.24" 
+      z="391.54"/>
+
+    <box name="ArgonInterior" lunit="cm" 
+      x="100"
+      y="389"
+      z="391.3"/>
+
+    <box name="GaseousArgon" lunit="cm" 
+      x="40"
+      y="389"
+      z="391.3"/>
+
+    <subtraction name="SteelShell">
+      <first ref="Cryostat"/>
+      <second ref="ArgonInterior"/>
+    </subtraction>
+
+
+
+    <box name="FoamPadBlock" lunit="cm"
+      x="200.24"
+      y="489.24"
+      z="491.54" />
+
+    <subtraction name="FoamPadding">
+      <first ref="FoamPadBlock"/>
+      <second ref="Cryostat"/>
+      <positionref ref="posCenter"/>
+    </subtraction>
+
+    <box name="SteelSupportBlock" lunit="cm"
+      x="300.24"
+      y="589.24"
+      z="591.54" />
+
+    <subtraction name="SteelSupport">
+      <first ref="SteelSupportBlock"/>
+      <second ref="FoamPadBlock"/>
+      <positionref ref="posCenter"/>
+    </subtraction>
+
+    <torus name="ArapucaMeshCorner" rmin="0" rmax="0.6" rtor="5" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshtube_vertical" rmin="0" rmax="0.6" z="65.3" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshtube_horizontal" rmin="0" rmax="0.6" z="72.4" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+    
+    <box name="ArapucaMeshModule" x="92.1" y="1.2" z="84.7" lunit="cm"/>
+    
+    <tube name="ArapucaMeshRod_vertical" rmin="0" rmax="0.1" z="73.5" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
+    <tube name="ArapucaMeshRod_horizontal" rmin="0" rmax="0.1" z="80.9" deltaphi="360" startphi="0"  aunit="deg" lunit="cm"/>
+
+    <box name="CathodeArapucaMeshModule" x="0.126000001" y="67.25" z="77.25" lunit="cm"/>
+    <tube name="CathodeArapucaMeshRod_vertical" rmax="0.0315" z="77.25" deltaphi="360" aunit="deg" lunit="cm"/>
+    <tube name="CathodeArapucaMeshRod_horizontal" rmax="0.0315" z="67.25"  deltaphi="360" aunit="deg" lunit="cm"/>
+
+    <union name="Meshunion1">
+      <first ref="ArapucaMeshtube_vertical"/>
+      <second ref="ArapucaMeshCorner"/>
+           <position name="Meshcorner1" unit="cm" x="-5" y="0" z="32.65"/>
+        <rotationref ref="rPlus90AboutX" />
+    </union>
+    
+    <union name="Meshunion2">
+      <first ref="Meshunion1"/>
+      <second ref="ArapucaMeshtube_horizontal"/>
+           <position name="Meshside2" unit="cm" x="-41.2" y="0" z="37.65"/>
+           <rotation name="Meshrot2" unit="deg" x="0" y="90" z="0" />
+    </union>
+    
+    <union name="Meshunion3">
+      <first ref="Meshunion2"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner2" unit="cm" x="-77.4" y="0" z="32.65"/>
+        <rotation name="Meshrot3" unit="deg" x="90" y="270" z="0" />
+    </union>
+    
+    <union name="Meshunion4">
+      <first ref="Meshunion3"/>
+      <second ref="ArapucaMeshtube_vertical"/>
+           <position name="Meshside3" unit="cm" x="-82.4" y="0" z="0" />
+    </union>
+    
+    <union name="Meshunion5">
+      <first ref="Meshunion4"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner3" unit="cm" x="-77.4" y="0" z="-32.65"/>
+        <rotation name="Meshrot5" unit="deg" x="90" y="180" z="0" />
+    </union>
+    
+    <union name="Meshunion6">
+      <first ref="Meshunion5"/>
+      <second ref="ArapucaMeshtube_horizontal"/>
+        <position name="Meshside4" unit="cm" x="-41.2" y="0" z="-37.65"/>
+        <rotation name="Meshrot6" unit="deg" x="0" y="90" z="0" />
+    </union>
+    
+    <union name="Meshunion7">
+      <first ref="Meshunion6"/>
+      <second ref="ArapucaMeshCorner"/>
+        <position name="Meshcorner4" unit="cm" x="-5" y="0" z="-32.65"/>
+        <rotation name="Meshrot7" unit="deg" x="90" y="90" z="0" />
+    </union>
+
+    <box name="CathodeMeshModule" x="0.050000001" y="77.250000001" z="67.250000001" lunit="cm"/>
+    <box name="CathodeMeshStrip_horizontal" x="0.05" y="77.25" z="0.25" lunit="cm"/>
+    <box name="CathodeMeshStrip_vertical" x="0.05" y="0.25" z="67.25" lunit="cm"/>
+    <union name="CathodeMeshunion1">
+      <first ref="CathodeMeshStrip_vertical"/>
+      <second ref="CathodeMeshStrip_vertical"/>
+      <position name="posMeshStrip_vertical1" unit="cm" x="0" y="2.5" z="0"/>
+    </union>
+  <union name="CathodeMeshunion2">
+    <first ref="CathodeMeshunion1"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical2" unit="cm" x="0" y="5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion3">
+    <first ref="CathodeMeshunion2"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical3" unit="cm" x="0" y="7.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion4">
+    <first ref="CathodeMeshunion3"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical4" unit="cm" x="0" y="10" z="0"/>
+  </union>
+  <union name="CathodeMeshunion5">
+    <first ref="CathodeMeshunion4"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical5" unit="cm" x="0" y="12.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion6">
+    <first ref="CathodeMeshunion5"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical6" unit="cm" x="0" y="15" z="0"/>
+  </union>
+  <union name="CathodeMeshunion7">
+    <first ref="CathodeMeshunion6"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical7" unit="cm" x="0" y="17.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion8">
+    <first ref="CathodeMeshunion7"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical8" unit="cm" x="0" y="20" z="0"/>
+  </union>
+  <union name="CathodeMeshunion9">
+    <first ref="CathodeMeshunion8"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical9" unit="cm" x="0" y="22.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion10">
+    <first ref="CathodeMeshunion9"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical10" unit="cm" x="0" y="25" z="0"/>
+  </union>
+  <union name="CathodeMeshunion11">
+    <first ref="CathodeMeshunion10"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical11" unit="cm" x="0" y="27.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion12">
+    <first ref="CathodeMeshunion11"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical12" unit="cm" x="0" y="30" z="0"/>
+  </union>
+  <union name="CathodeMeshunion13">
+    <first ref="CathodeMeshunion12"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical13" unit="cm" x="0" y="32.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion14">
+    <first ref="CathodeMeshunion13"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical14" unit="cm" x="0" y="35" z="0"/>
+  </union>
+  <union name="CathodeMeshunion15">
+    <first ref="CathodeMeshunion14"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical15" unit="cm" x="0" y="37.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion16">
+    <first ref="CathodeMeshunion15"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical16" unit="cm" x="0" y="40" z="0"/>
+  </union>
+  <union name="CathodeMeshunion17">
+    <first ref="CathodeMeshunion16"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical17" unit="cm" x="0" y="42.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion18">
+    <first ref="CathodeMeshunion17"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical18" unit="cm" x="0" y="45" z="0"/>
+  </union>
+  <union name="CathodeMeshunion19">
+    <first ref="CathodeMeshunion18"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical19" unit="cm" x="0" y="47.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion20">
+    <first ref="CathodeMeshunion19"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical20" unit="cm" x="0" y="50" z="0"/>
+  </union>
+  <union name="CathodeMeshunion21">
+    <first ref="CathodeMeshunion20"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical21" unit="cm" x="0" y="52.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion22">
+    <first ref="CathodeMeshunion21"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical22" unit="cm" x="0" y="55" z="0"/>
+  </union>
+  <union name="CathodeMeshunion23">
+    <first ref="CathodeMeshunion22"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical23" unit="cm" x="0" y="57.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion24">
+    <first ref="CathodeMeshunion23"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical24" unit="cm" x="0" y="60" z="0"/>
+  </union>
+  <union name="CathodeMeshunion25">
+    <first ref="CathodeMeshunion24"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical25" unit="cm" x="0" y="62.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion26">
+    <first ref="CathodeMeshunion25"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical26" unit="cm" x="0" y="65" z="0"/>
+  </union>
+  <union name="CathodeMeshunion27">
+    <first ref="CathodeMeshunion26"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical27" unit="cm" x="0" y="67.5" z="0"/>
+  </union>
+  <union name="CathodeMeshunion28">
+    <first ref="CathodeMeshunion27"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical28" unit="cm" x="0" y="70" z="0"/>
+  </union>
+  <union name="CathodeMeshunion29">
+    <first ref="CathodeMeshunion28"/>
+    <second ref="CathodeMeshStrip_vertical"/>
+    <position name="posMeshStrip_vertical29" unit="cm" x="0" y="72.5" z="0"/>
+  </union>
+    <union name="CathodeMeshunion30">
+      <first ref="CathodeMeshunion29"/>
+      <second ref="CathodeMeshStrip_horizontal"/>
+      <position name="posMeshStrip_horizontal0" unit="cm" x="0" y="36.25" z="-31.25"/>
+    </union>
+  <union name="CathodeMeshunion31">
+    <first ref="CathodeMeshunion30"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal1" unit="cm" x="0" y="36.25" z="-28.75"/>
+  </union>
+  <union name="CathodeMeshunion32">
+    <first ref="CathodeMeshunion31"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal2" unit="cm" x="0" y="36.25" z="-26.25"/>
+  </union>
+  <union name="CathodeMeshunion33">
+    <first ref="CathodeMeshunion32"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal3" unit="cm" x="0" y="36.25" z="-23.75"/>
+  </union>
+  <union name="CathodeMeshunion34">
+    <first ref="CathodeMeshunion33"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal4" unit="cm" x="0" y="36.25" z="-21.25"/>
+  </union>
+  <union name="CathodeMeshunion35">
+    <first ref="CathodeMeshunion34"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal5" unit="cm" x="0" y="36.25" z="-18.75"/>
+  </union>
+  <union name="CathodeMeshunion36">
+    <first ref="CathodeMeshunion35"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal6" unit="cm" x="0" y="36.25" z="-16.25"/>
+  </union>
+  <union name="CathodeMeshunion37">
+    <first ref="CathodeMeshunion36"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal7" unit="cm" x="0" y="36.25" z="-13.75"/>
+  </union>
+  <union name="CathodeMeshunion38">
+    <first ref="CathodeMeshunion37"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal8" unit="cm" x="0" y="36.25" z="-11.25"/>
+  </union>
+  <union name="CathodeMeshunion39">
+    <first ref="CathodeMeshunion38"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal9" unit="cm" x="0" y="36.25" z="-8.75"/>
+  </union>
+  <union name="CathodeMeshunion40">
+    <first ref="CathodeMeshunion39"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal10" unit="cm" x="0" y="36.25" z="-6.25"/>
+  </union>
+  <union name="CathodeMeshunion41">
+    <first ref="CathodeMeshunion40"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal11" unit="cm" x="0" y="36.25" z="-3.75"/>
+  </union>
+  <union name="CathodeMeshunion42">
+    <first ref="CathodeMeshunion41"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal12" unit="cm" x="0" y="36.25" z="-1.25"/>
+  </union>
+  <union name="CathodeMeshunion43">
+    <first ref="CathodeMeshunion42"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal13" unit="cm" x="0" y="36.25" z="1.25"/>
+  </union>
+  <union name="CathodeMeshunion44">
+    <first ref="CathodeMeshunion43"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal14" unit="cm" x="0" y="36.25" z="3.75"/>
+  </union>
+  <union name="CathodeMeshunion45">
+    <first ref="CathodeMeshunion44"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal15" unit="cm" x="0" y="36.25" z="6.25"/>
+  </union>
+  <union name="CathodeMeshunion46">
+    <first ref="CathodeMeshunion45"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal16" unit="cm" x="0" y="36.25" z="8.75"/>
+  </union>
+  <union name="CathodeMeshunion47">
+    <first ref="CathodeMeshunion46"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal17" unit="cm" x="0" y="36.25" z="11.25"/>
+  </union>
+  <union name="CathodeMeshunion48">
+    <first ref="CathodeMeshunion47"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal18" unit="cm" x="0" y="36.25" z="13.75"/>
+  </union>
+  <union name="CathodeMeshunion49">
+    <first ref="CathodeMeshunion48"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal19" unit="cm" x="0" y="36.25" z="16.25"/>
+  </union>
+  <union name="CathodeMeshunion50">
+    <first ref="CathodeMeshunion49"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal20" unit="cm" x="0" y="36.25" z="18.75"/>
+  </union>
+  <union name="CathodeMeshunion51">
+    <first ref="CathodeMeshunion50"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal21" unit="cm" x="0" y="36.25" z="21.25"/>
+  </union>
+  <union name="CathodeMeshunion52">
+    <first ref="CathodeMeshunion51"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal22" unit="cm" x="0" y="36.25" z="23.75"/>
+  </union>
+  <union name="CathodeMeshunion53">
+    <first ref="CathodeMeshunion52"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal23" unit="cm" x="0" y="36.25" z="26.25"/>
+  </union>
+  <union name="CathodeMeshunion54">
+    <first ref="CathodeMeshunion53"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal24" unit="cm" x="0" y="36.25" z="28.75"/>
+  </union>
+  <union name="CathodeMeshunion55">
+    <first ref="CathodeMeshunion54"/>
+    <second ref="CathodeMeshStrip_horizontal"/>
+    <position name="posMeshStrip_horizontal25" unit="cm" x="0" y="36.25" z="31.25"/>
+  </union>
+
+    <box name="ArapucaOut" lunit="cm"
+      x="65.3"
+      y="2.5"
+      z="65.3"/>
+    <box name="ArapucaIn" lunit="cm"
+      x="60"
+      y="2.5"
+      z="60"/>
+     <subtraction name="ArapucaWalls">
+      <first  ref="ArapucaOut"/>
+      <second ref="ArapucaIn"/>
+      <position name="posArapucaSub" x="0" y="1.25" z="0." unit="cm"/>
+      </subtraction>
+    <box name="ArapucaAcceptanceWindow" lunit="cm"
+      x="60"
+      y="1"
+      z="60"/>
+    <box name="ArapucaDoubleIn" lunit="cm"
+      x="60"
+      y="3.5"
+      z="60"/>
+     <subtraction name="ArapucaDoubleWalls">
+      <first  ref="ArapucaOut"/>
+      <second ref="ArapucaDoubleIn"/>
+      <position name="posArapucaDoubleSub" x="0" y="0" z="0" unit="cm"/>
+      </subtraction>
+    <box name="ArapucaDoubleAcceptanceWindow" lunit="cm"
+      x="2.48"
+      y="60"
+      z="60"/>
+
+    <box name="Cryostat" lunit="cm"
+      x="790"
+      y="854.8"
+      z="854.8"/>
+      
+    <box name="CathodeBlock" lunit="cm"
+      x="6"
+      y="337"
+      z="299.3" />
+
+    <box name="CathodeVoid" lunit="cm"
+      x="7"
+      y="77.25"
+      z="67.25" />
+
+    <subtraction name="Cathode1">
+      <first ref="CathodeBlock"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub1" x="0" y="-123.875" z="-108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode2">
+      <first ref="Cathode1"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub2" x="0" y="-123.875" z="-37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode3">
+      <first ref="Cathode2"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub3" x="0" y="-123.875" z="37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode4">
+      <first ref="Cathode3"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub4" x="0" y="-123.875" z="108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode5">
+      <first ref="Cathode4"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub5" x="0" y="-42.625" z="-108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode6">
+      <first ref="Cathode5"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub6" x="0" y="-42.625" z="-37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode7">
+      <first ref="Cathode6"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub7" x="0" y="-42.625" z="37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode8">
+      <first ref="Cathode7"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub8" x="0" y="-42.625" z="108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode9">
+      <first ref="Cathode8"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub9" x="0" y="42.625" z="-108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode10">
+      <first ref="Cathode9"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub10" x="0" y="42.625" z="-37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode11">
+      <first ref="Cathode10"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub11" x="0" y="42.625" z="37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode12">
+      <first ref="Cathode11"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub12" x="0" y="42.625" z="108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode13">
+      <first ref="Cathode12"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub13" x="0" y="123.875" z="-108.875" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode14">
+      <first ref="Cathode13"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub14" x="0" y="123.875" z="-37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="Cathode15">
+      <first ref="Cathode14"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub15" x="0" y="123.875" z="37.625" unit="cm"/>
+    </subtraction>
+    <subtraction name="CathodeFrame">
+      <first ref="Cathode15"/>
+      <second ref="CathodeVoid"/>
+      <position name="posCathodeSub16" x="0" y="123.875" z="108.875" unit="cm"/>
+    </subtraction>
+    <union name="CathodeFrame_MeshTop11">
+    <first ref="CathodeFrame"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop11"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom11">
+    <first ref="CathodeFrame_MeshTop11"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom11"/>
+    </union>
+    <union name="CathodeFrame_MeshTop21">
+    <first ref="CathodeFrame_MeshBottom11"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop21"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom21">
+    <first ref="CathodeFrame_MeshTop21"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom21"/>
+    </union>
+    <union name="CathodeFrame_MeshTop41">
+    <first ref="CathodeFrame_MeshBottom21"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop41"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom41">
+    <first ref="CathodeFrame_MeshTop41"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom41"/>
+    </union>
+    <union name="CathodeFrame_MeshTop32">
+    <first ref="CathodeFrame_MeshBottom41"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop32"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom32">
+    <first ref="CathodeFrame_MeshTop32"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom32"/>
+    </union>
+    <union name="CathodeFrame_MeshTop42">
+    <first ref="CathodeFrame_MeshBottom32"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop42"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom42">
+    <first ref="CathodeFrame_MeshTop42"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom42"/>
+    </union>
+    
+    <union name="CathodeFrame_MeshTop13">
+    <first ref="CathodeFrame_MeshBottom42"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop13"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom13">
+    <first ref="CathodeFrame_MeshTop13"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom13"/>
+    </union>
+    <union name="CathodeFrame_MeshTop23">
+    <first ref="CathodeFrame_MeshBottom13"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop23"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom23">
+    <first ref="CathodeFrame_MeshTop23"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom23"/>
+    </union>
+    <union name="CathodeFrame_MeshTop33">
+    <first ref="CathodeFrame_MeshBottom23"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop33"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom33">
+    <first ref="CathodeFrame_MeshTop33"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom33"/>
+    </union>
+
+    <union name="CathodeFrame_MeshTop14">
+    <first ref="CathodeFrame_MeshBottom33"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop14"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom14">
+    <first ref="CathodeFrame_MeshTop14"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom14"/>
+    </union>
+    <union name="CathodeFrame_MeshTop34">
+    <first ref="CathodeFrame_MeshBottom14"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop34"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom34">
+    <first ref="CathodeFrame_MeshTop34"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom34"/>
+    </union>
+    <union name="CathodeFrame_MeshTop44">
+    <first ref="CathodeFrame_MeshBottom34"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop44"/>
+    </union>
+    <union name="CathodeFrame_MeshBottom44">
+    <first ref="CathodeFrame_MeshTop44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom44"/>
+    </union>
+
+   
+    <!--Non-TCO Side-->
+    <union name="CathodeFrame_MeshTop22">
+    <first ref="CathodeFrame_MeshBottom44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop22"/>
+    </union>
+    <union name="Cathode_nonTCOSide">
+    <first ref="CathodeFrame_MeshTop22"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom22"/>
+    </union>
+    <!--TCO Side-->
+    <union name="CathodeFrame_MeshTop12">
+    <first ref="CathodeFrame_MeshBottom44"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshTop12"/>
+    </union>
+    <union name="Cathode_TCOSide">
+    <first ref="CathodeFrame_MeshTop12"/>
+    <second ref="CathodeMeshunion55"/>
+    <positionref ref="posCathodeMeshBottom22"/>
+    </union>
+
+    
+    
+    <box name="DetEnclosure" lunit="cm"
+      x="400.24"
+      y="789.24"
+      z="791.54"/>
+
+
+    <box name="World" lunit="cm" 
+      x="8400.24" 
+      y="8789.24" 
+      z="8791.54"/>
+</solids>
+<structure>
+    <volume name="volTPCActive">
+      <materialref ref="LAr"/>
+      <solidref ref="CRMActive"/>
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.5*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="500*V/cm"/>
+      <colorref ref="blue"/>
+    </volume>
+   <volume name="volTPCPlaneU0">
+     <materialref ref="LAr"/>
+     <solidref ref="CRMUPlane"/>
+   </volume>
+  <volume name="volTPCPlaneV0">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMVPlane"/>
+  </volume>
+  <volume name="volTPCPlaneZ0">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMZPlane"/>
+  </volume>
+   <volume name="volTPC0">
+     <materialref ref="LAr"/>
+       <solidref ref="CRM"/>
+       <physvol>
+       <volumeref ref="volTPCPlaneU0"/>
+       <position name="posPlaneU0" unit="cm" 
+         x="11.48" y="0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneV0"/>
+       <position name="posPlaneY0" unit="cm" 
+         x="11.5" y="0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneZ0"/>
+       <position name="posPlaneZ0" unit="cm" 
+         x="11.52" y="0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCActive"/>
+       <position name="posActive0" unit="cm" 
+        x="-0.03" y="" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+   </volume>
+ 
+   <volume name="volTPCPlaneU1">
+     <materialref ref="LAr"/>
+     <solidref ref="CRMUPlane"/>
+   </volume>
+  <volume name="volTPCPlaneV1">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMVPlane"/>
+  </volume>
+  <volume name="volTPCPlaneZ1">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMZPlane"/>
+  </volume>
+   <volume name="volTPC1">
+     <materialref ref="LAr"/>
+       <solidref ref="CRM"/>
+       <physvol>
+       <volumeref ref="volTPCPlaneU1"/>
+       <position name="posPlaneU1" unit="cm" 
+         x="11.48" y="-0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneV1"/>
+       <position name="posPlaneY1" unit="cm" 
+         x="11.5" y="-0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneZ1"/>
+       <position name="posPlaneZ1" unit="cm" 
+         x="11.52" y="-0.3" z="0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCActive"/>
+       <position name="posActive1" unit="cm" 
+        x="-0.03" y="" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+   </volume>
+ 
+   <volume name="volTPCPlaneU2">
+     <materialref ref="LAr"/>
+     <solidref ref="CRMUPlane"/>
+   </volume>
+  <volume name="volTPCPlaneV2">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMVPlane"/>
+  </volume>
+  <volume name="volTPCPlaneZ2">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMZPlane"/>
+  </volume>
+   <volume name="volTPC2">
+     <materialref ref="LAr"/>
+       <solidref ref="CRM"/>
+       <physvol>
+       <volumeref ref="volTPCPlaneU2"/>
+       <position name="posPlaneU2" unit="cm" 
+         x="11.48" y="0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneV2"/>
+       <position name="posPlaneY2" unit="cm" 
+         x="11.5" y="0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneZ2"/>
+       <position name="posPlaneZ2" unit="cm" 
+         x="11.52" y="0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCActive"/>
+       <position name="posActive2" unit="cm" 
+        x="-0.03" y="" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+   </volume>
+ 
+   <volume name="volTPCPlaneU3">
+     <materialref ref="LAr"/>
+     <solidref ref="CRMUPlane"/>
+   </volume>
+  <volume name="volTPCPlaneV3">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMVPlane"/>
+  </volume>
+  <volume name="volTPCPlaneZ3">
+    <materialref ref="LAr"/>
+    <solidref ref="CRMZPlane"/>
+  </volume>
+   <volume name="volTPC3">
+     <materialref ref="LAr"/>
+       <solidref ref="CRM"/>
+       <physvol>
+       <volumeref ref="volTPCPlaneU3"/>
+       <position name="posPlaneU3" unit="cm" 
+         x="11.48" y="-0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneV3"/>
+       <position name="posPlaneY3" unit="cm" 
+         x="11.5" y="-0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCPlaneZ3"/>
+       <position name="posPlaneZ3" unit="cm" 
+         x="11.52" y="-0.3" z="-0.275"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volTPCActive"/>
+       <position name="posActive3" unit="cm" 
+        x="-0.03" y="" z="0"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+   </volume>
+ 
+    <volume name="volSteelShell">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
+      <solidref ref="SteelShell" />
+    </volume>
+    <volume name="volGaseousArgon">
+      <materialref ref="ArGas"/>
+      <solidref ref="GaseousArgon"/>
+    </volume>
+
+    <!-- xARAPUCA tiles -->
+    
+    <volume name="volTile-0">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-0">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-0b">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-0b">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-1">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-1">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-1b">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-1b">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-2">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-2">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-2b">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-2b">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-3">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-3">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-3b">
+      <materialref ref="G10"/>
+      <solidref ref="TileWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-3b">
+      <materialref ref="LAr"/>
+      <solidref ref="TileAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-4">
+      <materialref ref="G10"/>
+      <solidref ref="MembraneArapucaWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-4">
+      <materialref ref="LAr"/>
+      <solidref ref="MembraneArapucaAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-4b">
+      <materialref ref="G10"/>
+      <solidref ref="MembraneArapucaWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-4b">
+      <materialref ref="LAr"/>
+      <solidref ref="MembraneArapucaAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-5">
+      <materialref ref="G10"/>
+      <solidref ref="MembraneArapucaWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-5">
+      <materialref ref="LAr"/>
+      <solidref ref="MembraneArapucaAcceptanceWindow"/>
+    </volume>
+    <volume name="volTile-5b">
+      <materialref ref="G10"/>
+      <solidref ref="MembraneArapucaWalls"/>
+    </volume>
+    <volume name="volOpDetSensitive_Tile-5b">
+      <materialref ref="LAr"/>
+      <solidref ref="MembraneArapucaAcceptanceWindow"/>
+    </volume>
+    
+    <!-- xARAPUCA tiles -->
+    
+    <volume name="volCryostat">
+      <materialref ref="LAr" />
+      <solidref ref="Cryostat" />
+      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+      <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="1*cm"/>
+      <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+      <physvol>
+        <volumeref ref="volGaseousArgon"/>
+        <position name="posGaseousArgon" unit="cm" x="30" y="0" z="0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volSteelShell"/>
+        <position name="posSteelShell" unit="cm" x="0" y="0" z="0"/>
+      </physvol>
+       <physvol>
+         <volumeref ref="volTPC0"/>
+         <position name="posTPC0" unit="cm" 
+         x="-21.53" y="-84.25" z="-74.825"/>
+        <rotationref ref="rIdentity"/>
+       </physvol>
+       <physvol>
+         <volumeref ref="volTPC1"/>
+         <position name="posTPC1" unit="cm"
+         x="-21.53" y="84.25" z="-74.825"/>
+         <rotationref ref="rIdentity"/>
+       </physvol>
+       <physvol>
+         <volumeref ref="volTPC2"/>
+         <position name="posTPC2" unit="cm"
+         x="-21.53" y="-84.25" z="74.825"/>
+         <rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+         <volumeref ref="volTPC3"/>
+         <position name="posTPC3" unit="cm"
+         x="-21.53" y="84.25" z="74.825"/>
+         <rotationref ref="rIdentity"/>
+      </physvol>
+      
+    </volume>
+
+    <volume name="volFoamPadding">
+      <materialref ref="fibrous_glass"/>
+      <solidref ref="FoamPadding"/>
+    </volume>
+
+    <volume name="volSteelSupport">
+      <materialref ref="AirSteelMixture"/>
+      <solidref ref="SteelSupport"/>
+    </volume>
+
+    
+    <volume name="volCathodeArapucaMeshRod_vertical">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="CathodeArapucaMeshRod_vertical"/>
+    </volume>
+    <volume name="volCathodeArapucaMeshRod_horizontal">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="CathodeArapucaMeshRod_horizontal"/>
+    </volume>
+    <volume name="volArapucaMeshRod_vertical">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="ArapucaMeshRod_vertical"/>
+    </volume>
+    <volume name="volArapucaMeshRod_horizontal">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="ArapucaMeshRod_horizontal"/>
+    </volume>
+    <volume name="volMeshunion">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="Meshunion7"/>
+    </volume>
+    <volume name="volArapucaMesh">
+      <materialref ref="LAr"/>
+      <solidref ref="ArapucaMeshModule"/>
+      <physvol>
+       <volumeref ref="volMeshunion"/>
+       <position name="posMesh18" unit="cm" x="41.2" y="0" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical0" unit="cm" x="-37.44" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical1" unit="cm" x="-29.952" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical2" unit="cm" x="-22.464" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical3" unit="cm" x="-14.976" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical4" unit="cm" x="-7.488" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical5" unit="cm" x="0" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical6" unit="cm" x="7.488" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical7" unit="cm" x="14.976" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical8" unit="cm" x="22.464" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical9" unit="cm" x="29.952" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_vertical"/>
+       <position name="posMeshRod_vertical10" unit="cm" x="37.44" y="0.20001" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal10" unit="cm" x="0" y="0" z="-29.952"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal11" unit="cm" x="0" y="0" z="-22.464"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal12" unit="cm" x="0" y="0" z="-14.976"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal13" unit="cm" x="0" y="0" z="-7.488"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal14" unit="cm" x="0" y="0" z="0"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal15" unit="cm" x="0" y="0" z="7.488"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal16" unit="cm" x="0" y="0" z="14.976"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal17" unit="cm" x="0" y="0" z="22.464"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+      <physvol>
+       <volumeref ref="volArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal18" unit="cm" x="0" y="0" z="29.952"/>
+        <rotationref ref="rot90AboutY"/>
+       </physvol>
+    </volume>
+    <volume name="volCathodeArapucaMesh">
+      <materialref ref="LAr"/>
+      <solidref ref="CathodeArapucaMeshModule"/>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical0" unit="cm" x="-0.0315000005" y="-33.1" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical1" unit="cm" x="-0.0315000005" y="-31.83" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical2" unit="cm" x="-0.0315000005" y="-30.56" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical3" unit="cm" x="-0.0315000005" y="-29.29" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical4" unit="cm" x="-0.0315000005" y="-28.02" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical5" unit="cm" x="-0.0315000005" y="-26.75" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical6" unit="cm" x="-0.0315000005" y="-25.48" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical7" unit="cm" x="-0.0315000005" y="-24.21" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical8" unit="cm" x="-0.0315000005" y="-22.94" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical9" unit="cm" x="-0.0315000005" y="-21.67" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical10" unit="cm" x="-0.0315000005" y="-20.4" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical11" unit="cm" x="-0.0315000005" y="-19.13" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical12" unit="cm" x="-0.0315000005" y="-17.86" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical13" unit="cm" x="-0.0315000005" y="-16.59" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical14" unit="cm" x="-0.0315000005" y="-15.32" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical15" unit="cm" x="-0.0315000005" y="-14.05" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical16" unit="cm" x="-0.0315000005" y="-12.78" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical17" unit="cm" x="-0.0315000005" y="-11.51" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical18" unit="cm" x="-0.0315000005" y="-10.24" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical19" unit="cm" x="-0.0315000005" y="-8.97" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical20" unit="cm" x="-0.0315000005" y="-7.7" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical21" unit="cm" x="-0.0315000005" y="-6.43" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical22" unit="cm" x="-0.0315000005" y="-5.16" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical23" unit="cm" x="-0.0315000005" y="-3.89" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical24" unit="cm" x="-0.0315000005" y="-2.62" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical25" unit="cm" x="-0.0315000005" y="-1.35" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical26" unit="cm" x="-0.0315000005" y="-0.0799999999999983" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical27" unit="cm" x="-0.0315000005" y="1.19" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical28" unit="cm" x="-0.0315000005" y="2.46" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical29" unit="cm" x="-0.0315000005" y="3.73" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical30" unit="cm" x="-0.0315000005" y="5" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical31" unit="cm" x="-0.0315000005" y="6.27" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical32" unit="cm" x="-0.0315000005" y="7.54" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical33" unit="cm" x="-0.0315000005" y="8.81" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical34" unit="cm" x="-0.0315000005" y="10.08" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical35" unit="cm" x="-0.0315000005" y="11.35" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical36" unit="cm" x="-0.0315000005" y="12.62" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical37" unit="cm" x="-0.0315000005" y="13.89" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical38" unit="cm" x="-0.0315000005" y="15.16" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical39" unit="cm" x="-0.0315000005" y="16.43" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical40" unit="cm" x="-0.0315000005" y="17.7" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical41" unit="cm" x="-0.0315000005" y="18.97" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical42" unit="cm" x="-0.0315000005" y="20.24" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical43" unit="cm" x="-0.0315000005" y="21.51" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical44" unit="cm" x="-0.0315000005" y="22.78" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical45" unit="cm" x="-0.0315000005" y="24.05" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical46" unit="cm" x="-0.0315000005" y="25.32" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical47" unit="cm" x="-0.0315000005" y="26.59" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical48" unit="cm" x="-0.0315000005" y="27.86" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical49" unit="cm" x="-0.0315000005" y="29.13" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical50" unit="cm" x="-0.0315000005" y="30.4" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical51" unit="cm" x="-0.0315000005" y="31.67" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_vertical"/>
+       <position name="posCathodeMeshRod_vertical52" unit="cm" x="-0.0315000005" y="32.94" z="0"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal20" unit="cm" x="0.0315000005" y="0" z="-38.02"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal21" unit="cm" x="0.0315000005" y="0" z="-36.75"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal22" unit="cm" x="0.0315000005" y="0" z="-35.48"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal23" unit="cm" x="0.0315000005" y="0" z="-34.21"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal24" unit="cm" x="0.0315000005" y="0" z="-32.94"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal25" unit="cm" x="0.0315000005" y="0" z="-31.67"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal26" unit="cm" x="0.0315000005" y="0" z="-30.4"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal27" unit="cm" x="0.0315000005" y="0" z="-29.13"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal28" unit="cm" x="0.0315000005" y="0" z="-27.86"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal29" unit="cm" x="0.0315000005" y="0" z="-26.59"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal210" unit="cm" x="0.0315000005" y="0" z="-25.32"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal211" unit="cm" x="0.0315000005" y="0" z="-24.05"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal212" unit="cm" x="0.0315000005" y="0" z="-22.78"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal213" unit="cm" x="0.0315000005" y="0" z="-21.51"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal214" unit="cm" x="0.0315000005" y="0" z="-20.24"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal215" unit="cm" x="0.0315000005" y="0" z="-18.97"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal216" unit="cm" x="0.0315000005" y="0" z="-17.7"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal217" unit="cm" x="0.0315000005" y="0" z="-16.43"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal218" unit="cm" x="0.0315000005" y="0" z="-15.16"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal219" unit="cm" x="0.0315000005" y="0" z="-13.89"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal220" unit="cm" x="0.0315000005" y="0" z="-12.62"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal221" unit="cm" x="0.0315000005" y="0" z="-11.35"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal222" unit="cm" x="0.0315000005" y="0" z="-10.08"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal223" unit="cm" x="0.0315000005" y="0" z="-8.81"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal224" unit="cm" x="0.0315000005" y="0" z="-7.54"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal225" unit="cm" x="0.0315000005" y="0" z="-6.27"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal226" unit="cm" x="0.0315000005" y="0" z="-5"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal227" unit="cm" x="0.0315000005" y="0" z="-3.73"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal228" unit="cm" x="0.0315000005" y="0" z="-2.46"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal229" unit="cm" x="0.0315000005" y="0" z="-1.19"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal230" unit="cm" x="0.0315000005" y="0" z="0.0799999999999983"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal231" unit="cm" x="0.0315000005" y="0" z="1.34999999999999"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal232" unit="cm" x="0.0315000005" y="0" z="2.62"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal233" unit="cm" x="0.0315000005" y="0" z="3.89"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal234" unit="cm" x="0.0315000005" y="0" z="5.16"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal235" unit="cm" x="0.0315000005" y="0" z="6.43"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal236" unit="cm" x="0.0315000005" y="0" z="7.7"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal237" unit="cm" x="0.0315000005" y="0" z="8.97"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal238" unit="cm" x="0.0315000005" y="0" z="10.24"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal239" unit="cm" x="0.0315000005" y="0" z="11.51"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal240" unit="cm" x="0.0315000005" y="0" z="12.78"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal241" unit="cm" x="0.0315000005" y="0" z="14.05"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal242" unit="cm" x="0.0315000005" y="0" z="15.32"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal243" unit="cm" x="0.0315000005" y="0" z="16.59"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal244" unit="cm" x="0.0315000005" y="0" z="17.86"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal245" unit="cm" x="0.0315000005" y="0" z="19.13"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal246" unit="cm" x="0.0315000005" y="0" z="20.4"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal247" unit="cm" x="0.0315000005" y="0" z="21.67"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal248" unit="cm" x="0.0315000005" y="0" z="22.94"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal249" unit="cm" x="0.0315000005" y="0" z="24.21"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal250" unit="cm" x="0.0315000005" y="0" z="25.48"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal251" unit="cm" x="0.0315000005" y="0" z="26.75"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal252" unit="cm" x="0.0315000005" y="0" z="28.02"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal253" unit="cm" x="0.0315000005" y="0" z="29.29"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal254" unit="cm" x="0.0315000005" y="0" z="30.56"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal255" unit="cm" x="0.0315000005" y="0" z="31.83"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal256" unit="cm" x="0.0315000005" y="0" z="33.1"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal257" unit="cm" x="0.0315000005" y="0" z="34.37"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal258" unit="cm" x="0.0315000005" y="0" z="35.64"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal259" unit="cm" x="0.0315000005" y="0" z="36.91"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+      <physvol>
+       <volumeref ref="volCathodeArapucaMeshRod_horizontal"/>
+       <position name="posMeshRod_horizontal260" unit="cm" x="0.0315000005" y="0" z="38.18"/>
+       <rotationref ref="rPlus90AboutX"/>
+      </physvol>
+    </volume>
+
+    <volume name="volCathodeMeshStrip_vertical">
+      <materialref ref="G10"/>
+      <solidref ref="CathodeMeshStrip_vertical"/>
+    </volume>
+    <volume name="volCathodeMeshStrip_horizontal">
+      <materialref ref="G10"/>
+      <solidref ref="CathodeMeshStrip_horizontal"/>
+    </volume>
+    <volume name="volCathodeMeshunion">
+      <materialref ref="G10"/>
+      <solidref ref="CathodeMeshunion55"/>
+    </volume>
+    <volume name="volCathodeMesh">
+      <materialref ref="LAr"/>
+      <solidref ref="CathodeMeshModule"/>
+      <physvol>
+       <volumeref ref="volCathodeMeshunion"/>
+       <position name="posCathodeMesh" unit="cm" x="0" y="0" z="-36.25"/>
+      </physvol>
+    </volume>
+
+        <volume name="volCathode_nonTCOSide">
+          <materialref ref="G10" />
+          <solidref ref="Cathode_nonTCOSide"/>
+          <colorref ref="black"/>
+        </volume>
+        <volume name="volArapucaDouble_0-0-0">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_0-0-0">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_0-0-1">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_0-0-1">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_0-0-2">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_0-0-2">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_0-0-3">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_0-0-3">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_1-0-0">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_1-0-0">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_1-0-1">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_1-0-1">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_1-0-2">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_1-0-2">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaDouble_1-0-3">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaDoubleWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaDouble_1-0-3">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaDoubleAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-0">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-0">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-1">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-1">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-2">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-2">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-3">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-3">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-4">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-4">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-5">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-5">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-6">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-6">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_0-7">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_0-7">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-0">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-0">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-1">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-1">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-2">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-2">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-3">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-3">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-4">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-4">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-5">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-5">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-6">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-6">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        <volume name="volArapucaLat_1-7">
+          <materialref ref="G10" />
+          <solidref ref="ArapucaWalls" />
+        </volume>
+        <volume name="volOpDetSensitive_ArapucaLat_1-7">
+          <materialref ref="LAr"/>
+          <solidref ref="ArapucaAcceptanceWindow"/>
+        </volume>
+        
+        <volume name="volCryostat">
+          <materialref ref="LAr" />
+          <solidref ref="Cryostat" />
+          <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
+          <auxiliary auxtype="StepLimit" auxunit="cm" auxvalue="0.47625*cm"/>
+          <auxiliary auxtype="Efield" auxunit="V/cm" auxvalue="0*V/cm"/>
+
+            <physvol>
+            <volumeref ref="volCathode_nonTCOSide"/>
+            <rotationref ref="rPlus180AboutY"/>
+            <position name="posCathode-0" unit="cm" x="-35.5" y="0" z="-2.8421709430404e-14"/>
+            </physvol>
+            
+            <!-- xARAPUCA tiles (cut in two parts for readout channels matching)  -->
+
+            <!-- DAPHNE channel 0 -->
+            <physvol>
+              <volumeref ref="volTile-2"/>
+              <position name="posTile2" unit="cm"
+                x="-37.707"
+            y="-118+32.5/2"
+            z="-37.7"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-2"/>
+              <position name="posOpTile2" unit="cm"
+                x="-36.967"
+            y="-118+32.5/2"
+            z="-37.7"/>
+            </physvol>
+            <!-- DAPHNE channel 7 -->
+            <physvol>
+              <volumeref ref="volTile-2b"/>
+              <position name="posTile2b" unit="cm"
+                x="-37.707"
+            y="-118-32.5/2"
+            z="-37.7"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-2b"/>
+              <position name="posOpTile2b" unit="cm"
+                x="-36.967"
+            y="-118-32.5/2"
+            z="-37.7"/>
+            </physvol>
+            <!-- DAPHNE channel 10 -->
+            <physvol>
+              <volumeref ref="volTile-3"/>
+              <position name="posTile3" unit="cm"
+                x="-37.707"
+            y="-38+32.5/2"
+            z="108.5"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-3"/>
+              <position name="posOpTile3" unit="cm"
+                x="-36.967"
+            y="-38+32.5/2"
+            z="108.5"/>
+            </physvol>
+            <!-- DAPHNE channel 17 -->
+            <physvol>
+              <volumeref ref="volTile-3b"/>
+              <position name="posTile3b" unit="cm"
+                x="-37.707"
+            y="-38-32.5/2"
+            z="108.5"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-3b"/>
+              <position name="posOpTile3b" unit="cm"
+                x="-36.967"
+            y="-38-32.5/2"
+            z="108.5"/>
+            </physvol>
+            <!-- DAPHNE channel 47 -->
+            <physvol>
+              <volumeref ref="volTile-1b"/>
+              <position name="posTile1b" unit="cm"
+                x="-37.707"
+            y="37.2+32.5/2"
+            z="-108.5"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-1b"/>
+              <position name="posOpTile1b" unit="cm"
+                x="-36.967"
+            y="37.2+32.5/2"
+            z="-108.5"/>
+            </physvol>
+            <!-- DAPHNE channel 20 -->
+            <physvol>
+              <volumeref ref="volTile-0b"/>
+              <position name="posTile0" unit="cm"
+                x="-37.707"
+            y="118+32.5/2"
+            z="37.3"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-0b"/>
+              <position name="posOpTile0" unit="cm"
+                x="-36.967"
+            y="118+32.5/2"
+            z="37.3"/>
+            </physvol>
+            <!-- DAPHNE channel 27 -->
+            <physvol>
+              <volumeref ref="volTile-0"/>
+              <position name="posTile0" unit="cm"
+                x="-37.707"
+            y="118-32.5/2"
+            z="37.3"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-0"/>
+              <position name="posOpTile0" unit="cm"
+                x="-36.967"
+            y="118-32.5/2"
+            z="37.3"/>
+            </physvol>
+            <!-- DAPHNE channel 37 -->
+            <physvol>
+              <volumeref ref="volTile-1"/>
+              <position name="posTile1" unit="cm"
+                x="-37.707"
+            y="37.2-32.5/2"
+            z="-108.5"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-1"/>
+              <position name="posOpTile1" unit="cm"
+                x="-36.967"
+            y="37.2-32.5/2"
+            z="-108.5"/>
+            </physvol>
+            <!-- DAPHNE channel 6 -->
+            <physvol>
+              <volumeref ref="volTile-4b"/>
+              <position name="posTile4b" unit="cm"
+                x="3"
+            y="188"
+            z="37.3"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-4b"/>
+              <position name="posOpTile4b" unit="cm"
+                x="3"
+            y="187.2"
+            z="37.3"/>
+            </physvol>
+            <!-- DAPHNE channel 1 -->
+            <physvol>
+              <volumeref ref="volTile-4"/>
+              <position name="posTile4" unit="cm"
+                x="-27"
+            y="188"
+            z="37.3"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-4"/>
+              <position name="posOpTile4" unit="cm"
+                x="-27"
+            y="187.2"
+            z="37.3"/>
+            </physvol>
+            <!-- DAPHNE channel 30 -->
+            <physvol>
+              <volumeref ref="volTile-5b"/>
+              <position name="posTile5b" unit="cm"
+                x="3"
+            y="188"
+            z="-37.7"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-5b"/>
+              <position name="posOpTile5b" unit="cm"
+                x="3"
+            y="187.2"
+            z="-37.7"/>
+            </physvol>
+            <!-- DAPHNE channel 36 -->
+            <physvol>
+              <volumeref ref="volTile-5"/>
+              <position name="posTile5" unit="cm"
+                x="-27"
+            y="188"
+            z="-37.7"/>
+            </physvol>
+            <physvol>
+              <volumeref ref="volOpDetSensitive_Tile-5"/>
+              <position name="posOpTile5" unit="cm"
+                x="-27"
+            y="187.2"
+            z="-37.7"/>
+            </physvol>
+
+            
+            <!-- xARAPUCA tiles -->
+        </volume>
+    
+    <volume name="volDetEnclosure">
+      <materialref ref="Air"/>
+      <solidref ref="DetEnclosure"/>
+
+       <physvol>
+           <volumeref ref="volFoamPadding"/>
+           <positionref ref="posCryoInDetEnc"/>
+       </physvol>
+       <physvol>
+           <volumeref ref="volSteelSupport"/>
+           <positionref ref="posCryoInDetEnc"/>
+       </physvol>
+       <physvol>
+           <volumeref ref="volCryostat"/>
+           <positionref ref="posCryoInDetEnc"/>
+       </physvol>
+    </volume>
+
+    <volume name="volWorld" >
+      <materialref ref="DUSEL_Rock"/>
+      <solidref ref="World"/>
+
+      <physvol>
+        <volumeref ref="volDetEnclosure"/>
+	<position name="posDetEnclosure" unit="cm" x="71.56" y="0" z="149.65"/>
+      </physvol>
+
+    </volume>
+</structure>
+
+  <setup name="Default" version="1.0">
+    <world ref="volWorld"/>
+  </setup>
+
+</gdml_simple_extension>

@@ -28,6 +28,8 @@
 #include "detdataformats/trigger/TriggerActivityData.hpp"
 #include "detdataformats/trigger/TriggerCandidateData.hpp"
 
+#include "detdataformats/hsi/HSIFrame.hpp"
+
 #include <vector>
 #include <map>
 //#include <array>

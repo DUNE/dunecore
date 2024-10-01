@@ -175,5 +175,14 @@
   <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerCandidateData,dunedaq::trgdataformats::TriggerActivityData,void>>"/>
   <class name="art::Wrapper<art::Assns<dunedaq::trgdataformats::TriggerActivityData,dunedaq::trgdataformats::TriggerCandidateData,void>>"/>
 
+ <class name="dunedaq::detdataformats::HSIFrame" ClassVersion="10">
+  <version ClassVersion="10" checksum="3168665936"/>
+ </class>
+ <class name="std::vector<dunedaq::detdataformats::HSIFrame>"/>
+ <class name="art::Ptr<dunedaq::detdataformats::HSIFrame>"/>
+ <class name="art::PtrVector<dunedaq::detdataformats::HSIFrame>"/>
+ <class name="art::Wrapper<std::vector<dunedaq::detdataformats::HSIFrame>>"/>
+ <class name="art::Wrapper<art::PtrVector<dunedaq::detdataformats::HSIFrame>>"/>
+
 
 </lcgdict>

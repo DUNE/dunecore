@@ -2,7 +2,8 @@
 #include "dump_lartpcdetector_geometry.fcl"
 
 services.message.destinations.GeometryLog.filename:  "ProtoDUNE-SP-geometry.txt"
-services.ExptGeoHelperInterface: @local::dune_geometry_helper
+services.WireReadout: @local::dune_wire_readout
 services.GeometryConfigurationWriter: {}
+services.AuxDetGeometry: @local::protodune_auxdet_geo
 services.Geometry:               @local::protodune_geo
 

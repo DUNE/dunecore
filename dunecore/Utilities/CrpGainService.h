@@ -21,20 +21,10 @@
 #include <vector>
 #include <string>
 
-#include "larcore/Geometry/Geometry.h"
+#include "larcorealg/Geometry/fwd.h"
+#include "larcoreobj/SimpleTypesAndConstants/geo_vectors.h"
 #include "art/Framework/Services/Registry/ServiceMacros.h"
-
-namespace fhicl {
-  class ParameterSet;
-}
-
-namespace art {
-  class ActivityRegistry;
-}
-
-namespace geo {
-  class Geometry;
-}
+#include "fhiclcpp/fwd.h"
 
 namespace sim {
   class SimChannel;
@@ -55,7 +45,7 @@ class CrpGainService {
 public:
   using FloatArrayPtr = const FloatArrayTool*;
   
-  explicit CrpGainService(fhicl::ParameterSet const& ps, art::ActivityRegistry& areg);
+  explicit CrpGainService(fhicl::ParameterSet const& ps);
   // The compiler-generated destructor is fine for non-base
   // classes without bare pointers or other resource use.
   
@@ -101,7 +91,8 @@ private:
   std::vector<float> m_lemgainmap;
 
   // detector geometry
-  const geo::Geometry* m_geo;
+  const geo::GeometryCore* m_geo;
+  const geo::WireReadoutGeom* m_wireReadout;
 };
 
 }

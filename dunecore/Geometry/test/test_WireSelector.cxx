@@ -19,6 +19,7 @@
 
 #undef NDEBUG
 
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include <string>
 #include <iostream>
@@ -124,11 +125,12 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
     std::stringstream config;
     config << "#include \"geometry_dune.fcl\"" << endl;
     config << "services.Geometry:                   @local::" + gname << endl;
-    config << "services.ExptGeoHelperInterface:     @local::dune_geometry_helper" << endl;
+    config << "services.WireReadout:     @local::dune_wire_readout" << endl;
     ArtServiceHelper::load_services(config);
   }
 
   art::ServiceHandle<geo::Geometry> pgeo;
+  auto const& wireReadout = art::ServiceHandle<geo::WireReadout>()->Get();
 
   cout << myname << line << endl;
   cout << myname << "Input arguments:" << endl;
@@ -167,12 +169,12 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
 
   cout << myname << line << endl;
   cout << myname << "Geometry properties:" << endl;
-  Index ncha = pgeo->Nchannels();
+  Index ncha = wireReadout.Nchannels();
   cout << myname << "        # channels: " << ncha << endl;
   const double piOver2 = 0.5*acos(-1.0);
   Index nwirSel = 0;
   for ( WireSelector::PlaneID pid : ws.planeIDs() ) {
-    const geo::PlaneGeo& gpla = ws.geometry()->Plane(pid);
+    const geo::PlaneGeo& gpla = ws.wireReadout()->Plane(pid);
     double thtx = gpla.ThetaZ() - piOver2;
     Index nwir = gpla.Nwires();
     const geo::TPCGeo& gtpc = pgeo->TPC(pid);
@@ -202,11 +204,11 @@ int test_WireSelector(string gname, double wireAngle, double minDrift, unsigned 
       ostringstream wout;
       if ( ! endBlock ) {
         WireID wid(pid, iwir);
-        const WireGeo* pgwir = pgeo->WirePtr(wid);
+        const WireGeo* pgwir = wireReadout.WirePtr(wid);
         auto xyzWire = pgwir->GetCenter();
         auto xyz1 = pgwir->GetStart();
         auto xyz2 = pgwir->GetEnd();
-        icha = pgeo->PlaneWireToChannel(wid);
+        icha = wireReadout.PlaneWireToChannel(wid);
         wout << myname << setw(12) << iwir << " [" << setw(4) << icha << "] " << toString(xyzWire);
         xyzWire = rotX(xyzWire);
         wout << " --> " << toString(xyzWire) << "\n";
