@@ -9,7 +9,7 @@ cet_test(test_make_tool
     test_make_tool.cxx
   LIBRARIES
     dunecore::ArtSupport_Tool_TestTool_tool
-    art::Utilities canvas
+    art::Utilities canvas::canvas
     fhiclcpp::fhiclcpp
     cetlib::cetlib 
     cetlib_except::cetlib_except
@@ -23,7 +23,6 @@ cet_test(test_ArtServiceHelper
     dunecore_ArtSupport
     art_root_io::TFileService_service
     art::Framework_Services_Optional_RandomNumberGenerator_service
-    ROOT_BASIC_LIB_LIST
 )
 
 cet_test(test_DuneToolManager

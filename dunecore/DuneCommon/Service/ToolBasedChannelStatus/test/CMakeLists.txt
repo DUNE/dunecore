@@ -13,8 +13,10 @@ cet_test(test_ToolBasedChannelStatusService
   SOURCES
     test_ToolBasedChannelStatusService.cxx
   LIBRARIES
+    larcore::headers
     larcorealg::Geometry
     lardataalg::DetectorInfo
     dunecore::ArtSupport
+    larevt::CalibrationDBI_Providers 
 )
 

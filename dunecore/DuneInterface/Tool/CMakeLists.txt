@@ -9,7 +9,7 @@
 # CMake instructions for DUNE tool interface classes.
 
 # Make the dictionary.
-art_dictionary()
+art_dictionary(DICTIONARY_LIBRARIES FFTW3::FFTW3)
 
 ####################################
 # Define interface targets (no code, only depedencies) when headers do
@@ -29,6 +29,7 @@ cet_make_library(LIBRARY_NAME RunDataTool INTERFACE
   SOURCE RunDataTool.h
   LIBRARIES INTERFACE
   dunecore::DuneInterface_Data_RunData
+  ROOT::Core
   )
 
 cet_make_library(LIBRARY_NAME TpcDataTool INTERFACE

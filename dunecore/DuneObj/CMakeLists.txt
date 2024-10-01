@@ -1,18 +1,20 @@
+include_directories("${dunedaqdataformats_DIR}/../../../include")
+include_directories("${dunedetdataformats_DIR}/../../../include")
 #cet_make( LIBRARIES canvas::canvas
-#		    messagefacility::MF_MessageLogger
+#                  messagefacility::MF_MessageLogger 
 #		    MF_Utilities
 #		    cetlib::cetlib 
 #                   cetlib_except::cetlib_except
-#		    ROOT_BASIC_LIB_LIST
         #        NO_DICTIONARY )
 
       #art_dictionary( DICTIONARY_LIBRARIES dunedataobj_DuneBase )
 art_make(
   LIB_LIBRARIES
+                    ROOT::Core
 		    messagefacility::MF_MessageLogger
 		    cetlib::cetlib 
 		    cetlib_except::cetlib_except
-		    ROOT_BASIC_LIB_LIST
+                    lardataobj::RecoBase
                     HDF5::HDF5
   DICT_LIBRARIES
   #  EXCLUDE OpDetDivRec.h OpDetDivRec.cc

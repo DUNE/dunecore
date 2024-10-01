@@ -10,7 +10,7 @@
  * Licensing/copyright details are in the COPYING file that you should have
  * received with this code.
  * 
- * Modified Nove 2021 Tom Junk -- remove ERS and add offline equivalents
+ * Modified November 2021 Tom Junk -- remove ERS and add offline equivalents
  */
 
 #ifndef HDF5LIBS_INCLUDE_HDF5LIBS_HDF5FILELAYOUT_HPP_

@@ -4,6 +4,7 @@ art_make( BASENAME_ONLY
 	  EXCLUDE CheckGeometry_module.cc CheckCRPGeometry_module.cc CheckDPhaseGeometry_module.cc issue19191_module.cc
 	  LIBRARY_NAME dunecore_Geometry
 	  LIB_LIBRARIES larcorealg::Geometry
+                     larcore::Geometry_Geometry_service
                         messagefacility::MF_MessageLogger
                         cetlib::cetlib 
 			cetlib_except::cetlib_except
@@ -11,23 +12,23 @@ art_make( BASENAME_ONLY
                         art::Framework_Services_Registry
                         art::Utilities
                         canvas::canvas
-                        ROOT_BASIC_LIB_LIST
-                        ROOT_GEOM
+                        ROOT::Geom
                         
           SERVICE_LIBRARIES larcorealg::Geometry
+                     larcore::Geometry_Geometry_service
                         dunecore_Geometry
                         fhiclcpp::fhiclcpp
                         cetlib::cetlib
 			cetlib_except::cetlib_except
                         ROOT::Geom
                         ROOT::XMLIO
-                        ROOT_Gdml
-                        ROOT_BASIC_LIB_LIST
+                        ROOT::Gdml
         )
 
 cet_build_plugin ( CheckGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
+                     lardata::Utilities
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry
@@ -43,15 +44,15 @@ cet_build_plugin ( CheckGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
-
+                     ROOT::Gpad
                BASENAME_ONLY
           )
 
 cet_build_plugin ( CheckDPhaseGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
+                     lardata::Utilities
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry
@@ -67,14 +68,15 @@ cet_build_plugin ( CheckDPhaseGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
+		     ROOT::Gpad
                BASENAME_ONLY
           )
 
 cet_build_plugin ( CheckCRPGeometry art::module
                      larcorealg::Geometry
-                     larcore_Geometry_Geometry_service
+                     larcore::Geometry_Geometry_service
+                     lardata::Utilities
                      art::Framework_Core
                      art::Framework_Principal
                      art::Framework_Services_Registry
@@ -90,8 +92,8 @@ cet_build_plugin ( CheckCRPGeometry art::module
                      fhiclcpp::fhiclcpp
                      cetlib::cetlib
 	             cetlib_except::cetlib_except
-                     ROOT_BASIC_LIB_LIST
                      ROOT::Geom
+		     ROOT::Gpad
                BASENAME_ONLY
           )
 

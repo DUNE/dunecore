@@ -1,0 +1,13 @@
+BEGIN_PROLOG
+
+# HDF5TPStreamInput3 source configuration parameters
+# for the HDF5 file format released by DUNE-DAQ April 23, 2024
+
+hdf5tpstreaminput3: {
+  raw_data_label:        "daq"                # module label for products put in the event
+  module_type:           HDF5TPStreamInput3   # source plug-in name
+  ClockFrequencyMHz:     62.5                 # clock frequency for converting timestamps
+  LogLevel: 0                                 # debug printout
+}
+
+END_PROLOG

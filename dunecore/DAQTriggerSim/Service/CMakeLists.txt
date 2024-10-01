@@ -6,30 +6,21 @@
 # CMake instructions for DAQTriggerSim/Services
 
 cet_build_plugin(TemplateTriggerService   art::service
-                ART_ROOT_IO_TFILE_SUPPORT
+                lardataobj::RawData
+                larcoreobj::headers
                 ROOT::Core
-                ART_FRAMEWORK_SERVICES_OPTIONAL_RANDOMNUMBERGENERATOR_SERVICE
                 nurandom::RandomUtils_NuRandomService_service
-                ART_FRAMEWORK_CORE
-                ART_FRAMEWORK_PRINCIPAL
-                art::Utilities canvas
+		art::Utilities canvas::canvas art::Framework_Principal
                 messagefacility::MF_MessageLogger
-                cetlib::cetlib cetlib_except
-                ROOT_BASIC_LIB_LIST
+                cetlib::cetlib cetlib_except::cetlib_except
              )
 
 cet_build_plugin(HardwareMapperService   art::service
-                larcorealg_Geometry
+                larcorealg::Geometry
                 dunecore_Geometry
-                ART_FRAMEWORK_CORE
-                ART_FRAMEWORK_PRINCIPAL
-                ART_FRAMEWORK_SERVICES_REGISTRY
-                ART_ROOT_IO_TFILE_SUPPORT
                 ROOT::Core
-                ART_PERSISTENCY_PROVENANCE
                 messagefacility::MF_MessageLogger
-                ROOT_BASIC_LIB_LIST
-                art::Utilities canvas
+                art::Utilities canvas::canvas art::Framework_Principal
              )
 
 install_fhicl()

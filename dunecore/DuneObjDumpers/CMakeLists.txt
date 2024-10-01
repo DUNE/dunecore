@@ -1,6 +1,6 @@
 art_make(
   LIB_LIBRARIES
-    ROOT_EG
+    ROOT::EG
     ROOT::Core
   MODULE_LIBRARIES
     dunecore::DuneObj
@@ -14,8 +14,7 @@ art_make(
     messagefacility::MF_MessageLogger
     cetlib::cetlib
     cetlib_except::cetlib_except
-    ROOT_EG
-    ROOT_BASIC_LIB_LIST
+    ROOT::EG
   )
 
 install_headers()
