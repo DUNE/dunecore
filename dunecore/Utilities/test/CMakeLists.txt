@@ -3,13 +3,8 @@ cet_enable_asserts()
 art_make( NO_PLUGINS
           BASENAME_ONLY
           LIBRARY_NAME  dunecore_Utilities
-	  MODULE_LIBRARIES lardata_Utilities
-                        ART_FRAMEWORK_CORE
-			ART_FRAMEWORK_PRINCIPAL
-			ART_FRAMEWORK_SERVICES_REGISTRY
-			ART_ROOT_IO_TFILE_SUPPORT
+	  MODULE_LIBRARIES lardata::Utilities
 			ROOT::Core
-			ART_ROOT_IO_TFILESERVICE_SERVICE
 			art::Persistency_Common canvas
 			art::Persistency_Provenance canvas
 			art::Utilities canvas
@@ -17,10 +12,9 @@ art_make( NO_PLUGINS
 			
 	                fhiclcpp::fhiclcpp
 			cetlib::cetlib cetlib_except
-                        ROOT_GEOM
-                        ROOT_XMLIO
-                        ROOT_GDML
-			ROOT_BASIC_LIB_LIST
+                        ROOT::Geom
+                        ROOT::XMLIO
+                        ROOT::GDML
         )
 
 
