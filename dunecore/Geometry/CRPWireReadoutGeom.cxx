@@ -78,18 +78,22 @@ namespace {
     unsigned int ncells  = 1U;  // number of drift volumes
     bool drift_direction_set{false};
     geo::Coordinate drift_axis{};
+    geo::DriftSign drift_sign{};
     for (geo::TPCGeo const& tpc: cryo.IterateTPCs()) {
       tpcs.push_back( &tpc );
-      auto const [axis, _] = tpc.DriftAxisWithSign();
+      auto const [axis, dasign] = tpc.DriftAxisWithSign();
       if( !drift_direction_set ) {
         drift_axis = axis;
+	drift_sign = dasign;
+	drift_direction_set = true;
 	continue;
       }
       
-      if( axis != drift_axis && ncells < 2U){
+      if( (axis != drift_axis || dasign != drift_sign) && ncells < 2U){
 	ncells++;
       }
       drift_axis = axis;
+      drift_sign = dasign;
       drift_direction_set = true;
     }
 
@@ -742,7 +746,6 @@ void geo::CRPWireReadoutGeom::buildReadoutPlanes
   
   mf::LogInfo(fLogCategory)
     << "Build readout planes for "<<NCryostats<<" "<<MaxTPCs<<" "<<MaxPlanes;
-  
 
   if( Cryostats.size() > 1 ){
     throw cet::exception(fLogCategory)
