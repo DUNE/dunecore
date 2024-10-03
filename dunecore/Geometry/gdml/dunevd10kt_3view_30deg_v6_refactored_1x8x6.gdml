@@ -10330,7 +10330,7 @@
         <position name="opdetshift" unit="cm" x="0" y="0.5" z="0"/>
       </physvol>
     </volume>
-   <volume name="volTPCEnclosure">
+   <volume name="volEnclosureTPC">
      <materialref ref="LAr"/>
      <solidref ref="TPCEnclosure"/>
      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
@@ -11087,7 +11087,7 @@
       </physvol>
 
       <physvol>
-        <volumeref ref="volTPCEnclosure"/>
+        <volumeref ref="volEnclosureTPC"/>
         <position name="posTPCEnclosure" unit="cm" x="-1.995" y="0" z="0"/>
       </physvol>
      <physvol>

@@ -876,7 +876,7 @@
           <positionref ref="posCenter"/>
         </physvol>
       </volume>
-   <volume name="volTPCEnclosure">
+   <volume name="volEnclosureTPC">
      <materialref ref="LAr"/>
      <solidref ref="TPCEnclosure"/>
      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
@@ -8101,7 +8101,7 @@
       </physvol>
 
       <physvol>
-        <volumeref ref="volTPCEnclosure"/>
+        <volumeref ref="volEnclosureTPC"/>
         <position name="posTPCEnclosure" unit="cm" x="2.91999999999997" y="0" z="0"/>
       </physvol>
      <physvol>
