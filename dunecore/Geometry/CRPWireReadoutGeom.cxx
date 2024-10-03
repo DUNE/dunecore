@@ -83,6 +83,7 @@ namespace {
       auto const [axis, _] = tpc.DriftAxisWithSign();
       if( !drift_direction_set ) {
         drift_axis = axis;
+	drift_direction_set = true;
 	continue;
       }
       
