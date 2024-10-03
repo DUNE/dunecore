@@ -1182,7 +1182,7 @@ close(FieldCage);
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 sub placeCathodeAndAnode() {
-    # to placed in volTPCEnclosure
+    # to placed in volEnclosureTPC
 
     $CathodePosX = 0.5*$TPCEnclosure_x - $TPC_x - $anodePlateWidth - $heightCathode/2;
     $CathodePosY = -0.5*$TPCEnclosure_y + 0.5*$widthCathode;
@@ -1432,13 +1432,13 @@ EOF
 EOF
   }
 
-    # Build volume volTPCEnclosure, which is holding all the TPCs
+    # Build volume volEnclosureTPC, which is holding all the TPCs
     #   This is needed for keeping all SimEnergyDeposits relevant for reconstruction and simulations.
 
     if ($tpc_on==1) # place TPC inside the TPC enclosure offsetting each pair of CRMs by borderCRP
     {
 	print CRYO <<EOF;
-   <volume name="volTPCEnclosure">
+   <volume name="volEnclosureTPC">
      <materialref ref="LAr"/>
      <solidref ref="TPCEnclosure"/>
      <auxiliary auxtype="SensDet" auxvalue="SimEnergyDeposit"/>
@@ -1527,13 +1527,13 @@ EOF
       </physvol>
 EOF
 
-# Insert volume volTPCEnclosure, which is holding all the TPCs
+# Insert volume volEnclosureTPC, which is holding all the TPCs
 #   This is needed for keeping all SimEnergyDeposits relevant for reconstruction and simulations.
     if ($tpc_on == 1) {
 	print CRYO <<EOF;
 
       <physvol>
-        <volumeref ref="volTPCEnclosure"/>
+        <volumeref ref="volEnclosureTPC"/>
         <position name="posTPCEnclosure" unit="cm" x="@{[0.5*($Argon_x-$TPCEnclosure_x)-$HeightGaseousAr+$anodePlateWidth]}" y="0" z="0"/>
       </physvol>
 EOF
