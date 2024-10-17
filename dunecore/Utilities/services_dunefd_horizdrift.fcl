@@ -7,7 +7,8 @@
 BEGIN_PROLOG
 
 dunefd_services_legacy: {
- ExptGeoHelperInterface:         @local::dune_geometry_helper
+ AuxDetGeometry:                 @local::dune10kt_auxdet_geo
+ WireReadout:                    @local::dune_wire_readout
  Geometry:                       @local::dune10kt_geo
  GeometryConfigurationWriter:    {}
  DetectorClocksService:          @local::dunefd_detectorclocks
@@ -28,7 +29,8 @@ dunefd_services_legacy: {
 dunefd_simulation_services_legacy: {
  LArFFT:                       @local::dunefd_larfft
  LArG4Parameters:              @local::dunefd_largeantparameters
- ExptGeoHelperInterface:       @local::dune_geometry_helper
+ AuxDetGeometry:               @local::dune10kt_auxdet_geo
+ WireReadout:                  @local::dune_wire_readout
  GeometryConfigurationWriter:  {}
  Geometry:                     @local::dune10kt_geo
  DetectorClocksService:        @local::dunefd_detectorclocks

@@ -10,11 +10,12 @@ BEGIN_PROLOG
 
 protodunedphase_services_legacy: {
  DatabaseUtil:                   @local::dunefd_database
- ExptGeoHelperInterface:         @local::dune_geometry_helper
+ WireReadout:         @local::dune_wire_readout
  GeometryConfigurationWriter:    {}
  ChannelStatusService:           @local::dunefd_channel_status
  LArFFT:                         @local::dunefd_larfft
  NuRandomService:                @local::dune_seedservice
+AuxDetGeometry: @local::protodunedphase_auxdet_geo
  Geometry:                       @local::protodunedphase_geo
  DetectorClocksService:          @local::protodunedphase_detectorclocks
  DetectorPropertiesService:      @local::protodunedphase_detproperties
@@ -31,7 +32,7 @@ protodunedphase_simulation_services_legacy: {
  ParticleInventoryService:       @local::standard_particleinventoryservice
  LArFFT:                         @local::dunefd_larfft
  LArG4Parameters:                @local::protodune_largeantparameters
- ExptGeoHelperInterface:         @local::dune_geometry_helper
+ WireReadout:         @local::dune_wire_readout
  GeometryConfigurationWriter:    {}
  LArVoxelCalculator:             @local::dunefd_larvoxelcalculator
  MagneticField:                  @local::no_mag_larsoft
@@ -40,6 +41,7 @@ protodunedphase_simulation_services_legacy: {
  OpDetResponseInterface:         @local::dunefd_opdetresponse_legacy
  PhotonBackTrackerService:       @local::standard_photonbacktrackerservice
  ChannelStatusService:           @local::dunefd_channel_status
+AuxDetGeometry: @local::protodunedphase_auxdet_geo
  Geometry:                       @local::protodunedphase_geo
  DetectorClocksService:          @local::protodunedphase_detectorclocks
  DetectorPropertiesService:      @local::protodunedphase_detproperties
@@ -88,6 +90,7 @@ protodunedphase_simulation_services_legacy.LArPropertiesService.EnableCerenkovLi
 
 protodunedphase_driftY_simulation_services_legacy:                         @local::protodunedphase_simulation_services_legacy
 protodunedphase_driftY_simulation_services_legacy.PhotonVisibilityService: @local::protodunedp_driftY_RL99CM_VUVREF_photonvisibilityservice
+AuxDetGeometry: @local::protodunedphase_auxdet_geo
 protodunedphase_driftY_simulation_services_legacy.Geometry:                @local::protodunedphase_driftY_geo
 
 
