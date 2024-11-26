@@ -54,6 +54,7 @@ protodunevd_larg4_services.LArG4Detector: @local::protodunevd_larg4detector
 
 ## DRIFT Y ##
 protodunevd_drifty_refactored_simulation_services: @local::protodunevd_refactored_simulation_services
+protodunevd_drifty_refactored_simulation_services.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_drifty_refactored_simulation_services.Geometry: @local::protodunevd_v3_geo_driftY
 
 protodunevd_drifty_larg4_services: @local::protodune_larg4_services

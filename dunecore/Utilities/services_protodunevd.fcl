@@ -9,6 +9,7 @@ BEGIN_PROLOG
 
 protodunevd_services:                                       @local::protodune_services 
 protodunevd_services.Geometry:                              @local::protodunevd_v4_geo
+protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v4_auxdet_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
 
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
@@ -22,8 +23,8 @@ protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
 protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
+protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v4_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
-
 
 # Full service configuration which includes memory-intensive services
 protodunevd_simulation_services: 
@@ -73,9 +74,11 @@ protodunevd_data_reco_services.DetectorPropertiesService:     @local::protodunev
 ##### DRIFT Y ######
 ####################
 protodunevd_services_driftY: @local::protodune_services
+protodunevd_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY: @local::protodunevd_simulation_services
+protodunevd_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_simulation_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY.ParticleInventoryService: @local::standard_particleinventoryservice
@@ -83,10 +86,12 @@ protodunevd_simulation_services_driftY.PhotonBackTrackerService:     @local::dun
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services_driftY: @local::protodune_minimal_simulation_services
+protodunevd_minimal_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_minimal_simulation_services_driftY.Geometry: @local::protodunevd_v3_geo_driftY
 
 # reco for sim config
 protodunevd_reco_services_driftY:                    @local::protodunevd_reco_services
+protodunevd_reco_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
 protodunevd_reco_services_driftY.Geometry:  	     @local::protodunevd_v3_geo_driftY
 
 

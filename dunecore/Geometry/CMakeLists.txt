@@ -1,7 +1,18 @@
 #MESSAGE( STATUS "Boost_SYSTEM_LIBRARY:         "  )
 
 art_make( BASENAME_ONLY
-	  EXCLUDE CheckGeometry_module.cc CheckCRPGeometry_module.cc CheckDPhaseGeometry_module.cc issue19191_module.cc
+          EXCLUDE AuxDetGeoObjectSorter35_tool.cc
+                  AuxDetGeoObjectSorterYZX_tool.cc
+                  CheckGeometry_module.cc
+                  CheckCRPGeometry_module.cc
+                  CheckDPhaseGeometry_module.cc
+                  GeoObjectSorter35_tool.cc
+                  GeoObjectSorterAPA_tool.cc
+                  GeoObjectSorterCRM_tool.cc
+                  GeoObjectSorterCRU_tool.cc
+                  GeoObjectSorterCRU60D_tool.cc
+                  GeoObjectSorterICEBERG_tool.cc
+                  issue19191_module.cc
 	  LIBRARY_NAME dunecore_Geometry
 	  LIB_LIBRARIES larcorealg::Geometry
                      larcore::Geometry_Geometry_service
@@ -96,6 +107,17 @@ cet_build_plugin ( CheckCRPGeometry art::module
 		     ROOT::Gpad
                BASENAME_ONLY
           )
+
+
+cet_build_plugin(AuxDetGeoObjectSorter35 art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(AuxDetGeoObjectSorterYZX art::tool LIBRARIES PRIVATE dunecore::Geometry)
+
+cet_build_plugin(GeoObjectSorter35 art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(GeoObjectSorterAPA art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(GeoObjectSorterCRM art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(GeoObjectSorterCRU art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(GeoObjectSorterCRU60D art::tool LIBRARIES PRIVATE dunecore::Geometry)
+cet_build_plugin(GeoObjectSorterICEBERG art::tool LIBRARIES PRIVATE dunecore::Geometry)
 
 
 add_subdirectory(gdml)

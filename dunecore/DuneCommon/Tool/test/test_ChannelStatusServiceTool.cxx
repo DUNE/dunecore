@@ -46,7 +46,7 @@ int test_ChannelStatusServiceTool(bool useExistingFcl =false, string extrafcl ="
     ofstream fout(fclfile.c_str());
     fout << "#include \"services_dune.fcl\"" << endl;
     fout << "services.Geometry: @local::protodune_geo" << endl;
-    fout << "services.ExptGeoHelperInterface: @local::dune_geometry_helper" << endl;
+    fout << "services.WireReadout: @local::dune_wire_readout" << endl;
     fout << "services.ChannelStatusService: {" << endl;
     fout << "  service_provider: SimpleChannelStatusService" << endl;
     fout << "  BadChannels: [ 1 ]" << endl;

@@ -9,17 +9,20 @@ BEGIN_PROLOG
 ###########################################
 dunefdvd_1x6x6_services: {
     @table::dunefdvd_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_geo
 }
 
 dunefdvd_1x6x6_simulation_services: {
     @table::dunefdvd_simulation_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_geo
     LArG4Detector:             @local::dunevd10kt_1x6x6_larg4detector
 }
 
 dunefdvd_1x6x6_reco_services: {
     @table::dunefdvd_reco_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_geo
 }
 
@@ -27,17 +30,20 @@ dunevd10kt_1x6x6_3view_geo: @local::dunevd10kt_1x6x6_3view_v1_geo
 
 dunefdvd_1x6x6_3view_services: {
     @table::dunefdvd_1x6x6_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_geo
 }
 
 dunefdvd_1x6x6_3view_simulation_services: {
     @table::dunefdvd_1x6x6_simulation_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_geo
     LArG4Detector:             @local::dunevd10kt_1x6x6_3view_larg4detector
 }
 
 dunefdvd_1x6x6_3view_reco_services: {
     @table::dunefdvd_1x6x6_reco_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_geo
 }
 
@@ -45,17 +51,20 @@ dunevd10kt_1x6x6_3view_30deg_geo: @local::dunevd10kt_1x6x6_3view_30deg_v1_geo
 
 dunefdvd_1x6x6_3view_30deg_services: {
     @table::dunefdvd_1x6x6_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_30deg_geo
 }
 
 dunefdvd_1x6x6_3view_30deg_simulation_services: {
     @table::dunefdvd_1x6x6_simulation_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_30deg_geo
     LArG4Detector:             @local::dunevd10kt_1x6x6_3view_30deg_larg4detector
 }
 
 dunefdvd_1x6x6_3view_30deg_reco_services: {
     @table::dunefdvd_1x6x6_reco_services
+AuxDetGeometry: @local::dunevd10kt_1x6x6_auxdet_geo
     Geometry:                  @local::dunevd10kt_1x6x6_3view_30deg_geo
 }
 

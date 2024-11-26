@@ -1,6 +1,7 @@
 // WireSelector.cxx
 
 #include "WireSelector.h"
+#include "larcore/Geometry/WireReadout.h"
 #include "larcore/Geometry/Geometry.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
@@ -15,17 +16,16 @@ using std::endl;
 
 //**********************************************************************
 
-WireSelector::WireSelector(Index icry) {
+WireSelector::WireSelector(Index icry)
+  : m_pgeo{art::ServiceHandle<geo::Geometry>().get()}
+  , m_wireReadout{&art::ServiceHandle<geo::WireReadout>()->Get()}
+{
   selectCryostats({icry});
 }
 
 //**********************************************************************
 
 const WireSelector::GeometryCore* WireSelector::geometry() {
-  if ( m_pgeo == nullptr ) {
-    art::ServiceHandle<geo::Geometry> hgeo;
-    m_pgeo = hgeo.get();
-  }
   return m_pgeo;
 }
 
@@ -82,21 +82,20 @@ void WireSelector::selectPlanes() {
   clearData();
   for ( Index icry : cryostats() ) {
     geo::CryostatID cid(icry);
-    for ( geo::TPCID tid : geometry()->Iterate<geo::TPCID>(cid) ) {
+    for ( geo::TPCGeo const& tpc : geometry()->Iterate<geo::TPCGeo>(cid) ) {
+      auto const& tid = tpc.ID();
       // Check TPC set.
       if ( m_tpcSets.size() ) {
-        Index itps = geometry()->TPCtoTPCset(tid).TPCset;
+        Index itps = m_wireReadout->TPCtoTPCset(tid).TPCset;
         if ( find(m_tpcSets.begin(), m_tpcSets.end(), itps) == m_tpcSets.end() ) continue;
       }
       // Check drift.
       if ( driftMin() > 0.0 || driftMax() < 1.e20 ) {
-        const geo::TPCGeo& gtpc = geometry()->TPC(tid);
-        //double driftSize = gtpc.ActiveWidth();
-        double driftSize = gtpc.DriftDistance(); // good for the last anode plane
+        double driftSize = tpc.DriftDistance(); // good for the last anode plane
         if ( driftSize < driftMin() ) continue;
         if ( driftSize >= driftMax() ) continue;
       }
-      for ( geo::PlaneGeo const& gpla : geometry()->Iterate<geo::PlaneGeo>(tid) ) {
+      for ( geo::PlaneGeo const& gpla : m_wireReadout->Iterate<geo::PlaneGeo>(tid) ) {
         // Check view.
         if ( view() != geo::kUnknown && gpla.View() != view() ) continue;
         // Check wire angle.
@@ -121,9 +120,10 @@ const WireSelector::WireInfoVector& WireSelector::fillData() {
   const double piOver2 = 0.5*acos(-1.0);
   if ( haveData() ) return m_data;
   for ( geo::PlaneID pid : planeIDs() ) {
-    const geo::PlaneGeo& gpla = geometry()->Plane(pid);
-    const geo::TPCGeo& gtpc = geometry()->TPC(pid);
-    const geo::PlaneGeo& gplaLast = gtpc.LastPlane();  // Plane furthest from TPC center.
+    auto const& tpcid = pid;
+    const geo::PlaneGeo& gpla = m_wireReadout->Plane(pid);
+    unsigned int const num_planes = m_wireReadout->Nplanes(tpcid);
+    const geo::PlaneGeo& gplaLast = m_wireReadout->Plane({tpcid, num_planes - 1});  // Plane furthest from TPC center.
     double xLastPlane = gplaLast.MiddleWire().GetCenter().x();
     double xThisPlane = gpla.MiddleWire().GetCenter().x();
     double driftOffset = fabs(xThisPlane - xLastPlane);
@@ -136,12 +136,12 @@ const WireSelector::WireInfoVector& WireSelector::fillData() {
         cout << myname << "ERROR: Plane normal is not along x." << endl;
         continue;
       }
-      double driftDist = gtpc.DriftDistance() - driftOffset;
+      double driftDist = m_pgeo->TPC(tpcid).DriftDistance() - driftOffset;
       m_data.emplace_back(xyzWire.x(), xyzWire.y(), xyzWire.z(),
                           driftSign*driftDist,
                           pgwir->Length(),
                           gpla.WirePitch(),
-                          geometry()->PlaneWireToChannel(wid));
+                          m_wireReadout->PlaneWireToChannel(wid));
     }
   }
   m_haveData = true;

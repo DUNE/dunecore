@@ -9,6 +9,7 @@ BEGIN_PROLOG
 ###########################################
 dunefdvd_services: {
     @table::dunefd_services
+AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     Geometry:                  @local::dunevd10kt_geo
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
@@ -19,6 +20,7 @@ dunefdvd_services: {
 
 dunefdvd_simulation_services: {
     @table::dunefd_simulation_services
+AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     Geometry:                  @local::dunevd10kt_geo
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
@@ -33,6 +35,7 @@ dunefdvd_reco_services: {
     @table::dunefd_reco_services
     DetectorPropertiesService: @local::dunefdvd_detproperties
     DetectorClocksService:     @local::dunefdvd_detectorclocks
+AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     Geometry:                  @local::dunevd10kt_geo
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
     LArPropertiesService:      @local::dunefdvd_properties
