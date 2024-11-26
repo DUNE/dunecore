@@ -259,11 +259,6 @@
    <fraction n="0.53" ref="fibrous_glass"/>
   </material>
 
-  <material name="FR4SussexAPA">
-   <D value="1.75" unit="g/cm3"/>
-   <fraction n="1" ref="FR4"/>
-  </material>
-
   <material name="STEEL_STAINLESS_Fe7Cr2Ni" formula="STEEL_STAINLESS_Fe7Cr2Ni">
    <D value="7.9300" unit="g/cm3"/>
    <fraction n="0.0010" ref="carbon"/>
@@ -12763,6 +12758,10 @@
       <position name="posGasArSub2" x="-86.02" y="419.6" z="-2.8421709430404e-14" unit="cm"/>
     </subtraction>
 
+        <box name="scintBox_Top" lunit="mm" x="132" y="1440" z="20"/>
+        <box name="scintBox_Bottom" lunit="mm"  x="116" y="1440" z="20"/>
+        <box name="ModulescintBox_Top" lunit="mm" x="1126" y="21" z="1440"/>
+        <box name="ModulescintBox_Bottom" lunit="mm" x="1110" y="21" z="1440"/>
     <box name="CathodeBlock" lunit="cm"
       x="6"
       y="337"
@@ -42151,6 +42150,106 @@
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
       <solidref ref="SteelSupport"/>
     </volume>
+    <volume name="volAuxDetSensitiveCRTDPPaddleTop">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Top"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+    <volume name="volAuxDetSensitiveCRTDPPaddleBottom">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Bottom"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+<volume name="volAuxDetCRTDPModuleTop">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Top"/>
+    <physvol name="CRTDPTOP0" copynumber="0">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="497" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP1" copynumber="1">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="355" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP2" copynumber="2">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="213" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP3" copynumber="3">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="71" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP4" copynumber="4">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="-71" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP5" copynumber="5">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="-213" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP6" copynumber="6">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="-355" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPTOP7" copynumber="7">
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <position name="posCRTPaddleSensitiveTop1" unit="mm" x="-497" y="0" z="0"/> 
+        <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+</volume>
+<volume name="volAuxDetCRTDPModuleBottom">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Bottom"/>
+    <physvol name="CRTDPBOTTOM0" copynumber="8">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="497" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM1" copynumber="9">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="355" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM2" copynumber="10">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="213" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM3" copynumber="11">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="71" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM4" copynumber="12">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="-71" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM5" copynumber="13">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="-213" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM6" copynumber="14">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="-355" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+    <physvol name="CRTDPBOTTOM7" copynumber="15">
+      <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+      <position name="posCRTPaddleSensitiveBottom1" unit="mm" x="-497" y="0" z="0"/> 
+      <rotationref ref="rMinus90AboutX"/>
+    </physvol>
+	</volume>
     <volume name="volUnitCent">
     <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
     <solidref ref="UnitCent"/>
@@ -43043,44 +43142,44 @@
     
     <physvol name="volSteelSupport_Top">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Top" x="0" y="569.3" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_Top" x="90" y="0" z="0" unit="deg"/>
+    <position name="posSteelSupport_Top" x="506.9" y="0" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_Top" x="90" y="-90" z="0" unit="deg"/>
     
     </physvol>
     
     
     <physvol name="volSteelSupport_Bottom">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Bottom" x="0" y="-569.3" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_Bottom" x="-90" y="0" z="0" unit="deg"/>
+    <position name="posSteelSupport_Bottom" x="-506.9" y="0" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_Bottom" x="-90" y="90" z="0" unit="deg"/>
     </physvol>
     
     
-    <physvol>
+    <physvol name="volSteelSupport_US">
     <volumeref ref="volSteelSupport_US"/>
     <position name="posSteelSupport_US" x="0" y="0" z="-539.3" unit="cm"/>
-    <rotation name="rotSteelSupport_Front" x="0" y="0" z="0" unit="deg"/>
+    <rotation name="rotSteelSupport_Front" x="0" y="0" z="90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_DS">
     <volumeref ref="volSteelSupport_WS"/>
     <position name="posSteelSupport_DS" x="0" y="0" z="539.3" unit="cm"/>
-    <rotation name="rotSteelSupport_Back" x="0" y="0" z="" unit="deg"/>
+    <rotation name="rotSteelSupport_Back" x="0" y="0" z="90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_LS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_LS" x="540.9" y="0" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_LS" x="0" y="-90" z="0" unit="deg"/>
+    <position name="posSteelSupport_LS" x="0" y="-539.3" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_LS" x="90" y="0" z="-90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_RS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_RS" x="-540.9" y="0" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
+    <position name="posSteelSupport_RS" x="0" y="539.3" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_RS" x="90" y="0" z="90" unit="deg"/>
     </physvol>
     
     <physvol>
@@ -43118,6 +43217,16 @@
     <physvol>
            <volumeref ref="volCryostat"/>
            <positionref ref="posCryoInDetEnc"/>
+    </physvol>
+    <physvol>
+        <volumeref ref="volAuxDetCRTDPModuleTop"/>
+        <position name="posCRTDPTOPSensitive_1" unit="mm" x="3848" y="5882" z="0"/>
+        <rotationref ref="rIdentity"/>
+    </physvol>
+    <physvol>
+        <volumeref ref="volAuxDetCRTDPModuleBottom"/>
+        <position name="posCRTDPBOTTOMSensitive_1" unit="mm" x="-4406" y="-5882" z="0"/>
+        <rotationref ref="rIdentity"/>
     </physvol>
     </volume>
 

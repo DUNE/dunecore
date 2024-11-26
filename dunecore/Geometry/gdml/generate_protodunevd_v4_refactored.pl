@@ -59,6 +59,13 @@
 #                  Pablo Barham Alzás <pablo.barham@cern.ch>
 ##################################################################################
 
+# v4.1		tkosc (thomas.kosc@proton.me) 27th November 2023
+#		- Rotated (-90° along z) the Steel Structure of cryostat (as indicated in todo list of v1)
+#		This concerns the following physical volumes : 
+#			* volSteelSupport_Top, volSteelSupport_Bottom, volSteelSupport_TUS, volSteelSupport_DS
+#			* volSteelSupport_LS, volSteelSupport_RS
+
+
 # Each subroutine generates a fragment GDML file, and the last subroutine
 # creates an XML file that make_gdml.pl will use to appropriately arrange
 # the fragment GDML files to create the final desired DUNE GDML file, 
@@ -86,7 +93,7 @@ my $Cathode_switch="on";
 $ArapucaMesh_switch="on";
 
 my $HD_CRT_switch="off";
-my $DP_CRT_switch="off";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
+my $DP_CRT_switch="on";  # existing CRTs in NP02 (VD module 0), CRT used for the double phase DP
 # DP_CRT switch is OFF due to overlaps with the beam pipe. Once solved it should be turned ON. 
 
 if ( defined $help )
@@ -112,7 +119,7 @@ else
 
 
 # set wires on to be the default, unless given an input by the user
-$wires_on = 0; # 1=on, 0=off
+$wires_on = 1; # 1=on, 0=off
 if (defined $wires)
 {
     $wires_on = $wires;
@@ -357,15 +364,23 @@ $posCryoInDetEnc_x = 0;
 $posCryoInDetEnc_y = 0;
 $posCryoInDetEnc_z = 0;
 
-$posTopSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y; #+ 61.8/2; ## JS Real, add boxCryoTop dz/2.
-$posBotSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y; # - 61.8/2;
-$posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z;# + 61.8/2;  ## JS Real, add boxCryoWallSm dz/2.;
-$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z;# - 61.8/2;
-$posLeftSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x; # + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
-$posRightSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x;#  + 61.8/2;  ## JS Real, add boxCryoWallLg dz/2.;
+$boxCryoWidth = 61.8;
+$posTopSteelStruct = $Argon_x/2+$FoamPadding+$SteelSupport_x + $boxCryoWidth/2. + 0.4/2.; #tkosc elaborate a little more these numbers
+$posBotSteelStruct = -$Argon_x/2-$FoamPadding-$SteelSupport_x - $boxCryoWidth/2. - 0.4/2.;
+$posZBackSteelStruct = $Argon_z/2+$FoamPadding+$SteelSupport_z + $boxCryoWidth/2. + 0.4/2.;
+$posZFrontSteelStruct = -$Argon_z/2-$FoamPadding-$SteelSupport_z - $boxCryoWidth/2. - 0.4/2.;
+$posLeftSteelStruct = $Argon_y/2+$FoamPadding+$SteelSupport_y + $boxCryoWidth/2. + 0.4/2.; 
+$posRightSteelStruct = -$Argon_y/2-$FoamPadding-$SteelSupport_y - $boxCryoWidth/2. - 0.4/2.;
+#tkosc : the ±0.4/2 is added in order to compensate the reduction of $Argon_xyz dimensions by 0.4cm
+# and keep the cryostat positions correct
+#790.0 --> 789.6 in x
+#854.8 --> 854.4 in y
+#854.8 --> 854.4 in z
 
-$posTopSteelStruct -= 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise
-$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on";
+
+
+#$posTopSteelStruct -= 29.7 if $DP_CRT_switch eq "on";  # overlap volume otherwise
+#$posBotSteelStruct += 29.7 if $DP_CRT_switch eq "on";
 
 # 2*AirThickness is added to the world volume in x, y and z
 $AirThickness = 3000;
@@ -4900,44 +4915,44 @@ EOF
     
     <physvol name="volSteelSupport_Top">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Top" x="0" y="@{[$posTopSteelStruct+61.1]}" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_Top" x="90" y="0" z="0" unit="deg"/>
+    <position name="posSteelSupport_Top" x="$posTopSteelStruct" y="0" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_Top" x="90" y="-90" z="0" unit="deg"/>
     
     </physvol>
     
     
     <physvol name="volSteelSupport_Bottom">
     <volumeref ref="volSteelSupport_TB"/>
-    <position name="posSteelSupport_Bottom" x="0" y="@{[$posBotSteelStruct-61.1]}" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_Bottom" x="-90" y="0" z="0" unit="deg"/>
+    <position name="posSteelSupport_Bottom" x="$posBotSteelStruct" y="0" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_Bottom" x="-90" y="90" z="0" unit="deg"/>
     </physvol>
     
     
-    <physvol>
+    <physvol name="volSteelSupport_US">
     <volumeref ref="volSteelSupport_US"/>
-    <position name="posSteelSupport_US" x="0" y="0" z="@{[$posZFrontSteelStruct-31.1]}" unit="cm"/>
-    <rotation name="rotSteelSupport_Front" x="0" y="0" z="0" unit="deg"/>
+    <position name="posSteelSupport_US" x="0" y="0" z="$posZFrontSteelStruct" unit="cm"/>
+    <rotation name="rotSteelSupport_Front" x="0" y="0" z="90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_DS">
     <volumeref ref="volSteelSupport_WS"/>
-    <position name="posSteelSupport_DS" x="0" y="0" z="@{[$posZBackSteelStruct+31.1]}" unit="cm"/>
-    <rotation name="rotSteelSupport_Back" x="0" y="0" z="" unit="deg"/>
+    <position name="posSteelSupport_DS" x="0" y="0" z="$posZBackSteelStruct" unit="cm"/>
+    <rotation name="rotSteelSupport_Back" x="0" y="0" z="90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_LS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_LS" x="@{[$posLeftSteelStruct+65.1]}" y="0" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_LS" x="0" y="-90" z="0" unit="deg"/>
+    <position name="posSteelSupport_LS" x="0" y="$posRightSteelStruct" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_LS" x="90" y="0" z="-90" unit="deg"/>
     </physvol>
     
     
     <physvol name="volSteelSupport_RS">
     <volumeref ref="volSteelSupport_LR"/>
-    <position name="posSteelSupport_RS" x="@{[$posRightSteelStruct-65.1]}" y="0" z="0" unit="cm"/>
-    <rotation name="rotSteelSupport_RS" x="0" y="90" z="0" unit="deg"/>
+    <position name="posSteelSupport_RS" x="0" y="$posLeftSteelStruct" z="0" unit="cm"/>
+    <rotation name="rotSteelSupport_RS" x="90" y="0" z="90" unit="deg"/>
     </physvol>
     
 EOF
