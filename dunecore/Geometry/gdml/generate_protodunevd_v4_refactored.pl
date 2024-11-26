@@ -1634,39 +1634,20 @@ print TPC <<EOF;
   </volume>
 EOF
 
-# offset of the active area from CRP envelope
-my $pcbOffsetY = 999;
-my $pcbOffsetZ = 999;
-if( $quad == 0 ){
-    $pcbOffsetY =  $borderCRP/2;
-    $pcbOffsetZ = ($borderCRP/2 - $gapCRU/4);
-} elsif( $quad == 1 ){
-    $pcbOffsetY =  -$borderCRP/2;
-    $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
-} elsif ( $quad == 2 ){
-    $pcbOffsetY =  $borderCRP/2;
-    $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
-} elsif ( $quad == 3 ){
-    $pcbOffsetY = -$borderCRP/2;
-    $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
-} else {
-    die "Uknown $quad quadrant index\n";
-}
-
 my @posUplane = (0, 0, 0);
 $posUplane[0] = 0.5*$TPC_x - 2.5*$padWidth;
-$posUplane[1] = $pcbOffsetY;
-$posUplane[2] = $pcbOffsetZ;
+$posUplane[1] = 0;
+$posUplane[2] = 0;
 
 my @posVplane = (0, 0, 0);
 $posVplane[0] = 0.5*$TPC_x - 1.5*$padWidth;
-$posVplane[1] = $pcbOffsetY;
-$posVplane[2] = $pcbOffsetZ;
+$posVplane[1] = 0;
+$posVplane[2] = 0;
 
 my @posZplane = (0, 0, 0);
 $posZplane[0] = 0.5*$TPC_x - 0.5*$padWidth;
-$posZplane[1] = $pcbOffsetY; 
-$posZplane[2] = $pcbOffsetZ;
+$posZplane[1] = 0;
+$posZplane[2] = 0;
 
 my @posTPCActive = (0, 0, 0);
 $posTPCActive[0] = -$ReadoutPlane/2;
@@ -2874,22 +2855,30 @@ if ($tpc_on==1) # place Top and Bottom TPCs inside croystat offsetting each pair
 	if($ii%2==0){
 	  if($jj%2==0){
 	    $quad=0;
-	    $myposTPCY = $posY-$CRP_y/4;
-	    $myposTPCZ = $posZ-$CRP_z/4;
+            $pcbOffsetY =  $borderCRP/2; # offset of the active area from CRP envelope
+            $pcbOffsetZ = ($borderCRP/2 - $gapCRU/4);
+	    $myposTPCY = $posY-$CRP_y/4 + $pcbOffsetY;
+	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
 	  }else{
 	    $quad=1;
-	    $myposTPCY = $posY+$CRP_y/4;
-	    $myposTPCZ = $posZ-$CRP_z/4;
+            $pcbOffsetY =  -$borderCRP/2;
+            $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
+	    $myposTPCY = $posY+$CRP_y/4 + $pcbOffsetY;
+	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
           }
 	}else{
 	  if($jj%2==0){
 	    $quad=2;
-	    $myposTPCY = $posY-$CRP_y/4;
-	    $myposTPCZ = $posZ+$CRP_z/4;
+            $pcbOffsetY =  $borderCRP/2;
+            $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
+	    $myposTPCY = $posY-$CRP_y/4 + $pcbOffsetY;
+	    $myposTPCZ = $posZ+$CRP_z/4 + $pcbOffsetZ;
 	  }else{
 	    $quad=3;
-	    $myposTPCY = $posY+$CRP_y/4;
-	    $myposTPCZ = $posZ+$CRP_z/4;
+            $pcbOffsetY = -$borderCRP/2;
+            $pcbOffsetZ = -($borderCRP/2 - $gapCRU/4);
+	    $myposTPCY = $posY+$CRP_y/4 + $pcbOffsetY;
+	    $myposTPCZ = $posZ+$CRP_z/4 + $pcbOffsetZ;
 	    }
 	}
 	
