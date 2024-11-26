@@ -46,6 +46,9 @@
 #               - outer cathode arapucas shifted inwards
 #               - implemented bottom drift volume, together with double-sided arapucas on the cathode
 #               - arapucas on the outer sides of the cathode shifted inwards
+#           Nov 2024: Viktor Pec (viktor.pec@fzu.cz)
+#               - added full TPC active volume enclosure in order to be able store Edeps in the gaps
+#                 between the active volumes, separately from the external depositions in the cryostat.
 #
 #################################################################################
 
