@@ -409,8 +409,8 @@
 </materials>
 <solids>
      <torus name="FieldShaperCorner" rmin="0.5" rmax="2.285" rtor="2.3" deltaphi="90" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperLongtube" rmin="0.5" rmax="2.285" z="896.52" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
-     <tube name="FieldShaperLongtubeSlim" rmin="0.5" rmax="0.75" z="896.52" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+     <tube name="FieldShaperLongtube" rmin="0.5" rmax="2.285" z="2091.88" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
+     <tube name="FieldShaperLongtubeSlim" rmin="0.5" rmax="0.75" z="2091.88" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperShorttube" rmin="0.5" rmax="2.285" z="1345.6048" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperShorttubeWindowSlim" rmin="0.5" rmax="0.75" z="670" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
      <tube name="FieldShaperShorttubeWindowNotSlim" rmin="0.5" rmax="2.285" z="337.8024" deltaphi="360" startphi="0" aunit="deg" lunit="cm"/>
@@ -434,21 +434,21 @@
     <union name="FSunion1">
       <first ref="FieldShaperLongtube"/>
       <second ref="FieldShaperCorner"/>
-                <position name="esquinapos1" unit="cm" x="-2.3" y="0" z="448.26"/>
+                <position name="esquinapos1" unit="cm" x="-2.3" y="0" z="1045.94"/>
                 <rotationref ref="rPlus90AboutX"/>
     </union>
 
     <union name="FSunion2">
       <first ref="FSunion1"/>
       <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos2" unit="cm" x="-675.1024" y="0" z="450.56"/>
+   		<position name="esquinapos2" unit="cm" x="-675.1024" y="0" z="1048.24"/>
    		<rotationref ref="rPlus90AboutY"/>
     </union>
 
     <union name="FSunion3">
       <first ref="FSunion2"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos3" unit="cm" x="-1347.9048" y="0" z="448.26"/>
+   		<position name="esquinapos3" unit="cm" x="-1347.9048" y="0" z="1045.94"/>
 		<rotationref ref="rPlus90AboutXMinux90AboutY"/>
     </union>
 
@@ -461,42 +461,42 @@
     <union name="FSunion5">
       <first ref="FSunion4"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos5" unit="cm" x="-1347.9048" y="0" z="-448.26"/>
+   		<position name="esquinapos5" unit="cm" x="-1347.9048" y="0" z="-1045.94"/>
 		<rotationref ref="rPlus90AboutXPlus180AboutY"/>
     </union>
 
     <union name="FSunion6">
       <first ref="FSunion5"/>
       <second ref="FieldShaperShorttube"/>
-   		<position name="esquinapos6" unit="cm" x="-675.1024" y="0" z="-450.56"/>
+   		<position name="esquinapos6" unit="cm" x="-675.1024" y="0" z="-1048.24"/>
 		<rotationref ref="rPlus90AboutY"/>
     </union>
 
     <union name="FieldShaperSolid">
       <first ref="FSunion6"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos7" unit="cm" x="-2.3" y="0" z="-448.26"/>
+   		<position name="esquinapos7" unit="cm" x="-2.3" y="0" z="-1045.94"/>
 		<rotationref ref="rPlus90AboutXPlus90AboutY"/>
     </union>
 
     <union name="FSunionSlim1">
       <first ref="FieldShaperLongtubeSlim"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos8" unit="cm" x="-2.3" y="0" z="448.26"/>
+   		<position name="esquinapos8" unit="cm" x="-2.3" y="0" z="1045.94"/>
 		<rotationref ref="rPlus90AboutX"/>
     </union>
 
     <union name="FSunionSlim2">
       <first ref="FSunionSlim1"/>
       <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos9" unit="cm" x="-675.1024" y="0" z="450.56"/>
+   		<position name="esquinapos9" unit="cm" x="-675.1024" y="0" z="1048.24"/>
    		<rotationref ref="rPlus90AboutY"/>
     </union>
 
     <union name="FSunionSlim3">
       <first ref="FSunionSlim2"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos10" unit="cm" x="-1347.9048" y="0" z="448.26"/>
+   		<position name="esquinapos10" unit="cm" x="-1347.9048" y="0" z="1045.94"/>
 		<rotationref ref="rPlus90AboutXMinux90AboutY"/>
     </union>
 
@@ -509,21 +509,21 @@
     <union name="FSunionSlim5">
       <first ref="FSunionSlim4"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos11" unit="cm" x="-1347.9048" y="0" z="-448.26"/>
+   		<position name="esquinapos11" unit="cm" x="-1347.9048" y="0" z="-1045.94"/>
 		<rotationref ref="rPlus90AboutXPlus180AboutY"/>
     </union>
 
     <union name="FSunionSlim6">
       <first ref="FSunionSlim5"/>
       <second ref="FieldShaperShorttubeSlim"/>
-   		<position name="esquinapos12" unit="cm" x="-675.1024" y="0" z="-450.56"/>
+   		<position name="esquinapos12" unit="cm" x="-675.1024" y="0" z="-1048.24"/>
 		<rotationref ref="rPlus90AboutY"/>
     </union>
 
     <union name="FieldShaperSolidSlim">
       <first ref="FSunionSlim6"/>
       <second ref="FieldShaperCorner"/>
-   		<position name="esquinapos13" unit="cm" x="-2.3" y="0" z="-448.26"/>
+   		<position name="esquinapos13" unit="cm" x="-2.3" y="0" z="-1045.94"/>
 		<rotationref ref="rPlus90AboutXPlus90AboutY"/>
     </union>
 
@@ -3422,7 +3422,7 @@
     <box name="TPCEnclosure" lunit="cm"
       x="654.09"
       y="1345.6048"
-      z="896.52"/>
+      z="2091.88"/>
 
     <box name="ArapucaEnclosure" lunit="cm"
       x="65"
@@ -3470,17 +3470,17 @@
     <box name="Cryostat" lunit="cm"
       x="850.32"
       y="1507.8448"
-      z="1110.76"/>
+      z="2306.12"/>
 
     <box name="ArgonInterior" lunit="cm"
       x="850.08"
       y="1507.6048"
-      z="1110.52"/>
+      z="2305.88"/>
 
     <box name="GaseousArgon" lunit="cm"
       x="99.99"
       y="1507.6048"
-      z="1110.52"/>
+      z="2305.88"/>
 
     <subtraction name="SteelShell">
       <first ref="Cryostat"/>
@@ -3589,7 +3589,7 @@
     <box name="FoamPadBlock" lunit="cm"
       x="1010.32"
       y="1667.8448"
-      z="1270.76" />
+      z="2466.12" />
 
     <subtraction name="FoamPadding">
       <first ref="FoamPadBlock"/>
@@ -3600,7 +3600,7 @@
     <box name="SteelSupportBlock" lunit="cm"
       x="1210.32"
       y="1867.8448"
-      z="1470.76" />
+      z="2666.12" />
 
     <subtraction name="SteelSupport">
       <first ref="SteelSupportBlock"/>
@@ -3611,13 +3611,13 @@
     <box name="DetEnclosure" lunit="cm"
       x="1310.32"
       y="2067.8448"
-      z="1670.76"/>
+      z="2866.12"/>
 
 
     <box name="World" lunit="cm"
       x="9310.32"
       y="10067.8448"
-      z="9670.76"/>
+      z="10866.12"/>
 </solids>
 <structure>
 <volume name="volFieldShaper">
@@ -10339,349 +10339,813 @@
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-0" unit="cm"
-           x="1.995" y="-588.4521" z="-373.3"/>
+           x="1.995" y="-588.4521" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-1" unit="cm"
-           x="1.995" y="-420.7515" z="-373.3"/>
+           x="1.995" y="-420.7515" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-2" unit="cm"
-           x="1.995" y="-252.0509" z="-373.3"/>
+           x="1.995" y="-252.0509" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-3" unit="cm"
-           x="1.995" y="-84.3502999999999" z="-373.3"/>
+           x="1.995" y="-84.3502999999999" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-4" unit="cm"
-           x="1.995" y="84.3503000000001" z="-373.3"/>
+           x="1.995" y="84.3503000000001" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-5" unit="cm"
-           x="1.995" y="252.0509" z="-373.3"/>
+           x="1.995" y="252.0509" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-6" unit="cm"
-           x="1.995" y="420.7515" z="-373.3"/>
+           x="1.995" y="420.7515" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-7" unit="cm"
-           x="1.995" y="588.4521" z="-373.3"/>
+           x="1.995" y="588.4521" z="-970.98"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-8" unit="cm"
-           x="1.995" y="-588.4521" z="-224.38"/>
+           x="1.995" y="-588.4521" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-9" unit="cm"
-           x="1.995" y="-420.7515" z="-224.38"/>
+           x="1.995" y="-420.7515" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-10" unit="cm"
-           x="1.995" y="-252.0509" z="-224.38"/>
+           x="1.995" y="-252.0509" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-11" unit="cm"
-           x="1.995" y="-84.3502999999999" z="-224.38"/>
+           x="1.995" y="-84.3502999999999" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-12" unit="cm"
-           x="1.995" y="84.3503000000001" z="-224.38"/>
+           x="1.995" y="84.3503000000001" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-13" unit="cm"
-           x="1.995" y="252.0509" z="-224.38"/>
+           x="1.995" y="252.0509" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-14" unit="cm"
-           x="1.995" y="420.7515" z="-224.38"/>
+           x="1.995" y="420.7515" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-15" unit="cm"
-           x="1.995" y="588.4521" z="-224.38"/>
+           x="1.995" y="588.4521" z="-822.06"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-16" unit="cm"
-           x="1.995" y="-588.4521" z="-74.46"/>
+           x="1.995" y="-588.4521" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-17" unit="cm"
-           x="1.995" y="-420.7515" z="-74.46"/>
+           x="1.995" y="-420.7515" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-18" unit="cm"
-           x="1.995" y="-252.0509" z="-74.46"/>
+           x="1.995" y="-252.0509" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-19" unit="cm"
-           x="1.995" y="-84.3502999999999" z="-74.46"/>
+           x="1.995" y="-84.3502999999999" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-20" unit="cm"
-           x="1.995" y="84.3503000000001" z="-74.46"/>
+           x="1.995" y="84.3503000000001" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-21" unit="cm"
-           x="1.995" y="252.0509" z="-74.46"/>
+           x="1.995" y="252.0509" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-22" unit="cm"
-           x="1.995" y="420.7515" z="-74.46"/>
+           x="1.995" y="420.7515" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-23" unit="cm"
-           x="1.995" y="588.4521" z="-74.46"/>
+           x="1.995" y="588.4521" z="-672.14"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-24" unit="cm"
-           x="1.995" y="-588.4521" z="74.46"/>
+           x="1.995" y="-588.4521" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-25" unit="cm"
-           x="1.995" y="-420.7515" z="74.46"/>
+           x="1.995" y="-420.7515" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-26" unit="cm"
-           x="1.995" y="-252.0509" z="74.46"/>
+           x="1.995" y="-252.0509" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-27" unit="cm"
-           x="1.995" y="-84.3502999999999" z="74.46"/>
+           x="1.995" y="-84.3502999999999" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-28" unit="cm"
-           x="1.995" y="84.3503000000001" z="74.46"/>
+           x="1.995" y="84.3503000000001" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-29" unit="cm"
-           x="1.995" y="252.0509" z="74.46"/>
+           x="1.995" y="252.0509" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-30" unit="cm"
-           x="1.995" y="420.7515" z="74.46"/>
+           x="1.995" y="420.7515" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-31" unit="cm"
-           x="1.995" y="588.4521" z="74.46"/>
+           x="1.995" y="588.4521" z="-523.22"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-32" unit="cm"
-           x="1.995" y="-588.4521" z="224.38"/>
+           x="1.995" y="-588.4521" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-33" unit="cm"
-           x="1.995" y="-420.7515" z="224.38"/>
+           x="1.995" y="-420.7515" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-34" unit="cm"
-           x="1.995" y="-252.0509" z="224.38"/>
+           x="1.995" y="-252.0509" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-35" unit="cm"
-           x="1.995" y="-84.3502999999999" z="224.38"/>
+           x="1.995" y="-84.3502999999999" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-36" unit="cm"
-           x="1.995" y="84.3503000000001" z="224.38"/>
+           x="1.995" y="84.3503000000001" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-37" unit="cm"
-           x="1.995" y="252.0509" z="224.38"/>
+           x="1.995" y="252.0509" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-38" unit="cm"
-           x="1.995" y="420.7515" z="224.38"/>
+           x="1.995" y="420.7515" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-39" unit="cm"
-           x="1.995" y="588.4521" z="224.38"/>
+           x="1.995" y="588.4521" z="-373.3"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-40" unit="cm"
-           x="1.995" y="-588.4521" z="373.3"/>
+           x="1.995" y="-588.4521" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-41" unit="cm"
-           x="1.995" y="-420.7515" z="373.3"/>
+           x="1.995" y="-420.7515" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-42" unit="cm"
-           x="1.995" y="-252.0509" z="373.3"/>
+           x="1.995" y="-252.0509" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-43" unit="cm"
-           x="1.995" y="-84.3502999999999" z="373.3"/>
+           x="1.995" y="-84.3502999999999" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-44" unit="cm"
-           x="1.995" y="84.3503000000001" z="373.3"/>
+           x="1.995" y="84.3503000000001" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-45" unit="cm"
-           x="1.995" y="252.0509" z="373.3"/>
+           x="1.995" y="252.0509" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-46" unit="cm"
-           x="1.995" y="420.7515" z="373.3"/>
+           x="1.995" y="420.7515" z="-224.38"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC"/>
 	<position name="posTPC-47" unit="cm"
+           x="1.995" y="588.4521" z="-224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-48" unit="cm"
+           x="1.995" y="-588.4521" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-49" unit="cm"
+           x="1.995" y="-420.7515" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-50" unit="cm"
+           x="1.995" y="-252.0509" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-51" unit="cm"
+           x="1.995" y="-84.3502999999999" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-52" unit="cm"
+           x="1.995" y="84.3503000000001" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-53" unit="cm"
+           x="1.995" y="252.0509" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-54" unit="cm"
+           x="1.995" y="420.7515" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-55" unit="cm"
+           x="1.995" y="588.4521" z="-74.4599999999998"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-56" unit="cm"
+           x="1.995" y="-588.4521" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-57" unit="cm"
+           x="1.995" y="-420.7515" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-58" unit="cm"
+           x="1.995" y="-252.0509" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-59" unit="cm"
+           x="1.995" y="-84.3502999999999" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-60" unit="cm"
+           x="1.995" y="84.3503000000001" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-61" unit="cm"
+           x="1.995" y="252.0509" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-62" unit="cm"
+           x="1.995" y="420.7515" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-63" unit="cm"
+           x="1.995" y="588.4521" z="74.4600000000003"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-64" unit="cm"
+           x="1.995" y="-588.4521" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-65" unit="cm"
+           x="1.995" y="-420.7515" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-66" unit="cm"
+           x="1.995" y="-252.0509" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-67" unit="cm"
+           x="1.995" y="-84.3502999999999" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-68" unit="cm"
+           x="1.995" y="84.3503000000001" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-69" unit="cm"
+           x="1.995" y="252.0509" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-70" unit="cm"
+           x="1.995" y="420.7515" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-71" unit="cm"
+           x="1.995" y="588.4521" z="224.38"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-72" unit="cm"
+           x="1.995" y="-588.4521" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-73" unit="cm"
+           x="1.995" y="-420.7515" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-74" unit="cm"
+           x="1.995" y="-252.0509" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-75" unit="cm"
+           x="1.995" y="-84.3502999999999" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-76" unit="cm"
+           x="1.995" y="84.3503000000001" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-77" unit="cm"
+           x="1.995" y="252.0509" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-78" unit="cm"
+           x="1.995" y="420.7515" z="373.3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-79" unit="cm"
            x="1.995" y="588.4521" z="373.3"/>
       </physvol>
       <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-80" unit="cm"
+           x="1.995" y="-588.4521" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-81" unit="cm"
+           x="1.995" y="-420.7515" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-82" unit="cm"
+           x="1.995" y="-252.0509" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-83" unit="cm"
+           x="1.995" y="-84.3502999999999" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-84" unit="cm"
+           x="1.995" y="84.3503000000001" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-85" unit="cm"
+           x="1.995" y="252.0509" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-86" unit="cm"
+           x="1.995" y="420.7515" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-87" unit="cm"
+           x="1.995" y="588.4521" z="523.22"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-88" unit="cm"
+           x="1.995" y="-588.4521" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-89" unit="cm"
+           x="1.995" y="-420.7515" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-90" unit="cm"
+           x="1.995" y="-252.0509" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-91" unit="cm"
+           x="1.995" y="-84.3502999999999" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-92" unit="cm"
+           x="1.995" y="84.3503000000001" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-93" unit="cm"
+           x="1.995" y="252.0509" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-94" unit="cm"
+           x="1.995" y="420.7515" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-95" unit="cm"
+           x="1.995" y="588.4521" z="672.14"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-96" unit="cm"
+           x="1.995" y="-588.4521" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-97" unit="cm"
+           x="1.995" y="-420.7515" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-98" unit="cm"
+           x="1.995" y="-252.0509" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-99" unit="cm"
+           x="1.995" y="-84.3502999999999" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-100" unit="cm"
+           x="1.995" y="84.3503000000001" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-101" unit="cm"
+           x="1.995" y="252.0509" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-102" unit="cm"
+           x="1.995" y="420.7515" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-103" unit="cm"
+           x="1.995" y="588.4521" z="822.06"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-104" unit="cm"
+           x="1.995" y="-588.4521" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-105" unit="cm"
+           x="1.995" y="-420.7515" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-106" unit="cm"
+           x="1.995" y="-252.0509" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-107" unit="cm"
+           x="1.995" y="-84.3502999999999" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-108" unit="cm"
+           x="1.995" y="84.3503000000001" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-109" unit="cm"
+           x="1.995" y="252.0509" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-110" unit="cm"
+           x="1.995" y="420.7515" z="970.98"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volTPC"/>
+	<position name="posTPC-111" unit="cm"
+           x="1.995" y="588.4521" z="970.98"/>
+      </physvol>
+      <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-0" unit="cm" x="-325.045" y="-504.6018" z="-298.84"/>
+	<position name="posCathodeGrid-0" unit="cm" x="-325.045" y="-504.6018" z="-896.52"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-0" unit="cm" x="327.04" y="-504.6018" z="-298.84"/>
+	<position name="posAnodePlate-0" unit="cm" x="327.04" y="-504.6018" z="-896.52"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-1" unit="cm" x="-325.045" y="-168.2006" z="-298.84"/>
+	<position name="posCathodeGrid-1" unit="cm" x="-325.045" y="-168.2006" z="-896.52"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-1" unit="cm" x="327.04" y="-168.2006" z="-298.84"/>
+	<position name="posAnodePlate-1" unit="cm" x="327.04" y="-168.2006" z="-896.52"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-2" unit="cm" x="-325.045" y="168.2006" z="-298.84"/>
+	<position name="posCathodeGrid-2" unit="cm" x="-325.045" y="168.2006" z="-896.52"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-2" unit="cm" x="327.04" y="168.2006" z="-298.84"/>
+	<position name="posAnodePlate-2" unit="cm" x="327.04" y="168.2006" z="-896.52"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-3" unit="cm" x="-325.045" y="504.6018" z="-298.84"/>
+	<position name="posCathodeGrid-3" unit="cm" x="-325.045" y="504.6018" z="-896.52"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-3" unit="cm" x="327.04" y="504.6018" z="-298.84"/>
+	<position name="posAnodePlate-3" unit="cm" x="327.04" y="504.6018" z="-896.52"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-4" unit="cm" x="-325.045" y="-504.6018" z="0"/>
+	<position name="posCathodeGrid-4" unit="cm" x="-325.045" y="-504.6018" z="-597.68"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-4" unit="cm" x="327.04" y="-504.6018" z="0"/>
+	<position name="posAnodePlate-4" unit="cm" x="327.04" y="-504.6018" z="-597.68"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-5" unit="cm" x="-325.045" y="-168.2006" z="0"/>
+	<position name="posCathodeGrid-5" unit="cm" x="-325.045" y="-168.2006" z="-597.68"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-5" unit="cm" x="327.04" y="-168.2006" z="0"/>
+	<position name="posAnodePlate-5" unit="cm" x="327.04" y="-168.2006" z="-597.68"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-6" unit="cm" x="-325.045" y="168.2006" z="0"/>
+	<position name="posCathodeGrid-6" unit="cm" x="-325.045" y="168.2006" z="-597.68"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-6" unit="cm" x="327.04" y="168.2006" z="0"/>
+	<position name="posAnodePlate-6" unit="cm" x="327.04" y="168.2006" z="-597.68"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-7" unit="cm" x="-325.045" y="504.6018" z="0"/>
+	<position name="posCathodeGrid-7" unit="cm" x="-325.045" y="504.6018" z="-597.68"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-7" unit="cm" x="327.04" y="504.6018" z="0"/>
+	<position name="posAnodePlate-7" unit="cm" x="327.04" y="504.6018" z="-597.68"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-8" unit="cm" x="-325.045" y="-504.6018" z="298.84"/>
+	<position name="posCathodeGrid-8" unit="cm" x="-325.045" y="-504.6018" z="-298.84"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-8" unit="cm" x="327.04" y="-504.6018" z="298.84"/>
+	<position name="posAnodePlate-8" unit="cm" x="327.04" y="-504.6018" z="-298.84"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-9" unit="cm" x="-325.045" y="-168.2006" z="298.84"/>
+	<position name="posCathodeGrid-9" unit="cm" x="-325.045" y="-168.2006" z="-298.84"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-9" unit="cm" x="327.04" y="-168.2006" z="298.84"/>
+	<position name="posAnodePlate-9" unit="cm" x="327.04" y="-168.2006" z="-298.84"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-10" unit="cm" x="-325.045" y="168.2006" z="298.84"/>
+	<position name="posCathodeGrid-10" unit="cm" x="-325.045" y="168.2006" z="-298.84"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-10" unit="cm" x="327.04" y="168.2006" z="298.84"/>
+	<position name="posAnodePlate-10" unit="cm" x="327.04" y="168.2006" z="-298.84"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
       <physvol>
 	<volumeref ref="volCathodeGrid"/>
-	<position name="posCathodeGrid-11" unit="cm" x="-325.045" y="504.6018" z="298.84"/>
+	<position name="posCathodeGrid-11" unit="cm" x="-325.045" y="504.6018" z="-298.84"/>
       </physvol>
       <physvol>
 	<volumeref ref="volAnodePlate"/>
-	<position name="posAnodePlate-11" unit="cm" x="327.04" y="504.6018" z="298.84"/>
+	<position name="posAnodePlate-11" unit="cm" x="327.04" y="504.6018" z="-298.84"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-12" unit="cm" x="-325.045" y="-504.6018" z="1.13686837721616e-13"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-12" unit="cm" x="327.04" y="-504.6018" z="1.13686837721616e-13"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-13" unit="cm" x="-325.045" y="-168.2006" z="1.13686837721616e-13"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-13" unit="cm" x="327.04" y="-168.2006" z="1.13686837721616e-13"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-14" unit="cm" x="-325.045" y="168.2006" z="1.13686837721616e-13"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-14" unit="cm" x="327.04" y="168.2006" z="1.13686837721616e-13"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-15" unit="cm" x="-325.045" y="504.6018" z="1.13686837721616e-13"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-15" unit="cm" x="327.04" y="504.6018" z="1.13686837721616e-13"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-16" unit="cm" x="-325.045" y="-504.6018" z="298.84"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-16" unit="cm" x="327.04" y="-504.6018" z="298.84"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-17" unit="cm" x="-325.045" y="-168.2006" z="298.84"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-17" unit="cm" x="327.04" y="-168.2006" z="298.84"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-18" unit="cm" x="-325.045" y="168.2006" z="298.84"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-18" unit="cm" x="327.04" y="168.2006" z="298.84"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-19" unit="cm" x="-325.045" y="504.6018" z="298.84"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-19" unit="cm" x="327.04" y="504.6018" z="298.84"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-20" unit="cm" x="-325.045" y="-504.6018" z="597.68"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-20" unit="cm" x="327.04" y="-504.6018" z="597.68"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-21" unit="cm" x="-325.045" y="-168.2006" z="597.68"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-21" unit="cm" x="327.04" y="-168.2006" z="597.68"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-22" unit="cm" x="-325.045" y="168.2006" z="597.68"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-22" unit="cm" x="327.04" y="168.2006" z="597.68"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-23" unit="cm" x="-325.045" y="504.6018" z="597.68"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-23" unit="cm" x="327.04" y="504.6018" z="597.68"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-24" unit="cm" x="-325.045" y="-504.6018" z="896.52"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-24" unit="cm" x="327.04" y="-504.6018" z="896.52"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-25" unit="cm" x="-325.045" y="-168.2006" z="896.52"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-25" unit="cm" x="327.04" y="-168.2006" z="896.52"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-26" unit="cm" x="-325.045" y="168.2006" z="896.52"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-26" unit="cm" x="327.04" y="168.2006" z="896.52"/>
+	<rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volCathodeGrid"/>
+	<position name="posCathodeGrid-27" unit="cm" x="-325.045" y="504.6018" z="896.52"/>
+      </physvol>
+      <physvol>
+	<volumeref ref="volAnodePlate"/>
+	<position name="posAnodePlate-27" unit="cm" x="327.04" y="504.6018" z="896.52"/>
 	<rotationref ref="rIdentity"/>
       </physvol>
      <physvol>
@@ -10689,7 +11153,7 @@
        <position name="posArapucaDouble0-Frame-0-0" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10697,7 +11161,7 @@
        <position name="posArapucaDouble1-Frame-0-0" unit="cm"
          x="-325.045"
 	 y="-467.6018"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10705,7 +11169,7 @@
        <position name="posArapucaDouble2-Frame-0-0" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="-190.34"/>
+	 z="-788.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10713,7 +11177,7 @@
        <position name="posArapucaDouble3-Frame-0-0" unit="cm"
          x="-325.045"
 	 y="-376.9018"
-	 z="-261.34"/>
+	 z="-859.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10721,7 +11185,7 @@
        <position name="posArapucaDouble0-Frame-0-1" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="-37.5"/>
+	 z="-635.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10729,7 +11193,7 @@
        <position name="posArapucaDouble1-Frame-0-1" unit="cm"
          x="-325.045"
 	 y="-467.6018"
-	 z="-108.5"/>
+	 z="-706.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10737,7 +11201,7 @@
        <position name="posArapucaDouble2-Frame-0-1" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="108.5"/>
+	 z="-489.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10745,7 +11209,7 @@
        <position name="posArapucaDouble3-Frame-0-1" unit="cm"
          x="-325.045"
 	 y="-376.9018"
-	 z="37.5"/>
+	 z="-560.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10753,7 +11217,7 @@
        <position name="posArapucaDouble0-Frame-0-2" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="261.34"/>
+	 z="-336.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10761,7 +11225,7 @@
        <position name="posArapucaDouble1-Frame-0-2" unit="cm"
          x="-325.045"
 	 y="-467.6018"
-	 z="190.34"/>
+	 z="-407.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10769,7 +11233,7 @@
        <position name="posArapucaDouble2-Frame-0-2" unit="cm"
          x="-325.045"
 	 y="-541.6018"
-	 z="336.34"/>
+	 z="-190.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10777,7 +11241,135 @@
        <position name="posArapucaDouble3-Frame-0-2" unit="cm"
          x="-325.045"
 	 y="-376.9018"
+	 z="-261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-0-3" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="-37.4999999999999"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-0-3" unit="cm"
+         x="-325.045"
+	 y="-467.6018"
+	 z="-108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-0-3" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-0-3" unit="cm"
+         x="-325.045"
+	 y="-376.9018"
+	 z="37.5000000000001"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-0-4" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-0-4" unit="cm"
+         x="-325.045"
+	 y="-467.6018"
+	 z="190.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-0-4" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="407.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-0-4" unit="cm"
+         x="-325.045"
+	 y="-376.9018"
 	 z="336.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-0-5" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="560.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-0-5" unit="cm"
+         x="-325.045"
+	 y="-467.6018"
+	 z="489.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-0-5" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="706.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-0-5" unit="cm"
+         x="-325.045"
+	 y="-376.9018"
+	 z="635.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-0-6" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="859.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-0-6" unit="cm"
+         x="-325.045"
+	 y="-467.6018"
+	 z="788.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-0-6" unit="cm"
+         x="-325.045"
+	 y="-541.6018"
+	 z="934.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-0-6" unit="cm"
+         x="-325.045"
+	 y="-376.9018"
+	 z="934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10785,7 +11377,7 @@
        <position name="posArapucaDouble0-Frame-1-0" unit="cm"
          x="-325.045"
 	 y="-295.9006"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10793,7 +11385,7 @@
        <position name="posArapucaDouble1-Frame-1-0" unit="cm"
          x="-325.045"
 	 y="-131.2006"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10801,7 +11393,7 @@
        <position name="posArapucaDouble2-Frame-1-0" unit="cm"
          x="-325.045"
 	 y="-205.2006"
-	 z="-190.34"/>
+	 z="-788.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10809,7 +11401,7 @@
        <position name="posArapucaDouble3-Frame-1-0" unit="cm"
          x="-325.045"
 	 y="-40.5006"
-	 z="-261.34"/>
+	 z="-859.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10817,7 +11409,7 @@
        <position name="posArapucaDouble0-Frame-1-1" unit="cm"
          x="-325.045"
 	 y="-295.9006"
-	 z="-37.5"/>
+	 z="-635.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10825,7 +11417,7 @@
        <position name="posArapucaDouble1-Frame-1-1" unit="cm"
          x="-325.045"
 	 y="-131.2006"
-	 z="-108.5"/>
+	 z="-706.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10833,7 +11425,7 @@
        <position name="posArapucaDouble2-Frame-1-1" unit="cm"
          x="-325.045"
 	 y="-205.2006"
-	 z="108.5"/>
+	 z="-489.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10841,7 +11433,7 @@
        <position name="posArapucaDouble3-Frame-1-1" unit="cm"
          x="-325.045"
 	 y="-40.5006"
-	 z="37.5"/>
+	 z="-560.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10849,7 +11441,7 @@
        <position name="posArapucaDouble0-Frame-1-2" unit="cm"
          x="-325.045"
 	 y="-295.9006"
-	 z="261.34"/>
+	 z="-336.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10857,7 +11449,7 @@
        <position name="posArapucaDouble1-Frame-1-2" unit="cm"
          x="-325.045"
 	 y="-131.2006"
-	 z="190.34"/>
+	 z="-407.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10865,7 +11457,7 @@
        <position name="posArapucaDouble2-Frame-1-2" unit="cm"
          x="-325.045"
 	 y="-205.2006"
-	 z="336.34"/>
+	 z="-190.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10873,7 +11465,135 @@
        <position name="posArapucaDouble3-Frame-1-2" unit="cm"
          x="-325.045"
 	 y="-40.5006"
+	 z="-261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-1-3" unit="cm"
+         x="-325.045"
+	 y="-295.9006"
+	 z="-37.4999999999999"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-1-3" unit="cm"
+         x="-325.045"
+	 y="-131.2006"
+	 z="-108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-1-3" unit="cm"
+         x="-325.045"
+	 y="-205.2006"
+	 z="108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-1-3" unit="cm"
+         x="-325.045"
+	 y="-40.5006"
+	 z="37.5000000000001"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-1-4" unit="cm"
+         x="-325.045"
+	 y="-295.9006"
+	 z="261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-1-4" unit="cm"
+         x="-325.045"
+	 y="-131.2006"
+	 z="190.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-1-4" unit="cm"
+         x="-325.045"
+	 y="-205.2006"
+	 z="407.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-1-4" unit="cm"
+         x="-325.045"
+	 y="-40.5006"
 	 z="336.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-1-5" unit="cm"
+         x="-325.045"
+	 y="-295.9006"
+	 z="560.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-1-5" unit="cm"
+         x="-325.045"
+	 y="-131.2006"
+	 z="489.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-1-5" unit="cm"
+         x="-325.045"
+	 y="-205.2006"
+	 z="706.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-1-5" unit="cm"
+         x="-325.045"
+	 y="-40.5006"
+	 z="635.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-1-6" unit="cm"
+         x="-325.045"
+	 y="-295.9006"
+	 z="859.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-1-6" unit="cm"
+         x="-325.045"
+	 y="-131.2006"
+	 z="788.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-1-6" unit="cm"
+         x="-325.045"
+	 y="-205.2006"
+	 z="934.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-1-6" unit="cm"
+         x="-325.045"
+	 y="-40.5006"
+	 z="934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10881,7 +11601,7 @@
        <position name="posArapucaDouble0-Frame-2-0" unit="cm"
          x="-325.045"
 	 y="40.5006"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10889,7 +11609,7 @@
        <position name="posArapucaDouble1-Frame-2-0" unit="cm"
          x="-325.045"
 	 y="205.2006"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10897,7 +11617,7 @@
        <position name="posArapucaDouble2-Frame-2-0" unit="cm"
          x="-325.045"
 	 y="131.2006"
-	 z="-190.34"/>
+	 z="-788.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10905,7 +11625,7 @@
        <position name="posArapucaDouble3-Frame-2-0" unit="cm"
          x="-325.045"
 	 y="295.9006"
-	 z="-261.34"/>
+	 z="-859.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10913,7 +11633,7 @@
        <position name="posArapucaDouble0-Frame-2-1" unit="cm"
          x="-325.045"
 	 y="40.5006"
-	 z="-37.5"/>
+	 z="-635.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10921,7 +11641,7 @@
        <position name="posArapucaDouble1-Frame-2-1" unit="cm"
          x="-325.045"
 	 y="205.2006"
-	 z="-108.5"/>
+	 z="-706.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10929,7 +11649,7 @@
        <position name="posArapucaDouble2-Frame-2-1" unit="cm"
          x="-325.045"
 	 y="131.2006"
-	 z="108.5"/>
+	 z="-489.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10937,7 +11657,7 @@
        <position name="posArapucaDouble3-Frame-2-1" unit="cm"
          x="-325.045"
 	 y="295.9006"
-	 z="37.5"/>
+	 z="-560.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10945,7 +11665,7 @@
        <position name="posArapucaDouble0-Frame-2-2" unit="cm"
          x="-325.045"
 	 y="40.5006"
-	 z="261.34"/>
+	 z="-336.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10953,7 +11673,7 @@
        <position name="posArapucaDouble1-Frame-2-2" unit="cm"
          x="-325.045"
 	 y="205.2006"
-	 z="190.34"/>
+	 z="-407.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10961,7 +11681,7 @@
        <position name="posArapucaDouble2-Frame-2-2" unit="cm"
          x="-325.045"
 	 y="131.2006"
-	 z="336.34"/>
+	 z="-190.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10969,7 +11689,135 @@
        <position name="posArapucaDouble3-Frame-2-2" unit="cm"
          x="-325.045"
 	 y="295.9006"
+	 z="-261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-2-3" unit="cm"
+         x="-325.045"
+	 y="40.5006"
+	 z="-37.4999999999999"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-2-3" unit="cm"
+         x="-325.045"
+	 y="205.2006"
+	 z="-108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-2-3" unit="cm"
+         x="-325.045"
+	 y="131.2006"
+	 z="108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-2-3" unit="cm"
+         x="-325.045"
+	 y="295.9006"
+	 z="37.5000000000001"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-2-4" unit="cm"
+         x="-325.045"
+	 y="40.5006"
+	 z="261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-2-4" unit="cm"
+         x="-325.045"
+	 y="205.2006"
+	 z="190.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-2-4" unit="cm"
+         x="-325.045"
+	 y="131.2006"
+	 z="407.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-2-4" unit="cm"
+         x="-325.045"
+	 y="295.9006"
 	 z="336.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-2-5" unit="cm"
+         x="-325.045"
+	 y="40.5006"
+	 z="560.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-2-5" unit="cm"
+         x="-325.045"
+	 y="205.2006"
+	 z="489.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-2-5" unit="cm"
+         x="-325.045"
+	 y="131.2006"
+	 z="706.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-2-5" unit="cm"
+         x="-325.045"
+	 y="295.9006"
+	 z="635.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-2-6" unit="cm"
+         x="-325.045"
+	 y="40.5006"
+	 z="859.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-2-6" unit="cm"
+         x="-325.045"
+	 y="205.2006"
+	 z="788.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-2-6" unit="cm"
+         x="-325.045"
+	 y="131.2006"
+	 z="934.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-2-6" unit="cm"
+         x="-325.045"
+	 y="295.9006"
+	 z="934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10977,7 +11825,7 @@
        <position name="posArapucaDouble0-Frame-3-0" unit="cm"
          x="-325.045"
 	 y="376.9018"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10985,7 +11833,7 @@
        <position name="posArapucaDouble1-Frame-3-0" unit="cm"
          x="-325.045"
 	 y="541.6018"
-	 z="-336.34"/>
+	 z="-934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -10993,7 +11841,7 @@
        <position name="posArapucaDouble2-Frame-3-0" unit="cm"
          x="-325.045"
 	 y="467.6018"
-	 z="-190.34"/>
+	 z="-788.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11001,7 +11849,7 @@
        <position name="posArapucaDouble3-Frame-3-0" unit="cm"
          x="-325.045"
 	 y="541.6018"
-	 z="-261.34"/>
+	 z="-859.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11009,7 +11857,7 @@
        <position name="posArapucaDouble0-Frame-3-1" unit="cm"
          x="-325.045"
 	 y="376.9018"
-	 z="-37.5"/>
+	 z="-635.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11017,7 +11865,7 @@
        <position name="posArapucaDouble1-Frame-3-1" unit="cm"
          x="-325.045"
 	 y="541.6018"
-	 z="-108.5"/>
+	 z="-706.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11025,7 +11873,7 @@
        <position name="posArapucaDouble2-Frame-3-1" unit="cm"
          x="-325.045"
 	 y="467.6018"
-	 z="108.5"/>
+	 z="-489.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11033,7 +11881,7 @@
        <position name="posArapucaDouble3-Frame-3-1" unit="cm"
          x="-325.045"
 	 y="541.6018"
-	 z="37.5"/>
+	 z="-560.18"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11041,7 +11889,7 @@
        <position name="posArapucaDouble0-Frame-3-2" unit="cm"
          x="-325.045"
 	 y="376.9018"
-	 z="261.34"/>
+	 z="-336.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11049,7 +11897,7 @@
        <position name="posArapucaDouble1-Frame-3-2" unit="cm"
          x="-325.045"
 	 y="541.6018"
-	 z="190.34"/>
+	 z="-407.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11057,7 +11905,7 @@
        <position name="posArapucaDouble2-Frame-3-2" unit="cm"
          x="-325.045"
 	 y="467.6018"
-	 z="336.34"/>
+	 z="-190.34"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
      <physvol>
@@ -11065,7 +11913,135 @@
        <position name="posArapucaDouble3-Frame-3-2" unit="cm"
          x="-325.045"
 	 y="541.6018"
+	 z="-261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-3-3" unit="cm"
+         x="-325.045"
+	 y="376.9018"
+	 z="-37.4999999999999"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-3-3" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="-108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-3-3" unit="cm"
+         x="-325.045"
+	 y="467.6018"
+	 z="108.5"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-3-3" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="37.5000000000001"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-3-4" unit="cm"
+         x="-325.045"
+	 y="376.9018"
+	 z="261.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-3-4" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="190.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-3-4" unit="cm"
+         x="-325.045"
+	 y="467.6018"
+	 z="407.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-3-4" unit="cm"
+         x="-325.045"
+	 y="541.6018"
 	 z="336.34"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-3-5" unit="cm"
+         x="-325.045"
+	 y="376.9018"
+	 z="560.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-3-5" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="489.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-3-5" unit="cm"
+         x="-325.045"
+	 y="467.6018"
+	 z="706.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-3-5" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="635.18"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble0-Frame-3-6" unit="cm"
+         x="-325.045"
+	 y="376.9018"
+	 z="859.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble1-Frame-3-6" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="788.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble2-Frame-3-6" unit="cm"
+         x="-325.045"
+	 y="467.6018"
+	 z="934.02"/>
+       <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
+     </physvol>
+     <physvol>
+	<volumeref ref="volArapuca"/>
+       <position name="posArapucaDouble3-Frame-3-6" unit="cm"
+         x="-325.045"
+	 y="541.6018"
+	 z="934.02"/>
        <rotationref ref="rPlus90AboutXPlus90AboutZ"/>
      </physvol>
 </volume>
@@ -11095,7 +12071,7 @@
        <position name="posArapuca0-Lat-0" unit="cm"
          x="285.03"
 	 y="-743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11103,7 +12079,7 @@
        <position name="posArapuca1-Lat-0" unit="cm"
          x="210.03"
 	 y="-743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11111,7 +12087,7 @@
        <position name="posArapuca2-Lat-0" unit="cm"
          x="135.03"
 	 y="-743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11119,7 +12095,7 @@
        <position name="posArapuca3-Lat-0" unit="cm"
          x="60.03"
 	 y="-743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11127,7 +12103,7 @@
        <position name="posArapuca4-Lat-0" unit="cm"
          x="285.03"
 	 y="743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11135,7 +12111,7 @@
        <position name="posArapuca5-Lat-0" unit="cm"
          x="210.03"
 	 y="743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11143,7 +12119,7 @@
        <position name="posArapuca6-Lat-0" unit="cm"
          x="135.03"
 	 y="743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11151,7 +12127,7 @@
        <position name="posArapuca7-Lat-0" unit="cm"
          x="60.03"
 	 y="743.8024"
-	 z="-298.84"/>
+	 z="-896.52"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11159,7 +12135,7 @@
        <position name="posArapuca0-Lat-1" unit="cm"
          x="285.03"
 	 y="-743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11167,7 +12143,7 @@
        <position name="posArapuca1-Lat-1" unit="cm"
          x="210.03"
 	 y="-743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11175,7 +12151,7 @@
        <position name="posArapuca2-Lat-1" unit="cm"
          x="135.03"
 	 y="-743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11183,7 +12159,7 @@
        <position name="posArapuca3-Lat-1" unit="cm"
          x="60.03"
 	 y="-743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11191,7 +12167,7 @@
        <position name="posArapuca4-Lat-1" unit="cm"
          x="285.03"
 	 y="743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11199,7 +12175,7 @@
        <position name="posArapuca5-Lat-1" unit="cm"
          x="210.03"
 	 y="743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11207,7 +12183,7 @@
        <position name="posArapuca6-Lat-1" unit="cm"
          x="135.03"
 	 y="743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11215,7 +12191,7 @@
        <position name="posArapuca7-Lat-1" unit="cm"
          x="60.03"
 	 y="743.8024"
-	 z="-1.13686837721616e-13"/>
+	 z="-597.68"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11223,7 +12199,7 @@
        <position name="posArapuca0-Lat-2" unit="cm"
          x="285.03"
 	 y="-743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11231,7 +12207,7 @@
        <position name="posArapuca1-Lat-2" unit="cm"
          x="210.03"
 	 y="-743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11239,7 +12215,7 @@
        <position name="posArapuca2-Lat-2" unit="cm"
          x="135.03"
 	 y="-743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11247,7 +12223,7 @@
        <position name="posArapuca3-Lat-2" unit="cm"
          x="60.03"
 	 y="-743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -11255,7 +12231,7 @@
        <position name="posArapuca4-Lat-2" unit="cm"
          x="285.03"
 	 y="743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11263,7 +12239,7 @@
        <position name="posArapuca5-Lat-2" unit="cm"
          x="210.03"
 	 y="743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11271,7 +12247,7 @@
        <position name="posArapuca6-Lat-2" unit="cm"
          x="135.03"
 	 y="743.8024"
-	 z="298.84"/>
+	 z="-298.84"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11279,7 +12255,263 @@
        <position name="posArapuca7-Lat-2" unit="cm"
          x="60.03"
 	 y="743.8024"
+	 z="-298.84"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca0-Lat-3" unit="cm"
+         x="285.03"
+	 y="-743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca1-Lat-3" unit="cm"
+         x="210.03"
+	 y="-743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca2-Lat-3" unit="cm"
+         x="135.03"
+	 y="-743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca3-Lat-3" unit="cm"
+         x="60.03"
+	 y="-743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca4-Lat-3" unit="cm"
+         x="285.03"
+	 y="743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca5-Lat-3" unit="cm"
+         x="210.03"
+	 y="743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca6-Lat-3" unit="cm"
+         x="135.03"
+	 y="743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca7-Lat-3" unit="cm"
+         x="60.03"
+	 y="743.8024"
+	 z="-1.13686837721616e-13"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca0-Lat-4" unit="cm"
+         x="285.03"
+	 y="-743.8024"
 	 z="298.84"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca1-Lat-4" unit="cm"
+         x="210.03"
+	 y="-743.8024"
+	 z="298.84"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca2-Lat-4" unit="cm"
+         x="135.03"
+	 y="-743.8024"
+	 z="298.84"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca3-Lat-4" unit="cm"
+         x="60.03"
+	 y="-743.8024"
+	 z="298.84"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca4-Lat-4" unit="cm"
+         x="285.03"
+	 y="743.8024"
+	 z="298.84"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca5-Lat-4" unit="cm"
+         x="210.03"
+	 y="743.8024"
+	 z="298.84"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca6-Lat-4" unit="cm"
+         x="135.03"
+	 y="743.8024"
+	 z="298.84"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca7-Lat-4" unit="cm"
+         x="60.03"
+	 y="743.8024"
+	 z="298.84"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca0-Lat-5" unit="cm"
+         x="285.03"
+	 y="-743.8024"
+	 z="597.68"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca1-Lat-5" unit="cm"
+         x="210.03"
+	 y="-743.8024"
+	 z="597.68"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca2-Lat-5" unit="cm"
+         x="135.03"
+	 y="-743.8024"
+	 z="597.68"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca3-Lat-5" unit="cm"
+         x="60.03"
+	 y="-743.8024"
+	 z="597.68"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca4-Lat-5" unit="cm"
+         x="285.03"
+	 y="743.8024"
+	 z="597.68"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca5-Lat-5" unit="cm"
+         x="210.03"
+	 y="743.8024"
+	 z="597.68"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca6-Lat-5" unit="cm"
+         x="135.03"
+	 y="743.8024"
+	 z="597.68"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca7-Lat-5" unit="cm"
+         x="60.03"
+	 y="743.8024"
+	 z="597.68"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca0-Lat-6" unit="cm"
+         x="285.03"
+	 y="-743.8024"
+	 z="896.52"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca1-Lat-6" unit="cm"
+         x="210.03"
+	 y="-743.8024"
+	 z="896.52"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca2-Lat-6" unit="cm"
+         x="135.03"
+	 y="-743.8024"
+	 z="896.52"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca3-Lat-6" unit="cm"
+         x="60.03"
+	 y="-743.8024"
+	 z="896.52"/>
+       <rotationref ref="rIdentity"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca4-Lat-6" unit="cm"
+         x="285.03"
+	 y="743.8024"
+	 z="896.52"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca5-Lat-6" unit="cm"
+         x="210.03"
+	 y="743.8024"
+	 z="896.52"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca6-Lat-6" unit="cm"
+         x="135.03"
+	 y="743.8024"
+	 z="896.52"/>
+       <rotationref ref="rPlus180AboutX"/>
+     </physvol>
+     <physvol>
+       <volumeref ref="volArapuca"/>
+       <position name="posArapuca7-Lat-6" unit="cm"
+         x="60.03"
+	 y="743.8024"
+	 z="896.52"/>
        <rotationref ref="rPlus180AboutX"/>
      </physvol>
      <physvol>
@@ -11287,7 +12519,7 @@
        <position name="posArapuca0-ShortLat-220" unit="cm"
          x="285.03"
 	 y="-220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11295,7 +12527,7 @@
        <position name="posArapuca1-ShortLat-220" unit="cm"
          x="210.03"
 	 y="-220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11303,7 +12535,7 @@
        <position name="posArapuca2-ShortLat-220" unit="cm"
          x="135.03"
 	 y="-220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11311,7 +12543,7 @@
        <position name="posArapuca3-ShortLat-220" unit="cm"
          x="60.03"
 	 y="-220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11319,7 +12551,7 @@
        <position name="posArapuca4-ShortLat-220" unit="cm"
          x="285.03"
 	 y="-220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11327,7 +12559,7 @@
        <position name="posArapuca5-ShortLat-220" unit="cm"
          x="210.03"
 	 y="-220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11335,7 +12567,7 @@
        <position name="posArapuca6-ShortLat-220" unit="cm"
          x="135.03"
 	 y="-220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11343,7 +12575,7 @@
        <position name="posArapuca7-ShortLat-220" unit="cm"
          x="60.03"
 	 y="-220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11351,7 +12583,7 @@
        <position name="posArapuca0-ShortLat220" unit="cm"
          x="285.03"
 	 y="220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11359,7 +12591,7 @@
        <position name="posArapuca1-ShortLat220" unit="cm"
          x="210.03"
 	 y="220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11367,7 +12599,7 @@
        <position name="posArapuca2-ShortLat220" unit="cm"
          x="135.03"
 	 y="220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11375,7 +12607,7 @@
        <position name="posArapuca3-ShortLat220" unit="cm"
          x="60.03"
 	 y="220"
-	 z="-545.26"/>
+	 z="-1142.94"/>
        <rotationref ref="rMinus90AboutX"/>
      </physvol>
      <physvol>
@@ -11383,7 +12615,7 @@
        <position name="posArapuca4-ShortLat220" unit="cm"
          x="285.03"
 	 y="220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11391,7 +12623,7 @@
        <position name="posArapuca5-ShortLat220" unit="cm"
          x="210.03"
 	 y="220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11399,7 +12631,7 @@
        <position name="posArapuca6-ShortLat220" unit="cm"
          x="135.03"
 	 y="220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
      <physvol>
@@ -11407,7 +12639,7 @@
        <position name="posArapuca7-ShortLat220" unit="cm"
          x="60.03"
 	 y="220"
-	 z="545.26"/>
+	 z="1142.94"/>
        <rotationref ref="rPlus90AboutX"/>
      </physvol>
     <physvol>
@@ -11986,7 +13218,7 @@
 
       <physvol>
         <volumeref ref="volDetEnclosure"/>
-	<position name="posDetEnclosure" unit="cm" x="50.04" y="-1.13686837721616e-13" z="448.26"/>
+	<position name="posDetEnclosure" unit="cm" x="50.04" y="-1.13686837721616e-13" z="1045.94"/>
       </physvol>
 
     </volume>

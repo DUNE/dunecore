@@ -7,25 +7,33 @@ BEGIN_PROLOG
 ### ProtoDUNE-HD           ###
 ##############################
 
-protodunehd_services: @local::protodune_services 
+protodunehd_services: @local::protodune_services
 protodunehd_services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
 protodunehd_services.Geometry:  @local::protodunehdv6_geo
 protodunehd_services.DetectorClocksService: @local::protodunehd_detectorclocks
+protodunehd_services.LArPropertiesService.ScintPreScale: 1
+protodunehd_services.WireReadout.WireReadoutClass: DuneApaWireReadout
 
 protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
 protodunehd_rawdecoding_services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
 protodunehd_rawdecoding_services.Geometry: @local::protodunehdv6_geo
 protodunehd_rawdecoding_services.DetectorClocksService: @local::protodunehd_detectorclocks
+protodunehd_rawdecoding_services.LArPropertiesService.ScintPreScale: 1
+protodunehd_rawdecoding_services.WireReadout.WireReadoutClass: DuneApaWireReadout
 
 protodunehd_data_services: @local::protodune_data_services
 protodunehd_data_services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
 protodunehd_data_services.Geometry: @local::protodunehdv6_geo
 protodunehd_data_services.DetectorClocksService: @local::protodunehd_detectorclocks
+protodunehd_data_services.LArPropertiesService.ScintPreScale: 1
+protodunehd_data_services.WireReadout.WireReadoutClass: DuneApaWireReadout
 
 # Low memory configuration leaving out some heavy services
 protodunehd_minimal_simulation_services: @local::protodune_minimal_simulation_services
 protodunehd_minimal_simulation_services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
 protodunehd_minimal_simulation_services.Geometry: @local::protodunehdv6_geo
+protodunehd_minimal_simulation_services.LArPropertiesService.ScintPreScale: 1
+protodunehd_minimal_simulation_services.WireReadout.WireReadoutClass: DuneApaWireReadout
 
 # Full service configuration which includes memory-intensive services
 protodunehd_simulation_services: 
@@ -33,9 +41,11 @@ protodunehd_simulation_services:
   @table::protodunehd_minimal_simulation_services
   SignalShapingServiceDUNE:     @local::protodunesp_signalshapingservice
   PhotonVisibilityService:      @local::protodune_hd_photonvisibilityservice
-  OpDetResponseInterface:       @local::protodune_opdetresponse
+  OpDetResponseInterface:       @local::standard_opdetresponse
   DetectorClocksService: @local::protodunehd_detectorclocks
 }
+protodunehd_simulation_services.OpDetResponseInterface.QuantumEfficiency: 1
+
 
 # Reco services for ProtoDUNE simulation.
 protodunehd_reco_services:                            @local::protodunehd_services
