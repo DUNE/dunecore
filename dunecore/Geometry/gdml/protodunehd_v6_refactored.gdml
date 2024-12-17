@@ -65838,7 +65838,7 @@ z="113.63"/>
 	  z="113.63"/> 
         <rotationref ref="rPlus180AboutX"/>
       </physvol>
-
+      
       <physvol>
         <volumeref ref="volCathode"/>
         <position name="posCathode-1" unit="cm" 
@@ -65846,7 +65846,8 @@ z="113.63"/>
 	y="-26.2" 
 	z="113.63"/> 
         <rotationref ref="rIdentity"/>
-      </physvol>
+     </physvol>
+      
       <physvol name="volFCModTopRight-1">
         <volumeref ref="volFCMod"/>
         <position name="posFCModTopRight-1" unit="cm"
@@ -92086,10 +92087,6 @@ z="113.63"/>
          <rotationref ref="rBeamWRev3"/>
       </physvol>
        <physvol>
-           <volumeref ref="volCryostat"/>
-           <positionref ref="posCryoInDetEnc"/>
-       </physvol>
-       <physvol>
            <volumeref ref="volSurrConcrete"/>
            <position name="posSurrConcrete" unit="cm" 
            x="0" 
@@ -92351,6 +92348,10 @@ z="113.63"/>
             y="-220.52" 
             z="699.78"/>
            <rotationref ref="rMinus90AboutYMinus90AboutX"/>
+       </physvol>
+       <physvol>
+           <volumeref ref="volCryostat"/>
+           <positionref ref="posCryoInDetEnc"/>
        </physvol>
 
     </volume>
