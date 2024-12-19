@@ -202,8 +202,8 @@ dune10kt_v6_geo:             @local::dune10kt_base_geo
 dune10kt_v6_geo.GDML:        "dune10kt_v6_refactored.gdml"
 dune10kt_v6_geo.Name:        "dune10kt_v6"
 dune10kt_v6_auxdet_geo:      @local::dune10kt_base_auxdet_geo
-dune10kt_v6_auxdet_geo.GDML: @local::dune10kt_v6_refactored_geo.GDML
-dune10kt_v6_auxdet_geo.Name: @local::dune10kt_v6_refactored_geo.Name
+dune10kt_v6_auxdet_geo.GDML: @local::dune10kt_v6_geo.GDML
+dune10kt_v6_auxdet_geo.Name: @local::dune10kt_v6_geo.Name
 
 dune10kt_geo:                @local::dune10kt_v6_geo
 dune10kt_auxdet_geo:         @local::dune10kt_v6_auxdet_geo
