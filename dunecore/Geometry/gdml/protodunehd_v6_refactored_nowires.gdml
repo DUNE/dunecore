@@ -64,10 +64,17 @@
   <element name="argon" formula="Ar" Z="18"> <atom value="39.9480"/>  </element>
   <element name="sulphur" formula="S" Z="16"> <atom value="32.065"/>  </element>
   <element name="phosphorus" formula="P" Z="15"> <atom value="30.973"/>  </element>
+  <element name="titane"  formula="Ti" Z="22"> <atom value="47.867"/>  </element>
+  <element name="bismuth"  formula="Bi" Z="83"> <atom value="208.980"/>  </element>
 
   <material name="Vacuum" formula="Vacuum">
    <D value="1.e-25" unit="g/cm3"/>
    <fraction n="1.0" ref="videRef"/>
+  </material>
+
+  <material name="TITANIUM_Ti" formula="TITANIUM_Ti">
+   <D value="4.51" unit="g/cm3"/>
+   <fraction n="1.0000" ref="titanium"/>
   </material>
 
   <material name="ALUMINUM_Al" formula="ALUMINUM_Al">
@@ -825,7 +832,13 @@
       <position name="posPitInConcrete" x="133" y="450" z="-370" unit="cm"/>
     </subtraction>
 
-
+    <tube name="activebisource" rmin="0" rmax="2.5"  z="0.0001"  deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
+    <tube name="tifoil"         rmin="0" rmax="12.5" z="0.01064" deltaphi="360" startphi="0" aunit="deg" lunit="mm"/>
+    
+    <subtraction name="tifoils">
+      <first ref="tifoil"/>
+      <second ref="activebisource"/>
+    </subtraction>
 
     <box name="boxCryoTop" x="1016.8" y="1016.8" z="61.8" lunit="cm"/>
     <box name="boxCryoWallLg" x="1140.4" y="1075.6" z="61.8" lunit="cm"/>
@@ -1126,6 +1139,15 @@
     <volume name="volCathode">
       <materialref ref="G10" />
       <solidref ref="Cathode" />
+    </volume>
+
+    <volume name="volTiFoils">
+      <materialref ref="TITANIUM_Ti"/>
+      <solidref ref="tifoils"/>
+    </volume>
+    <volume name="volBiSource">
+      <materialref ref="Vacuum"/>
+      <solidref ref="activebisource"/>
     </volume>
 
    <volume name="volOpDetSensitive_0-0-0">
@@ -3402,6 +3424,23 @@ z="-118.43"/>
 	  y="-26.2" 
 	  z="-118.43"/> 
         <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+
+      <physvol>
+        <volumeref ref="volTiFoils"/>
+        <position name="posTiFoils" unit="cm"
+        x="-335"
+        y="-319"
+        z="218"/>
+        <rotationref ref="rMinus90AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volBiSource"/>
+        <position name="posBiSource" unit="cm"
+          x="-335"
+          y="-319"
+          z="218"/>
+        <rotationref ref="rMinus90AboutY"/>
       </physvol>
 
       <physvol>
@@ -30678,10 +30717,6 @@ z="113.63"/>
          <rotationref ref="rBeamWRev3"/>
       </physvol>
        <physvol>
-           <volumeref ref="volCryostat"/>
-           <positionref ref="posCryoInDetEnc"/>
-       </physvol>
-       <physvol>
            <volumeref ref="volSurrConcrete"/>
            <position name="posSurrConcrete" unit="cm" 
            x="0" 
@@ -30943,6 +30978,10 @@ z="113.63"/>
             y="-220.52" 
             z="699.78"/>
            <rotationref ref="rMinus90AboutYMinus90AboutX"/>
+       </physvol>
+       <physvol>
+           <volumeref ref="volCryostat"/>
+           <positionref ref="posCryoInDetEnc"/>
        </physvol>
 
     </volume>
