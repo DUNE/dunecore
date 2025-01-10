@@ -287,6 +287,12 @@
    <D value="0.00166" unit="g/cm3"/>
    <fraction n="1.0" ref="argon"/>
   </material>
+  
+  <material name="vm2000" formula="vm2000">
+      <D value="1.2" unit="g/cm3"/>
+      <composite n="2" ref="carbon"/>
+      <composite n="4" ref="hydrogen"/>
+    </material>
 
   <material formula=" " name="G10">
    <D value="1.7" unit="g/cm3"/>
@@ -1213,9 +1219,6 @@
       z="149"
       lunit="cm"/>
 
-
-
-
     <box name="ArapucaOut" lunit="cm"
       x="65.3"
       y="2.5"
@@ -1283,6 +1286,12 @@
       <position name="posGasArSub2" x="-86.02" y="419.6" z="-2.8421709430404e-14" unit="cm"/>
     </subtraction>
 
+    <box name="AnodePlate"
+       x="0.01"
+       y="337"
+       z="299.3"
+       lunit="cm"/>
+       
     <box name="CathodeBlock" lunit="cm"
       x="6"
       y="337"
@@ -2524,19 +2533,19 @@
        <physvol>
        <volumeref ref="volTPCPlaneU0"/>
        <position name="posPlaneU0" unit="cm" 
-         x="169.23" y="0" z="0"/>
+         x="169.23" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV0"/>
        <position name="posPlaneY0" unit="cm" 
-         x="169.25" y="0" z="0"/>
+         x="169.25" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ0"/>
        <position name="posPlaneZ0" unit="cm" 
-         x="169.27" y="0" z="0"/>
+         x="169.27" y="0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -2565,19 +2574,19 @@
        <physvol>
        <volumeref ref="volTPCPlaneU1"/>
        <position name="posPlaneU1" unit="cm" 
-         x="169.23" y="0" z="0"/>
+         x="169.23" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV1"/>
        <position name="posPlaneY1" unit="cm" 
-         x="169.25" y="0" z="0"/>
+         x="169.25" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ1"/>
        <position name="posPlaneZ1" unit="cm" 
-         x="169.27" y="0" z="0"/>
+         x="169.27" y="-0.3" z="0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -2606,19 +2615,19 @@
        <physvol>
        <volumeref ref="volTPCPlaneU2"/>
        <position name="posPlaneU2" unit="cm" 
-         x="169.23" y="0" z="0"/>
+         x="169.23" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV2"/>
        <position name="posPlaneY2" unit="cm" 
-         x="169.25" y="0" z="0"/>
+         x="169.25" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ2"/>
        <position name="posPlaneZ2" unit="cm" 
-         x="169.27" y="0" z="0"/>
+         x="169.27" y="0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -2647,19 +2656,19 @@
        <physvol>
        <volumeref ref="volTPCPlaneU3"/>
        <position name="posPlaneU3" unit="cm" 
-         x="169.23" y="0" z="0"/>
+         x="169.23" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneV3"/>
        <position name="posPlaneY3" unit="cm" 
-         x="169.25" y="0" z="0"/>
+         x="169.25" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
        <volumeref ref="volTPCPlaneZ3"/>
        <position name="posPlaneZ3" unit="cm" 
-         x="169.27" y="0" z="0"/>
+         x="169.27" y="-0.3" z="-0.275"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
@@ -2668,12 +2677,39 @@
         x="-0.03" y="0" z="0"/>
        <rotationref ref="rIdentity"/>
      </physvol>
+     
    </volume>
  
     <volume name="volSteelShell">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni" />
       <solidref ref="SteelShell" />
     </volume>
+    
+    <!-- Anode -->
+    
+    <volume name="volAnode_nonTCOSide_bot">
+      <materialref ref="vm2000" />
+      <solidref ref="AnodePlate"/>
+      <colorref ref="black"/>
+    </volume>
+    <volume name="volAnode_TCOSide_bot">
+      <materialref ref="vm2000" />
+      <solidref ref="AnodePlate"/>
+      <colorref ref="black"/>
+    </volume>
+    <volume name="volAnode_nonTCOSide_top">
+      <materialref ref="vm2000" />
+      <solidref ref="AnodePlate"/>
+      <colorref ref="black"/>
+    </volume>
+    <volume name="volAnode_TCOSide_top">
+      <materialref ref="vm2000" />
+      <solidref ref="AnodePlate"/>
+      <colorref ref="black"/>
+    </volume>
+    
+    <!-- Cathode -->
+    
     <volume name="volCathode_nonTCOSide">
       <materialref ref="G10" />
       <solidref ref="Cathode_nonTCOSide"/>
@@ -2684,6 +2720,7 @@
       <solidref ref="Cathode_TCOSide"/>
       <colorref ref="black"/>
     </volume>
+    
     <volume name="volGaseousArgon">
       <materialref ref="ArGas"/>
       <solidref ref="GaseousArgon"/>
@@ -2940,89 +2977,89 @@
       <physvol>
         <volumeref ref="volTPC0"/>
 	<position name="posTopTPC-0" unit="cm"
-           x="152.28" y="-252.45" z="-74.55"/>
+           x="152.28" y="-252.75" z="-74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC0"/>
 	<position name="posBotTPC-0" unit="cm"
-           x="-192.28" y="-252.45" z="-74.55"/>
+           x="-192.28" y="-252.75" z="-74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posTopTPC-1" unit="cm"
-           x="152.28" y="-84.55" z="-74.55"/>
+           x="152.28" y="-84.25" z="-74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posBotTPC-1" unit="cm"
-           x="-192.28" y="-84.55" z="-74.55"/>
+           x="-192.28" y="-84.25" z="-74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC0"/>
 	<position name="posTopTPC-2" unit="cm"
-           x="152.28" y="84.55" z="-74.55"/>
+           x="152.28" y="84.25" z="-74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC0"/>
 	<position name="posBotTPC-2" unit="cm"
-           x="-192.28" y="84.55" z="-74.55"/>
+           x="-192.28" y="84.25" z="-74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posTopTPC-3" unit="cm"
-           x="152.28" y="252.45" z="-74.55"/>
+           x="152.28" y="252.75" z="-74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posBotTPC-3" unit="cm"
-           x="-192.28" y="252.45" z="-74.55"/>
+           x="-192.28" y="252.75" z="-74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC2"/>
 	<position name="posTopTPC-4" unit="cm"
-           x="152.28" y="-252.45" z="74.55"/>
+           x="152.28" y="-252.75" z="74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC2"/>
 	<position name="posBotTPC-4" unit="cm"
-           x="-192.28" y="-252.45" z="74.55"/>
+           x="-192.28" y="-252.75" z="74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC3"/>
 	<position name="posTopTPC-5" unit="cm"
-           x="152.28" y="-84.55" z="74.55"/>
+           x="152.28" y="-84.25" z="74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC3"/>
 	<position name="posBotTPC-5" unit="cm"
-           x="-192.28" y="-84.55" z="74.55"/>
+           x="-192.28" y="-84.25" z="74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC2"/>
 	<position name="posTopTPC-6" unit="cm"
-           x="152.28" y="84.55" z="74.55"/>
+           x="152.28" y="84.25" z="74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC2"/>
 	<position name="posBotTPC-6" unit="cm"
-           x="-192.28" y="84.55" z="74.55"/>
+           x="-192.28" y="84.25" z="74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
         <volumeref ref="volTPC3"/>
 	<position name="posTopTPC-7" unit="cm"
-           x="152.28" y="252.45" z="74.55"/>
+           x="152.28" y="252.75" z="74.825"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC3"/>
 	<position name="posBotTPC-7" unit="cm"
-           x="-192.28" y="252.45" z="74.55"/>
+           x="-192.28" y="252.75" z="74.825"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
   <physvol>
@@ -3595,14 +3632,31 @@
      <position name="posFieldShaper113" unit="cm"  x="-359" y="0" z="164.7" />
      <rotationref ref="rPlus90AboutXPlus90AboutZ" />
   </physvol>
-        <physvol>
-        <volumeref ref="volCathode_nonTCOSide"/>
-        <position name="posCathode-0" unit="cm" x="-20" y="-168.5" z="-2.8421709430404e-14"/>
-        </physvol>
-        <physvol>
-        <volumeref ref="volCathode_TCOSide"/>
-        <position name="posCathode-1" unit="cm" x="-20" y="168.5" z="-2.8421709430404e-14"/>
-        </physvol>
+  <physvol>
+    <volumeref ref="volCathode_nonTCOSide"/>
+    <position name="posCathode-0" unit="cm" x="-20" y="-168.5" z="-2.8421709430404e-14"/>
+  </physvol>
+  <physvol>
+    <volumeref ref="volCathode_TCOSide"/>
+    <position name="posCathode-1" unit="cm" x="-20" y="168.5" z="-2.8421709430404e-14"/>
+</physvol>
+  <physvol>
+    <volumeref ref="volAnode_nonTCOSide_bot"/>
+    <position name="posAnodePlate-nonTCOSide_bot" unit="cm" x="-361.5" y="-168.5" z="-2.8421709430404e-14"/>
+  </physvol>
+  <physvol>
+    <volumeref ref="volAnode_TCOSide_bot"/>
+    <position name="posAnodePlate-nonTCOSide_bot" unit="cm" x="-361.5" y="168.5" z="-2.8421709430404e-14"/>
+  </physvol>
+  <physvol>
+    <volumeref ref="volAnode_nonTCOSide_top"/>
+    <position name="posAnodePlate-nonTCOSide_top" unit="cm" x="321.5" y="-168.5" z="-2.8421709430404e-14"/>
+  </physvol>
+  <physvol>
+    <volumeref ref="volAnode_TCOSide_top"/>
+    <position name="posAnodePlate-nonTCOSide_top" unit="cm" x="321.5" y="168.5" z="-2.8421709430404e-14"/>
+  </physvol>
+        
 <physvol>
   <volumeref ref="volPMT_foil"/>
   <position name="posPMT0" unit="cm" x="-367.6"  z="68.1" y="-405.3" />
@@ -5155,8 +5209,9 @@
            <volumeref ref="volCryostat"/>
            <positionref ref="posCryoInDetEnc"/>
     </physvol>
+   
     </volume>
-
+    
     <volume name="volWorld" >
       <materialref ref="Air"/>
       <solidref ref="World"/>
