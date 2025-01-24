@@ -75,6 +75,7 @@ dunefd_simulation_services: {
     #LArG4Detector:      No refactored full FD geom, required for this to run
     BackTrackerService:           @local::dunefd_backtrackerservice
     PhotonBackTrackerService: @local::dunefd_photonbacktrackerservice
+    LArG4Detector:      @local::dune10kt_larg4detector
     PhotonVisibilityService: @erase
 }
 
