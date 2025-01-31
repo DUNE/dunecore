@@ -66,11 +66,13 @@
 
 ##################################################################################
 #
-#  V5:       Updates on January 2025 (LP + changes by Yoann Kermaïdic)
-# Fixed cathode X-arapucas' and PMTs' positions to match beam pipe placement
+# V5:       Updates on January 2025 (LP + changes by Yoann Kermaïdic)
+# Fixed cathode X-arapucas' positions to match beam pipe placement
 # Inclusion of anode plate on top of the 3 wire planes for backgrounds.
 #           This is included together with the cathode switch on. Currently the material of this plate is
 #           set to vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
+# Placement of cathode resistive meshes individually for lighter visualization
+# J. Soto: Fixed PMTs' positions to match installation placement
 ##################################################################################
 
 #use warnings;
