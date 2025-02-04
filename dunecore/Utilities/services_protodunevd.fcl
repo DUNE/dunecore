@@ -11,20 +11,25 @@ protodunevd_services:                                       @local::protodune_se
 protodunevd_services.Geometry:                              @local::protodunevd_v4_geo
 protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v4_auxdet_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
+protodunevd_services.LArPropertiesService.ScintPreScale: 1
+
 
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
 protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v4_geo
 protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
+protodunevd_rawdecoding_services.LArPropertiesService.ScintPreScale: 1
 
 protodunevd_data_services:                                  @local::protodune_data_services
 protodunevd_data_services.Geometry:                         @local::protodunevd_v4_geo
 protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
+protodunevd_data_services.LArPropertiesService.ScintPreScale: 1
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
 protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
 protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v4_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
+protodunevd_minimal_simulation_services.LArPropertiesService.ScintPreScale: 1
 
 # Full service configuration which includes memory-intensive services
 protodunevd_simulation_services: 
@@ -32,8 +37,9 @@ protodunevd_simulation_services:
   @table::protodunevd_minimal_simulation_services
   SignalShapingServiceDUNE:     @local::protodunesp_signalshapingservice
   PhotonVisibilityService:      @local::protodune_photonvisibilityservice
-  OpDetResponseInterface:       @local::protodune_opdetresponse
+  OpDetResponseInterface:       @local::standard_opdetresponse
 }
+protodunevd_simulation_services.OpDetResponseInterface.QuantumEfficiency: 1
 
 # Reco services for ProtoDUNE simulation.
 protodunevd_reco_services:                            @local::protodunevd_services
@@ -73,25 +79,25 @@ protodunevd_data_reco_services.DetectorPropertiesService:     @local::protodunev
 ####################
 ##### DRIFT Y ######
 ####################
-protodunevd_services_driftY: @local::protodune_services
-protodunevd_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
+protodunevd_services_driftY: @local::protodunevd_services
+protodunevd_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo_driftY
 protodunevd_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY: @local::protodunevd_simulation_services
-protodunevd_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
+protodunevd_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo_driftY
 protodunevd_simulation_services_driftY.Geometry:  @local::protodunevd_v3_geo_driftY
 
 protodunevd_simulation_services_driftY.ParticleInventoryService: @local::standard_particleinventoryservice
 protodunevd_simulation_services_driftY.PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice
 
 # Low memory configuration leaving out some heavy services
-protodunevd_minimal_simulation_services_driftY: @local::protodune_minimal_simulation_services
-protodunevd_minimal_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
+protodunevd_minimal_simulation_services_driftY: @local::protodunevd_minimal_simulation_services
+protodunevd_minimal_simulation_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo_driftY
 protodunevd_minimal_simulation_services_driftY.Geometry: @local::protodunevd_v3_geo_driftY
 
 # reco for sim config
 protodunevd_reco_services_driftY:                    @local::protodunevd_reco_services
-protodunevd_reco_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo
+protodunevd_reco_services_driftY.AuxDetGeometry: @local::protodunevd_v3_auxdet_geo_driftY
 protodunevd_reco_services_driftY.Geometry:  	     @local::protodunevd_v3_geo_driftY
 
 
