@@ -2791,12 +2791,12 @@
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posTopTPC-1" unit="cm"
-           x="152.28" y="-83.95" z="-75.1"/>
+           x="152.28" y="-84.55" z="-74.55"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posBotTPC-1" unit="cm"
-           x="-192.28" y="-83.95" z="-75.1"/>
+           x="-192.28" y="-84.55" z="-74.55"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>
@@ -2813,12 +2813,12 @@
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posTopTPC-3" unit="cm"
-           x="152.28" y="253.05" z="-75.1"/>
+           x="152.28" y="252.45" z="-74.55"/>
       </physvol>
       <physvol>
         <volumeref ref="volTPC1"/>
 	<position name="posBotTPC-3" unit="cm"
-           x="-192.28" y="253.05" z="-75.1"/>
+           x="-192.28" y="252.45" z="-74.55"/>
          <rotationref ref="rPlus180AboutY"/>           
       </physvol>
       <physvol>

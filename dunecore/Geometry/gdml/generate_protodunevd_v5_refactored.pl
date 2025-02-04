@@ -2830,8 +2830,8 @@ if ($tpc_on==1) # place Top and Bottom TPCs inside croystat offsetting each pair
 	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
 	  }else{
 	    $quad=1;
-            $pcbOffsetY =  $borderCRP/2;
-            $pcbOffsetZ =  -($borderCRP/2 - $gapCRU/4);
+            $pcbOffsetY =  -$borderCRP/2;
+            $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
 	    $myposTPCY = $posY+$CRP_y/4 + $pcbOffsetY;
 	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
           }
