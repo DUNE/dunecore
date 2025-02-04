@@ -68,6 +68,7 @@
 #
 # V5:       Updates on January 2025 (LP + changes by Yoann Kermaïdic)
 # Fixed cathode X-arapucas' positions to match beam pipe placement
+# Fixed cathode X-arapuca's positions to include displacement due to the electronic box       
 # Inclusion of anode plate on top of the 3 wire planes for backgrounds.
 #           This is included together with the cathode switch on. Currently the material of this plate is
 #           set to vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
@@ -917,17 +918,17 @@ $Lower_FirstFrameVertDist = 284.13 - 1.1; #Vertical distance from cathode center
 #$Upper_FirstFrameVertDist = 301.08;
 #$Lower_FirstFrameVertDist = 284.13; #Vertical distance from cathode center in warm
 $VerticalPDdist = 75.8; #distance between arapucas (center to center) in the y direction
+$heightElectronicBox = 7.5; #height of arapuca electronic box is 7.7 cm but some of it may be inside the cathode frame (all facing the non-tco side)
 
 #Positions of the 4 arapucas with respect to the Frame center --> arapucas over the cathode
-$list_posx_bot[0]=-2*$widthCathodeVoid - 2.0*$CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
+$list_posx_bot[0]=-1*$widthCathodeVoid - 2.0*$CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
 $list_posz_bot[0]= -0.5*$lengthCathodeVoid - $CathodeBorder;
-$list_posx_bot[1]= $CathodeBorder + $GapPD + 0.5*$ArapucaOut_x;
+$list_posx_bot[1]= $widthCathodeVoid + $CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
 $list_posz_bot[1]=-1.5*$lengthCathodeVoid - 2.0*$CathodeBorder;
-$list_posx_bot[2]=-$list_posx_bot[1];
+$list_posx_bot[2]=-$CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
 $list_posz_bot[2]=-$list_posz_bot[1];
-$list_posx_bot[3]=-$list_posx_bot[0];
+$list_posx_bot[3]= 2*$widthCathodeVoid + 2.0*$CathodeBorder - $GapPD - 0.5*$ArapucaOut_x;
 $list_posz_bot[3]=-$list_posz_bot[0];
-
 
 #+++++++++++++++++++++++++ End defining variables ++++++++++++++++++++++++++
 
@@ -2829,8 +2830,8 @@ if ($tpc_on==1) # place Top and Bottom TPCs inside croystat offsetting each pair
 	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
 	  }else{
 	    $quad=1;
-            $pcbOffsetY =  -$borderCRP/2;
-            $pcbOffsetZ =  ($borderCRP/2 - $gapCRU/4);
+            $pcbOffsetY =  $borderCRP/2;
+            $pcbOffsetZ =  -($borderCRP/2 - $gapCRU/4);
 	    $myposTPCY = $posY+$CRP_y/4 + $pcbOffsetY;
 	    $myposTPCZ = $posZ-$CRP_z/4 + $pcbOffsetZ;
           }
@@ -3057,9 +3058,10 @@ for ($ara = 0; $ara<4; $ara++)
  	     $Ara_Z = $FrameCenter_z+$list_posz_bot[$ara];
  	     #if($Ara_z==1&&$ara==2){$Ara_Z = $FrameCenter_z+$list_posz_bot[0];} #If Z is longer
              $Ara_X = $FrameCenter_x;
-             if($Frame_x==0&&$ara==0){$Ara_Y = $FrameCenter_y-$list_posx_bot[1];
+             if($Frame_x==0&&$ara==0){$Ara_Y = $FrameCenter_y+$list_posx_bot[2];
              }else{$Ara_Y = $FrameCenter_y+$list_posx_bot[$ara];} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
-
+             $Ara_Y = $Ara_Y - $heightElectronicBox;
+             
 	print CRYO <<EOF;
      <physvol>
        <volumeref ref="volArapucaDouble_$Frame_x\-$Frame_z\-$ara"/>
@@ -3156,17 +3158,11 @@ if($ArapucaMesh_switch eq "on")
              # All Mesh centers will have the same X coordinate
              $Mesh_Z = $FrameCenter_z+$list_posz_bot[$mesh];
              $Mesh_X = $FrameCenter_x;
-             if($Frame_x==0 && $mesh==0){$Mesh_Y = $FrameCenter_y - $list_posx_bot[1];}
+             if($Frame_x==0 && $mesh==0){$Mesh_Y = $FrameCenter_y + $list_posx_bot[2];}
              else{$Mesh_Y = $FrameCenter_y + $list_posx_bot[$mesh];} #GEOMETRY IS ROTATED: X--> Y AND Y--> X
              # To correctly center cathode X-ARAPUCA meshes
-             if($Frame_x == 0){
-              if($mesh==1){$Mesh_Y = $Mesh_Y + 5.475}
-              else{$Mesh_Y = $Mesh_Y - 5.475}
-              }
-             else{
-              if($mesh==0 || $mesh==1){$Mesh_Y = $Mesh_Y + 5.475}
-              else{$Mesh_Y = $Mesh_Y - 5.475}
-              }
+             $Mesh_Y = $Mesh_Y - 5.475;
+             
         print CRYO <<EOF;
         <physvol>
         <volumeref ref="volCathodeArapucaMesh"/>
