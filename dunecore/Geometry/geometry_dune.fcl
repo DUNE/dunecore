@@ -493,6 +493,13 @@ protodunehdv6_auxdet_geo: @local::dune10kt_base_auxdet_geo
 protodunehdv6_auxdet_geo.Name: @local::protodunehdv6_geo.Name
 protodunehdv6_auxdet_geo.GDML: @local::protodunehdv6_geo.GDML
 
+protodunehdv7_geo: @local::dune10kt_base_geo
+protodunehdv7_geo.Name: "protodunehdv7"
+protodunehdv7_geo.GDML: "protodunehd_v7_refactored.gdml" #nowires.gdml
+protodunehdv7_auxdet_geo: @local::dune10kt_base_auxdet_geo
+protodunehdv7_auxdet_geo.Name: @local::protodunehdv7_geo.Name
+protodunehdv7_auxdet_geo.GDML: @local::protodunehdv7_geo.GDML
+
 # === End ProtoDUNE-HD ===
 
 # ProtoDUNE VD
