@@ -178,6 +178,7 @@ $testfactorbottom = 1;#factor for visualization
 $borderCRUBottom_z = $testfactorbottom*0.8;# cm includes half gap of 4mm (i.e. 6 mm border + 2 mm half gap) between CRU at the bottom
 $borderCRUBottom_y = $testfactorbottom*0.85;# cm includes half gap of 4mm (i.e. 6 mm border + 2.5 mm half gap) between CRU at the bottom
 $gapSST_ybottom = $testfactorbottom* (2.4-$gapCRP);
+$borderCRUBottom1side_z = $testfactorbottom*0.5;# cm includes half gap of 4mm (i.e. 3 mm border + 2 mm half gap) between CRU at the bottom This assumes that only one side of the CRU has dead material
 
 #Overwritten by $workspace configuration later on...
 # number of CRMs in y and z
@@ -238,6 +239,8 @@ $nCRM_y = $nSST_y * 2 * 2;
 $widthTPCActive  = $nCRM_y * $widthCRM + $nCRM_y * $borderCRP + ($nSST_y-1) * $gapSST_y ;  # around 1200 for full module
 $lengthTPCActive = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP + ($nSST1_z-1) * $gapSST1_z + ($nSST2_z) * $gapSST2_z; # around 6000 for full module
 
+$lengthTPCActivebottom = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRUBottom_z + $gapSST1_z; # around 6000 for full module
+
 
 # active volume dimensions
 $driftTPCActive  = 650.0;
@@ -258,11 +261,13 @@ $widthCathodeBottom=2*$widthCRM + 2*$borderCRUBottom_y; # need to add the border
 
 $lengthCathode=2*$lengthCRM + 2*$borderCRP;
 $lengthCathodeBottom=2*$lengthCRM + 2*$borderCRUBottom_z;
-#$lengthAnodeBottom=$lengthCRM + 2*$borderCRUBottom_z;
 $lengthAnodeBottom=$lengthCRM;
 
 $widthCathodeVoid=76.35;
 $lengthCathodeVoid=67.0;
+
+#print " Debug lengthTPCActive orig       : $lengthTPCActive\n";
+#print " Debug lengthTPCActivebottom        : $lengthTPCActivebottom\n";
 
 
 ####################################################################
@@ -1211,8 +1216,8 @@ sub placeCathodeAndAnode() {
     $posAnodePlateBottom = -0.5*$TPCEnclosure_x + 0.5*$anodePlateWidth;
     $CathodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCathodeBottom;
     $CathodePosYBottom = -0.5*$TPCEnclosure_ybottom + 0.5*$widthCathodeBottom;
-    #$AnodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCathodeBottom-$borderCRUBottom_z;
-    $AnodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM+$borderCRUBottom_z;
+    #$AnodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM+$borderCRUBottom_z;
+    $AnodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM+$borderCRUBottom1side_z;
 
     my $posZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM;
 
@@ -1247,7 +1252,8 @@ EOF
 EOF
         
         $idxBottom++;
-        $AnodePosZBottom2=$AnodePosZBottom+$lengthAnodeBottom+2*$borderCRUBottom_z;
+        #$AnodePosZBottom2=$AnodePosZBottom+$lengthAnodeBottom+2*$borderCRUBottom_z; #first test
+        $AnodePosZBottom2=$AnodePosZBottom+$lengthAnodeBottom+2*$borderCRUBottom1side_z; #dead material on one side only
             
             print CRYO <<EOF;
       <physvol>
@@ -1275,7 +1281,8 @@ EOF
 	    }
 	    $CathodePosZ += $lengthCathode;
         $CathodePosZBottom+= $lengthCathodeBottom;
-        $AnodePosZBottom+= 2*($lengthAnodeBottom+2*$borderCRUBottom_z);
+        #$AnodePosZBottom+= 2*($lengthAnodeBottom+2*$borderCRUBottom_z); #first test
+        $AnodePosZBottom+= 2*($lengthAnodeBottom+2*$borderCRUBottom1side_z); #dead material on one side only
 
         if($nSST2_z == 0 && ($ii+1) % 3 == 0 && $ii>0){
             $CathodePosZ += $gapSST1_z;
@@ -1563,17 +1570,20 @@ EOF
 	my $posZ = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM;
     my $posZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM ;
 
+   
 
 	for(my $ii=0;$ii<$nCRM_z;$ii++)
 	{
-        #TOP
-        #$posZBottom += $borderCRUBottom_z;
+        #print " ii borderCRUBottom_z posZBottom orig       : $ii $borderCRUBottom_z $posZBottom\n";
+
 
         if( $ii==0 ){
-            $posZBottom += $borderCRUBottom_z;
+            #$posZBottom += $borderCRUBottom_z;
+            $posZBottom += $borderCRUBottom1side_z;
         }
         if( $ii>0 ){
-            $posZBottom += 2*$borderCRUBottom_z;
+            #$posZBottom += 2*$borderCRUBottom_z; #first test
+            $posZBottom += 2*$borderCRUBottom1side_z; #gap on one side only
         }
         
 	    if( $ii % 2 == 0 ){
@@ -1581,7 +1591,6 @@ EOF
 
 		if( $ii>0 ){
 		    $posZ += $borderCRP;
-            #$posZBottom += $borderCRUBottom_z;
 
 		}
             

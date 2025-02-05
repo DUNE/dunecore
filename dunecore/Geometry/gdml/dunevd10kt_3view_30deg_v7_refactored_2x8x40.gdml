@@ -10377,7 +10377,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-1" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2928.29"/>
+         	   x="-327.04" y="-591.15" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10388,7 +10388,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-3" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2928.29"/>
+         	   x="-327.04" y="-423.25" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10399,7 +10399,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-5" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2928.29"/>
+         	   x="-327.04" y="-253.65" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10410,7 +10410,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-7" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2928.29"/>
+         	   x="-327.04" y="-85.75" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10421,7 +10421,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-9" unit="cm"
-         	   x="-327.04" y="85.75" z="-2928.29"/>
+         	   x="-327.04" y="85.75" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10432,7 +10432,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-11" unit="cm"
-         	   x="-327.04" y="253.65" z="-2928.29"/>
+         	   x="-327.04" y="253.65" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10443,7 +10443,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-13" unit="cm"
-         	   x="-327.04" y="423.25" z="-2928.29"/>
+         	   x="-327.04" y="423.25" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10454,7 +10454,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-15" unit="cm"
-         	   x="-327.04" y="591.15" z="-2928.29"/>
+         	   x="-327.04" y="591.15" z="-2928.59"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10465,7 +10465,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-17" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2777.77"/>
+         	   x="-327.04" y="-591.15" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10476,7 +10476,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-19" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2777.77"/>
+         	   x="-327.04" y="-423.25" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10487,7 +10487,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-21" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2777.77"/>
+         	   x="-327.04" y="-253.65" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10498,7 +10498,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-23" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2777.77"/>
+         	   x="-327.04" y="-85.75" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10509,7 +10509,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-25" unit="cm"
-         	   x="-327.04" y="85.75" z="-2777.77"/>
+         	   x="-327.04" y="85.75" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10520,7 +10520,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-27" unit="cm"
-         	   x="-327.04" y="253.65" z="-2777.77"/>
+         	   x="-327.04" y="253.65" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10531,7 +10531,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-29" unit="cm"
-         	   x="-327.04" y="423.25" z="-2777.77"/>
+         	   x="-327.04" y="423.25" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10542,7 +10542,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-31" unit="cm"
-         	   x="-327.04" y="591.15" z="-2777.77"/>
+         	   x="-327.04" y="591.15" z="-2778.67"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10553,7 +10553,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-33" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2627.25"/>
+         	   x="-327.04" y="-591.15" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10564,7 +10564,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-35" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2627.25"/>
+         	   x="-327.04" y="-423.25" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10575,7 +10575,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-37" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2627.25"/>
+         	   x="-327.04" y="-253.65" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10586,7 +10586,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-39" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2627.25"/>
+         	   x="-327.04" y="-85.75" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10597,7 +10597,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-41" unit="cm"
-         	   x="-327.04" y="85.75" z="-2627.25"/>
+         	   x="-327.04" y="85.75" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10608,7 +10608,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-43" unit="cm"
-         	   x="-327.04" y="253.65" z="-2627.25"/>
+         	   x="-327.04" y="253.65" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10619,7 +10619,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-45" unit="cm"
-         	   x="-327.04" y="423.25" z="-2627.25"/>
+         	   x="-327.04" y="423.25" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10630,7 +10630,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-47" unit="cm"
-         	   x="-327.04" y="591.15" z="-2627.25"/>
+         	   x="-327.04" y="591.15" z="-2628.75"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10641,7 +10641,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-49" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2476.73"/>
+         	   x="-327.04" y="-591.15" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10652,7 +10652,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-51" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2476.73"/>
+         	   x="-327.04" y="-423.25" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10663,7 +10663,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-53" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2476.73"/>
+         	   x="-327.04" y="-253.65" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10674,7 +10674,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-55" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2476.73"/>
+         	   x="-327.04" y="-85.75" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10685,7 +10685,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-57" unit="cm"
-         	   x="-327.04" y="85.75" z="-2476.73"/>
+         	   x="-327.04" y="85.75" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10696,7 +10696,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-59" unit="cm"
-         	   x="-327.04" y="253.65" z="-2476.73"/>
+         	   x="-327.04" y="253.65" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10707,7 +10707,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-61" unit="cm"
-         	   x="-327.04" y="423.25" z="-2476.73"/>
+         	   x="-327.04" y="423.25" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10718,7 +10718,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-63" unit="cm"
-         	   x="-327.04" y="591.15" z="-2476.73"/>
+         	   x="-327.04" y="591.15" z="-2478.83"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10729,7 +10729,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-65" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2326.21"/>
+         	   x="-327.04" y="-591.15" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10740,7 +10740,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-67" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2326.21"/>
+         	   x="-327.04" y="-423.25" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10751,7 +10751,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-69" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2326.21"/>
+         	   x="-327.04" y="-253.65" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10762,7 +10762,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-71" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2326.21"/>
+         	   x="-327.04" y="-85.75" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10773,7 +10773,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-73" unit="cm"
-         	   x="-327.04" y="85.75" z="-2326.21"/>
+         	   x="-327.04" y="85.75" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10784,7 +10784,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-75" unit="cm"
-         	   x="-327.04" y="253.65" z="-2326.21"/>
+         	   x="-327.04" y="253.65" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10795,7 +10795,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-77" unit="cm"
-         	   x="-327.04" y="423.25" z="-2326.21"/>
+         	   x="-327.04" y="423.25" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10806,7 +10806,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-79" unit="cm"
-         	   x="-327.04" y="591.15" z="-2326.21"/>
+         	   x="-327.04" y="591.15" z="-2328.91"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10817,7 +10817,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-81" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2175.69"/>
+         	   x="-327.04" y="-591.15" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10828,7 +10828,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-83" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2175.69"/>
+         	   x="-327.04" y="-423.25" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10839,7 +10839,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-85" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2175.69"/>
+         	   x="-327.04" y="-253.65" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10850,7 +10850,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-87" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2175.69"/>
+         	   x="-327.04" y="-85.75" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10861,7 +10861,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-89" unit="cm"
-         	   x="-327.04" y="85.75" z="-2175.69"/>
+         	   x="-327.04" y="85.75" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10872,7 +10872,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-91" unit="cm"
-         	   x="-327.04" y="253.65" z="-2175.69"/>
+         	   x="-327.04" y="253.65" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10883,7 +10883,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-93" unit="cm"
-         	   x="-327.04" y="423.25" z="-2175.69"/>
+         	   x="-327.04" y="423.25" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10894,7 +10894,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-95" unit="cm"
-         	   x="-327.04" y="591.15" z="-2175.69"/>
+         	   x="-327.04" y="591.15" z="-2178.99"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10905,7 +10905,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-97" unit="cm"
-         	   x="-327.04" y="-591.15" z="-2025.17"/>
+         	   x="-327.04" y="-591.15" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10916,7 +10916,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-99" unit="cm"
-         	   x="-327.04" y="-423.25" z="-2025.17"/>
+         	   x="-327.04" y="-423.25" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10927,7 +10927,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-101" unit="cm"
-         	   x="-327.04" y="-253.65" z="-2025.17"/>
+         	   x="-327.04" y="-253.65" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10938,7 +10938,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-103" unit="cm"
-         	   x="-327.04" y="-85.75" z="-2025.17"/>
+         	   x="-327.04" y="-85.75" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10949,7 +10949,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-105" unit="cm"
-         	   x="-327.04" y="85.75" z="-2025.17"/>
+         	   x="-327.04" y="85.75" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10960,7 +10960,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-107" unit="cm"
-         	   x="-327.04" y="253.65" z="-2025.17"/>
+         	   x="-327.04" y="253.65" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10971,7 +10971,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-109" unit="cm"
-         	   x="-327.04" y="423.25" z="-2025.17"/>
+         	   x="-327.04" y="423.25" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10982,7 +10982,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-111" unit="cm"
-         	   x="-327.04" y="591.15" z="-2025.17"/>
+         	   x="-327.04" y="591.15" z="-2029.07"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -10993,7 +10993,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-113" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1874.65"/>
+         	   x="-327.04" y="-591.15" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11004,7 +11004,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-115" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1874.65"/>
+         	   x="-327.04" y="-423.25" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11015,7 +11015,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-117" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1874.65"/>
+         	   x="-327.04" y="-253.65" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11026,7 +11026,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-119" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1874.65"/>
+         	   x="-327.04" y="-85.75" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11037,7 +11037,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-121" unit="cm"
-         	   x="-327.04" y="85.75" z="-1874.65"/>
+         	   x="-327.04" y="85.75" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11048,7 +11048,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-123" unit="cm"
-         	   x="-327.04" y="253.65" z="-1874.65"/>
+         	   x="-327.04" y="253.65" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11059,7 +11059,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-125" unit="cm"
-         	   x="-327.04" y="423.25" z="-1874.65"/>
+         	   x="-327.04" y="423.25" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11070,7 +11070,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-127" unit="cm"
-         	   x="-327.04" y="591.15" z="-1874.65"/>
+         	   x="-327.04" y="591.15" z="-1879.15"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11081,7 +11081,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-129" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1724.13"/>
+         	   x="-327.04" y="-591.15" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11092,7 +11092,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-131" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1724.13"/>
+         	   x="-327.04" y="-423.25" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11103,7 +11103,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-133" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1724.13"/>
+         	   x="-327.04" y="-253.65" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11114,7 +11114,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-135" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1724.13"/>
+         	   x="-327.04" y="-85.75" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11125,7 +11125,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-137" unit="cm"
-         	   x="-327.04" y="85.75" z="-1724.13"/>
+         	   x="-327.04" y="85.75" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11136,7 +11136,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-139" unit="cm"
-         	   x="-327.04" y="253.65" z="-1724.13"/>
+         	   x="-327.04" y="253.65" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11147,7 +11147,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-141" unit="cm"
-         	   x="-327.04" y="423.25" z="-1724.13"/>
+         	   x="-327.04" y="423.25" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11158,7 +11158,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-143" unit="cm"
-         	   x="-327.04" y="591.15" z="-1724.13"/>
+         	   x="-327.04" y="591.15" z="-1729.23"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11169,7 +11169,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-145" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1573.61"/>
+         	   x="-327.04" y="-591.15" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11180,7 +11180,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-147" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1573.61"/>
+         	   x="-327.04" y="-423.25" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11191,7 +11191,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-149" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1573.61"/>
+         	   x="-327.04" y="-253.65" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11202,7 +11202,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-151" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1573.61"/>
+         	   x="-327.04" y="-85.75" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11213,7 +11213,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-153" unit="cm"
-         	   x="-327.04" y="85.75" z="-1573.61"/>
+         	   x="-327.04" y="85.75" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11224,7 +11224,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-155" unit="cm"
-         	   x="-327.04" y="253.65" z="-1573.61"/>
+         	   x="-327.04" y="253.65" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11235,7 +11235,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-157" unit="cm"
-         	   x="-327.04" y="423.25" z="-1573.61"/>
+         	   x="-327.04" y="423.25" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11246,7 +11246,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-159" unit="cm"
-         	   x="-327.04" y="591.15" z="-1573.61"/>
+         	   x="-327.04" y="591.15" z="-1579.31"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11257,7 +11257,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-161" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1423.09"/>
+         	   x="-327.04" y="-591.15" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11268,7 +11268,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-163" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1423.09"/>
+         	   x="-327.04" y="-423.25" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11279,7 +11279,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-165" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1423.09"/>
+         	   x="-327.04" y="-253.65" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11290,7 +11290,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-167" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1423.09"/>
+         	   x="-327.04" y="-85.75" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11301,7 +11301,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-169" unit="cm"
-         	   x="-327.04" y="85.75" z="-1423.09"/>
+         	   x="-327.04" y="85.75" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11312,7 +11312,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-171" unit="cm"
-         	   x="-327.04" y="253.65" z="-1423.09"/>
+         	   x="-327.04" y="253.65" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11323,7 +11323,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-173" unit="cm"
-         	   x="-327.04" y="423.25" z="-1423.09"/>
+         	   x="-327.04" y="423.25" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11334,7 +11334,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-175" unit="cm"
-         	   x="-327.04" y="591.15" z="-1423.09"/>
+         	   x="-327.04" y="591.15" z="-1429.39"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11345,7 +11345,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-177" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1272.57"/>
+         	   x="-327.04" y="-591.15" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11356,7 +11356,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-179" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1272.57"/>
+         	   x="-327.04" y="-423.25" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11367,7 +11367,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-181" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1272.57"/>
+         	   x="-327.04" y="-253.65" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11378,7 +11378,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-183" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1272.57"/>
+         	   x="-327.04" y="-85.75" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11389,7 +11389,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-185" unit="cm"
-         	   x="-327.04" y="85.75" z="-1272.57"/>
+         	   x="-327.04" y="85.75" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11400,7 +11400,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-187" unit="cm"
-         	   x="-327.04" y="253.65" z="-1272.57"/>
+         	   x="-327.04" y="253.65" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11411,7 +11411,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-189" unit="cm"
-         	   x="-327.04" y="423.25" z="-1272.57"/>
+         	   x="-327.04" y="423.25" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11422,7 +11422,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-191" unit="cm"
-         	   x="-327.04" y="591.15" z="-1272.57"/>
+         	   x="-327.04" y="591.15" z="-1279.47"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11433,7 +11433,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-193" unit="cm"
-         	   x="-327.04" y="-591.15" z="-1122.05"/>
+         	   x="-327.04" y="-591.15" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11444,7 +11444,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-195" unit="cm"
-         	   x="-327.04" y="-423.25" z="-1122.05"/>
+         	   x="-327.04" y="-423.25" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11455,7 +11455,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-197" unit="cm"
-         	   x="-327.04" y="-253.65" z="-1122.05"/>
+         	   x="-327.04" y="-253.65" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11466,7 +11466,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-199" unit="cm"
-         	   x="-327.04" y="-85.75" z="-1122.05"/>
+         	   x="-327.04" y="-85.75" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11477,7 +11477,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-201" unit="cm"
-         	   x="-327.04" y="85.75" z="-1122.05"/>
+         	   x="-327.04" y="85.75" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11488,7 +11488,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-203" unit="cm"
-         	   x="-327.04" y="253.65" z="-1122.05"/>
+         	   x="-327.04" y="253.65" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11499,7 +11499,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-205" unit="cm"
-         	   x="-327.04" y="423.25" z="-1122.05"/>
+         	   x="-327.04" y="423.25" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11510,7 +11510,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-207" unit="cm"
-         	   x="-327.04" y="591.15" z="-1122.05"/>
+         	   x="-327.04" y="591.15" z="-1129.55"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11521,7 +11521,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-209" unit="cm"
-         	   x="-327.04" y="-591.15" z="-971.530000000001"/>
+         	   x="-327.04" y="-591.15" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11532,7 +11532,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-211" unit="cm"
-         	   x="-327.04" y="-423.25" z="-971.530000000001"/>
+         	   x="-327.04" y="-423.25" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11543,7 +11543,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-213" unit="cm"
-         	   x="-327.04" y="-253.65" z="-971.530000000001"/>
+         	   x="-327.04" y="-253.65" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11554,7 +11554,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-215" unit="cm"
-         	   x="-327.04" y="-85.75" z="-971.530000000001"/>
+         	   x="-327.04" y="-85.75" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11565,7 +11565,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-217" unit="cm"
-         	   x="-327.04" y="85.75" z="-971.530000000001"/>
+         	   x="-327.04" y="85.75" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11576,7 +11576,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-219" unit="cm"
-         	   x="-327.04" y="253.65" z="-971.530000000001"/>
+         	   x="-327.04" y="253.65" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11587,7 +11587,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-221" unit="cm"
-         	   x="-327.04" y="423.25" z="-971.530000000001"/>
+         	   x="-327.04" y="423.25" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11598,7 +11598,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-223" unit="cm"
-         	   x="-327.04" y="591.15" z="-971.530000000001"/>
+         	   x="-327.04" y="591.15" z="-979.63"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11609,7 +11609,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-225" unit="cm"
-         	   x="-327.04" y="-591.15" z="-821.010000000001"/>
+         	   x="-327.04" y="-591.15" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11620,7 +11620,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-227" unit="cm"
-         	   x="-327.04" y="-423.25" z="-821.010000000001"/>
+         	   x="-327.04" y="-423.25" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11631,7 +11631,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-229" unit="cm"
-         	   x="-327.04" y="-253.65" z="-821.010000000001"/>
+         	   x="-327.04" y="-253.65" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11642,7 +11642,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-231" unit="cm"
-         	   x="-327.04" y="-85.75" z="-821.010000000001"/>
+         	   x="-327.04" y="-85.75" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11653,7 +11653,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-233" unit="cm"
-         	   x="-327.04" y="85.75" z="-821.010000000001"/>
+         	   x="-327.04" y="85.75" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11664,7 +11664,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-235" unit="cm"
-         	   x="-327.04" y="253.65" z="-821.010000000001"/>
+         	   x="-327.04" y="253.65" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11675,7 +11675,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-237" unit="cm"
-         	   x="-327.04" y="423.25" z="-821.010000000001"/>
+         	   x="-327.04" y="423.25" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11686,7 +11686,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-239" unit="cm"
-         	   x="-327.04" y="591.15" z="-821.010000000001"/>
+         	   x="-327.04" y="591.15" z="-829.71"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11697,7 +11697,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-241" unit="cm"
-         	   x="-327.04" y="-591.15" z="-670.490000000001"/>
+         	   x="-327.04" y="-591.15" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11708,7 +11708,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-243" unit="cm"
-         	   x="-327.04" y="-423.25" z="-670.490000000001"/>
+         	   x="-327.04" y="-423.25" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11719,7 +11719,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-245" unit="cm"
-         	   x="-327.04" y="-253.65" z="-670.490000000001"/>
+         	   x="-327.04" y="-253.65" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11730,7 +11730,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-247" unit="cm"
-         	   x="-327.04" y="-85.75" z="-670.490000000001"/>
+         	   x="-327.04" y="-85.75" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11741,7 +11741,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-249" unit="cm"
-         	   x="-327.04" y="85.75" z="-670.490000000001"/>
+         	   x="-327.04" y="85.75" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11752,7 +11752,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-251" unit="cm"
-         	   x="-327.04" y="253.65" z="-670.490000000001"/>
+         	   x="-327.04" y="253.65" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11763,7 +11763,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-253" unit="cm"
-         	   x="-327.04" y="423.25" z="-670.490000000001"/>
+         	   x="-327.04" y="423.25" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11774,7 +11774,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-255" unit="cm"
-         	   x="-327.04" y="591.15" z="-670.490000000001"/>
+         	   x="-327.04" y="591.15" z="-679.79"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11785,7 +11785,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-257" unit="cm"
-         	   x="-327.04" y="-591.15" z="-519.970000000001"/>
+         	   x="-327.04" y="-591.15" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11796,7 +11796,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-259" unit="cm"
-         	   x="-327.04" y="-423.25" z="-519.970000000001"/>
+         	   x="-327.04" y="-423.25" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11807,7 +11807,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-261" unit="cm"
-         	   x="-327.04" y="-253.65" z="-519.970000000001"/>
+         	   x="-327.04" y="-253.65" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11818,7 +11818,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-263" unit="cm"
-         	   x="-327.04" y="-85.75" z="-519.970000000001"/>
+         	   x="-327.04" y="-85.75" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11829,7 +11829,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-265" unit="cm"
-         	   x="-327.04" y="85.75" z="-519.970000000001"/>
+         	   x="-327.04" y="85.75" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11840,7 +11840,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-267" unit="cm"
-         	   x="-327.04" y="253.65" z="-519.970000000001"/>
+         	   x="-327.04" y="253.65" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11851,7 +11851,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-269" unit="cm"
-         	   x="-327.04" y="423.25" z="-519.970000000001"/>
+         	   x="-327.04" y="423.25" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11862,7 +11862,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-271" unit="cm"
-         	   x="-327.04" y="591.15" z="-519.970000000001"/>
+         	   x="-327.04" y="591.15" z="-529.869999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11873,7 +11873,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-273" unit="cm"
-         	   x="-327.04" y="-591.15" z="-369.450000000001"/>
+         	   x="-327.04" y="-591.15" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11884,7 +11884,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-275" unit="cm"
-         	   x="-327.04" y="-423.25" z="-369.450000000001"/>
+         	   x="-327.04" y="-423.25" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11895,7 +11895,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-277" unit="cm"
-         	   x="-327.04" y="-253.65" z="-369.450000000001"/>
+         	   x="-327.04" y="-253.65" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11906,7 +11906,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-279" unit="cm"
-         	   x="-327.04" y="-85.75" z="-369.450000000001"/>
+         	   x="-327.04" y="-85.75" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11917,7 +11917,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-281" unit="cm"
-         	   x="-327.04" y="85.75" z="-369.450000000001"/>
+         	   x="-327.04" y="85.75" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11928,7 +11928,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-283" unit="cm"
-         	   x="-327.04" y="253.65" z="-369.450000000001"/>
+         	   x="-327.04" y="253.65" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11939,7 +11939,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-285" unit="cm"
-         	   x="-327.04" y="423.25" z="-369.450000000001"/>
+         	   x="-327.04" y="423.25" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11950,7 +11950,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-287" unit="cm"
-         	   x="-327.04" y="591.15" z="-369.450000000001"/>
+         	   x="-327.04" y="591.15" z="-379.949999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11961,7 +11961,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-289" unit="cm"
-         	   x="-327.04" y="-591.15" z="-218.930000000001"/>
+         	   x="-327.04" y="-591.15" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11972,7 +11972,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-291" unit="cm"
-         	   x="-327.04" y="-423.25" z="-218.930000000001"/>
+         	   x="-327.04" y="-423.25" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11983,7 +11983,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-293" unit="cm"
-         	   x="-327.04" y="-253.65" z="-218.930000000001"/>
+         	   x="-327.04" y="-253.65" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -11994,7 +11994,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-295" unit="cm"
-         	   x="-327.04" y="-85.75" z="-218.930000000001"/>
+         	   x="-327.04" y="-85.75" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12005,7 +12005,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-297" unit="cm"
-         	   x="-327.04" y="85.75" z="-218.930000000001"/>
+         	   x="-327.04" y="85.75" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12016,7 +12016,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-299" unit="cm"
-         	   x="-327.04" y="253.65" z="-218.930000000001"/>
+         	   x="-327.04" y="253.65" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12027,7 +12027,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-301" unit="cm"
-         	   x="-327.04" y="423.25" z="-218.930000000001"/>
+         	   x="-327.04" y="423.25" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12038,7 +12038,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-303" unit="cm"
-         	   x="-327.04" y="591.15" z="-218.930000000001"/>
+         	   x="-327.04" y="591.15" z="-230.029999999999"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12049,7 +12049,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-305" unit="cm"
-         	   x="-327.04" y="-591.15" z="-68.4100000000005"/>
+         	   x="-327.04" y="-591.15" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12060,7 +12060,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-307" unit="cm"
-         	   x="-327.04" y="-423.25" z="-68.4100000000005"/>
+         	   x="-327.04" y="-423.25" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12071,7 +12071,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-309" unit="cm"
-         	   x="-327.04" y="-253.65" z="-68.4100000000005"/>
+         	   x="-327.04" y="-253.65" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12082,7 +12082,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-311" unit="cm"
-         	   x="-327.04" y="-85.75" z="-68.4100000000005"/>
+         	   x="-327.04" y="-85.75" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12093,7 +12093,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-313" unit="cm"
-         	   x="-327.04" y="85.75" z="-68.4100000000005"/>
+         	   x="-327.04" y="85.75" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12104,7 +12104,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-315" unit="cm"
-         	   x="-327.04" y="253.65" z="-68.4100000000005"/>
+         	   x="-327.04" y="253.65" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12115,7 +12115,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-317" unit="cm"
-         	   x="-327.04" y="423.25" z="-68.4100000000005"/>
+         	   x="-327.04" y="423.25" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12126,7 +12126,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-319" unit="cm"
-         	   x="-327.04" y="591.15" z="-68.4100000000005"/>
+         	   x="-327.04" y="591.15" z="-80.1099999999994"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12137,7 +12137,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-321" unit="cm"
-         	   x="-327.04" y="-591.15" z="82.1099999999995"/>
+         	   x="-327.04" y="-591.15" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12148,7 +12148,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-323" unit="cm"
-         	   x="-327.04" y="-423.25" z="82.1099999999995"/>
+         	   x="-327.04" y="-423.25" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12159,7 +12159,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-325" unit="cm"
-         	   x="-327.04" y="-253.65" z="82.1099999999995"/>
+         	   x="-327.04" y="-253.65" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12170,7 +12170,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-327" unit="cm"
-         	   x="-327.04" y="-85.75" z="82.1099999999995"/>
+         	   x="-327.04" y="-85.75" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12181,7 +12181,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-329" unit="cm"
-         	   x="-327.04" y="85.75" z="82.1099999999995"/>
+         	   x="-327.04" y="85.75" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12192,7 +12192,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-331" unit="cm"
-         	   x="-327.04" y="253.65" z="82.1099999999995"/>
+         	   x="-327.04" y="253.65" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12203,7 +12203,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-333" unit="cm"
-         	   x="-327.04" y="423.25" z="82.1099999999995"/>
+         	   x="-327.04" y="423.25" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12214,7 +12214,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-335" unit="cm"
-         	   x="-327.04" y="591.15" z="82.1099999999995"/>
+         	   x="-327.04" y="591.15" z="69.8100000000006"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12225,7 +12225,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-337" unit="cm"
-         	   x="-327.04" y="-591.15" z="232.629999999999"/>
+         	   x="-327.04" y="-591.15" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12236,7 +12236,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-339" unit="cm"
-         	   x="-327.04" y="-423.25" z="232.629999999999"/>
+         	   x="-327.04" y="-423.25" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12247,7 +12247,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-341" unit="cm"
-         	   x="-327.04" y="-253.65" z="232.629999999999"/>
+         	   x="-327.04" y="-253.65" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12258,7 +12258,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-343" unit="cm"
-         	   x="-327.04" y="-85.75" z="232.629999999999"/>
+         	   x="-327.04" y="-85.75" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12269,7 +12269,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-345" unit="cm"
-         	   x="-327.04" y="85.75" z="232.629999999999"/>
+         	   x="-327.04" y="85.75" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12280,7 +12280,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-347" unit="cm"
-         	   x="-327.04" y="253.65" z="232.629999999999"/>
+         	   x="-327.04" y="253.65" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12291,7 +12291,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-349" unit="cm"
-         	   x="-327.04" y="423.25" z="232.629999999999"/>
+         	   x="-327.04" y="423.25" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12302,7 +12302,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-351" unit="cm"
-         	   x="-327.04" y="591.15" z="232.629999999999"/>
+         	   x="-327.04" y="591.15" z="219.730000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12313,7 +12313,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-353" unit="cm"
-         	   x="-327.04" y="-591.15" z="383.15"/>
+         	   x="-327.04" y="-591.15" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12324,7 +12324,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-355" unit="cm"
-         	   x="-327.04" y="-423.25" z="383.15"/>
+         	   x="-327.04" y="-423.25" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12335,7 +12335,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-357" unit="cm"
-         	   x="-327.04" y="-253.65" z="383.15"/>
+         	   x="-327.04" y="-253.65" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12346,7 +12346,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-359" unit="cm"
-         	   x="-327.04" y="-85.75" z="383.15"/>
+         	   x="-327.04" y="-85.75" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12357,7 +12357,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-361" unit="cm"
-         	   x="-327.04" y="85.75" z="383.15"/>
+         	   x="-327.04" y="85.75" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12368,7 +12368,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-363" unit="cm"
-         	   x="-327.04" y="253.65" z="383.15"/>
+         	   x="-327.04" y="253.65" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12379,7 +12379,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-365" unit="cm"
-         	   x="-327.04" y="423.25" z="383.15"/>
+         	   x="-327.04" y="423.25" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12390,7 +12390,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-367" unit="cm"
-         	   x="-327.04" y="591.15" z="383.15"/>
+         	   x="-327.04" y="591.15" z="369.650000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12401,7 +12401,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-369" unit="cm"
-         	   x="-327.04" y="-591.15" z="533.67"/>
+         	   x="-327.04" y="-591.15" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12412,7 +12412,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-371" unit="cm"
-         	   x="-327.04" y="-423.25" z="533.67"/>
+         	   x="-327.04" y="-423.25" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12423,7 +12423,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-373" unit="cm"
-         	   x="-327.04" y="-253.65" z="533.67"/>
+         	   x="-327.04" y="-253.65" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12434,7 +12434,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-375" unit="cm"
-         	   x="-327.04" y="-85.75" z="533.67"/>
+         	   x="-327.04" y="-85.75" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12445,7 +12445,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-377" unit="cm"
-         	   x="-327.04" y="85.75" z="533.67"/>
+         	   x="-327.04" y="85.75" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12456,7 +12456,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-379" unit="cm"
-         	   x="-327.04" y="253.65" z="533.67"/>
+         	   x="-327.04" y="253.65" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12467,7 +12467,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-381" unit="cm"
-         	   x="-327.04" y="423.25" z="533.67"/>
+         	   x="-327.04" y="423.25" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12478,7 +12478,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-383" unit="cm"
-         	   x="-327.04" y="591.15" z="533.67"/>
+         	   x="-327.04" y="591.15" z="519.570000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12489,7 +12489,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-385" unit="cm"
-         	   x="-327.04" y="-591.15" z="684.189999999999"/>
+         	   x="-327.04" y="-591.15" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12500,7 +12500,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-387" unit="cm"
-         	   x="-327.04" y="-423.25" z="684.189999999999"/>
+         	   x="-327.04" y="-423.25" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12511,7 +12511,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-389" unit="cm"
-         	   x="-327.04" y="-253.65" z="684.189999999999"/>
+         	   x="-327.04" y="-253.65" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12522,7 +12522,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-391" unit="cm"
-         	   x="-327.04" y="-85.75" z="684.189999999999"/>
+         	   x="-327.04" y="-85.75" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12533,7 +12533,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-393" unit="cm"
-         	   x="-327.04" y="85.75" z="684.189999999999"/>
+         	   x="-327.04" y="85.75" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12544,7 +12544,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-395" unit="cm"
-         	   x="-327.04" y="253.65" z="684.189999999999"/>
+         	   x="-327.04" y="253.65" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12555,7 +12555,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-397" unit="cm"
-         	   x="-327.04" y="423.25" z="684.189999999999"/>
+         	   x="-327.04" y="423.25" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12566,7 +12566,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-399" unit="cm"
-         	   x="-327.04" y="591.15" z="684.189999999999"/>
+         	   x="-327.04" y="591.15" z="669.490000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12577,7 +12577,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-401" unit="cm"
-         	   x="-327.04" y="-591.15" z="834.709999999999"/>
+         	   x="-327.04" y="-591.15" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12588,7 +12588,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-403" unit="cm"
-         	   x="-327.04" y="-423.25" z="834.709999999999"/>
+         	   x="-327.04" y="-423.25" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12599,7 +12599,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-405" unit="cm"
-         	   x="-327.04" y="-253.65" z="834.709999999999"/>
+         	   x="-327.04" y="-253.65" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12610,7 +12610,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-407" unit="cm"
-         	   x="-327.04" y="-85.75" z="834.709999999999"/>
+         	   x="-327.04" y="-85.75" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12621,7 +12621,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-409" unit="cm"
-         	   x="-327.04" y="85.75" z="834.709999999999"/>
+         	   x="-327.04" y="85.75" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12632,7 +12632,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-411" unit="cm"
-         	   x="-327.04" y="253.65" z="834.709999999999"/>
+         	   x="-327.04" y="253.65" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12643,7 +12643,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-413" unit="cm"
-         	   x="-327.04" y="423.25" z="834.709999999999"/>
+         	   x="-327.04" y="423.25" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12654,7 +12654,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-415" unit="cm"
-         	   x="-327.04" y="591.15" z="834.709999999999"/>
+         	   x="-327.04" y="591.15" z="819.410000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12665,7 +12665,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-417" unit="cm"
-         	   x="-327.04" y="-591.15" z="985.229999999999"/>
+         	   x="-327.04" y="-591.15" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12676,7 +12676,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-419" unit="cm"
-         	   x="-327.04" y="-423.25" z="985.229999999999"/>
+         	   x="-327.04" y="-423.25" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12687,7 +12687,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-421" unit="cm"
-         	   x="-327.04" y="-253.65" z="985.229999999999"/>
+         	   x="-327.04" y="-253.65" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12698,7 +12698,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-423" unit="cm"
-         	   x="-327.04" y="-85.75" z="985.229999999999"/>
+         	   x="-327.04" y="-85.75" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12709,7 +12709,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-425" unit="cm"
-         	   x="-327.04" y="85.75" z="985.229999999999"/>
+         	   x="-327.04" y="85.75" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12720,7 +12720,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-427" unit="cm"
-         	   x="-327.04" y="253.65" z="985.229999999999"/>
+         	   x="-327.04" y="253.65" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12731,7 +12731,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-429" unit="cm"
-         	   x="-327.04" y="423.25" z="985.229999999999"/>
+         	   x="-327.04" y="423.25" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12742,7 +12742,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-431" unit="cm"
-         	   x="-327.04" y="591.15" z="985.229999999999"/>
+         	   x="-327.04" y="591.15" z="969.330000000001"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12753,7 +12753,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-433" unit="cm"
-         	   x="-327.04" y="-591.15" z="1135.75"/>
+         	   x="-327.04" y="-591.15" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12764,7 +12764,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-435" unit="cm"
-         	   x="-327.04" y="-423.25" z="1135.75"/>
+         	   x="-327.04" y="-423.25" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12775,7 +12775,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-437" unit="cm"
-         	   x="-327.04" y="-253.65" z="1135.75"/>
+         	   x="-327.04" y="-253.65" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12786,7 +12786,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-439" unit="cm"
-         	   x="-327.04" y="-85.75" z="1135.75"/>
+         	   x="-327.04" y="-85.75" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12797,7 +12797,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-441" unit="cm"
-         	   x="-327.04" y="85.75" z="1135.75"/>
+         	   x="-327.04" y="85.75" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12808,7 +12808,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-443" unit="cm"
-         	   x="-327.04" y="253.65" z="1135.75"/>
+         	   x="-327.04" y="253.65" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12819,7 +12819,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-445" unit="cm"
-         	   x="-327.04" y="423.25" z="1135.75"/>
+         	   x="-327.04" y="423.25" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12830,7 +12830,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-447" unit="cm"
-         	   x="-327.04" y="591.15" z="1135.75"/>
+         	   x="-327.04" y="591.15" z="1119.25"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12841,7 +12841,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-449" unit="cm"
-         	   x="-327.04" y="-591.15" z="1286.27"/>
+         	   x="-327.04" y="-591.15" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12852,7 +12852,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-451" unit="cm"
-         	   x="-327.04" y="-423.25" z="1286.27"/>
+         	   x="-327.04" y="-423.25" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12863,7 +12863,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-453" unit="cm"
-         	   x="-327.04" y="-253.65" z="1286.27"/>
+         	   x="-327.04" y="-253.65" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12874,7 +12874,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-455" unit="cm"
-         	   x="-327.04" y="-85.75" z="1286.27"/>
+         	   x="-327.04" y="-85.75" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12885,7 +12885,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-457" unit="cm"
-         	   x="-327.04" y="85.75" z="1286.27"/>
+         	   x="-327.04" y="85.75" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12896,7 +12896,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-459" unit="cm"
-         	   x="-327.04" y="253.65" z="1286.27"/>
+         	   x="-327.04" y="253.65" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12907,7 +12907,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-461" unit="cm"
-         	   x="-327.04" y="423.25" z="1286.27"/>
+         	   x="-327.04" y="423.25" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12918,7 +12918,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-463" unit="cm"
-         	   x="-327.04" y="591.15" z="1286.27"/>
+         	   x="-327.04" y="591.15" z="1269.17"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12929,7 +12929,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-465" unit="cm"
-         	   x="-327.04" y="-591.15" z="1436.79"/>
+         	   x="-327.04" y="-591.15" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12940,7 +12940,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-467" unit="cm"
-         	   x="-327.04" y="-423.25" z="1436.79"/>
+         	   x="-327.04" y="-423.25" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12951,7 +12951,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-469" unit="cm"
-         	   x="-327.04" y="-253.65" z="1436.79"/>
+         	   x="-327.04" y="-253.65" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12962,7 +12962,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-471" unit="cm"
-         	   x="-327.04" y="-85.75" z="1436.79"/>
+         	   x="-327.04" y="-85.75" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12973,7 +12973,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-473" unit="cm"
-         	   x="-327.04" y="85.75" z="1436.79"/>
+         	   x="-327.04" y="85.75" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12984,7 +12984,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-475" unit="cm"
-         	   x="-327.04" y="253.65" z="1436.79"/>
+         	   x="-327.04" y="253.65" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -12995,7 +12995,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-477" unit="cm"
-         	   x="-327.04" y="423.25" z="1436.79"/>
+         	   x="-327.04" y="423.25" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13006,7 +13006,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-479" unit="cm"
-         	   x="-327.04" y="591.15" z="1436.79"/>
+         	   x="-327.04" y="591.15" z="1419.09"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13017,7 +13017,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-481" unit="cm"
-         	   x="-327.04" y="-591.15" z="1587.31"/>
+         	   x="-327.04" y="-591.15" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13028,7 +13028,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-483" unit="cm"
-         	   x="-327.04" y="-423.25" z="1587.31"/>
+         	   x="-327.04" y="-423.25" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13039,7 +13039,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-485" unit="cm"
-         	   x="-327.04" y="-253.65" z="1587.31"/>
+         	   x="-327.04" y="-253.65" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13050,7 +13050,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-487" unit="cm"
-         	   x="-327.04" y="-85.75" z="1587.31"/>
+         	   x="-327.04" y="-85.75" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13061,7 +13061,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-489" unit="cm"
-         	   x="-327.04" y="85.75" z="1587.31"/>
+         	   x="-327.04" y="85.75" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13072,7 +13072,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-491" unit="cm"
-         	   x="-327.04" y="253.65" z="1587.31"/>
+         	   x="-327.04" y="253.65" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13083,7 +13083,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-493" unit="cm"
-         	   x="-327.04" y="423.25" z="1587.31"/>
+         	   x="-327.04" y="423.25" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13094,7 +13094,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-495" unit="cm"
-         	   x="-327.04" y="591.15" z="1587.31"/>
+         	   x="-327.04" y="591.15" z="1569.01"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13105,7 +13105,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-497" unit="cm"
-         	   x="-327.04" y="-591.15" z="1737.83"/>
+         	   x="-327.04" y="-591.15" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13116,7 +13116,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-499" unit="cm"
-         	   x="-327.04" y="-423.25" z="1737.83"/>
+         	   x="-327.04" y="-423.25" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13127,7 +13127,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-501" unit="cm"
-         	   x="-327.04" y="-253.65" z="1737.83"/>
+         	   x="-327.04" y="-253.65" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13138,7 +13138,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-503" unit="cm"
-         	   x="-327.04" y="-85.75" z="1737.83"/>
+         	   x="-327.04" y="-85.75" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13149,7 +13149,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-505" unit="cm"
-         	   x="-327.04" y="85.75" z="1737.83"/>
+         	   x="-327.04" y="85.75" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13160,7 +13160,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-507" unit="cm"
-         	   x="-327.04" y="253.65" z="1737.83"/>
+         	   x="-327.04" y="253.65" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13171,7 +13171,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-509" unit="cm"
-         	   x="-327.04" y="423.25" z="1737.83"/>
+         	   x="-327.04" y="423.25" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13182,7 +13182,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-511" unit="cm"
-         	   x="-327.04" y="591.15" z="1737.83"/>
+         	   x="-327.04" y="591.15" z="1718.93"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13193,7 +13193,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-513" unit="cm"
-         	   x="-327.04" y="-591.15" z="1888.35"/>
+         	   x="-327.04" y="-591.15" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13204,7 +13204,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-515" unit="cm"
-         	   x="-327.04" y="-423.25" z="1888.35"/>
+         	   x="-327.04" y="-423.25" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13215,7 +13215,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-517" unit="cm"
-         	   x="-327.04" y="-253.65" z="1888.35"/>
+         	   x="-327.04" y="-253.65" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13226,7 +13226,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-519" unit="cm"
-         	   x="-327.04" y="-85.75" z="1888.35"/>
+         	   x="-327.04" y="-85.75" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13237,7 +13237,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-521" unit="cm"
-         	   x="-327.04" y="85.75" z="1888.35"/>
+         	   x="-327.04" y="85.75" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13248,7 +13248,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-523" unit="cm"
-         	   x="-327.04" y="253.65" z="1888.35"/>
+         	   x="-327.04" y="253.65" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13259,7 +13259,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-525" unit="cm"
-         	   x="-327.04" y="423.25" z="1888.35"/>
+         	   x="-327.04" y="423.25" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13270,7 +13270,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-527" unit="cm"
-         	   x="-327.04" y="591.15" z="1888.35"/>
+         	   x="-327.04" y="591.15" z="1868.85"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13281,7 +13281,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-529" unit="cm"
-         	   x="-327.04" y="-591.15" z="2038.87"/>
+         	   x="-327.04" y="-591.15" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13292,7 +13292,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-531" unit="cm"
-         	   x="-327.04" y="-423.25" z="2038.87"/>
+         	   x="-327.04" y="-423.25" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13303,7 +13303,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-533" unit="cm"
-         	   x="-327.04" y="-253.65" z="2038.87"/>
+         	   x="-327.04" y="-253.65" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13314,7 +13314,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-535" unit="cm"
-         	   x="-327.04" y="-85.75" z="2038.87"/>
+         	   x="-327.04" y="-85.75" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13325,7 +13325,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-537" unit="cm"
-         	   x="-327.04" y="85.75" z="2038.87"/>
+         	   x="-327.04" y="85.75" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13336,7 +13336,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-539" unit="cm"
-         	   x="-327.04" y="253.65" z="2038.87"/>
+         	   x="-327.04" y="253.65" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13347,7 +13347,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-541" unit="cm"
-         	   x="-327.04" y="423.25" z="2038.87"/>
+         	   x="-327.04" y="423.25" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13358,7 +13358,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-543" unit="cm"
-         	   x="-327.04" y="591.15" z="2038.87"/>
+         	   x="-327.04" y="591.15" z="2018.77"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13369,7 +13369,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-545" unit="cm"
-         	   x="-327.04" y="-591.15" z="2189.39"/>
+         	   x="-327.04" y="-591.15" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13380,7 +13380,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-547" unit="cm"
-         	   x="-327.04" y="-423.25" z="2189.39"/>
+         	   x="-327.04" y="-423.25" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13391,7 +13391,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-549" unit="cm"
-         	   x="-327.04" y="-253.65" z="2189.39"/>
+         	   x="-327.04" y="-253.65" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13402,7 +13402,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-551" unit="cm"
-         	   x="-327.04" y="-85.75" z="2189.39"/>
+         	   x="-327.04" y="-85.75" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13413,7 +13413,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-553" unit="cm"
-         	   x="-327.04" y="85.75" z="2189.39"/>
+         	   x="-327.04" y="85.75" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13424,7 +13424,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-555" unit="cm"
-         	   x="-327.04" y="253.65" z="2189.39"/>
+         	   x="-327.04" y="253.65" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13435,7 +13435,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-557" unit="cm"
-         	   x="-327.04" y="423.25" z="2189.39"/>
+         	   x="-327.04" y="423.25" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13446,7 +13446,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-559" unit="cm"
-         	   x="-327.04" y="591.15" z="2189.39"/>
+         	   x="-327.04" y="591.15" z="2168.69"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13457,7 +13457,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-561" unit="cm"
-         	   x="-327.04" y="-591.15" z="2339.91"/>
+         	   x="-327.04" y="-591.15" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13468,7 +13468,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-563" unit="cm"
-         	   x="-327.04" y="-423.25" z="2339.91"/>
+         	   x="-327.04" y="-423.25" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13479,7 +13479,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-565" unit="cm"
-         	   x="-327.04" y="-253.65" z="2339.91"/>
+         	   x="-327.04" y="-253.65" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13490,7 +13490,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-567" unit="cm"
-         	   x="-327.04" y="-85.75" z="2339.91"/>
+         	   x="-327.04" y="-85.75" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13501,7 +13501,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-569" unit="cm"
-         	   x="-327.04" y="85.75" z="2339.91"/>
+         	   x="-327.04" y="85.75" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13512,7 +13512,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-571" unit="cm"
-         	   x="-327.04" y="253.65" z="2339.91"/>
+         	   x="-327.04" y="253.65" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13523,7 +13523,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-573" unit="cm"
-         	   x="-327.04" y="423.25" z="2339.91"/>
+         	   x="-327.04" y="423.25" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13534,7 +13534,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-575" unit="cm"
-         	   x="-327.04" y="591.15" z="2339.91"/>
+         	   x="-327.04" y="591.15" z="2318.61"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13545,7 +13545,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-577" unit="cm"
-         	   x="-327.04" y="-591.15" z="2490.43"/>
+         	   x="-327.04" y="-591.15" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13556,7 +13556,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-579" unit="cm"
-         	   x="-327.04" y="-423.25" z="2490.43"/>
+         	   x="-327.04" y="-423.25" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13567,7 +13567,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-581" unit="cm"
-         	   x="-327.04" y="-253.65" z="2490.43"/>
+         	   x="-327.04" y="-253.65" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13578,7 +13578,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-583" unit="cm"
-         	   x="-327.04" y="-85.75" z="2490.43"/>
+         	   x="-327.04" y="-85.75" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13589,7 +13589,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-585" unit="cm"
-         	   x="-327.04" y="85.75" z="2490.43"/>
+         	   x="-327.04" y="85.75" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13600,7 +13600,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-587" unit="cm"
-         	   x="-327.04" y="253.65" z="2490.43"/>
+         	   x="-327.04" y="253.65" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13611,7 +13611,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-589" unit="cm"
-         	   x="-327.04" y="423.25" z="2490.43"/>
+         	   x="-327.04" y="423.25" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13622,7 +13622,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-591" unit="cm"
-         	   x="-327.04" y="591.15" z="2490.43"/>
+         	   x="-327.04" y="591.15" z="2468.53"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13633,7 +13633,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-593" unit="cm"
-         	   x="-327.04" y="-591.15" z="2640.95"/>
+         	   x="-327.04" y="-591.15" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13644,7 +13644,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-595" unit="cm"
-         	   x="-327.04" y="-423.25" z="2640.95"/>
+         	   x="-327.04" y="-423.25" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13655,7 +13655,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-597" unit="cm"
-         	   x="-327.04" y="-253.65" z="2640.95"/>
+         	   x="-327.04" y="-253.65" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13666,7 +13666,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-599" unit="cm"
-         	   x="-327.04" y="-85.75" z="2640.95"/>
+         	   x="-327.04" y="-85.75" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13677,7 +13677,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-601" unit="cm"
-         	   x="-327.04" y="85.75" z="2640.95"/>
+         	   x="-327.04" y="85.75" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13688,7 +13688,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-603" unit="cm"
-         	   x="-327.04" y="253.65" z="2640.95"/>
+         	   x="-327.04" y="253.65" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13699,7 +13699,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-605" unit="cm"
-         	   x="-327.04" y="423.25" z="2640.95"/>
+         	   x="-327.04" y="423.25" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13710,7 +13710,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-607" unit="cm"
-         	   x="-327.04" y="591.15" z="2640.95"/>
+         	   x="-327.04" y="591.15" z="2618.45"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13721,7 +13721,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-609" unit="cm"
-         	   x="-327.04" y="-591.15" z="2791.47"/>
+         	   x="-327.04" y="-591.15" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13732,7 +13732,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-611" unit="cm"
-         	   x="-327.04" y="-423.25" z="2791.47"/>
+         	   x="-327.04" y="-423.25" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13743,7 +13743,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-613" unit="cm"
-         	   x="-327.04" y="-253.65" z="2791.47"/>
+         	   x="-327.04" y="-253.65" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13754,7 +13754,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-615" unit="cm"
-         	   x="-327.04" y="-85.75" z="2791.47"/>
+         	   x="-327.04" y="-85.75" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13765,7 +13765,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-617" unit="cm"
-         	   x="-327.04" y="85.75" z="2791.47"/>
+         	   x="-327.04" y="85.75" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13776,7 +13776,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-619" unit="cm"
-         	   x="-327.04" y="253.65" z="2791.47"/>
+         	   x="-327.04" y="253.65" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13787,7 +13787,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-621" unit="cm"
-         	   x="-327.04" y="423.25" z="2791.47"/>
+         	   x="-327.04" y="423.25" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13798,7 +13798,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-623" unit="cm"
-         	   x="-327.04" y="591.15" z="2791.47"/>
+         	   x="-327.04" y="591.15" z="2768.37"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13809,7 +13809,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-625" unit="cm"
-         	   x="-327.04" y="-591.15" z="2941.99"/>
+         	   x="-327.04" y="-591.15" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13820,7 +13820,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-627" unit="cm"
-         	   x="-327.04" y="-423.25" z="2941.99"/>
+         	   x="-327.04" y="-423.25" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13831,7 +13831,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-629" unit="cm"
-         	   x="-327.04" y="-253.65" z="2941.99"/>
+         	   x="-327.04" y="-253.65" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13842,7 +13842,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-631" unit="cm"
-         	   x="-327.04" y="-85.75" z="2941.99"/>
+         	   x="-327.04" y="-85.75" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13853,7 +13853,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-633" unit="cm"
-         	   x="-327.04" y="85.75" z="2941.99"/>
+         	   x="-327.04" y="85.75" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13864,7 +13864,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-635" unit="cm"
-         	   x="-327.04" y="253.65" z="2941.99"/>
+         	   x="-327.04" y="253.65" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13875,7 +13875,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-637" unit="cm"
-         	   x="-327.04" y="423.25" z="2941.99"/>
+         	   x="-327.04" y="423.25" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13886,7 +13886,7 @@
        <physvol>
          <volumeref ref="volTPC"/>
          <position name="posTPC-639" unit="cm"
-         	   x="-327.04" y="591.15" z="2941.99"/>
+         	   x="-327.04" y="591.15" z="2918.29"/>
          <rotationref ref="rPlus180AboutY"/>
        </physvol>
       <physvol>
@@ -13900,12 +13900,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-0" unit="cm" x="-652.085" y="-507.2" z="-2928.29"/>
+       <position name="posAnodePlateBottom-0" unit="cm" x="-652.085" y="-507.2" z="-2928.59"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-1" unit="cm" x="-652.085" y="-507.2" z="-2777.77"/>
+       <position name="posAnodePlateBottom-1" unit="cm" x="-652.085" y="-507.2" z="-2778.67"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -13919,12 +13919,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-2" unit="cm" x="-652.085" y="-169.7" z="-2928.29"/>
+       <position name="posAnodePlateBottom-2" unit="cm" x="-652.085" y="-169.7" z="-2928.59"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-3" unit="cm" x="-652.085" y="-169.7" z="-2777.77"/>
+       <position name="posAnodePlateBottom-3" unit="cm" x="-652.085" y="-169.7" z="-2778.67"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -13938,12 +13938,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-4" unit="cm" x="-652.085" y="169.7" z="-2928.29"/>
+       <position name="posAnodePlateBottom-4" unit="cm" x="-652.085" y="169.7" z="-2928.59"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-5" unit="cm" x="-652.085" y="169.7" z="-2777.77"/>
+       <position name="posAnodePlateBottom-5" unit="cm" x="-652.085" y="169.7" z="-2778.67"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -13957,12 +13957,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-6" unit="cm" x="-652.085" y="507.2" z="-2928.29"/>
+       <position name="posAnodePlateBottom-6" unit="cm" x="-652.085" y="507.2" z="-2928.59"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-7" unit="cm" x="-652.085" y="507.2" z="-2777.77"/>
+       <position name="posAnodePlateBottom-7" unit="cm" x="-652.085" y="507.2" z="-2778.67"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -13976,12 +13976,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-8" unit="cm" x="-652.085" y="-507.2" z="-2627.25"/>
+       <position name="posAnodePlateBottom-8" unit="cm" x="-652.085" y="-507.2" z="-2628.75"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-9" unit="cm" x="-652.085" y="-507.2" z="-2476.73"/>
+       <position name="posAnodePlateBottom-9" unit="cm" x="-652.085" y="-507.2" z="-2478.83"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -13995,12 +13995,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-10" unit="cm" x="-652.085" y="-169.7" z="-2627.25"/>
+       <position name="posAnodePlateBottom-10" unit="cm" x="-652.085" y="-169.7" z="-2628.75"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-11" unit="cm" x="-652.085" y="-169.7" z="-2476.73"/>
+       <position name="posAnodePlateBottom-11" unit="cm" x="-652.085" y="-169.7" z="-2478.83"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14014,12 +14014,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-12" unit="cm" x="-652.085" y="169.7" z="-2627.25"/>
+       <position name="posAnodePlateBottom-12" unit="cm" x="-652.085" y="169.7" z="-2628.75"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-13" unit="cm" x="-652.085" y="169.7" z="-2476.73"/>
+       <position name="posAnodePlateBottom-13" unit="cm" x="-652.085" y="169.7" z="-2478.83"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14033,12 +14033,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-14" unit="cm" x="-652.085" y="507.2" z="-2627.25"/>
+       <position name="posAnodePlateBottom-14" unit="cm" x="-652.085" y="507.2" z="-2628.75"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-15" unit="cm" x="-652.085" y="507.2" z="-2476.73"/>
+       <position name="posAnodePlateBottom-15" unit="cm" x="-652.085" y="507.2" z="-2478.83"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14052,12 +14052,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-16" unit="cm" x="-652.085" y="-507.2" z="-2326.21"/>
+       <position name="posAnodePlateBottom-16" unit="cm" x="-652.085" y="-507.2" z="-2328.91"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-17" unit="cm" x="-652.085" y="-507.2" z="-2175.69"/>
+       <position name="posAnodePlateBottom-17" unit="cm" x="-652.085" y="-507.2" z="-2178.99"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14071,12 +14071,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-18" unit="cm" x="-652.085" y="-169.7" z="-2326.21"/>
+       <position name="posAnodePlateBottom-18" unit="cm" x="-652.085" y="-169.7" z="-2328.91"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-19" unit="cm" x="-652.085" y="-169.7" z="-2175.69"/>
+       <position name="posAnodePlateBottom-19" unit="cm" x="-652.085" y="-169.7" z="-2178.99"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14090,12 +14090,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-20" unit="cm" x="-652.085" y="169.7" z="-2326.21"/>
+       <position name="posAnodePlateBottom-20" unit="cm" x="-652.085" y="169.7" z="-2328.91"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-21" unit="cm" x="-652.085" y="169.7" z="-2175.69"/>
+       <position name="posAnodePlateBottom-21" unit="cm" x="-652.085" y="169.7" z="-2178.99"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14109,12 +14109,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-22" unit="cm" x="-652.085" y="507.2" z="-2326.21"/>
+       <position name="posAnodePlateBottom-22" unit="cm" x="-652.085" y="507.2" z="-2328.91"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-23" unit="cm" x="-652.085" y="507.2" z="-2175.69"/>
+       <position name="posAnodePlateBottom-23" unit="cm" x="-652.085" y="507.2" z="-2178.99"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14128,12 +14128,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-24" unit="cm" x="-652.085" y="-507.2" z="-2025.17"/>
+       <position name="posAnodePlateBottom-24" unit="cm" x="-652.085" y="-507.2" z="-2029.07"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-25" unit="cm" x="-652.085" y="-507.2" z="-1874.65"/>
+       <position name="posAnodePlateBottom-25" unit="cm" x="-652.085" y="-507.2" z="-1879.15"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14147,12 +14147,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-26" unit="cm" x="-652.085" y="-169.7" z="-2025.17"/>
+       <position name="posAnodePlateBottom-26" unit="cm" x="-652.085" y="-169.7" z="-2029.07"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-27" unit="cm" x="-652.085" y="-169.7" z="-1874.65"/>
+       <position name="posAnodePlateBottom-27" unit="cm" x="-652.085" y="-169.7" z="-1879.15"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14166,12 +14166,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-28" unit="cm" x="-652.085" y="169.7" z="-2025.17"/>
+       <position name="posAnodePlateBottom-28" unit="cm" x="-652.085" y="169.7" z="-2029.07"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-29" unit="cm" x="-652.085" y="169.7" z="-1874.65"/>
+       <position name="posAnodePlateBottom-29" unit="cm" x="-652.085" y="169.7" z="-1879.15"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14185,12 +14185,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-30" unit="cm" x="-652.085" y="507.2" z="-2025.17"/>
+       <position name="posAnodePlateBottom-30" unit="cm" x="-652.085" y="507.2" z="-2029.07"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-31" unit="cm" x="-652.085" y="507.2" z="-1874.65"/>
+       <position name="posAnodePlateBottom-31" unit="cm" x="-652.085" y="507.2" z="-1879.15"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14204,12 +14204,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-32" unit="cm" x="-652.085" y="-507.2" z="-1724.13"/>
+       <position name="posAnodePlateBottom-32" unit="cm" x="-652.085" y="-507.2" z="-1729.23"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-33" unit="cm" x="-652.085" y="-507.2" z="-1573.61"/>
+       <position name="posAnodePlateBottom-33" unit="cm" x="-652.085" y="-507.2" z="-1579.31"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14223,12 +14223,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-34" unit="cm" x="-652.085" y="-169.7" z="-1724.13"/>
+       <position name="posAnodePlateBottom-34" unit="cm" x="-652.085" y="-169.7" z="-1729.23"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-35" unit="cm" x="-652.085" y="-169.7" z="-1573.61"/>
+       <position name="posAnodePlateBottom-35" unit="cm" x="-652.085" y="-169.7" z="-1579.31"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14242,12 +14242,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-36" unit="cm" x="-652.085" y="169.7" z="-1724.13"/>
+       <position name="posAnodePlateBottom-36" unit="cm" x="-652.085" y="169.7" z="-1729.23"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-37" unit="cm" x="-652.085" y="169.7" z="-1573.61"/>
+       <position name="posAnodePlateBottom-37" unit="cm" x="-652.085" y="169.7" z="-1579.31"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14261,12 +14261,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-38" unit="cm" x="-652.085" y="507.2" z="-1724.13"/>
+       <position name="posAnodePlateBottom-38" unit="cm" x="-652.085" y="507.2" z="-1729.23"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-39" unit="cm" x="-652.085" y="507.2" z="-1573.61"/>
+       <position name="posAnodePlateBottom-39" unit="cm" x="-652.085" y="507.2" z="-1579.31"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14280,12 +14280,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-40" unit="cm" x="-652.085" y="-507.2" z="-1423.09"/>
+       <position name="posAnodePlateBottom-40" unit="cm" x="-652.085" y="-507.2" z="-1429.39"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-41" unit="cm" x="-652.085" y="-507.2" z="-1272.57"/>
+       <position name="posAnodePlateBottom-41" unit="cm" x="-652.085" y="-507.2" z="-1279.47"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14299,12 +14299,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-42" unit="cm" x="-652.085" y="-169.7" z="-1423.09"/>
+       <position name="posAnodePlateBottom-42" unit="cm" x="-652.085" y="-169.7" z="-1429.39"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-43" unit="cm" x="-652.085" y="-169.7" z="-1272.57"/>
+       <position name="posAnodePlateBottom-43" unit="cm" x="-652.085" y="-169.7" z="-1279.47"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14318,12 +14318,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-44" unit="cm" x="-652.085" y="169.7" z="-1423.09"/>
+       <position name="posAnodePlateBottom-44" unit="cm" x="-652.085" y="169.7" z="-1429.39"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-45" unit="cm" x="-652.085" y="169.7" z="-1272.57"/>
+       <position name="posAnodePlateBottom-45" unit="cm" x="-652.085" y="169.7" z="-1279.47"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14337,12 +14337,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-46" unit="cm" x="-652.085" y="507.2" z="-1423.09"/>
+       <position name="posAnodePlateBottom-46" unit="cm" x="-652.085" y="507.2" z="-1429.39"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-47" unit="cm" x="-652.085" y="507.2" z="-1272.57"/>
+       <position name="posAnodePlateBottom-47" unit="cm" x="-652.085" y="507.2" z="-1279.47"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14356,12 +14356,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-48" unit="cm" x="-652.085" y="-507.2" z="-1122.05"/>
+       <position name="posAnodePlateBottom-48" unit="cm" x="-652.085" y="-507.2" z="-1129.55"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-49" unit="cm" x="-652.085" y="-507.2" z="-971.530000000001"/>
+       <position name="posAnodePlateBottom-49" unit="cm" x="-652.085" y="-507.2" z="-979.63"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14375,12 +14375,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-50" unit="cm" x="-652.085" y="-169.7" z="-1122.05"/>
+       <position name="posAnodePlateBottom-50" unit="cm" x="-652.085" y="-169.7" z="-1129.55"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-51" unit="cm" x="-652.085" y="-169.7" z="-971.530000000001"/>
+       <position name="posAnodePlateBottom-51" unit="cm" x="-652.085" y="-169.7" z="-979.63"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14394,12 +14394,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-52" unit="cm" x="-652.085" y="169.7" z="-1122.05"/>
+       <position name="posAnodePlateBottom-52" unit="cm" x="-652.085" y="169.7" z="-1129.55"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-53" unit="cm" x="-652.085" y="169.7" z="-971.530000000001"/>
+       <position name="posAnodePlateBottom-53" unit="cm" x="-652.085" y="169.7" z="-979.63"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14413,12 +14413,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-54" unit="cm" x="-652.085" y="507.2" z="-1122.05"/>
+       <position name="posAnodePlateBottom-54" unit="cm" x="-652.085" y="507.2" z="-1129.55"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-55" unit="cm" x="-652.085" y="507.2" z="-971.530000000001"/>
+       <position name="posAnodePlateBottom-55" unit="cm" x="-652.085" y="507.2" z="-979.63"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14432,12 +14432,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-56" unit="cm" x="-652.085" y="-507.2" z="-821.010000000001"/>
+       <position name="posAnodePlateBottom-56" unit="cm" x="-652.085" y="-507.2" z="-829.71"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-57" unit="cm" x="-652.085" y="-507.2" z="-670.490000000001"/>
+       <position name="posAnodePlateBottom-57" unit="cm" x="-652.085" y="-507.2" z="-679.79"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14451,12 +14451,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-58" unit="cm" x="-652.085" y="-169.7" z="-821.010000000001"/>
+       <position name="posAnodePlateBottom-58" unit="cm" x="-652.085" y="-169.7" z="-829.71"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-59" unit="cm" x="-652.085" y="-169.7" z="-670.490000000001"/>
+       <position name="posAnodePlateBottom-59" unit="cm" x="-652.085" y="-169.7" z="-679.79"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14470,12 +14470,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-60" unit="cm" x="-652.085" y="169.7" z="-821.010000000001"/>
+       <position name="posAnodePlateBottom-60" unit="cm" x="-652.085" y="169.7" z="-829.71"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-61" unit="cm" x="-652.085" y="169.7" z="-670.490000000001"/>
+       <position name="posAnodePlateBottom-61" unit="cm" x="-652.085" y="169.7" z="-679.79"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14489,12 +14489,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-62" unit="cm" x="-652.085" y="507.2" z="-821.010000000001"/>
+       <position name="posAnodePlateBottom-62" unit="cm" x="-652.085" y="507.2" z="-829.71"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-63" unit="cm" x="-652.085" y="507.2" z="-670.490000000001"/>
+       <position name="posAnodePlateBottom-63" unit="cm" x="-652.085" y="507.2" z="-679.79"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14508,12 +14508,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-64" unit="cm" x="-652.085" y="-507.2" z="-519.970000000001"/>
+       <position name="posAnodePlateBottom-64" unit="cm" x="-652.085" y="-507.2" z="-529.87"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-65" unit="cm" x="-652.085" y="-507.2" z="-369.450000000001"/>
+       <position name="posAnodePlateBottom-65" unit="cm" x="-652.085" y="-507.2" z="-379.95"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14527,12 +14527,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-66" unit="cm" x="-652.085" y="-169.7" z="-519.970000000001"/>
+       <position name="posAnodePlateBottom-66" unit="cm" x="-652.085" y="-169.7" z="-529.87"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-67" unit="cm" x="-652.085" y="-169.7" z="-369.450000000001"/>
+       <position name="posAnodePlateBottom-67" unit="cm" x="-652.085" y="-169.7" z="-379.95"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14546,12 +14546,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-68" unit="cm" x="-652.085" y="169.7" z="-519.970000000001"/>
+       <position name="posAnodePlateBottom-68" unit="cm" x="-652.085" y="169.7" z="-529.87"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-69" unit="cm" x="-652.085" y="169.7" z="-369.450000000001"/>
+       <position name="posAnodePlateBottom-69" unit="cm" x="-652.085" y="169.7" z="-379.95"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14565,12 +14565,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-70" unit="cm" x="-652.085" y="507.2" z="-519.970000000001"/>
+       <position name="posAnodePlateBottom-70" unit="cm" x="-652.085" y="507.2" z="-529.87"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-71" unit="cm" x="-652.085" y="507.2" z="-369.450000000001"/>
+       <position name="posAnodePlateBottom-71" unit="cm" x="-652.085" y="507.2" z="-379.95"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14584,12 +14584,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-72" unit="cm" x="-652.085" y="-507.2" z="-218.930000000001"/>
+       <position name="posAnodePlateBottom-72" unit="cm" x="-652.085" y="-507.2" z="-230.03"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-73" unit="cm" x="-652.085" y="-507.2" z="-68.4100000000007"/>
+       <position name="posAnodePlateBottom-73" unit="cm" x="-652.085" y="-507.2" z="-80.1099999999996"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14603,12 +14603,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-74" unit="cm" x="-652.085" y="-169.7" z="-218.930000000001"/>
+       <position name="posAnodePlateBottom-74" unit="cm" x="-652.085" y="-169.7" z="-230.03"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-75" unit="cm" x="-652.085" y="-169.7" z="-68.4100000000007"/>
+       <position name="posAnodePlateBottom-75" unit="cm" x="-652.085" y="-169.7" z="-80.1099999999996"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14622,12 +14622,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-76" unit="cm" x="-652.085" y="169.7" z="-218.930000000001"/>
+       <position name="posAnodePlateBottom-76" unit="cm" x="-652.085" y="169.7" z="-230.03"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-77" unit="cm" x="-652.085" y="169.7" z="-68.4100000000007"/>
+       <position name="posAnodePlateBottom-77" unit="cm" x="-652.085" y="169.7" z="-80.1099999999996"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14641,12 +14641,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-78" unit="cm" x="-652.085" y="507.2" z="-218.930000000001"/>
+       <position name="posAnodePlateBottom-78" unit="cm" x="-652.085" y="507.2" z="-230.03"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-79" unit="cm" x="-652.085" y="507.2" z="-68.4100000000007"/>
+       <position name="posAnodePlateBottom-79" unit="cm" x="-652.085" y="507.2" z="-80.1099999999996"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14660,12 +14660,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-80" unit="cm" x="-652.085" y="-507.2" z="82.1099999999993"/>
+       <position name="posAnodePlateBottom-80" unit="cm" x="-652.085" y="-507.2" z="69.8100000000004"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-81" unit="cm" x="-652.085" y="-507.2" z="232.629999999999"/>
+       <position name="posAnodePlateBottom-81" unit="cm" x="-652.085" y="-507.2" z="219.73"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14679,12 +14679,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-82" unit="cm" x="-652.085" y="-169.7" z="82.1099999999993"/>
+       <position name="posAnodePlateBottom-82" unit="cm" x="-652.085" y="-169.7" z="69.8100000000004"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-83" unit="cm" x="-652.085" y="-169.7" z="232.629999999999"/>
+       <position name="posAnodePlateBottom-83" unit="cm" x="-652.085" y="-169.7" z="219.73"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14698,12 +14698,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-84" unit="cm" x="-652.085" y="169.7" z="82.1099999999993"/>
+       <position name="posAnodePlateBottom-84" unit="cm" x="-652.085" y="169.7" z="69.8100000000004"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-85" unit="cm" x="-652.085" y="169.7" z="232.629999999999"/>
+       <position name="posAnodePlateBottom-85" unit="cm" x="-652.085" y="169.7" z="219.73"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14717,12 +14717,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-86" unit="cm" x="-652.085" y="507.2" z="82.1099999999993"/>
+       <position name="posAnodePlateBottom-86" unit="cm" x="-652.085" y="507.2" z="69.8100000000004"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-87" unit="cm" x="-652.085" y="507.2" z="232.629999999999"/>
+       <position name="posAnodePlateBottom-87" unit="cm" x="-652.085" y="507.2" z="219.73"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14736,12 +14736,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-88" unit="cm" x="-652.085" y="-507.2" z="383.149999999999"/>
+       <position name="posAnodePlateBottom-88" unit="cm" x="-652.085" y="-507.2" z="369.65"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-89" unit="cm" x="-652.085" y="-507.2" z="533.669999999999"/>
+       <position name="posAnodePlateBottom-89" unit="cm" x="-652.085" y="-507.2" z="519.57"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14755,12 +14755,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-90" unit="cm" x="-652.085" y="-169.7" z="383.149999999999"/>
+       <position name="posAnodePlateBottom-90" unit="cm" x="-652.085" y="-169.7" z="369.65"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-91" unit="cm" x="-652.085" y="-169.7" z="533.669999999999"/>
+       <position name="posAnodePlateBottom-91" unit="cm" x="-652.085" y="-169.7" z="519.57"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14774,12 +14774,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-92" unit="cm" x="-652.085" y="169.7" z="383.149999999999"/>
+       <position name="posAnodePlateBottom-92" unit="cm" x="-652.085" y="169.7" z="369.65"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-93" unit="cm" x="-652.085" y="169.7" z="533.669999999999"/>
+       <position name="posAnodePlateBottom-93" unit="cm" x="-652.085" y="169.7" z="519.57"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14793,12 +14793,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-94" unit="cm" x="-652.085" y="507.2" z="383.149999999999"/>
+       <position name="posAnodePlateBottom-94" unit="cm" x="-652.085" y="507.2" z="369.65"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-95" unit="cm" x="-652.085" y="507.2" z="533.669999999999"/>
+       <position name="posAnodePlateBottom-95" unit="cm" x="-652.085" y="507.2" z="519.57"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14812,12 +14812,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-96" unit="cm" x="-652.085" y="-507.2" z="684.189999999999"/>
+       <position name="posAnodePlateBottom-96" unit="cm" x="-652.085" y="-507.2" z="669.49"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-97" unit="cm" x="-652.085" y="-507.2" z="834.709999999999"/>
+       <position name="posAnodePlateBottom-97" unit="cm" x="-652.085" y="-507.2" z="819.410000000001"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14831,12 +14831,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-98" unit="cm" x="-652.085" y="-169.7" z="684.189999999999"/>
+       <position name="posAnodePlateBottom-98" unit="cm" x="-652.085" y="-169.7" z="669.49"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-99" unit="cm" x="-652.085" y="-169.7" z="834.709999999999"/>
+       <position name="posAnodePlateBottom-99" unit="cm" x="-652.085" y="-169.7" z="819.410000000001"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14850,12 +14850,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-100" unit="cm" x="-652.085" y="169.7" z="684.189999999999"/>
+       <position name="posAnodePlateBottom-100" unit="cm" x="-652.085" y="169.7" z="669.49"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-101" unit="cm" x="-652.085" y="169.7" z="834.709999999999"/>
+       <position name="posAnodePlateBottom-101" unit="cm" x="-652.085" y="169.7" z="819.410000000001"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14869,12 +14869,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-102" unit="cm" x="-652.085" y="507.2" z="684.189999999999"/>
+       <position name="posAnodePlateBottom-102" unit="cm" x="-652.085" y="507.2" z="669.49"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-103" unit="cm" x="-652.085" y="507.2" z="834.709999999999"/>
+       <position name="posAnodePlateBottom-103" unit="cm" x="-652.085" y="507.2" z="819.410000000001"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14888,12 +14888,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-104" unit="cm" x="-652.085" y="-507.2" z="985.229999999999"/>
+       <position name="posAnodePlateBottom-104" unit="cm" x="-652.085" y="-507.2" z="969.33"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-105" unit="cm" x="-652.085" y="-507.2" z="1135.75"/>
+       <position name="posAnodePlateBottom-105" unit="cm" x="-652.085" y="-507.2" z="1119.25"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14907,12 +14907,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-106" unit="cm" x="-652.085" y="-169.7" z="985.229999999999"/>
+       <position name="posAnodePlateBottom-106" unit="cm" x="-652.085" y="-169.7" z="969.33"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-107" unit="cm" x="-652.085" y="-169.7" z="1135.75"/>
+       <position name="posAnodePlateBottom-107" unit="cm" x="-652.085" y="-169.7" z="1119.25"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14926,12 +14926,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-108" unit="cm" x="-652.085" y="169.7" z="985.229999999999"/>
+       <position name="posAnodePlateBottom-108" unit="cm" x="-652.085" y="169.7" z="969.33"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-109" unit="cm" x="-652.085" y="169.7" z="1135.75"/>
+       <position name="posAnodePlateBottom-109" unit="cm" x="-652.085" y="169.7" z="1119.25"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14945,12 +14945,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-110" unit="cm" x="-652.085" y="507.2" z="985.229999999999"/>
+       <position name="posAnodePlateBottom-110" unit="cm" x="-652.085" y="507.2" z="969.33"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-111" unit="cm" x="-652.085" y="507.2" z="1135.75"/>
+       <position name="posAnodePlateBottom-111" unit="cm" x="-652.085" y="507.2" z="1119.25"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14964,12 +14964,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-112" unit="cm" x="-652.085" y="-507.2" z="1286.27"/>
+       <position name="posAnodePlateBottom-112" unit="cm" x="-652.085" y="-507.2" z="1269.17"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-113" unit="cm" x="-652.085" y="-507.2" z="1436.79"/>
+       <position name="posAnodePlateBottom-113" unit="cm" x="-652.085" y="-507.2" z="1419.09"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -14983,12 +14983,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-114" unit="cm" x="-652.085" y="-169.7" z="1286.27"/>
+       <position name="posAnodePlateBottom-114" unit="cm" x="-652.085" y="-169.7" z="1269.17"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-115" unit="cm" x="-652.085" y="-169.7" z="1436.79"/>
+       <position name="posAnodePlateBottom-115" unit="cm" x="-652.085" y="-169.7" z="1419.09"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15002,12 +15002,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-116" unit="cm" x="-652.085" y="169.7" z="1286.27"/>
+       <position name="posAnodePlateBottom-116" unit="cm" x="-652.085" y="169.7" z="1269.17"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-117" unit="cm" x="-652.085" y="169.7" z="1436.79"/>
+       <position name="posAnodePlateBottom-117" unit="cm" x="-652.085" y="169.7" z="1419.09"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15021,12 +15021,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-118" unit="cm" x="-652.085" y="507.2" z="1286.27"/>
+       <position name="posAnodePlateBottom-118" unit="cm" x="-652.085" y="507.2" z="1269.17"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-119" unit="cm" x="-652.085" y="507.2" z="1436.79"/>
+       <position name="posAnodePlateBottom-119" unit="cm" x="-652.085" y="507.2" z="1419.09"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15040,12 +15040,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-120" unit="cm" x="-652.085" y="-507.2" z="1587.31"/>
+       <position name="posAnodePlateBottom-120" unit="cm" x="-652.085" y="-507.2" z="1569.01"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-121" unit="cm" x="-652.085" y="-507.2" z="1737.83"/>
+       <position name="posAnodePlateBottom-121" unit="cm" x="-652.085" y="-507.2" z="1718.93"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15059,12 +15059,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-122" unit="cm" x="-652.085" y="-169.7" z="1587.31"/>
+       <position name="posAnodePlateBottom-122" unit="cm" x="-652.085" y="-169.7" z="1569.01"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-123" unit="cm" x="-652.085" y="-169.7" z="1737.83"/>
+       <position name="posAnodePlateBottom-123" unit="cm" x="-652.085" y="-169.7" z="1718.93"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15078,12 +15078,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-124" unit="cm" x="-652.085" y="169.7" z="1587.31"/>
+       <position name="posAnodePlateBottom-124" unit="cm" x="-652.085" y="169.7" z="1569.01"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-125" unit="cm" x="-652.085" y="169.7" z="1737.83"/>
+       <position name="posAnodePlateBottom-125" unit="cm" x="-652.085" y="169.7" z="1718.93"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15097,12 +15097,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-126" unit="cm" x="-652.085" y="507.2" z="1587.31"/>
+       <position name="posAnodePlateBottom-126" unit="cm" x="-652.085" y="507.2" z="1569.01"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-127" unit="cm" x="-652.085" y="507.2" z="1737.83"/>
+       <position name="posAnodePlateBottom-127" unit="cm" x="-652.085" y="507.2" z="1718.93"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15116,12 +15116,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-128" unit="cm" x="-652.085" y="-507.2" z="1888.35"/>
+       <position name="posAnodePlateBottom-128" unit="cm" x="-652.085" y="-507.2" z="1868.85"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-129" unit="cm" x="-652.085" y="-507.2" z="2038.87"/>
+       <position name="posAnodePlateBottom-129" unit="cm" x="-652.085" y="-507.2" z="2018.77"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15135,12 +15135,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-130" unit="cm" x="-652.085" y="-169.7" z="1888.35"/>
+       <position name="posAnodePlateBottom-130" unit="cm" x="-652.085" y="-169.7" z="1868.85"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-131" unit="cm" x="-652.085" y="-169.7" z="2038.87"/>
+       <position name="posAnodePlateBottom-131" unit="cm" x="-652.085" y="-169.7" z="2018.77"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15154,12 +15154,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-132" unit="cm" x="-652.085" y="169.7" z="1888.35"/>
+       <position name="posAnodePlateBottom-132" unit="cm" x="-652.085" y="169.7" z="1868.85"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-133" unit="cm" x="-652.085" y="169.7" z="2038.87"/>
+       <position name="posAnodePlateBottom-133" unit="cm" x="-652.085" y="169.7" z="2018.77"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15173,12 +15173,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-134" unit="cm" x="-652.085" y="507.2" z="1888.35"/>
+       <position name="posAnodePlateBottom-134" unit="cm" x="-652.085" y="507.2" z="1868.85"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-135" unit="cm" x="-652.085" y="507.2" z="2038.87"/>
+       <position name="posAnodePlateBottom-135" unit="cm" x="-652.085" y="507.2" z="2018.77"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15192,12 +15192,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-136" unit="cm" x="-652.085" y="-507.2" z="2189.39"/>
+       <position name="posAnodePlateBottom-136" unit="cm" x="-652.085" y="-507.2" z="2168.69"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-137" unit="cm" x="-652.085" y="-507.2" z="2339.91"/>
+       <position name="posAnodePlateBottom-137" unit="cm" x="-652.085" y="-507.2" z="2318.61"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15211,12 +15211,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-138" unit="cm" x="-652.085" y="-169.7" z="2189.39"/>
+       <position name="posAnodePlateBottom-138" unit="cm" x="-652.085" y="-169.7" z="2168.69"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-139" unit="cm" x="-652.085" y="-169.7" z="2339.91"/>
+       <position name="posAnodePlateBottom-139" unit="cm" x="-652.085" y="-169.7" z="2318.61"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15230,12 +15230,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-140" unit="cm" x="-652.085" y="169.7" z="2189.39"/>
+       <position name="posAnodePlateBottom-140" unit="cm" x="-652.085" y="169.7" z="2168.69"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-141" unit="cm" x="-652.085" y="169.7" z="2339.91"/>
+       <position name="posAnodePlateBottom-141" unit="cm" x="-652.085" y="169.7" z="2318.61"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15249,12 +15249,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-142" unit="cm" x="-652.085" y="507.2" z="2189.39"/>
+       <position name="posAnodePlateBottom-142" unit="cm" x="-652.085" y="507.2" z="2168.69"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-143" unit="cm" x="-652.085" y="507.2" z="2339.91"/>
+       <position name="posAnodePlateBottom-143" unit="cm" x="-652.085" y="507.2" z="2318.61"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15268,12 +15268,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-144" unit="cm" x="-652.085" y="-507.2" z="2490.43"/>
+       <position name="posAnodePlateBottom-144" unit="cm" x="-652.085" y="-507.2" z="2468.53"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-145" unit="cm" x="-652.085" y="-507.2" z="2640.95"/>
+       <position name="posAnodePlateBottom-145" unit="cm" x="-652.085" y="-507.2" z="2618.45"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15287,12 +15287,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-146" unit="cm" x="-652.085" y="-169.7" z="2490.43"/>
+       <position name="posAnodePlateBottom-146" unit="cm" x="-652.085" y="-169.7" z="2468.53"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-147" unit="cm" x="-652.085" y="-169.7" z="2640.95"/>
+       <position name="posAnodePlateBottom-147" unit="cm" x="-652.085" y="-169.7" z="2618.45"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15306,12 +15306,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-148" unit="cm" x="-652.085" y="169.7" z="2490.43"/>
+       <position name="posAnodePlateBottom-148" unit="cm" x="-652.085" y="169.7" z="2468.53"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-149" unit="cm" x="-652.085" y="169.7" z="2640.95"/>
+       <position name="posAnodePlateBottom-149" unit="cm" x="-652.085" y="169.7" z="2618.45"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15325,12 +15325,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-150" unit="cm" x="-652.085" y="507.2" z="2490.43"/>
+       <position name="posAnodePlateBottom-150" unit="cm" x="-652.085" y="507.2" z="2468.53"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-151" unit="cm" x="-652.085" y="507.2" z="2640.95"/>
+       <position name="posAnodePlateBottom-151" unit="cm" x="-652.085" y="507.2" z="2618.45"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15344,12 +15344,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-152" unit="cm" x="-652.085" y="-507.2" z="2791.47"/>
+       <position name="posAnodePlateBottom-152" unit="cm" x="-652.085" y="-507.2" z="2768.37"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-153" unit="cm" x="-652.085" y="-507.2" z="2941.99"/>
+       <position name="posAnodePlateBottom-153" unit="cm" x="-652.085" y="-507.2" z="2918.29"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15363,12 +15363,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-154" unit="cm" x="-652.085" y="-169.7" z="2791.47"/>
+       <position name="posAnodePlateBottom-154" unit="cm" x="-652.085" y="-169.7" z="2768.37"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-155" unit="cm" x="-652.085" y="-169.7" z="2941.99"/>
+       <position name="posAnodePlateBottom-155" unit="cm" x="-652.085" y="-169.7" z="2918.29"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15382,12 +15382,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-156" unit="cm" x="-652.085" y="169.7" z="2791.47"/>
+       <position name="posAnodePlateBottom-156" unit="cm" x="-652.085" y="169.7" z="2768.37"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-157" unit="cm" x="-652.085" y="169.7" z="2941.99"/>
+       <position name="posAnodePlateBottom-157" unit="cm" x="-652.085" y="169.7" z="2918.29"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
@@ -15401,12 +15401,12 @@
       </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-158" unit="cm" x="-652.085" y="507.2" z="2791.47"/>
+       <position name="posAnodePlateBottom-158" unit="cm" x="-652.085" y="507.2" z="2768.37"/>
        <rotationref ref="rIdentity"/>
      </physvol>
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
-       <position name="posAnodePlateBottom-159" unit="cm" x="-652.085" y="507.2" z="2941.99"/>
+       <position name="posAnodePlateBottom-159" unit="cm" x="-652.085" y="507.2" z="2918.29"/>
        <rotationref ref="rIdentity"/>
      </physvol>
      <physvol>
