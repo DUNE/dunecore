@@ -30,10 +30,17 @@ sub gen_Materials
   <element name="argon" formula="Ar" Z="18"> <atom value="39.9480"/>  </element>
   <element name="sulphur" formula="S" Z="16"> <atom value="32.065"/>  </element>
   <element name="phosphorus" formula="P" Z="15"> <atom value="30.973"/>  </element>
+  <element name="titane"  formula="Ti" Z="22"> <atom value="47.867"/>  </element>
+  <element name="bismuth"  formula="Bi" Z="83"> <atom value="208.980"/>  </element>
 
   <material name="Vacuum" formula="Vacuum">
    <D value="1.e-25" unit="g/cm3"/>
    <fraction n="1.0" ref="videRef"/>
+  </material>
+
+  <material name="TITANIUM_Ti" formula="TITANIUM_Ti">
+   <D value="4.51" unit="g/cm3"/>
+   <fraction n="1.0000" ref="titanium"/>
   </material>
 
   <material name="ALUMINUM_Al" formula="ALUMINUM_Al">
