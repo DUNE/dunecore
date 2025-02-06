@@ -3716,7 +3716,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-0"/>
 <position name="posArapuca0-0-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3724,7 +3724,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-0-0"/>
        <position name="posOpArapuca0-0-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3732,7 +3732,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-0-1"/>
        <position name="posOpArapuca0-0-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3740,7 +3740,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-0-2"/>
        <position name="posOpArapuca0-0-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3748,7 +3748,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-0-3"/>
        <position name="posOpArapuca0-0-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3756,7 +3756,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-1"/>
 <position name="posArapuca0-1-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3764,7 +3764,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-1-0"/>
        <position name="posOpArapuca0-1-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3772,7 +3772,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-1-1"/>
        <position name="posOpArapuca0-1-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3780,7 +3780,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-1-2"/>
        <position name="posOpArapuca0-1-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3788,7 +3788,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-1-3"/>
        <position name="posOpArapuca0-1-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3796,7 +3796,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-2"/>
 <position name="posArapuca0-2-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3804,7 +3804,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-2-0"/>
        <position name="posOpArapuca0-2-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3812,7 +3812,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-2-1"/>
        <position name="posOpArapuca0-2-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3820,7 +3820,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-2-2"/>
        <position name="posOpArapuca0-2-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3828,7 +3828,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-2-3"/>
        <position name="posOpArapuca0-2-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3836,7 +3836,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-3"/>
 <position name="posArapuca0-3-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3844,7 +3844,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-3-0"/>
        <position name="posOpArapuca0-3-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3852,7 +3852,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-3-1"/>
        <position name="posOpArapuca0-3-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3860,7 +3860,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-3-2"/>
        <position name="posOpArapuca0-3-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3868,7 +3868,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-3-3"/>
        <position name="posOpArapuca0-3-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3876,7 +3876,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-4"/>
 <position name="posArapuca0-4-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3884,7 +3884,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-4-0"/>
        <position name="posOpArapuca0-4-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3892,7 +3892,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-4-1"/>
        <position name="posOpArapuca0-4-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3900,7 +3900,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-4-2"/>
        <position name="posOpArapuca0-4-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3908,7 +3908,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-4-3"/>
        <position name="posOpArapuca0-4-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3916,7 +3916,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-5"/>
 <position name="posArapuca0-5-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3924,7 +3924,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-5-0"/>
        <position name="posOpArapuca0-5-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3932,7 +3932,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-5-1"/>
        <position name="posOpArapuca0-5-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3940,7 +3940,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-5-2"/>
        <position name="posOpArapuca0-5-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3948,7 +3948,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-5-3"/>
        <position name="posOpArapuca0-5-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3956,7 +3956,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-6"/>
 <position name="posArapuca0-6-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -3964,7 +3964,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-6-0"/>
        <position name="posOpArapuca0-6-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -3972,7 +3972,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-6-1"/>
        <position name="posOpArapuca0-6-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -3980,7 +3980,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-6-2"/>
        <position name="posOpArapuca0-6-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -3988,7 +3988,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-6-3"/>
        <position name="posOpArapuca0-6-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -3996,7 +3996,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-7"/>
 <position name="posArapuca0-7-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -4004,7 +4004,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-7-0"/>
        <position name="posOpArapuca0-7-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -4012,7 +4012,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-7-1"/>
        <position name="posOpArapuca0-7-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -4020,7 +4020,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-7-2"/>
        <position name="posOpArapuca0-7-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -4028,7 +4028,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-7-3"/>
        <position name="posOpArapuca0-7-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -4036,7 +4036,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-8"/>
 <position name="posArapuca0-8-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -4044,7 +4044,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-8-0"/>
        <position name="posOpArapuca0-8-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -4052,7 +4052,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-8-1"/>
        <position name="posOpArapuca0-8-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -4060,7 +4060,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-8-2"/>
        <position name="posOpArapuca0-8-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -4068,7 +4068,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-8-3"/>
        <position name="posOpArapuca0-8-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -4076,7 +4076,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_0-9"/>
 <position name="posArapuca0-9-TPC-12-0-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="-454.975"/>
 <rotationref ref="rIdentity"/>
@@ -4084,7 +4084,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-9-0"/>
        <position name="posOpArapuca0-9-0-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-535.175"/>
        <rotationref ref="rIdentity"/>
@@ -4092,7 +4092,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-9-1"/>
        <position name="posOpArapuca0-9-1-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-486.375"/>
        <rotationref ref="rIdentity"/>
@@ -4100,7 +4100,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-9-2"/>
        <position name="posOpArapuca0-9-2-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-423.575"/>
        <rotationref ref="rIdentity"/>
@@ -4108,7 +4108,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_0-9-3"/>
        <position name="posOpArapuca0-9-3-TPC-12-0-0" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-374.775"/>
        <rotationref ref="rIdentity"/>
@@ -4117,7 +4117,7 @@ z="-454.975"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-0" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="-454.975"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -4642,7 +4642,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-0"/>
 <position name="posArapuca1-0-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4650,7 +4650,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-0-0"/>
        <position name="posOpArapuca1-0-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4658,7 +4658,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-0-1"/>
        <position name="posOpArapuca1-0-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4666,7 +4666,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-0-2"/>
        <position name="posOpArapuca1-0-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4674,7 +4674,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-0-3"/>
        <position name="posOpArapuca1-0-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4682,7 +4682,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-1"/>
 <position name="posArapuca1-1-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4690,7 +4690,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-1-0"/>
        <position name="posOpArapuca1-1-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4698,7 +4698,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-1-1"/>
        <position name="posOpArapuca1-1-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4706,7 +4706,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-1-2"/>
        <position name="posOpArapuca1-1-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4714,7 +4714,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-1-3"/>
        <position name="posOpArapuca1-1-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4722,7 +4722,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-2"/>
 <position name="posArapuca1-2-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4730,7 +4730,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-2-0"/>
        <position name="posOpArapuca1-2-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4738,7 +4738,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-2-1"/>
        <position name="posOpArapuca1-2-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4746,7 +4746,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-2-2"/>
        <position name="posOpArapuca1-2-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4754,7 +4754,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-2-3"/>
        <position name="posOpArapuca1-2-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4762,7 +4762,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-3"/>
 <position name="posArapuca1-3-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4770,7 +4770,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-3-0"/>
        <position name="posOpArapuca1-3-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4778,7 +4778,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-3-1"/>
        <position name="posOpArapuca1-3-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4786,7 +4786,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-3-2"/>
        <position name="posOpArapuca1-3-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4794,7 +4794,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-3-3"/>
        <position name="posOpArapuca1-3-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4802,7 +4802,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-4"/>
 <position name="posArapuca1-4-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4810,7 +4810,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-4-0"/>
        <position name="posOpArapuca1-4-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4818,7 +4818,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-4-1"/>
        <position name="posOpArapuca1-4-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4826,7 +4826,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-4-2"/>
        <position name="posOpArapuca1-4-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4834,7 +4834,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-4-3"/>
        <position name="posOpArapuca1-4-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4842,7 +4842,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-5"/>
 <position name="posArapuca1-5-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4850,7 +4850,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-5-0"/>
        <position name="posOpArapuca1-5-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4858,7 +4858,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-5-1"/>
        <position name="posOpArapuca1-5-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4866,7 +4866,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-5-2"/>
        <position name="posOpArapuca1-5-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4874,7 +4874,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-5-3"/>
        <position name="posOpArapuca1-5-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4882,7 +4882,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-6"/>
 <position name="posArapuca1-6-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4890,7 +4890,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-6-0"/>
        <position name="posOpArapuca1-6-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4898,7 +4898,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-6-1"/>
        <position name="posOpArapuca1-6-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4906,7 +4906,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-6-2"/>
        <position name="posOpArapuca1-6-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4914,7 +4914,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-6-3"/>
        <position name="posOpArapuca1-6-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4922,7 +4922,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-7"/>
 <position name="posArapuca1-7-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4930,7 +4930,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-7-0"/>
        <position name="posOpArapuca1-7-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4938,7 +4938,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-7-1"/>
        <position name="posOpArapuca1-7-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4946,7 +4946,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-7-2"/>
        <position name="posOpArapuca1-7-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4954,7 +4954,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-7-3"/>
        <position name="posOpArapuca1-7-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4962,7 +4962,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-8"/>
 <position name="posArapuca1-8-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -4970,7 +4970,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-8-0"/>
        <position name="posOpArapuca1-8-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4978,7 +4978,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-8-1"/>
        <position name="posOpArapuca1-8-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4986,7 +4986,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-8-2"/>
        <position name="posOpArapuca1-8-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -4994,7 +4994,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-8-3"/>
        <position name="posOpArapuca1-8-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -5002,7 +5002,7 @@ z="-454.975"/>
 <physvol>
 <volumeref ref="volArapuca_1-9"/>
 <position name="posArapuca1-9-TPC-12-1-0" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="-454.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -5010,7 +5010,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-9-0"/>
        <position name="posOpArapuca1-9-0-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-535.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -5018,7 +5018,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-9-1"/>
        <position name="posOpArapuca1-9-1-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-486.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -5026,7 +5026,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-9-2"/>
        <position name="posOpArapuca1-9-2-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-423.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -5034,7 +5034,7 @@ z="-454.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_1-9-3"/>
        <position name="posOpArapuca1-9-3-TPC-12-1-0" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-374.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -5043,7 +5043,7 @@ z="-454.975"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-2" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="-454.975"/>
         <rotationref ref="rPlus180AboutY"/>
@@ -5568,7 +5568,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-0"/>
 <position name="posArapuca2-0-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5576,7 +5576,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-0-0"/>
        <position name="posOpArapuca2-0-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5584,7 +5584,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-0-1"/>
        <position name="posOpArapuca2-0-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5592,7 +5592,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-0-2"/>
        <position name="posOpArapuca2-0-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5600,7 +5600,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-0-3"/>
        <position name="posOpArapuca2-0-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5608,7 +5608,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-1"/>
 <position name="posArapuca2-1-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5616,7 +5616,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-1-0"/>
        <position name="posOpArapuca2-1-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5624,7 +5624,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-1-1"/>
        <position name="posOpArapuca2-1-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5632,7 +5632,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-1-2"/>
        <position name="posOpArapuca2-1-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5640,7 +5640,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-1-3"/>
        <position name="posOpArapuca2-1-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5648,7 +5648,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-2"/>
 <position name="posArapuca2-2-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5656,7 +5656,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-2-0"/>
        <position name="posOpArapuca2-2-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5664,7 +5664,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-2-1"/>
        <position name="posOpArapuca2-2-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5672,7 +5672,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-2-2"/>
        <position name="posOpArapuca2-2-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5680,7 +5680,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-2-3"/>
        <position name="posOpArapuca2-2-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5688,7 +5688,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-3"/>
 <position name="posArapuca2-3-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5696,7 +5696,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-3-0"/>
        <position name="posOpArapuca2-3-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5704,7 +5704,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-3-1"/>
        <position name="posOpArapuca2-3-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5712,7 +5712,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-3-2"/>
        <position name="posOpArapuca2-3-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5720,7 +5720,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-3-3"/>
        <position name="posOpArapuca2-3-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5728,7 +5728,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-4"/>
 <position name="posArapuca2-4-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5736,7 +5736,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-4-0"/>
        <position name="posOpArapuca2-4-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5744,7 +5744,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-4-1"/>
        <position name="posOpArapuca2-4-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5752,7 +5752,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-4-2"/>
        <position name="posOpArapuca2-4-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5760,7 +5760,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-4-3"/>
        <position name="posOpArapuca2-4-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5768,7 +5768,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-5"/>
 <position name="posArapuca2-5-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5776,7 +5776,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-5-0"/>
        <position name="posOpArapuca2-5-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5784,7 +5784,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-5-1"/>
        <position name="posOpArapuca2-5-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5792,7 +5792,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-5-2"/>
        <position name="posOpArapuca2-5-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5800,7 +5800,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-5-3"/>
        <position name="posOpArapuca2-5-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5808,7 +5808,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-6"/>
 <position name="posArapuca2-6-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5816,7 +5816,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-6-0"/>
        <position name="posOpArapuca2-6-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5824,7 +5824,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-6-1"/>
        <position name="posOpArapuca2-6-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5832,7 +5832,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-6-2"/>
        <position name="posOpArapuca2-6-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5840,7 +5840,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-6-3"/>
        <position name="posOpArapuca2-6-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5848,7 +5848,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-7"/>
 <position name="posArapuca2-7-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5856,7 +5856,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-7-0"/>
        <position name="posOpArapuca2-7-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5864,7 +5864,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-7-1"/>
        <position name="posOpArapuca2-7-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5872,7 +5872,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-7-2"/>
        <position name="posOpArapuca2-7-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5880,7 +5880,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-7-3"/>
        <position name="posOpArapuca2-7-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5888,7 +5888,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-8"/>
 <position name="posArapuca2-8-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5896,7 +5896,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-8-0"/>
        <position name="posOpArapuca2-8-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5904,7 +5904,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-8-1"/>
        <position name="posOpArapuca2-8-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5912,7 +5912,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-8-2"/>
        <position name="posOpArapuca2-8-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5920,7 +5920,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-8-3"/>
        <position name="posOpArapuca2-8-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5928,7 +5928,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_2-9"/>
 <position name="posArapuca2-9-TPC-12-0-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="-222.585"/>
 <rotationref ref="rIdentity"/>
@@ -5936,7 +5936,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-9-0"/>
        <position name="posOpArapuca2-9-0-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-302.785"/>
        <rotationref ref="rIdentity"/>
@@ -5944,7 +5944,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-9-1"/>
        <position name="posOpArapuca2-9-1-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-253.985"/>
        <rotationref ref="rIdentity"/>
@@ -5952,7 +5952,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-9-2"/>
        <position name="posOpArapuca2-9-2-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-191.185"/>
        <rotationref ref="rIdentity"/>
@@ -5960,7 +5960,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_2-9-3"/>
        <position name="posOpArapuca2-9-3-TPC-12-0-1" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-142.385"/>
        <rotationref ref="rIdentity"/>
@@ -5969,7 +5969,7 @@ z="-222.585"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-4" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="-222.585"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -6494,7 +6494,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-0"/>
 <position name="posArapuca3-0-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6502,7 +6502,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-0-0"/>
        <position name="posOpArapuca3-0-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6510,7 +6510,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-0-1"/>
        <position name="posOpArapuca3-0-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6518,7 +6518,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-0-2"/>
        <position name="posOpArapuca3-0-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6526,7 +6526,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-0-3"/>
        <position name="posOpArapuca3-0-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6534,7 +6534,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-1"/>
 <position name="posArapuca3-1-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6542,7 +6542,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-1-0"/>
        <position name="posOpArapuca3-1-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6550,7 +6550,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-1-1"/>
        <position name="posOpArapuca3-1-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6558,7 +6558,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-1-2"/>
        <position name="posOpArapuca3-1-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6566,7 +6566,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-1-3"/>
        <position name="posOpArapuca3-1-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6574,7 +6574,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-2"/>
 <position name="posArapuca3-2-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6582,7 +6582,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-2-0"/>
        <position name="posOpArapuca3-2-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6590,7 +6590,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-2-1"/>
        <position name="posOpArapuca3-2-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6598,7 +6598,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-2-2"/>
        <position name="posOpArapuca3-2-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6606,7 +6606,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-2-3"/>
        <position name="posOpArapuca3-2-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6614,7 +6614,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-3"/>
 <position name="posArapuca3-3-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6622,7 +6622,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-3-0"/>
        <position name="posOpArapuca3-3-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6630,7 +6630,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-3-1"/>
        <position name="posOpArapuca3-3-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6638,7 +6638,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-3-2"/>
        <position name="posOpArapuca3-3-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6646,7 +6646,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-3-3"/>
        <position name="posOpArapuca3-3-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6654,7 +6654,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-4"/>
 <position name="posArapuca3-4-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6662,7 +6662,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-4-0"/>
        <position name="posOpArapuca3-4-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6670,7 +6670,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-4-1"/>
        <position name="posOpArapuca3-4-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6678,7 +6678,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-4-2"/>
        <position name="posOpArapuca3-4-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6686,7 +6686,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-4-3"/>
        <position name="posOpArapuca3-4-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6694,7 +6694,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-5"/>
 <position name="posArapuca3-5-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6702,7 +6702,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-5-0"/>
        <position name="posOpArapuca3-5-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6710,7 +6710,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-5-1"/>
        <position name="posOpArapuca3-5-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6718,7 +6718,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-5-2"/>
        <position name="posOpArapuca3-5-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6726,7 +6726,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-5-3"/>
        <position name="posOpArapuca3-5-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6734,7 +6734,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-6"/>
 <position name="posArapuca3-6-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6742,7 +6742,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-6-0"/>
        <position name="posOpArapuca3-6-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6750,7 +6750,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-6-1"/>
        <position name="posOpArapuca3-6-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6758,7 +6758,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-6-2"/>
        <position name="posOpArapuca3-6-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6766,7 +6766,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-6-3"/>
        <position name="posOpArapuca3-6-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6774,7 +6774,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-7"/>
 <position name="posArapuca3-7-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6782,7 +6782,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-7-0"/>
        <position name="posOpArapuca3-7-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6790,7 +6790,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-7-1"/>
        <position name="posOpArapuca3-7-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6798,7 +6798,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-7-2"/>
        <position name="posOpArapuca3-7-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6806,7 +6806,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-7-3"/>
        <position name="posOpArapuca3-7-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6814,7 +6814,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-8"/>
 <position name="posArapuca3-8-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6822,7 +6822,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-8-0"/>
        <position name="posOpArapuca3-8-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6830,7 +6830,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-8-1"/>
        <position name="posOpArapuca3-8-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6838,7 +6838,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-8-2"/>
        <position name="posOpArapuca3-8-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6846,7 +6846,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-8-3"/>
        <position name="posOpArapuca3-8-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6854,7 +6854,7 @@ z="-222.585"/>
 <physvol>
 <volumeref ref="volArapuca_3-9"/>
 <position name="posArapuca3-9-TPC-12-1-1" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="-222.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -6862,7 +6862,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-9-0"/>
        <position name="posOpArapuca3-9-0-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-302.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6870,7 +6870,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-9-1"/>
        <position name="posOpArapuca3-9-1-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-253.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6878,7 +6878,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-9-2"/>
        <position name="posOpArapuca3-9-2-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-191.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6886,7 +6886,7 @@ z="-222.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_3-9-3"/>
        <position name="posOpArapuca3-9-3-TPC-12-1-1" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-142.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -6895,7 +6895,7 @@ z="-222.585"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-6" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="-222.585"/>
         <rotationref ref="rPlus180AboutY"/>
@@ -7420,7 +7420,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-0"/>
 <position name="posArapuca4-0-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7428,7 +7428,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-0-0"/>
        <position name="posOpArapuca4-0-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7436,7 +7436,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-0-1"/>
        <position name="posOpArapuca4-0-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7444,7 +7444,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-0-2"/>
        <position name="posOpArapuca4-0-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7452,7 +7452,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-0-3"/>
        <position name="posOpArapuca4-0-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7460,7 +7460,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-1"/>
 <position name="posArapuca4-1-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7468,7 +7468,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-1-0"/>
        <position name="posOpArapuca4-1-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7476,7 +7476,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-1-1"/>
        <position name="posOpArapuca4-1-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7484,7 +7484,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-1-2"/>
        <position name="posOpArapuca4-1-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7492,7 +7492,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-1-3"/>
        <position name="posOpArapuca4-1-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7500,7 +7500,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-2"/>
 <position name="posArapuca4-2-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7508,7 +7508,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-2-0"/>
        <position name="posOpArapuca4-2-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7516,7 +7516,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-2-1"/>
        <position name="posOpArapuca4-2-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7524,7 +7524,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-2-2"/>
        <position name="posOpArapuca4-2-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7532,7 +7532,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-2-3"/>
        <position name="posOpArapuca4-2-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7540,7 +7540,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-3"/>
 <position name="posArapuca4-3-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7548,7 +7548,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-3-0"/>
        <position name="posOpArapuca4-3-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7556,7 +7556,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-3-1"/>
        <position name="posOpArapuca4-3-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7564,7 +7564,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-3-2"/>
        <position name="posOpArapuca4-3-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7572,7 +7572,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-3-3"/>
        <position name="posOpArapuca4-3-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7580,7 +7580,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-4"/>
 <position name="posArapuca4-4-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7588,7 +7588,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-4-0"/>
        <position name="posOpArapuca4-4-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7596,7 +7596,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-4-1"/>
        <position name="posOpArapuca4-4-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7604,7 +7604,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-4-2"/>
        <position name="posOpArapuca4-4-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7612,7 +7612,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-4-3"/>
        <position name="posOpArapuca4-4-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7620,7 +7620,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-5"/>
 <position name="posArapuca4-5-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7628,7 +7628,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-5-0"/>
        <position name="posOpArapuca4-5-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7636,7 +7636,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-5-1"/>
        <position name="posOpArapuca4-5-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7644,7 +7644,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-5-2"/>
        <position name="posOpArapuca4-5-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7652,7 +7652,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-5-3"/>
        <position name="posOpArapuca4-5-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7660,7 +7660,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-6"/>
 <position name="posArapuca4-6-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7668,7 +7668,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-6-0"/>
        <position name="posOpArapuca4-6-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7676,7 +7676,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-6-1"/>
        <position name="posOpArapuca4-6-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7684,7 +7684,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-6-2"/>
        <position name="posOpArapuca4-6-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7692,7 +7692,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-6-3"/>
        <position name="posOpArapuca4-6-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7700,7 +7700,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-7"/>
 <position name="posArapuca4-7-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7708,7 +7708,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-7-0"/>
        <position name="posOpArapuca4-7-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7716,7 +7716,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-7-1"/>
        <position name="posOpArapuca4-7-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7724,7 +7724,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-7-2"/>
        <position name="posOpArapuca4-7-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7732,7 +7732,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-7-3"/>
        <position name="posOpArapuca4-7-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7740,7 +7740,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-8"/>
 <position name="posArapuca4-8-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7748,7 +7748,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-8-0"/>
        <position name="posOpArapuca4-8-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7756,7 +7756,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-8-1"/>
        <position name="posOpArapuca4-8-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7764,7 +7764,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-8-2"/>
        <position name="posOpArapuca4-8-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7772,7 +7772,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-8-3"/>
        <position name="posOpArapuca4-8-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7780,7 +7780,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_4-9"/>
 <position name="posArapuca4-9-TPC-12-0-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="9.80500000000006"/>
 <rotationref ref="rIdentity"/>
@@ -7788,7 +7788,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-9-0"/>
        <position name="posOpArapuca4-9-0-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-70.3949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7796,7 +7796,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-9-1"/>
        <position name="posOpArapuca4-9-1-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="-21.5949999999999"/>
        <rotationref ref="rIdentity"/>
@@ -7804,7 +7804,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-9-2"/>
        <position name="posOpArapuca4-9-2-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="41.2050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7812,7 +7812,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_4-9-3"/>
        <position name="posOpArapuca4-9-3-TPC-12-0-2" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="90.0050000000001"/>
        <rotationref ref="rIdentity"/>
@@ -7821,7 +7821,7 @@ z="9.80500000000006"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-8" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="9.80500000000006"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -8346,7 +8346,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-0"/>
 <position name="posArapuca5-0-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8354,7 +8354,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-0-0"/>
        <position name="posOpArapuca5-0-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8362,7 +8362,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-0-1"/>
        <position name="posOpArapuca5-0-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8370,7 +8370,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-0-2"/>
        <position name="posOpArapuca5-0-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8378,7 +8378,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-0-3"/>
        <position name="posOpArapuca5-0-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8386,7 +8386,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-1"/>
 <position name="posArapuca5-1-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8394,7 +8394,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-1-0"/>
        <position name="posOpArapuca5-1-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8402,7 +8402,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-1-1"/>
        <position name="posOpArapuca5-1-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8410,7 +8410,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-1-2"/>
        <position name="posOpArapuca5-1-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8418,7 +8418,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-1-3"/>
        <position name="posOpArapuca5-1-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8426,7 +8426,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-2"/>
 <position name="posArapuca5-2-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8434,7 +8434,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-2-0"/>
        <position name="posOpArapuca5-2-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8442,7 +8442,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-2-1"/>
        <position name="posOpArapuca5-2-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8450,7 +8450,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-2-2"/>
        <position name="posOpArapuca5-2-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8458,7 +8458,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-2-3"/>
        <position name="posOpArapuca5-2-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8466,7 +8466,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-3"/>
 <position name="posArapuca5-3-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8474,7 +8474,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-3-0"/>
        <position name="posOpArapuca5-3-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8482,7 +8482,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-3-1"/>
        <position name="posOpArapuca5-3-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8490,7 +8490,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-3-2"/>
        <position name="posOpArapuca5-3-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8498,7 +8498,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-3-3"/>
        <position name="posOpArapuca5-3-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8506,7 +8506,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-4"/>
 <position name="posArapuca5-4-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8514,7 +8514,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-4-0"/>
        <position name="posOpArapuca5-4-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8522,7 +8522,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-4-1"/>
        <position name="posOpArapuca5-4-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8530,7 +8530,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-4-2"/>
        <position name="posOpArapuca5-4-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8538,7 +8538,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-4-3"/>
        <position name="posOpArapuca5-4-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8546,7 +8546,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-5"/>
 <position name="posArapuca5-5-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8554,7 +8554,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-5-0"/>
        <position name="posOpArapuca5-5-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8562,7 +8562,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-5-1"/>
        <position name="posOpArapuca5-5-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8570,7 +8570,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-5-2"/>
        <position name="posOpArapuca5-5-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8578,7 +8578,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-5-3"/>
        <position name="posOpArapuca5-5-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8586,7 +8586,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-6"/>
 <position name="posArapuca5-6-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8594,7 +8594,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-6-0"/>
        <position name="posOpArapuca5-6-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8602,7 +8602,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-6-1"/>
        <position name="posOpArapuca5-6-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8610,7 +8610,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-6-2"/>
        <position name="posOpArapuca5-6-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8618,7 +8618,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-6-3"/>
        <position name="posOpArapuca5-6-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8626,7 +8626,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-7"/>
 <position name="posArapuca5-7-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8634,7 +8634,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-7-0"/>
        <position name="posOpArapuca5-7-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8642,7 +8642,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-7-1"/>
        <position name="posOpArapuca5-7-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8650,7 +8650,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-7-2"/>
        <position name="posOpArapuca5-7-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8658,7 +8658,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-7-3"/>
        <position name="posOpArapuca5-7-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8666,7 +8666,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-8"/>
 <position name="posArapuca5-8-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8674,7 +8674,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-8-0"/>
        <position name="posOpArapuca5-8-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8682,7 +8682,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-8-1"/>
        <position name="posOpArapuca5-8-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8690,7 +8690,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-8-2"/>
        <position name="posOpArapuca5-8-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8698,7 +8698,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-8-3"/>
        <position name="posOpArapuca5-8-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8706,7 +8706,7 @@ z="9.80500000000006"/>
 <physvol>
 <volumeref ref="volArapuca_5-9"/>
 <position name="posArapuca5-9-TPC-12-1-2" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="9.80500000000006"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -8714,7 +8714,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-9-0"/>
        <position name="posOpArapuca5-9-0-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-70.3949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8722,7 +8722,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-9-1"/>
        <position name="posOpArapuca5-9-1-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="-21.5949999999999"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8730,7 +8730,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-9-2"/>
        <position name="posOpArapuca5-9-2-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="41.2050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8738,7 +8738,7 @@ z="9.80500000000006"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_5-9-3"/>
        <position name="posOpArapuca5-9-3-TPC-12-1-2" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="90.0050000000001"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -8747,7 +8747,7 @@ z="9.80500000000006"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-10" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="9.80500000000006"/>
         <rotationref ref="rPlus180AboutY"/>
@@ -9272,7 +9272,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-0"/>
 <position name="posArapuca6-0-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9280,7 +9280,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-0-0"/>
        <position name="posOpArapuca6-0-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9288,7 +9288,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-0-1"/>
        <position name="posOpArapuca6-0-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9296,7 +9296,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-0-2"/>
        <position name="posOpArapuca6-0-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9304,7 +9304,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-0-3"/>
        <position name="posOpArapuca6-0-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9312,7 +9312,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-1"/>
 <position name="posArapuca6-1-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9320,7 +9320,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-1-0"/>
        <position name="posOpArapuca6-1-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9328,7 +9328,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-1-1"/>
        <position name="posOpArapuca6-1-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9336,7 +9336,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-1-2"/>
        <position name="posOpArapuca6-1-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9344,7 +9344,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-1-3"/>
        <position name="posOpArapuca6-1-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9352,7 +9352,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-2"/>
 <position name="posArapuca6-2-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9360,7 +9360,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-2-0"/>
        <position name="posOpArapuca6-2-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9368,7 +9368,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-2-1"/>
        <position name="posOpArapuca6-2-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9376,7 +9376,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-2-2"/>
        <position name="posOpArapuca6-2-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9384,7 +9384,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-2-3"/>
        <position name="posOpArapuca6-2-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9392,7 +9392,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-3"/>
 <position name="posArapuca6-3-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9400,7 +9400,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-3-0"/>
        <position name="posOpArapuca6-3-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9408,7 +9408,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-3-1"/>
        <position name="posOpArapuca6-3-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9416,7 +9416,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-3-2"/>
        <position name="posOpArapuca6-3-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9424,7 +9424,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-3-3"/>
        <position name="posOpArapuca6-3-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9432,7 +9432,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-4"/>
 <position name="posArapuca6-4-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9440,7 +9440,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-4-0"/>
        <position name="posOpArapuca6-4-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9448,7 +9448,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-4-1"/>
        <position name="posOpArapuca6-4-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9456,7 +9456,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-4-2"/>
        <position name="posOpArapuca6-4-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9464,7 +9464,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-4-3"/>
        <position name="posOpArapuca6-4-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9472,7 +9472,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-5"/>
 <position name="posArapuca6-5-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9480,7 +9480,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-5-0"/>
        <position name="posOpArapuca6-5-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9488,7 +9488,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-5-1"/>
        <position name="posOpArapuca6-5-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9496,7 +9496,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-5-2"/>
        <position name="posOpArapuca6-5-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9504,7 +9504,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-5-3"/>
        <position name="posOpArapuca6-5-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9512,7 +9512,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-6"/>
 <position name="posArapuca6-6-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9520,7 +9520,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-6-0"/>
        <position name="posOpArapuca6-6-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9528,7 +9528,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-6-1"/>
        <position name="posOpArapuca6-6-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9536,7 +9536,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-6-2"/>
        <position name="posOpArapuca6-6-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9544,7 +9544,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-6-3"/>
        <position name="posOpArapuca6-6-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9552,7 +9552,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-7"/>
 <position name="posArapuca6-7-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9560,7 +9560,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-7-0"/>
        <position name="posOpArapuca6-7-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9568,7 +9568,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-7-1"/>
        <position name="posOpArapuca6-7-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9576,7 +9576,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-7-2"/>
        <position name="posOpArapuca6-7-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9584,7 +9584,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-7-3"/>
        <position name="posOpArapuca6-7-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9592,7 +9592,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-8"/>
 <position name="posArapuca6-8-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9600,7 +9600,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-8-0"/>
        <position name="posOpArapuca6-8-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9608,7 +9608,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-8-1"/>
        <position name="posOpArapuca6-8-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9616,7 +9616,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-8-2"/>
        <position name="posOpArapuca6-8-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9624,7 +9624,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-8-3"/>
        <position name="posOpArapuca6-8-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9632,7 +9632,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_6-9"/>
 <position name="posArapuca6-9-TPC-12-0-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="242.195"/>
 <rotationref ref="rIdentity"/>
@@ -9640,7 +9640,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-9-0"/>
        <position name="posOpArapuca6-9-0-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="161.995"/>
        <rotationref ref="rIdentity"/>
@@ -9648,7 +9648,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-9-1"/>
        <position name="posOpArapuca6-9-1-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="210.795"/>
        <rotationref ref="rIdentity"/>
@@ -9656,7 +9656,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-9-2"/>
        <position name="posOpArapuca6-9-2-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="273.595"/>
        <rotationref ref="rIdentity"/>
@@ -9664,7 +9664,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_6-9-3"/>
        <position name="posOpArapuca6-9-3-TPC-12-0-3" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="322.395"/>
        <rotationref ref="rIdentity"/>
@@ -9673,7 +9673,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-12" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="242.195"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -10198,7 +10198,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-0"/>
 <position name="posArapuca7-0-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10206,7 +10206,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-0-0"/>
        <position name="posOpArapuca7-0-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10214,7 +10214,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-0-1"/>
        <position name="posOpArapuca7-0-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10222,7 +10222,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-0-2"/>
        <position name="posOpArapuca7-0-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10230,7 +10230,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-0-3"/>
        <position name="posOpArapuca7-0-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10238,7 +10238,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-1"/>
 <position name="posArapuca7-1-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10246,7 +10246,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-1-0"/>
        <position name="posOpArapuca7-1-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10254,7 +10254,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-1-1"/>
        <position name="posOpArapuca7-1-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10262,7 +10262,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-1-2"/>
        <position name="posOpArapuca7-1-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10270,7 +10270,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-1-3"/>
        <position name="posOpArapuca7-1-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10278,7 +10278,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-2"/>
 <position name="posArapuca7-2-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10286,7 +10286,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-2-0"/>
        <position name="posOpArapuca7-2-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10294,7 +10294,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-2-1"/>
        <position name="posOpArapuca7-2-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10302,7 +10302,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-2-2"/>
        <position name="posOpArapuca7-2-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10310,7 +10310,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-2-3"/>
        <position name="posOpArapuca7-2-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10318,7 +10318,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-3"/>
 <position name="posArapuca7-3-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10326,7 +10326,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-3-0"/>
        <position name="posOpArapuca7-3-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10334,7 +10334,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-3-1"/>
        <position name="posOpArapuca7-3-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10342,7 +10342,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-3-2"/>
        <position name="posOpArapuca7-3-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10350,7 +10350,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-3-3"/>
        <position name="posOpArapuca7-3-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10358,7 +10358,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-4"/>
 <position name="posArapuca7-4-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10366,7 +10366,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-4-0"/>
        <position name="posOpArapuca7-4-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10374,7 +10374,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-4-1"/>
        <position name="posOpArapuca7-4-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10382,7 +10382,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-4-2"/>
        <position name="posOpArapuca7-4-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10390,7 +10390,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-4-3"/>
        <position name="posOpArapuca7-4-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10398,7 +10398,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-5"/>
 <position name="posArapuca7-5-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10406,7 +10406,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-5-0"/>
        <position name="posOpArapuca7-5-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10414,7 +10414,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-5-1"/>
        <position name="posOpArapuca7-5-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10422,7 +10422,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-5-2"/>
        <position name="posOpArapuca7-5-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10430,7 +10430,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-5-3"/>
        <position name="posOpArapuca7-5-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10438,7 +10438,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-6"/>
 <position name="posArapuca7-6-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10446,7 +10446,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-6-0"/>
        <position name="posOpArapuca7-6-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10454,7 +10454,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-6-1"/>
        <position name="posOpArapuca7-6-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10462,7 +10462,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-6-2"/>
        <position name="posOpArapuca7-6-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10470,7 +10470,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-6-3"/>
        <position name="posOpArapuca7-6-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10478,7 +10478,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-7"/>
 <position name="posArapuca7-7-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10486,7 +10486,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-7-0"/>
        <position name="posOpArapuca7-7-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10494,7 +10494,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-7-1"/>
        <position name="posOpArapuca7-7-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10502,7 +10502,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-7-2"/>
        <position name="posOpArapuca7-7-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10510,7 +10510,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-7-3"/>
        <position name="posOpArapuca7-7-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10518,7 +10518,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-8"/>
 <position name="posArapuca7-8-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10526,7 +10526,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-8-0"/>
        <position name="posOpArapuca7-8-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10534,7 +10534,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-8-1"/>
        <position name="posOpArapuca7-8-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10542,7 +10542,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-8-2"/>
        <position name="posOpArapuca7-8-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10550,7 +10550,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-8-3"/>
        <position name="posOpArapuca7-8-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10558,7 +10558,7 @@ z="242.195"/>
 <physvol>
 <volumeref ref="volArapuca_7-9"/>
 <position name="posArapuca7-9-TPC-12-1-3" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="242.195"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -10566,7 +10566,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-9-0"/>
        <position name="posOpArapuca7-9-0-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="161.995"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10574,7 +10574,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-9-1"/>
        <position name="posOpArapuca7-9-1-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="210.795"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10582,7 +10582,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-9-2"/>
        <position name="posOpArapuca7-9-2-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="273.595"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10590,7 +10590,7 @@ z="242.195"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_7-9-3"/>
        <position name="posOpArapuca7-9-3-TPC-12-1-3" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="322.395"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -10599,7 +10599,7 @@ z="242.195"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-14" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="242.195"/>
         <rotationref ref="rPlus180AboutY"/>
@@ -11124,7 +11124,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-0"/>
 <position name="posArapuca8-0-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11132,7 +11132,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-0-0"/>
        <position name="posOpArapuca8-0-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11140,7 +11140,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-0-1"/>
        <position name="posOpArapuca8-0-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11148,7 +11148,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-0-2"/>
        <position name="posOpArapuca8-0-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11156,7 +11156,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-0-3"/>
        <position name="posOpArapuca8-0-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11164,7 +11164,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-1"/>
 <position name="posArapuca8-1-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11172,7 +11172,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-1-0"/>
        <position name="posOpArapuca8-1-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11180,7 +11180,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-1-1"/>
        <position name="posOpArapuca8-1-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11188,7 +11188,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-1-2"/>
        <position name="posOpArapuca8-1-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11196,7 +11196,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-1-3"/>
        <position name="posOpArapuca8-1-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11204,7 +11204,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-2"/>
 <position name="posArapuca8-2-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11212,7 +11212,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-2-0"/>
        <position name="posOpArapuca8-2-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11220,7 +11220,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-2-1"/>
        <position name="posOpArapuca8-2-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11228,7 +11228,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-2-2"/>
        <position name="posOpArapuca8-2-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11236,7 +11236,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-2-3"/>
        <position name="posOpArapuca8-2-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11244,7 +11244,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-3"/>
 <position name="posArapuca8-3-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11252,7 +11252,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-3-0"/>
        <position name="posOpArapuca8-3-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11260,7 +11260,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-3-1"/>
        <position name="posOpArapuca8-3-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11268,7 +11268,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-3-2"/>
        <position name="posOpArapuca8-3-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11276,7 +11276,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-3-3"/>
        <position name="posOpArapuca8-3-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11284,7 +11284,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-4"/>
 <position name="posArapuca8-4-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11292,7 +11292,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-4-0"/>
        <position name="posOpArapuca8-4-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11300,7 +11300,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-4-1"/>
        <position name="posOpArapuca8-4-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11308,7 +11308,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-4-2"/>
        <position name="posOpArapuca8-4-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11316,7 +11316,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-4-3"/>
        <position name="posOpArapuca8-4-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11324,7 +11324,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-5"/>
 <position name="posArapuca8-5-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11332,7 +11332,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-5-0"/>
        <position name="posOpArapuca8-5-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11340,7 +11340,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-5-1"/>
        <position name="posOpArapuca8-5-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11348,7 +11348,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-5-2"/>
        <position name="posOpArapuca8-5-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11356,7 +11356,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-5-3"/>
        <position name="posOpArapuca8-5-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11364,7 +11364,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-6"/>
 <position name="posArapuca8-6-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11372,7 +11372,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-6-0"/>
        <position name="posOpArapuca8-6-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11380,7 +11380,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-6-1"/>
        <position name="posOpArapuca8-6-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11388,7 +11388,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-6-2"/>
        <position name="posOpArapuca8-6-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11396,7 +11396,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-6-3"/>
        <position name="posOpArapuca8-6-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11404,7 +11404,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-7"/>
 <position name="posArapuca8-7-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11412,7 +11412,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-7-0"/>
        <position name="posOpArapuca8-7-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11420,7 +11420,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-7-1"/>
        <position name="posOpArapuca8-7-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11428,7 +11428,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-7-2"/>
        <position name="posOpArapuca8-7-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11436,7 +11436,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-7-3"/>
        <position name="posOpArapuca8-7-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11444,7 +11444,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-8"/>
 <position name="posArapuca8-8-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11452,7 +11452,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-8-0"/>
        <position name="posOpArapuca8-8-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11460,7 +11460,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-8-1"/>
        <position name="posOpArapuca8-8-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11468,7 +11468,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-8-2"/>
        <position name="posOpArapuca8-8-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11476,7 +11476,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-8-3"/>
        <position name="posOpArapuca8-8-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11484,7 +11484,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_8-9"/>
 <position name="posArapuca8-9-TPC-12-0-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="474.585"/>
 <rotationref ref="rIdentity"/>
@@ -11492,7 +11492,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-9-0"/>
        <position name="posOpArapuca8-9-0-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="394.385"/>
        <rotationref ref="rIdentity"/>
@@ -11500,7 +11500,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-9-1"/>
        <position name="posOpArapuca8-9-1-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="443.185"/>
        <rotationref ref="rIdentity"/>
@@ -11508,7 +11508,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-9-2"/>
        <position name="posOpArapuca8-9-2-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="505.985"/>
        <rotationref ref="rIdentity"/>
@@ -11516,7 +11516,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_8-9-3"/>
        <position name="posOpArapuca8-9-3-TPC-12-0-4" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="554.785"/>
        <rotationref ref="rIdentity"/>
@@ -11525,7 +11525,7 @@ z="474.585"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-16" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="474.585"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -12050,7 +12050,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-0"/>
 <position name="posArapuca9-0-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12058,7 +12058,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-0-0"/>
        <position name="posOpArapuca9-0-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12066,7 +12066,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-0-1"/>
        <position name="posOpArapuca9-0-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12074,7 +12074,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-0-2"/>
        <position name="posOpArapuca9-0-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12082,7 +12082,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-0-3"/>
        <position name="posOpArapuca9-0-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12090,7 +12090,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-1"/>
 <position name="posArapuca9-1-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12098,7 +12098,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-1-0"/>
        <position name="posOpArapuca9-1-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12106,7 +12106,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-1-1"/>
        <position name="posOpArapuca9-1-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12114,7 +12114,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-1-2"/>
        <position name="posOpArapuca9-1-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12122,7 +12122,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-1-3"/>
        <position name="posOpArapuca9-1-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12130,7 +12130,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-2"/>
 <position name="posArapuca9-2-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12138,7 +12138,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-2-0"/>
        <position name="posOpArapuca9-2-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12146,7 +12146,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-2-1"/>
        <position name="posOpArapuca9-2-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12154,7 +12154,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-2-2"/>
        <position name="posOpArapuca9-2-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12162,7 +12162,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-2-3"/>
        <position name="posOpArapuca9-2-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12170,7 +12170,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-3"/>
 <position name="posArapuca9-3-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12178,7 +12178,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-3-0"/>
        <position name="posOpArapuca9-3-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12186,7 +12186,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-3-1"/>
        <position name="posOpArapuca9-3-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12194,7 +12194,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-3-2"/>
        <position name="posOpArapuca9-3-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12202,7 +12202,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-3-3"/>
        <position name="posOpArapuca9-3-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12210,7 +12210,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-4"/>
 <position name="posArapuca9-4-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12218,7 +12218,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-4-0"/>
        <position name="posOpArapuca9-4-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12226,7 +12226,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-4-1"/>
        <position name="posOpArapuca9-4-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12234,7 +12234,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-4-2"/>
        <position name="posOpArapuca9-4-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12242,7 +12242,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-4-3"/>
        <position name="posOpArapuca9-4-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12250,7 +12250,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-5"/>
 <position name="posArapuca9-5-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12258,7 +12258,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-5-0"/>
        <position name="posOpArapuca9-5-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12266,7 +12266,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-5-1"/>
        <position name="posOpArapuca9-5-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12274,7 +12274,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-5-2"/>
        <position name="posOpArapuca9-5-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12282,7 +12282,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-5-3"/>
        <position name="posOpArapuca9-5-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12290,7 +12290,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-6"/>
 <position name="posArapuca9-6-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12298,7 +12298,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-6-0"/>
        <position name="posOpArapuca9-6-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12306,7 +12306,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-6-1"/>
        <position name="posOpArapuca9-6-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12314,7 +12314,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-6-2"/>
        <position name="posOpArapuca9-6-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12322,7 +12322,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-6-3"/>
        <position name="posOpArapuca9-6-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12330,7 +12330,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-7"/>
 <position name="posArapuca9-7-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12338,7 +12338,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-7-0"/>
        <position name="posOpArapuca9-7-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12346,7 +12346,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-7-1"/>
        <position name="posOpArapuca9-7-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12354,7 +12354,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-7-2"/>
        <position name="posOpArapuca9-7-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12362,7 +12362,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-7-3"/>
        <position name="posOpArapuca9-7-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12370,7 +12370,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-8"/>
 <position name="posArapuca9-8-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12378,7 +12378,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-8-0"/>
        <position name="posOpArapuca9-8-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12386,7 +12386,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-8-1"/>
        <position name="posOpArapuca9-8-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12394,7 +12394,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-8-2"/>
        <position name="posOpArapuca9-8-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12402,7 +12402,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-8-3"/>
        <position name="posOpArapuca9-8-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12410,7 +12410,7 @@ z="474.585"/>
 <physvol>
 <volumeref ref="volArapuca_9-9"/>
 <position name="posArapuca9-9-TPC-12-1-4" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="474.585"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -12418,7 +12418,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-9-0"/>
        <position name="posOpArapuca9-9-0-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="394.385"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12426,7 +12426,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-9-1"/>
        <position name="posOpArapuca9-9-1-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="443.185"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12434,7 +12434,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-9-2"/>
        <position name="posOpArapuca9-9-2-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="505.985"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12442,7 +12442,7 @@ z="474.585"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_9-9-3"/>
        <position name="posOpArapuca9-9-3-TPC-12-1-4" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="554.785"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -12451,7 +12451,7 @@ z="474.585"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-18" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="474.585"/>
         <rotationref ref="rPlus180AboutY"/>
@@ -12976,7 +12976,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-0"/>
 <position name="posArapuca10-0-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-612.31875"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -12984,7 +12984,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-0-0"/>
        <position name="posOpArapuca10-0-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -12992,7 +12992,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-0-1"/>
        <position name="posOpArapuca10-0-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13000,7 +13000,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-0-2"/>
        <position name="posOpArapuca10-0-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13008,7 +13008,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-0-3"/>
        <position name="posOpArapuca10-0-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-612.31875"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13016,7 +13016,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-1"/>
 <position name="posArapuca10-1-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-550.048355263158"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13024,7 +13024,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-1-0"/>
        <position name="posOpArapuca10-1-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13032,7 +13032,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-1-1"/>
        <position name="posOpArapuca10-1-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13040,7 +13040,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-1-2"/>
        <position name="posOpArapuca10-1-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13048,7 +13048,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-1-3"/>
        <position name="posOpArapuca10-1-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-550.048355263158"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13056,7 +13056,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-2"/>
 <position name="posArapuca10-2-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-487.777960526316"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13064,7 +13064,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-2-0"/>
        <position name="posOpArapuca10-2-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13072,7 +13072,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-2-1"/>
        <position name="posOpArapuca10-2-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13080,7 +13080,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-2-2"/>
        <position name="posOpArapuca10-2-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13088,7 +13088,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-2-3"/>
        <position name="posOpArapuca10-2-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-487.777960526316"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13096,7 +13096,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-3"/>
 <position name="posArapuca10-3-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-425.507565789474"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13104,7 +13104,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-3-0"/>
        <position name="posOpArapuca10-3-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13112,7 +13112,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-3-1"/>
        <position name="posOpArapuca10-3-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13120,7 +13120,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-3-2"/>
        <position name="posOpArapuca10-3-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13128,7 +13128,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-3-3"/>
        <position name="posOpArapuca10-3-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-425.507565789474"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13136,7 +13136,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-4"/>
 <position name="posArapuca10-4-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-363.237171052632"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13144,7 +13144,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-4-0"/>
        <position name="posOpArapuca10-4-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13152,7 +13152,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-4-1"/>
        <position name="posOpArapuca10-4-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13160,7 +13160,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-4-2"/>
        <position name="posOpArapuca10-4-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13168,7 +13168,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-4-3"/>
        <position name="posOpArapuca10-4-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-363.237171052632"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13176,7 +13176,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-5"/>
 <position name="posArapuca10-5-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-300.96677631579"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13184,7 +13184,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-5-0"/>
        <position name="posOpArapuca10-5-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13192,7 +13192,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-5-1"/>
        <position name="posOpArapuca10-5-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13200,7 +13200,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-5-2"/>
        <position name="posOpArapuca10-5-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13208,7 +13208,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-5-3"/>
        <position name="posOpArapuca10-5-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-300.96677631579"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13216,7 +13216,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-6"/>
 <position name="posArapuca10-6-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-238.696381578947"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13224,7 +13224,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-6-0"/>
        <position name="posOpArapuca10-6-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13232,7 +13232,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-6-1"/>
        <position name="posOpArapuca10-6-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13240,7 +13240,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-6-2"/>
        <position name="posOpArapuca10-6-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13248,7 +13248,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-6-3"/>
        <position name="posOpArapuca10-6-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-238.696381578947"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13256,7 +13256,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-7"/>
 <position name="posArapuca10-7-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-176.425986842105"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13264,7 +13264,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-7-0"/>
        <position name="posOpArapuca10-7-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13272,7 +13272,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-7-1"/>
        <position name="posOpArapuca10-7-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13280,7 +13280,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-7-2"/>
        <position name="posOpArapuca10-7-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13288,7 +13288,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-7-3"/>
        <position name="posOpArapuca10-7-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-176.425986842105"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13296,7 +13296,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-8"/>
 <position name="posArapuca10-8-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-114.155592105263"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13304,7 +13304,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-8-0"/>
        <position name="posOpArapuca10-8-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13312,7 +13312,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-8-1"/>
        <position name="posOpArapuca10-8-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13320,7 +13320,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-8-2"/>
        <position name="posOpArapuca10-8-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13328,7 +13328,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-8-3"/>
        <position name="posOpArapuca10-8-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-114.155592105263"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13336,7 +13336,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_10-9"/>
 <position name="posArapuca10-9-TPC-12-0-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="-51.885197368421"
 z="706.975"/>
 <rotationref ref="rIdentity"/>
@@ -13344,7 +13344,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-9-0"/>
        <position name="posOpArapuca10-9-0-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="626.775"/>
        <rotationref ref="rIdentity"/>
@@ -13352,7 +13352,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-9-1"/>
        <position name="posOpArapuca10-9-1-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="675.575"/>
        <rotationref ref="rIdentity"/>
@@ -13360,7 +13360,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-9-2"/>
        <position name="posOpArapuca10-9-2-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="738.375"/>
        <rotationref ref="rIdentity"/>
@@ -13368,7 +13368,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_10-9-3"/>
        <position name="posOpArapuca10-9-3-TPC-12-0-5" unit="cm"
-         x="-365.57605"
+         x="-361.57605"
        y="-51.885197368421"
          z="787.175"/>
        <rotationref ref="rIdentity"/>
@@ -13377,7 +13377,7 @@ z="706.975"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-20" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="-324.664375"
         z="706.975"/>
         <rotationref ref="rPlus180AboutXPlus180AboutY"/>
@@ -13902,7 +13902,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-0"/>
 <position name="posArapuca11-0-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="10.385197368421"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -13910,7 +13910,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-0-0"/>
        <position name="posOpArapuca11-0-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13918,7 +13918,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-0-1"/>
        <position name="posOpArapuca11-0-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13926,7 +13926,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-0-2"/>
        <position name="posOpArapuca11-0-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13934,7 +13934,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-0-3"/>
        <position name="posOpArapuca11-0-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="10.385197368421"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13942,7 +13942,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-1"/>
 <position name="posArapuca11-1-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="72.6555921052631"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -13950,7 +13950,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-1-0"/>
        <position name="posOpArapuca11-1-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13958,7 +13958,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-1-1"/>
        <position name="posOpArapuca11-1-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13966,7 +13966,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-1-2"/>
        <position name="posOpArapuca11-1-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13974,7 +13974,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-1-3"/>
        <position name="posOpArapuca11-1-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="72.6555921052631"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13982,7 +13982,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-2"/>
 <position name="posArapuca11-2-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="134.925986842105"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -13990,7 +13990,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-2-0"/>
        <position name="posOpArapuca11-2-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -13998,7 +13998,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-2-1"/>
        <position name="posOpArapuca11-2-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14006,7 +14006,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-2-2"/>
        <position name="posOpArapuca11-2-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14014,7 +14014,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-2-3"/>
        <position name="posOpArapuca11-2-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="134.925986842105"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14022,7 +14022,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-3"/>
 <position name="posArapuca11-3-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="197.196381578947"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14030,7 +14030,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-3-0"/>
        <position name="posOpArapuca11-3-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14038,7 +14038,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-3-1"/>
        <position name="posOpArapuca11-3-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14046,7 +14046,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-3-2"/>
        <position name="posOpArapuca11-3-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14054,7 +14054,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-3-3"/>
        <position name="posOpArapuca11-3-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="197.196381578947"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14062,7 +14062,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-4"/>
 <position name="posArapuca11-4-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="259.46677631579"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14070,7 +14070,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-4-0"/>
        <position name="posOpArapuca11-4-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14078,7 +14078,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-4-1"/>
        <position name="posOpArapuca11-4-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14086,7 +14086,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-4-2"/>
        <position name="posOpArapuca11-4-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14094,7 +14094,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-4-3"/>
        <position name="posOpArapuca11-4-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="259.46677631579"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14102,7 +14102,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-5"/>
 <position name="posArapuca11-5-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="321.737171052632"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14110,7 +14110,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-5-0"/>
        <position name="posOpArapuca11-5-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14118,7 +14118,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-5-1"/>
        <position name="posOpArapuca11-5-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14126,7 +14126,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-5-2"/>
        <position name="posOpArapuca11-5-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14134,7 +14134,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-5-3"/>
        <position name="posOpArapuca11-5-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="321.737171052632"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14142,7 +14142,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-6"/>
 <position name="posArapuca11-6-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="384.007565789474"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14150,7 +14150,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-6-0"/>
        <position name="posOpArapuca11-6-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14158,7 +14158,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-6-1"/>
        <position name="posOpArapuca11-6-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14166,7 +14166,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-6-2"/>
        <position name="posOpArapuca11-6-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14174,7 +14174,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-6-3"/>
        <position name="posOpArapuca11-6-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="384.007565789474"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14182,7 +14182,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-7"/>
 <position name="posArapuca11-7-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="446.277960526316"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14190,7 +14190,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-7-0"/>
        <position name="posOpArapuca11-7-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14198,7 +14198,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-7-1"/>
        <position name="posOpArapuca11-7-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14206,7 +14206,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-7-2"/>
        <position name="posOpArapuca11-7-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14214,7 +14214,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-7-3"/>
        <position name="posOpArapuca11-7-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="446.277960526316"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14222,7 +14222,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-8"/>
 <position name="posArapuca11-8-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="508.548355263158"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14230,7 +14230,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-8-0"/>
        <position name="posOpArapuca11-8-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14238,7 +14238,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-8-1"/>
        <position name="posOpArapuca11-8-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14246,7 +14246,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-8-2"/>
        <position name="posOpArapuca11-8-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14254,7 +14254,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-8-3"/>
        <position name="posOpArapuca11-8-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="508.548355263158"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14262,7 +14262,7 @@ z="706.975"/>
 <physvol>
 <volumeref ref="volArapuca_11-9"/>
 <position name="posArapuca11-9-TPC-12-1-5" unit="cm"
-x="-365.52605"
+x="-361.52605"
 y="570.81875"
 z="706.975"/>
 <rotationref ref="rPlus180AboutY"/>
@@ -14270,7 +14270,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-9-0"/>
        <position name="posOpArapuca11-9-0-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="626.775"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14278,7 +14278,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-9-1"/>
        <position name="posOpArapuca11-9-1-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="675.575"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14286,7 +14286,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-9-2"/>
        <position name="posOpArapuca11-9-2-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="738.375"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14294,7 +14294,7 @@ z="706.975"/>
      <physvol>
        <volumeref ref="volOpDetSensitive_11-9-3"/>
        <position name="posOpArapuca11-9-3-TPC-12-1-5" unit="cm"
-         x="-365.47605"
+         x="-361.47605"
        y="570.81875"
          z="787.175"/>
        <rotationref ref="rPlus180AboutY"/>
@@ -14303,7 +14303,7 @@ z="706.975"/>
       <physvol>
         <volumeref ref="volTPCInner0"/>
         <position name="posTPC-22" unit="cm"
-        x="-1.85000000000002"
+        x="2.14999999999998"
         y="283.164375"
         z="706.975"/>
         <rotationref ref="rPlus180AboutY"/>
