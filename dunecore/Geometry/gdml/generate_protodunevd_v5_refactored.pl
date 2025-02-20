@@ -66,14 +66,15 @@
 
 ##################################################################################
 #
-# V5:       Updates on January 2025 (LP + changes by Yoann Kermaïdic)
+# V5:       Updates on January 2025 (LP + changes by Yoann Kermaïdic, J. Soto and H. Amar)
 # Fixed cathode X-arapucas' positions to match beam pipe placement
-# Fixed cathode X-arapuca's positions to include displacement due to the electronic box       
+# Fixed cathode X-arapuca's positions to include displacement due to the electronic box   
 # Inclusion of anode plate on top of the 3 wire planes for backgrounds.
 #           This is included together with the cathode switch on. Currently the material of this plate is
 #           set to vm2000 so that no additional geometry (ReflAnode) is needed to obtain optical fast simulation.
 # Placement of cathode resistive meshes individually for lighter visualization
 # J. Soto: Fixed PMTs' positions to match installation placement
+# H. Amar: Fixed membrane X-arapuca's positions to match installation placement           
 ##################################################################################
 
 #use warnings;
@@ -913,11 +914,9 @@ $GapPD = 0.5; #Arapuca distance from Cathode Frame
 $CathodeFrameToFC    = 15.1;
 $FCToArapucaSpaceLat = 65 + $ArapucaOut_y; #X-ARAPUCA frame distance from FC. 65 cm to X-ARAPUCA window.
 $FirstFrameVertDist  = 37.57; # 30.0 --> 37.57 cm # Vertical distance from top/bottom anode (=204.55+85.3 cm above/below cathode)
-$Upper_FirstFrameVertDist = 301.08 + 1.1;
-$Lower_FirstFrameVertDist = 284.13 - 1.1; #Vertical distance from cathode center in cold
-#$Upper_FirstFrameVertDist = 301.08;
-#$Lower_FirstFrameVertDist = 284.13; #Vertical distance from cathode center in warm
-$VerticalPDdist = 75.8; #distance between arapucas (center to center) in the y direction
+$Upper_FirstFrameVertDist = 302.6;
+$Lower_FirstFrameVertDist = 280.7; # Vertical distance from cathode center in cold
+$VerticalPDdist = 75.6;  # 75.8 (warm) -> 75.6 (cold) distance between arapucas (center to center) in the y direction in cold
 $heightElectronicBox = 7.5; #height of arapuca electronic box is 7.7 cm but some of it may be inside the cathode frame (all facing the non-tco side)
 
 #Positions of the 4 arapucas with respect to the Frame center --> arapucas over the cathode
