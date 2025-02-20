@@ -1557,8 +1557,32 @@ EOF
 
 for($i=0 ; $i<$nAPAs ; $i++){
 for($p=0 ; $p<10 ; $p++){
+for($ncuts=0 ; $ncuts<4; $ncuts++){
+print CRYO <<EOF;
+   <volume name="volOpDetSensitiveCPA_$i\-$p\-$ncuts">
+     <materialref ref="LAr"/>
+     <solidref ref="ArapucaSingleAcceptanceWindow"/>
+   </volume>
+EOF
+}
+}
+}
+
+for($i=0 ; $i<$nAPAs ; $i++){
+for($p=0 ; $p<10 ; $p++){
 print CRYO <<EOF;
    <volume name="volArapuca_$i\-$p">
+     <materialref ref="FR4SussexAPA"/>
+     <solidref ref="ArapucaSingleWalls"/>
+   </volume>
+EOF
+}
+}
+
+for($i=0 ; $i<$nAPAs ; $i++){
+for($p=0 ; $p<10 ; $p++){
+print CRYO <<EOF;
+   <volume name="volArapucaCPA_$i\-$p">
      <materialref ref="FR4SussexAPA"/>
      <solidref ref="ArapucaSingleWalls"/>
    </volume>
@@ -1742,7 +1766,7 @@ EOF
             # one is specifically for volArapuca, this is to avoid overlaps b/w arapuca and the volTPCInner, since 
             # we do not have holes in the cathode to place the Arapucas, making holes in cathode for placing arapucas
             # is a good idea that can be implemented if time allows.
-            place_OpDets(($CPA_0_x+0.7), $APACenter_y, $APACenter_z, $apa_i, ($CPA_0_x+0.38305));  
+            place_OpDets_cpa(($CPA_0_x+0.7), $APACenter_y, $APACenter_z, $apa_i, ($CPA_0_x+0.38305));  
             
 
             $tpc_0 = 2*$apa_i+0;
@@ -1894,6 +1918,71 @@ for($nwindow=0 ; $nwindow<4; $nwindow++){
      <physvol>
        <volumeref ref="volOpDetSensitive_$apa_i\-$paddle\-$nwindow"/>
        <position name="posOpArapuca$apa_i\-$paddle\-$nwindow\-TPC\-$i\-$j\-$k" unit="cm"
+         x="@{[$posAra_x]}"
+         y="@{[$Paddle_Y]}"
+         z="@{[$list_pos[$nwindow]+$APACenter_z]}"/>
+       <rotationref ref="$rot"/>
+     </physvol>
+EOF
+}#end nwindow for-loop
+}#end Paddle for-loop
+
+}
+
+sub place_OpDets_cpa()
+{
+
+    $APACenter_x = $_[0];
+    $APACenter_y = $_[1];
+    $APACenter_z = $_[2];
+    $apa_i = $_[3];
+    $arapuca_pos_x = $_[4];
+
+    # Alternate the paddle orientations
+    # if ($apa_i % 2 == 0){
+	  #   $rot = "rPlus180AboutY";
+	  #   $posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
+    if ($APACenter_x < 0){
+	    $rot = "rPlus180AboutY";
+	    $posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
+    }else{
+	    $rot = "rIdentity";
+	    $posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);
+	  }
+
+for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
+{
+
+             # All Light Paddle centers will have the same
+             #      X coordinate as the center of the current APA
+             #      Z coordinate as the current TPC pair
+             # The Y coordinate must be looped over:
+
+             #the multiplication by j here is a temporary dirty trick to get around some strange behavior
+
+             $Paddle_Y   =    $APACenter_y
+                            - $APAphys_y/2
+                            + $j*$FrameToPaddleSpace
+                            + (1-$j)*($ArapucaOut_y/2 + $APAFrameZSide_y)
+                            + $PaddleYInterval*$paddle;
+
+print CRYO <<EOF;
+<physvol>
+<volumeref ref="volArapucaCPA_$apa_i\-$paddle"/>
+<position name="posArapuca$apa_i\-$paddle\-TPC\-$i\-$j\-$k\-cpa" unit="cm"
+x="@{[$arapuca_pos_x]}"
+y="@{[$Paddle_Y]}"
+z="@{[$APACenter_z]}"/>
+<rotationref ref="$rot"/>
+</physvol>
+EOF
+
+
+for($nwindow=0 ; $nwindow<4; $nwindow++){
+             print CRYO <<EOF;
+     <physvol>
+       <volumeref ref="volOpDetSensitiveCPA_$apa_i\-$paddle\-$nwindow"/>
+       <position name="posOpArapuca$apa_i\-$paddle\-$nwindow\-TPC\-$i\-$j\-$k\-cpa" unit="cm"
          x="@{[$posAra_x]}"
          y="@{[$Paddle_Y]}"
          z="@{[$list_pos[$nwindow]+$APACenter_z]}"/>
