@@ -369,7 +369,12 @@ sub gen_Materials
    <composite n="8" ref="hydrogen"/>
   </material>
 
-
+  <material name="vm2000" formula="vm2000">
+   <D value="1.2" unit="g/cm3"/>
+   <composite n="2" ref="carbon"/>
+   <composite n="4" ref="hydrogen"/>
+  </material>
+    
 EOF
 
 my $nStrings = scalar $ARGV + 1;
