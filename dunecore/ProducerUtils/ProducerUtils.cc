@@ -239,4 +239,58 @@ namespace producer
         dup2(fd, 1);
         close(fd);
     }
+    
+    //......................................................
+    double ProducerUtils::Sum(std::vector<double> Vec)
+    {
+        double Sum = 0;
+        for (double Val : Vec)
+        {
+        Sum += Val;
+        }
+        return Sum;
+    }
+    float ProducerUtils::Sum(std::vector<float> Vec)
+    {
+        float Sum = 0;
+        for (float Val : Vec)
+        {
+        Sum += Val;
+        }
+        return Sum;
+    }
+
+    //......................................................
+    double ProducerUtils::Average(std::vector<double> Vec)
+    {
+        double sum = Sum(Vec);
+        return sum / Vec.size();
+    }
+    float ProducerUtils::Average(std::vector<float> Vec)
+    {
+        float sum = Sum(Vec);
+        return sum / Vec.size();
+    }
+
+    //......................................................
+    double ProducerUtils::STD(std::vector<double> Vec)
+    {
+        double Mean = Average(Vec);
+        double Sum = 0;
+        for (double Val : Vec)
+        {
+        Sum += (Val - Mean) * (Val - Mean);
+        }
+        return sqrt(Sum / Vec.size());
+    }
+    float ProducerUtils::STD(std::vector<float> Vec)
+    {
+        float Mean = Average(Vec);
+        float Sum = 0;
+        for (float Val : Vec)
+        {
+        Sum += (Val - Mean) * (Val - Mean);
+        }
+        return sqrt(Sum / Vec.size());
+    }
 }
