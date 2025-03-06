@@ -8,13 +8,25 @@
 
 BEGIN_PROLOG
 
-dunefd_signalshapingservice: {
+# The ADC range in bits
+Nbit_legacy: 12   # to be used basically only for protoDUNE-SP (and older prototypes)
+Nbit_standard: 14 # new DAQ value since 2021 or so
+
+# The cold electronics gain default value changed in protoDUNE-hd in mid-july 2024,
+# New value is 7.8, once confirmed by CE and new noise maps are ready this should be updated
+# Better behavior would be to read this from a database, run-dependent
+ASICGainInMVPerFC_standard: 14   
+
+# General configuration
+dune_signalshapingservice: {
 
   DeconNorm: 200
   ADCPerPCAtLowestASICGain: 13160 #ADC/pC (2.8 ADC/mV * 4.7 mV/fC * 1000)
   # ASICGains:           [4.7, 7.8, 14, 25]
-  ASICGainInMVPerFC:  [ 14, 14, 14 ] #mV/fC for Ind & col planes
+  ASICGainInMVPerFC:  [ @local::ASICGainInMVPerFC_standard, @local::ASICGainInMVPerFC_standard, @local::ASICGainInMVPerFC_standard  ] #mV/fC for Ind & col planes
   ShapeTimeConst:  [ 2.0, 2.0, 2.0 ] #Gain and Peaking time (microseconds)
+  Nbit: @local::Nbit_standard
+
 
   # Noise Factor - rms ADCs @ lowest ASIC Gain (4.7 mV/fC)
   NoiseFactVec:         [[ 1.12, 0.86, 0.60, 0.55 ], [ 1.12, 0.86, 0.60, 0.55 ], [ 0.89, 0.66, 0.48, 0.43 ]]
@@ -81,22 +93,25 @@ dunefd_signalshapingservice: {
   DebugFieldShape: false
 }
 
-# 35t is the same for now
+# fd signal shaping service
+dunefd_signalshapingservice: @local::dune_signalshapingservice
 
-dune35t_signalshapingservice:   @local::dunefd_signalshapingservice
+# 35t is the same for now
+dune35t_signalshapingservice:   @local::dune_signalshapingservice
 ### Previous default settings
 #dune35t_signalshapingservice.ADCPerPCAtLowestASICGain: 11700 #ADC/pC   (For correct Digitization)
 #dune35t_signalshapingservice.ASICGainInMVPerFC: [7.8, 7.8, 7.8] #mV/fC for Ind & col planes
 #dune35t_signalshapingservice.ShapeTimeConst:  [ 2.0, 2.0, 2.0 ] #Gain and Peaking time (microseconds)
 ### Bringing in line with data settings, 8th Sept 2016
-dune35t_signalshapingservice.ASICGainInMVPerFC: [ 14.0, 14.0, 14.0] #mV/fC for Ind & col planes
 dune35t_signalshapingservice.ShapeTimeConst:    [ 3.0 , 3.0 , 3.0 ] #Gain and Peaking time (microseconds)
 #
 # 3x1x1, protoDUNE and DUNE dual-phase signal service
 #
 
 # ProtoDUNE single phase
-protodunesp_signalshapingservice: @local::dunefd_signalshapingservice
+protodunesp_signalshapingservice: @local::dune_signalshapingservice
+protodunesp_signalshapingservice.Nbit: @local::Nbit_legacy
+protodunesp_signalshapingservice.ASICGainInMVPerFC: [ 14, 14, 14  ] #mV/fC for Ind & col planes
 protodunesp_signalshapingservice.ColFilter: "(x>0.0)*gaus"
 protodunesp_signalshapingservice.ColFilterParams: [ 1.0, 0.0, 0.1 ]
 protodunesp_signalshapingservice.IndUFilter: "(x>0.0)*gaus"
