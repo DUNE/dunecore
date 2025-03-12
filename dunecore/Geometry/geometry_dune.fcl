@@ -212,7 +212,7 @@ dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x6_v6_nut
 dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.Name: @local::dune10kt_1x2x6_v6_nuts_refactored_geo.Name
 
 dune10kt_1x2x6_nuts_refactored_geo: @local::dune10kt_1x2x6_v6_nuts_refactored_geo
-dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo: @local::dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.Name
+dune10kt_1x2x6_nuts_refactored_auxdet_geo: @local::dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo
 
 
 
