@@ -1,0 +1,32 @@
+#include "services_common_dune.fcl"
+#include "services_dunefd_horizdrift.fcl"
+
+######################################
+### Dune FD horizontal drift 1x2x6_nuts ###
+######################################
+
+BEGIN_PROLOG
+
+dunefd_1x2x6_nuts_services: {
+    @table::dunefd_services
+    AuxDetGeometry: @local::dune10kt_1x2x6_nuts_refactored_auxdet_geo
+    Geometry: @local::dune10kt_1x2x6_nuts_refactored_geo
+}
+
+dunefd_1x2x6_nuts_simulation_services: {
+    @table::dunefd_simulation_services
+    AuxDetGeometry: @local::dune10kt_1x2x6_nuts_refactored_auxdet_geo
+    Geometry: @local::dune10kt_1x2x6_nuts_refactored_geo
+    LArG4Detector:      @local::dune10kt_1x2x6_larg4detector
+}
+dunefd_1x2x6_nuts_simulation_services.LArG4Detector.gdmlFileName_: @local::dune10kt_1x2x6_nuts_refactored_geo.GDML
+dunefd_1x2x6_nuts_simulation_services.LArG4Detector.volumeNames: [ "volTPCInner0", "volTPCActiveOuter" ]
+dunefd_1x2x6_nuts_simulation_services.LArG4Detector.stepLimits: [ 0.4, 0.4 ]
+
+dunefd_1x2x6_nuts_reco_services: {
+    @table::dunefd_reco_services
+    AuxDetGeometry: @local::dune10kt_1x2x6_nuts_refactored_auxdet_geo
+    Geometry: @local::dune10kt_1x2x6_nuts_refactored_geo
+}
+
+END_PROLOG
