@@ -197,6 +197,26 @@ dune10kt_1x2x6_refactored_geo:   @local::dune10kt_1x2x6_v6_refactored_geo
 dune10kt_1x2x6_auxdet_geo:              @local::dune10kt_1x2x6_v4_auxdet_geo
 dune10kt_1x2x6_refactored_auxdet_geo:   @local::dune10kt_1x2x6_v6_refactored_auxdet_geo
 
+dune10kt_1x2x6_v6_refactored_geo:      @local::dune10kt_base_geo
+dune10kt_1x2x6_v6_refactored_geo.GDML: "dune10kt_v6_refactored_1x2x6.gdml"
+dune10kt_1x2x6_v6_refactored_geo.Name: "dune10kt_v6_1x2x6"
+dune10kt_1x2x6_v6_refactored_auxdet_geo:      @local::dune10kt_base_auxdet_geo
+dune10kt_1x2x6_v6_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x6_v6_refactored_geo.GDML
+dune10kt_1x2x6_v6_refactored_auxdet_geo.Name: @local::dune10kt_1x2x6_v6_refactored_geo.Name
+
+dune10kt_1x2x6_v6_nuts_refactored_geo:      @local::dune10kt_base_geo
+dune10kt_1x2x6_v6_nuts_refactored_geo.GDML: "dune10kt_v6_refactored_1x2x6_modded_dbDrift_cpaPDS_singleVol.gdml"
+dune10kt_1x2x6_v6_nuts_refactored_geo.Name: "dune10kt_v6_refactored_1x2x6_modded_dbDrift_cpaPDS_singleVol"
+dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo:      @local::dune10kt_base_auxdet_geo
+dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.GDML: @local::dune10kt_1x2x6_v6_nuts_refactored_geo.GDML
+dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.Name: @local::dune10kt_1x2x6_v6_nuts_refactored_geo.Name
+
+dune10kt_1x2x6_nuts_refactored_geo: @local::dune10kt_1x2x6_v6_nuts_refactored_geo
+dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo: @local::dune10kt_1x2x6_v6_nuts_refactored_auxdet_geo.Name
+
+
+
+
 # Full HD geometry
 dune10kt_v6_geo:             @local::dune10kt_base_geo
 dune10kt_v6_geo.GDML:        "dune10kt_v6_refactored.gdml"
