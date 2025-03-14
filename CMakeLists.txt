@@ -23,7 +23,7 @@ find_package(cetmodules REQUIRED)
 
 #project(dunecore VERSION 09.48.00d00 LANGUAGES CXX)
 project(dunecore LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 10.04.05d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 10.04.06d00)
 set(${PROJECT_NAME}_FW_DIR "config_data")
 
 ## Make target names shorter (dunecore::X vs dunecore::dune_X).
