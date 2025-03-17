@@ -9,8 +9,8 @@ dunefd_detproperties.Temperature:                            87
 dunefd_detproperties.Electronlifetime:                       10.4e3
 dunefd_detproperties.Efield:                                 [0.5,0.666,0.8]  #(predicted for microBooNE)
 dunefd_detproperties.ElectronsToADC:                         6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
-dunefd_detproperties.NumberTimeSamples:                      4492         # drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
-dunefd_detproperties.ReadOutWindowSize:                      4492         # drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
+dunefd_detproperties.NumberTimeSamples:                      8984         # drift length/drift velocity*sampling rate = (2*359.4 cm)/(0.16 cm/us)*(2 MHz)
+dunefd_detproperties.ReadOutWindowSize:                      8984         # drift length/drift velocity*sampling rate = (2*359.4 cm)/(0.16 cm/us)*(2 MHz)
 dunefd_detproperties.TimeOffsetU:                            0.
 dunefd_detproperties.TimeOffsetV:                            0.
 dunefd_detproperties.TimeOffsetZ:                            0.
