@@ -500,6 +500,10 @@ protodunehdv7_auxdet_geo: @local::dune10kt_base_auxdet_geo
 protodunehdv7_auxdet_geo.Name: @local::protodunehdv7_geo.Name
 protodunehdv7_auxdet_geo.GDML: @local::protodunehdv7_geo.GDML
 
+# Keep these definitions up to date when new geometries are added
+protodunehd_geo: @local::protodunehdv7_geo
+protodunehd_auxdet_geo: @local::protodunev7_auxdet_geo
+
 # === End ProtoDUNE-HD ===
 
 # ProtoDUNE VD
