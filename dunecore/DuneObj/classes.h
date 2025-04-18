@@ -27,6 +27,9 @@
 #include "detdataformats/trigger/TriggerPrimitive.hpp"
 #include "detdataformats/trigger/TriggerActivityData.hpp"
 #include "detdataformats/trigger/TriggerCandidateData.hpp"
+#include "detdataformats/trigger/TriggerPrimitive2.hpp"
+#include "detdataformats/trigger/TriggerActivityData2.hpp"
+#include "detdataformats/trigger/TriggerCandidateData2.hpp"
 
 #include "detdataformats/hsi/HSIFrame.hpp"
 
