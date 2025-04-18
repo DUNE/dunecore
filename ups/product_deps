@@ -252,8 +252,8 @@ duneutil            v10_04_07d01
 dune_pardata        v01_84_00
 dunedetdataformats  v4_4_5
 dunedaqdataformats  v4_4_5
-nusystematics       v1_05_06
-larsoft             v10_04_08
+nusystematics       v1_05_07
+larsoft             v10_05_00
 cetmodules          v3_24_01    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_11_2
