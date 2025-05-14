@@ -40,7 +40,15 @@
 #include "CRPWireReadoutGeom.h"
 #include "GeoObjectSorterCRU60D.h"
 
+#include "duneprototypes/Protodune/vd/ChannelMap/PDVD_PDMapAlg.hh"
+#include "art/Utilities/ToolMacros.h"
+#include "art/Utilities/make_tool.h"
+
 using geo::dune::vd::crp::ChannelToWireMap;
+
+  bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const {
+    return fPDMapTool->isValid(opChannel);
+  }
 
 
 namespace {
@@ -304,7 +312,9 @@ geo::CRPWireReadoutGeom::CRPWireReadoutGeom(fhicl::ParameterSet const& p,
 {
   mf::LogInfo(fLogCategory)
     << "Initializing CRPWireReadoutGeom channel mapping algorithm.";
-  
+
+  fPDMapTool = art::make_tool<opdet::PDVD_PDMapAlg>(p.get<fhicl::ParameterSet>("PDMapTool"));
+
   buildReadoutPlanes(geom->Cryostats());
   fillChannelToWireMap(geom->Cryostats());
   

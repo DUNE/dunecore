@@ -28,6 +28,8 @@
 #include <cassert>
 #include <utility>
 
+#include "duneprototypes/Protodune/vd/ChannelMap/PDVD_PDMapAlg.hh"
+#include "duneprototypes/Protodune/vd/ChannelMap/PDMapAlg.h"
 
 // -----------------------------------------------------------------------------
 // forward declarations
@@ -136,7 +138,9 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
    */
   virtual std::vector<geo::WireID> ChannelToWire(raw::ChannelID_t channel) const
     override;
-  
+
+  virtual bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;  
+
   /// Returns the number of readout channels (ID's go `0` to `Nchannels()`).
   virtual unsigned int Nchannels() const override;
   
@@ -470,7 +474,9 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
-  
+ 
+  std::unique_ptr<opdet::PDVD_PDMapAlg> fPDMapTool;
+ 
   using PlaneType_t = std::size_t; ///< Type for plane type identifier.
   
   /// Identifier for first induction plane type.

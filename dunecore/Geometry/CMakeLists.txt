@@ -1,5 +1,7 @@
 #MESSAGE( STATUS "Boost_SYSTEM_LIBRARY:         "  )
 
+include_directories($ENV{NLOHMANN_JSON_INC})
+
 art_make( BASENAME_ONLY
           EXCLUDE AuxDetGeoObjectSorter35_tool.cc
                   AuxDetGeoObjectSorterYZX_tool.cc
@@ -24,7 +26,7 @@ art_make( BASENAME_ONLY
                         art::Utilities
                         canvas::canvas
                         ROOT::Geom
-                        
+        
           SERVICE_LIBRARIES larcorealg::Geometry
                      larcore::Geometry_Geometry_service
                         dunecore_Geometry
