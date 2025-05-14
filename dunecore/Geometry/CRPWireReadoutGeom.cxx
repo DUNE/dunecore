@@ -40,15 +40,11 @@
 #include "CRPWireReadoutGeom.h"
 #include "GeoObjectSorterCRU60D.h"
 
-#include "duneprototypes/Protodune/vd/ChannelMap/PDVD_PDMapAlg.hh"
+#include "duneprototypes/Protodune/vd/ChannelMap/PDVDPDMapAlg.hh"
 #include "art/Utilities/ToolMacros.h"
 #include "art/Utilities/make_tool.h"
 
 using geo::dune::vd::crp::ChannelToWireMap;
-
-  bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const {
-    return fPDMapTool->isValid(opChannel);
-  }
 
 
 namespace {
@@ -59,7 +55,7 @@ namespace {
   };
 
   typedef std::vector< const geo::TPCGeo* > TPCPtrVector_t;
-  
+
   std::vector< TPCPtrVector_t > groupTPCsIntoSets( const geo::WireReadoutGeom& wireReadout,
                                                    const geo::CryostatGeo &cryo ){
     //
@@ -313,7 +309,7 @@ geo::CRPWireReadoutGeom::CRPWireReadoutGeom(fhicl::ParameterSet const& p,
   mf::LogInfo(fLogCategory)
     << "Initializing CRPWireReadoutGeom channel mapping algorithm.";
 
-  fPDMapTool = art::make_tool<opdet::PDVD_PDMapAlg>(p.get<fhicl::ParameterSet>("PDMapTool"));
+  fPDMapTool = art::make_tool<opdet::PDVDPDMapAlg>(p.get<fhicl::ParameterSet>("PDMapTool"));
 
   buildReadoutPlanes(geom->Cryostats());
   fillChannelToWireMap(geom->Cryostats());
@@ -963,4 +959,9 @@ std::string geo::CRPWireReadoutGeom::PlaneTypeName(PlaneType_t planeType) {
 } // geo::CRPWireReadoutGeom::PlaneTypeName()
 
 
+// ----------------------------------------------------------------------------
+
+bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const {
+   return fPDMapTool->isValidHardwareChannel(opChannel);
+}
 // ----------------------------------------------------------------------------
