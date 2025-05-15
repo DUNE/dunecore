@@ -26,7 +26,8 @@ art_make( BASENAME_ONLY
                         art::Utilities
                         canvas::canvas
                         ROOT::Geom
-        
+                        duneprototypes::Protodune_vd_ChannelMap                       
+  
           SERVICE_LIBRARIES larcorealg::Geometry
                      larcore::Geometry_Geometry_service
                         dunecore_Geometry
@@ -37,6 +38,11 @@ art_make( BASENAME_ONLY
                         ROOT::XMLIO
                         ROOT::Gdml
         )
+
+target_link_libraries(dunecore_Geometry PRIVATE
+  duneprototypes_Protodune_vd_ChannelMap_PDVDPDMapAlg_tool
+)
+
 
 cet_build_plugin ( CheckGeometry art::module
                      larcorealg::Geometry
