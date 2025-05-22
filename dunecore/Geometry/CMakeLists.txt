@@ -24,9 +24,11 @@ art_make( BASENAME_ONLY
                         art::Utilities
                         canvas::canvas
                         ROOT::Geom
-                        
+                        nlohmann_json::nlohmann_json
+                        duneprototypes::Protodune_vd_ChannelMap
+                        opdet_PDVDPDMapAlg
           SERVICE_LIBRARIES larcorealg::Geometry
-                     larcore::Geometry_Geometry_service
+                        larcore::Geometry_Geometry_service
                         dunecore_Geometry
                         fhiclcpp::fhiclcpp
                         cetlib::cetlib
@@ -34,6 +36,8 @@ art_make( BASENAME_ONLY
                         ROOT::Geom
                         ROOT::XMLIO
                         ROOT::Gdml
+                        duneprototypes::Protodune_vd_ChannelMap
+                        opdet_PDVDPDMapAlg
         )
 
 cet_build_plugin ( CheckGeometry art::module
