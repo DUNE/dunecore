@@ -7,20 +7,16 @@ namespace producer
     {
     }
 
-    void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2, const detinfo::DetectorClocksData &clockData, const art::Event &evt)
+    void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime)
     {
-        geo::CryostatID c(0);
-        const geo::CryostatGeo& cryostat = geom->Cryostat(c);
-        const geo::TPCGeo& tpcg = cryostat.TPC(0);
-        const double driftLength = tpcg.DriftDistance();
-        const double driftTime = driftLength / art::ServiceHandle<detinfo::DetectorPropertiesService const>()->DataFor(evt, clockData).DriftVelocity();
+        // Use time in us to return the distance in cm
         ClusterDistance = abs(t1 - t2) * driftLength / driftTime;
     }
 
-    void ProducerUtils::ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, const detinfo::DetectorClocksData &clockData, const art::Event &evt)    
+    void ProducerUtils::ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, float driftLength, float driftTime)  
     {
-        double x12 = 0;
-        ComputeDistanceX(x12, t1, t2, clockData, evt);
+        double x12 = 0; // This will be the distance in X in cm
+        ComputeDistanceX(x12, t1, t2, driftLength, driftTime);
         ClusterDistance = sqrt(pow(x12, 2) + pow(y1 - y2, 2) + pow(z1 - z2, 2));
     }
 

@@ -42,8 +42,8 @@ namespace producer
     {
     public:
         explicit ProducerUtils(fhicl::ParameterSet const &p);
-        void ComputeDistanceX(double &ClusterDistance, double t1, double t2, const detinfo::DetectorClocksData &clockData, const art::Event &evt);
-        void ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, const detinfo::DetectorClocksData &clockData, const art::Event &evt);
+        void ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime);
+        void ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, float driftLength, float driftTime);
         
         void FillMyMaps(std::map<int, simb::MCParticle> &MyMap, art::FindManyP<simb::MCParticle> Assn, art::ValidHandle<std::vector<simb::MCTruth>> Hand);
         static long unsigned int WhichGeneratorType(std::vector<std::map<int, simb::MCParticle>> GeneratorParticles, int TrID);
@@ -78,8 +78,6 @@ namespace producer
     private:
         // From fhicl configuration
         const std::string fGeometry;
-        // Find correct drift time and distance relation from geometry service
-        art::ServiceHandle<geo::Geometry> geom;
     };
 }
 #endif
