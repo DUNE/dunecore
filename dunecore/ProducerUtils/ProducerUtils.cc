@@ -3,30 +3,24 @@
 namespace producer
 {
     ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-        : fGeometry(p.get<std::string>("Geometry")),
-          fDetectorSizeX(p.get<double>("DetectorSizeX")), // Changed type to double
-          fDetectorDriftTime(p.get<double>("DetectorDriftTime"))
+        : fGeometry(p.get<std::string>("Geometry"))
     {
     }
 
-    void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2)
+    void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2, const detinfo::DetectorClocksData &clockData, const art::Event &evt)
     {
-        ClusterDistance = 0;
-        if (fGeometry == "HD")
-        {
-            ClusterDistance = abs(t1 - t2) * fDetectorSizeX / fDetectorDriftTime;
-        }
-        else if (fGeometry == "VD")
-        {
-            ClusterDistance = abs(t1 - t2) * fDetectorSizeX / (fDetectorDriftTime / 2);
-        }
+        geo::CryostatID c(0);
+        const geo::CryostatGeo& cryostat = geom->Cryostat(c);
+        const geo::TPCGeo& tpcg = cryostat.TPC(0);
+        const double driftLength = tpcg.DriftDistance();
+        const double driftTime = driftLength / art::ServiceHandle<detinfo::DetectorPropertiesService const>()->DataFor(evt, clockData).DriftVelocity();
+        ClusterDistance = abs(t1 - t2) * driftLength / driftTime;
     }
 
-    void ProducerUtils::ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2)
+    void ProducerUtils::ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, const detinfo::DetectorClocksData &clockData, const art::Event &evt)    
     {
-        ClusterDistance = 0;
         double x12 = 0;
-        ComputeDistanceX(x12, t1, t2);
+        ComputeDistanceX(x12, t1, t2, clockData, evt);
         ClusterDistance = sqrt(pow(x12, 2) + pow(y1 - y2, 2) + pow(z1 - z2, 2));
     }
 
