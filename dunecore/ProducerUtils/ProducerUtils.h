@@ -28,8 +28,13 @@
 #include "canvas/Persistency/Common/FindMany.h"
 #include "canvas/Persistency/Common/FindManyP.h"
 #include "fhiclcpp/ParameterSet.h"
+#include "larcore/Geometry/Geometry.h"
+#include "larcorealg/Geometry/GeometryCore.h"
+#include "lardata/DetectorInfoServices/DetectorClocksService.h"
+#include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
 #include "larsim/MCCheater/ParticleInventoryService.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+
 
 namespace producer
 {
@@ -37,8 +42,8 @@ namespace producer
     {
     public:
         explicit ProducerUtils(fhicl::ParameterSet const &p);
-        void ComputeDistanceX(double &ClusterDistance, double t1, double t2);
-        void ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2);
+        void ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime);
+        void ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, float driftLength, float driftTime);
         
         void FillMyMaps(std::map<int, simb::MCParticle> &MyMap, art::FindManyP<simb::MCParticle> Assn, art::ValidHandle<std::vector<simb::MCTruth>> Hand);
         static long unsigned int WhichGeneratorType(std::vector<std::map<int, simb::MCParticle>> GeneratorParticles, int TrID);
@@ -73,8 +78,6 @@ namespace producer
     private:
         // From fhicl configuration
         const std::string fGeometry;
-        const double fDetectorSizeX;
-        const double fDetectorDriftTime;
     };
 }
 #endif
