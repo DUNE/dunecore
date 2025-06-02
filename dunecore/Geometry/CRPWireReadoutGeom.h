@@ -28,6 +28,11 @@
 #include <cassert>
 #include <utility>
 
+// ART
+#include "art/Utilities/make_tool.h"
+
+#include "duneprototypes/Protodune/vd/ChannelMap/PDMapAlg.h"
+#include "duneprototypes/Protodune/vd/ChannelMap/PDVDPDMapAlg.hh"
 
 // -----------------------------------------------------------------------------
 // forward declarations
@@ -587,6 +592,22 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   //
   std::string fLogCategory = "CRPWireReadoutGeom";
   
+    /// @name Optical detector channel mapping
+
+  std::unique_ptr<opdet::PDVDPDMapAlg> fPDMapTool;
+//  virtual unsigned int NOpChannels(unsigned int NOpDets) const override;
+//  unsigned int NOpChannels() const  override;
+//  unsigned int MaxOpChannel() const override;
+  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const;
+  bool IsValidOpChannel(int opChannel) const;
+  unsigned int NOpChannels(unsigned int NOpDets) const;
+  unsigned int MaxOpChannel(unsigned int NOpDets) const;
+  unsigned int NOpHardwareChannels(unsigned int opDet) const;
+  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const;
+  unsigned int OpDetFromOpChannel(unsigned int opChannel) const;
+  unsigned int HardwareChannelFromOpChannel(unsigned int /* opChannel */) const;
+  unsigned int NOpChannels() const;
+
 }; // class geo::CRPWireReadoutGeom
 
 
