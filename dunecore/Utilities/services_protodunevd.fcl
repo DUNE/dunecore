@@ -8,28 +8,28 @@ BEGIN_PROLOG
 ##############################
 
 protodunevd_services:                                       @local::protodune_services 
-protodunevd_services.Geometry:                              @local::protodunevd_v4_geo
-protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v4_auxdet_geo
+protodunevd_services.Geometry:                              @local::protodunevd_v5_geo
+protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v5_auxdet_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
 protodunevd_services.WireReadout:                           @local::protodunevd_wire_readout
 protodunevd_services.LArPropertiesService.ScintPreScale: 1
 
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
-protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v4_geo
+protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v5_geo
 protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
 protodunevd_rawdecoding_services.WireReadout:               @local::protodunevd_wire_readout
 protodunevd_rawdecoding_services.LArPropertiesService.ScintPreScale: 1
 
 protodunevd_data_services:                                  @local::protodune_data_services
-protodunevd_data_services.Geometry:                         @local::protodunevd_v4_geo
+protodunevd_data_services.Geometry:                         @local::protodunevd_v5_geo
 protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
 protodunevd_data_services.WireReadout:                      @local::protodunevd_wire_readout
 protodunevd_data_services.LArPropertiesService.ScintPreScale: 1
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
-protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v4_geo
-protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v4_auxdet_geo
+protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v5_geo
+protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v5_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
 protodunevd_minimal_simulation_services.WireReadout:               @local::protodunevd_wire_readout 
 protodunevd_minimal_simulation_services.LArPropertiesService.ScintPreScale: 1
