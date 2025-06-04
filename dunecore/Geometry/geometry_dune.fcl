@@ -649,6 +649,14 @@ larnd_auxdet_geo: {
   SortingParameters: { tool_type: AuxDetGeoObjectSorterYZX }
 }
 
+protodunevd_wire_readout: {
+  ChannelsPerOpDet: 1
+  service_provider: "DUNEWireReadout"
+  PDMapTool: {
+    tool_type: "PDVDPDMapAlg"
+    MappingFile: "PDVD_PDS_Mapping_v04152025.json"
+  }
+}
 
 dune_wire_readout:
 {
