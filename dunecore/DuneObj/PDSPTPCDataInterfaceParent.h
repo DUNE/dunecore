@@ -32,4 +32,16 @@
 					     std::vector<raw::RDStatus> &rdstatuses,  
 					     std::vector<int> &apalist) = 0;
 
+   // the same, but with an argument for the detector type.  Overloaded with an extra argument.  Some decoders will override this with a version that
+   // respects the detector type string.
+
+    virtual int retrieveDataForSpecifiedAPAs(art::Event &evt, std::vector<raw::RawDigit> &raw_digits, std::vector<raw::RDTimeStamp> &rd_timestamps,
+					     std::vector<raw::RDStatus> &rdstatuses,  
+					     std::vector<int> &apalist,
+					     std::string detectortype)
+   {
+     return retrieveDataForSpecifiedAPAs(evt, raw_digits, rd_timestamps, rdstatuses, apalist);
+   }
+   
+   
   };
