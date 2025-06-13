@@ -598,14 +598,14 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
 //  virtual unsigned int NOpChannels(unsigned int NOpDets) const override;
 //  unsigned int NOpChannels() const  override;
 //  unsigned int MaxOpChannel() const override;
-  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const;
+  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
   bool IsValidOpChannel(int opChannel) const;
-  unsigned int NOpChannels(unsigned int NOpDets) const;
-  unsigned int MaxOpChannel(unsigned int NOpDets) const;
-  unsigned int NOpHardwareChannels(unsigned int opDet) const;
-  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const;
-  unsigned int OpDetFromOpChannel(unsigned int opChannel) const;
-  unsigned int HardwareChannelFromOpChannel(unsigned int /* opChannel */) const;
+  unsigned int NOpChannels(unsigned int NOpDets) const override;
+  unsigned int MaxOpChannel(unsigned int NOpDets) const override;
+  unsigned int NOpHardwareChannels(unsigned int opDet) const override;
+  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const override;
+  unsigned int OpDetFromOpChannel(unsigned int opChannel) const override;
+  unsigned int HardwareChannelFromOpChannel(unsigned int /* opChannel */) const override;
   unsigned int NOpChannels() const;
 
 }; // class geo::CRPWireReadoutGeom
