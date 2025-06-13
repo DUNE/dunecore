@@ -553,6 +553,21 @@ protodunevd_v4_auxdet_geo: @local::standard_auxdet_sorter
 protodunevd_v4_auxdet_geo.Name: @local::protodunevd_v4_geo.Name
 protodunevd_v4_auxdet_geo.GDML: @local::protodunevd_v4_geo.GDML
 
+# protoDUNE VD generated with GGD
+protodunevd_v5_geo: @local::protodunedphase_geo
+protodunevd_v5_geo.Name: "protodunevd_v5"
+protodunevd_v5_geo.GDML: "protodunevd_v5_ggd.gdml" #nowires.gdml
+protodunevd_v5_geo.ROOT: "protodunevd_v5_ggd.gdml"
+protodunevd_v5_geo.SortingParameters: {
+  tool_type: GeoObjectSorterCRU60D
+  SortTPCPDVD: true
+}
+
+protodunevd_v5_auxdet_geo: @local::standard_auxdet_sorter
+protodunevd_v5_auxdet_geo.Name: @local::protodunevd_v5_geo.Name
+protodunevd_v5_auxdet_geo.GDML: @local::protodunevd_v5_geo.GDML
+
+
 # protoDUNE VD with driftY
 protodunevd_v1_geo_driftY: @local::dune10kt_base_geo
 protodunevd_v1_geo_driftY.Name: "protodunevd_v1_driftY"
@@ -649,6 +664,14 @@ larnd_auxdet_geo: {
   SortingParameters: { tool_type: AuxDetGeoObjectSorterYZX }
 }
 
+protodunevd_wire_readout: {
+  ChannelsPerOpDet: 1
+  service_provider: "DUNEWireReadout"
+  PDMapTool: {
+    tool_type: "PDVDPDMapAlg"
+    MappingFile: "PDVD_PDS_Mapping_v04152025.json"
+  }
+}
 
 dune_wire_readout:
 {
