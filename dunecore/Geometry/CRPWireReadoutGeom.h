@@ -31,8 +31,8 @@
 // ART
 #include "art/Utilities/make_tool.h"
 
-#include "duneprototypes/Protodune/vd/ChannelMap/PDMapAlg.h"
-#include "duneprototypes/Protodune/vd/ChannelMap/PDVDPDMapAlg.hh"
+#include "dunecore/ChannelMap/PDMapAlg.h"
+#include "dunecore/ChannelMap/PDVDPDMapAlg.hh"
 
 // -----------------------------------------------------------------------------
 // forward declarations

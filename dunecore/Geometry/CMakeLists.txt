@@ -25,7 +25,6 @@ art_make( BASENAME_ONLY
                         canvas::canvas
                         ROOT::Geom
                         nlohmann_json::nlohmann_json
-                        duneprototypes::Protodune_vd_ChannelMap
                         opdet_PDVDPDMapAlg
           SERVICE_LIBRARIES larcorealg::Geometry
                         larcore::Geometry_Geometry_service
@@ -36,7 +35,6 @@ art_make( BASENAME_ONLY
                         ROOT::Geom
                         ROOT::XMLIO
                         ROOT::Gdml
-                        duneprototypes::Protodune_vd_ChannelMap
                         opdet_PDVDPDMapAlg
         )
 
