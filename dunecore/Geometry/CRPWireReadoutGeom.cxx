@@ -990,8 +990,12 @@ unsigned int geo::CRPWireReadoutGeom::NOpHardwareChannels(unsigned int opDet) co
 //----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned int ch) const
 {
-  //What is this?
-  return ch;
+  if(fPDMapTool->NOpHardwareChannels(detNum)>ch){return fPDMapTool->HardwareChannelPerOpDet(detNum).at(ch);}
+  else
+  {
+    throw cet::exception(fLogCategory)
+        << "ERROR, you are requesting an OpHardwareChannel out of range " << detNum << " " << ch << " " << fPDMapTool->NOpHardwareChannels(detNum) <<"\n";
+  }
 }
 
 //----------------------------------------------------------------------------
