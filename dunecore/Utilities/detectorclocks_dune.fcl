@@ -62,7 +62,11 @@ protodune_detectorclocks.DefaultTrigTime:     250. # Default trigger time [us].
 protodune_detectorclocks.DefaultBeamTime:     250. # Default beam time [us].
 
 protodunehd_detectorclocks: @local::protodune_detectorclocks
-protodunehd_detectorclocks.ClockSpeedTPC: 1.953125
+
+# This is 2MHz rather than 1.953125 (1./512ns) because we are resampling from
+# 512ns tick period to 500ns within wirecell
+protodunehd_detectorclocks.ClockSpeedTPC: 2.0
+
 protodunehd_detectorclocks.ClockSpeedOptical: 62.5
 
 dunedphase3x1x1_detectorclocks: @local::dunefddphase_detectorclocks
