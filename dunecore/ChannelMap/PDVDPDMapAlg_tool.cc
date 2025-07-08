@@ -13,7 +13,7 @@
       {
         std::string fname;
         cet::search_path sp("FW_SEARCH_PATH");
-        std::string filename = pset.get<std::string>("MappingFile", "PDVD_PDS_Mapping_v04152025.json");
+        std::string filename = pset.get<std::string>("MappingFile", "PDVD_PDS_Mapping_v07082025.json");
         sp.find_file(filename, fname);
         std::ifstream i(fname, std::ifstream::in);
         i >> PDmap;
@@ -64,6 +64,24 @@
       double PDVDPDMapAlg::XenonEfficiency(size_t hwch) const
       {
         return PDmap.at(hwch)["eff_Xe"].get<double>();
+      }
+
+      std::string PDVDPDMapAlg::getName(size_t ch) const
+      {
+        return PDmap.at(ch).value("name", "UNKNOWN");
+      }
+     
+      void PDVDPDMapAlg::getEntryFromName(const std::string& name) const
+      {
+        for (const auto& entry : PDmap)
+        {
+          if (entry.contains("name") && entry["name"] == name)
+          {
+            std::cout << entry.dump(2) << std::endl;
+            return;
+          }
+        }
+        std::cout << "Name \"" << name << "\" not found in PDmap." << std::endl;
       }
 
       std::string PDVDPDMapAlg::pdType(size_t hwch) const

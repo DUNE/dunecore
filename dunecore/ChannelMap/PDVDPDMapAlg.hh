@@ -61,6 +61,10 @@ namespace opdet {
     bool isPDType(size_t ch, std::string pdname) const override;
     double ArgonEfficiency(size_t ch) const;
     double XenonEfficiency(size_t ch) const;
+
+    std::string getName(size_t ch) const;
+    void getEntryFromName(const std::string& name) const;    
+
     std::string OpDetTypeHardwareChannel(size_t hwch) const;
     std::string OpDetType(size_t opdet) const;
 

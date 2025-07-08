@@ -15,7 +15,7 @@ The mapping associates each optical channel to information such as:
 
 ## File Structure
 
-- `PDVD_PDS_Mapping_v04152025.json`:  
+- `PDVD_PDS_Mapping_v07082025.json`:  
   Mapping of 40 optical channels for ProtoDUNE-VD.  
   The version suffix follows the format `vMMDDYYYY` for version tracking.
   
@@ -27,24 +27,23 @@ The mapping associates each optical channel to information such as:
   
 ---------------------------MEMBRANES MAPPING---------------------------------
 
-         M1(1)   |   M3(0)
- NO-TCO  M2(3)   |   M4(2)   TCO
-         M5(17)  |   M7(16) 
-         M6(23)  |   M8(22) 
+         M1(0)   |   M3(1)
+ NO-TCO  M2(2)   |   M4(3)   TCO
+         M5(12)  |   M7(13) 
+         M6(18)  |   M8(19) 
 *Numbers in parentheses indicate the corresponding optical channel.*
 
 ## Cathode GeometricalMapping
 
 ---------------------------CATHODE MAPPING---------------------------------
 
-                 C4(11)           |      C8(10)
-                            C3(9) |            C7(8)
-   NO-TCO   C1(7)                 | C5(6)                 TCO
-                       C2(5)      |            C6(4)
+                       C2(4)       |             C6(5)
+            C1(6)                  |C5(7)             
+   NO-TCO                     C3(8)|             C7(9)        TCO
+                 C4(10)            |      C8(11)    
 *Numbers in parentheses indicate the corresponding optical channel.*
 
-
-> **Note**: HardwareChannel for Cathode and PMTs are not fully defined yet.
+> **Note**: HardwareChannel for PMTs are not fully defined yet.
 
 
 
