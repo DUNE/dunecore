@@ -75,6 +75,9 @@
 # Placement of cathode resistive meshes individually for lighter visualization
 # J. Soto: Fixed PMTs' positions to match installation placement
 # H. Amar: Fixed membrane X-arapuca's positions to match installation placement           
+#
+#  NOTE THAT BECAUSE OF AN UNRESOLVED OVERLAP BETWEEN volCryostat AND volTPC
+#  PROTODUNE-VD GEOMETRY GENERATOR WAS MOVED TO GGD
 ##################################################################################
 
 #use warnings;
