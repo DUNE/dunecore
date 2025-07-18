@@ -25,6 +25,7 @@
 #
 #    V7:    Yoann Kermaidic: February 2025
 #             Add one of the two 207Bi source
+#             July 3rd 2025, v10_08_02d00, Field cage and Xarapuca positions in Y updated
 ##################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
@@ -921,7 +922,7 @@ $list_pos[2]=0.5*$gapCenter_arapuca_z+0.5*$ArapucaAcceptanceWindow_z;
 $list_pos[3]=$list_pos[2]+$ArapucaAcceptanceWindow_z+$gapBetween_arapuca_z;
 
 $nLightPaddlesPerAPA    =    10;
-$PaddleYInterval        =   ($APAphys_y+$APAGap_y-2*$APAFrameZSide_y)/($nLightPaddlesPerAPA);
+$PaddleYInterval        =   59.2;
 $FrameToPaddleSpace     =    16.0;
 
 # $PaddleYInterval is defined so that the center-to-center distance in the
@@ -2807,8 +2808,8 @@ print "$cpa_i".". CPA_x = $CPA_x".", APACenter_y = $APACenter_y".", APACenter_z 
 $CPAmodbarGap = 1.8*$inch;
 $FCmodRight_x[$cpa_i]  = $CPA_x + 3 + 342/2; #352/2; # CPAmodCenter_x to FCmodCenter_x 
 $FCmodLeft_x[$cpa_i]   = $CPA_x - 3 - 342/2; #352/2;
-$FCmodTop_y[$cpa_i]    = $APACenter_y + 603.3/2 + $CPAmodbarGap + 5.4; #9.4;# + 1.83; # CPAmodCenter_y to FCmodCenter_y with 1.5 inch distance between CPA and module bars
-$FCmodBottom_y[$cpa_i] = $APACenter_y - 603.3/2 - $CPAmodbarGap - 5.4; #9.4;# - 1.83;
+$FCmodTop_y[$cpa_i]    = $APACenter_y + 603.3/2 + $CPAmodbarGap + 5.4 - 11.03; #9.4;# + 1.83; # CPAmodCenter_y to FCmodCenter_y with 1.5 inch distance between CPA and module bars
+$FCmodBottom_y[$cpa_i] = $APACenter_y - 603.3/2 - $CPAmodbarGap - 5.4 + 11.03; #9.4;# - 1.83;
 $FCmod_z[$cpa_i]       = $APACenter_z;
 
 $FCEWmodRight_x = $CPA_x + 3 + 342/2; #354.3/2;
@@ -3114,9 +3115,11 @@ sub place_OpDets()
     if ( $apa_i % 2 == 0 ) {
 $rot = "rIdentity";
 $posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
+$posBottomArapuca_y=41.15; #PDs in x<0
     }else{
 $rot = "rPlus180AboutY";
-$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);
+$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1); 
+$posBottomArapuca_y=33.55; #PDs in x>0
     }
 
    
@@ -3132,8 +3135,7 @@ for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
 
              $Paddle_Y   =    $APACenter_y
                             - $APAphys_y/2
-                            + $FrameToPaddleSpace
-                            + (1-$j)*($ArapucaOut_y/2 + $APAFrameZSide_y)
+                            + $posBottomArapuca_y
                             + $PaddleYInterval*$paddle;
 
 print CRYO <<EOF;
