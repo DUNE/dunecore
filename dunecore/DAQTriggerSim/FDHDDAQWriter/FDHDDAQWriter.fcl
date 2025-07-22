@@ -10,4 +10,12 @@ FDHDdaqwriter:
   InductionPedestalOffset:     2000   # to be added to all induction-plane ADC values
 }
 
+FDHDWIBEthBinaryWriter:
+{
+  module_type:                 "FDHDDAQWIBEthBinary"
+  rawdigitlabel:               "tpcrawdecoder:daq"
+  CollectionPedestalOffset:    900    # to be added to all collection-plane ADC values
+  InductionPedestalOffset:     2000   # to be added to all induction-plane ADC values
+}
+
 END_PROLOG

@@ -1,0 +1,18 @@
+#include "FDHDDAQWriter.fcl"
+#include "FDHDChannelMapService.fcl"
+#include "prodsingle_dunefd.fcl"
+
+services.TPCChannelMapService: @local::fdhdwibethchannelmap
+physics.analyzers.fdhdwibethbinary: @local::FDHDWIBEthBinaryWriter
+physics.stream1: [ "fdhdwibethbinary", "out1" ]
+physics.analyzers.fdhdwibethbinary.rawdigitlabel: "daq"
+
+# save all the raw digits in memory
+
+physics.producers.daq.CompressionType: "none"
+physics.producers.daq.SaveEmptyChannel: true
+physics.producers.daq.ZeroThreshold: 1
+
+# but do not write them to disk
+
+outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
