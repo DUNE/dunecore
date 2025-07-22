@@ -2,7 +2,7 @@
 #include <iostream>
 
 // standalone test program to run the service provider.  Compile with:
-// g++ --std=c++17 -o testmap testmap.C FDHDChannelMapSP.cxx
+// g++ --std=c++17 -o testmapwibeth testmapwibeth.C TPCChannelMapSP.cxx
 
 int main(int argc, char **argv)
 {
