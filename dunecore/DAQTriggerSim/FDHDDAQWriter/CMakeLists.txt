@@ -12,6 +12,7 @@ art_make(MODULE_LIBRARIES
                         messagefacility::MF_MessageLogger
 			HDF5::HDF5
                         dunecore::ChannelMap_FDHDChannelMapService_service
+                        dunecore::ChannelMap_TPCChannelMapService_service
                         BASENAME_ONLY
 )
 
