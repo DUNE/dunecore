@@ -4248,7 +4248,6 @@
     <position unit="cm" name="posCRTPaddleSensitive_bottom_5" x="-21.3" y="0.0" z="0.0"/>
     <position unit="cm" name="posCRTPaddleSensitive_bottom_6" x="-35.5" y="0.0" z="0.0"/>
     <position unit="cm" name="posCRTPaddleSensitive_bottom_7" x="-49.7" y="0.0" z="0.0"/>
-    <position unit="cm" name="cryo_pos" x="0" y="0" z="0"/>
     <position unit="cm" name="posBeamWinFoam" x="230.72280686017208" y="445.7013273265373" z="-445.7013273265373"/>
     <position unit="cm" name="posBeamWinGlassWool" x="233.67309657693934" y="467.52214067740874" z="-467.52214067740874"/>
     <position unit="cm" name="posBeamPipe" x="276.97573596820075" y="787.7953688918119" z="-787.7953688918119"/>
@@ -4269,6 +4268,7 @@
     <position unit="cm" name="posSteelSupport" x="0" y="0" z="0"/>
     <position unit="cm" name="posCRTDPTOPSensitive_1" x="384.8" y="588.2" z="0.0"/>
     <position unit="cm" name="posCRTDPBOTTOMSensitive_1" x="-440.6" y="-588.2" z="0.0"/>
+    <position unit="cm" name="cryo_pos" x="0" y="0" z="0"/>
     <position unit="cm" name="center" x="0.0" y="0.0" z="0.0"/>
     <rotation unit="degree" name="rot90AboutY" x="0" y="90" z="0"/>
     <rotation unit="degree" name="rPlus45AboutX" x="45" y="0" z="0"/>
@@ -7911,6 +7911,829 @@
     <box name="world_shape" lunit="cm" x="19904.0" y="17033.6" z="20033.6"/>
   </solids>
   <structure>
+    <volume name="volBeamWinFoam">
+      <materialref ref="ProtoDUNEBWFoam"/>
+      <solidref ref="BeamWindowFoam"/>
+    </volume>
+    <volume name="volBeamWinGlassWool">
+      <materialref ref="GlassWool"/>
+      <solidref ref="BeamWindowGlassWool"/>
+    </volume>
+    <volume name="volBeamPipeVac">
+      <materialref ref="Vacuum"/>
+      <solidref ref="BeamPipeVacuum"/>
+    </volume>
+    <volume name="volUnitCent">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="UnitCent"/>
+    </volume>
+    <volume name="volUnitTop">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="UnitTop"/>
+    </volume>
+    <volume name="volSteelSupport_TB">
+      <materialref ref="Air"/>
+      <solidref ref="boxCryoTop"/>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_0-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_0-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_0-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_0-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_0-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_1-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_1-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_1-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_1-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_1-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_2-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_2-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_2-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_2-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_2-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_3-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_3-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_3-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_3-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_3-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_4-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_4-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_4-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_4-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitTBCent_4-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBE_0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBS_0"/>
+        <rotationref ref="rotUnitTBS_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBW_0"/>
+        <rotationref ref="rotUnitTBW_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBN_0"/>
+        <rotationref ref="rotUnitTBN_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBE_1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBS_1"/>
+        <rotationref ref="rotUnitTBS_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBW_1"/>
+        <rotationref ref="rotUnitTBW_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBN_1"/>
+        <rotationref ref="rotUnitTBN_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBE_2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBS_2"/>
+        <rotationref ref="rotUnitTBS_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBW_2"/>
+        <rotationref ref="rotUnitTBW_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBN_2"/>
+        <rotationref ref="rotUnitTBN_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBE_3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBS_3"/>
+        <rotationref ref="rotUnitTBS_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBW_3"/>
+        <rotationref ref="rotUnitTBW_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBN_3"/>
+        <rotationref ref="rotUnitTBN_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBE_4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBS_4"/>
+        <rotationref ref="rotUnitTBS_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBW_4"/>
+        <rotationref ref="rotUnitTBW_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitTBN_4"/>
+        <rotationref ref="rotUnitTBN_4"/>
+      </physvol>
+    </volume>
+    <volume name="volUnitWallS">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="UnitWallS"/>
+    </volume>
+    <volume name="volSteelSupport_US">
+      <materialref ref="Air"/>
+      <solidref ref="boxCryoWallSm"/>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_0-0"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_0-1"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_0-2"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_0-3"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_0-4"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_1-0"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_1-1"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_1-2"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_1-3"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_1-4"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_2-0"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_2-1"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_2-2"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_2-3"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_2-4"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_3-0"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_3-1"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_3-2"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_3-3"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_3-4"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_4-0"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_4-1"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_4-2"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_4-3"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitUSCent_4-4"/>
+        <rotationref ref="rPlus180AboutY"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSE_0"/>
+        <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSS_0"/>
+        <rotationref ref="rotUnitUSS_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSW_0"/>
+        <rotationref ref="rotUnitUSW_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSN_0"/>
+        <rotationref ref="rotUnitUSN_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSE_1"/>
+        <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSS_1"/>
+        <rotationref ref="rotUnitUSS_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSW_1"/>
+        <rotationref ref="rotUnitUSW_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSN_1"/>
+        <rotationref ref="rotUnitUSN_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSE_2"/>
+        <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSS_2"/>
+        <rotationref ref="rotUnitUSS_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSW_2"/>
+        <rotationref ref="rotUnitUSW_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSN_2"/>
+        <rotationref ref="rotUnitUSN_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSE_3"/>
+        <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSS_3"/>
+        <rotationref ref="rotUnitUSS_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSW_3"/>
+        <rotationref ref="rotUnitUSW_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSN_3"/>
+        <rotationref ref="rotUnitUSN_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSE_4"/>
+        <rotationref ref="rPlus180AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSS_4"/>
+        <rotationref ref="rotUnitUSS_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitTop"/>
+        <positionref ref="posUnitUSW_4"/>
+        <rotationref ref="rotUnitUSW_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitUSN_4"/>
+        <rotationref ref="rotUnitUSN_4"/>
+      </physvol>
+    </volume>
+    <volume name="volUnitWallL">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="UnitWallL"/>
+    </volume>
+    <volume name="volSteelSupport_LR">
+      <materialref ref="Air"/>
+      <solidref ref="boxCryoWallLg"/>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_0-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_0-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_0-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_0-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_0-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_1-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_1-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_1-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_1-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_1-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_2-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_2-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_2-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_2-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_2-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_3-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_3-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_3-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_3-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_3-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_4-0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_4-1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_4-2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_4-3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitCent"/>
+        <positionref ref="posUnitLRCent_4-4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRE_0"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRS_0"/>
+        <rotationref ref="rotUnitLRS_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRW_0"/>
+        <rotationref ref="rotUnitLRW_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRN_0"/>
+        <rotationref ref="rotUnitLRN_0"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRE_1"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRS_1"/>
+        <rotationref ref="rotUnitLRS_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRW_1"/>
+        <rotationref ref="rotUnitLRW_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRN_1"/>
+        <rotationref ref="rotUnitLRN_1"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRE_2"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRS_2"/>
+        <rotationref ref="rotUnitLRS_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRW_2"/>
+        <rotationref ref="rotUnitLRW_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRN_2"/>
+        <rotationref ref="rotUnitLRN_2"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRE_3"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRS_3"/>
+        <rotationref ref="rotUnitLRS_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRW_3"/>
+        <rotationref ref="rotUnitLRW_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRN_3"/>
+        <rotationref ref="rotUnitLRN_3"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRE_4"/>
+        <rotationref ref="identity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRS_4"/>
+        <rotationref ref="rotUnitLRS_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallL"/>
+        <positionref ref="posUnitLRW_4"/>
+        <rotationref ref="rotUnitLRW_4"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volUnitWallS"/>
+        <positionref ref="posUnitLRN_4"/>
+        <rotationref ref="rotUnitLRN_4"/>
+      </physvol>
+    </volume>
+    <volume name="volFoamPadding">
+      <materialref ref="foam_protoDUNE_RPUF_assayedSample"/>
+      <solidref ref="FoamPadding"/>
+    </volume>
+    <volume name="volSteelSupport">
+      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
+      <solidref ref="SteelSupport"/>
+    </volume>
+    <volume name="volAuxDetSensitiveCRTDPPaddleTop">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Top"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+    <volume name="volAuxDetCRTDPModuleTop">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Top"/>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_0"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_1"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_2"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_3"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_4"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_5"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_6"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
+        <positionref ref="posCRTPaddleSensitive_top_7"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+    </volume>
+    <volume name="volAuxDetSensitiveCRTDPPaddleBottom">
+      <materialref ref="Polystyrene"/>
+      <solidref ref="scintBox_Bottom"/>
+      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
+      <auxiliary auxtype="Solid" auxvalue="True"/>
+    </volume>
+    <volume name="volAuxDetCRTDPModuleBottom">
+      <materialref ref="Air"/>
+      <solidref ref="ModulescintBox_Bottom"/>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_0"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_1"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_2"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_3"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_4"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_5"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_6"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
+        <positionref ref="posCRTPaddleSensitive_bottom_7"/>
+        <rotationref ref="rMinus90AboutX"/>
+      </physvol>
+    </volume>
     <volume name="cryostat_steel_volume">
       <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
       <solidref ref="cryostat_steel_shape"/>
@@ -37139,837 +37962,9 @@
       <auxiliary auxtype="StepLimit" auxvalue="0.47625*cm"/>
       <auxiliary auxtype="Efield" auxvalue="0*V/cm"/>
     </volume>
-    <volume name="volBeamWinFoam">
-      <materialref ref="ProtoDUNEBWFoam"/>
-      <solidref ref="BeamWindowFoam"/>
-    </volume>
-    <volume name="volBeamWinGlassWool">
-      <materialref ref="GlassWool"/>
-      <solidref ref="BeamWindowGlassWool"/>
-    </volume>
-    <volume name="volBeamPipeVac">
-      <materialref ref="Vacuum"/>
-      <solidref ref="BeamPipeVacuum"/>
-    </volume>
-    <volume name="volUnitCent">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="UnitCent"/>
-    </volume>
-    <volume name="volUnitTop">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="UnitTop"/>
-    </volume>
-    <volume name="volSteelSupport_TB">
-      <materialref ref="Air"/>
-      <solidref ref="boxCryoTop"/>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_0-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_0-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_0-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_0-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_0-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_1-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_1-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_1-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_1-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_1-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_2-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_2-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_2-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_2-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_2-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_3-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_3-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_3-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_3-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_3-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_4-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_4-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_4-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_4-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitTBCent_4-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBE_0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBS_0"/>
-        <rotationref ref="rotUnitTBS_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBW_0"/>
-        <rotationref ref="rotUnitTBW_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBN_0"/>
-        <rotationref ref="rotUnitTBN_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBE_1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBS_1"/>
-        <rotationref ref="rotUnitTBS_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBW_1"/>
-        <rotationref ref="rotUnitTBW_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBN_1"/>
-        <rotationref ref="rotUnitTBN_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBE_2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBS_2"/>
-        <rotationref ref="rotUnitTBS_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBW_2"/>
-        <rotationref ref="rotUnitTBW_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBN_2"/>
-        <rotationref ref="rotUnitTBN_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBE_3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBS_3"/>
-        <rotationref ref="rotUnitTBS_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBW_3"/>
-        <rotationref ref="rotUnitTBW_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBN_3"/>
-        <rotationref ref="rotUnitTBN_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBE_4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBS_4"/>
-        <rotationref ref="rotUnitTBS_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBW_4"/>
-        <rotationref ref="rotUnitTBW_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitTBN_4"/>
-        <rotationref ref="rotUnitTBN_4"/>
-      </physvol>
-    </volume>
-    <volume name="volUnitWallS">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="UnitWallS"/>
-    </volume>
-    <volume name="volSteelSupport_US">
-      <materialref ref="Air"/>
-      <solidref ref="boxCryoWallSm"/>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_0-0"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_0-1"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_0-2"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_0-3"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_0-4"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_1-0"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_1-1"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_1-2"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_1-3"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_1-4"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_2-0"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_2-1"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_2-2"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_2-3"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_2-4"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_3-0"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_3-1"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_3-2"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_3-3"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_3-4"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_4-0"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_4-1"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_4-2"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_4-3"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitUSCent_4-4"/>
-        <rotationref ref="rPlus180AboutY"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSE_0"/>
-        <rotationref ref="rPlus180AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSS_0"/>
-        <rotationref ref="rotUnitUSS_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSW_0"/>
-        <rotationref ref="rotUnitUSW_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSN_0"/>
-        <rotationref ref="rotUnitUSN_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSE_1"/>
-        <rotationref ref="rPlus180AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSS_1"/>
-        <rotationref ref="rotUnitUSS_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSW_1"/>
-        <rotationref ref="rotUnitUSW_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSN_1"/>
-        <rotationref ref="rotUnitUSN_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSE_2"/>
-        <rotationref ref="rPlus180AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSS_2"/>
-        <rotationref ref="rotUnitUSS_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSW_2"/>
-        <rotationref ref="rotUnitUSW_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSN_2"/>
-        <rotationref ref="rotUnitUSN_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSE_3"/>
-        <rotationref ref="rPlus180AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSS_3"/>
-        <rotationref ref="rotUnitUSS_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSW_3"/>
-        <rotationref ref="rotUnitUSW_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSN_3"/>
-        <rotationref ref="rotUnitUSN_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSE_4"/>
-        <rotationref ref="rPlus180AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSS_4"/>
-        <rotationref ref="rotUnitUSS_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitTop"/>
-        <positionref ref="posUnitUSW_4"/>
-        <rotationref ref="rotUnitUSW_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitUSN_4"/>
-        <rotationref ref="rotUnitUSN_4"/>
-      </physvol>
-    </volume>
-    <volume name="volUnitWallL">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="UnitWallL"/>
-    </volume>
-    <volume name="volSteelSupport_LR">
-      <materialref ref="Air"/>
-      <solidref ref="boxCryoWallLg"/>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_0-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_0-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_0-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_0-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_0-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_1-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_1-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_1-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_1-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_1-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_2-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_2-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_2-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_2-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_2-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_3-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_3-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_3-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_3-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_3-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_4-0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_4-1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_4-2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_4-3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitCent"/>
-        <positionref ref="posUnitLRCent_4-4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRE_0"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRS_0"/>
-        <rotationref ref="rotUnitLRS_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRW_0"/>
-        <rotationref ref="rotUnitLRW_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRN_0"/>
-        <rotationref ref="rotUnitLRN_0"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRE_1"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRS_1"/>
-        <rotationref ref="rotUnitLRS_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRW_1"/>
-        <rotationref ref="rotUnitLRW_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRN_1"/>
-        <rotationref ref="rotUnitLRN_1"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRE_2"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRS_2"/>
-        <rotationref ref="rotUnitLRS_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRW_2"/>
-        <rotationref ref="rotUnitLRW_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRN_2"/>
-        <rotationref ref="rotUnitLRN_2"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRE_3"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRS_3"/>
-        <rotationref ref="rotUnitLRS_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRW_3"/>
-        <rotationref ref="rotUnitLRW_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRN_3"/>
-        <rotationref ref="rotUnitLRN_3"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRE_4"/>
-        <rotationref ref="identity"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRS_4"/>
-        <rotationref ref="rotUnitLRS_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallL"/>
-        <positionref ref="posUnitLRW_4"/>
-        <rotationref ref="rotUnitLRW_4"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volUnitWallS"/>
-        <positionref ref="posUnitLRN_4"/>
-        <rotationref ref="rotUnitLRN_4"/>
-      </physvol>
-    </volume>
-    <volume name="volFoamPadding">
-      <materialref ref="foam_protoDUNE_RPUF_assayedSample"/>
-      <solidref ref="FoamPadding"/>
-    </volume>
-    <volume name="volSteelSupport">
-      <materialref ref="STEEL_STAINLESS_Fe7Cr2Ni"/>
-      <solidref ref="SteelSupport"/>
-    </volume>
-    <volume name="volAuxDetSensitiveCRTDPPaddleTop">
-      <materialref ref="Polystyrene"/>
-      <solidref ref="scintBox_Top"/>
-      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
-      <auxiliary auxtype="Solid" auxvalue="True"/>
-    </volume>
-    <volume name="volAuxDetCRTDPModuleTop">
-      <materialref ref="Air"/>
-      <solidref ref="ModulescintBox_Top"/>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_0"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_1"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_2"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_3"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_4"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_5"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_6"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleTop"/>
-        <positionref ref="posCRTPaddleSensitive_top_7"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-    </volume>
-    <volume name="volAuxDetSensitiveCRTDPPaddleBottom">
-      <materialref ref="Polystyrene"/>
-      <solidref ref="scintBox_Bottom"/>
-      <auxiliary auxtype="SensDet" auxvalue="AuxDet"/>
-      <auxiliary auxtype="Solid" auxvalue="True"/>
-    </volume>
-    <volume name="volAuxDetCRTDPModuleBottom">
-      <materialref ref="Air"/>
-      <solidref ref="ModulescintBox_Bottom"/>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_0"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_1"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_2"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_3"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_4"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_5"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_6"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-      <physvol>
-        <volumeref ref="volAuxDetSensitiveCRTDPPaddleBottom"/>
-        <positionref ref="posCRTPaddleSensitive_bottom_7"/>
-        <rotationref ref="rMinus90AboutX"/>
-      </physvol>
-    </volume>
     <volume name="volDetEnclosure">
       <materialref ref="Air"/>
       <solidref ref="volDetEnclosure_shape"/>
-      <physvol>
-        <volumeref ref="volCryostat"/>
-        <positionref ref="cryo_pos"/>
-        <rotationref ref="identity"/>
-      </physvol>
       <physvol>
         <volumeref ref="volBeamWinFoam"/>
         <positionref ref="posBeamWinFoam"/>
@@ -38034,6 +38029,11 @@
         <volumeref ref="volAuxDetCRTDPModuleBottom"/>
         <positionref ref="posCRTDPBOTTOMSensitive_1"/>
         <rotationref ref="rIdentity"/>
+      </physvol>
+      <physvol>
+        <volumeref ref="volCryostat"/>
+        <positionref ref="cryo_pos"/>
+        <rotationref ref="identity"/>
       </physvol>
     </volume>
     <volume name="volWorld">

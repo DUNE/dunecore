@@ -8,4 +8,8 @@ fdhdchannelmap: {
   CrateMapFile:           "FDHD_CrateMap_v1.txt"            # crate numbers and APA names
 }
 
+fdhdwibethchannelmap: {
+  FileName:               "FDHDChannelMap_WIBEth_visiblewires_v1.txt"  # electronics map for all APAs
+}
+
 END_PROLOG
