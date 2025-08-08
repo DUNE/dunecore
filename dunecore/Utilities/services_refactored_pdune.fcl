@@ -51,6 +51,7 @@ protodunevd_refactored_simulation_services:
 }
 protodunevd_larg4_services: @local::protodune_larg4_services
 protodunevd_larg4_services.LArG4Detector: @local::protodunevd_larg4detector
+protodunevd_refactored_simulation_services.PhotonBackTrackerService.PhotonBackTracker.G4ModuleLabels: [ "PDFastSimAr", "PDFastSimXe" ]
 
 ## DRIFT Y ##
 protodunevd_drifty_refactored_simulation_services: @local::protodunevd_refactored_simulation_services
