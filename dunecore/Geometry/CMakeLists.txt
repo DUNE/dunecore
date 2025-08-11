@@ -25,7 +25,7 @@ art_make( BASENAME_ONLY
                         canvas::canvas
                         ROOT::Geom
                         nlohmann_json::nlohmann_json
-                        opdet_PDVDPDMapAlg
+                        dunecore::opdet_PDVDPDMapAlg
           SERVICE_LIBRARIES larcorealg::Geometry
                         larcore::Geometry_Geometry_service
                         dunecore_Geometry
@@ -35,7 +35,7 @@ art_make( BASENAME_ONLY
                         ROOT::Geom
                         ROOT::XMLIO
                         ROOT::Gdml
-                        opdet_PDVDPDMapAlg
+                        dunecore::opdet_PDVDPDMapAlg
         )
 
 cet_build_plugin ( CheckGeometry art::module

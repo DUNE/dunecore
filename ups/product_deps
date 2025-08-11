@@ -248,12 +248,12 @@ gdmldir	product_dir	gdml
 #
 product             version
 dunepdlegacy        v1_01_04
-duneutil            v10_08_01d00
+duneutil            v10_09_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_4_5
 dunedaqdataformats  v4_4_5
 nusystematics       v1_05_07
-larsoft             v10_08_01
+larsoft             v10_09_00
 cetmodules          v3_24_01    -       only_for_build
 valgrind            v3_17_0
 nlohmann_json       v3_11_2
