@@ -43,9 +43,6 @@
 #include "CRPWireReadoutGeom.h"
 #include "GeoObjectSorterCRU60D.h"
 
-#include "duneprototypes/Protodune/vd/ChannelMap/PDVDPDMapAlg.hh"
-
-
 using geo::dune::vd::crp::ChannelToWireMap;
 
 
