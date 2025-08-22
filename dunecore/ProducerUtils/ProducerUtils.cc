@@ -3,8 +3,9 @@
 namespace producer
 {
     ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-        : fGeometry(p.get<std::string>("Geometry"))
     {
+        // Constructor can be used to initialize any parameters if needed
+        // Currently, no parameters are being initialized
     }
 
     void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime)
