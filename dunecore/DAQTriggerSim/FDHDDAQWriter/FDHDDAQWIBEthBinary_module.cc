@@ -19,6 +19,11 @@
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
+#include <net/ethernet.h>		// for struct ether_header
+#include <netinet/ip.h>			// struct ip
+
+#include <netinet/udp.h>		// struct udphdr
+#include <arpa/inet.h>			// ntohs, ntohl
 #include <hdf5.h>
 #include <iostream>
 #include <string>
@@ -29,9 +34,37 @@
 #include <vector>
 #include <unordered_map>
 #include "detdataformats/wibeth/WIBEthFrame.hpp"
+#include "detdataformats/DAQEthHeader.hpp"
 #include "lardataobj/RawData/raw.h"
 #include "lardataobj/RawData/RawDigit.h"
 #include "dunecore/ChannelMap/TPCChannelMapService.h"
+
+
+#pragma pack(push, 1)
+typedef struct pcap_hdr {
+    uint32_t magic_number;
+    uint16_t version_major;
+    uint16_t version_minor;
+    int32_t  thiszone;
+    uint32_t sigfigs;
+    uint32_t snaplen;
+    uint32_t network;
+} pcap_hdr_t;
+
+typedef struct pcaprec_hdr {
+    uint32_t ts_sec;   // timestamp seconds
+    uint32_t ts_usec;  // timestamp microseconds or nanoseconds
+    uint32_t incl_len; // number of bytes of packet saved in file
+    uint32_t orig_len; // original length of packet (on the wire)
+} pcaprec_hdr_t;
+
+struct pkt_data_hdrs {
+  struct ether_header ehdr;
+  struct ip           ihdr;
+  struct udphdr       uhdr;
+};
+#pragma pack(pop)
+
 
 class FDHDDAQWIBEthBinary : public art::EDAnalyzer {
 public:
@@ -64,6 +97,22 @@ FDHDDAQWIBEthBinary::FDHDDAQWIBEthBinary(fhicl::ParameterSet const& p)
   fInductionPedestalOffset = p.get<int>("InductionPedestalOffset",2000);
 }
 
+// Detect endianness of host at runtime
+int is_little_endian() {
+    uint16_t test = 0x1;
+    return *(uint8_t *)&test == 0x1;
+}
+// Swap bytes for endian conversion
+uint16_t swap16(uint16_t x) { return (x >> 8) | (x << 8); }
+
+uint32_t swap32(uint32_t x) {
+    return  (x >> 24) |
+           ((x >> 8) & 0x0000FF00) |
+           ((x << 8) & 0x00FF0000) |
+           (x << 24);
+}
+
+
 void FDHDDAQWIBEthBinary::analyze(art::Event const& e)
 {
   art::ServiceHandle<dune::TPCChannelMapService> electronicsMap;
@@ -83,6 +132,29 @@ void FDHDDAQWIBEthBinary::analyze(art::Event const& e)
   ofm1 << "_event" << std::internal << std::setfill('0') << std::setw(6) << evtno << ".dat";
   std::string outputfilename = ofm1.str();
   FILE *ofile = fopen(outputfilename.c_str(),"w");
+
+  auto hdr = pcap_hdr();
+  hdr.magic_number = 0xa1b2c3d4;
+  hdr.version_major = 2;
+  hdr.version_minor = 4;
+  hdr.thiszone = 0;
+  hdr.sigfigs = 0;
+  hdr.snaplen = 262144;
+  hdr.network = 1;
+
+  // the file will be majority little endian...
+  if (!is_little_endian()) {
+    // Convert all fields to host byte order
+    hdr.version_major = swap16(hdr.version_major);
+    hdr.version_minor = swap16(hdr.version_minor);
+    hdr.thiszone      = (int32_t)swap32((uint32_t)hdr.thiszone);
+    hdr.sigfigs       = swap32(hdr.sigfigs);
+    hdr.snaplen       = swap32(hdr.snaplen);
+    hdr.network       = swap32(hdr.network);
+  }
+
+  fwrite(&hdr, sizeof(hdr), 1, ofile);
+
 
   // this will throw an exception if the raw digits cannot be found.
 
@@ -146,7 +218,7 @@ void FDHDDAQWIBEthBinary::analyze(art::Event const& e)
 		  planelist[streamchan] = cinfo.plane;
 		} // end loop over stream chan to fill chanlist
 	      if (skip) continue;  // didn't find all the channels we need to make this frame
-	      
+
 	      dunedaq::fddetdataformats::WIBEthFrame frame;
 	      std::vector<std::vector<short>> uncompressed(64, std::vector<short>(nSamples));
 	      for (int streamchan=0; streamchan<64; ++streamchan)
@@ -205,7 +277,46 @@ void FDHDDAQWIBEthBinary::analyze(art::Event const& e)
 		      frame.header.version = 0;
 		      frame.header.channel = 0;
 		      frame.header.extra_data = 0;
+
+		      pcaprec_hdr_t       pchdr;
+		      struct timeval tv;
+		      gettimeofday(&tv,NULL);
+		      pchdr.ts_sec = tv.tv_sec;
+		      pchdr.ts_usec = tv.tv_usec;
+		      pchdr.incl_len =
+			sizeof(pkt_data_hdrs)
+			+ sizeof(frame)+ 1;   // ethernet trailer in practice is 1 byte
+		      pchdr.orig_len = pchdr.incl_len;
+		      fwrite(&pchdr, sizeof(pchdr), 1, ofile);
+		      printf("incl_len=%d pkt_data_hdrs=%zd frame=%zd\n",
+			     pchdr.incl_len, sizeof(pkt_data_hdrs), sizeof(frame) );
+
+		      struct pkt_data_hdrs hdrs;
+		      unsigned char dst[ETH_ALEN] = {0xff,0xff,0xff,0xff,0xff,0xff};
+		      unsigned char src[ETH_ALEN] = {0x00,0x11,0x22,0x33,0x44,0x55};
+		      memcpy(&(hdrs.ehdr.ether_dhost),&dst,sizeof(dst));
+		      memcpy(&(hdrs.ehdr.ether_shost),&src,sizeof(src));
+		      hdrs.ehdr.ether_type = htons(ETH_P_IP);
+		      hdrs.ihdr.ip_hl         = 5;
+		      hdrs.ihdr.ip_v          = 4;
+		      hdrs.ihdr.ip_tos        = 0;
+		      hdrs.ihdr.ip_len        = htons(7228);
+		      hdrs.ihdr.ip_id         = htons(56064);
+		      hdrs.ihdr.ip_off        = htons(0);
+		      hdrs.ihdr.ip_ttl        = 128;
+		      hdrs.ihdr.ip_p          = 17;
+		      hdrs.ihdr.ip_sum        = htons(0);
+		      hdrs.ihdr.ip_src.s_addr = htonl(0xc0a80101);
+		      hdrs.ihdr.ip_dst.s_addr = htonl(0xc0a80102);
+		      hdrs.uhdr.source = htons(2048);
+		      hdrs.uhdr.dest   = htons(2049);
+		      hdrs.uhdr.len    = htons(7208);
+		      hdrs.uhdr.check  = htons(0);
+		      fwrite(&hdrs, sizeof(hdrs), 1, ofile);
+
 		      fwrite(&frame, sizeof(frame), 1, ofile);
+		      unsigned char trailer_byte = 0xc0;
+		      fwrite(&trailer_byte, sizeof(trailer_byte), 1, ofile);
 		      ++iseq;
 		    }
 		}
