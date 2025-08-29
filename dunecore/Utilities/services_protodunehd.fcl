@@ -13,6 +13,8 @@ protodunehd_services.Geometry:  @local::protodunehdv6_geo
 protodunehd_services.DetectorClocksService: @local::protodunehd_detectorclocks
 protodunehd_services.LArPropertiesService.ScintPreScale: 1
 protodunehd_services.WireReadout.WireReadoutClass: DuneApaWireReadout
+protodunehd_services.SpaceCharge: @local::pdhd_spacecharge
+
 
 protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
 protodunehd_rawdecoding_services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
