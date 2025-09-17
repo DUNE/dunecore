@@ -132,7 +132,7 @@
     {
       "channel": 13,
       "pd_type": "Membrane",
-      "wls" : "None",
+      "wls" : "PTP+Q",
       "eff_Ar": 0.0,
       "eff_Xe": 0.03,
       "name":  "M7",
@@ -299,8 +299,7 @@
       "pd_type": "PMT",
       "wls" : "PEN",
       "eff_Ar": 0.036,
-      "eff_Xe": 0.036,
-      "eff": 0.036,
+      "eff_Xe": 0.036, 
       "name":  "",
       "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" : 30, "OfflineChannel": 3160}]
     },
@@ -328,7 +327,6 @@
       "wls" : "PEN+Q",
       "eff_Ar": 0.0,
       "eff_Xe": 0.036,
-      "eff": 0.036,
       "name":  "",
       "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" : 16, "OfflineChannel": 3190}]
     },
