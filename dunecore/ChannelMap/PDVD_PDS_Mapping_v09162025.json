@@ -232,15 +232,6 @@
       "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" : 22, "OfflineChannel": 3080}]
     },
     {
-      "channel": 24,
-      "pd_type": "PMT",
-      "wls" : "PEN+Q",
-      "eff_Ar": 0.0,
-      "eff_Xe": 0.036,
-      "name":  "",
-      "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" :  , "OfflineChannel": 3090}]
-    },
-    {
       "channel": 25,
       "pd_type": "PMT",
       "wls" : "PEN",
@@ -257,15 +248,6 @@
       "eff_Xe": 0.036,
       "name":  "",
       "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" : 34, "OfflineChannel": 3110}]
-    },
-    {
-      "channel": 27,
-      "pd_type": "PMT",
-      "wls" : "PEN",
-      "eff_Ar": 0.036,
-      "eff_Xe": 0.036,
-      "name":  "",
-      "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" :  , "OfflineChannel": 3120}]
     },
     {
       "channel": 28,
