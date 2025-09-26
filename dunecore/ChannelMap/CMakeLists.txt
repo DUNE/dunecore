@@ -34,4 +34,7 @@ art_make_library(
 )
   
 # install PDVD_PDS_Mapping.json with mapping of the photon detectors
-install_fw(LIST PDVD_PDS_Mapping_v07082025.json)
+install_fw(LIST
+           PDVD_PDS_Mapping_v04152025.json 
+           PDVD_PDS_Mapping_v07082025.json
+           PDVD_PDS_Mapping_v09162025.json)
