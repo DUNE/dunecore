@@ -56,7 +56,8 @@ namespace opdet {
     //  PDVDPDMapAlg(Config const&) {}
 
     // void setup() {}
-    std::string getOpDetProperty(int OpDet, std::string property) const;
+    std::string getOfflineChannelProperty(unsigned int oc, std::string property) const;
+    std::string getOpDetProperty(unsigned int OpDet, std::string property) const;
     
     bool isPDType(size_t ch, std::string pdname) const override;
     double ArgonEfficiency(size_t ch) const;
@@ -91,7 +92,7 @@ namespace opdet {
     bool isValidHardwareChannel(int hwch) const;
     unsigned int NOpChannels();
     unsigned int NOpHardwareChannels(unsigned int opDet);
-    unsigned int OpDetFromOpChannel(unsigned int OpChannel);
+    unsigned int OpDetFromOpChannel(unsigned int OpChannel) const;
     std::vector<unsigned int> HardwareChannelPerOpDet(unsigned int OpDet);
 
   private:

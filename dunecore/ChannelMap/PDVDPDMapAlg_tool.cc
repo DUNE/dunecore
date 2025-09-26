@@ -39,9 +39,15 @@
     PDVDPDMapAlg::~PDVDPDMapAlg()
       { }
 
-      std::string PDVDPDMapAlg::getOpDetProperty(int OpDet, std::string property) const
+      std::string PDVDPDMapAlg::getOfflineChannelProperty(unsigned int oc, std::string property) const
       {
-        if(OpDet>=(int)PDmap.size())
+        if(property=="OfflineChannel") return std::to_string(oc);
+        else return getOpDetProperty(OpDetFromOpChannel(oc),property);
+      }
+
+      std::string PDVDPDMapAlg::getOpDetProperty( unsigned int OpDet, std::string property) const
+      {
+        if(OpDet>=PDmap.size())
            throw cet::exception(fLogCategory)
          << "PDVDPDMapAlg::getOpDetProperty(" << OpDet
          << "): channel requested do not exist "
@@ -162,9 +168,9 @@
       {
         return MapOpDetChannelToHardwareChannel[opDet].size();
       }
-      unsigned int PDVDPDMapAlg::OpDetFromOpChannel(unsigned int opChannel)
+      unsigned int PDVDPDMapAlg::OpDetFromOpChannel(unsigned int opChannel) const
       {
-        return MapHardwareChannelToOpDetChannel[opChannel];
+        return MapHardwareChannelToOpDetChannel.at(opChannel);
       }
       std::vector<unsigned int> PDVDPDMapAlg::HardwareChannelPerOpDet(unsigned int opDet)
       {
