@@ -238,7 +238,7 @@
       "eff_Ar": 0.0,
       "eff_Xe": 0.036,
       "name":  "",
-      "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" :  , "OfflineChannel": 3090}]
+      "HardwareChannel": [{"Slot": 0, "Link" : 0, "DaphneChannel" :  0, "OfflineChannel": 3090}]
     },
     {
       "channel": 25,
@@ -265,7 +265,7 @@
       "eff_Ar": 0.036,
       "eff_Xe": 0.036,
       "name":  "",
-      "HardwareChannel": [{"Slot": 0, "Link" : 1, "DaphneChannel" :  , "OfflineChannel": 3120}]
+      "HardwareChannel": [{"Slot": 0, "Link" : 0, "DaphneChannel" : 0 , "OfflineChannel": 3120}]
     },
     {
       "channel": 28,
