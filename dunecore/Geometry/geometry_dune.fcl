@@ -669,7 +669,7 @@ protodunevd_wire_readout: {
   service_provider: "DUNEWireReadout"
   PDMapTool: {
     tool_type: "PDVDPDMapAlg"
-    MappingFile: "PDVD_PDS_Mapping_v07082025.json"
+    MappingFile: "PDVD_PDS_Mapping_v09162025.json"
   }
 }
 
