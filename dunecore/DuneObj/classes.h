@@ -33,6 +33,8 @@
 
 #include "detdataformats/hsi/HSIFrame.hpp"
 
+#include "dunecore/DuneObj/SimpleBeamParticle.h"
+
 #include <vector>
 #include <map>
 //#include <array>

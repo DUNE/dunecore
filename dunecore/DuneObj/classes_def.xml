@@ -222,5 +222,8 @@
  <class name="art::Wrapper<std::vector<dunedaq::detdataformats::HSIFrame>>"/>
  <class name="art::Wrapper<art::PtrVector<dunedaq::detdataformats::HSIFrame>>"/>
 
+ <class name="SimpleBeamParticle"/>
+ <class name="std::vector<SimpleBeamParticle>"/>
+ <class name="std::map<int, SimpleBeamParticle>"/>
 
 </lcgdict>
