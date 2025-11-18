@@ -252,7 +252,6 @@ duneutil            v10_13_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_4_5
 dunedaqdataformats  v4_4_5
-nusystematics       v1_05_09
 larsoft             v10_13_00
 cetmodules          v3_24_01    -       only_for_build
 valgrind            v3_17_0
@@ -313,11 +312,11 @@ end_product_list
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier        dunepdlegacy         larsoft     duneutil  nusystematics    dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
-c14:debug        c14:debug            c14:debug   c14:debug c14:debug           -nq-                -nq-                   -nq-       -nq-    -nq-           c14:debug  
-c14:prof         c14:prof             c14:prof    c14:prof  c14:prof            -nq-                -nq-                   -nq-       -nq-    -nq-   	     c14:prof   
-e26:debug        e26:debug            e26:debug   e26:debug e26:debug           -nq-                -nq-                   -nq-       -nq-    -nq- 	     e26:debug 
-e26:prof         e26:prof             e26:prof    e26:prof  e26:prof            -nq-                -nq-                   -nq-       -nq-    -nq-  	     e26:prof  
+qualifier        dunepdlegacy         larsoft     duneutil  dunedetdataformats   dunedaqdataformats   dune_pardata valgrind  nlohmann_json  highfive   notes
+c14:debug        c14:debug            c14:debug   c14:debug -nq-                -nq-                   -nq-       -nq-    -nq-           c14:debug  
+c14:prof         c14:prof             c14:prof    c14:prof  -nq-                -nq-                   -nq-       -nq-    -nq-   	     c14:prof   
+e26:debug        e26:debug            e26:debug   e26:debug -nq-                -nq-                   -nq-       -nq-    -nq- 	     e26:debug 
+e26:prof         e26:prof             e26:prof    e26:prof  -nq-                -nq-                   -nq-       -nq-    -nq-  	     e26:prof  
 
 end_qualifier_list
 ####################################
