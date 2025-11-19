@@ -77,7 +77,6 @@ namespace producer
     
     private:
         // From fhicl configuration
-        const std::string fGeometry;
     };
 }
 #endif

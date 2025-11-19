@@ -3,7 +3,7 @@
 namespace producer
 {
     ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-        : fGeometry(p.get<std::string>("Geometry"))
+        : 
     {
     }
 
