@@ -41,6 +41,7 @@ namespace producer
     class ProducerUtils
     {
     public:
+        explicit ProducerUtils();
         explicit ProducerUtils(fhicl::ParameterSet const &p);
         void ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime);
         void ComputeDistance3D(double &ClusterDistance, double t1, double y1, double z1, double t2, double y2, double z2, float driftLength, float driftTime);
@@ -77,7 +78,7 @@ namespace producer
     
     private:
         // From fhicl configuration
-        const std::string fGeometry;
+        int fDummy; // Add any private members if needed
     };
 }
 #endif
