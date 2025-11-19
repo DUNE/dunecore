@@ -2,10 +2,10 @@
 
 namespace producer
 {
-    ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-        : 
-    {
-    }
+    // ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
+    //     : /* Initialize members here if needed */ 
+    // {
+    // }
 
     void ProducerUtils::ComputeDistanceX(double &ClusterDistance, double t1, double t2, float driftLength, float driftTime)
     {
