@@ -78,6 +78,7 @@ namespace producer
     
     private:
         // From fhicl configuration
+        int fDummy; // Add any private members if needed
     };
 }
 #endif

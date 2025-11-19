@@ -5,8 +5,9 @@ namespace producer
     ProducerUtils::ProducerUtils()
     {
     }
+    
     ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-    //     : /* Initialize members here if needed */ 
+        : fDummy(p.get<int>("Dummy", 0))
     {
     }
 
