@@ -2,8 +2,12 @@
 
 namespace producer
 {
+    ProducerUtils::ProducerUtils()
+    {
+    }
+    
     ProducerUtils::ProducerUtils(fhicl::ParameterSet const &p)
-        : fGeometry(p.get<std::string>("Geometry"))
+        : fDummy(p.get<int>("Dummy", 0))
     {
     }
 
