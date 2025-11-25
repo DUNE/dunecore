@@ -47,6 +47,12 @@ protodunehd_simulation_services:
   DetectorClocksService: @local::protodunehd_detectorclocks
 }
 protodunehd_simulation_services.OpDetResponseInterface.QuantumEfficiency: 1
+# Make sure that the backtracker looks at the correct time interval. 
+# The recob::OpFlash::Time() is at -250 us w.r.t. the true times and so should be the hit peak times. 
+# recob::OpFlash::AbsTime() is corrected for this offset. 
+# The Delay configurable is expected to be in ns.
+protodunehd_simulation_services.PhotonBackTrackerService.PhotonBackTracker.Delay: -250e3
+
 
 
 # Reco services for ProtoDUNE simulation.
