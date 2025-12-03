@@ -375,6 +375,7 @@ dunevd10kt_v7_auxdet_geo.GDML: @local::dunevd10kt_v7_geo.GDML
 dunevd10kt_v7_auxdet_geo.Name: @local::dunevd10kt_v7_geo.Name
 
 dunevd10kt_geo : @local::dunevd10kt_v7_geo
+dunevd10kt_auxdet_geo: @local::dunevd10kt_v7_auxdet_geo
 
 
 dunedphase10kt_workspace_geo:        @local::dunedphase10kt_geo
