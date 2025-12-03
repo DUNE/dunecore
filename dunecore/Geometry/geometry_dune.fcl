@@ -365,8 +365,16 @@ dunevd10kt_1x8x6_3view_30deg_geo: @local::dunevd10kt_1x8x6_3view_30deg_v5_geo
 dunevd10kt_1x8x6_3view_auxdet_geo: @local::dunevd10kt_1x8x6_3view_v3_auxdet_geo
 dunevd10kt_1x8x6_3view_30deg_auxdet_geo: @local::dunevd10kt_1x8x6_3view_30deg_v5_auxdet_geo
 
-# temporarily assign workspace geometry
-dunevd10kt_geo : @local::dunevd10kt_1x6x6_geo
+
+# Full VD geometry
+dunevd10kt_v7_geo:             @local::dune10kt_base_geo
+dunevd10kt_v7_geo.GDML:        "dunevd10kt_3view_30deg_v7_refactored_2x8x40.gdml"
+dunevd10kt_v7_geo.Name:        "dunevd10kt_3view_30deg_v7_refactored_2x8x40"
+dunevd10kt_v7_auxdet_geo:      @local::dunevd10kt_auxdet_geo
+dunevd10kt_v7_auxdet_geo.GDML: @local::dunevd10kt_v7_geo.GDML
+dunevd10kt_v7_auxdet_geo.Name: @local::dunevd10kt_v7_geo.Name
+
+dunevd10kt_geo : @local::dunevd10kt_v7_geo
 
 
 dunedphase10kt_workspace_geo:        @local::dunedphase10kt_geo
