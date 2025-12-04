@@ -29,6 +29,7 @@ AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     PhotonVisibilityService:   @local::dune10kt_vd_photonvisibilityservice_Ar # The PhotonVisibilityService is used for the hybrid model for light simulation, by default we set up to be argon. 
     LArPropertiesService:      @local::dunefdvd_properties
     LArG4Parameters:           @local::dunefdvd_largeantparameters
+    LArG4Detector:             @local::dunevd10kt_3view_30deg_larg4detector
 }
 
 dunefdvd_reco_services: {
