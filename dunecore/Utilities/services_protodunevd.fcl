@@ -18,12 +18,14 @@ protodunevd_services.LArPropertiesService.ScintPreScale: 1
 protodunevd_rawdecoding_services:                           @local::protodune_rawdecoding_services
 protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_v5_geo
 protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
+protodunevd_rawdecoding_services.DetectorClocksService:                 @local::protodunevd_detectorclocks
 protodunevd_rawdecoding_services.WireReadout:               @local::protodunevd_wire_readout
 protodunevd_rawdecoding_services.LArPropertiesService.ScintPreScale: 1
 
 protodunevd_data_services:                                  @local::protodune_data_services
 protodunevd_data_services.Geometry:                         @local::protodunevd_v5_geo
 protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
+protodunevd_data_services.DetectorClocksService:                 @local::protodunevd_detectorclocks
 protodunevd_data_services.WireReadout:                      @local::protodunevd_wire_readout
 protodunevd_data_services.LArPropertiesService.ScintPreScale: 1
 
@@ -32,6 +34,7 @@ protodunevd_minimal_simulation_services:                           @local::proto
 protodunevd_minimal_simulation_services.Geometry:                  @local::protodunevd_v5_geo
 protodunevd_minimal_simulation_services.AuxDetGeometry:            @local::protodunevd_v5_auxdet_geo
 protodunevd_minimal_simulation_services.DetectorPropertiesService: @local::protodunevd_detproperties
+protodunevd_minimal_simulation_services.DetectorClocksService:     @local::protodunevd_detectorclocks
 protodunevd_minimal_simulation_services.WireReadout:               @local::protodunevd_wire_readout 
 protodunevd_minimal_simulation_services.LArPropertiesService.ScintPreScale: 1
 
