@@ -69,6 +69,9 @@ protodunehd_detectorclocks.ClockSpeedTPC: 2.0
 
 protodunehd_detectorclocks.ClockSpeedOptical: 62.5
 
+# PD VD config - copy config from PD HD
+protodunevd_detectorclocks: @local::protodunehd_detectorclocks
+
 dunedphase3x1x1_detectorclocks: @local::dunefddphase_detectorclocks
 dunedphase3x1x1_detectorclocks.ClockSpeedOptical:  250. # Optical clock speed in MHz
 
