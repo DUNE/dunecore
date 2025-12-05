@@ -11,6 +11,7 @@ protodunevd_services:                                       @local::protodune_se
 protodunevd_services.Geometry:                              @local::protodunevd_v5_geo
 protodunevd_services.AuxDetGeometry:                        @local::protodunevd_v5_auxdet_geo
 protodunevd_services.DetectorPropertiesService:             @local::protodunevd_detproperties
+protodunevd_services.DetectorClocksService:                 @local::protodunevd_detectorclocks
 protodunevd_services.WireReadout:                           @local::protodunevd_wire_readout
 protodunevd_services.LArPropertiesService.ScintPreScale: 1
 
