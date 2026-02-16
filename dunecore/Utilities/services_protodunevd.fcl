@@ -20,14 +20,12 @@ protodunevd_rawdecoding_services.Geometry:                  @local::protodunevd_
 protodunevd_rawdecoding_services.DetectorPropertiesService: @local::protodunevd_detproperties
 protodunevd_rawdecoding_services.DetectorClocksService:                 @local::protodunevd_detectorclocks
 protodunevd_rawdecoding_services.WireReadout:               @local::protodunevd_wire_readout
-protodunevd_rawdecoding_services.LArPropertiesService.ScintPreScale: 0.2
 
 protodunevd_data_services:                                  @local::protodune_data_services
 protodunevd_data_services.Geometry:                         @local::protodunevd_v5_geo
 protodunevd_data_services.DetectorPropertiesService:        @local::protodunevd_detproperties
 protodunevd_data_services.DetectorClocksService:                 @local::protodunevd_detectorclocks
 protodunevd_data_services.WireReadout:                      @local::protodunevd_wire_readout
-protodunevd_data_services.LArPropertiesService.ScintPreScale: 0.2
 
 # Low memory configuration leaving out some heavy services
 protodunevd_minimal_simulation_services:                           @local::protodune_minimal_simulation_services
