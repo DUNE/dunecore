@@ -248,7 +248,7 @@ gdmldir	product_dir	gdml
 #
 product             version
 dunepdlegacy        v1_01_04
-duneutil            v10_20_01
+duneutil            v10_20_01d01
 dune_pardata        v01_84_00
 dunedetdataformats  v4_4_6
 dunedaqdataformats  v4_4_5
