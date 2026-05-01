@@ -16,6 +16,7 @@ AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     ChannelGroupService:       @erase
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
     LArPropertiesService:      @local::dunefdvd_properties
+    WireReadout:               @local::protodunevd_wire_readout
 }
 
 dunefdvd_simulation_services: {
@@ -30,6 +31,7 @@ AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     LArPropertiesService:      @local::dunefdvd_properties
     LArG4Parameters:           @local::dunefdvd_largeantparameters
     LArG4Detector:             @local::dunevd10kt_3view_30deg_larg4detector
+    WireReadout:               @local::protodunevd_wire_readout
 }
 
 dunefdvd_reco_services: {
@@ -40,6 +42,7 @@ AuxDetGeometry: @local::dunevd10kt_auxdet_geo
     Geometry:                  @local::dunevd10kt_geo
     PhotonBackTrackerService:  @local::dunefdvd_photonbacktrackerservice
     LArPropertiesService:      @local::dunefdvd_properties
+    WireReadout:               @local::protodunevd_wire_readout
 }
 
 END_PROLOG
