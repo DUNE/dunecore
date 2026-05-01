@@ -103,7 +103,8 @@ dune::DUNEWireReadout::DUNEWireReadout(fhicl::ParameterSet const& pset)
 
     // DUNE 10kt vd
     } else if ( ( detectorName.find("dunevd10kt") != std::string::npos ) ) {
-      fWireReadout = std::make_unique<geo::WireReadoutCRUGeom>(pset, geom);
+//      fWireReadout = std::make_unique<geo::WireReadoutCRUGeom>(pset, geom);
+      fWireReadout = std::make_unique<geo::CRPWireReadoutGeom>(pset, geom);
 
     // VD CRP cold box channel map
     } else if ( ( detectorName.find("dunevdcb1") != std::string::npos ) ) {
