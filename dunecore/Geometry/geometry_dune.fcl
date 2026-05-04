@@ -563,6 +563,12 @@ protodunevd_v5_geo.SortingParameters: {
   SortTPCPDVD: true
 }
 
+# protoDUNE VD for PNS run
+protodunevd_v5_pns_geo: @local::protodunevd_v5_geo
+protodunevd_v5_pns_geo.Name: "protodunevd_v5_pns"
+protodunevd_v5_pns_geo.GDML: "protodunevd_v5_ggd_PNS.gdml" #nowires.gdml
+protodunevd_v5_pns_geo.ROOT: "protodunevd_v5_ggd_PNS.gdml"
+
 protodunevd_v5_auxdet_geo: @local::standard_auxdet_sorter
 protodunevd_v5_auxdet_geo.Name: @local::protodunevd_v5_geo.Name
 protodunevd_v5_auxdet_geo.GDML: @local::protodunevd_v5_geo.GDML
