@@ -178,7 +178,8 @@
   <class name="dunedaq::trgdataformats2::TriggerCandidateData" ClassVersion="10">
    <version ClassVersion="10" checksum="1473877479"/>
   </class>
-  <class name="dunedaq::trgdataformats2::TriggerPrimitive" ClassVersion="10">
+  <class name="dunedaq::trgdataformats2::TriggerPrimitive" ClassVersion="11">
+   <version ClassVersion="11" checksum="2505221935"/>
    <version ClassVersion="10" checksum="2799293222"/>
   </class>
   <class name="dunedaq::trgdataformats2::TriggerActivityData" ClassVersion="10">
