@@ -116,6 +116,9 @@ protodunehd_detproperties.TimeOffsetU:       0.
 protodunehd_detproperties.TimeOffsetV:       0.
 protodunehd_detproperties.TimeOffsetZ:       0.
 
+protodunehd_detproperties_resampled: @local::protodunehd_detproperties
+protodunehd_detproperties_resampled.NumberTimeSamples: 5999         # Resampling up to 500ns ticks --> 5999 samples
+protodunehd_detproperties_resampled.ReadOutWindowSize: 5999
 
 
 protodunesp_detproperties :
