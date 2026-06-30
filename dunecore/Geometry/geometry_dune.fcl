@@ -500,9 +500,16 @@ protodunehdv7_auxdet_geo: @local::dune10kt_base_auxdet_geo
 protodunehdv7_auxdet_geo.Name: @local::protodunehdv7_geo.Name
 protodunehdv7_auxdet_geo.GDML: @local::protodunehdv7_geo.GDML
 
+protodunehdv8_geo: @local::dune10kt_base_geo
+protodunehdv8_geo.Name: "protodunehdv8"
+protodunehdv8_geo.GDML: "protodunehd_v8_refactored.gdml" #nowires.gdml
+protodunehdv8_auxdet_geo: @local::dune10kt_base_auxdet_geo
+protodunehdv8_auxdet_geo.Name: @local::protodunehdv8_geo.Name
+protodunehdv8_auxdet_geo.GDML: @local::protodunehdv8_geo.GDML
+
 # Keep these definitions up to date when new geometries are added
-protodunehd_geo: @local::protodunehdv7_geo
-protodunehd_auxdet_geo: @local::protodunev7_auxdet_geo
+protodunehd_geo: @local::protodunehdv8_geo
+protodunehd_auxdet_geo: @local::protodunehdv8_auxdet_geo
 
 # === End ProtoDUNE-HD ===
 
