@@ -4,7 +4,7 @@
 # May 2018
 
 # Build test for each component.
-
+add_compile_options("-Wno-error=parentheses" )
 include(CetTest)
 
 cet_test(test_DataMap SOURCES test_DataMap.cxx
