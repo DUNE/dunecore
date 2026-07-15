@@ -148,6 +148,19 @@ TimeOffsetU:       0.
 TimeOffsetV:       0.
 TimeOffsetZ:       0.
 
+# Position-aware electric field provider (mandatory). ProtoDUNE-SP has a
+# central cathode (CPA) at x=0 and two anodes (APAs) at x=+/-360 cm, so the
+# drift field points from the cathode toward each anode along +/-x.
+ElectricFieldProvider: {
+  ProviderType:   "DriftVol"
+  DriftAxis:      "x"
+  ExtentY:        [ 0.0, 607.5 ]   # cm (transverse)
+  ExtentZ:        [ 0.0, 695.0 ]   # cm (transverse)
+  Anodes:         [ -360.0, 360.0 ]  # cm along drift
+  Cathodes:       [ 0.0 ]            # cm along drift
+  FieldMagnitude: 0.4867             # kV/cm (nominal, 180 kV)
+}
+
 }
 
 
