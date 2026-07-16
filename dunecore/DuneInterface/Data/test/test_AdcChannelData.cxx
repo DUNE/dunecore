@@ -116,11 +116,11 @@ int test_AdcChannelData() {
     }
     assert ( acd1.hasView("view2") );
     assert( acd1.viewSize() == 1 );
-    assert( ient12 = nent12 );
+    assert( ient12 == nent12 );
   }
   assert ( acdtop.hasView("view1") );
   assert ( acdtop.hasView("view1/view2") );
-  assert( ient12 = nent12 );
+  assert( ient12 == nent12 );
     
   cout << line << endl;
   cout << myname << "Check view2." << endl;
