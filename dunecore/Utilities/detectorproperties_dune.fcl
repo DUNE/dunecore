@@ -7,7 +7,7 @@ dunefd_detproperties:                                        @local::standard_de
 # dunefd_detproperties.SamplingRate:                         500.         #in ns
 dunefd_detproperties.Temperature:                            87
 dunefd_detproperties.Electronlifetime:                       10.4e3
-dunefd_detproperties.Efield:                                 [0.5,0.666,0.8]  #(predicted for microBooNE)
+dunefd_detproperties.PerPlaneEfield:                                 [0.5,0.666,0.8]  #(predicted for microBooNE)
 dunefd_detproperties.ElectronsToADC:                         6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 dunefd_detproperties.NumberTimeSamples:                      4492         # drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
 dunefd_detproperties.ReadOutWindowSize:                      4492         # drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
@@ -19,7 +19,7 @@ dunefd_detproperties.IncludeInterPlanePitchInXTickOffsets:   false
 dunefdvd_detproperties:                                      @local::standard_detproperties
 dunefdvd_detproperties.Temperature:                          87
 dunefdvd_detproperties.Electronlifetime:                     10.4e3
-dunefdvd_detproperties.Efield:                               [0.5, 1.0, 1.0]  #(placeholder values)
+dunefdvd_detproperties.PerPlaneEfield:                               [0.5, 1.0, 1.0]  #(placeholder values)
 dunefdvd_detproperties.ElectronsToADC:                       6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 dunefdvd_detproperties.NumberTimeSamples:                    8500         # drift length/drift velocity*sampling rate = (650.0 cm)/(0.16 cm/us)*(2 MHz)
 dunefdvd_detproperties.ReadOutWindowSize:                    8500         # as per proposal
@@ -34,7 +34,7 @@ dunefddphase_detproperties:                   @local::standard_detproperties
 # dunefddphase_detproperties.SamplingRate:    400.          # in ns
 dunefddphase_detproperties.Temperature:       87            # in K
 dunefddphase_detproperties.Electronlifetime:  3.0e3         # in us
-dunefddphase_detproperties.Efield:            [0.5,4.0,0.0] # in kV/cm
+dunefddphase_detproperties.PerPlaneEfield:            [0.5,4.0,0.0] # in kV/cm
 dunefddphase_detproperties.ElectronsToADC:    5.1267e-04    # 
 dunefddphase_detproperties.NumberTimeSamples: 20000         # drift length/drift velocity*sampling rate
 dunefddphase_detproperties.ReadOutWindowSize: 20000         # drift length/drift velocity*sampling rate
@@ -45,7 +45,7 @@ dunefddphase_detproperties.TimeOffsetZ:       0.
 protodunedphase_detproperties:                   @local::standard_detproperties
 protodunedphase_detproperties.Temperature:       87            # in K
 protodunedphase_detproperties.Electronlifetime:  3.0e3         # in us
-protodunedphase_detproperties.Efield:            [0.5,4.0,0.0] # in kV/cm
+protodunedphase_detproperties.PerPlaneEfield:            [0.5,4.0,0.0] # in kV/cm
 protodunedphase_detproperties.ElectronsToADC:    1.02534e-03   # 
 protodunedphase_detproperties.NumberTimeSamples: 10000         # 10000 before beam + 10000 after beam
 protodunedphase_detproperties.ReadOutWindowSize: 10000         # 10000 before beam + 10000 after beam
@@ -56,7 +56,7 @@ protodunedphase_detproperties.TimeOffsetZ:       0.
 dphase3x1x1_detproperties: 		@local::standard_detproperties
 dphase3x1x1_detproperties.Temperature:       87            # in K
 dphase3x1x1_detproperties.Electronlifetime:  3.0e3         # in us
-dphase3x1x1_detproperties.Efield:            [0.5,4.0,0.0] # in kV/cm
+dphase3x1x1_detproperties.PerPlaneEfield:            [0.5,4.0,0.0] # in kV/cm
 dphase3x1x1_detproperties.ElectronsToADC:    1.02534e-03   # 
 dphase3x1x1_detproperties.NumberTimeSamples: 1667
 dphase3x1x1_detproperties.ReadOutWindowSize: 1667
@@ -68,8 +68,8 @@ dune35t_detproperties:                   @local::standard_detproperties
 # dune35t_detproperties.SamplingRate:      500.         #in ns
 dune35t_detproperties.Temperature:       87
 dune35t_detproperties.Electronlifetime:  3.0e3
-# dune35t_detproperties.Efield:          [0.5,0.666,0.8]  #(predicted for microBooNE)
-dune35t_detproperties.Efield:            [0.25,0.782,1.734] # Run was at half field
+# dune35t_detproperties.PerPlaneEfield:          [0.5,0.666,0.8]  #(predicted for microBooNE)
+dune35t_detproperties.PerPlaneEfield:            [0.25,0.782,1.734] # Run was at half field
 dune35t_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE 35t
 dune35t_detproperties.NumberTimeSamples: 5200
 dune35t_detproperties.ReadOutWindowSize: 5200
@@ -85,7 +85,7 @@ dune35t_milliblock_detproperties.ReadOutWindowSize: 15000
 protodune_detproperties:                   @local::standard_detproperties
 protodune_detproperties.Temperature:       87.68
 protodune_detproperties.Electronlifetime:  35.0e3
-protodune_detproperties.Efield:           [0.4867,0.666,0.8]  #(predicted for microBooNE)
+protodune_detproperties.PerPlaneEfield:           [0.4867,0.666,0.8]  #(predicted for microBooNE)
 protodune_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 protodune_detproperties.NumberTimeSamples: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
 protodune_detproperties.ReadOutWindowSize: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
@@ -96,7 +96,7 @@ protodune_detproperties.TimeOffsetZ:       0.
 protodunevd_detproperties:                   @local::standard_detproperties
 protodunevd_detproperties.Temperature:       87.68
 protodunevd_detproperties.Electronlifetime:  35.0e3
-protodunevd_detproperties.Efield:           [0.450, 3.125, 0.5, 3.125]   #(nominal PDVD / 154 kV)
+protodunevd_detproperties.PerPlaneEfield:           [0.450, 3.125, 0.5, 3.125]   #(nominal PDVD / 154 kV)
 protodunevd_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 protodunevd_detproperties.NumberTimeSamples: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
 protodunevd_detproperties.ReadOutWindowSize: 6000         # 1 drift window = 4492 = drift length/drift velocity*sampling rate = (359.4 cm)/(0.16 cm/us)*(2 MHz)
@@ -108,7 +108,7 @@ protodunevd_detproperties.TimeOffsetZ:       0.
 protodunehd_detproperties:                   @local::standard_detproperties
 protodunehd_detproperties.Temperature:       87.68
 protodunehd_detproperties.Electronlifetime:  35.0e3
-protodunehd_detproperties.Efield:           [0.4867,0.666,0.8]  #(predicted for microBooNE)
+protodunehd_detproperties.PerPlaneEfield:           [0.4867,0.666,0.8]  #(predicted for microBooNE)
 protodunehd_detproperties.ElectronsToADC:    6.8906513e-3 # 1fC = 43.008 ADC counts for DUNE fd
 protodunehd_detproperties.NumberTimeSamples: 5859         # PDHD Now uses 5859 time samples in its readout
 protodunehd_detproperties.ReadOutWindowSize: 5859
@@ -133,7 +133,7 @@ protodunesp_detproperties :
 
   # Drift properties 
 Temperature:      87.68           #Kelvin
-Efield:           [0.4867,0.619423,0.776903,1.72178]     #calc from 180KV drift and wire biases will be overwritten if GetHVvaluefromTable is enabled
+PerPlaneEfield:           [0.4867,0.619423,0.776903,1.72178]     #calc from 180KV drift and wire biases will be overwritten if GetHVvaluefromTable is enabled
 Electronlifetime: 35.0e3               #microseconds
 SternheimerA:     0.1956  # Ar Sternheimer parameter a.
 SternheimerK:     3.0000  # Ar Sternheimer parameter k.
@@ -148,18 +148,11 @@ TimeOffsetU:       0.
 TimeOffsetV:       0.
 TimeOffsetZ:       0.
 
-# Position-aware electric field provider (mandatory). ProtoDUNE-SP has a
-# central cathode (CPA) at x=0 and two anodes (APAs) at x=+/-360 cm, so the
-# drift field points from the cathode toward each anode along +/-x.
-ElectricFieldProvider: {
-  ProviderType:   "DriftVol"
-  DriftAxis:      "x"
-  ExtentY:        [ 0.0, 607.5 ]   # cm (transverse)
-  ExtentZ:        [ 0.0, 695.0 ]   # cm (transverse)
-  Anodes:         [ -360.0, 360.0 ]  # cm along drift
-  Cathodes:       [ 0.0 ]            # cm along drift
-  FieldMagnitude: 0.4867             # kV/cm (nominal, 180 kV)
-}
+# Position-aware electric field and position distortion are now supplied by
+# optional art services (ElectricFieldService / PositionDistorterService) in
+# the `services` block. When unconfigured, Efield(point) falls back to the
+# uniform PerPlaneEfield inside the active volume and Distort/Correct are the
+# identity.
 
 }
 
