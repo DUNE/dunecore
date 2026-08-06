@@ -5,7 +5,7 @@
 #
 # Instructions to build and install duneRunData
 
-cet_make_exec(duneRunData
+cet_make_exec(NAME duneRunData
   SOURCE duneRunData.cxx
   LIBRARIES
     dunecore::ArtSupport

@@ -12,40 +12,40 @@ cet_test_env_prepend(FHICL_FILE_PATH "." ${TRANSITIVE_PATHS_WITH_FHICL_DIR})
 cet_transitive_paths(LIBRARY_DIR BINARY IN_TREE)
 cet_test_env_prepend(CET_PLUGIN_PATH ${TRANSITIVE_PATHS_WITH_LIBRARY_DIR})
 
-cet_test(test_DataMap SOURCES test_DataMap.cxx
+cet_test(test_DataMap SOURCE test_DataMap.cxx
   LIBRARIES
   ROOT::Core
   ROOT::Hist
 )
 
-cet_test(test_DuneEventInfo SOURCES test_DuneEventInfo.cxx
+cet_test(test_DuneEventInfo SOURCE test_DuneEventInfo.cxx
   LIBRARIES
   ROOT::Core
 )
 
-cet_test(test_RunData SOURCES test_RunData.cxx
+cet_test(test_RunData SOURCE test_RunData.cxx
   LIBRARIES
   ROOT::Core
 )
 
-cet_test(test_AdcChannelData SOURCES test_AdcChannelData.cxx
+cet_test(test_AdcChannelData SOURCE test_AdcChannelData.cxx
   LIBRARIES
   ROOT::Core
 )
 
-cet_test(test_FftwReal2dDftData SOURCES test_FftwReal2dDftData.cxx
-  LIBRARIES
-  ROOT::Core
-  FFTW3::FFTW3
-)
-
-cet_test(test_Tpc2dRoi SOURCES test_Tpc2dRoi.cxx
+cet_test(test_FftwReal2dDftData SOURCE test_FftwReal2dDftData.cxx
   LIBRARIES
   ROOT::Core
   FFTW3::FFTW3
 )
 
-cet_test(test_TpcData SOURCES test_TpcData.cxx
+cet_test(test_Tpc2dRoi SOURCE test_Tpc2dRoi.cxx
+  LIBRARIES
+  ROOT::Core
+  FFTW3::FFTW3
+)
+
+cet_test(test_TpcData SOURCE test_TpcData.cxx
   LIBRARIES
   ROOT::Core
     dunecore::DuneInterface_Data

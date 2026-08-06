@@ -15,7 +15,7 @@ cet_test_env_prepend(CET_PLUGIN_PATH ${TRANSITIVE_PATHS_WITH_LIBRARY_DIR})
 cet_enable_asserts()
 
 cet_test(test_GeoRopChannelGroupService
-  SOURCES
+  SOURCE
     test_GeoRopChannelGroupService.cxx
   LIBRARIES
     larcore::headers
@@ -25,7 +25,7 @@ cet_test(test_GeoRopChannelGroupService
 )
 
 cet_test(test_GeoApaChannelGroupService
-  SOURCES
+  SOURCE
     test_GeoApaChannelGroupService.cxx
   LIBRARIES
     larcore::headers
@@ -34,7 +34,7 @@ cet_test(test_GeoApaChannelGroupService
 )
 
 cet_test(test_FixedChannelGroupService
-  SOURCES
+  SOURCE
     test_FixedChannelGroupService.cxx
   LIBRARIES
     dunecore::ArtSupport

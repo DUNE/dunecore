@@ -15,7 +15,7 @@ cet_test_env_prepend(CET_PLUGIN_PATH ${TRANSITIVE_PATHS_WITH_LIBRARY_DIR})
 cet_enable_asserts()
 
 cet_test(test_ToolBasedChannelStatusService 
-  SOURCES
+  SOURCE
     test_ToolBasedChannelStatusService.cxx
   LIBRARIES
     larcore::headers

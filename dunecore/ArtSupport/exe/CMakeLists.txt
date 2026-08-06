@@ -5,7 +5,7 @@
 #
 # Instructions to build and install fcldump.
 
-cet_make_exec(fcldump
+cet_make_exec(NAME fcldump
   SOURCE
     fcldump.cxx
   LIBRARIES
@@ -14,7 +14,7 @@ cet_make_exec(fcldump
     cetlib_except::cetlib_except
 )
 
-cet_make_exec(liblist
+cet_make_exec(NAME liblist
   SOURCE
     liblist.cxx
   LIBRARIES
@@ -23,7 +23,7 @@ cet_make_exec(liblist
 )
 
 install_scripts(
-  fclgrep
+  LIST fclgrep
 )
 
 install_source()

@@ -10,7 +10,7 @@ cet_transitive_paths(LIBRARY_DIR BINARY IN_TREE)
 cet_test_env_prepend(CET_PLUGIN_PATH ${TRANSITIVE_PATHS_WITH_LIBRARY_DIR})
 
 cet_test(test_make_tool
-  SOURCES
+  SOURCE
     test_make_tool.cxx
   LIBRARIES
     dunecore::ArtSupport_Tool_TestTool_tool
@@ -22,7 +22,7 @@ cet_test(test_make_tool
 )
 
 cet_test(test_ArtServiceHelper
-  SOURCES
+  SOURCE
     test_ArtServiceHelper.cxx
   LIBRARIES
     dunecore_ArtSupport
@@ -31,7 +31,7 @@ cet_test(test_ArtServiceHelper
 )
 
 cet_test(test_DuneToolManager
-  SOURCES
+  SOURCE
     test_DuneToolManager.cxx
   LIBRARIES
     dunecore::ArtSupport

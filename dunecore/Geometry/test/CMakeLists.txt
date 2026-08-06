@@ -17,7 +17,7 @@ cet_test_env_prepend(FW_SEARCH_PATH ${TRANSITIVE_PATHS_WITH_GDML_DIR})
 
 cet_enable_asserts()
 
-cet_test(test_GeometryDune35t SOURCES test_GeometryDune35t.cxx
+cet_test(test_GeometryDune35t SOURCE test_GeometryDune35t.cxx
   LIBRARIES
     dunecore::ArtSupport
     larcorealg::Geometry
@@ -25,7 +25,7 @@ cet_test(test_GeometryDune35t SOURCES test_GeometryDune35t.cxx
     ROOT::Geom
 )
 
-cet_test(test_GeometryDune10kt SOURCES test_GeometryDune10kt.cxx
+cet_test(test_GeometryDune10kt SOURCE test_GeometryDune10kt.cxx
   LIBRARIES
     dunecore::ArtSupport
     larcorealg::Geometry
@@ -33,7 +33,7 @@ cet_test(test_GeometryDune10kt SOURCES test_GeometryDune10kt.cxx
     ROOT::Geom
 )
 
-cet_test(test_GeometryProtoDune SOURCES test_GeometryProtoDune.cxx
+cet_test(test_GeometryProtoDune SOURCE test_GeometryProtoDune.cxx
   LIBRARIES
     dunecore::ArtSupport
     larcorealg::Geometry
@@ -41,7 +41,7 @@ cet_test(test_GeometryProtoDune SOURCES test_GeometryProtoDune.cxx
     ROOT::Geom
 )
 
-cet_test(test_WireSelector SOURCES test_WireSelector.cxx
+cet_test(test_WireSelector SOURCE test_WireSelector.cxx
   LIBRARIES
     dunecore::ArtSupport
     dunecore::Geometry

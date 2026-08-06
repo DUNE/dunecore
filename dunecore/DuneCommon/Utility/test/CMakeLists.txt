@@ -12,116 +12,116 @@ cet_test_env_prepend(FW_SEARCH_PATH ".")
 cet_test_env_prepend(ROOT_INCLUDE_PATH ".")
 cet_test_env_prepend(ROOT_LIBRARY_PATH "." ${PROJECT_BINARY_DIR}/lib)
 
-cet_test(test_LineColors SOURCES test_LineColors.cxx
+cet_test(test_LineColors SOURCE test_LineColors.cxx
   LIBRARIES
   ROOT::Gpad
 )
 
 
-#cet_test(test_DuneTimeConverter SOURCES test_DuneTimeConverter.cxx
+#cet_test(test_DuneTimeConverter SOURCE test_DuneTimeConverter.cxx
 #  LIBRARIES
 #    art::Persistency_Provenance canvas
 #)
 
-cet_test(test_StringManipulator SOURCES test_StringManipulator.cxx
+cet_test(test_StringManipulator SOURCE test_StringManipulator.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
   )
 
-cet_test(test_TPadManipulator SOURCES test_TPadManipulator.cxx
+cet_test(test_TPadManipulator SOURCE test_TPadManipulator.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_RootPalette SOURCES test_RootPalette.cxx
+cet_test(test_RootPalette SOURCE test_RootPalette.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_CompactRealDftData SOURCES test_CompactRealDftData.cxx
+cet_test(test_CompactRealDftData SOURCE test_CompactRealDftData.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_DuneFFT SOURCES test_DuneFFT.cxx
+cet_test(test_DuneFFT SOURCE test_DuneFFT.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_FwFFT SOURCES test_FwFFT.cxx
+cet_test(test_FwFFT SOURCE test_FwFFT.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_Fw2dFFT SOURCES test_Fw2dFFT.cxx
+cet_test(test_Fw2dFFT SOURCE test_Fw2dFFT.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_coldelecResponse SOURCES test_coldelecResponse.cxx
+cet_test(test_coldelecResponse SOURCE test_coldelecResponse.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_gausTF1 SOURCES test_gausTF1.cxx
+cet_test(test_gausTF1 SOURCE test_gausTF1.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_offsetLine SOURCES test_offsetLine.cxx
+cet_test(test_offsetLine SOURCE test_offsetLine.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_GausStepFitter SOURCES test_GausStepFitter.cxx
+cet_test(test_GausStepFitter SOURCE test_GausStepFitter.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_GausRmsFitter SOURCES test_GausRmsFitter.cxx
+cet_test(test_GausRmsFitter SOURCE test_GausRmsFitter.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_SampleTailer SOURCES test_SampleTailer.cxx
+cet_test(test_SampleTailer SOURCE test_SampleTailer.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_shiftHistFit SOURCES test_shiftHistFit.cxx
+cet_test(test_shiftHistFit SOURCE test_shiftHistFit.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_RootParFormula SOURCES test_RootParFormula.cxx
+cet_test(test_RootParFormula SOURCE test_RootParFormula.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
-cet_test(test_DuneContextToolRedirector SOURCES test_DuneContextToolRedirector.cxx
+cet_test(test_DuneContextToolRedirector SOURCE test_DuneContextToolRedirector.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
 )
 
 cet_test(test_DuneContextManager
-  SOURCES
-    test_DuneContextManager.cxx
+  SOURCE
+      test_DuneContextManager.cxx
   LIBRARIES
     dunecore::DuneCommon_Utility
     ROOT::Core
