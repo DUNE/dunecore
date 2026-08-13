@@ -1,5 +1,6 @@
-art_make( BASENAME_ONLY
-          MODULE_LIBRARIES dunecore::DAQTriggerSim_TriggerDataProducts
+#art_make( BASENAME_ONLY
+
+set(          MODULE_LIBRARIES dunecore::DAQTriggerSim_TriggerDataProducts
                            dunecore::DAQTriggerSim_TriggerAlgorithms
                            larcore::Geometry_Geometry_service
                            larcorealg::Geometry
@@ -19,6 +20,9 @@ art_make( BASENAME_ONLY
                            cetlib::cetlib 
 			   cetlib_except::cetlib_except
 	 )
+
+cet_build_plugin(ActivityTriggerProd art::module LIBRARIES ${MODULE_LIBRARIES} SOURCE ActivityTriggerProd_module.cc BASENAME_ONLY)
+cet_build_plugin(TemplateTriggerProd art::module LIBRARIES ${MODULE_LIBRARIES} SOURCE TemplateTriggerProd_module.cc BASENAME_ONLY)
 
 install_fhicl()
 install_headers()

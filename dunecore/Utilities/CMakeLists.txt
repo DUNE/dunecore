@@ -17,43 +17,43 @@ set( dune_util_lib_list lardata::Utilities_LArFFT_service
     )
 
 
-cet_build_plugin( SignalShapingServiceDUNE  art::service
+cet_build_plugin( SignalShapingServiceDUNE  art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
         )
 
-cet_build_plugin( SignalShapingServiceDUNE10kt  art::service
+cet_build_plugin( SignalShapingServiceDUNE10kt  art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
         )
 
-cet_build_plugin( SignalShapingServiceDUNEDPhase  art::service
+cet_build_plugin( SignalShapingServiceDUNEDPhase  art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
         )
 	             
-cet_build_plugin( SignalShapingServiceDUNE34kt  art::service
+cet_build_plugin( SignalShapingServiceDUNE34kt  art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
         )
               
 
-cet_build_plugin( SignalShapingServiceDUNE35t  art::service
+cet_build_plugin( SignalShapingServiceDUNE35t  art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
         )
 
-cet_build_plugin( FileCatalogMetadataDUNE art::service
+cet_build_plugin( FileCatalogMetadataDUNE art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
 	)
 
-cet_build_plugin( TFileMetadataDUNE art::service
+cet_build_plugin( TFileMetadataDUNE art::service LIBRARIES
                ${dune_util_lib_list}
 	       BASENAME_ONLY
 	)
 
-cet_build_plugin(CrpGainService   art::service
+cet_build_plugin(CrpGainService   art::service LIBRARIES
                 dunecore_ArtSupport
                 larcorealg::Geometry
                 larcore::headers

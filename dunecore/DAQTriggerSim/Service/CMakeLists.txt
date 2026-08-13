@@ -5,7 +5,7 @@
 #
 # CMake instructions for DAQTriggerSim/Services
 
-cet_build_plugin(TemplateTriggerService   art::service
+cet_build_plugin(TemplateTriggerService   art::service LIBRARIES
                 lardataobj::RawData
                 larcoreobj::headers
                 ROOT::Core
@@ -15,7 +15,7 @@ cet_build_plugin(TemplateTriggerService   art::service
                 cetlib::cetlib cetlib_except::cetlib_except
              )
 
-cet_build_plugin(HardwareMapperService   art::service
+cet_build_plugin(HardwareMapperService   art::service LIBRARIES
                 larcorealg::Geometry
                 dunecore_Geometry
                 ROOT::Core

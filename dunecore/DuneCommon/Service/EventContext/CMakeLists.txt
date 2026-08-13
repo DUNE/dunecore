@@ -6,7 +6,7 @@
 install_headers()
 install_source()
 
-art_make(SERVICE_LIBRARIES 
+set(SERVICE_LIBRARIES 
            dunecore_DuneCommon_Utility
            art::Framework_Services_Registry
            art::Framework_Principal
@@ -15,5 +15,6 @@ art_make(SERVICE_LIBRARIES
            messagefacility::MF_MessageLogger
            ROOT::Core
 )
+cet_build_plugin(EventContextService art::service LIBRARIES ${SERVICE_LIBRARIES} SOURCE EventContextService_service.cc)
 
 add_subdirectory(test)

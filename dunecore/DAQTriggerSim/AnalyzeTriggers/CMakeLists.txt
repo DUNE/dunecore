@@ -1,5 +1,5 @@
-art_make( 
-          MODULE_LIBRARIES dunecore::DAQTriggerSim_Service_TemplateTriggerService_service
+#art_make( 
+set(          MODULE_LIBRARIES dunecore::DAQTriggerSim_Service_TemplateTriggerService_service
 	                   dunecore::DAQTriggerSim_TriggerDataProducts
                            dunecore::DAQTriggerSim_TriggerAlgorithms
                            larcore::Geometry_Geometry_service
@@ -19,6 +19,8 @@ art_make(
                            cetlib::cetlib 
 			   cetlib_except::cetlib_except
 	 )
+
+cet_build_plugin(TemplateTriggerAna art::module LIBRARIES ${MODULE_LIBRARIES} SOURCE TemplateTriggerAna_module.cc)
 
 install_fhicl()
 install_headers()

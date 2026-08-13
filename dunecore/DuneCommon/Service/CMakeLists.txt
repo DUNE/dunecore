@@ -5,7 +5,7 @@
 
 # Add plugin for each service.
 
-cet_build_plugin(GeoRopChannelGroupService   art::service
+cet_build_plugin(GeoRopChannelGroupService   art::service LIBRARIES
                 larcore::headers
                 larcorealg::Geometry
                 art::Utilities
@@ -14,7 +14,7 @@ cet_build_plugin(GeoRopChannelGroupService   art::service
 		cetlib_except::cetlib_except
              )
 
-cet_build_plugin(GeoApaChannelGroupService   art::service
+cet_build_plugin(GeoApaChannelGroupService   art::service LIBRARIES
                 larcore::headers
                 larcorealg::Geometry
                 art::Utilities 
@@ -23,7 +23,7 @@ cet_build_plugin(GeoApaChannelGroupService   art::service
 		cetlib_except::cetlib_except
              )
 
-cet_build_plugin(FixedChannelGroupService   art::service
+cet_build_plugin(FixedChannelGroupService   art::service LIBRARIES
                 art::Utilities
 		canvas::canvas
                 cetlib::cetlib

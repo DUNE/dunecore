@@ -6,7 +6,7 @@
 install_headers()
 install_source()
 
-art_make(SERVICE_LIBRARIES 
+set(SERVICE_LIBRARIES 
                            dunecore_DuneCommon_Service_ToolBasedChannelStatus
                            art::Framework_Services_Registry
                            art::Framework_Principal
@@ -17,7 +17,8 @@ art_make(SERVICE_LIBRARIES
                            larevt::CalibrationDBI_Providers
                            larcoreobj::headers
                            larcore::headers
-         LIB_LIBRARIES
+)
+set(         LIB_LIBRARIES
            dunecore_ArtSupport
            larevt::CalibrationDBI_Providers
            larcoreobj::headers
@@ -27,5 +28,8 @@ art_make(SERVICE_LIBRARIES
            ROOT::HistPainter
            FFTW3::FFTW3
 )
+
+cet_make_library(dunecore_DuneCommon_Service_ToolBasedChannelStatus LIBRARIES ${LIB_LIBRARIES} SOURCE ToolBasedChannelStatus.cxx ToolBasedChannelStatusService.cxx)
+cet_build_plugin(ToolBasedChannelStatusService art::service LIBRARIES ${SERVICE_LIBRARIES} SOURCE ToolBasedChannelStatusService_service.cc)
 
 add_subdirectory(test)
