@@ -117,6 +117,14 @@ public:
   static void load_services(std::istream& config);
   static void load_services(fhicl::ParameterSet const& pset);
 
+  // Explicitly destroy the services (and thus close/flush any services
+  // such as TFileService that perform I/O in their destructors).  This
+  // must be called before the program begins its exit-time teardown of
+  // ROOT/Cling; otherwise the services are only destroyed at program
+  // exit, when the ROOT interpreter state they rely on may already be
+  // gone, resulting in a crash.
+  static void unload_services();
+
   // For backward compatibility.
   static void load(std::string const& filename) { load_services(filename, FileOnPath_t{}); }
 
