@@ -14,6 +14,7 @@ protodunehd_services.DetectorClocksService: @local::protodunehd_detectorclocks
 protodunehd_services.LArPropertiesService.ScintPreScale: 1
 protodunehd_services.WireReadout.WireReadoutClass: DuneApaWireReadout
 protodunehd_services.SpaceCharge: @local::pdhd_spacecharge
+protodunehd_services.SignalShapingServiceDUNE: @erase
 
 
 protodunehd_rawdecoding_services: @local::protodune_rawdecoding_services
@@ -29,6 +30,7 @@ protodunehd_data_services.Geometry: @local::protodunehd_geo
 protodunehd_data_services.DetectorClocksService: @local::protodunehd_detectorclocks
 protodunehd_data_services.LArPropertiesService.ScintPreScale: 1
 protodunehd_data_services.WireReadout.WireReadoutClass: DuneApaWireReadout
+protodunehd_data_services.SignalShapingServiceDUNE: @erase
 
 # Low memory configuration leaving out some heavy services
 protodunehd_minimal_simulation_services: @local::protodune_minimal_simulation_services
@@ -67,7 +69,5 @@ protodunehd_data_reco_services.ChannelStatusService: @local::protodunehd_channel
 protodunehd_data_reco_services.IPhotonCalibrator:    @local::protodunesp_photoncalibrator
 # ProtoDUNE detector properties service
 protodunehd_data_reco_services.DetectorPropertiesService: @local::protodunehd_detproperties
-# Dataprep service.
-protodunehd_data_reco_services.RawDigitPrepService.ToolNames: @local::protodune_dataprep_tools_wirecell
 
 END_PROLOG
