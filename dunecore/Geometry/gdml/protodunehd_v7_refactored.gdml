@@ -92125,10 +92125,6 @@ z="113.63"/>
          <rotationref ref="rBeamWRev3"/>
       </physvol>
        <physvol>
-           <volumeref ref="volCryostat"/>
-           <positionref ref="posCryoInDetEnc"/>
-       </physvol>
-       <physvol>
            <volumeref ref="volSurrConcrete"/>
            <position name="posSurrConcrete" unit="cm" 
            x="0" 
@@ -92391,7 +92387,10 @@ z="113.63"/>
             z="699.78"/>
            <rotationref ref="rMinus90AboutYMinus90AboutX"/>
        </physvol>
-
+       <physvol>
+           <volumeref ref="volCryostat"/>
+           <positionref ref="posCryoInDetEnc"/>
+       </physvol>
     </volume>
 
 
