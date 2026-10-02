@@ -103,8 +103,16 @@ dune::DUNEWireReadout::DUNEWireReadout(fhicl::ParameterSet const& pset)
 
     // DUNE 10kt vd
     } else if ( ( detectorName.find("dunevd10kt") != std::string::npos ) ) {
-//      fWireReadout = std::make_unique<geo::WireReadoutCRUGeom>(pset, geom);
-      fWireReadout = std::make_unique<geo::CRPWireReadoutGeom>(pset, geom);
+        //Workspace geometry e.g. 1x8x6 or 1x8x14 or 1x6x6.  
+        //These do not use bridged induction channels and probably never will
+        if ( ( detectorName.find("1x8x") != std::string::npos ) 
+           || (detectorName.find("1x6x") != std::string::npos )) {
+            fWireReadout = std::make_unique<geo::WireReadoutCRUGeom>(pset, geom);
+        }
+        //Genuine VD 10kt.  This does use bridged induction channels
+        else {
+            fWireReadout = std::make_unique<geo::CRPWireReadoutGeom>(pset, geom);
+        }
 
     // VD CRP cold box channel map
     } else if ( ( detectorName.find("dunevdcb1") != std::string::npos ) ) {
