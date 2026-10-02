@@ -708,6 +708,16 @@ protodunevd_wire_readout: {
   }
 }
 
+dunevd10kt_wire_readout: {
+  ChannelsPerOpDet: 1
+  service_provider: "DUNEWireReadout"
+  #TODO FIGURE OUT WHAT MAPPING IS NEEDED HERE
+  PDMapTool: {
+    tool_type: "PDVDPDMapAlg"
+    MappingFile: "PDVD_PDS_Mapping_v09162025.json"
+  }
+}
+
 dune_wire_readout:
 {
   service_provider : DUNEWireReadout
