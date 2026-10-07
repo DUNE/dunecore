@@ -278,32 +278,42 @@ $Argon_x = 1510;
 $Argon_y = 1510;
 $Argon_z = 6200;
 
-# width of gas argon layer on top
-$HeightGaseousAr = 100;
+# width of gaseous argon layer fixed to the top of the cryostat
+$HeightGaseousAr = 20;
+
+# height of liquid argon between the top CRP/anode and the gas-liquid interface
+$HeightLiquidArAboveCRP = 80;
+
+# target lower liquid argon buffer used when auto-sizing single-drift workspace geometries.
+# This preserves the previous workspace total height when splitting the old 100 cm
+# top gas region into gas plus liquid above the CRP.
+$HeightLArBufferBelowTPC = 100 - $heightCathode - $anodePlateWidth;
+
+# vertical size of the TPC enclosure, including drift volumes, readout planes,
+# anode plates, and the cathode between the drift volumes.
+$TPCEnclosure_x = $nCRM_x * ($driftTPCActive + $ReadoutPlane + $anodePlateWidth) + $heightCathode;
 
 if( $workspace != 0 )
 {
     #active tpc + 1.0 m buffer on each side
     if ( $nCRM_x == 1 ) # single drift volume
     {
-	$Argon_x = $driftTPCActive + $HeightGaseousAr + $ReadoutPlane + 100;
+	$Argon_x = $HeightGaseousAr + $HeightLiquidArAboveCRP + $TPCEnclosure_x + $HeightLArBufferBelowTPC;
     }
     $Argon_y = $widthTPCActive + 162;
     $Argon_z = $lengthTPCActive + 214.0;
 }
 
 
-# size of liquid argon buffer
-if ( $nCRM_x == 1 )
-{
-    $xLArBuffer = $Argon_x - $driftTPCActive - $HeightGaseousAr - $heightCathode - $ReadoutPlane; # cathode not part of the buffer
-}
-else
-{
-    $xLArBuffer = $Argon_x - 2*$driftTPCActive - $HeightGaseousAr - 2*$ReadoutPlane - $heightCathode; # cathode not part of the buffer
-}
+# size of liquid argon buffer below the TPC enclosure
+$xLArBuffer = $Argon_x - $HeightGaseousAr - $HeightLiquidArAboveCRP - $TPCEnclosure_x;
+die "Argon_x is too small for gas, liquid above CRP, and TPC enclosure heights\n" if ( $xLArBuffer < 0 );
 $yLArBuffer = 0.5 * ($Argon_y - $widthTPCActive);
 $zLArBuffer = 0.5 * ($Argon_z - $lengthTPCActive);
+
+# top CRP/anode reference position in the argon interior coordinate system
+$TopCRP_x = 0.5*$Argon_x - $HeightGaseousAr - $HeightLiquidArAboveCRP;
+$BottomCRP_x = $TopCRP_x - $TPCEnclosure_x + 0.5*$padWidth;
 
 # cryostat
 $SteelThickness = 0.12; # membrane
@@ -1212,7 +1222,7 @@ sub placeCathodeAndAnode() {
     $CathodePosX = 0.5*$TPCEnclosure_x - $TPC_x - $anodePlateWidth - $heightCathode/2;
     $CathodePosY = -0.5*$TPCEnclosure_y + 0.5*$widthCathode;
     $CathodePosZ = -0.5*$TPCEnclosure_z + 0.5*$lengthCathode;
-    $posAnodePlate = 0.5*$TPCEnclosure_x - 0.5*$anodePlateWidth;#right above TPC vol and right below GAr; Note here, that $HeightGaseousAr already contains the thicknes of the anode plate!
+    $posAnodePlate = 0.5*$TPCEnclosure_x - 0.5*$anodePlateWidth;#right above TPC vol and below the liquid argon layer over the CRP
     $posAnodePlateBottom = -0.5*$TPCEnclosure_x + 0.5*$anodePlateWidth;
     $CathodePosZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCathodeBottom;
     $CathodePosYBottom = -0.5*$TPCEnclosure_ybottom + 0.5*$widthCathodeBottom;
@@ -1384,7 +1394,7 @@ print CRYO <<EOF;
       z="$Argon_z"/>
 
     <box name="GaseousArgon" lunit="cm"
-      x="@{[$HeightGaseousAr - $anodePlateWidth]}"
+      x="$HeightGaseousAr"
       y="$Argon_y"
       z="$Argon_z"/>
 
@@ -1449,7 +1459,6 @@ print CRYO <<EOF;
 EOF
 
     # TPC Enclosure
-    $TPCEnclosure_x = $Argon_x - $HeightGaseousAr + $nCRM_x*$anodePlateWidth - $xLArBuffer;
     #$TPCEnclosure_y = $nCRM_y * ($widthCRM + $borderCRP);
     #$TPCEnclosure_y = $nCRM_y * $widthCRM + $nCRM_y * $borderCRP + ($nSST1_y-1) * $gapSST1_y + ($nSST2_y) * $gapSST2_y;  # around 1200 for full module
     #$TPCEnclosure_z = $nCRM_z * ($lengthCRM + $borderCRP);
@@ -1691,7 +1700,7 @@ EOF
 
       <physvol>
         <volumeref ref="volGaseousArgon"/>
-        <position name="posGaseousArgon" unit="cm" x="@{[$Argon_x/2-$HeightGaseousAr/2+$anodePlateWidth/2]}" y="0" z="0"/>
+        <position name="posGaseousArgon" unit="cm" x="@{[0.5*$Argon_x - 0.5*$HeightGaseousAr]}" y="0" z="0"/>
       </physvol>
       <physvol>
         <volumeref ref="volSteelShell"/>
@@ -1706,7 +1715,7 @@ EOF
 
       <physvol>
         <volumeref ref="volEnclosureTPC"/>
-        <position name="posTPCEnclosure" unit="cm" x="@{[0.5*($Argon_x-$TPCEnclosure_x)-$HeightGaseousAr+$anodePlateWidth]}" y="0" z="0"/>
+        <position name="posTPCEnclosure" unit="cm" x="@{[$TopCRP_x - 0.5*$TPCEnclosure_x]}" y="0" z="0"/>
       </physvol>
 EOF
     }
@@ -1715,7 +1724,7 @@ EOF
     if ($pdsconfig == 0) {  #4-pi PDS coverage
 	#for placing the Arapucas on laterals
 	if ($nCRM_y==8) {
-	    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
+	    $FrameCenter_x=$TopCRP_x - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
 	    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
 	    for($j=0;$j<$nCRM_z/2;$j++){#nCRM will give the collumn number (1 collumn per frame)
 		place_OpDetsLateral($FrameCenter_x, $FrameCenter_z, $j);
@@ -1724,7 +1733,7 @@ EOF
 
 	    #16 arapucas, 8 at y=-2.2m and 8 at y=2.2m.
 
-	    $FrameCenter_x=0.5*$Argon_x - $HeightGaseousAr - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
+	    $FrameCenter_x=$TopCRP_x - 0.5*$padWidth; # should be -0.5*$ReadoutPlane? #anode position
 	    $FrameCenter_z=-19*$lengthCathode/2+(40-$nCRM_z)/2*$lengthCathode/2;
 	    place_OpDetsShortLateral($FrameCenter_x,-220, $FrameCenter_z);
 	    place_OpDetsShortLateral($FrameCenter_x,220, $FrameCenter_z);
@@ -1788,9 +1797,9 @@ sub place_FieldShaper()
     for ( $i=0; $i<$NFieldShapers; $i=$i+1 ) {
 	$dist=$i*$FieldShaperSeparation;
 	if ( !$reversed ) {
-	    $posX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane) + ($i+0.5)*$FieldShaperSeparation;
+	    $posX = $TopCRP_x - ($driftTPCActive + $ReadoutPlane) + ($i+0.5)*$FieldShaperSeparation;
 	} else  {
-	    $posX = $Argon_x/2 - $HeightGaseousAr - ($driftTPCActive + $ReadoutPlane + $heightCathode) - ($i+0.5)*$FieldShaperSeparation;
+	    $posX = $TopCRP_x - ($driftTPCActive + $ReadoutPlane + $heightCathode) - ($i+0.5)*$FieldShaperSeparation;
 	}
 	if ($pdsconfig==0){
 	    if ($dist>250){
@@ -1924,7 +1933,7 @@ sub place_OpDetsLateral()
 	    if ($ara < 8) {
 		$Ara_X = $FrameCenter_x-$FirstFrameVertDist;
 	    } else { # bottom TPC arapucas
-		$Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
+		$Ara_X = $BottomCRP_x + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
 	    }
 	} else { #other tiles separated by VerticalPDdist
 	    if ($ara < 8) {
@@ -1981,7 +1990,7 @@ sub place_OpDetsShortLateral()
 	if ($ara < 8) {
 	    $Ara_X = $FrameCenter_x-$FirstFrameVertDist;
 	} else { # bottom TPC arapucas
-	    $Ara_X = -$FrameCenter_x - $HeightGaseousAr + $xLArBuffer + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
+	    $Ara_X = $BottomCRP_x + $FirstFrameVertDist; #FIXME: double check if cathode offset needed
 	}
     } else { #other tiles separated by VerticalPDdist
 	if ($ara < 8) {
@@ -2402,6 +2411,8 @@ print " CRM total area        : $widthCRM x $lengthCRM\n";
 print " Wire pitch in U, V, Z : $wirePitchU, $wirePitchV, $wirePitchZ\n";
 print " TPC active volume  : $driftTPCActive x $widthTPCActive x $lengthTPCActive\n";
 print " Argon volume       : ($Argon_x, $Argon_y, $Argon_z) \n";
+print " Gaseous Ar height  : $HeightGaseousAr\n";
+print " LAr above CRP      : $HeightLiquidArAboveCRP\n";
 print " Argon buffer       : ($xLArBuffer, $yLArBuffer, $zLArBuffer) \n";
 print " Detector enclosure : $DetEncX x $DetEncY x $DetEncZ\n";
 print " TPC Origin         : ($OriginXSet, $OriginYSet, $OriginZSet) \n";
