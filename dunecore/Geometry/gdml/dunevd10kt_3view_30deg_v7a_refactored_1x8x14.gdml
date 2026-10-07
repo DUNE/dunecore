@@ -3478,7 +3478,7 @@
       z="2315.18"/>
 
     <box name="GaseousArgon" lunit="cm"
-      x="20"
+      x="70"
       y="1513.9"
       z="2315.18"/>
 
@@ -3585,7 +3585,7 @@
       y="337.5"
       z="299.54"
       lunit="cm"/>
-    
+
     <box name="AnodePlateBottom"
        x="0.01"
        y="337.5"
@@ -12065,7 +12065,7 @@
 
       <physvol>
         <volumeref ref="volGaseousArgon"/>
-        <position name="posGaseousArgon" unit="cm" x="415.04" y="0" z="0"/>
+        <position name="posGaseousArgon" unit="cm" x="390.04" y="0" z="0"/>
       </physvol>
       <physvol>
         <volumeref ref="volSteelShell"/>

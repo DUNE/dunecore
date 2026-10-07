@@ -194,7 +194,7 @@ if( $workspace == 1 )
     $nSST2_z =1;
     $nSST1_z =2;
     $nSST_y =2;
-    
+
     $nCRM_x = 1;
 
 }
@@ -205,7 +205,7 @@ if( $workspace == 2 )
     $nSST2_z =2;
     $nSST1_z =6;
     $nSST_y =2;
-    
+
     $nCRM_x = 1;
 
 }
@@ -216,7 +216,7 @@ if( $workspace == 3 )
     $nSST2_z =2;#2
     $nSST1_z =2;#2
     $nSST_y =2;#2
-    
+
     $nCRM_x = 2;
 }
 
@@ -226,7 +226,7 @@ if( $workspace == 4 )
     $nSST2_z =2;
     $nSST1_z =6;
     $nSST_y =2;
-    
+
     $nCRM_x = 2;
 }
 
@@ -279,10 +279,10 @@ $Argon_y = 1510;
 $Argon_z = 6200;
 
 # width of gaseous argon layer fixed to the top of the cryostat
-$HeightGaseousAr = 20;
+$HeightGaseousAr = 70;
 
 # height of liquid argon between the top CRP/anode and the gas-liquid interface
-$HeightLiquidArAboveCRP = 80;
+$HeightLiquidArAboveCRP = 30;
 
 # target lower liquid argon buffer used when auto-sizing single-drift workspace geometries.
 # This preserves the previous workspace total height when splitting the old 100 cm
@@ -1260,11 +1260,11 @@ EOF
        <rotationref ref="rIdentity"/>
      </physvol>
 EOF
-        
+
         $idxBottom++;
         #$AnodePosZBottom2=$AnodePosZBottom+$lengthAnodeBottom+2*$borderCRUBottom_z; #first test
         $AnodePosZBottom2=$AnodePosZBottom+$lengthAnodeBottom+2*$borderCRUBottom1side_z; #dead material on one side only
-            
+
             print CRYO <<EOF;
       <physvol>
        <volumeref ref="volAnodePlateBottom"/>
@@ -1286,8 +1286,8 @@ EOF
             $CathodePosYBottom += $gapSST_ybottom;
 
         }
-        
-            
+
+
 	    }
 	    $CathodePosZ += $lengthCathode;
         $CathodePosZBottom+= $lengthCathodeBottom;
@@ -1309,15 +1309,15 @@ EOF
              $CathodePosZ += $gapSST2_z;
              #print " ii gap last             : $ii, ($nCRM_z/2)-1 \n";
         }
-        
+
         #print " ii    idx  ($nCRM_z/2)-2        : $ii $idx ($nCRM_z/2)-2\n";
 
-       
+
         $CathodePosY = -0.5*$TPCEnclosure_y + 0.5*$widthCathode;
         $CathodePosYBottom = -0.5*$TPCEnclosure_ybottom + 0.5*$widthCathodeBottom;
 
 
-        
+
 	}
     }
 
@@ -1331,8 +1331,8 @@ EOF
 	    for($j=0;$j<$nCRM_z/2;$j++){
 		place_OpDetsCathode($FrameCenter_x, $FrameCenter_y, $FrameCenter_z, $i, $j);
 		$FrameCenter_z+=$lengthCathode;
-            
-            
+
+
             if($nSST2_z == 0 && ($j+1) % 3 == 0 && $j>0){
                 $FrameCenter_z += $gapSST1_z;
            }
@@ -1345,17 +1345,17 @@ EOF
             if($nSST2_z > 0 && $j % 3 == 0 && $j>=($nCRM_z/2)-2){
                 $FrameCenter_z += $gapSST2_z;
            }
-            
-            
+
+
 	    }
 	    $FrameCenter_y+=$widthCathode;
         if(($i+1) % 2 == 0 && $i>0){
             $FrameCenter_y += $gapSST_y;
         }
-        
-        
-        
-        
+
+
+
+
 	    $FrameCenter_z=-0.5*$TPCEnclosure_z + 0.5*$lengthCathode;
 	}
     }
@@ -1463,12 +1463,12 @@ EOF
     #$TPCEnclosure_y = $nCRM_y * $widthCRM + $nCRM_y * $borderCRP + ($nSST1_y-1) * $gapSST1_y + ($nSST2_y) * $gapSST2_y;  # around 1200 for full module
     #$TPCEnclosure_z = $nCRM_z * ($lengthCRM + $borderCRP);
     #$TPCEnclosure_z = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP + ($nSST_z-1) * $gapSST_z ; # around 6000 for full module
-    
+
     $TPCEnclosure_y = $nCRM_y * $widthCRM + $nCRM_y * $borderCRP + ($nSST_y-1) * $gapSST_y ;  # around 1200 for full module
     $TPCEnclosure_ybottom = $nCRM_y * $widthCRM + $nCRM_y * $borderCRUBottom_y + $gapSST_ybottom ;  # around 1200 for full module
 
     $TPCEnclosure_z = $nCRM_z * $lengthCRM + $nCRM_z * $borderCRP + ($nSST1_z-1) * $gapSST1_z + ($nSST2_z) * $gapSST2_z; # around 6000 for full module
-    
+
     print CRYO <<EOF;
 <solids>
     <box name="TPCEnclosure" lunit="cm"
@@ -1579,7 +1579,7 @@ EOF
 	my $posZ = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM;
     my $posZBottom = -0.5*$TPCEnclosure_z + 0.5*$lengthCRM ;
 
-   
+
 
 	for(my $ii=0;$ii<$nCRM_z;$ii++)
 	{
@@ -1594,7 +1594,7 @@ EOF
             #$posZBottom += 2*$borderCRUBottom_z; #first test
             $posZBottom += 2*$borderCRUBottom1side_z; #gap on one side only
         }
-        
+
 	    if( $ii % 2 == 0 ){
 		$posZ += $borderCRP;
 
@@ -1602,7 +1602,7 @@ EOF
 		    $posZ += $borderCRP;
 
 		}
-            
+
              if( $nSST2_z == 0 && $ii % 6 == 0 && $ii>0){
              $posZ += $gapSST1_z;
              }
@@ -1615,9 +1615,9 @@ EOF
             if( $nSST2_z > 0 && ($ii-2) % 6 == 0 && $ii>=$nCRM_z-2){
                 $posZ += $gapSST2_z;
             }
-         
-        
-        
+
+
+
 	    }
 	    my $posY = -0.5*$TPCEnclosure_y + 0.5*$widthCRM;
         my $posYBottom = -0.5*$TPCEnclosure_ybottom + 0.5*$widthCRM;
@@ -1639,8 +1639,8 @@ EOF
              $posYBottom+=$gapSST_ybottom;
 
              }
-            
-            
+
+
 		}
             #print "posY posYBottom jj : $posY $posYBottom $jj\n ";
 
@@ -2188,7 +2188,7 @@ print ENCL <<EOF;
       y="$widthCathode"
       z="$lengthCathode"
       lunit="cm"/>
-    
+
     <box name="AnodePlateBottom"
        x="$anodePlateWidth"
        y="$widthCathode"
