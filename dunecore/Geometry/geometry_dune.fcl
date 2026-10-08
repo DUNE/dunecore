@@ -386,6 +386,10 @@ dunevd10kt_v7_geo.Name:        "dunevd10kt_3view_30deg_v7_refactored_2x8x40"
 dunevd10kt_v7_auxdet_geo:      @local::dunevd10kt_auxdet_geo
 dunevd10kt_v7_auxdet_geo.GDML: @local::dunevd10kt_v7_geo.GDML
 dunevd10kt_v7_auxdet_geo.Name: @local::dunevd10kt_v7_geo.Name
+dunevd10kt_v7_geo.SortingParameters: {
+  tool_type: GeoObjectSorterCRU60D
+  SortTPCPDVD: false
+}
 
 dunevd10kt_geo : @local::dunevd10kt_v6_geo
 dunevd10kt_auxdet_geo: @local::dunevd10kt_v6_auxdet_geo
