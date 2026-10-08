@@ -10,7 +10,9 @@ install_source()
 file(GLOB channel_map_files *Map*.txt)
 install_fw( LIST ${channel_map_files} )
 
-art_make(SERVICE_LIBRARIES 
+art_make(
+        EXCLUDE DUNEVD10KTPDMapAlg_tool.cc
+        SERVICE_LIBRARIES 
                            art::Framework_Services_Registry
                            art::Framework_Principal
                            art::Framework_Core
@@ -32,6 +34,14 @@ art_make_library(
     ROOT::Core
     nlohmann_json::nlohmann_json
 )
+
+cet_build_plugin(DUNEVD10KTPDMapAlg art::tool
+  LIBRARIES PRIVATE
+    larcorealg::Geometry
+    larcore::Geometry_Geometry_service
+    art::Framework_Core
+)
+
   
 # install PDVD_PDS_Mapping.json with mapping of the photon detectors
 install_fw(LIST
