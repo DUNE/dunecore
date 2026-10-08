@@ -12,7 +12,7 @@
 #define DUNEVD10KTPDMapAlg_HH
 
 //Base Tools
-#include "PDMapAlg.h"
+#include "dunecore/ChannelMap/PDVDPDMapAlg.hh"
 
 //ART
 #include "fhiclcpp/ParameterSet.h"
@@ -24,21 +24,24 @@
 
 namespace opdet {
 
-  class DUNEVD10KTPDMapAlg : public PDMapAlg
+  class DUNEVD10KTPDMapAlg : public PDVDPDMapAlg
   {
   public:
-    DUNEVD10KTPDMapAlg(const fhicl::ParameterSet& pset);
+    explicit DUNEVD10KTPDMapAlg(const fhicl::ParameterSet& pset);
 
-    // PDMapAlg interface
+    // PDMapAlg / PDVDPDMapAlg interface
     std::string pdType(size_t ch) const override;
     bool isPDType(size_t ch, std::string pdname) const override;
 
     // Optical detector channel mapping
-    unsigned int NOpChannels() const;
-    unsigned int NOpHardwareChannels(unsigned int opDet) const;
-    bool isValidHardwareChannel(int hwch) const;
-    unsigned int OpDetFromOpChannel(unsigned int opChannel) const;
-    std::vector<int> HardwareChannelPerOpDet(unsigned int opDet) const;
+    unsigned int NOpChannels() const override;
+    unsigned int MaxOpChannel() const override;
+    unsigned int NOpHardwareChannels(unsigned int opDet) const override;
+    bool isValidHardwareChannel(int hwch) const override;
+    unsigned int OpDetFromOpChannel(unsigned int opChannel) const override;
+    std::vector<unsigned int> HardwareChannelPerOpDet(unsigned int opDet) const override;
+    unsigned int getNHardwareChannels() const override;
+
     unsigned int OpChannel(unsigned int opDet, unsigned int hwCh) const;
 
   private:
@@ -48,9 +51,10 @@ namespace opdet {
     unsigned int fNOpDets;
     unsigned int fChannelsPerOpDet;
     unsigned int fNOpChannels;
+    unsigned int fMaxOpChannel;
 
-    std::map<int, unsigned int> fOpChannelToOpDet;
-    std::map<unsigned int, std::vector<int>> fOpDetToOpChannels;
+    std::map<unsigned int, unsigned int> fOpChannelToOpDet;
+    std::map<unsigned int, std::vector<unsigned int>> fOpDetToOpChannels;
 
     void buildMaps();
   };

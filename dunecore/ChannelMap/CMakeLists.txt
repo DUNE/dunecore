@@ -37,9 +37,12 @@ art_make_library(
 
 cet_build_plugin(DUNEVD10KTPDMapAlg art::tool
   LIBRARIES PRIVATE
+    dunecore::opdet_PDVDPDMapAlg
     larcorealg::Geometry
     larcore::Geometry_Geometry_service
     art::Framework_Core
+    messagefacility::MF_MessageLogger
+    fhiclcpp::fhiclcpp
 )
 
   

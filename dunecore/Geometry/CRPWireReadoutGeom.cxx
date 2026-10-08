@@ -973,8 +973,7 @@ unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
 //----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
 {
-  // By default just return the number of optical channels
-  return fPDMapTool->NOpChannels();
+  return fPDMapTool->MaxOpChannel();
 }
 
 //----------------------------------------------------------------------------
