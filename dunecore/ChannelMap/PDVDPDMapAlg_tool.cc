@@ -9,7 +9,12 @@
 
     namespace opdet {
 
+     PDVDPDMapAlg::PDVDPDMapAlg()
+       : NHardwareChannels(0)
+     {}
+
      PDVDPDMapAlg::PDVDPDMapAlg(const fhicl::ParameterSet& pset)
+       : NHardwareChannels(0)
       {
         std::string fname;
         cet::search_path sp("FW_SEARCH_PATH");
@@ -18,7 +23,6 @@
         std::ifstream i(fname, std::ifstream::in);
         i >> PDmap;
         i.close();
-        NHardwareChannels=0;
         
         for (size_t opDet = 0; opDet < PDmap.size(); ++opDet)
         {
@@ -35,9 +39,6 @@
           }
         }
       }
-
-    PDVDPDMapAlg::~PDVDPDMapAlg()
-      { }
 
       std::string PDVDPDMapAlg::getOpDetProperty(int OpDet, std::string property) const
       {
@@ -154,23 +155,41 @@
       {
         return ! (MapHardwareChannelToOpDetChannel.find(hwch)== MapHardwareChannelToOpDetChannel.end());
       }
-      unsigned int PDVDPDMapAlg::NOpChannels()
+      unsigned int PDVDPDMapAlg::NOpChannels() const
       {
         return MapHardwareChannelToOpDetChannel.size();
       }
-      unsigned int PDVDPDMapAlg::NOpHardwareChannels(unsigned int opDet)
+      unsigned int PDVDPDMapAlg::MaxOpChannel() const
       {
-        return MapOpDetChannelToHardwareChannel[opDet].size();
+        if (MapHardwareChannelToOpDetChannel.empty()) return 0;
+        return MapHardwareChannelToOpDetChannel.rbegin()->first;
       }
-      unsigned int PDVDPDMapAlg::OpDetFromOpChannel(unsigned int opChannel)
+      unsigned int PDVDPDMapAlg::NOpHardwareChannels(unsigned int opDet) const
       {
-        return MapHardwareChannelToOpDetChannel[opChannel];
+        auto it = MapOpDetChannelToHardwareChannel.find(opDet);
+        if (it != MapOpDetChannelToHardwareChannel.end()) {
+          return it->second.size();
+        }
+        return 0;
       }
-      std::vector<unsigned int> PDVDPDMapAlg::HardwareChannelPerOpDet(unsigned int opDet)
+      unsigned int PDVDPDMapAlg::OpDetFromOpChannel(unsigned int opChannel) const
       {
-        return MapOpDetChannelToHardwareChannel[opDet];
+        auto it = MapHardwareChannelToOpDetChannel.find(opChannel);
+        if (it != MapHardwareChannelToOpDetChannel.end()) {
+          return it->second;
+        }
+        throw cet::exception(fLogCategory)
+          << "PDVDPDMapAlg::OpDetFromOpChannel: invalid opChannel " << opChannel << "\n";
       }
-      unsigned int PDVDPDMapAlg::getNHardwareChannels()
+      std::vector<unsigned int> PDVDPDMapAlg::HardwareChannelPerOpDet(unsigned int opDet) const
+      {
+        auto it = MapOpDetChannelToHardwareChannel.find(opDet);
+        if (it != MapOpDetChannelToHardwareChannel.end()) {
+          return it->second;
+        }
+        return {};
+      }
+      unsigned int PDVDPDMapAlg::getNHardwareChannels() const
       {
         return NHardwareChannels;
       }

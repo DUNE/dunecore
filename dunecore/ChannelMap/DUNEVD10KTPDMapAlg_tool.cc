@@ -1,4 +1,4 @@
-#include "DUNEVD10KTPDMapAlg.hh"
+#include "dunecore/ChannelMap/DUNEVD10KTPDMapAlg.hh"
 
 //ART
 #include "art/Utilities/ToolMacros.h"
@@ -23,14 +23,21 @@ namespace opdet {
   static constexpr unsigned int kChannelStride = 10;
 
   DUNEVD10KTPDMapAlg::DUNEVD10KTPDMapAlg(const fhicl::ParameterSet& pset)
-    : fLogCategory("DUNEVD10KTPDMapAlg"),
+    : PDVDPDMapAlg(),
+      fLogCategory("DUNEVD10KTPDMapAlg"),
       fNOpDets(0),
-      fChannelsPerOpDet(pset.get<unsigned int>("ChannelsPerOpDet")),
-      fNOpChannels(0)
+      fChannelsPerOpDet(pset.get<unsigned int>("ChannelsPerOpDet", 2)),
+      fNOpChannels(0),
+      fMaxOpChannel(0)
   {
     auto const* geom = art::ServiceHandle<geo::Geometry const>().get();
 
     const auto& cryostats = geom->Cryostats();
+    if (cryostats.empty())
+    {
+      throw cet::exception(fLogCategory)
+        << "DUNEVD10KTPDMapAlg: No cryostats found in geometry.";
+    }
     fNOpDets = cryostats[0].NOpDet();
 
     if (fChannelsPerOpDet == 0)
@@ -45,13 +52,15 @@ namespace opdet {
       << "DUNEVD10KTPDMapAlg: "
       << fNOpDets << " OpDets (from geometry), "
       << fChannelsPerOpDet << " channels/OpDet, "
-      << "total op channels = " << fNOpChannels;
+      << "total op channels = " << fNOpChannels
+      << ", max op channel = " << fMaxOpChannel;
   }
 
   // -----------------------------------------------------------------------
   void DUNEVD10KTPDMapAlg::buildMaps()
   {
     fNOpChannels = 0;
+    fMaxOpChannel = 0;
     fOpChannelToOpDet.clear();
     fOpDetToOpChannels.clear();
 
@@ -61,13 +70,15 @@ namespace opdet {
 
       for (unsigned int hwCh = 0; hwCh < fChannelsPerOpDet; ++hwCh)
       {
-        int opChannel = OpChannel(opDet, hwCh);
+        unsigned int opChannel = OpChannel(opDet, hwCh);
 
         fOpChannelToOpDet[opChannel] = opDet;
         fOpDetToOpChannels[opDet].push_back(opChannel);
+        if (opChannel > fMaxOpChannel) fMaxOpChannel = opChannel;
         ++fNOpChannels;
       }
     }
+    NHardwareChannels = fNOpChannels;
   }
 
   // -----------------------------------------------------------------------
@@ -87,6 +98,16 @@ namespace opdet {
     return fNOpChannels;
   }
 
+  unsigned int DUNEVD10KTPDMapAlg::MaxOpChannel() const
+  {
+    return fMaxOpChannel;
+  }
+
+  unsigned int DUNEVD10KTPDMapAlg::getNHardwareChannels() const
+  {
+    return fNOpChannels;
+  }
+
   unsigned int DUNEVD10KTPDMapAlg::NOpHardwareChannels(unsigned int opDet) const
   {
     if (opDet >= fNOpDets)
@@ -99,13 +120,14 @@ namespace opdet {
 
   bool DUNEVD10KTPDMapAlg::isValidHardwareChannel(int hwch) const
   {
-    return fOpChannelToOpDet.find(hwch) != fOpChannelToOpDet.end();
+    if (hwch < 0) return false;
+    return fOpChannelToOpDet.find(static_cast<unsigned int>(hwch)) != fOpChannelToOpDet.end();
   }
 
   unsigned int DUNEVD10KTPDMapAlg::OpDetFromOpChannel(
     unsigned int opChannel) const
   {
-    auto it = fOpChannelToOpDet.find(static_cast<int>(opChannel));
+    auto it = fOpChannelToOpDet.find(opChannel);
     if (it == fOpChannelToOpDet.end())
     {
       throw cet::exception(fLogCategory)
@@ -114,7 +136,7 @@ namespace opdet {
     return it->second;
   }
 
-  std::vector<int> DUNEVD10KTPDMapAlg::HardwareChannelPerOpDet(
+  std::vector<unsigned int> DUNEVD10KTPDMapAlg::HardwareChannelPerOpDet(
     unsigned int opDet) const
   {
     auto it = fOpDetToOpChannels.find(opDet);

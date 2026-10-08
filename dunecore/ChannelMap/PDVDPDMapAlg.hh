@@ -43,9 +43,9 @@ namespace opdet {
   public:
     //Default constructor
     explicit PDVDPDMapAlg(const fhicl::ParameterSet& pset);
-    PDVDPDMapAlg() : PDVDPDMapAlg(fhicl::ParameterSet()) {}
+    PDVDPDMapAlg();
     //Default destructor
-    ~PDVDPDMapAlg();
+    virtual ~PDVDPDMapAlg() = default;
 
     nlohmann::json getCollectionWithProperty(std::string property);
     template<typename T> nlohmann::json getCollectionWithProperty(std::string property, T property_value);
@@ -85,14 +85,15 @@ namespace opdet {
     auto getChannelEntry(size_t ch) const;
       
     size_t size() const;
-    public:
-    unsigned int NHardwareChannels;
-    unsigned int getNHardwareChannels();
-    bool isValidHardwareChannel(int hwch) const;
-    unsigned int NOpChannels();
-    unsigned int NOpHardwareChannels(unsigned int opDet);
-    unsigned int OpDetFromOpChannel(unsigned int OpChannel);
-    std::vector<unsigned int> HardwareChannelPerOpDet(unsigned int OpDet);
+  public:
+    unsigned int NHardwareChannels{0};
+    virtual unsigned int getNHardwareChannels() const;
+    virtual bool isValidHardwareChannel(int hwch) const;
+    virtual unsigned int NOpChannels() const;
+    virtual unsigned int MaxOpChannel() const;
+    virtual unsigned int NOpHardwareChannels(unsigned int opDet) const;
+    virtual unsigned int OpDetFromOpChannel(unsigned int OpChannel) const;
+    virtual std::vector<unsigned int> HardwareChannelPerOpDet(unsigned int OpDet) const;
 
   private:
     std::string fLogCategory = "PDVDPDMapAlg";
