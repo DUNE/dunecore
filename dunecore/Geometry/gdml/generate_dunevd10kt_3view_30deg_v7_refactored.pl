@@ -57,6 +57,12 @@
 #                - Note that the bottom is very differentr from the top and there are no CRP but singles CRU which made necessary to have
 #                   a specific new volume for the bottom anode
 #
+#     v7a:   Oct 2026: Viktor Pec (viktor.pec@fzu.cz)
+#               - reduced the gaseous argon layer above the Vertical Drift top CRP
+#               - added a configurable liquid argon layer between the gas and the top CRP/anode
+#               - made the vertical cryostat stack explicit so gas height, liquid-over-CRP height,
+#                 TPC enclosure height, and bottom LAr buffer are derived consistently
+#
 #################################################################################
 
 # Each subroutine generates a fragment GDML file, and the last subroutine
