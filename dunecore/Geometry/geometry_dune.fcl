@@ -717,8 +717,8 @@ dunevd10kt_wire_readout: {
   service_provider: "DUNEWireReadout"
   #TODO FIGURE OUT WHAT MAPPING IS NEEDED HERE
   PDMapTool: {
-    tool_type: "DUNEVD10KTPDMapAlg"
-    ChannelsPerOpDet: 2
+    tool_type: "PDVDPDMapAlg"
+    MappingFile: "PDVD_PDS_Mapping_v09162025.json"
   }
 }
 
