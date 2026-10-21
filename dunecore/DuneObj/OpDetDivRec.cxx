@@ -31,15 +31,12 @@ namespace sim {
       if(! std::is_sorted(time_chans.begin(), time_chans.end(), CompareByPdTime() ) ) //Just to guarantee no funny buisiness in the ordering. This shold generally not be an issue because we should always pass this check. After I convince myself it is always filled correctly, I will remove this check.
         std::sort(time_chans.begin(), time_chans.end(), CompareByPdTime());
     }else{
-      for(auto cfp = itr->phots.begin(); cfp!= itr->phots.end(); ++cfp){
-        if(cfp!= itr->phots.end() && cfp->opChan != opchan && cfp->trackID!=tid){
-          continue;
-        }else if(cfp == itr->phots.end()){
-          itr->phots.emplace_back(opchan, tid);
-        }else{
-          cfp->AddPhoton();
-          break;
-        }
+      auto cfp = std::find_if(itr->phots.begin(), itr->phots.end(),
+          [&](Chan_Phot const& c){ return c.opChan == opchan && c.trackID == tid; });
+      if(cfp != itr->phots.end()){
+        cfp->AddPhoton();
+      }else{
+        itr->phots.emplace_back(opchan, tid);
       }
     }
   }//End  AddPhoton
@@ -47,7 +44,7 @@ namespace sim {
   std::vector<std::pair<int, double>> OpDetDivRec::GetFracs(OpDet_Time_Chans::stored_time_t time){
     std::vector<std::pair<int, double>> ret;
     auto itr = priv_FindClosestTimeChan(time);
-    if( itr != time_chans.end() || itr->time==time ){
+    if( itr != time_chans.end() && itr->time==time ){
       ret = itr->GetFracs();
     }  
     return ret;
@@ -56,7 +53,7 @@ namespace sim {
   std::vector<std::pair<int, double>> OpDetDivRec::GetFracs(OpDet_Time_Chans::stored_time_t time, int tid){
     std::vector<std::pair<int, double>> ret;
     auto itr = priv_FindClosestTimeChan(time);
-    if( itr != time_chans.end() || itr->time==time ){
+    if( itr != time_chans.end() && itr->time==time ){
       ret = itr->GetFracs(tid);
     }  
     return ret;
