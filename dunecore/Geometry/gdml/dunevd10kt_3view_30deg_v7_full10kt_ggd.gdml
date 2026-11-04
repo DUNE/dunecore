@@ -6916,11 +6916,14 @@
     <element name="manganese" Z="25" formula="Mn">
       <atom value="54.94"/>
     </element>
-    <element name="boron11" Z="4" formula="B11">
+    <element name="boron11" Z="5" formula="B11">
       <atom value="11.0"/>
     </element>
-    <element name="boron10" Z="4" formula="B10">
+    <element name="boron10" Z="5" formula="B10">
       <atom value="10.0"/>
+    </element>
+    <element name="lead" Z="82" formula="Pb">
+      <atom value="207.2"/>
     </element>
     <material name="Vacuum" formula="">
       <D value="1e-25"/>
@@ -6933,6 +6936,10 @@
     <material name="SILICON_Si" formula="">
       <D value="2.33"/>
       <fraction ref="silicon" n="1.0"/>
+    </material>
+    <material name="Lead" formula="">
+      <D value="11.35"/>
+      <composite ref="lead" n="1"/>
     </material>
     <material name="epoxy_resin" formula="">
       <D value="1.125"/>
@@ -8339,7 +8346,7 @@
       <solidref ref="box_name"/>
     </volume>
     <volume name="boxshapeLeadVol">
-      <materialref ref="lead"/>
+      <materialref ref="Lead"/>
       <solidref ref="box_namePb"/>
     </volume>
     <volume name="ShieldBlockWaterLog">
