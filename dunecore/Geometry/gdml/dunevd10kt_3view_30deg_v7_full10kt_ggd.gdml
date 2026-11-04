@@ -6845,7 +6845,7 @@
     <rotation unit="degree" name="rPlus90AboutXPlus180AboutY" x="90" y="180" z="0"/>
     <rotation unit="degree" name="rPlus90AboutXMinux90AboutY" x="90" y="270" z="0"/>
     <rotation unit="degree" name="rPlus90AboutZ" x="0" y="0" z="90"/>
-    <position unit="cm" name="posDetEnclosure" x="609.0599999999998" y="234.87999999999988" z="7390.73"/>
+    <position unit="cm" name="posDetEnclosure" x="68.99999999999997" y="0.0" z="7148.75"/>
     <position name="center"/>
     <rotation name="identity"/>
   </define>
