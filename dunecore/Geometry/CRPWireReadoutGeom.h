@@ -27,12 +27,10 @@
 #include <vector>
 #include <cassert>
 #include <utility>
+#include <map>
 
 // ART
 #include "art/Utilities/make_tool.h"
-
-#include "dunecore/ChannelMap/PDMapAlg.h"
-#include "dunecore/ChannelMap/PDVDPDMapAlg.hh"
 
 // -----------------------------------------------------------------------------
 // forward declarations
@@ -475,7 +473,11 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
-  
+
+  //PDS maps  
+  std::map<unsigned int, std::vector<unsigned int>>  fHardwareChannelToOpDetMap;
+  std::map<unsigned int, unsigned int> fOpDetToHardwareChannelMap;
+
   using PlaneType_t = std::size_t; ///< Type for plane type identifier.
   
   /// Identifier for first induction plane type.
@@ -592,22 +594,17 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   //
   std::string fLogCategory = "CRPWireReadoutGeom";
   
-    /// @name Optical detector channel mapping
+    /// Optical detector channel mapping
 
-  std::unique_ptr<opdet::PDVDPDMapAlg> fPDMapTool;
-//  virtual unsigned int NOpChannels(unsigned int NOpDets) const override;
-//  unsigned int NOpChannels() const  override;
-//  unsigned int MaxOpChannel() const override;
-  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
-  bool IsValidOpChannel(int opChannel) const;
-  unsigned int NOpChannels(unsigned int NOpDets) const override;
-  unsigned int MaxOpChannel(unsigned int NOpDets) const override;
+  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const;
   unsigned int NOpHardwareChannels(unsigned int opDet) const override;
-  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const override;
-  unsigned int OpDetFromOpChannel(unsigned int opChannel) const override;
-  unsigned int HardwareChannelFromOpChannel(unsigned int /* opChannel */) const override;
+  unsigned int NOpHardwareChannels() const;
+  // Return ALL hardware channels associated to an OpChannel
+  std::vector<unsigned int> HardwareChannelsFromOpChannel(unsigned int opDet) const;
   unsigned int NOpChannels() const;
-
+  unsigned int HardwareChannelFromOpChannel(unsigned int opDet) const;
+  bool IsValidOpChannel(int hwch) const;
+  void buildDefaultOpDetMapping(fhicl::ParameterSet const& p, GeometryCore const* geom);
 }; // class geo::CRPWireReadoutGeom
 
 
