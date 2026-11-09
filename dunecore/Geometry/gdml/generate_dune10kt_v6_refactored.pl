@@ -29,6 +29,9 @@
 #   Added single-sided Arapucas on the lateral APAs of the full detector, based on the ProtoDUNE HD
 #   implementation. Openings face the drift region, with opaque backs facing the membrane.
 #   Central APAs and workspace geometries retain double-sided Arapucas.
+# Update: 2026/11/09, Viktor Pec (viktor.pec@fzu.cz)
+#   Regenerated the full, 1x2x2 and 1x2x6 geometries as v6a, with and without wires, using the
+#   current materials and the Arapuca centering and lateral single-sided changes above.
 #
 ###
 
