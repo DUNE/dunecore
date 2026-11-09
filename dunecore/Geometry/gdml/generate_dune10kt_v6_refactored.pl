@@ -22,6 +22,9 @@
 #   Created two separate active volumes separated along the drift direction by the APA.
 #   This will enable turning off energy deposits in half the volume for background studies emulating the
 #   lateral APA. This change will not be needed in future geo since we will be moving to the 10kton.
+# Update: 2026/11/09, Viktor Pec (viktor.pec@fzu.cz)
+#   Centered the double-sided Arapuca sensitive windows within their frames, removing a 0.05 cm
+#   offset in the drift direction and restoring equal clearance on both sides.
 #
 ###
 
@@ -1816,13 +1819,14 @@ sub place_OpDets()
     $APACenter_z = $_[2];
     $apa_i = $_[3];
 
+    # Double-sided windows are centered in the frame in the drift direction.
+    $posAra_x = $APACenter_x;
+
     # Alternate the paddle orientations
     if ( $apa_i % 2 == 0 ) {
 	$rot = "rIdentity";
-	$posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
     }else{
 	$rot = "rPlus180AboutY";
-	$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);
 	     }
 
 
