@@ -22,6 +22,16 @@
 #   Created two separate active volumes separated along the drift direction by the APA.
 #   This will enable turning off energy deposits in half the volume for background studies emulating the
 #   lateral APA. This change will not be needed in future geo since we will be moving to the 10kton.
+# Update: 2026/11/09, Viktor Pec (viktor.pec@fzu.cz)
+#   Centered the double-sided Arapuca sensitive windows within their frames, removing a 0.05 cm
+#   offset in the drift direction and restoring equal clearance on both sides.
+# Update: 2026/11/09, Viktor Pec (viktor.pec@fzu.cz)
+#   Added single-sided Arapucas on the lateral APAs of the full detector, based on the ProtoDUNE HD
+#   implementation. Openings face the drift region, with opaque backs facing the membrane.
+#   Central APAs and workspace geometries retain double-sided Arapucas.
+# Update: 2026/11/09, Viktor Pec (viktor.pec@fzu.cz)
+#   Regenerated the full, 1x2x2 and 1x2x6 geometries as v6a, with and without wires, using the
+#   current materials and the Arapuca centering and lateral single-sided changes above.
 #
 ###
 
@@ -409,6 +419,8 @@ $ArapucaIn_x = 2.4;
 $ArapucaIn_y = 9.3;
 $ArapucaIn_z = 46.8;
 $ArapucaAcceptanceWindow_x = 2.2;
+# Lateral modules retain an opaque back, as in ProtoDUNE HD.
+$ArapucaSingleAcceptanceWindow_x = 1.0;
 $ArapucaAcceptanceWindow_y = 9.3;
 $ArapucaAcceptanceWindow_z = 46.8;
 $gapCenter_arapuca_z = 16.0;
@@ -493,6 +505,10 @@ print DEF <<EOF;
    <position name="posArapucaSub1"    unit="cm" x="0" y="0" z="@{[$list_pos[1]]}"/>
    <position name="posArapucaSub2"    unit="cm" x="0" y="0" z="@{[$list_pos[2]]}"/>
    <position name="posArapucaSub3"    unit="cm" x="0" y="0" z="@{[$list_pos[3]]}"/>
+   <position name="posArapucaSingleSub0" unit="cm" x="@{[$ArapucaOut_x/2]}" y="0" z="@{[$list_pos[0]]}"/>
+   <position name="posArapucaSingleSub1" unit="cm" x="@{[$ArapucaOut_x/2]}" y="0" z="@{[$list_pos[1]]}"/>
+   <position name="posArapucaSingleSub2" unit="cm" x="@{[$ArapucaOut_x/2]}" y="0" z="@{[$list_pos[2]]}"/>
+   <position name="posArapucaSingleSub3" unit="cm" x="@{[$ArapucaOut_x/2]}" y="0" z="@{[$list_pos[3]]}"/>
 </define>
 </gdml>
 EOF
@@ -1463,6 +1479,36 @@ print CRYO <<EOF;
       <positionref ref="posArapucaSub3"/>
       </subtraction>
 
+    <!-- The shifted cut opens only the local +x half of the frame. -->
+    <box name="ArapucaSingleIn" lunit="cm"
+      x="@{[$ArapucaOut_x]}"
+      y="@{[$ArapucaAcceptanceWindow_y]}"
+      z="@{[$ArapucaAcceptanceWindow_z]}"/>
+    <subtraction name="ArapucaSingleWalls0">
+      <first ref="ArapucaOut"/>
+      <second ref="ArapucaSingleIn"/>
+      <positionref ref="posArapucaSingleSub0"/>
+    </subtraction>
+    <subtraction name="ArapucaSingleWalls1">
+      <first ref="ArapucaSingleWalls0"/>
+      <second ref="ArapucaSingleIn"/>
+      <positionref ref="posArapucaSingleSub1"/>
+    </subtraction>
+    <subtraction name="ArapucaSingleWalls2">
+      <first ref="ArapucaSingleWalls1"/>
+      <second ref="ArapucaSingleIn"/>
+      <positionref ref="posArapucaSingleSub2"/>
+    </subtraction>
+    <subtraction name="ArapucaSingleWalls">
+      <first ref="ArapucaSingleWalls2"/>
+      <second ref="ArapucaSingleIn"/>
+      <positionref ref="posArapucaSingleSub3"/>
+    </subtraction>
+    <box name="ArapucaSingleAcceptanceWindow" lunit="cm"
+      x="@{[$ArapucaSingleAcceptanceWindow_x]}"
+      y="@{[$ArapucaAcceptanceWindow_y]}"
+      z="@{[$ArapucaAcceptanceWindow_z]}"/>
+
     <box name="ArapucaAcceptanceWindow" lunit="cm"
       x="@{[$ArapucaAcceptanceWindow_x]}"
       y="@{[$ArapucaAcceptanceWindow_y]}"
@@ -1544,11 +1590,13 @@ EOF
 
 for($i=0 ; $i<$nAPAs ; $i++){
 for($p=0 ; $p<10 ; $p++){
+my $windowSolid = arapuca_is_single($i)
+    ? "ArapucaSingleAcceptanceWindow" : "ArapucaAcceptanceWindow";
 for($ncuts=0 ; $ncuts<4; $ncuts++){
 print CRYO <<EOF;
    <volume name="volOpDetSensitive_$i\-$p\-$ncuts">
      <materialref ref="LAr"/>
-     <solidref ref="ArapucaAcceptanceWindow"/>
+     <solidref ref="$windowSolid"/>
    </volume>
 EOF
 }
@@ -1557,10 +1605,11 @@ EOF
 
 for($i=0 ; $i<$nAPAs ; $i++){
 for($p=0 ; $p<10 ; $p++){
+my $wallSolid = arapuca_is_single($i) ? "ArapucaSingleWalls" : "ArapucaWalls";
 print CRYO <<EOF;
    <volume name="volArapuca_$i\-$p">
      <materialref ref="FR4SussexAPA"/>
-     <solidref ref="ArapucaWalls"/>
+     <solidref ref="$wallSolid"/>
    </volume>
 EOF
 }
@@ -1808,6 +1857,16 @@ close(CRYO);
 #++++++++++++++++++++++++++++++++++++ place_OpDets +++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+# APA numbering follows the x loop first, then y and z. Only the full
+# three-plane detector has lateral modules; workspaces model central APAs.
+sub arapuca_is_single
+{
+    my ($apa) = @_;
+    my $plane = $apa % $nAPAWide;
+    return $workspace == 0 && !$protoDune && $nAPAWide == 3
+        && ($plane == 0 || $plane == $nAPAWide - 1);
+}
+
 sub place_OpDets()
 {
 
@@ -1816,14 +1875,24 @@ sub place_OpDets()
     $APACenter_z = $_[2];
     $apa_i = $_[3];
 
+    # Double-sided windows are centered in the frame in the drift direction.
+    $posAra_x = $APACenter_x;
+
     # Alternate the paddle orientations
     if ( $apa_i % 2 == 0 ) {
 	$rot = "rIdentity";
-	$posAra_x = ($APACenter_x+0.5*$ArapucaOut_x-0.5*$ArapucaAcceptanceWindow_x-0.1);
     }else{
 	$rot = "rPlus180AboutY";
-	$posAra_x = ($APACenter_x-0.5*$ArapucaOut_x+0.5*$ArapucaAcceptanceWindow_x+0.1);
 	     }
+
+    if (arapuca_is_single($apa_i)) {
+        # The opening is local +x. Point it into the drift volume on each
+        # lateral plane, independently of the alternating APA numbering.
+        my $direction = ($apa_i % $nAPAWide == 0) ? 1 : -1;
+        $rot = ($direction == 1) ? "rIdentity" : "rPlus180AboutY";
+        $posAra_x = $APACenter_x + $direction *
+            (0.5*$ArapucaOut_x - 0.5*$ArapucaSingleAcceptanceWindow_x - 0.1);
+    }
 
 
 for ($paddle = 0; $paddle<$nLightPaddlesPerAPA; $paddle++)
