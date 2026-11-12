@@ -17,3 +17,9 @@ GeGeDe code for Full-10kt VD Geometry built in DUNEGGD repository [here](https:/
       - (2018 onwards) : https://indico.cern.ch/event/698002/contributions/2868259/attachments/1591642/2519098/AC_introduction_to_the_cryostat_design_warm_vessel.pdf
       - (2024 onwards) : https://edms.cern.ch/ui/#!master/navigator/document?D:101565889:101565889:subDocs which seems consistent
       - Outer Shield Walls - built by Luis et al. (~23 cm on lateral + end-walls, includes some assumed buffer)
+
+## Variants
+    - full10kt contains the default geometry including Cryostat, Support Enclosure (I-beams, Belts, etc), Cavern Hall Geometry
+    - 2x8x40 contains just the full Inner Cryostat and has a simplified outer structure (Similar to PERL-generated)
+    - 1x8x14 is the workspace geometry as before
+    - full10kt_shielded also adds layers of water bricks on the short walls, halfway up on the lateral sides and at the floor. This design is preliminary and needs to be finalized still
