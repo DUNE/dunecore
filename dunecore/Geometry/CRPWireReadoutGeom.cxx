@@ -958,86 +958,114 @@ std::string geo::CRPWireReadoutGeom::PlaneTypeName(PlaneType_t planeType) {
 } // geo::CRPWireReadoutGeom::PlaneTypeName()
 
 // ----------------------------------------------------------------------------
+// --- Optical detector channel mapping ---------------------------------------
+// ----------------------------------------------------------------------------
+unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
+{
+  // Number of OpChannels belonging to the first NOpDets optical detectors
+  unsigned int nOpChannels = 0;
+  for (auto const& [opDet, opChannels] : fOpDetToOpChannels) {
+    if (opDet >= NOpDets) break; // std::map is sorted by OpDet number
+    nOpChannels += opChannels.size();
+  }
+  return nOpChannels;
+}
+
+// ----------------------------------------------------------------------------
+unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
+{
+  // One past the largest OpChannel number of the first NOpDets optical detectors.
+  // OpChannel numbers are not contiguous, so this is larger than NOpChannels().
+  unsigned int endOpChannel = 0;
+  for (auto const& [opDet, opChannels] : fOpDetToOpChannels) {
+    if (opDet >= NOpDets) break; // std::map is sorted by OpDet number
+    for (unsigned int const opChannel : opChannels)
+      endOpChannel = std::max(endOpChannel, opChannel + 1);
+  }
+  return endOpChannel;
+}
+
+// ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::NOpHardwareChannels(unsigned int opDet) const
 {
-  // Number of hardware channels per opDet
-  auto const it = fHardwareChannelToOpDetMap.find(opDet);
-  if (it != fHardwareChannelToOpDetMap.end()) {
-    return it->second.size(); // Returns the size of the vector for this opDet
-  }
-  return 0;
+  auto const it = fOpDetToOpChannels.find(opDet);
+  return (it == fOpDetToOpChannels.end()) ? 0 : it->second.size();
 }
+
 // ----------------------------------------------------------------------------
-unsigned int geo::CRPWireReadoutGeom::NOpHardwareChannels() const
+bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const
 {
-  // Total number of hardware channels
-  return fHardwareChannelToOpDetMap.size();
+  auto const it = fOpChannelInfo.find(opChannel);
+  return (it != fOpChannelInfo.end()) && (it->second.opDet < NOpDets);
 }
-//----------------------------------------------------------------------------
-std::vector<unsigned int> geo::CRPWireReadoutGeom::HardwareChannelsFromOpChannel(unsigned int opDet) const
-{
-  auto it = fHardwareChannelToOpDetMap.find(opDet);
-  if (it != fHardwareChannelToOpDetMap.end()) {
-    return it->second;
-  }
-  else
-  {
-    throw cet::exception(fLogCategory)
-        << "ERROR, you are requesting an OpDetChannel out of range \n";
-  }
-}
-//......................................................................
-unsigned int geo::CRPWireReadoutGeom::NOpChannels() const
-{
-  return fOpDetToHardwareChannelMap.size();
-}
-//----------------------------------------------------------------------------
-unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned int ch) const
-{
-  auto const it = fHardwareChannelToOpDetMap.find(detNum);
 
-  if (it != fHardwareChannelToOpDetMap.end() && ch < it->second.size()) {
-    return it->second.at(ch);
+// ----------------------------------------------------------------------------
+unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned int hwchannel) const
+{
+  auto const it = fOpDetToOpChannels.find(detNum);
+  if (it != fOpDetToOpChannels.end() && hwchannel < it->second.size()) {
+    return it->second[hwchannel];
   }
 
   throw cet::exception(fLogCategory)
-    << "ERROR, requesting an OpHardwareChannel out of range: detNum = " 
-    << detNum << ", ch = " << ch 
-    << " (Available channels for this detNum: " 
-    << (it != fHardwareChannelToOpDetMap.end() ? it->second.size() : 0) << ")\n";
+    << "OpChannel(): no hardware channel " << hwchannel << " in optical detector " << detNum
+    << " (it has " << NOpHardwareChannels(detNum) << " channels).\n";
 }
-//----------------------------------------------------------------------------
-unsigned int geo::CRPWireReadoutGeom::HardwareChannelFromOpChannel(unsigned int opDet) const
+
+// ----------------------------------------------------------------------------
+unsigned int geo::CRPWireReadoutGeom::OpDetFromOpChannel(unsigned int opChannel) const
 {
-  auto const it = fHardwareChannelToOpDetMap.find(opDet);
-  // Check if the opDet exists in the map and contains exactly one hardware channel
-  if (it != fHardwareChannelToOpDetMap.end()) {
-     std::vector<unsigned int> const& hwChannels = it->second;
-     if (hwChannels.size() == 1) { return hwChannels.front(); }
-  }
-  // Throw exception if the detector has multiple channels or isn't found
+  return findOpChannelInfo(opChannel).opDet;
+}
+
+// ----------------------------------------------------------------------------
+unsigned int geo::CRPWireReadoutGeom::HardwareChannelFromOpChannel(unsigned int opChannel) const
+{
+  return findOpChannelInfo(opChannel).hardwareChannel;
+}
+
+// ----------------------------------------------------------------------------
+geo::CRPWireReadoutGeom::OpChannelInfo_t const&
+geo::CRPWireReadoutGeom::findOpChannelInfo(unsigned int opChannel) const
+{
+  auto const it = fOpChannelInfo.find(opChannel);
+  if (it != fOpChannelInfo.end()) return it->second;
+
   throw cet::exception(fLogCategory)
-        << "Ambiguous request of Op Hardware channel for an OpChannel that has "
-        << (it != fHardwareChannelToOpDetMap.end() ? std::to_string(it->second.size()) : "0")
-        << " channels. Please use function HardwareChannelsFromOpChannel.\n";
+    << "Invalid OpChannel " << opChannel << ": OpChannels are numbered "
+    << kOpChannelStride << " * OpDet + hardware channel (valid OpChannels: "
+    << fOpChannelInfo.size() << ", largest: "
+    << (fOpChannelInfo.empty() ? 0 : fOpChannelInfo.rbegin()->first)
+    << "). Check IsValidOpChannel() before converting a channel number.\n";
 }
-//......................................................................
-bool geo::CRPWireReadoutGeom::IsValidOpChannel(int hwch) const {
-   return ! (fHardwareChannelToOpDetMap.find(hwch)== fHardwareChannelToOpDetMap.end());
-}
-//......................................................................
-void geo::CRPWireReadoutGeom::buildDefaultOpDetMapping(fhicl::ParameterSet const& p, GeometryCore const* geom) 
+
+// ----------------------------------------------------------------------------
+void geo::CRPWireReadoutGeom::buildDefaultOpDetMapping(fhicl::ParameterSet const& p, GeometryCore const* geom)
 {
   unsigned int const channelsPerOpDet = p.get<unsigned int>("ChannelsPerOpDet", 2);
-  unsigned int const nOpDets = geom->NOpDets();
-  fOpDetToHardwareChannelMap.clear();
-  fHardwareChannelToOpDetMap.clear();
+  if ((channelsPerOpDet == 0) || (channelsPerOpDet > kOpChannelStride)) {
+    throw cet::exception(fLogCategory)
+      << "ChannelsPerOpDet = " << channelsPerOpDet << " is not supported: OpChannels are numbered "
+      << kOpChannelStride << " * OpDet + hardware channel, so it must be between 1 and "
+      << kOpChannelStride << ".\n";
+  }
 
-  for (unsigned int opDetCh = 0; opDetCh < nOpDets; ++opDetCh) {
-    for (unsigned int hdwch = 0; hdwch < channelsPerOpDet; ++hdwch) {
-      unsigned int const opHardwareChannel = 10 * opDetCh + hdwch;
-      fOpDetToHardwareChannelMap[opHardwareChannel] = opDetCh;
-      fHardwareChannelToOpDetMap[opDetCh].push_back(opHardwareChannel);
+  unsigned int const nOpDets = geom->NOpDets();
+  fOpDetToOpChannels.clear();
+  fOpChannelInfo.clear();
+
+  for (unsigned int opDet = 0; opDet < nOpDets; ++opDet) {
+    std::vector<unsigned int>& opChannels = fOpDetToOpChannels[opDet];
+    for (unsigned int hwChannel = 0; hwChannel < channelsPerOpDet; ++hwChannel) {
+      unsigned int const opChannel = kOpChannelStride * opDet + hwChannel;
+      opChannels.push_back(opChannel);
+      fOpChannelInfo[opChannel] = OpChannelInfo_t{opDet, hwChannel};
     }
   }
+
+  mf::LogInfo(fLogCategory)
+    << "Optical channel mapping: " << nOpDets << " optical detectors with "
+    << channelsPerOpDet << " channels each (OpChannel = " << kOpChannelStride
+    << " * OpDet + hardware channel, " << NOpChannels(nOpDets) << " channels, "
+    << "MaxOpChannel = " << MaxOpChannel(nOpDets) << ").";
 }
