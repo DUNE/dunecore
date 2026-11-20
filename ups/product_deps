@@ -247,7 +247,7 @@ gdmldir	product_dir	gdml
 #   entry to match for a given product.
 #
 product             version
-dunepdlegacy        v1_01_04
+dunepdlegacy        v1_03_00
 duneutil            v10_31_00d00
 dune_pardata        v01_84_00
 dunedetdataformats  v4_4_6
