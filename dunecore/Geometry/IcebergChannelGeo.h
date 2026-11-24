@@ -14,7 +14,6 @@
 
 #include "larcorealg/Geometry/fwd.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_vectors.h"
-//#include "larcorealg/Geometry/WireReadoutGeom.h"
 
 #include <utility>
 #include <vector>
@@ -32,6 +31,7 @@ public:
 
   using Index = unsigned int;
   using Point = geo::Point_t;
+  // definition made concrete here to enable ROOT dictionary maker to run
   //using EndPoints = geo::WireReadoutGeom::Segment;
   using EndPoints = std::pair<Point, Point>;
   using EndPointsVector = std::vector<EndPoints>;
