@@ -311,7 +311,16 @@ geo::CRPWireReadoutGeom::CRPWireReadoutGeom(fhicl::ParameterSet const& p,
   
   buildReadoutPlanes(geom->Cryostats());
   fillChannelToWireMap(geom->Cryostats());
-  buildDefaultOpDetMapping(p, geom);
+
+  // Check if the optical channel map configuration/tool parameter exists in the pset
+  bool hasMapTool = p.has_key("PDMapTool");
+  if(hasMapTool){//for now, this is needed only for PDVD
+     mf::LogInfo(fLogCategory) << "Using configured PDMapTool for optical channel mapping.";
+     fPDMapTool = art::make_tool<opdet::PDVDPDMapAlg>(p.get<fhicl::ParameterSet>("PDMapTool"));
+  }else{
+    mf::LogInfo(fLogCategory) << "No PDMapTool found in WireReadout pset; using default OpDet mapping.";
+    buildDefaultOpDetMapping(p, geom);
+  }
 
   MF_LOG_TRACE(fLogCategory)
     << "CRPWireReadoutGeom::Initialize() completed.";
@@ -962,6 +971,7 @@ std::string geo::CRPWireReadoutGeom::PlaneTypeName(PlaneType_t planeType) {
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
 {
+  if(fPDMapTool){ return fPDMapTool->NOpChannels(); }
   // Number of OpChannels belonging to the first NOpDets optical detectors
   unsigned int nOpChannels = 0;
   for (auto const& [opDet, opChannels] : fOpDetToOpChannels) {
@@ -970,10 +980,18 @@ unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
   }
   return nOpChannels;
 }
+// ----------------------------------------------------------------------------
+
+unsigned int geo::CRPWireReadoutGeom::NOpChannels() const
+{
+  if(fPDMapTool) { return fPDMapTool->NOpChannels(); }
+  return fOpChannelInfo.size();
+}
 
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
 {
+  if(fPDMapTool){ return fPDMapTool->NOpChannels(); }
   // One past the largest OpChannel number of the first NOpDets optical detectors.
   // OpChannel numbers are not contiguous, so this is larger than NOpChannels().
   unsigned int endOpChannel = 0;
@@ -988,20 +1006,37 @@ unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::NOpHardwareChannels(unsigned int opDet) const
 {
+  if(fPDMapTool){ return fPDMapTool->NOpHardwareChannels(opDet); }
   auto const it = fOpDetToOpChannels.find(opDet);
   return (it == fOpDetToOpChannels.end()) ? 0 : it->second.size();
 }
-
 // ----------------------------------------------------------------------------
+
+bool geo::CRPWireReadoutGeom::IsValidOpChannel(int opChannel) const {
+  if (fPDMapTool) { return fPDMapTool->isValidHardwareChannel(opChannel); }
+  return (opChannel >= 0) && IsValidOpChannel(static_cast<unsigned int>(opChannel), NOpChannels());
+}
+// ----------------------------------------------------------------------------
+
 bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const
 {
+  if(fPDMapTool){ return fPDMapTool->isValidHardwareChannel(opChannel); }
   auto const it = fOpChannelInfo.find(opChannel);
   return (it != fOpChannelInfo.end()) && (it->second.opDet < NOpDets);
 }
-
 // ----------------------------------------------------------------------------
+
 unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned int hwchannel) const
 {
+  if(fPDMapTool){ 
+    if(fPDMapTool->NOpHardwareChannels(detNum) > hwchannel) {
+      return fPDMapTool->HardwareChannelPerOpDet(detNum).at(hwchannel);
+    }else{
+      throw cet::exception(fLogCategory)
+        << "ERROR, you are requesting an OpHardwareChannel out of range "
+        << detNum << " " << hwchannel << " " << fPDMapTool->NOpHardwareChannels(detNum) << "\n";
+    }
+  }
   auto const it = fOpDetToOpChannels.find(detNum);
   if (it != fOpDetToOpChannels.end() && hwchannel < it->second.size()) {
     return it->second[hwchannel];
@@ -1015,12 +1050,21 @@ unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned in
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::OpDetFromOpChannel(unsigned int opChannel) const
 {
+  if(fPDMapTool){ return fPDMapTool->OpDetFromOpChannel(opChannel); }
   return findOpChannelInfo(opChannel).opDet;
 }
 
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::HardwareChannelFromOpChannel(unsigned int opChannel) const
 {
+  if(fPDMapTool){ 
+    if(fPDMapTool->NOpHardwareChannels(opChannel) == 1) {
+      return fPDMapTool->HardwareChannelPerOpDet(opChannel).at(0);
+    }
+    throw cet::exception(fLogCategory)
+      << "Ambiguous request of Op Hardware channel for an OpChannel that has more than one.\n";
+  }
+  
   return findOpChannelInfo(opChannel).hardwareChannel;
 }
 

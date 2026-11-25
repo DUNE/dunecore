@@ -31,6 +31,8 @@
 
 // ART
 #include "art/Utilities/make_tool.h"
+#include "dunecore/ChannelMap/PDMapAlg.h"
+#include "dunecore/ChannelMap/PDVDPDMapAlg.hh"
 
 // -----------------------------------------------------------------------------
 // forward declarations
@@ -110,7 +112,7 @@ namespace geo::dune::vd::crp{
   private:
 				       
     std::map<raw::ChannelID_t, ChannelsInROPStruct> fROPfirstChannel;
-    raw::ChannelID_t fEndChannel = 0;
+    raw::ChannelID_t fEndChannel = 0;  
   };
 }  //namespaces
 
@@ -621,8 +623,13 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
    */
   /// @{
 
+  std::unique_ptr<opdet::PDVDPDMapAlg> fPDMapTool;
+
   /// Number of OpChannels in the first `NOpDets` optical detectors.
   unsigned int NOpChannels(unsigned int NOpDets) const override;
+ 
+  /// Total number of OpChannels
+  unsigned int NOpChannels() const;
 
   /// One past the largest OpChannel number in the first `NOpDets` optical detectors.
   unsigned int MaxOpChannel(unsigned int NOpDets) const override;
@@ -632,6 +639,7 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
 
   /// Whether `opChannel` exists and belongs to one of the first `NOpDets` detectors.
   bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
+  bool IsValidOpChannel(int opChannel) const;
 
   /// OpChannel number of hardware channel `hwchannel` of detector `detNum`.
   /// @throw cet::exception if there is no such channel
