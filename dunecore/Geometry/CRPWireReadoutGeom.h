@@ -625,6 +625,10 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
 
   std::unique_ptr<opdet::PDVDPDMapAlg> fPDMapTool;
 
+  /// Whether `opChannel` exists and belongs to one of the first `NOpDets` detectors.
+  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
+  bool IsValidOpChannel(int opChannel) const;
+
   /// Number of OpChannels in the first `NOpDets` optical detectors.
   unsigned int NOpChannels(unsigned int NOpDets) const override;
  
@@ -636,10 +640,6 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
 
   /// Number of OpChannels of optical detector `opDet` (0 if it does not exist).
   unsigned int NOpHardwareChannels(unsigned int opDet) const override;
-
-  /// Whether `opChannel` exists and belongs to one of the first `NOpDets` detectors.
-  bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
-  bool IsValidOpChannel(int opChannel) const;
 
   /// OpChannel number of hardware channel `hwchannel` of detector `detNum`.
   /// @throw cet::exception if there is no such channel

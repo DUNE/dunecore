@@ -969,6 +969,19 @@ std::string geo::CRPWireReadoutGeom::PlaneTypeName(PlaneType_t planeType) {
 // ----------------------------------------------------------------------------
 // --- Optical detector channel mapping ---------------------------------------
 // ----------------------------------------------------------------------------
+bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const
+{
+  if(fPDMapTool){ return fPDMapTool->isValidHardwareChannel(opChannel); }
+  auto const it = fOpChannelInfo.find(opChannel);
+  return (it != fOpChannelInfo.end()) && (it->second.opDet < NOpDets);
+}
+// ----------------------------------------------------------------------------
+bool geo::CRPWireReadoutGeom::IsValidOpChannel(int opChannel) const {
+  if (fPDMapTool) { return fPDMapTool->isValidHardwareChannel(opChannel); }
+  return (opChannel >= 0) && IsValidOpChannel(static_cast<unsigned int>(opChannel), NOpChannels());
+}
+// ----------------------------------------------------------------------------
+
 unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
 {
   if(fPDMapTool){ return fPDMapTool->NOpChannels(); }
@@ -980,14 +993,6 @@ unsigned int geo::CRPWireReadoutGeom::NOpChannels(unsigned int NOpDets) const
   }
   return nOpChannels;
 }
-// ----------------------------------------------------------------------------
-
-unsigned int geo::CRPWireReadoutGeom::NOpChannels() const
-{
-  if(fPDMapTool) { return fPDMapTool->NOpChannels(); }
-  return fOpChannelInfo.size();
-}
-
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
 {
@@ -1005,25 +1010,12 @@ unsigned int geo::CRPWireReadoutGeom::MaxOpChannel(unsigned int NOpDets) const
 
 // ----------------------------------------------------------------------------
 unsigned int geo::CRPWireReadoutGeom::NOpHardwareChannels(unsigned int opDet) const
-{
+{ //Number of hardware channels per opDet
   if(fPDMapTool){ return fPDMapTool->NOpHardwareChannels(opDet); }
   auto const it = fOpDetToOpChannels.find(opDet);
   return (it == fOpDetToOpChannels.end()) ? 0 : it->second.size();
 }
-// ----------------------------------------------------------------------------
 
-bool geo::CRPWireReadoutGeom::IsValidOpChannel(int opChannel) const {
-  if (fPDMapTool) { return fPDMapTool->isValidHardwareChannel(opChannel); }
-  return (opChannel >= 0) && IsValidOpChannel(static_cast<unsigned int>(opChannel), NOpChannels());
-}
-// ----------------------------------------------------------------------------
-
-bool geo::CRPWireReadoutGeom::IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const
-{
-  if(fPDMapTool){ return fPDMapTool->isValidHardwareChannel(opChannel); }
-  auto const it = fOpChannelInfo.find(opChannel);
-  return (it != fOpChannelInfo.end()) && (it->second.opDet < NOpDets);
-}
 // ----------------------------------------------------------------------------
 
 unsigned int geo::CRPWireReadoutGeom::OpChannel(unsigned int detNum, unsigned int hwchannel) const
@@ -1068,6 +1060,13 @@ unsigned int geo::CRPWireReadoutGeom::HardwareChannelFromOpChannel(unsigned int 
   return findOpChannelInfo(opChannel).hardwareChannel;
 }
 
+// ----------------------------------------------------------------------------
+
+unsigned int geo::CRPWireReadoutGeom::NOpChannels() const
+{
+  if(fPDMapTool) { return fPDMapTool->NOpChannels(); }
+  return fOpChannelInfo.size();
+}
 // ----------------------------------------------------------------------------
 geo::CRPWireReadoutGeom::OpChannelInfo_t const&
 geo::CRPWireReadoutGeom::findOpChannelInfo(unsigned int opChannel) const
