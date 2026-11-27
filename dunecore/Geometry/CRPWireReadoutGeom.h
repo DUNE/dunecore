@@ -27,10 +27,10 @@
 #include <vector>
 #include <cassert>
 #include <utility>
+#include <map>
 
 // ART
 #include "art/Utilities/make_tool.h"
-
 #include "dunecore/ChannelMap/PDMapAlg.h"
 #include "dunecore/ChannelMap/PDVDPDMapAlg.hh"
 
@@ -112,7 +112,7 @@ namespace geo::dune::vd::crp{
   private:
 				       
     std::map<raw::ChannelID_t, ChannelsInROPStruct> fROPfirstChannel;
-    raw::ChannelID_t fEndChannel = 0;
+    raw::ChannelID_t fEndChannel = 0;  
   };
 }  //namespaces
 
@@ -475,7 +475,20 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   
   /// Range of channels covered by each of the wire planes.
   geo::PlaneDataContainer<PlaneInfo_t> fPlaneInfo;
-  
+
+  /// Location of one optical channel (OpChannel) in the photon detector system.
+  struct OpChannelInfo_t {
+    unsigned int opDet;           ///< Optical detector the channel belongs to.
+    unsigned int hardwareChannel; ///< Index of the channel within its optical detector.
+  };
+
+  /// OpChannel numbers of each optical detector, ordered by hardware channel
+  /// (key: OpDet number).
+  std::map<unsigned int, std::vector<unsigned int>> fOpDetToOpChannels;
+
+  /// Optical detector and hardware channel of each OpChannel (key: OpChannel number).
+  std::map<unsigned int, OpChannelInfo_t> fOpChannelInfo;
+
   using PlaneType_t = std::size_t; ///< Type for plane type identifier.
   
   /// Identifier for first induction plane type.
@@ -592,21 +605,65 @@ class geo::CRPWireReadoutGeom: public geo::WireReadoutGeom {
   //
   std::string fLogCategory = "CRPWireReadoutGeom";
   
-    /// @name Optical detector channel mapping
+  // --- BEGIN -- Optical detector channel mapping -----------------------------
+  /**
+   * @name Optical detector channel mapping
+   *
+   * Implementation of the `geo::WireReadoutGeom` optical channel interface.
+   * Generic code (e.g. `OpHitFinder`, `OpFlashFinder`, `PhotonBackTracker`)
+   * reaches this mapping only through these virtual functions, so all of them
+   * must be overridden consistently: the base class defaults assume one
+   * channel per optical detector with OpChannel == OpDet.
+   *
+   * Optical detector `d` is read out by the OpChannels
+   * `kOpChannelStride * d + h`, with hardware channel `h` in
+   * `[0, ChannelsPerOpDet)` (see `buildDefaultOpDetMapping()`).
+   * Channel numbers are therefore not contiguous: `MaxOpChannel()` is larger
+   * than `NOpChannels()`.
+   */
+  /// @{
 
   std::unique_ptr<opdet::PDVDPDMapAlg> fPDMapTool;
-//  virtual unsigned int NOpChannels(unsigned int NOpDets) const override;
-//  unsigned int NOpChannels() const  override;
-//  unsigned int MaxOpChannel() const override;
+
+  /// Whether `opChannel` exists and belongs to one of the first `NOpDets` detectors.
   bool IsValidOpChannel(unsigned int opChannel, unsigned int NOpDets) const override;
   bool IsValidOpChannel(int opChannel) const;
+
+  /// Number of OpChannels in the first `NOpDets` optical detectors.
   unsigned int NOpChannels(unsigned int NOpDets) const override;
-  unsigned int MaxOpChannel(unsigned int NOpDets) const override;
-  unsigned int NOpHardwareChannels(unsigned int opDet) const override;
-  unsigned int OpChannel(unsigned int detNum, unsigned int ch) const override;
-  unsigned int OpDetFromOpChannel(unsigned int opChannel) const override;
-  unsigned int HardwareChannelFromOpChannel(unsigned int /* opChannel */) const override;
+ 
+  /// Total number of OpChannels
   unsigned int NOpChannels() const;
+
+  /// One past the largest OpChannel number in the first `NOpDets` optical detectors.
+  unsigned int MaxOpChannel(unsigned int NOpDets) const override;
+
+  /// Number of OpChannels of optical detector `opDet` (0 if it does not exist).
+  unsigned int NOpHardwareChannels(unsigned int opDet) const override;
+
+  /// OpChannel number of hardware channel `hwchannel` of detector `detNum`.
+  /// @throw cet::exception if there is no such channel
+  unsigned int OpChannel(unsigned int detNum, unsigned int hwchannel = 0) const override;
+
+  /// Optical detector that `opChannel` belongs to.
+  /// @throw cet::exception if `opChannel` is not a valid OpChannel
+  unsigned int OpDetFromOpChannel(unsigned int opChannel) const override;
+
+  /// Index of `opChannel` within its optical detector (`0` to `NOpHardwareChannels() - 1`).
+  /// @throw cet::exception if `opChannel` is not a valid OpChannel
+  unsigned int HardwareChannelFromOpChannel(unsigned int opChannel) const override;
+
+  /// Returns the location of `opChannel`, throwing `cet::exception` if it is not valid.
+  OpChannelInfo_t const& findOpChannelInfo(unsigned int opChannel) const;
+
+  /// Fills the optical channel maps from the `ChannelsPerOpDet` parameter.
+  void buildDefaultOpDetMapping(fhicl::ParameterSet const& p, GeometryCore const* geom);
+
+  /// Spacing between the first OpChannel numbers of consecutive optical detectors.
+  static constexpr unsigned int kOpChannelStride = 10U;
+
+  /// @}
+  // --- END -- Optical detector channel mapping -------------------------------
 
 }; // class geo::CRPWireReadoutGeom
 
