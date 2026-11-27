@@ -150,7 +150,7 @@ public:
   bool isValid() const { return hasValidGlobalNormalization() && hasValidTermNormalization(); }
 
   // Equality.
-  bool operator==(const RealDftNormalization& rhs) {
+  bool operator==(const RealDftNormalization& rhs) const {
     if ( ! isValid() ) return false;
     if ( ! rhs.isValid() ) return false;
     if ( globalNormalization() != rhs.globalNormalization() ) return false;

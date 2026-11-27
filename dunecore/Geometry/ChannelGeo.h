@@ -10,10 +10,17 @@
 #define ChannelGeo_H
 
 #include "larcorealg/Geometry/fwd.h"
-#include "larcorealg/Geometry/WireReadoutGeom.h"
+#include "larcoreobj/SimpleTypesAndConstants/geo_vectors.h"
 
 #include <utility>
 #include <vector>
+
+// -----------------------------------------------------------------------------
+// forward declaration to avoid ranges conflict when building root dictionary
+namespace geo {
+    class WireReadoutGeom;
+    }
+// -----------------------------------------------------------------------------
 
 class ChannelGeo {
 
@@ -21,7 +28,9 @@ public:
 
   using Index = unsigned int;
   using Point = geo::Point_t;
-  using EndPoints = geo::WireReadoutGeom::Segment;
+  // definition made concrete here to enable ROOT dictionary maker to run
+  //using EndPoints = geo::WireReadoutGeom::Segment;
+  using EndPoints = std::pair<Point, Point>;
   using EndPointsVector = std::vector<EndPoints>;
 
   // Ctor from channel number and geometry service.
